@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AdjuntosHistoriaAtenciones" table="adjuntos_historia_atenciones" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.AdjuntosHistoriaAtencionesId">
+            <key-property name="cuenta" type="java.lang.Integer">
+                <column name="cuenta" />
+            </key-property>
+            <key-property name="nombreOriginal" type="string">
+                <column name="nombre_original" length="256" />
+            </key-property>
+            <key-property name="nombreArchivo" type="string">
+                <column name="nombre_archivo" length="256" />
+            </key-property>
+            <key-property name="paciente" type="int">
+                <column name="paciente" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" update="false" insert="false" fetch="select">
+            <column name="cuenta" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" update="false" insert="false" fetch="select">
+            <column name="paciente" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

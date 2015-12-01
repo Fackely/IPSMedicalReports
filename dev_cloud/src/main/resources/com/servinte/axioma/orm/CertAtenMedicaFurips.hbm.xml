@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 15, 2011 5:27:23 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CertAtenMedicaFurips" table="cert_aten_medica_furips" schema="manejopaciente">
+        <id name="codigoReclamacion" type="long">
+            <column name="codigo_reclamacion" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">reclamacionesAccEveFact</param>
+            </generator>
+        </id>
+        <many-to-one name="diagnosticosByPkCeratemedfuripsDxing" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_dx_ingreso" length="10" />
+            <column name="tipo_cie_dx_ingreso" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacion" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_documento_medico" length="3" />
+        </many-to-one>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico" />
+        </many-to-one>
+        <one-to-one name="reclamacionesAccEveFact" class="com.servinte.axioma.orm.ReclamacionesAccEveFact" constrained="true"></one-to-one>
+        <many-to-one name="diagnosticosByPkCeratemedfuripsRelegr2" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_dx_rel2_egreso" length="10" />
+            <column name="tipo_cie_dx_rel1_egreso" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByPkCeratemedfuripsReling2" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_dx_rel2_ingreso" length="10" />
+            <column name="tipo_cie_dx_rel1_ingreso" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByPkCeratemedfuripsRelegr1" class="com.servinte.axioma.orm.Diagnosticos" update="false" insert="false" fetch="select">
+            <column name="acronimo_dx_rel1_egreso" length="10" />
+            <column name="tipo_cie_dx_rel1_egreso" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByPkCeratemedfuripsDxegr" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_dx_egreso" length="10" />
+            <column name="tipo_cie_dx_egreso" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByPkCeratemedfuripsReling1" class="com.servinte.axioma.orm.Diagnosticos" update="false" insert="false" fetch="select">
+            <column name="acronimo_dx_rel1_ingreso" length="10" />
+            <column name="tipo_cie_dx_rel1_ingreso" />
+        </many-to-one>
+        <property name="tipoCieDxRel2Ingreso" type="java.lang.Integer">
+            <column name="tipo_cie_dx_rel2_ingreso" />
+        </property>
+        <property name="tipoCieDxRel2Egreso" type="java.lang.Integer">
+            <column name="tipo_cie_dx_rel2_egreso" />
+        </property>
+        <property name="primerApellidoMedico" type="string">
+            <column name="primer_apellido_medico" length="30" />
+        </property>
+        <property name="segundoApellidoMedico" type="string">
+            <column name="segundo_apellido_medico" length="30" />
+        </property>
+        <property name="primerNombreMedico" type="string">
+            <column name="primer_nombre_medico" length="30" />
+        </property>
+        <property name="segundoNombreMedico" type="string">
+            <column name="segundo_nombre_medico" length="30" />
+        </property>
+        <property name="nroDocumentoMedico" type="string">
+            <column name="nro_documento_medico" length="20" />
+        </property>
+        <property name="nroRegistroMedico" type="string">
+            <column name="nro_registro_medico" length="30" />
+        </property>
+    </class>
+</hibernate-mapping>

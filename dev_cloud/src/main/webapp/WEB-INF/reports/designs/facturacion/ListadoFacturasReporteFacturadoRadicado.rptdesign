@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.16" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.0.v20080606 Build &lt;2.3.0.v20080618-0630></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="131">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="listadoFacturas" id="132">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">nombretipoconvenio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">nombreconvenio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">consecutivofactura</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">fechafactura</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">fecharadicacion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">valorradicado</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">ajustesdebito</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">ajustescredito</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">totalradicado</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">nombretipoconvenio</property>
+                    <property name="nativeName">nombretipoconvenio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">nombreconvenio</property>
+                    <property name="nativeName">nombreconvenio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">consecutivofactura</property>
+                    <property name="nativeName">consecutivofactura</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">fechafactura</property>
+                    <property name="nativeName">fechafactura</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">fecharadicacion</property>
+                    <property name="nativeName">fecharadicacion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">valorradicado</property>
+                    <property name="nativeName">valorradicado</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">ajustesdebito</property>
+                    <property name="nativeName">ajustesdebito</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">ajustescredito</property>
+                    <property name="nativeName">ajustescredito</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">totalradicado</property>
+                    <property name="nativeName">totalradicado</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT tc.descripcion as nombretipoconvenio, con.nombre as nombreconvenio, f.consecutivo_factura as consecutivofactura, to_char(f.fecha, 'DD/MM/YYYY') as fechafactura, case when cc.fecha_radicacion is not null then to_char(cc.fecha_radicacion, 'DD/MM/YYYY') else '' end as fecharadicacion, case when cc.estado&lt;>4 then 0 else (coalesce(f.valor_cartera,0) + getAjustesFactura(f.codigo, f.numero_cuenta_cobro,1,3) - getAjustesFactura(f.codigo, f.numero_cuenta_cobro,2,3)) end as valorradicado, getAjustesFactura(f.codigo, f.numero_cuenta_cobro,3,3) as ajustesdebito, getAjustesFactura(f.codigo, f.numero_cuenta_cobro,4,3) as ajustescredito, case when cc.estado&lt;>4 then 0 else ((coalesce(f.valor_cartera,0) + getAjustesFactura(f.codigo, f.numero_cuenta_cobro,1,3) - getAjustesFactura(f.codigo, f.numero_cuenta_cobro,2,3)) +getAjustesFactura(f.codigo, f.numero_cuenta_cobro,3,3) -getAjustesFactura(f.codigo, f.numero_cuenta_cobro,4,3) ) end as totalradicado   FROM facturas f INNER JOIN convenios con ON(f.convenio=con.codigo) INNER JOIN tipos_convenio tc ON(tc.codigo=con.tipo_convenio and tc.institucion=con.institucion) INNER JOIN vias_ingreso as vi ON(f.via_ingreso=vi.codigo) INNER JOIN estados_factura_f as ef ON(f.estado_facturacion=ef.codigo) INNER JOIN estados_factura_paciente ep ON(f.estado_paciente=ep.codigo) LEFT OUTER JOIN cuentas_cobro cc ON(cc.numero_cuenta_cobro=f.numero_cuenta_cobro and f.institucion=cc.institucion) WHERE 1=2;
+</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nombretipoconvenio</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombretipoconvenio</design:label>
+            <design:formattingHints>
+              <design:displaySize>128</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nombreconvenio</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombreconvenio</design:label>
+            <design:formattingHints>
+              <design:displaySize>128</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>consecutivofactura</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>consecutivofactura</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>fechafactura</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>fechafactura</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>valorfactura</design:name>
+            <design:position>5</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valorfactura</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>ajustescredito</design:name>
+            <design:position>6</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ajustescredito</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>ajustesdebito</design:name>
+            <design:position>7</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ajustesdebito</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>totalfacturado</design:name>
+            <design:position>8</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>totalfacturado</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <property name="canShrink">true</property>
+            <property name="headerHeight">3cm</property>
+            <property name="footerHeight">3cm</property>
+            <page-header>
+                <grid id="4">
+                    <property name="width">100%</property>
+                    <column id="5">
+                        <property name="width">1.9895833333in</property>
+                    </column>
+                    <column id="6">
+                        <property name="width">2.9791666667in</property>
+                    </column>
+                    <column id="7">
+                        <property name="width">2in</property>
+                    </column>
+                    <row id="8">
+                        <property name="height">0.573in</property>
+                        <cell id="9"/>
+                        <cell id="10"/>
+                        <cell id="11">
+                            <grid id="98">
+                                <property name="width">100%</property>
+                                <column id="99"/>
+                                <row id="100">
+                                    <cell id="101">
+                                        <grid id="116">
+                                            <property name="width">100%</property>
+                                            <column id="117">
+                                                <property name="width">0.9270833333in</property>
+                                            </column>
+                                            <column id="118">
+                                                <property name="width">0.3229166667in</property>
+                                            </column>
+                                            <column id="119">
+                                                <property name="width">0.84375in</property>
+                                            </column>
+                                            <row id="120">
+                                                <cell id="121">
+                                                    <auto-text id="122">
+                                                        <property name="textAlign">right</property>
+                                                        <property name="type">page-number</property>
+                                                    </auto-text>
+                                                </cell>
+                                                <cell id="123">
+                                                    <text id="124">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="contentType">plain</property>
+                                                        <text-property name="content"><![CDATA[de]]></text-property>
+                                                    </text>
+                                                </cell>
+                                                <cell id="125">
+                                                    <auto-text id="126">
+                                                        <property name="type">total-page</property>
+                                                    </auto-text>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                    </cell>
+                                </row>
+                                <row id="102">
+                                    <cell id="103">
+                                        <text id="115">
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                    <row id="12">
+                        <property name="height">0.297in</property>
+                        <cell id="13"/>
+                        <cell id="14">
+                            <property name="textAlign">center</property>
+                        </cell>
+                        <cell id="15"/>
+                    </row>
+                    <row id="16">
+                        <property name="height">0.297in</property>
+                        <cell id="17"/>
+                        <cell id="18"/>
+                        <cell id="19"/>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="25">
+            <property name="width">100%</property>
+            <property name="dataSet">listadoFacturas</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">nombretipoconvenio</property>
+                    <expression name="expression">dataSetRow["nombretipoconvenio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombreconvenio</property>
+                    <expression name="expression">dataSetRow["nombreconvenio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">consecutivofactura</property>
+                    <expression name="expression">dataSetRow["consecutivofactura"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">fechafactura</property>
+                    <expression name="expression">dataSetRow["fechafactura"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecharadicacion</property>
+                    <expression name="expression">dataSetRow["fecharadicacion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valorradicado</property>
+                    <expression name="expression">dataSetRow["valorradicado"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">ajustesdebito</property>
+                    <expression name="expression">dataSetRow["ajustesdebito"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">ajustescredito</property>
+                    <expression name="expression">dataSetRow["ajustescredito"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">totalradicado</property>
+                    <expression name="expression">dataSetRow["totalradicado"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="53"/>
+            <column id="54"/>
+            <column id="55"/>
+            <column id="56"/>
+            <column id="57"/>
+            <column id="58"/>
+            <column id="59"/>
+            <column id="60"/>
+            <column id="129"/>
+            <header>
+                <row id="26">
+                    <property name="backgroundColor">silver</property>
+                    <cell id="27">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="61">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Tipo Convenio</text-property>
+                        </label>
+                    </cell>
+                    <cell id="28">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="62">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Convenio</text-property>
+                        </label>
+                    </cell>
+                    <cell id="29">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="63">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Factura</text-property>
+                        </label>
+                    </cell>
+                    <cell id="30">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="64">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Fecha Fact</text-property>
+                        </label>
+                    </cell>
+                    <cell id="31">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="65">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Fecha Rad.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="32">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="66">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Valor Rad.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="33">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="67">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Ajus. Deb.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="34">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="68">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Ajus. Cred.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="127">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="130">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Total Rad.</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="35">
+                    <cell id="36">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <data id="144">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <property name="resultSetColumn">nombretipoconvenio</property>
+                        </data>
+                    </cell>
+                    <cell id="37">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <data id="145">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <property name="resultSetColumn">nombreconvenio</property>
+                        </data>
+                    </cell>
+                    <cell id="38">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <data id="146">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">consecutivofactura</property>
+                        </data>
+                    </cell>
+                    <cell id="39">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <data id="147">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">fechafactura</property>
+                        </data>
+                    </cell>
+                    <cell id="40">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <data id="148">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">fecharadicacion</property>
+                        </data>
+                    </cell>
+                    <cell id="41">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <data id="149">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$###0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">valorradicado</property>
+                        </data>
+                    </cell>
+                    <cell id="42">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <data id="150">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$###0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">ajustesdebito</property>
+                        </data>
+                    </cell>
+                    <cell id="43">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="151">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$###0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">ajustescredito</property>
+                        </data>
+                    </cell>
+                    <cell id="128">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="152">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$###0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">totalradicado</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>

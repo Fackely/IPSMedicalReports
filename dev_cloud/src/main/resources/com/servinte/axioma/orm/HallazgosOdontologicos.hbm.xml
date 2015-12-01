@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HallazgosOdontologicos" table="hallazgos_odontologicos" schema="odontologia">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipoHallazgoCeoCop" class="com.servinte.axioma.orm.TipoHallazgoCeoCop" fetch="select">
+            <column name="tipo_hallazgo_ceo_cop" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico" length="10" />
+            <column name="tipo_cie" />
+        </many-to-one>
+        <many-to-one name="convencionesOdontologicas" class="com.servinte.axioma.orm.ConvencionesOdontologicas" fetch="select">
+            <column name="convencion" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="3" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="125" not-null="true" />
+        </property>
+        <property name="acronimo" type="string">
+            <column name="acronimo" length="6" not-null="true" />
+        </property>
+        <property name="aplicaA" type="string">
+            <column name="aplica_a" length="3" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="ATratar" type="string">
+            <column name="a_tratar" length="1" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="fecha_modificacion" length="13" not-null="true" />
+        </property>
+        <property name="horaModificacion" type="string">
+            <column name="hora_modificacion" length="5" not-null="true" />
+        </property>
+        <property name="usuarioModificacion" type="string">
+            <column name="usuario_modificacion" length="30" not-null="true" />
+        </property>
+        <set name="logDetPlanTratamientos" inverse="true" lazy="true" table="log_det_plan_tratamiento" fetch="select">
+            <key>
+                <column name="hallazgo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetPlanTratamiento" />
+        </set>
+        <set name="hisConfDetPlanTs" inverse="true" lazy="true" table="his_conf_det_plan_t" fetch="select">
+            <key>
+                <column name="hallazgo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfDetPlanT" />
+        </set>
+        <set name="presupuestoPiezases" inverse="true" lazy="true" table="presupuesto_piezas" fetch="select">
+            <key>
+                <column name="hallazgo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoPiezas" />
+        </set>
+        <set name="hallazgosVsProgSers" inverse="true" lazy="true" table="hallazgos_vs_prog_ser" fetch="select">
+            <key>
+                <column name="hallazgo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HallazgosVsProgSer" />
+        </set>
+        <set name="detPlanTratamientos" inverse="true" lazy="true" table="det_plan_tratamiento" fetch="select">
+            <key>
+                <column name="hallazgo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetPlanTratamiento" />
+        </set>
+    </class>
+</hibernate-mapping>

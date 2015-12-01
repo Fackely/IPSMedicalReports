@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4/05/2011 07:38:02 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AntecedentesVarios" table="antecedentes_varios" schema="historiaclinica">
+        <composite-id name="id" class="com.servinte.axioma.orm.AntecedentesVariosId">
+            <key-property name="codigo" type="int">
+                <column name="codigo" />
+            </key-property>
+            <key-property name="codigoPaciente" type="int">
+                <column name="codigo_paciente" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="antecedentes" class="com.servinte.axioma.orm.Antecedentes" fetch="select">
+            <column name="tipo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="antecedentesPacientes" class="com.servinte.axioma.orm.AntecedentesPacientes" update="false" insert="false" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="login_usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="8000" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <!-- 
+        <property name="hora" type="time">
+            <column name="hora" length="15" not-null="true" />
+        </property>
+         -->
+         <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

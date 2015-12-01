@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CuentasBancarias" table="cuentas_bancarias" schema="tesoreria">
+        <comment>Esta estructura corresponde a la informaci&#195;&#179;n de las cuentas bancarias. Se debe crear la estructura a nivel de base de datos, es decir, NO
+        tendr&#195;&#161; Interfaz Gr&#195;&#161;fica. Esta informaci&#195;&#179;n ser&#195;&#161; utilizada en el registro de entrega a transportadora de valores y en la interfaz
+        contable de Sonria.</comment>
+        <id name="codigo" type="short">
+            <column name="codigo" precision="3" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentasContables" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable" precision="10" scale="0" not-null="true">
+                <comment>Corresponde a la cuenta contable que se maneja para la cuenta bancaria. C&#195;&#179;digo axioma.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tipoCuentaBancaria" class="com.servinte.axioma.orm.TipoCuentaBancaria" fetch="select">
+            <column name="tipo_cuenta" length="1" not-null="true">
+                <comment>Campo en donde se selecciona el tipo de cuenta bancaria. Las opciones de este campo son: (C: Cuenta Corriente, A: Cuenta Ahorrros, R:Cuenta Rentable, E:
+                Caja empresa, O: Otro Tipo cuenta)</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="empresasInstitucion" class="com.servinte.axioma.orm.EmpresasInstitucion" fetch="select">
+            <column name="cod_emp_inst" precision="10" scale="0">
+                <comment>C&#195;&#179;digo de la empresa instituci&#195;&#179;n asociado a la cuenta bancaria, c&#195;&#179;digo axioma.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="entidadesFinancieras" class="com.servinte.axioma.orm.EntidadesFinancieras" fetch="select">
+            <column name="entidad_financiera" not-null="true">
+                <comment>Corresponde al c&#195;&#179;digo de la entidad financiera asociada a la cuenta bancaria.</comment>
+            </column>
+        </many-to-one>
+        <property name="numAbrevCuentaBan" type="short">
+            <column name="num_abrev_cuenta_ban" precision="3" scale="0" not-null="true">
+                <comment>Corresponde al n&#195;&#186;mero abreviado de la cuenta.</comment>
+            </column>
+        </property>
+        <property name="numCuentaBan" type="string">
+            <column name="num_cuenta_ban" length="20" not-null="true">
+                <comment>Corresponde al n&#195;&#186;mero de la cuenta.</comment>
+            </column>
+        </property>
+        <property name="indicativoInterfaz" type="char">
+            <column name="indicativo_interfaz" length="1" not-null="true">
+                <comment>Campo para actualizar autom&#195;&#161;ticamente desde la interfaz con el ERP. Maneja Valores S/N.</comment>
+            </column>
+        </property>
+        <set name="entregaTransportadoras" inverse="true" lazy="true" table="entrega_transportadora" fetch="select">
+            <key>
+                <column name="cuenta_bancaria" precision="3" scale="0">
+                    <comment>Referencia hacia la tabla tesoreria.cuentas_bancarias</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntregaTransportadora" />
+        </set>
+    </class>
+</hibernate-mapping>

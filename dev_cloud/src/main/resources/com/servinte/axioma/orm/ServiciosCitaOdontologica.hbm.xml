@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 17, 2010 4:28:21 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ServiciosCitaOdontologica" table="servicios_cita_odontologica" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="unidadesConsulta" class="com.servinte.axioma.orm.UnidadesConsulta" fetch="select">
+            <column name="unidad_agenda" />
+        </many-to-one>
+        <many-to-one name="agendaOdontologica" class="com.servinte.axioma.orm.AgendaOdontologica" fetch="select">
+            <column name="codigo_agenda" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="numero_solicitud" />
+        </many-to-one>
+        <many-to-one name="citasOdontologicas" class="com.servinte.axioma.orm.CitasOdontologicas" fetch="select">
+            <column name="cita_odontologica" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="programasHallazgoPieza" class="com.servinte.axioma.orm.ProgramasHallazgoPieza" fetch="select">
+            <column name="programa_hallazgo_pieza" precision="12" scale="0" />
+        </many-to-one>
+        <property name="duracion" type="java.lang.Integer">
+            <column name="duracion" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="valorTarifa" type="big_decimal">
+            <column name="valor_tarifa" precision="12" />
+        </property>
+        <property name="estadoCita" type="string">
+            <column name="estado_cita" length="4" not-null="true" />
+        </property>
+        <property name="fechaCita" type="date">
+            <column name="fecha_cita" length="13" not-null="true" />
+        </property>
+        <property name="horaInicio" type="string">
+            <column name="hora_inicio" length="5" />
+        </property>
+        <property name="horaFin" type="string">
+            <column name="hora_fin" length="5" />
+        </property>
+        <property name="aplicaAbono" type="string">
+            <column name="aplica_abono" length="1" />
+        </property>
+        <property name="aplicaAnticipo" type="string">
+            <column name="aplica_anticipo" length="1" not-null="true" />
+        </property>
+        <property name="contrato" type="java.lang.Integer">
+            <column name="contrato" />
+        </property>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+        <set name="logServiciosCitaOdos" inverse="true" lazy="true" table="log_servicios_cita_odo" fetch="select" cascade="all">
+            <key>
+                <column name="servicio_cita_odontologica" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogServiciosCitaOdo" />
+        </set>
+        <set name="servArtIncCitaOdos" inverse="true" lazy="true" table="serv_art_inc_cita_odo" fetch="select">
+            <key>
+                <column name="servicio_cita_odo" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServArtIncCitaOdo" />
+        </set>
+    </class>
+</hibernate-mapping>

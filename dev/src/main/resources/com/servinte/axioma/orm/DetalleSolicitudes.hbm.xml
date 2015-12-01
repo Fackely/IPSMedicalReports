@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 25, 2011 12:12:09 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetalleSolicitudes" table="detalle_solicitudes" schema="ordenes">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetalleSolicitudesId">
+            <key-property name="numeroSolicitud" type="int">
+                <column name="numero_solicitud" />
+            </key-property>
+            <key-property name="articulo" type="int">
+                <column name="articulo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="solicitudesMedicamentos" class="com.servinte.axioma.orm.SolicitudesMedicamentos" update="false" insert="false" fetch="select">
+            <column name="numero_solicitud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="articuloByArticuloPrincipal" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="articulo_principal" />
+        </many-to-one>
+        <many-to-one name="unidosisXArticulo" class="com.servinte.axioma.orm.UnidosisXArticulo" fetch="select">
+            <column name="unidosis_articulo" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="auto_ent_sub" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="articuloByArticulo" class="com.servinte.axioma.orm.Articulo" update="false" insert="false" fetch="select">
+            <column name="articulo" not-null="true" />
+        </many-to-one>
+        <property name="dosis" type="string">
+            <column name="dosis" length="4000" />
+        </property>
+        <property name="frecuencia" type="java.lang.Integer">
+            <column name="frecuencia" />
+        </property>
+        <property name="tipoFrecuencia" type="string">
+            <column name="tipo_frecuencia" length="256" />
+        </property>
+        <property name="via" type="string">
+            <column name="via" length="4000" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="cantidad" type="java.lang.Integer">
+            <column name="cantidad" />
+        </property>
+        <property name="diasTratamiento" type="java.lang.Long">
+            <column name="dias_tratamiento" precision="10" scale="0" />
+        </property>
+        <property name="nroDosisTotal" type="java.lang.Integer">
+            <column name="nro_dosis_total" precision="8" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Camas1" table="camas1" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="estadosCama" class="com.servinte.axioma.orm.EstadosCama" fetch="select">
+            <column name="estado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposUsuarioCama" class="com.servinte.axioma.orm.TiposUsuarioCama" fetch="select">
+            <column name="tipo_usuario_cama" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="habitaciones" class="com.servinte.axioma.orm.Habitaciones" fetch="select">
+            <column name="habitacion" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" not-null="true" />
+        </many-to-one>
+        <property name="numeroCama" type="string">
+            <column name="numero_cama" length="16" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="35" />
+        </property>
+        <property name="esUci" type="boolean">
+            <column name="es_uci" not-null="true" />
+        </property>
+        <property name="asignableAdmision" type="string">
+            <column name="asignable_admision" length="1" not-null="true" />
+        </property>
+        <set name="logsActivarCamasReservadases" inverse="true" lazy="true" table="logs_activar_camas_reservadas" fetch="select">
+            <key>
+                <column name="codigo_cama" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogsActivarCamasReservadas" />
+        </set>
+        <set name="logEstadosCamas" inverse="true" lazy="true" table="log_estados_cama" fetch="select">
+            <key>
+                <column name="cama" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEstadosCama" />
+        </set>
+        <set name="admisionesHospis" inverse="true" lazy="true" table="admisiones_hospi" fetch="select">
+            <key>
+                <column name="cama" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdmisionesHospi" />
+        </set>
+        <set name="serviciosCamas" inverse="true" lazy="true" table="servicios_cama" fetch="select">
+            <key>
+                <column name="codigo_cama" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosCama" />
+        </set>
+        <set name="autorizacioneses" inverse="true" lazy="true" table="autorizaciones" fetch="select">
+            <key>
+                <column name="cama" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Autorizaciones" />
+        </set>
+        <set name="trasladoCamasForCodigoCamaAntigua" inverse="true" lazy="true" table="traslado_cama" fetch="select">
+            <key>
+                <column name="codigo_cama_antigua" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladoCama" />
+        </set>
+        <set name="hisCamaPacs" inverse="true" lazy="true" table="his_cama_pac" fetch="select">
+            <key>
+                <column name="codigo_cama" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisCamaPac" />
+        </set>
+        <set name="admisionesUrgenciases" inverse="true" lazy="true" table="admisiones_urgencias" fetch="select">
+            <key>
+                <column name="cama_observacion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdmisionesUrgencias" />
+        </set>
+        <set name="trasladoCamasForCodigoNuevaCama" inverse="true" lazy="true" table="traslado_cama" fetch="select">
+            <key>
+                <column name="codigo_nueva_cama" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladoCama" />
+        </set>
+        <set name="reservarCamas" inverse="true" lazy="true" table="reservar_cama" fetch="select">
+            <key>
+                <column name="codigo_cama" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReservarCama" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetAutorizacionesEstancia" table="det_autorizaciones_estancia" schema="manejopaciente">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="detCargos" class="com.servinte.axioma.orm.DetCargos" fetch="select">
+            <column name="det_cargo" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="detAutorizacion" type="long">
+            <column name="det_autorizacion" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="numeroSolicitud" type="int">
+            <column name="numero_solicitud" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

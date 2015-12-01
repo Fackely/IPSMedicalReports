@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DatosTemporalesSolicitud" table="datos_temporales_solicitud" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.DatosTemporalesSolicitudId">
+            <key-property name="interpretacion" type="string">
+                <column name="interpretacion" length="4000" />
+            </key-property>
+            <key-property name="fechaInterpretacion" type="date">
+                <column name="fecha_interpretacion" length="13" />
+            </key-property>
+            <key-property name="horaInterpretacion" type="time">
+                <column name="hora_interpretacion" length="15" />
+            </key-property>
+            <key-property name="codigoMedicoInterpreta" type="java.lang.Integer">
+                <column name="codigo_medico_interpreta" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

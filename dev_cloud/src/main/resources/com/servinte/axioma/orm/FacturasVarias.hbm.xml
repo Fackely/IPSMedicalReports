@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 9, 2010 4:15:34 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FacturasVarias" table="facturas_varias" schema="facturasvarias">
+        <id name="codigoFacVar" type="long">
+            <column name="codigo_fac_var" precision="12" scale="0" />
+            <generator class="sequence">
+            	<param name="sequence">seq_facturas_varias</param>
+            </generator>
+        </id>
+        <many-to-one name="usuariosByUsuarioAprobacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_aprobacion" length="30" />
+        </many-to-one>
+        <many-to-one name="deudores" class="com.servinte.axioma.orm.Deudores" fetch="select">
+            <column name="deudor" not-null="true" />
+        </many-to-one>
+         <many-to-one name="historicoEncabezado" class="com.servinte.axioma.orm.HistoricoEncabezado" fetch="select" cascade="all">
+            <column name="historico_encabezado" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioAnulacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_anulacion" length="30" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="conceptosFacturasVarias" class="com.servinte.axioma.orm.ConceptosFacturasVarias" fetch="select">
+            <column name="concepto" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" />
+        </many-to-one>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="estadoFactura" type="string">
+            <column name="estado_factura" length="3" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="valorFactura" type="big_decimal">
+            <column name="valor_factura" precision="14" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="valorPagos" type="big_decimal">
+            <column name="valor_pagos" precision="14" />
+        </property>
+        <property name="fechaAnulacion" type="date">
+            <column name="fecha_anulacion" length="13" />
+        </property>
+        <property name="motivoAnulacion" type="string">
+            <column name="motivo_anulacion" length="256" />
+        </property>
+        <property name="ajustesCredito" type="big_decimal">
+            <column name="ajustes_credito" precision="12" />
+        </property>
+        <property name="ajustesDebito" type="big_decimal">
+            <column name="ajustes_debito" precision="12" />
+        </property>
+        <property name="anulaFacApro" type="string">
+            <column name="anula_fac_apro" length="1" />
+        </property>
+        <property name="fechaAprobacion" type="date">
+            <column name="fecha_aprobacion" length="13" />
+        </property>
+        <property name="fechaGenAprobacion" type="date">
+            <column name="fecha_gen_aprobacion" length="13" />
+        </property>
+        <property name="fechaGenAnulacion" type="date">
+            <column name="fecha_gen_anulacion" length="13" />
+        </property>
+        <property name="horaGenAnulacion" type="string">
+            <column name="hora_gen_anulacion" length="5" />
+        </property>
+        <property name="horaGenAprobacion" type="string">
+            <column name="hora_gen_aprobacion" length="5" />
+        </property>
+        <property name="motivoAprobacion" type="string">
+            <column name="motivo_aprobacion" length="256" />
+        </property>
+        <property name="contabilizado" type="string">
+            <column name="contabilizado" length="1" not-null="true" />
+        </property>
+        <property name="contabilizadoAnulacion" type="string">
+            <column name="contabilizado_anulacion" length="1" not-null="true" />
+        </property>
+        <set name="ventaTarjetaClientes" inverse="true" lazy="true" table="venta_tarjeta_cliente" fetch="select">
+            <key>
+                <column name="codigo_fac_var" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.VentaTarjetaCliente" />
+        </set>
+        <set name="aplicacPagosFacturaFvariases" inverse="true" lazy="true" table="aplicac_pagos_factura_fvarias" fetch="select">
+            <key>
+                <column name="factura" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AplicacPagosFacturaFvarias" />
+        </set>
+        <set name="ajusFacturasVariases" inverse="true" lazy="true" table="ajus_facturas_varias" fetch="select">
+            <key>
+                <column name="factura" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AjusFacturasVarias" />
+        </set>
+        <set name="aprobAnulFacturasVariases" inverse="true" lazy="true" table="aprob_anul_facturas_varias" fetch="select">
+            <key>
+                <column name="factura_varia" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AprobAnulFacturasVarias" />
+        </set>
+        <set name="multasFacturasVariases" inverse="true" lazy="true" table="multas_facturas_varias" fetch="select" cascade="all">
+            <key>
+                <column name="factura_varia" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MultasFacturasVarias" />
+        </set>
+    </class>
+</hibernate-mapping>

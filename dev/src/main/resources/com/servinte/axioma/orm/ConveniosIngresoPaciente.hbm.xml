@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 9, 2010 6:24:29 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConveniosIngresoPaciente" table="convenios_ingreso_paciente" schema="facturacion">
+        <comment>Relaciona los contratos del convenio asociado al apciente en su ingreso</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_convenios_ingreso_pac</param>
+			</generator>
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true">
+                <comment>Contrato asociado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="paciente" not-null="true">
+                <comment>Paciente asociado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Campo de auditoria</comment>
+            </column>
+        </many-to-one>
+        <property name="activo" type="char">
+            <column name="activo" length="1" not-null="true">
+                <comment>Estado de el convenio con el paciente</comment>
+            </column>
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Campo de auditoria e historicos</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Campo de auditoria e historicos</comment>
+            </column>
+        </property>
+        <property name="porDefecto" type="java.lang.Character">
+            <column name="por_defecto" length="1">
+                <comment>Indica si el convenio fue asociado por defecto</comment>
+            </column>
+        </property>
+        <set name="bonosConvIngPacs" inverse="true" lazy="true" table="bonos_conv_ing_pac" fetch="select" cascade="all">
+            <key>
+                <column name="conve_ing_pac" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.BonosConvIngPac" />
+        </set>
+        <set name="autorizacionConvIngPacs" inverse="true" lazy="true" table="autorizacion_conv_ing_pac" fetch="select" cascade="all">
+            <key>
+                <column name="conve_ing_pac" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionConvIngPac" />
+        </set>
+        <set name="validacionesBdConvIngPacs" inverse="true" lazy="true" table="validaciones_bd_conv_ing_pac" fetch="select" cascade="all">
+            <key>
+                <column name="conve_ing_pac" precision="12" scale="0" not-null="true">
+                    <comment>Convenio-Paciente al cual pertenece la validacion</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValidacionesBdConvIngPac" />
+        </set>
+    </class>
+</hibernate-mapping>

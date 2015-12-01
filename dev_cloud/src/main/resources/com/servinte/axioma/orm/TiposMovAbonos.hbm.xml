@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/07/2011 06:11:28 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposMovAbonos" table="tipos_mov_abonos" schema="tesoreria">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="128" not-null="true" />
+        </property>
+        <property name="operacion" type="string">
+            <column name="operacion" length="5" />
+        </property>
+        <set name="nombreMovAbonos" table="nombre_mov_abono" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_mov_abono" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NombreMovAbono" />
+        </set>
+        <set name="movimientosAbonoses" table="movimientos_abonos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosAbonos" />
+        </set>
+    </class>
+</hibernate-mapping>

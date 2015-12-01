@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/10/2012 09:42:33 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposSalas" table="tipos_salas" schema="salascirugia">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="128" not-null="true" />
+        </property>
+        <property name="esQuirurgica" type="java.lang.Boolean">
+            <column name="es_quirurgica" />
+        </property>
+        <property name="esUrgencias" type="java.lang.Boolean">
+            <column name="es_urgencias" />
+        </property>
+        <set name="gruposServicioses" table="grupos_servicios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_sala_standar" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GruposServicios" />
+        </set>
+    </class>
+</hibernate-mapping>

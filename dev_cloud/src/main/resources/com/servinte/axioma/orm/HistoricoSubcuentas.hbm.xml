@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoricoSubcuentas" table="historico_subcuentas" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.HistoricoSubcuentasId">
+            <key-property name="subCuenta" type="int">
+                <column name="sub_cuenta" />
+            </key-property>
+            <key-property name="codigoFactura" type="int">
+                <column name="codigo_factura" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="facturas" class="com.servinte.axioma.orm.Facturas" update="false" insert="false" fetch="select">
+            <column name="codigo_factura" not-null="true" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifariosByEsquemaTarifariosArticulos" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tarifarios_articulos" />
+        </many-to-one>
+        <many-to-one name="estratosSociales" class="com.servinte.axioma.orm.EstratosSociales" fetch="select">
+            <column name="clasificacion_socioeconomica" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="naturalezaPacientes" class="com.servinte.axioma.orm.NaturalezaPacientes" fetch="select">
+            <column name="naturaleza_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifariosByEsquemaTarifariosServicios" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tarifarios_servicios" />
+        </many-to-one>
+        <many-to-one name="montosCobro" class="com.servinte.axioma.orm.MontosCobro" fetch="select">
+            <column name="monto_cobro" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposAfiliado" class="com.servinte.axioma.orm.TiposAfiliado" fetch="select">
+            <column name="tipo_afiliado" length="1" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifariosByEsquemaTarServOriginal" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tar_serv_original" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifariosByEsquemaTarArtiOriginal" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tar_arti_original" />
+        </many-to-one>
+        <property name="nroPoliza" type="string">
+            <column name="nro_poliza" length="15" />
+        </property>
+        <property name="nroCarnet" type="string">
+            <column name="nro_carnet" length="15" />
+        </property>
+        <property name="nroAutorizacion" type="string">
+            <column name="nro_autorizacion" length="15" />
+        </property>
+        <property name="fechaAfiliacion" type="date">
+            <column name="fecha_afiliacion" length="13" />
+        </property>
+        <property name="semanasCotizacion" type="java.lang.Integer">
+            <column name="semanas_cotizacion" />
+        </property>
+        <property name="valorUtilizadoSoat" type="big_decimal">
+            <column name="valor_utilizado_soat" precision="14" />
+        </property>
+        <property name="nroPrioridad" type="int">
+            <column name="nro_prioridad" not-null="true" />
+        </property>
+        <property name="porcentajeAutorizado" type="big_decimal">
+            <column name="porcentaje_autorizado" precision="5" />
+        </property>
+        <property name="montoAutorizado" type="big_decimal">
+            <column name="monto_autorizado" precision="14" />
+        </property>
+        <property name="obsParametrosDistribucion" type="string">
+            <column name="obs_parametros_distribucion" length="4000" />
+        </property>
+        <property name="facturado" type="char">
+            <column name="facturado" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

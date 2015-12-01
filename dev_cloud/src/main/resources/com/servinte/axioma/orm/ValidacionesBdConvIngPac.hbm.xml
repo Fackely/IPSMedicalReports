@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 26, 2010 8:03:04 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ValidacionesBdConvIngPac" table="validaciones_bd_conv_ing_pac" schema="facturacion">
+        <comment>Validaciones de un Convenio-Paciente</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_val_bd_conv_ing_pac</param>
+			</generator>
+        </id>
+        <many-to-one name="conveniosIngresoPaciente" class="com.servinte.axioma.orm.ConveniosIngresoPaciente" fetch="select">
+            <column name="conve_ing_pac" precision="12" scale="0" not-null="true">
+                <comment>Convenio-Paciente al cual pertenece la validacion</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Campo de auditoria</comment>
+            </column>
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="4" not-null="true">
+                <comment>Estado de la validacion. Si fue exitosa o no</comment>
+            </column>
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Campo de auditoria e historicos</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Campo de auditoria e historicos</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

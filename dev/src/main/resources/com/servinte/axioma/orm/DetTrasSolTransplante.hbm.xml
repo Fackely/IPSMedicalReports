@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetTrasSolTransplante" table="det_tras_sol_transplante" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetTrasSolTransplanteId">
+            <key-property name="idTraslado" type="long">
+                <column name="id_traslado" precision="12" scale="0" />
+            </key-property>
+            <key-property name="solicitudTrasladada" type="int">
+                <column name="solicitud_trasladada" />
+            </key-property>
+            <key-property name="solicitudGenerada" type="int">
+                <column name="solicitud_generada" />
+            </key-property>
+            <key-property name="fechaTraslado" type="date">
+                <column name="fecha_traslado" length="13" />
+            </key-property>
+            <key-property name="horaTraslado" type="string">
+                <column name="hora_traslado" length="5" />
+            </key-property>
+            <key-property name="usuarioTraslado" type="string">
+                <column name="usuario_traslado" length="30" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="trasSolTransplante" class="com.servinte.axioma.orm.TrasSolTransplante" update="false" insert="false" fetch="select">
+            <column name="id_traslado" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="usuario_traslado" length="30" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

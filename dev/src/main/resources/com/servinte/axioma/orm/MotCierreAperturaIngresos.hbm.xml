@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MotCierreAperturaIngresos" table="mot_cierre_apertura_ingresos" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.MotCierreAperturaIngresosId">
+            <key-property name="codigo" type="string">
+                <column name="codigo" length="4" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="128" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="6" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="cierreIngresosesForFkMotcierre" inverse="true" lazy="true" table="cierre_ingresos" fetch="select">
+            <key>
+                <column name="motivo_cierre" length="4" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreIngresos" />
+        </set>
+        <set name="cierreIngresosesForFkMotaper" inverse="true" lazy="true" table="cierre_ingresos" fetch="select">
+            <key>
+                <column name="motivo_apertura" length="4" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreIngresos" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogConsulReporPromo" table="log_consul_repor_promo" schema="odontologia">
+        <composite-id name="id" class="com.servinte.axioma.orm.LogConsulReporPromoId">
+            <key-property name="codigoPk" type="int">
+                <column name="codigo_pk" />
+            </key-property>
+            <key-property name="regionCentroAtencion" type="java.lang.Long">
+                <column name="region_centro_atencion" precision="10" scale="0" />
+            </key-property>
+            <key-property name="paisCentroAtencion" type="string">
+                <column name="pais_centro_atencion" length="10" />
+            </key-property>
+            <key-property name="ciudadCentroAtencion" type="string">
+                <column name="ciudad_centro_atencion" length="10" />
+            </key-property>
+            <key-property name="deptoCentroAtencion" type="string">
+                <column name="depto_centro_atencion" length="10" />
+            </key-property>
+            <key-property name="categoriaCentroAtencion" type="java.lang.Long">
+                <column name="categoria_centro_atencion" precision="10" scale="0" />
+            </key-property>
+            <key-property name="programaOdontologico" type="java.lang.Long">
+                <column name="programa_odontologico" precision="12" scale="0" />
+            </key-property>
+            <key-property name="edadInicial" type="java.lang.Integer">
+                <column name="edad_inicial" />
+            </key-property>
+            <key-property name="edadFinal" type="java.lang.Integer">
+                <column name="edad_final" />
+            </key-property>
+            <key-property name="sexo" type="java.lang.Integer">
+                <column name="sexo" />
+            </key-property>
+            <key-property name="estadoCivil" type="string">
+                <column name="estado_civil" length="1" />
+            </key-property>
+            <key-property name="nroHijos" type="java.lang.Integer">
+                <column name="nro_hijos" />
+            </key-property>
+            <key-property name="ocupacionPaciente" type="java.lang.Integer">
+                <column name="ocupacion_paciente" />
+            </key-property>
+            <key-property name="porcentajeDescuento" type="big_decimal">
+                <column name="porcentaje_descuento" precision="5" />
+            </key-property>
+            <key-property name="valorDescuento" type="big_decimal">
+                <column name="valor_descuento" precision="12" />
+            </key-property>
+            <key-property name="porcentajeHonorario" type="big_decimal">
+                <column name="porcentaje_honorario" precision="5" />
+            </key-property>
+            <key-property name="valorHonorario" type="java.lang.Long">
+                <column name="valor_honorario" precision="12" scale="0" />
+            </key-property>
+            <key-property name="fechaModifica" type="date">
+                <column name="fecha_modifica" length="13" />
+            </key-property>
+            <key-property name="horaModifica" type="string">
+                <column name="hora_modifica" length="5" />
+            </key-property>
+            <key-property name="usuarioModifica" type="string">
+                <column name="usuario_modifica" length="30" />
+            </key-property>
+            <key-property name="servicio" type="java.lang.Integer">
+                <column name="servicio" />
+            </key-property>
+            <key-property name="codigoCentro" type="java.lang.Integer">
+                <column name="codigo_centro" />
+            </key-property>
+            <key-property name="nombreCentro" type="string">
+                <column name="nombre_centro" length="16" />
+            </key-property>
+            <key-property name="fechaInicialVigencia" type="date">
+                <column name="fecha_inicial_vigencia" length="13" />
+            </key-property>
+            <key-property name="fechaFinalVigencia" type="date">
+                <column name="fecha_final_vigencia" length="13" />
+            </key-property>
+            <key-property name="horaInicialVigencia" type="string">
+                <column name="hora_inicial_vigencia" length="5" />
+            </key-property>
+            <key-property name="horaFinalVigencia" type="string">
+                <column name="hora_final_vigencia" length="5" />
+            </key-property>
+            <key-property name="fechaGeneracionInicial" type="date">
+                <column name="fecha_generacion_inicial" length="13" />
+            </key-property>
+            <key-property name="fechaGeneracionFecha" type="date">
+                <column name="fecha_generacion_fecha" length="13" />
+            </key-property>
+            <key-property name="activo" type="string">
+                <column name="activo" length="1" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+            <key-property name="tipoReporte" type="string">
+                <column name="tipo_reporte" length="16" />
+            </key-property>
+            <key-property name="ruta" type="string">
+                <column name="ruta" length="256" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

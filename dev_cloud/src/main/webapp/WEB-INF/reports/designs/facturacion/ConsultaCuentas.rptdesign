@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <html-property name="description">contiene header and footer</html-property>
+    <text-property name="displayName">template axioma reports</text-property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="94">
+            <property name="odaDriverClass">oracle.jdbc.OracleDriver</property>
+            <property name="odaURL">jdbc:oracle:thin:@100.0.0.200:1521:axpp</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="listadoCuentas" id="96">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">CUENTA</property>
+                    <property name="displayName">CUENTA</property>
+                </structure>
+                <structure>
+                    <property name="columnName">HORA</property>
+                    <property name="displayName">HORA</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CONSECUTIVOINGRESO</property>
+                    <property name="displayName">CONSECUTIVOINGRESO</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PACIENTE</property>
+                    <property name="displayName">PACIENTE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CONVENIO</property>
+                    <property name="displayName">CONVENIO</property>
+                </structure>
+                <structure>
+                    <property name="columnName">TIPO_EVENTO</property>
+                    <property name="displayName">TIPO_EVENTO</property>
+                </structure>
+                <structure>
+                    <property name="columnName">USUARIO</property>
+                    <property name="displayName">USUARIO</property>
+                </structure>
+                <structure>
+                    <property name="columnName">DESCRIPCIONENTIDADSUB</property>
+                    <property name="displayName">DESCRIPCIONENTIDADSUB</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">CUENTA</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">fecha</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">HORA</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">estadocuenta</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">viaingreso</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">CONSECUTIVOINGRESO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">PACIENTE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">CONVENIO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">TIPO_EVENTO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">USUARIO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">DESCRIPCIONENTIDADSUB</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">CUENTA</property>
+                    <property name="nativeName">CUENTA</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">fecha</property>
+                    <property name="nativeName">FECHA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">HORA</property>
+                    <property name="nativeName">HORA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">estadocuenta</property>
+                    <property name="nativeName">ESTADOCUENTA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">viaingreso</property>
+                    <property name="nativeName">VIAINGRESO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">CONSECUTIVOINGRESO</property>
+                    <property name="nativeName">CONSECUTIVOINGRESO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">PACIENTE</property>
+                    <property name="nativeName">PACIENTE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">CONVENIO</property>
+                    <property name="nativeName">CONVENIO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">TIPO_EVENTO</property>
+                    <property name="nativeName">TIPO_EVENTO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">USUARIO</property>
+                    <property name="nativeName">USUARIO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">DESCRIPCIONENTIDADSUB</property>
+                    <property name="nativeName">DESCRIPCIONENTIDADSUB</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+c.id AS "cuenta", 
+to_char(c.fecha_apertura,'DD/MM/YYYY') AS "fecha",
+c.hora_apertura AS "hora", 
+getnombreestadocuenta(c.estado_cuenta) AS "estadoCuenta", 
+getnombreviaingreso(c.via_ingreso) AS "viaIngreso", 
+i.consecutivo as "consecutivoingreso",
+getnombrepersona(c.codigo_paciente) AS "paciente", 
+getnombreconvenio(sc.convenio) AS "convenio",
+getintegridaddominio(c.tipo_evento) AS "tipo_evento",
+c.usuario_modifica AS "usuario", 
+CASE WHEN pes.ingreso IS NULL THEN getDescEntitadSubContratada(pes.entidad_subcontratada) ELSE coalesce(getDescripEntidadSubXingreso(c.id_ingreso),'') END AS "descripcionentidadsub" 
+FROM cuentas c 
+INNER JOIN personas p ON(p.codigo=c.codigo_paciente) 
+INNER JOIN sub_cuentas sc ON(sc.ingreso=c.id_ingreso AND sc.nro_prioridad = 1) 
+INNER JOIN centros_costo cc ON(cc.codigo=c.area) 
+INNER JOIN ingresos i ON(i.id=c.id_ingreso) 
+LEFT OUTER JOIN pac_entidades_subcontratadas pes ON(pes.consecutivo=i.pac_entidades_subcontratadas) </property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <property name="headerHeight">4cm</property>
+            <property name="footerHeight">3cm</property>
+            <page-header>
+                <grid name="masterPageHeader" id="4">
+                    <property name="fontFamily">"SansSerif"</property>
+                    <property name="height">1.46875in</property>
+                    <property name="width">10.583333333333334in</property>
+                    <column id="5">
+                        <property name="width">3.3020833333333335in</property>
+                    </column>
+                    <column id="6">
+                        <property name="width">4.229166666666667in</property>
+                    </column>
+                    <column id="166">
+                        <property name="width">3.2083333333333335in</property>
+                    </column>
+                    <row id="7">
+                        <property name="height">1.178in</property>
+                        <cell id="8">
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="9">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                        <cell id="164">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="46">
+                        <property name="height">0.297in</property>
+                        <cell id="47">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="drop">none</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid name="masterPageFooter" id="24">
+                    <property name="marginTop">0.5cm</property>
+                    <property name="marginLeft">0cm</property>
+                    <property name="marginBottom">0cm</property>
+                    <property name="marginRight">0cm</property>
+                    <property name="height">0.8854166666666666in</property>
+                    <property name="width">10.6875in</property>
+                    <column id="25">
+                        <property name="width">3.6in</property>
+                    </column>
+                    <column id="170">
+                        <property name="width">3.6in</property>
+                    </column>
+                    <column id="174">
+                        <property name="width">3.5in</property>
+                    </column>
+                    <row id="26">
+                        <property name="height">0.28125in</property>
+                        <cell id="27">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="167">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="171">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="28">
+                        <property name="height">0.3125in</property>
+                        <cell id="29">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="168">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="172">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="30">
+                        <property name="height">0.3020833333333333in</property>
+                        <cell id="31">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <property name="textAlign">left</property>
+                        </cell>
+                        <cell id="169">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <text id="175">
+                                <property name="textAlign">center</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="173">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <text id="176">
+                                <property name="textAlign">right</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[Página: <value-of>pageNumber</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="97">
+            <property name="width">100%</property>
+            <property name="dataSet">listadoCuentas</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">cuenta</property>
+                    <expression name="expression">dataSetRow["cuenta"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">fecha</property>
+                    <expression name="expression">dataSetRow["fecha"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">hora</property>
+                    <expression name="expression">dataSetRow["hora"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">estadocuenta</property>
+                    <expression name="expression">dataSetRow["estadocuenta"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">usuario</property>
+                    <expression name="expression">dataSetRow["usuario"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">viaingreso</property>
+                    <expression name="expression">dataSetRow["viaingreso"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">paciente</property>
+                    <expression name="expression">dataSetRow["paciente"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">convenio</property>
+                    <expression name="expression">dataSetRow["convenio"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">tipo_evento</property>
+                    <expression name="expression">dataSetRow["tipo_evento"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CONSECUTIVOINGRESO</property>
+                    <property name="displayName">CONSECUTIVOINGRESO</property>
+                    <expression name="expression">dataSetRow["consecutivoingreso"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="125">
+                <property name="width">0.714in</property>
+            </column>
+            <column id="126">
+                <property name="width">0.795in</property>
+            </column>
+            <column id="127">
+                <property name="width">0.622in</property>
+            </column>
+            <column id="128">
+                <property name="width">0.928in</property>
+            </column>
+            <column id="129">
+                <property name="width">0.724in</property>
+            </column>
+            <column id="130">
+                <property name="width">0.938in</property>
+            </column>
+            <column id="159">
+                <property name="width">0.938in</property>
+            </column>
+            <column id="153">
+                <property name="width">0.938in</property>
+            </column>
+            <column id="131">
+                <property name="width">1.591in</property>
+            </column>
+            <column id="132">
+                <property name="width">0.989in</property>
+            </column>
+            <header>
+                <row id="98">
+                    <cell id="99">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <text id="133">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">plain</property>
+                            <text-property name="content"><![CDATA[Cuenta]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="100">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <text id="134">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">plain</property>
+                            <text-property name="content"><![CDATA[Fecha]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="101">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <text id="135">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">plain</property>
+                            <text-property name="content"><![CDATA[Hora]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="102">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <text id="136">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">plain</property>
+                            <text-property name="content"><![CDATA[Estado]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="103">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <text id="137">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">plain</property>
+                            <text-property name="content"><![CDATA[Usuario]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="104">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <text id="138">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">plain</property>
+                            <text-property name="content"><![CDATA[Vía Ingreso]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="156">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <text id="162">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">plain</property>
+                            <text-property name="content"><![CDATA[Ingreso]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="150">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <label id="154">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Tipo Evento</text-property>
+                        </label>
+                    </cell>
+                    <cell id="105">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <text id="139">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">plain</property>
+                            <text-property name="content"><![CDATA[Paciente]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="106">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <text id="140">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">plain</property>
+                            <text-property name="content"><![CDATA[Responsable]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="107">
+                    <property name="verticalAlign">top</property>
+                    <cell id="108">
+                        <property name="textAlign">right</property>
+                        <data id="141">
+                            <property name="resultSetColumn">cuenta</property>
+                        </data>
+                    </cell>
+                    <cell id="109">
+                        <property name="textAlign">center</property>
+                        <property name="verticalAlign">top</property>
+                        <data id="142">
+                            <property name="resultSetColumn">fecha</property>
+                        </data>
+                    </cell>
+                    <cell id="110">
+                        <property name="textAlign">center</property>
+                        <data id="143">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Short Time</property>
+                                <property name="pattern">Short Time</property>
+                            </structure>
+                            <property name="resultSetColumn">hora</property>
+                        </data>
+                    </cell>
+                    <cell id="111">
+                        <data id="144">
+                            <property name="resultSetColumn">estadocuenta</property>
+                        </data>
+                    </cell>
+                    <cell id="112">
+                        <data id="148">
+                            <property name="resultSetColumn">usuario</property>
+                        </data>
+                    </cell>
+                    <cell id="113">
+                        <data id="145">
+                            <property name="resultSetColumn">viaingreso</property>
+                        </data>
+                    </cell>
+                    <cell id="157">
+                        <data id="163">
+                            <property name="resultSetColumn">CONSECUTIVOINGRESO</property>
+                        </data>
+                    </cell>
+                    <cell id="151">
+                        <data id="155">
+                            <property name="resultSetColumn">tipo_evento</property>
+                        </data>
+                    </cell>
+                    <cell id="114">
+                        <data id="146">
+                            <property name="resultSetColumn">paciente</property>
+                        </data>
+                    </cell>
+                    <cell id="115">
+                        <data id="149">
+                            <property name="resultSetColumn">convenio</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="116">
+                    <cell id="117"/>
+                    <cell id="118"/>
+                    <cell id="119"/>
+                    <cell id="120"/>
+                    <cell id="121"/>
+                    <cell id="122"/>
+                    <cell id="158"/>
+                    <cell id="152"/>
+                    <cell id="123"/>
+                    <cell id="124"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

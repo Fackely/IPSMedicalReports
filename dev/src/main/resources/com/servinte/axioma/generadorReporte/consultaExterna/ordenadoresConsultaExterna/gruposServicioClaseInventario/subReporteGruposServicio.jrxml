@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReporteGruposServicio" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="0.9090909090909244"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subReporteUnidadesConsulta" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subReporteProfesionales" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="grupoUnidadesConsulta" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="cantidadOrdenesAmbGeneradas" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="axiomaTitulo" mode="Transparent" x="0" y="0" width="275" height="20" forecolor="#000000" backcolor="#FEFEFE"/>
+				<box leftPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Grupo de Servicio: "+$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+				<reportElement style="axiomaTitulo" mode="Transparent" x="275" y="0" width="297" height="20" forecolor="#000000" backcolor="#FEFEFE"/>
+				<box rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Cant. Ordenes Amb. Generadas Grupo Servicios: "+$F{cantidadOrdenesAmbGeneradas}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<subreport isUsingCache="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="572" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReporteProfesionales">
+					<subreportParameterExpression><![CDATA[$P{subReporteProfesionales}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="esServicio">
+					<subreportParameterExpression><![CDATA[true]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{grupoUnidadesConsulta}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteUnidadesConsulta}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

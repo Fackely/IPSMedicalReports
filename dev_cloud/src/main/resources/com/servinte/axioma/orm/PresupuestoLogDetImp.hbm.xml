@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresupuestoLogDetImp" table="presupuesto_log_det_imp" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="presupuestoLogImpresion" class="com.servinte.axioma.orm.PresupuestoLogImpresion" fetch="select">
+            <column name="presupuesto_log_impresion" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="anexo" type="string">
+            <column name="anexo" length="7" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

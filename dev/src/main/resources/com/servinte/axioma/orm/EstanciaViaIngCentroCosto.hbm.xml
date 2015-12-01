@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 13, 2010 8:47:16 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EstanciaViaIngCentroCosto" table="estancia_via_ing_centro_costo" schema="facturacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+             <generator class="sequence">
+				<param name="sequence">facturacion.seq_estancia_via_centro</param>
+			</generator>
+        </id>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" not-null="true">
+                <comment>Hace relaci&#195;&#179;n a la tabla facturacion.entidades_subcontratadas</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" not-null="true">
+                <comment>Hace relaci&#195;&#179;n a la tabla manejopaciente.vias_ingreso</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" not-null="true">
+                <comment>Hace relaci&#195;&#179;n a la tabla administracion.centros_costo</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

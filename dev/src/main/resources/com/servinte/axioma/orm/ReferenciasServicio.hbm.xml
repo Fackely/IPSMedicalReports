@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 30, 2010 8:37:21 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ReferenciasServicio" table="referencias_servicio" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.ReferenciasServicioId">
+            <key-property name="servicio" type="int">
+                <column name="servicio" />
+            </key-property>
+            <key-property name="tipoTarifario" type="int">
+                <column name="tipo_tarifario" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" update="false" insert="false" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tarifariosOficiales" class="com.servinte.axioma.orm.TarifariosOficiales" update="false" insert="false" fetch="select">
+            <column name="tipo_tarifario" not-null="true" />
+        </many-to-one>
+        <property name="codigoPropietario" type="string">
+            <column name="codigo_propietario" length="20" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="300" not-null="true" />
+        </property>
+        <property name="unidades" type="java.lang.Double">
+            <column name="unidades" precision="17" scale="17" />
+        </property>
+        <set name="unidadAgendaServCitaOdontos" inverse="true" lazy="true" table="unidad_agenda_serv_cita_odonto" fetch="select">
+            <key>
+                <column name="servicio" not-null="true">
+                    <comment>Servicio odontol&#195;&#179;gico perteneciente a la unidad de agenda. Llave compuesta</comment>
+                </column>
+                <column name="tipo_tarifario" not-null="true">
+                    <comment>Tipo tarifario con el que se asocia la referencia del servicio. Llave compuesta</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadAgendaServCitaOdonto" />
+        </set>
+    </class>
+</hibernate-mapping>

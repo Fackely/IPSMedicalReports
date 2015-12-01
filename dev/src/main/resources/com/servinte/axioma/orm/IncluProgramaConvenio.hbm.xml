@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 9, 2011 10:59:06 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.IncluProgramaConvenio" table="inclu_programa_convenio" schema="odontologia">
+        <comment>Almacenar la relaci&#195;&#179;n de los programas contratados, solamente se utiliza en el caso en el que el par&#195;&#161;metro Maneja Programas est&#195;&#161;
+        en 'S'</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.seq_inclu_programa_convenio</param>
+			</generator>
+        </id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_solicitante" not-null="true">
+                <comment>Relaci&#195;&#179;n con el Centro de Atenci&#195;&#179;n que solicita la inclusi&#195;&#179;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa" precision="12" scale="0" not-null="true">
+                <comment>Programa seleccionado por el usuario</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="incluPresuConvenio" class="com.servinte.axioma.orm.IncluPresuConvenio" fetch="select">
+            <column name="inclu_presu_convenio" precision="12" scale="0" not-null="true">
+                <comment>Relaci&#195;&#179;n al convenio con el cual se realiza la contrataci&#195;&#179;n de las inclusiones</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="programasHallazgoPieza" class="com.servinte.axioma.orm.ProgramasHallazgoPieza" fetch="select">
+            <column name="programa_hallazgo_pieza" precision="12" scale="0" not-null="true">
+                <comment>Relaci&#195;&#179;n con el registro Programa Hallazgo Pieza</comment>
+            </column>
+        </many-to-one>
+        <property name="cantidad" type="java.lang.Integer">
+            <column name="cantidad">
+                <comment>Cantidad del Programa seleccionado por el usuario asociado a la inclusi&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="seleccionadoPromocion" type="char">
+            <column name="seleccionado_promocion" length="1" not-null="true">
+                <comment>Indica si para el programa se ha seleccionado promocion</comment>
+            </column>
+        </property>
+        <property name="seleccionadoBono" type="char">
+            <column name="seleccionado_bono" length="1" not-null="true">
+                <comment>Indica si para el programa se ha seleccionado bono</comment>
+            </column>
+        </property>
+        <property name="contratado" type="char">
+            <column name="contratado" length="1" not-null="true">
+                <comment>Indica si para el convenio espec&#195;&#173;fico se ha contratado o no los programas / servicios asociados</comment>
+            </column>
+        </property>
+        <set name="incluServicioConvenios" inverse="false" lazy="true" table="inclu_programa_servicio" fetch="select" cascade="all">
+            <key>
+                <column name="inclu_programa_convenio" precision="12" scale="0" not-null="true">
+                    <comment>Relaci&#195;&#179;n al programa asociado a la inclusi&#195;&#179;n</comment>
+                </column>
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.IncluServicioConvenio">
+                <column name="inclu_servicio_convenio" precision="12" scale="0" not-null="true">
+                    <comment>Relaci&#195;&#179;n al servicio asociado a la inclusi&#195;&#179;n</comment>
+                </column>
+            </many-to-many>
+        </set>
+        <set name="incluPresProgramaPromos" inverse="true" lazy="true" table="inclu_pres_programa_promo" fetch="select" cascade="all">
+            <key>
+                <column name="inclusion_programa" precision="12" scale="0" not-null="true">
+                    <comment>Programa el cual se contrat&#195;&#179; con promoci&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluPresProgramaPromo" />
+        </set>
+    </class>
+</hibernate-mapping>

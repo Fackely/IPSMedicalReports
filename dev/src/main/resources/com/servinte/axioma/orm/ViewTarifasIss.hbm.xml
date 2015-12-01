@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ViewTarifasIss" table="view_tarifas_iss" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.ViewTarifasIssId">
+            <key-property name="codigo" type="java.lang.Integer">
+                <column name="codigo" />
+            </key-property>
+            <key-property name="codigoEsquemaTarifario" type="java.lang.Integer">
+                <column name="codigo_esquema_tarifario" />
+            </key-property>
+            <key-property name="nombreEsquemaTarifario" type="string">
+                <column name="nombre_esquema_tarifario" length="70" />
+            </key-property>
+            <key-property name="valorTarifa" type="java.lang.Double">
+                <column name="valor_tarifa" precision="17" scale="17" />
+            </key-property>
+            <key-property name="porcentajeIva" type="java.lang.Double">
+                <column name="porcentaje_iva" precision="17" scale="17" />
+            </key-property>
+            <key-property name="codigoServicio" type="java.lang.Integer">
+                <column name="codigo_servicio" />
+            </key-property>
+            <key-property name="nombreServicio" type="string">
+                <column name="nombre_servicio" length="300" />
+            </key-property>
+            <key-property name="codigoEspecialidad" type="java.lang.Integer">
+                <column name="codigo_especialidad" />
+            </key-property>
+            <key-property name="nombreEspecialidad" type="string">
+                <column name="nombre_especialidad" length="120" />
+            </key-property>
+            <key-property name="codigoTipoLiquidacion" type="java.lang.Integer">
+                <column name="codigo_tipo_liquidacion" />
+            </key-property>
+            <key-property name="nombreTipoLiquidacion" type="string">
+                <column name="nombre_tipo_liquidacion" length="64" />
+            </key-property>
+            <key-property name="unidades" type="java.lang.Double">
+                <column name="unidades" precision="17" scale="17" />
+            </key-property>
+            <key-property name="liqAsocios" type="java.lang.Character">
+                <column name="liq_asocios" length="1" />
+            </key-property>
+            <key-property name="fechaVigencia" type="date">
+                <column name="fecha_vigencia" length="13" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

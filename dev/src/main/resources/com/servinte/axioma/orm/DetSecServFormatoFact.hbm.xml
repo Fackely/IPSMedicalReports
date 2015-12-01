@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetSecServFormatoFact" table="det_sec_serv_formato_fact" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetSecServFormatoFactId">
+            <key-property name="codigoFormato" type="int">
+                <column name="codigo_formato" />
+            </key-property>
+            <key-property name="nivelRompimiento" type="int">
+                <column name="nivel_rompimiento" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tipoRompimientoServ" class="com.servinte.axioma.orm.TipoRompimientoServ" fetch="select">
+            <column name="tipo_rompimiento" />
+        </many-to-one>
+        <many-to-one name="secServFormatoImpFact" class="com.servinte.axioma.orm.SecServFormatoImpFact" update="false" insert="false" fetch="select">
+            <column name="codigo_formato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="nivelRompimientoServ" class="com.servinte.axioma.orm.NivelRompimientoServ" update="false" insert="false" fetch="select">
+            <column name="nivel_rompimiento" not-null="true" />
+        </many-to-one>
+        <property name="imprimirDetalle" type="java.lang.Boolean">
+            <column name="imprimir_detalle" />
+        </property>
+        <property name="imprimirSubtotal" type="java.lang.Boolean">
+            <column name="imprimir_subtotal" />
+        </property>
+    </class>
+</hibernate-mapping>

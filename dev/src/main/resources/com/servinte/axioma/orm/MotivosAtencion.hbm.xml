@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MotivosAtencion" table="motivos_atencion" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposMotivoAtencion" class="com.servinte.axioma.orm.TiposMotivoAtencion" fetch="select">
+            <column name="tipo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="3" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="100" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" />
+        </property>
+        <set name="logPlanTratamientos" inverse="true" lazy="true" table="log_plan_tratamiento" fetch="select">
+            <key>
+                <column name="motivo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPlanTratamiento" />
+        </set>
+        <set name="logProgramasServiciosPlanTs" inverse="true" lazy="true" table="log_programas_servicios_plan_t" fetch="select">
+            <key>
+                <column name="motivo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogProgramasServiciosPlanT" />
+        </set>
+        <set name="logPresupuestoOdos" inverse="true" lazy="true" table="log_presupuesto_odo" fetch="select">
+            <key>
+                <column name="motivo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoOdo" />
+        </set>
+        <set name="planTratamientos" inverse="true" lazy="true" table="plan_tratamiento" fetch="select">
+            <key>
+                <column name="motivo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PlanTratamiento" />
+        </set>
+        <set name="hisConfProgServPlanTs" inverse="true" lazy="true" table="his_conf_prog_serv_plan_t" fetch="select">
+            <key>
+                <column name="motivo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfProgServPlanT" />
+        </set>
+        <set name="programasServiciosPlanTs" inverse="true" lazy="true" table="programas_servicios_plan_t" fetch="select">
+            <key>
+                <column name="motivo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgramasServiciosPlanT" />
+        </set>
+        <set name="hisConfPlanTratamientos" inverse="true" lazy="true" table="his_conf_plan_tratamiento" fetch="select">
+            <key>
+                <column name="motivo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfPlanTratamiento" />
+        </set>
+    </class>
+</hibernate-mapping>

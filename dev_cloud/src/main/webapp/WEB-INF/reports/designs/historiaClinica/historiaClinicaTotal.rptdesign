@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <html-property name="description">contiene header and footer</html-property>
+    <text-property name="displayName">template axioma reports</text-property>
+    <list-property name="configVars">
+        <structure>
+            <property name="name">idIngreso</property>
+            <property name="value">1</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="idIngreso" id="97">
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="isRequired">true</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+                <property name="pattern">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="94">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="administracionMedicamentos" id="96">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">idIngreso</property>
+                    <property name="nativeName">idIngreso</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT ds.articulo as articulo,getdescarticulosincodigo(ds.articulo) as medicamento,ds.dosis,ds.frecuencia||' '||ds.tipo_frecuencia as frecuencia,ds.via as via,ds.cantidad as cantidad,getnombreusuario(am.usuario) as responsable,ds.observaciones as observaciones,to_char(am.fecha_grabacion,'dd/mm/yyyy')||' '||am.hora_grabacion as fechahora from admin_medicamentos am inner join solicitudes s on(s.numero_solicitud=am.numero_solicitud) inner join detalle_solicitudes ds on(ds.numero_solicitud=s.numero_solicitud) inner join cuentas c on(s.cuenta=c.id) inner join articulo a on(ds.articulo=a.codigo) where a.naturaleza in(12,13) and c.id_ingreso=?;</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="insumos" id="168">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">idIngreso</property>
+                    <property name="nativeName">idIngreso</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT ds.articulo as articulo,getdescarticulosincodigo(ds.articulo) as insumo,ds.cantidad as cantidad,getnombrepersona(codigo_medico) as responsable,to_char(s.fecha_solicitud,'dd/mm/yyyy') ||' '||substr(s.hora_solicitud,0,6) as fechahorasolicitud from solicitudes s inner join detalle_solicitudes ds on(s.numero_solicitud=ds.numero_solicitud) inner join cuentas c on(s.cuenta=c.id) inner join articulo a on(ds.articulo=a.codigo) where a.naturaleza not in(12,13) and c.id_ingreso=?;</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="respuestaInterpretacionProcedimientos" id="209">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">idIngreso</property>
+                    <property name="nativeName">idIngreso</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT to_char(rsp.fecha_ejecucion,'dd/mm/yyyy')||' '|| substring(rsp.hora_grabacion,0,6) as fechahora,
+sp.codigo_servicio_solicitado ||' - '||getnombreservicio(codigo_servicio_solicitado,0) as servicio, 
+rsp.resultados as resultado,
+rsp.observaciones as observaciones,
+s.datos_medico_responde as medicoresponde,
+s.interpretacion as interpretacion, 
+getnombrepersona(codigo_medico_interpretacion) as medicointerpreta 
+from 
+solicitudes s 
+inner join sol_procedimientos sp on(s.numero_solicitud=sp.numero_solicitud) 
+inner join res_sol_proc rsp on(rsp.numero_solicitud=s.numero_solicitud) 
+inner join cuentas c on(c.id=s.cuenta) 
+where c.id_ingreso=?;</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <property name="headerHeight">4cm</property>
+            <property name="footerHeight">3cm</property>
+            <page-header>
+                <grid name="masterPageHeader" id="4">
+                    <property name="fontFamily">"SansSerif"</property>
+                    <property name="height">1.475in</property>
+                    <property name="width">7.217in</property>
+                    <column id="5">
+                        <property name="width">2.673in</property>
+                    </column>
+                    <column id="6">
+                        <property name="width">4.544in</property>
+                    </column>
+                    <row id="7">
+                        <property name="height">1.178in</property>
+                        <cell id="8">
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="9"/>
+                    </row>
+                    <row id="46">
+                        <property name="height">0.297in</property>
+                        <cell id="47">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid name="masterPageFooter" id="24">
+                    <property name="marginTop">0.5cm</property>
+                    <property name="marginLeft">0cm</property>
+                    <property name="marginBottom">0cm</property>
+                    <property name="marginRight">0cm</property>
+                    <property name="height">0.851in</property>
+                    <property name="width">7.217in</property>
+                    <column id="25"/>
+                    <row id="26">
+                        <cell id="27">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="28">
+                        <cell id="29">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="30">
+                        <property name="height">0.396in</property>
+                        <cell id="31">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <grid name="footerStaticData" id="38">
+                                <property name="fontFamily">"SansSerif"</property>
+                                <property name="height">0.366in</property>
+                                <property name="width">7.148in</property>
+                                <column id="64"/>
+                                <column id="39"/>
+                                <column id="40"/>
+                                <row id="41">
+                                    <property name="height">0.366in</property>
+                                    <cell id="63">
+                                        <text id="65">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <text-property name="content"><![CDATA[Creado por: Axioma Birt Reports]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="42">
+                                        <text name="footerCreatedDate" id="44">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="43">
+                                        <text name="footerNumberPage" id="45">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[Page: <value-of>pageNumber</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid name="grillaPpal" id="365">
+            <property name="width">100%</property>
+            <column id="366"/>
+            <row id="367">
+                <cell id="368">
+                    <label id="158">
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">ADMINISTRACIÓ N DE MEDICAMENTOS</text-property>
+                    </label>
+                    <grid id="159">
+                        <property name="width">100%</property>
+                        <column id="160"/>
+                        <row id="161">
+                            <cell id="162">
+                                <property name="paddingTop">0.5cm</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <table id="278">
+                        <property name="width">100%</property>
+                        <property name="dataSet">administracionMedicamentos</property>
+                        <list-property name="paramBindings">
+                            <structure>
+                                <property name="paramName">idIngreso</property>
+                                <expression name="expression">params["idIngreso"]</expression>
+                            </structure>
+                        </list-property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">articulo</property>
+                                <expression name="expression">dataSetRow["articulo"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">medicamento</property>
+                                <expression name="expression">dataSetRow["medicamento"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">dosis</property>
+                                <expression name="expression">dataSetRow["dosis"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">frecuencia</property>
+                                <expression name="expression">dataSetRow["frecuencia"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">via</property>
+                                <expression name="expression">dataSetRow["via"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">cantidad</property>
+                                <expression name="expression">dataSetRow["cantidad"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">fechahora</property>
+                                <expression name="expression">dataSetRow["fechahora"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">responsable</property>
+                                <expression name="expression">dataSetRow["responsable"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">observaciones</property>
+                                <expression name="expression">dataSetRow["observaciones"]</expression>
+                            </structure>
+                        </list-property>
+                        <property name="pageBreakInterval">50</property>
+                        <column id="319">
+                            <property name="width">0.631in</property>
+                        </column>
+                        <column id="320">
+                            <property name="width">1.81in</property>
+                        </column>
+                        <column id="321">
+                            <property name="width">0.61in</property>
+                        </column>
+                        <column id="322">
+                            <property name="width">0.452in</property>
+                        </column>
+                        <column id="323">
+                            <property name="width">0.494in</property>
+                        </column>
+                        <column id="324">
+                            <property name="width">0.494in</property>
+                        </column>
+                        <column id="325">
+                            <property name="width">0.8in</property>
+                        </column>
+                        <column id="326">
+                            <property name="width">1.094in</property>
+                        </column>
+                        <column id="327">
+                            <property name="width">0.926in</property>
+                        </column>
+                        <detail>
+                            <row id="289">
+                                <cell id="290">
+                                    <label id="134">
+                                        <property name="fontSize">10pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Arti.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="291">
+                                    <label id="135">
+                                        <property name="fontSize">10pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Medicamento</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="292">
+                                    <label id="136">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Dosis</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="293">
+                                    <label id="137">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Frecu.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="294">
+                                    <label id="138">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Vía</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="295">
+                                    <label id="139">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Can.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="296">
+                                    <label id="140">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Fecha/Hora</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="297">
+                                    <label id="141">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Responsable </text-property>
+                                    </label>
+                                </cell>
+                                <cell id="298">
+                                    <label id="146">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Observ.</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                            <row id="299">
+                                <cell id="300">
+                                    <data id="147">
+                                        <property name="resultSetColumn">articulo</property>
+                                    </data>
+                                </cell>
+                                <cell id="301">
+                                    <data id="148">
+                                        <property name="resultSetColumn">medicamento</property>
+                                    </data>
+                                </cell>
+                                <cell id="302">
+                                    <data id="149">
+                                        <property name="resultSetColumn">dosis</property>
+                                    </data>
+                                </cell>
+                                <cell id="303">
+                                    <data id="150">
+                                        <property name="resultSetColumn">frecuencia</property>
+                                    </data>
+                                </cell>
+                                <cell id="304">
+                                    <data id="151">
+                                        <property name="resultSetColumn">via</property>
+                                    </data>
+                                </cell>
+                                <cell id="305">
+                                    <data id="152">
+                                        <property name="resultSetColumn">cantidad</property>
+                                    </data>
+                                </cell>
+                                <cell id="306">
+                                    <data id="155">
+                                        <property name="resultSetColumn">fechahora</property>
+                                    </data>
+                                </cell>
+                                <cell id="307">
+                                    <data id="157">
+                                        <property name="resultSetColumn">responsable</property>
+                                    </data>
+                                </cell>
+                                <cell id="308">
+                                    <data id="156">
+                                        <property name="resultSetColumn">observaciones</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                    <grid id="164">
+                        <property name="width">100%</property>
+                        <column id="165"/>
+                        <row id="166">
+                            <cell id="167">
+                                <property name="paddingTop">0.5cm</property>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="369">
+                <cell id="370">
+                    <label id="163">
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">INSUMOS</text-property>
+                    </label>
+                    <grid id="193">
+                        <property name="width">100%</property>
+                        <column id="194"/>
+                        <row id="195">
+                            <cell id="196">
+                                <property name="paddingTop">0.5cm</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <table id="328">
+                        <property name="width">100%</property>
+                        <property name="dataSet">insumos</property>
+                        <list-property name="paramBindings">
+                            <structure>
+                                <property name="paramName">idIngreso</property>
+                                <expression name="expression">params["idIngreso"]</expression>
+                            </structure>
+                        </list-property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">articulo</property>
+                                <expression name="expression">dataSetRow["articulo"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">insumo</property>
+                                <expression name="expression">dataSetRow["insumo"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">cantidad</property>
+                                <expression name="expression">dataSetRow["cantidad"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">fechahorasolicitud</property>
+                                <expression name="expression">dataSetRow["fechahorasolicitud"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">responsable</property>
+                                <expression name="expression">dataSetRow["responsable"]</expression>
+                            </structure>
+                        </list-property>
+                        <property name="pageBreakInterval">50</property>
+                        <column id="353"/>
+                        <column id="354"/>
+                        <column id="355"/>
+                        <column id="356"/>
+                        <column id="357"/>
+                        <detail>
+                            <row id="335">
+                                <cell id="336">
+                                    <label id="197">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Arti.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="337">
+                                    <label id="199">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Insumo</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="338">
+                                    <label id="201">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Cantidad</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="339">
+                                    <label id="205">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Fecha/Hora</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="340">
+                                    <label id="203">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Responsable</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                            <row id="341">
+                                <cell id="342">
+                                    <data id="198">
+                                        <property name="resultSetColumn">articulo</property>
+                                    </data>
+                                </cell>
+                                <cell id="343">
+                                    <data id="200">
+                                        <property name="resultSetColumn">insumo</property>
+                                    </data>
+                                </cell>
+                                <cell id="344">
+                                    <data id="202">
+                                        <property name="resultSetColumn">cantidad</property>
+                                    </data>
+                                </cell>
+                                <cell id="345">
+                                    <data id="206">
+                                        <property name="resultSetColumn">fechahorasolicitud</property>
+                                    </data>
+                                </cell>
+                                <cell id="346">
+                                    <data id="204">
+                                        <property name="resultSetColumn">responsable</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                    <grid id="210">
+                        <property name="width">100%</property>
+                        <column id="211"/>
+                        <row id="212">
+                            <cell id="213">
+                                <property name="paddingTop">0.5cm</property>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="371">
+                <cell id="372">
+                    <label id="214">
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">RESPUESTA/INTERPRETACIÓN DE PROCEDIMIENTOS</text-property>
+                    </label>
+                    <grid id="215">
+                        <property name="width">100%</property>
+                        <column id="216"/>
+                        <row id="217">
+                            <cell id="218">
+                                <property name="paddingTop">0.5cm</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <table id="242">
+                        <property name="width">100%</property>
+                        <property name="dataSet">respuestaInterpretacionProcedimientos</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">fechahora</property>
+                                <expression name="expression">dataSetRow["fechahora"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">servicio</property>
+                                <expression name="expression">dataSetRow["servicio"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">resultado</property>
+                                <expression name="expression">dataSetRow["resultado"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">observaciones</property>
+                                <expression name="expression">dataSetRow["observaciones"]</expression>
+                            </structure>
+                            <structure>
+                                <property name="name">interpretacion</property>
+                                <expression name="expression">dataSetRow["interpretacion"]</expression>
+                            </structure>
+                        </list-property>
+                        <property name="pageBreakInterval">50</property>
+                        <column id="264">
+                            <property name="width">1.336in</property>
+                        </column>
+                        <column id="265">
+                            <property name="width">5.978in</property>
+                        </column>
+                        <detail>
+                            <row id="246">
+                                <cell id="247">
+                                    <label id="269">
+                                        <text-property name="text">FECHA/HORA:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="248">
+                                    <data id="273">
+                                        <property name="resultSetColumn">fechahora</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="249">
+                                <cell id="250">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <data id="274">
+                                        <property name="resultSetColumn">servicio</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="252">
+                                <cell id="253">
+                                    <label id="270">
+                                        <text-property name="text">RESULTADOS:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="254"/>
+                            </row>
+                            <row id="266">
+                                <cell id="267">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <data id="275">
+                                        <property name="resultSetColumn">resultado</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="255">
+                                <cell id="256">
+                                    <label id="271">
+                                        <text-property name="text">OBSERVACIONES:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="257">
+                                    <data id="276">
+                                        <property name="resultSetColumn">observaciones</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="258">
+                                <cell id="259">
+                                    <label id="272">
+                                        <text-property name="text">INTERPRETACIÓN:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="260">
+                                    <data id="277">
+                                        <property name="resultSetColumn">interpretacion</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                </cell>
+            </row>
+            <row id="373">
+                <cell id="374"/>
+            </row>
+            <row id="375">
+                <cell id="376">
+                    <label id="391">
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">RESPUESTA/INTERPRETACIÓN DE INTERCONSULTA</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="377">
+                <cell id="378"/>
+            </row>
+            <row id="379">
+                <cell id="380"/>
+            </row>
+            <row id="381">
+                <cell id="382"/>
+            </row>
+            <row id="383">
+                <cell id="384"/>
+            </row>
+            <row id="385">
+                <cell id="386"/>
+            </row>
+            <row id="387">
+                <cell id="388"/>
+            </row>
+        </grid>
+    </body>
+</report>

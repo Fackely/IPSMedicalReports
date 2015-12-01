@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ClasOdoSecEspe" table="clas_odo_sec_espe" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" not-null="true" />
+        </many-to-one>
+        <many-to-one name="clasificaPacientesOdo" class="com.servinte.axioma.orm.ClasificaPacientesOdo" fetch="select">
+            <column name="clasificacion" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

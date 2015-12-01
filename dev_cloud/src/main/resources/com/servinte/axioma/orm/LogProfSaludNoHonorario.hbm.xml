@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 13, 2011 8:51:07 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogProfSaludNoHonorario" table="log_prof_salud_no_honorario" schema="facturacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">facturacion.seq_log_prof_salud_no_honora</param>
+            </generator>
+        </id>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="solicitud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <property name="fechaLiquidacionHonorarios" type="date">
+            <column name="fecha_liquidacion_honorarios" length="13" not-null="true" />
+        </property>
+        <property name="horaLiquidacionHonorarios" type="string">
+            <column name="hora_liquidacion_honorarios" length="5" not-null="true" />
+        </property>
+        <property name="nombreProfesional" type="string">
+            <column name="nombre_profesional" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

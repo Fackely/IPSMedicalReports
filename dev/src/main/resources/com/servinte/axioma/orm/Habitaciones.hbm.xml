@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Habitaciones" table="habitaciones" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipoHabitacion" class="com.servinte.axioma.orm.TipoHabitacion" fetch="select">
+            <column name="tipo_habitacion" length="8" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pisos" class="com.servinte.axioma.orm.Pisos" fetch="select">
+            <column name="piso" not-null="true" />
+        </many-to-one>
+        <property name="codigoHabitac" type="string">
+            <column name="codigo_habitac" length="8" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="128" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="camas1s" inverse="true" lazy="true" table="camas1" fetch="select">
+            <key>
+                <column name="habitacion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Camas1" />
+        </set>
+        <set name="logsActivarCamasReservadases" inverse="true" lazy="true" table="logs_activar_camas_reservadas" fetch="select">
+            <key>
+                <column name="codigo_habitacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogsActivarCamasReservadas" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2010 4:21:11 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetalleMontoGeneral" table="detalle_monto_general" schema="facturacion">
+        <id name="detalleCodigo" type="int">
+            <column name="detalle_codigo" />
+            <generator class="foreign">
+                <param name="property">detalleMonto</param>
+            </generator>
+        </id>
+        <one-to-one name="detalleMonto" class="com.servinte.axioma.orm.DetalleMonto" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="valor" type="java.lang.Double">
+            <column name="valor" precision="17" scale="17">
+                <comment>Valor del detalle del monto</comment>
+            </column>
+        </property>
+        <property name="porcentaje" type="java.lang.Double">
+            <column name="porcentaje" precision="17" scale="17">
+                <comment>Porcentaje del detalle del monto</comment>
+            </column>
+        </property>
+        <property name="cantidadMonto" type="int">
+            <column name="cantidad_monto" not-null="true">
+                <comment>Cantidad de montos a cobrar</comment>
+            </column>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora en que se realiza el registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

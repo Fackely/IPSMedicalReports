@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HisConfPlanTratamiento" table="his_conf_plan_tratamiento" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="planTratamiento" class="com.servinte.axioma.orm.PlanTratamiento" fetch="select">
+            <column name="plan_tratamiento" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="evolucionesOdo" class="com.servinte.axioma.orm.EvolucionesOdo" fetch="select">
+            <column name="evolucion" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="odontogramaByOdontogramaDiagnostico" class="com.servinte.axioma.orm.Odontograma" fetch="select">
+            <column name="odontograma_diagnostico" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="citasOdontologicas" class="com.servinte.axioma.orm.CitasOdontologicas" fetch="select">
+            <column name="cita" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioGrabacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_grabacion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <many-to-one name="odontogramaByOdontogramaEvolucion" class="com.servinte.axioma.orm.Odontograma" fetch="select">
+            <column name="odontograma_evolucion" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="valoracionesOdonto" class="com.servinte.axioma.orm.ValoracionesOdonto" fetch="select">
+            <column name="valoracion" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="motivosAtencion" class="com.servinte.axioma.orm.MotivosAtencion" fetch="select">
+            <column name="motivo" />
+        </many-to-one>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="string">
+            <column name="hora_grabacion" length="5" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="indicativo" type="string">
+            <column name="indicativo" length="3" not-null="true" />
+        </property>
+        <property name="porConfirmar" type="string">
+            <column name="por_confirmar" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="imagen" type="string">
+            <column name="imagen" length="512" />
+        </property>
+        <property name="codigoMedico" type="java.lang.Integer">
+            <column name="codigo_medico" />
+        </property>
+    </class>
+</hibernate-mapping>

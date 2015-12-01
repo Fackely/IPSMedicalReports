@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 8, 2010 3:20:33 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogEncaEmiTarjetaCliente" table="log_enca_emi_tarjeta_cliente" schema="odontologia">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposTarjCliente" class="com.servinte.axioma.orm.TiposTarjCliente" fetch="select">
+            <column name="tipo_targeta" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="encaEmiTarjeta" type="long">
+            <column name="enca_emi_tarjeta" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="serialInicial" type="long">
+            <column name="serial_inicial" precision="14" scale="0" not-null="true" />
+        </property>
+        <property name="serialFinal" type="long">
+            <column name="serial_final" precision="14" scale="0" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="eliminado" type="java.lang.Character">
+            <column name="eliminado" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

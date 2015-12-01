@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LecturaPlanosAu" table="lectura_planos_au" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.LecturaPlanosAuId">
+            <key-property name="tipoIdentificacion" type="string">
+                <column name="tipo_identificacion" length="2" />
+            </key-property>
+            <key-property name="numeroIdentificacion" type="string">
+                <column name="numero_identificacion" length="20" />
+            </key-property>
+            <key-property name="numeroFactura" type="string">
+                <column name="numero_factura" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="codigoPrestador" type="string">
+            <column name="codigo_prestador" length="10" not-null="true" />
+        </property>
+        <property name="fechaIngreso" type="string">
+            <column name="fecha_ingreso" length="10" not-null="true" />
+        </property>
+        <property name="horaIngreso" type="string">
+            <column name="hora_ingreso" length="5" not-null="true" />
+        </property>
+        <property name="numeroAutorizacion" type="string">
+            <column name="numero_autorizacion" length="15" />
+        </property>
+        <property name="causaExterna" type="string">
+            <column name="causa_externa" length="2" not-null="true" />
+        </property>
+        <property name="diagSalida" type="string">
+            <column name="diag_salida" length="4" not-null="true" />
+        </property>
+        <property name="diagRelSalida1" type="string">
+            <column name="diag_rel_salida_1" length="4" />
+        </property>
+        <property name="diagRelSalida2" type="string">
+            <column name="diag_rel_salida_2" length="4" />
+        </property>
+        <property name="diagRelSalida3" type="string">
+            <column name="diag_rel_salida_3" length="4" />
+        </property>
+        <property name="destinoSalida" type="string">
+            <column name="destino_salida" length="1" not-null="true" />
+        </property>
+        <property name="estadoSalida" type="string">
+            <column name="estado_salida" length="1" not-null="true" />
+        </property>
+        <property name="causaMuerte" type="string">
+            <column name="causa_muerte" length="4" />
+        </property>
+        <property name="fechaSalida" type="string">
+            <column name="fecha_salida" length="10" not-null="true" />
+        </property>
+        <property name="horaSalida" type="string">
+            <column name="hora_salida" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReportePromocionesOdontologicas" pageWidth="752" pageHeight="572" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.4641000000000015"/>
+	<property name="ireport.x" value="157"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subReporteEspecialidades" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<field name="nombrePromocion" class="java.lang.String"/>
+	<field name="region" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<field name="dsSubPromociones" class="java.lang.Object"/>
+	<field name="categoriaAtencion" class="java.lang.String"/>
+	<field name="centroAtencion" class="java.lang.String"/>
+	<field name="nombreConvenio" class="java.lang.String"/>
+	<field name="numeroHijos" class="java.lang.String"/>
+	<field name="rangoEdad" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="estadoCivil" class="java.lang.String"/>
+	<field name="fechasHorasVigencia" class="java.lang.String"/>
+	<field name="ayudanteDescuento" class="java.lang.String"/>
+	<field name="ayudanteHonorario" class="java.lang.String"/>
+	<field name="codigoPrograma" class="java.lang.String"/>
+	<field name="ocupacion" class="java.lang.String"/>
+	<group name="promocion">
+		<groupExpression><![CDATA[$F{nombrePromocion}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement style="colorEncabezado" mode="Opaque" x="0" y="16" width="752" height="21" backcolor="#CCCCCC"/>
+					<staticText>
+						<reportElement style="axiomaItem" x="0" y="0" width="52" height="20"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ Nombre:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaItem" x="215" y="0" width="52" height="20"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ Vigencia:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="52" y="0" width="141" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrePromocion}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="592" y="0" width="59" height="20"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ Honorario:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaItem" x="438" y="0" width="59" height="20"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Descuento:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="267" y="0" width="165" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{fechasHorasVigencia}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="497" y="0" width="88" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteDescuento}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="651" y="0" width="88" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteHonorario}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="752" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="0" y="0" width="74" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{region}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="74" y="0" width="77" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ciudad}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="151" y="0" width="91" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{categoriaAtencion}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="242" y="0" width="82" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{centroAtencion}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="324" y="0" width="98" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreConvenio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="648" y="0" width="36" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{numeroHijos}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="476" y="0" width="61" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{rangoEdad}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="537" y="0" width="44" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{sexo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="581" y="0" width="67" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{estadoCivil}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="422" y="0" width="54" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoPrograma}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" stretchType="RelativeToBandHeight" x="684" y="0" width="68" height="20" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ocupacion}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

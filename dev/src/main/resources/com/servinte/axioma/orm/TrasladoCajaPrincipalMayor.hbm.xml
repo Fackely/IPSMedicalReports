@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/08/2011 12:59:08 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TrasladoCajaPrincipalMayor" table="traslado_caja_principal_mayor" schema="tesoreria">
+        <comment>Registro de traslado de cajas principal a mayor</comment>
+        <id name="movimientoEntregaCajaMayor" type="long">
+            <column name="movimiento_entrega_caja_mayor" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">entregaCajaMayor</param>
+            </generator>
+        </id>
+        <one-to-one name="entregaCajaMayor" class="com.servinte.axioma.orm.EntregaCajaMayor" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true">
+                <comment>Usuario (cajero) que hace el registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cajas" class="com.servinte.axioma.orm.Cajas" fetch="select">
+            <column name="caja_mayor" not-null="true">
+                <comment>Caja a la que se hace el traslado (tipo mayor)</comment>
+            </column>
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true">
+                <comment>Fecha en la que se hace el registro</comment>
+            </column>
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true">
+                <comment>Hora en la que se hace el registro</comment>
+            </column>
+        </property>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

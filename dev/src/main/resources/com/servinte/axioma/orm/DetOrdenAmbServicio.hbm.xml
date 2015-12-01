@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 29, 2011 5:59:59 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetOrdenAmbServicio" table="det_orden_amb_servicio" schema="ordenes">
+        <id name="codigoOrden" type="long">
+            <column name="codigo_orden" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">ordenesAmbulatorias</param>
+            </generator>
+        </id>
+        <one-to-one name="ordenesAmbulatorias" class="com.servinte.axioma.orm.OrdenesAmbulatorias" constrained="true"></one-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato_convenio" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="finalidadesServicio" class="com.servinte.axioma.orm.FinalidadesServicio" fetch="select">
+            <column name="finalidad" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="auto_ent_sub" precision="12" scale="0" />
+        </many-to-one>
+        <property name="cantidad" type="java.lang.Short">
+            <column name="cantidad" precision="3" scale="0" />
+        </property>
+        <property name="cubierto" type="string">
+            <column name="cubierto" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

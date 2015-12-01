@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subrptEspecialidades" pageWidth="732" pageHeight="62" orientation="Landscape" columnWidth="732" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subrptCitasConCancelacion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptServicios" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptCitasSinCancelacion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptCitasOdontoResumido" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="descripcionEspecialidad" class="java.lang.String"/>
+	<field name="descripcionUnidadAgenda" class="java.lang.String"/>
+	<field name="codigoEspecialidad" class="java.lang.Integer"/>
+	<field name="dsCitasConCancelacionPaciente" class="java.lang.Object"/>
+	<field name="dsCitasConCancelacionInstitucion" class="java.lang.Object"/>
+	<field name="dsCitasSinCancelacion" class="java.lang.Object"/>
+	<field name="dsCitasSinEspecialidad" class="java.lang.Object"/>
+	<field name="numCitasConCancelacionPaciente" class="java.lang.Integer"/>
+	<field name="numCitasSinCancelacion" class="java.lang.Integer"/>
+	<field name="dsResumenCitas" class="java.lang.Object"/>
+	<field name="esResumido" class="java.lang.Boolean"/>
+	<field name="codigoUnidadAgenda" class="java.lang.Integer"/>
+	<field name="totalCitasEspecialidad" class="java.lang.Integer"/>
+	<group name="especialidades" isReprintHeaderOnEachPage="true" minHeightToStartNewPage="25">
+		<groupExpression><![CDATA[$F{codigoEspecialidad}]]></groupExpression>
+		<groupHeader>
+			<band height="15" splitType="Prevent">
+				<frame>
+					<reportElement style="colorEncabezado" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="732" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+						<topPen lineWidth="1.0" lineStyle="Solid"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionEspecialidad" style="axiomaTexto" stretchType="RelativeToBandHeight" x="90" y="0" width="110" height="15" isPrintWhenDetailOverflows="true">
+							<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="2" leftPadding="5">
+							<pen lineWidth="0.0"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionEspecialidad}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionUnidad" style="axiomaTexto" stretchType="RelativeToBandHeight" x="310" y="0" width="150" height="15" isPrintWhenDetailOverflows="true">
+							<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="2" leftPadding="5">
+							<pen lineWidth="0.0"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionUnidadAgenda}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="0" y="0" width="90" height="15" isPrintWhenDetailOverflows="true">
+							<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="2" leftPadding="5">
+							<pen lineWidth="0.0"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Especialidad:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaItem" stretchType="RelativeToBandHeight" x="200" y="0" width="110" height="15" isPrintWhenDetailOverflows="true">
+							<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="2" leftPadding="5">
+							<pen lineWidth="0.0"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Unidad de Agenda:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaItem" x="0" y="0" width="232" height="15" isPrintWhenDetailOverflows="true">
+							<printWhenExpression><![CDATA[$F{esResumido}]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="2" leftPadding="5">
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Especialidad Unid Agenda]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaItem" stretchType="RelativeToBandHeight" x="232" y="0" width="150" height="15" isPrintWhenDetailOverflows="true">
+							<printWhenExpression><![CDATA[$F{esResumido}]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="2" leftPadding="5">
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Tipo Cita]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaItem" stretchType="RelativeToBandHeight" x="382" y="0" width="150" height="15" isPrintWhenDetailOverflows="true">
+							<printWhenExpression><![CDATA[$F{esResumido}]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="2" leftPadding="5">
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Estado Cita]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaItem" stretchType="RelativeToBandHeight" x="532" y="0" width="200" height="15" isPrintWhenDetailOverflows="true">
+							<printWhenExpression><![CDATA[$F{esResumido}]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="2" leftPadding="5">
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Total Citas]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<printWhenExpression><![CDATA[$F{esResumido}]]></printWhenExpression>
+				<frame>
+					<reportElement x="0" y="0" width="732" height="15"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="valorTotal" style="axiomaTexto" stretchType="RelativeToBandHeight" x="532" y="0" width="200" height="15" isPrintWhenDetailOverflows="true"/>
+						<box topPadding="3" leftPadding="3" rightPadding="3">
+							<pen lineWidth="1.0" lineStyle="Solid"/>
+							<topPen lineWidth="1.0" lineStyle="Solid"/>
+							<leftPen lineWidth="1.0" lineStyle="Solid"/>
+							<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+							<rightPen lineWidth="1.0" lineStyle="Solid"/>
+						</box>
+						<textElement textAlignment="Right">
+							<font size="10" isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalCitasEspecialidad}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="302" y="0" width="80" height="15"/>
+						<box topPadding="1" leftPadding="5"/>
+						<textElement textAlignment="Right">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[TOTAL CITAS]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionEspecialidad" style="axiomaTexto" stretchType="RelativeToBandHeight" x="382" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+						<box topPadding="2" leftPadding="5">
+							<pen lineWidth="0.0"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionEspecialidad}.isEmpty() ? "SIN ESPECIALIDAD" : $F{descripcionEspecialidad}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="10">
+			<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<subreport isUsingCache="true" runToBottom="false">
+					<reportElement key="subrptCitasConCancelacionPaciente" stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="subrptServicios">
+						<subreportParameterExpression><![CDATA[$P{subrptServicios}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="numCitasConCancelacionPaciente">
+						<subreportParameterExpression><![CDATA[$F{numCitasConCancelacionPaciente}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$F{dsCitasConCancelacionPaciente}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subrptCitasConCancelacion}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+		<band height="10">
+			<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<subreport isUsingCache="true" runToBottom="false">
+					<reportElement key="subrptCitasConCancelacion" stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="subrptServicios">
+						<subreportParameterExpression><![CDATA[$P{subrptServicios}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$F{dsCitasConCancelacionInstitucion}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subrptCitasConCancelacion}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+		<band height="10">
+			<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<subreport isUsingCache="true" runToBottom="false">
+					<reportElement key="subrptCitasSinCancelacion" stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="numCitasSinCancelacion">
+						<subreportParameterExpression><![CDATA[$F{numCitasSinCancelacion}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subrptServicios">
+						<subreportParameterExpression><![CDATA[$P{subrptServicios}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$F{dsCitasSinCancelacion}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subrptCitasSinCancelacion}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+		<band height="10">
+			<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<subreport isUsingCache="true" runToBottom="false">
+					<reportElement key="subrptCitasSinEspecialidad" stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="subrptServicios">
+						<subreportParameterExpression><![CDATA[$P{subrptServicios}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$F{dsCitasSinEspecialidad}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subrptCitasSinCancelacion}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+		<band height="10">
+			<printWhenExpression><![CDATA[$F{esResumido}]]></printWhenExpression>
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<subreport isUsingCache="true" runToBottom="false">
+					<reportElement key="subrptCitasResumido" stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="subrptServicios">
+						<subreportParameterExpression><![CDATA[$P{subrptServicios}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$F{dsResumenCitas}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subrptCitasOdontoResumido}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 17, 2011 3:52:29 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresupuestoDctoOdon" table="presupuesto_dcto_odon" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="detDescuentosOdon" class="com.servinte.axioma.orm.DetDescuentosOdon" fetch="select">
+            <column name="det_dcto_odo" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="autorizacionPresuDctoOdon" class="com.servinte.axioma.orm.AutorizacionPresuDctoOdon" fetch="select">
+            <column name="autorizacion_presu_dcto_odon" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="presupuestoOdontologico" class="com.servinte.axioma.orm.PresupuestoOdontologico" fetch="select">
+            <column name="presupuesto" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="descuentosOdonAten" class="com.servinte.axioma.orm.DescuentosOdonAten" fetch="select">
+            <column name="det_dcto_odo_aten" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioSolicitad" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_solicitad" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="motivosDescuentosOdon" class="com.servinte.axioma.orm.MotivosDescuentosOdon" fetch="select">
+            <column name="motivo" precision="12" scale="0" />
+        </many-to-one>
+        <property name="fechaSolicitad" type="date">
+            <column name="fecha_solicitad" length="13" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="horaSolicita" type="string">
+            <column name="hora_solicita" length="5" not-null="true" />
+        </property>
+        <property name="valorDescuento" type="big_decimal">
+            <column name="valor_descuento" precision="14" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="5" not-null="true" />
+        </property>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="14" scale="0" not-null="true" />
+        </property>
+        <property name="porcentajeDcto" type="big_decimal">
+            <column name="porcentaje_dcto" precision="5" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="512" />
+        </property>
+        <property name="inclusion" type="char">
+            <column name="inclusion" length="1" not-null="true" />
+        </property>
+        <set name="incluDctoOdontologicos" inverse="true" lazy="true" table="inclu_dcto_odontologico" fetch="select">
+            <key>
+                <column name="presupuesto_dcto_odon" precision="12" scale="0" not-null="true">
+                    <comment>Registro de la solicitud de descuento</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluDctoOdontologico" />
+        </set>
+        <set name="autorizacionPresuDctoOdons" inverse="true" lazy="true" table="autorizacion_presu_dcto_odon" fetch="select">
+            <key>
+                <column name="presupuesto_dcto_odon" precision="12" scale="0" not-null="true">
+                    <comment>Registro de la solicitud de descuento</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionPresuDctoOdon" />
+        </set>
+        <set name="logPresupuestoDctoOdons" inverse="true" lazy="true" table="log_presupuesto_dcto_odon" fetch="select">
+            <key>
+                <column name="presupuesto_dcto_odon" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoDctoOdon" />
+        </set>
+    </class>
+</hibernate-mapping>

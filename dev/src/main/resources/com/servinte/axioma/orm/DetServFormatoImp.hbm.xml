@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetServFormatoImp" table="det_serv_formato_imp" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetServFormatoImpId">
+            <key-property name="codigoFormato" type="int">
+                <column name="codigo_formato" />
+            </key-property>
+            <key-property name="detalle" type="java.lang.Boolean">
+                <column name="detalle" />
+            </key-property>
+            <key-property name="valoresDetalle" type="java.lang.Boolean">
+                <column name="valores_detalle" />
+            </key-property>
+            <key-property name="subtotalGrupo" type="java.lang.Boolean">
+                <column name="subtotal_grupo" />
+            </key-property>
+            <key-property name="prioridad" type="int">
+                <column name="prioridad" />
+            </key-property>
+            <key-property name="grupo" type="int">
+                <column name="grupo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="formatoImpPresupuesto" class="com.servinte.axioma.orm.FormatoImpPresupuesto" update="false" insert="false" fetch="select">
+            <column name="codigo_formato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="gruposServicios" class="com.servinte.axioma.orm.GruposServicios" update="false" insert="false" fetch="select">
+            <column name="grupo" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

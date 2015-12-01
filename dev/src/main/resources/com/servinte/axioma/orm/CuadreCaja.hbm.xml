@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 21, 2010 11:07:50 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CuadreCaja" table="cuadre_caja" schema="tesoreria">
+        <comment>Registro de los cuadres de caja para cada uno de los movimientos de caja realizados (Tipos de Arqueos) y seg&#195;&#186;n la forma de pago</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+          	<generator class="sequence" >
+				<param name="sequence">tesoreria.seq_cuadre_caja</param>
+			</generator>
+        </id>
+        <many-to-one name="formasPago" class="com.servinte.axioma.orm.FormasPago" fetch="select">
+            <column name="forma_pago" not-null="true">
+                <comment>Referencia hacia la tabla tesoreria.formas_pago</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="movimientosCaja" class="com.servinte.axioma.orm.MovimientosCaja" fetch="select">
+            <column name="movimiento_caja" precision="10" scale="0" not-null="true">
+                <comment>Referencia hacia la tabla tesoreria.movimientos_caja</comment>
+            </column>
+        </many-to-one>
+        <property name="valorcaja" type="big_decimal">
+            <column name="valorcaja" not-null="true">
+                <comment>valor en caja para ese movimiento</comment>
+            </column>
+        </property>
+        <property name="valorsistema" type="big_decimal">
+            <column name="valorsistema" not-null="true">
+                <comment>Valor calculado por el sistema para ese movimiento de caja</comment>
+            </column>
+        </property>
+        <property name="valordiferencia" type="big_decimal">
+            <column name="valordiferencia" not-null="true">
+                <comment>Valor diferencia entre el valor de sistema y el valor en caja para ese movimiento</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

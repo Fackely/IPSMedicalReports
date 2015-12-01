@@ -1,0 +1,2165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.16" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.0.v20080606 Build &lt;2.3.0.v20080618-0630></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="332">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="estanciaPromPacFallRanEdad1" id="333">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">valor</property>
+                    <property name="displayName">valor</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo</property>
+                    <property name="displayName">tipo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">edad</property>
+                    <property name="displayName">edad</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mes_egreso</property>
+                    <property name="displayName">mes_egreso</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mes</property>
+                    <property name="displayName">mes</property>
+                </structure>
+                <structure>
+                    <property name="columnName">sexo</property>
+                    <property name="displayName">sexo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre_etiqueta</property>
+                    <property name="displayName">nombre_etiqueta</property>
+                </structure>
+                <structure>
+                    <property name="columnName">orden</property>
+                    <property name="displayName">orden</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">valor</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">edad</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">mes_egreso</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">mes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">sexo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">nombre_etiqueta</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">orden</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">valor</property>
+                    <property name="nativeName">valor</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">tipo</property>
+                    <property name="nativeName">tipo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">edad</property>
+                    <property name="nativeName">edad</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">mes_egreso</property>
+                    <property name="nativeName">mes_egreso</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">mes</property>
+                    <property name="nativeName">mes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">sexo</property>
+                    <property name="nativeName">sexo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">nombre_etiqueta</property>
+                    <property name="nativeName">nombre_etiqueta</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">orden</property>
+                    <property name="nativeName">orden</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT t.valor,t.tipo,t.edad,t.mes_egreso,t.mes,t.sexo,re.nombre_etiqueta,re.orden FROM
+(
+	SELECT 
+	1 as valor,
+	e.fecha_egreso - p.fecha_nacimiento AS edad,
+	to_char(e.fecha_egreso,'YYYY-MM') as mes_egreso,
+	getnombremes(to_char(e.fecha_egreso,'MM')) || ' ' || to_char(e.fecha_egreso,'YYYY') AS mes,
+	CASE WHEN p.sexo = 1 THEN 'M' ELSE 'F' END AS sexo, 
+	'PACIENTES' as tipo 
+	FROM egresos e 
+	INNER JOIN cuentas c ON(c.id = e.cuenta) 
+	INNER JOIN pacientes pac ON(pac.codigo_paciente = c.codigo_paciente) 
+	INNER JOIN personas p ON(p.codigo = pac.codigo_paciente) 
+	WHERE e.fecha_egreso BETWEEN '2008-03-24' and '2008-06-21' and e.estado_salida = true AND e.usuario_responsable IS NOT NULL
+) t 
+INNER JOIN rangos_estadisticos re ON(re.rango_inicial &lt;= t.edad AND re.rango_final >= t.edad and re.institucion = 2 and re.activo = 'S' and re.reporte = 5) 
+order by t.mes_egreso,re.orden</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>valor</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>valor</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valor</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>tipo</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>tipo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tipo</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>edad</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>edad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>edad</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>mes_egreso</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>mes_egreso</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>mes_egreso</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>mes</design:name>
+            <design:position>5</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>mes</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>mes</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>sexo</design:name>
+            <design:position>6</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>sexo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sexo</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nombre_etiqueta</design:name>
+            <design:position>7</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>nombre_etiqueta</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombre_etiqueta</design:label>
+            <design:formattingHints>
+              <design:displaySize>128</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>orden</design:name>
+            <design:position>8</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>orden</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>orden</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="estanciaPromPacFallRanEdad2" id="389">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">valor</property>
+                    <property name="displayName">valor</property>
+                </structure>
+                <structure>
+                    <property name="columnName">paciente</property>
+                    <property name="displayName">paciente</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo</property>
+                    <property name="displayName">tipo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">edad</property>
+                    <property name="displayName">edad</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mes_egreso</property>
+                    <property name="displayName">mes_egreso</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mes</property>
+                    <property name="displayName">mes</property>
+                </structure>
+                <structure>
+                    <property name="columnName">sexo</property>
+                    <property name="displayName">sexo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre_etiqueta</property>
+                    <property name="displayName">nombre_etiqueta</property>
+                </structure>
+                <structure>
+                    <property name="columnName">orden</property>
+                    <property name="displayName">orden</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">valor</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">paciente</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">edad</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">mes_egreso</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">mes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">sexo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">nombre_etiqueta</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">orden</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">valor</property>
+                    <property name="nativeName">valor</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">paciente</property>
+                    <property name="nativeName">paciente</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">tipo</property>
+                    <property name="nativeName">tipo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">edad</property>
+                    <property name="nativeName">edad</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">mes_egreso</property>
+                    <property name="nativeName">mes_egreso</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">mes</property>
+                    <property name="nativeName">mes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">sexo</property>
+                    <property name="nativeName">sexo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">nombre_etiqueta</property>
+                    <property name="nativeName">nombre_etiqueta</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">orden</property>
+                    <property name="nativeName">orden</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT t.valor,t.paciente,t.tipo,t.edad,t.mes_egreso,t.mes,t.sexo,re.nombre_etiqueta,re.orden FROM
+(
+	SELECT 
+	gettiempoestancia(getfechaingreso(c.id,c.via_ingreso),e.fecha_egreso,1) as valor,
+	1 as paciente,
+	e.fecha_egreso - p.fecha_nacimiento AS edad,
+	to_char(e.fecha_egreso,'YYYY-MM') as mes_egreso,
+	getnombremes(to_char(e.fecha_egreso,'MM')) || ' ' || to_char(e.fecha_egreso,'YYYY') AS mes,
+	CASE WHEN p.sexo = 1 THEN 'M' ELSE 'F' END AS sexo, 
+	'ESTANCIA' as tipo 
+	FROM egresos e 
+	INNER JOIN cuentas c ON(c.id = e.cuenta) 
+	INNER JOIN pacientes pac ON(pac.codigo_paciente = c.codigo_paciente) 
+	INNER JOIN personas p ON(p.codigo = pac.codigo_paciente) 
+	WHERE e.fecha_egreso BETWEEN '2008-03-24' and '2008-06-21' and e.estado_salida = true AND e.usuario_responsable IS NOT NULL
+) t 
+INNER JOIN rangos_estadisticos re ON(re.rango_inicial &lt;= t.edad AND re.rango_final >= t.edad and re.institucion = 2 and re.activo = 'S' and re.reporte = 5) 
+order by t.mes_egreso,re.orden;</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>valor</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>valor</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valor</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>tipo</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>tipo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tipo</design:label>
+            <design:formattingHints>
+              <design:displaySize>65534</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>edad</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>edad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>edad</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>mes_egreso</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>mes_egreso</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>mes_egreso</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>mes</design:name>
+            <design:position>5</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>mes</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>mes</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>sexo</design:name>
+            <design:position>6</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>sexo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sexo</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nombre_etiqueta</design:name>
+            <design:position>7</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>nombre_etiqueta</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombre_etiqueta</design:label>
+            <design:formattingHints>
+              <design:displaySize>128</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>orden</design:name>
+            <design:position>8</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>orden</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>orden</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="dataCube1" id="390">
+            <property name="dimensions">
+                <tabular-dimension name="Group" id="391">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="392">
+                            <property name="levels">
+                                <tabular-level name="tipo" id="393">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">tipo</property>
+                                </tabular-level>
+                                <tabular-level name="sexo" id="394">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">sexo</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Group1" id="395">
+                    <property name="defaultHierarchy">NewTabularHierarchy1</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy1" id="396">
+                            <property name="levels">
+                                <tabular-level name="orden" id="397">
+                                    <property name="dataType">integer</property>
+                                    <property name="columnName">orden</property>
+                                </tabular-level>
+                                <tabular-level name="nombre_etiqueta" id="398">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">nombre_etiqueta</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field" id="399">
+                    <property name="measures">
+                        <tabular-measure name="valor" id="400">
+                            <expression name="measureExpression">dataSetRow["valor"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">estanciaPromPacFallRanEdad1</property>
+        </tabular-cube>
+        <tabular-cube name="dataCube2" id="499">
+            <property name="dimensions">
+                <tabular-dimension name="Group2" id="500">
+                    <property name="defaultHierarchy">NewTabularHierarchy2</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy2" id="501">
+                            <property name="levels">
+                                <tabular-level name="tipo" id="502">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">tipo</property>
+                                </tabular-level>
+                                <tabular-level name="sexo" id="503">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">sexo</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Group3" id="504">
+                    <property name="defaultHierarchy">NewTabularHierarchy3</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy3" id="505">
+                            <property name="levels">
+                                <tabular-level name="orden" id="506">
+                                    <property name="dataType">integer</property>
+                                    <property name="columnName">orden</property>
+                                </tabular-level>
+                                <tabular-level name="nombre_etiqueta" id="507">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">nombre_etiqueta</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field1" id="508">
+                    <property name="measures">
+                        <tabular-measure name="estancia" id="509">
+                            <property name="function">sum</property>
+                            <expression name="measureExpression">dataSetRow["valor"]</expression>
+                            <property name="dataType">float</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="Summary Field2" id="510">
+                    <property name="measures">
+                        <tabular-measure name="paciente" id="511">
+                            <expression name="measureExpression">dataSetRow["paciente"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">estanciaPromPacFallRanEdad2</property>
+        </tabular-cube>
+    </cubes>
+    <styles>
+        <style name="crosstab-cell" id="4">
+            <property name="borderBottomColor">#FFFFFF</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#FFFFFF</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#FFFFFF</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#FFFFFF</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="paddingTop">2pt</property>
+            <property name="paddingLeft">2pt</property>
+            <property name="paddingBottom">2pt</property>
+            <property name="paddingRight">2pt</property>
+        </style>
+        <style name="crosstab" id="5">
+            <property name="borderBottomColor">#FFFFFF</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#FFFFFF</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#FFFFFF</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#FFFFFF</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+        </style>
+        <style name="axiomaTitulo" id="226">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">small</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="axiomaTexto" id="227">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="textAlign">left</property>
+        </style>
+        <style name="axiomaLabelCelda" id="228">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="fontWeight">bold</property>
+            <structure name="numberFormat">
+                <property name="category">Custom</property>
+                <property name="pattern">0.00</property>
+            </structure>
+            <property name="textAlign">center</property>
+        </style>
+        <style name="axiomaInfoCelda" id="229">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <structure name="numberFormat">
+                <property name="category">Custom</property>
+                <property name="pattern">0.00</property>
+            </structure>
+            <property name="textAlign">left</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1cm</property>
+            <page-header>
+                <grid name="masterPageHeader" id="323">
+                    <property name="fontFamily">"SansSerif"</property>
+                    <property name="marginTop">0.5cm</property>
+                    <property name="marginLeft">0cm</property>
+                    <property name="marginBottom">0cm</property>
+                    <property name="marginRight">0cm</property>
+                    <property name="height">1.4166666666666667in</property>
+                    <property name="width">10.104166666666666in</property>
+                    <column id="324">
+                        <property name="width">6.28125in</property>
+                    </column>
+                    <column id="325">
+                        <property name="width">2.5520833333333335in</property>
+                    </column>
+                    <row id="326">
+                        <property name="height">1.178in</property>
+                        <cell id="327">
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="328">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="46">
+                        <property name="height">0.23958333333333334in</property>
+                        <cell id="47">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="drop">none</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <property name="textAlign">justify</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid name="masterPageFooter" id="24">
+                    <property name="marginTop">0.5cm</property>
+                    <property name="marginLeft">0cm</property>
+                    <property name="marginBottom">0cm</property>
+                    <property name="marginRight">0cm</property>
+                    <property name="height">0.851in</property>
+                    <property name="width">100%</property>
+                    <column id="25"/>
+                    <row id="26">
+                        <cell id="27">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="329">
+                        <cell id="29">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="30">
+                        <property name="height">0.396in</property>
+                        <cell id="31">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <grid name="footerStaticData" id="38">
+                                <property name="fontFamily">"SansSerif"</property>
+                                <property name="height">0.366in</property>
+                                <property name="width">100%</property>
+                                <column id="330"/>
+                                <column id="39"/>
+                                <column id="40"/>
+                                <row id="41">
+                                    <property name="height">0.366in</property>
+                                    <cell id="331">
+                                        <text id="65">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <text-property name="content"><![CDATA[Creado por: Axioma Birt Reports]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="42">
+                                        <text name="footerCreatedDate" id="44">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="43">
+                                        <text name="footerNumberPage" id="45">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[Page: <value-of>pageNumber</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <extended-item extensionName="Crosstab" extensionVersion="2.3.0" id="423">
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="441">
+                    <property name="measure">valor</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="442">
+                            <property name="aggregationOnRow">Group1/nombre_etiqueta</property>
+                            <property name="aggregationOnColumn">Group/sexo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="443">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">###0</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">valor_Group1/nombre_etiqueta_Group/sexo</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="457">
+                            <property name="aggregationOnColumn">Group/sexo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="458">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">###0</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">valor_Group/sexo</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="485">
+                            <property name="aggregationOnRow">Group1/nombre_etiqueta</property>
+                            <property name="aggregationOnColumn">Group/tipo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="486">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">###0</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">valor_Group1/nombre_etiqueta_Group/tipo_1</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="487">
+                            <property name="aggregationOnColumn">Group/tipo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="488">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">###0</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">valor_Group/tipo_1</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="491">
+                            <property name="aggregationOnRow">Group1/nombre_etiqueta</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="496">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">Fixed</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">Column Binding</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="493">
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                            <property name="content">
+                                <label id="498">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <property name="textAlign">right</property>
+                                    <text-property name="text">100.0%</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="444">
+                            <property name="backgroundColor">#E5E5E5</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#E5E5E5</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="425">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="454">
+                            <property name="content">
+                                <label id="461">
+                                    <property name="style">axiomaLabelCelda</property>
+                                    <text-property name="text">TOTAL</text-property>
+                                </label>
+                            </property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="426">
+                            <property name="dimension">Group1</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View" id="427">
+                                    <property name="level">Group1/orden</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="428">
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="width">0.5%</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View1" id="430">
+                                    <property name="level">Group1/nombre_etiqueta</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="431">
+                                            <property name="content">
+                                                <data name="nombre_etiqueta" id="432">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="resultSetColumn">nombre_etiqueta</property>
+                                                </data>
+                                            </property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="width">10%</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="433">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="490">
+                            <property name="content">
+                                <label id="495">
+                                    <property name="style">axiomaLabelCelda</property>
+                                    <text-property name="text">%</text-property>
+                                </label>
+                            </property>
+                            <property name="backgroundColor">#E5E5E5</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#E5E5E5</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="434">
+                            <property name="dimension">Group</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View2" id="435">
+                                    <property name="level">Group/tipo</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="436">
+                                            <property name="content">
+                                                <data name="tipo" id="437">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="marginTop">0pt</property>
+                                                    <property name="resultSetColumn">tipo</property>
+                                                </data>
+                                            </property>
+                                            <property name="backgroundColor">#E5E5E5</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                    <property name="aggregationHeader">
+                                        <extended-item extensionName="CrosstabCell" id="484">
+                                            <property name="content">
+                                                <data name="tipo_TOTAL" id="489">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="resultSetColumn">tipo_TOTAL</property>
+                                                </data>
+                                            </property>
+                                            <property name="backgroundColor">#E5E5E5</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#E5E5E5</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View3" id="438">
+                                    <property name="level">Group/sexo</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="439">
+                                            <property name="content">
+                                                <data name="sexo" id="440">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="resultSetColumn">sexo</property>
+                                                </data>
+                                            </property>
+                                            <property name="backgroundColor">#E5E5E5</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#E5E5E5</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="424">
+                    <property name="content">
+                        <label id="476">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">RANGO</text-property>
+                        </label>
+                    </property>
+                    <property name="backgroundColor">#E5E5E5</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                </extended-item>
+            </property>
+            <property name="cube">dataCube1</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">orden</property>
+                    <expression name="expression">dimension["Group1"]["orden"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">nombre_etiqueta</property>
+                    <expression name="expression">dimension["Group1"]["nombre_etiqueta"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tipo</property>
+                    <expression name="expression">dimension["Group"]["tipo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sexo</property>
+                    <expression name="expression">dimension["Group"]["sexo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valor_Group1/nombre_etiqueta_Group/sexo</property>
+                    <expression name="expression">measure["valor"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group1/nombre_etiqueta</value>
+                        <value>Group/sexo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">valor_Group1/nombre_etiqueta_Group/tipo</property>
+                    <property name="displayName">total_rango_paciente</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group1/nombre_etiqueta</value>
+                        <value>Group/tipo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["valor"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">tipo_TOTAL</property>
+                    <property name="displayName">TOTAL</property>
+                    <expression name="expression">"TOTAL"</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valor_Group1/nombre_etiqueta</property>
+                    <property name="displayName">total_rango_paciente</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group1/nombre_etiqueta</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["valor"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">valor_Group/tipo</property>
+                    <property name="displayName">total_pacientes</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group/tipo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["valor"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">valor_Group/sexo</property>
+                    <expression name="expression">measure["valor"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group/sexo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">valor</property>
+                    <property name="displayName">total_pacientes</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["valor"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">promedio_rango</property>
+                    <property name="displayName">promedio_rango</property>
+                    <expression name="expression">(data["valor_Group1/nombre_etiqueta_Group/tipo"]/data["valor_Group/tipo"])*100</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">porcentaje</property>
+                    <property name="displayName">porcentaje</property>
+                    <expression name="expression">(data["valor_Group1/nombre_etiqueta_Group/tipo"]/data["valor_Group/tipo"])*100</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">porcentaje2</property>
+                    <property name="displayName">porcentaje2</property>
+                    <expression name="expression">data["valor_Group/tipo"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">valor_Group1/nombre_etiqueta_Group/tipo_1</property>
+                    <expression name="expression">measure["valor"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group1/nombre_etiqueta</value>
+                        <value>Group/tipo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">valor_Group/tipo_1</property>
+                    <expression name="expression">measure["valor"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group/tipo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <property name="displayName">porcentaje</property>
+                    <expression name="expression">(data["valor_Group1/nombre_etiqueta"]/data["valor"])*100</expression>
+                    <property name="dataType">any</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_1</property>
+                    <expression name="expression">data["Column Binding"]</expression>
+                    <property name="dataType">any</property>
+                </structure>
+            </list-property>
+        </extended-item>
+        <label id="569">
+            <text-property name="text">                                                     </text-property>
+        </label>
+        <extended-item extensionName="Crosstab" extensionVersion="2.3.0" id="512">
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="530">
+                    <property name="measure">estancia</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="531">
+                            <property name="aggregationOnRow">Group3/nombre_etiqueta</property>
+                            <property name="aggregationOnColumn">Group2/sexo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="532">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">###0</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">estancia_Group3/nombre_etiqueta_Group2/sexo</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="541">
+                            <property name="aggregationOnRow">Group3/nombre_etiqueta</property>
+                            <property name="aggregationOnColumn">Group2/tipo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="542">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">###0</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">estancia_Group3/nombre_etiqueta_Group2/tipo</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="545">
+                            <property name="aggregationOnRow">Group3/nombre_etiqueta</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="566">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">Fixed</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">data_binding_estancia</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="551">
+                            <property name="aggregationOnColumn">Group2/tipo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="552">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">###0</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">estancia_Group2/tipo</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="555">
+                            <property name="aggregationOnColumn">Group2/sexo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="556">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">###0</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">estancia_Group2/sexo</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="559">
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="content">
+                                <data id="567">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">Fixed</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">data_binding_total</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="533">
+                            <property name="backgroundColor">#E5E5E5</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#E5E5E5</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#E5E5E5</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+                <extended-item extensionName="MeasureView" id="535">
+                    <property name="measure">paciente</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="536">
+                            <property name="aggregationOnRow">Group3/nombre_etiqueta</property>
+                            <property name="aggregationOnColumn">Group2/sexo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                            <property name="width">0%</property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="547">
+                            <property name="aggregationOnRow">Group3/nombre_etiqueta</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                            <property name="width">0.5%</property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="553">
+                            <property name="aggregationOnColumn">Group2/tipo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="557">
+                            <property name="aggregationOnColumn">Group2/sexo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="561">
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="563">
+                            <property name="aggregationOnRow">Group3/nombre_etiqueta</property>
+                            <property name="aggregationOnColumn">Group2/tipo</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#C0C0C0</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#C0C0C0</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#C0C0C0</property>
+                            <property name="width">0%</property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="538">
+                            <property name="backgroundColor">#E5E5E5</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#E5E5E5</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#E5E5E5</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="522">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="550">
+                            <property name="content">
+                                <label id="565">
+                                    <property name="style">axiomaLabelCelda</property>
+                                    <text-property name="text">TOTAL</text-property>
+                                </label>
+                            </property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="523">
+                            <property name="dimension">Group3</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View6" id="524">
+                                    <property name="level">Group3/orden</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="525">
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="width">0.5%</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View7" id="527">
+                                    <property name="level">Group3/nombre_etiqueta</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="528">
+                                            <property name="content">
+                                                <data name="nombre_etiqueta1" id="529">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="resultSetColumn">nombre_etiqueta</property>
+                                                </data>
+                                            </property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="width">15%</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="514">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="544">
+                            <property name="content">
+                                <label id="549">
+                                    <property name="style">axiomaLabelCelda</property>
+                                    <text-property name="text">PROMEDIO ESTANCIA</text-property>
+                                </label>
+                            </property>
+                            <property name="backgroundColor">#E5E5E5</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#E5E5E5</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="515">
+                            <property name="dimension">Group2</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View4" id="516">
+                                    <property name="level">Group2/tipo</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="517">
+                                            <property name="content">
+                                                <data name="tipo1" id="518">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="resultSetColumn">tipo</property>
+                                                </data>
+                                            </property>
+                                            <property name="backgroundColor">#E5E5E5</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                    <property name="aggregationHeader">
+                                        <extended-item extensionName="CrosstabCell" id="540">
+                                            <property name="content">
+                                                <data name="tipo_TOTAL1" id="543">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="resultSetColumn">tipo_TOTAL</property>
+                                                </data>
+                                            </property>
+                                            <property name="backgroundColor">#E5E5E5</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#E5E5E5</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View5" id="519">
+                                    <property name="level">Group2/sexo</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="520">
+                                            <property name="content">
+                                                <data name="sexo1" id="521">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="resultSetColumn">sexo</property>
+                                                </data>
+                                            </property>
+                                            <property name="backgroundColor">#E5E5E5</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#E5E5E5</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="513">
+                    <property name="content">
+                        <label id="568">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">RANGO</text-property>
+                        </label>
+                    </property>
+                    <property name="backgroundColor">#E5E5E5</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                </extended-item>
+            </property>
+            <property name="cube">dataCube2</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">tipo</property>
+                    <expression name="expression">dimension["Group2"]["tipo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sexo</property>
+                    <expression name="expression">dimension["Group2"]["sexo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">orden</property>
+                    <expression name="expression">dimension["Group3"]["orden"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">nombre_etiqueta</property>
+                    <expression name="expression">dimension["Group3"]["nombre_etiqueta"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">estancia_Group3/nombre_etiqueta_Group2/sexo</property>
+                    <expression name="expression">measure["estancia"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/nombre_etiqueta</value>
+                        <value>Group2/sexo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">paciente_Group3/nombre_etiqueta_Group2/sexo</property>
+                    <expression name="expression">measure["paciente"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/nombre_etiqueta</value>
+                        <value>Group2/sexo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">estancia_Group3/nombre_etiqueta_Group2/tipo</property>
+                    <expression name="expression">measure["estancia"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/nombre_etiqueta</value>
+                        <value>Group2/tipo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">tipo_TOTAL</property>
+                    <expression name="expression">"TOTAL"</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">estancia_Group3/nombre_etiqueta</property>
+                    <property name="displayName">total_estancia_z</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/nombre_etiqueta</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["estancia"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">paciente_Group3/nombre_etiqueta</property>
+                    <property name="displayName">total_paciente_w</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/nombre_etiqueta</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["paciente"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">estancia_Group2/tipo</property>
+                    <expression name="expression">measure["estancia"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group2/tipo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">paciente_Group2/tipo</property>
+                    <expression name="expression">measure["paciente"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group2/tipo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">estancia_Group2/sexo</property>
+                    <expression name="expression">measure["estancia"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group2/sexo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">paciente_Group2/sexo</property>
+                    <expression name="expression">measure["paciente"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group2/sexo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">estancia</property>
+                    <property name="displayName">total_estancia_y</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["estancia"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">paciente</property>
+                    <property name="displayName">total_paciente_x</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["paciente"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">paciente_Group3/nombre_etiqueta_Group2/tipo</property>
+                    <expression name="expression">measure["paciente"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/nombre_etiqueta</value>
+                        <value>Group2/tipo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">data_binding_estancia</property>
+                    <property name="displayName">data_binding_estancia</property>
+                    <expression name="expression">(data["estancia_Group3/nombre_etiqueta"]/data["paciente_Group3/nombre_etiqueta"]).toFixed(4)</expression>
+                    <property name="dataType">any</property>
+                </structure>
+                <structure>
+                    <property name="name">data_binding_total</property>
+                    <property name="displayName">data_binding_total</property>
+                    <expression name="expression">(data["estancia"]/data["paciente"]).toFixed(4)</expression>
+                    <property name="dataType">any</property>
+                </structure>
+            </list-property>
+        </extended-item>
+    </body>
+</report>

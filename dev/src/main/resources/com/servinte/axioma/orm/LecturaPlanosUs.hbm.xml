@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LecturaPlanosUs" table="lectura_planos_us" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.LecturaPlanosUsId">
+            <key-property name="tipoIdentificacion" type="string">
+                <column name="tipo_identificacion" length="2" />
+            </key-property>
+            <key-property name="numeroIdentificacion" type="string">
+                <column name="numero_identificacion" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="codigoEntidad" type="string">
+            <column name="codigo_entidad" length="6" not-null="true" />
+        </property>
+        <property name="tipoUsuario" type="string">
+            <column name="tipo_usuario" length="1" not-null="true" />
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="primer_apellido" length="30" not-null="true" />
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="segundo_apellido" length="30" />
+        </property>
+        <property name="primerNombre" type="string">
+            <column name="primer_nombre" length="20" not-null="true" />
+        </property>
+        <property name="segundoNombre" type="string">
+            <column name="segundo_nombre" length="20" />
+        </property>
+        <property name="edad" type="string">
+            <column name="edad" length="3" />
+        </property>
+        <property name="unidadMedida" type="string">
+            <column name="unidad_medida" length="1" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="1" not-null="true" />
+        </property>
+        <property name="codigoDepartamento" type="string">
+            <column name="codigo_departamento" length="2" not-null="true" />
+        </property>
+        <property name="codigoMunicipio" type="string">
+            <column name="codigo_municipio" length="3" not-null="true" />
+        </property>
+        <property name="zonaResidencia" type="string">
+            <column name="zona_residencia" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

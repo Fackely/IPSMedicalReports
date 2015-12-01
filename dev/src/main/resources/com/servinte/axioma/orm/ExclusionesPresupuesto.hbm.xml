@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 5, 2011 1:13:58 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ExclusionesPresupuesto" table="exclusiones_presupuesto" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="excluPresuEncabezado" class="com.servinte.axioma.orm.ExcluPresuEncabezado" fetch="select">
+            <column name="exclu_presu_encabezado" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa" />
+        </many-to-one>
+        <property name="valor" type="big_decimal">
+            <column name="valor" precision="14" not-null="true" />
+        </property>
+        <set name="presupuestoOdoConvenios" inverse="false" lazy="true" table="presupuesto_odo_conv_exclusion" fetch="select">
+            <key>
+                <column name="exclusiones_presupuesto" precision="12" scale="0" not-null="true">
+                    <comment>Registro de la exclusi&#195;&#179;n realizada al presupuesto</comment>
+                </column>
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.PresupuestoOdoConvenio">
+                <column name="presupuesto_odo_convenio" precision="12" scale="0" not-null="true">
+                    <comment>Convenio con el cual se contrat&#195;&#179; el programa / servicio excluido relacionado en el presupuesto</comment>
+                </column>
+            </many-to-many>
+        </set>
+        <set name="otrosSiExclusioneses" inverse="true" lazy="true" table="otros_si_exclusiones" fetch="select">
+            <key>
+                <column name="exclusion" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OtrosSiExclusiones" />
+        </set>
+        <set name="detExclusionesSuperficieses" inverse="true" lazy="true" table="det_exclusiones_superficies" fetch="select">
+            <key>
+                <column name="exclusion_presupuesto" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetExclusionesSuperficies" />
+        </set>
+    </class>
+</hibernate-mapping>

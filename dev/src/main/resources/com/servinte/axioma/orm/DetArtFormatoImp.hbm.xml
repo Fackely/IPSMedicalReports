@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetArtFormatoImp" table="det_art_formato_imp" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetArtFormatoImpId">
+            <key-property name="codigoFormato" type="int">
+                <column name="codigo_formato" />
+            </key-property>
+            <key-property name="descSeccionArt" type="string">
+                <column name="desc_seccion_art" length="256" />
+            </key-property>
+            <key-property name="detalleArticulos" type="java.lang.Boolean">
+                <column name="detalle_articulos" />
+            </key-property>
+            <key-property name="nivel" type="java.lang.Integer">
+                <column name="nivel" />
+            </key-property>
+            <key-property name="detalleNivel" type="java.lang.Boolean">
+                <column name="detalle_nivel" />
+            </key-property>
+            <key-property name="valoresDetalle" type="java.lang.Boolean">
+                <column name="valores_detalle" />
+            </key-property>
+            <key-property name="subtotalNivel" type="java.lang.Boolean">
+                <column name="subtotal_nivel" />
+            </key-property>
+            <key-property name="prioridad" type="int">
+                <column name="prioridad" />
+            </key-property>
+            <key-property name="medicamentosArticulos" type="string">
+                <column name="medicamentos_articulos" length="1" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="formatoImpPresupuesto" class="com.servinte.axioma.orm.FormatoImpPresupuesto" update="false" insert="false" fetch="select">
+            <column name="codigo_formato" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

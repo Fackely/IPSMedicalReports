@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2012 07:35:03 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TipoHallazgoCeoCop" table="tipo_hallazgo_ceo_cop" schema="odontologia">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="tipo" type="string">
+            <column name="tipo" length="15" not-null="true" />
+        </property>
+        <set name="hallazgosOdontologicoses" table="hallazgos_odontologicos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_hallazgo_ceo_cop" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HallazgosOdontologicos" />
+        </set>
+        <set name="historicoCopCeos" table="historico_cop_ceo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_hallazgo_ceo_cop" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoCopCeo" />
+        </set>
+    </class>
+</hibernate-mapping>

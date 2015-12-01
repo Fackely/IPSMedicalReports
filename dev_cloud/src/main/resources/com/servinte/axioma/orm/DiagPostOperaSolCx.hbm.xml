@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28/12/2012 09:58:42 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DiagPostOperaSolCx" table="diag_post_opera_sol_cx" schema="salascirugia">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="solCirugiaPorServicio" class="com.servinte.axioma.orm.SolCirugiaPorServicio" fetch="select">
+            <column name="cod_sol_cx_servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico" length="10" not-null="true" />
+            <column name="tipo_cie" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" />
+        </many-to-one>
+        <property name="principal" type="boolean">
+            <column name="principal" not-null="true" />
+        </property>
+        <property name="complicacion" type="boolean">
+            <column name="complicacion" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" />
+        </property>
+    </class>
+</hibernate-mapping>

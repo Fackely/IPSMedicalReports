@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="autorizacionArticulos" language="groovy" pageWidth="612" pageHeight="396" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subreporteMedicamentosAutorizados" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreporteInsumosAutorizados" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="nombrePaciente" class="java.lang.String"/>
+	<field name="tipoDocPaciente" class="java.lang.String"/>
+	<field name="numeroDocPaciente" class="java.lang.String"/>
+	<field name="tipoContrato" class="java.lang.String"/>
+	<field name="entidadSubcontratada" class="java.lang.String"/>
+	<field name="numeroAutorizacion" class="java.lang.String"/>
+	<field name="direccionEntidadSub" class="java.lang.String"/>
+	<field name="telefonoEntidadSub" class="java.lang.String"/>
+	<field name="fechaAutorizacion" class="java.lang.String"/>
+	<field name="fechaVencimiento" class="java.lang.String"/>
+	<field name="estadoAutorizacion" class="java.lang.String"/>
+	<field name="entidadAutoriza" class="java.lang.String"/>
+	<field name="usuarioAutoriza" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="rutaLogo" class="java.lang.String"/>
+	<field name="dsMedicamentosAutorizados" class="java.lang.Object"/>
+	<field name="infoParametroGeneral" class="java.lang.String"/>
+	<field name="dsInsumosAutorizados" class="java.lang.Object"/>
+	<field name="infoPiePagina" class="java.lang.String"/>
+	<field name="logoDerecha" class="java.lang.String"/>
+	<field name="logoIzquierda" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="190" splitType="Stretch">
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="76" width="572" height="96"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+			</frame>
+			<staticText>
+				<reportElement style="axiomaItem" x="226" y="82" width="62" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo y Nro. ID:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="tipoIdPacinte" style="axiomaTexto" x="300" y="82" width="16" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoDocPaciente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="393" y="82" width="96" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo contrato Paciente:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="nombrePacinte" style="axiomaTexto" x="44" y="82" width="178" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrePaciente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="85" y="125" width="137" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaAutorizacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="3" y="82" width="41" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="489" y="82" width="83" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoContrato}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="dirEntidadAutorizada" style="axiomaTexto" x="55" y="111" width="167" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccionEntidadSub}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="226" y="97" width="74" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Autorización:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="estadoAutorizacion" style="axiomaTexto" x="487" y="125" width="85" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estadoAutorizacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="3" y="125" width="82" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Autorización:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="numAutorizacion" style="axiomaTexto" x="300" y="97" width="56" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numeroAutorizacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="226" y="111" width="52" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefono:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="3" y="97" width="82" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entidad Autorizada:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="394" y="125" width="93" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado Autorización:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="226" y="125" width="62" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Vto:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="telEntidadAutorizada" style="axiomaTexto" x="277" y="111" width="95" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telefonoEntidadSub}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="3" y="111" width="52" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="226" y="141" width="90" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario que Autoriza:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="entidadEjecutta" style="axiomaTexto" x="96" y="141" width="126" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{entidadAutoriza}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="nomEntidadAutorizada" style="axiomaTexto" x="85" y="97" width="137" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{entidadSubcontratada}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="315" y="141" width="78" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuarioAutoriza}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="3" y="141" width="92" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entidad que Autoriza:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="3" y="156" width="111" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observaciones Generales:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="observaciones" style="axiomaTexto" stretchType="RelativeToTallestObject" x="114" y="156" width="458" height="15"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{observaciones}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="288" y="125" width="84" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaVencimiento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="316" y="82" width="56" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numeroDocPaciente}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="0" y="3" width="572" height="69"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement style="axiomaTitulo" x="187" y="1" width="209" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[AUTORIZACION ORDENES MEDICAS]]></text>
+				</staticText>
+				<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+					<reportElement key="logoIzquierda" x="40" y="1" width="120" height="67" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[$F{logoIzquierda} != null]]></printWhenExpression>
+					</reportElement>
+					<imageExpression class="java.lang.String"><![CDATA[$F{logoIzquierda}]]></imageExpression>
+				</image>
+				<textField isBlankWhenNull="true">
+					<reportElement key="infoParametroGeneral" style="axiomaTexto" x="187" y="31" width="209" height="12" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{infoParametroGeneral}]]></textFieldExpression>
+				</textField>
+				<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+					<reportElement key="logoIzquierda" x="428" y="2" width="120" height="67" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[$F{logoDerecha} != null]]></printWhenExpression>
+					</reportElement>
+					<imageExpression class="java.lang.String"><![CDATA[$F{logoDerecha}]]></imageExpression>
+				</image>
+			</frame>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="176" width="572" height="12"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Medicamentos e Insumos Autorizados]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="12">
+			<subreport>
+				<reportElement key="subreporteMedicamentosAutorizados" stretchType="RelativeToBandHeight" x="0" y="0" width="572" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{dsMedicamentosAutorizados}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreporteMedicamentosAutorizados}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12">
+			<subreport>
+				<reportElement key="subreporteInsumosAutorizados" x="0" y="0" width="572" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{dsInsumosAutorizados}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreporteInsumosAutorizados}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24">
+			<textField isBlankWhenNull="true">
+				<reportElement key="infoParametroGeneral" style="axiomaTexto" x="0" y="2" width="572" height="20" isRemoveLineWhenBlank="true"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{infoPiePagina}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

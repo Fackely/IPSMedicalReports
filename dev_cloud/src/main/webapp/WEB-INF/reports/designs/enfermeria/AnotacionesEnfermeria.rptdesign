@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Written by Eclipse BIRT 2.0 -->
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.6" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.0.1 Build &lt;20060222-1204></property>
+    <property name="units">in</property>
+    <html-property name="description">contiene header and footer</html-property>
+    <text-property name="displayName">template axioma reports</text-property>
+    <parameters>
+        <scalar-parameter name="codigo" id="160">
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="allowBlank">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+                <property name="pattern">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="codigo_reg" id="161">
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="allowBlank">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+                <property name="pattern">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="94">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="anotacionesEnfer" id="120">
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigo_reg</property>
+                    <property name="nativeName">codigo_reg</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT to_char(ehre.fecha_registro, 'dd/mm/yyyy' ) ||'-'|| to_char(ehre.hora_registro, 'HH24:MI' )  as fecha, 
+ehre.hora_registro as hora, 
+getnombreusuario(ehre.usuario) as usuario, 
+are.anotacion as nota  
+from registro_enfermeria rf 
+inner join enca_histo_registro_enfer ehre on (rf.codigo=ehre.registro_enfer) 
+inner join anotaciones_reg_enfer are on (ehre.codigo=are.codigo_histo_enfer) 
+where rf.codigo=?
+ORDER BY ehre.fecha_registro ASC, ehre.hora_registro ASC
+</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="infoPaciente" id="152">
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigo</property>
+                    <property name="nativeName">codigo</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT distinct
+getnombrepersona(cue.codigo_paciente) as paciente, 
+per.tipo_identificacion  as tipoid, 
+per.numero_identificacion as nuermoid 
+FROM enca_histo_registro_enfer ehre 
+INNER JOIN  registro_enfermeria re ON(ehre.registro_enfer=re.codigo) 
+INNER JOIN cuentas cue ON(re.cuenta=cue.id) 
+INNER JOIN personas per on(cue.codigo_paciente=per.codigo) 
+WHERE re.codigo = ?</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <property name="headerHeight">4cm</property>
+            <property name="footerHeight">3cm</property>
+            <page-header>
+                <grid name="masterPageHeader" id="4">
+                    <property name="fontFamily">SansSerif</property>
+                    <property name="height">1.475in</property>
+                    <property name="width">7.217in</property>
+                    <column id="5">
+                        <property name="width">2.673in</property>
+                    </column>
+                    <column id="6">
+                        <property name="width">4.544in</property>
+                    </column>
+                    <row id="7">
+                        <property name="height">1.178in</property>
+                        <cell id="8">
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="9"/>
+                    </row>
+                    <row id="46">
+                        <property name="height">0.297in</property>
+                        <cell id="47">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid name="masterPageFooter" id="24">
+                    <property name="marginTop">0.5cm</property>
+                    <property name="marginLeft">0cm</property>
+                    <property name="marginBottom">0cm</property>
+                    <property name="marginRight">0cm</property>
+                    <property name="height">0.851in</property>
+                    <property name="width">7.217in</property>
+                    <column id="25"/>
+                    <row id="26">
+                        <cell id="27">
+                            <property name="fontFamily">SansSerif</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="28">
+                        <cell id="29">
+                            <property name="fontFamily">SansSerif</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="30">
+                        <property name="height">0.396in</property>
+                        <cell id="31">
+                            <property name="fontFamily">SansSerif</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <grid name="footerStaticData" id="38">
+                                <property name="fontFamily">SansSerif</property>
+                                <property name="height">0.366in</property>
+                                <property name="width">7.148in</property>
+                                <column id="64"/>
+                                <column id="39"/>
+                                <column id="40"/>
+                                <row id="41">
+                                    <property name="height">0.366in</property>
+                                    <cell id="63">
+                                        <text id="65">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <text-property name="content"><![CDATA[Creado por: Axioma Birt Reports]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="42">
+                                        <text name="footerCreatedDate" id="44">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="43">
+                                        <text name="footerNumberPage" id="45">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[Page: <value-of>pageNumber</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="125">
+            <property name="width">100%</property>
+            <property name="dataSet">infoPaciente</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">codigo</property>
+                    <expression name="expression">params["codigo"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">paciente</property>
+                    <expression name="expression">dataSetRow["paciente"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">tipoid</property>
+                    <expression name="expression">dataSetRow["tipoid"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">nuermoid</property>
+                    <expression name="expression">dataSetRow["nuermoid"]</expression>
+                </structure>
+            </list-property>
+            <column id="144">
+                <property name="width">0.891in</property>
+            </column>
+            <column id="145">
+                <property name="width">2.831in</property>
+            </column>
+            <column id="146">
+                <property name="width">1.227in</property>
+            </column>
+            <column id="147">
+                <property name="width">0.811in</property>
+            </column>
+            <column id="148">
+                <property name="width">1.554in</property>
+            </column>
+            <header>
+                <row id="126">
+                    <property name="height">0.297in</property>
+                    <property name="backgroundColor">#E5E5E5</property>
+                    <property name="verticalAlign">middle</property>
+                    <cell id="127">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="170">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">ANOTACIONES DE ENFERMERIA</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="171">
+                    <property name="height">0.287in</property>
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="verticalAlign">top</property>
+                    <cell id="172">
+                        <property name="fontWeight">bold</property>
+                    </cell>
+                    <cell id="173"/>
+                    <cell id="174">
+                        <property name="fontWeight">bold</property>
+                    </cell>
+                    <cell id="175"/>
+                    <cell id="176"/>
+                </row>
+                <row id="132">
+                    <property name="height">0.554in</property>
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="verticalAlign">top</property>
+                    <cell id="133">
+                        <property name="fontWeight">bold</property>
+                        <label id="150">
+                            <text-property name="text">PACIENTE:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="134">
+                        <data id="154">
+                            <property name="resultSetColumn">paciente</property>
+                        </data>
+                    </cell>
+                    <cell id="135">
+                        <property name="fontWeight">bold</property>
+                        <label id="151">
+                            <text-property name="text">IDENTIFICACIÓN:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="136">
+                        <data id="156">
+                            <property name="resultSetColumn">tipoid</property>
+                        </data>
+                    </cell>
+                    <cell id="137">
+                        <data id="158">
+                            <property name="resultSetColumn">nuermoid</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="138">
+                    <cell id="139"/>
+                    <cell id="140"/>
+                    <cell id="141"/>
+                    <cell id="142"/>
+                    <cell id="143"/>
+                </row>
+            </footer>
+        </table>
+        <table id="96">
+            <property name="fontFamily">sans-serif</property>
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="height">0.851in</property>
+            <property name="width">7.326in</property>
+            <property name="dataSet">anotacionesEnfer</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">codigo_reg</property>
+                    <expression name="expression">params["codigo_reg"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">fecha</property>
+                    <expression name="expression">dataSetRow["fecha"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">usuario</property>
+                    <expression name="expression">dataSetRow["usuario"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">nota</property>
+                    <expression name="expression">dataSetRow["nota"]</expression>
+                </structure>
+            </list-property>
+            <column id="112">
+                <property name="width">1.584in</property>
+                <property name="textAlign">center</property>
+            </column>
+            <column id="114">
+                <property name="width">5.742in</property>
+                <property name="textAlign">center</property>
+            </column>
+            <header>
+                <row id="97">
+                    <property name="height">0.415in</property>
+                    <property name="backgroundColor">#E5E5E5</property>
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="fontWeight">bold</property>
+                    <property name="textAlign">center</property>
+                    <property name="verticalAlign">middle</property>
+                    <cell id="98">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="116">
+                            <text-property name="text">FECHA REGISTRO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="100">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="118">
+                            <text-property name="text">ENFERMERA(0)</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="102">
+                    <property name="backgroundColor">#E5E5E5</property>
+                    <property name="verticalAlign">top</property>
+                    <cell id="103">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="180">
+                            <property name="resultSetColumn">fecha</property>
+                        </data>
+                    </cell>
+                    <cell id="105">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="123">
+                            <property name="resultSetColumn">usuario</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="164">
+                    <property name="height">0.277in</property>
+                    <property name="textAlign">left</property>
+                    <property name="verticalAlign">top</property>
+                    <cell id="165">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="124">
+                            <property name="resultSetColumn">nota</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>

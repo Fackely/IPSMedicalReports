@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LecturaPlanosAf" table="lectura_planos_af" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.LecturaPlanosAfId">
+            <key-property name="tipoIdentificacion" type="string">
+                <column name="tipo_identificacion" length="2" />
+            </key-property>
+            <key-property name="numeroIdentificacion" type="string">
+                <column name="numero_identificacion" length="20" />
+            </key-property>
+            <key-property name="numeroFactura" type="string">
+                <column name="numero_factura" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="codigoPrestador" type="string">
+            <column name="codigo_prestador" length="10" not-null="true" />
+        </property>
+        <property name="razonSocial" type="string">
+            <column name="razon_social" length="60" not-null="true" />
+        </property>
+        <property name="fechaExpedicion" type="string">
+            <column name="fecha_expedicion" length="10" not-null="true" />
+        </property>
+        <property name="fechaInicio" type="string">
+            <column name="fecha_inicio" length="10" not-null="true" />
+        </property>
+        <property name="fechaFinal" type="string">
+            <column name="fecha_final" length="10" not-null="true" />
+        </property>
+        <property name="codigoEntidad" type="string">
+            <column name="codigo_entidad" length="6" not-null="true" />
+        </property>
+        <property name="nombreEntidad" type="string">
+            <column name="nombre_entidad" length="30" not-null="true" />
+        </property>
+        <property name="numeroContrato" type="string">
+            <column name="numero_contrato" length="15" />
+        </property>
+        <property name="planBeneficios" type="string">
+            <column name="plan_beneficios" length="30" />
+        </property>
+        <property name="numeroPoliza" type="string">
+            <column name="numero_poliza" length="10" />
+        </property>
+        <property name="valorCopago" type="string">
+            <column name="valor_copago" length="15" />
+        </property>
+        <property name="valorComision" type="string">
+            <column name="valor_comision" length="15" />
+        </property>
+        <property name="valorDescuentos" type="string">
+            <column name="valor_descuentos" length="15" />
+        </property>
+        <property name="valorNeto" type="string">
+            <column name="valor_neto" length="15" not-null="true" />
+        </property>
+        <property name="inconsistencia" type="string">
+            <column name="inconsistencia" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

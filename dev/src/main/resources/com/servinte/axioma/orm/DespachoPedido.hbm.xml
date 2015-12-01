@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 1, 2010 10:58:27 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DespachoPedido" table="despacho_pedido" schema="inventarios">
+        <id name="pedido" type="int">
+            <column name="pedido" />
+           	<generator class="assigned" />        
+      	</id>
+        <!-- <one-to-one name="pedido" class="com.servinte.axioma.orm.Pedido" constrained="true"></one-to-one> -->
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="contabilizado" type="string">
+            <column name="contabilizado" length="1" not-null="true" />
+        </property>
+        <set name="detalleDespachoPedidos" inverse="true" lazy="true" table="detalle_despacho_pedido" fetch="select">
+            <key>
+                <column name="pedido" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachoPedido" />
+        </set>
+    </class>
+</hibernate-mapping>

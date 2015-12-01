@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ControlAnticiposContrato" table="control_anticipos_contrato" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="valorAnticipoContConv" type="big_decimal">
+            <column name="valor_anticipo_cont_conv" precision="14" not-null="true" />
+        </property>
+        <property name="valorAntResPreContPac" type="big_decimal">
+            <column name="valor_ant_res_pre_cont_pac" precision="14" />
+        </property>
+        <property name="valorAntRecConvenio" type="big_decimal">
+            <column name="valor_ant_rec_convenio" precision="14" />
+        </property>
+        <property name="valorAntUtiFacPac" type="big_decimal">
+            <column name="valor_ant_uti_fac_pac" precision="14" />
+        </property>
+        <property name="numTotalPacientes" type="java.lang.Long">
+            <column name="num_total_pacientes" precision="10" scale="0" />
+        </property>
+        <property name="valorMaxPac" type="big_decimal">
+            <column name="valor_max_pac" precision="14" />
+        </property>
+        <property name="numPacAtendidos" type="java.lang.Long">
+            <column name="num_pac_atendidos" precision="10" scale="0" />
+        </property>
+        <property name="numPacXAtender" type="java.lang.Long">
+            <column name="num_pac_x_atender" precision="10" scale="0" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="reqAntContPre" type="char">
+            <column name="req_ant_cont_pre" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

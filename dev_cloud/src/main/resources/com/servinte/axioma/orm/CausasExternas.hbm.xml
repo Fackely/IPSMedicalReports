@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 20, 2011 3:11:24 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CausasExternas" table="causas_externas" schema="historiaclinica">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" />
+        </property>
+        <property name="solAutorizacion" type="string">
+            <column name="sol_autorizacion" length="1" not-null="true" />
+        </property>
+        <property name="tipoEvento" type="string">
+            <column name="tipo_evento" length="4" />
+        </property>
+        <set name="valoracionesOdontos" inverse="true" lazy="true" table="valoraciones_odonto" fetch="select">
+            <key>
+                <column name="causa_externa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValoracionesOdonto" />
+        </set>
+        <set name="ripsConsultorioses" inverse="true" lazy="true" table="rips_consultorios" fetch="select">
+            <key>
+                <column name="causa_externa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RipsConsultorios" />
+        </set>
+        <set name="informeAtencionIniUrgs" inverse="true" lazy="true" table="informe_atencion_ini_urg" fetch="select">
+            <key>
+                <column name="causa_externa" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeAtencionIniUrg" />
+        </set>
+        <set name="egresoses" inverse="true" lazy="true" table="egresos" fetch="select">
+            <key>
+                <column name="causa_externa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+        <set name="admisionesUrgenciases" inverse="true" lazy="true" table="admisiones_urgencias" fetch="select">
+            <key>
+                <column name="causa_externa" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdmisionesUrgencias" />
+        </set>
+        <set name="autorizacioneses" inverse="true" lazy="true" table="autorizaciones" fetch="select">
+            <key>
+                <column name="origen_atencion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Autorizaciones" />
+        </set>
+        <set name="cargosDirectosHcs" inverse="true" lazy="true" table="cargos_directos_hc" fetch="select">
+            <key>
+                <column name="causa_externa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CargosDirectosHc" />
+        </set>
+        <set name="admisionesHospis" inverse="true" lazy="true" table="admisiones_hospi" fetch="select">
+            <key>
+                <column name="causa_externa" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdmisionesHospi" />
+        </set>
+    </class>
+</hibernate-mapping>

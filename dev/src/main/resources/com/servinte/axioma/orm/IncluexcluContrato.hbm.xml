@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.IncluexcluContrato" table="incluexclu_contrato" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.IncluexcluContratoId">
+            <key-property name="codigoContrato" type="int">
+                <column name="codigo_contrato" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+            <key-property name="usuarioModifica" type="string">
+                <column name="usuario_modifica" length="30" />
+            </key-property>
+            <key-property name="fechaModifica" type="date">
+                <column name="fecha_modifica" length="13" />
+            </key-property>
+            <key-property name="horaModifica" type="string">
+                <column name="hora_modifica" length="5" />
+            </key-property>
+            <key-property name="prioridad" type="java.lang.Integer">
+                <column name="prioridad" />
+            </key-property>
+            <key-property name="codigoIncluExcluCc" type="java.lang.Long">
+                <column name="codigo_inclu_exclu_cc" precision="10" scale="0" />
+            </key-property>
+            <key-property name="fechaVigencia" type="date">
+                <column name="fecha_vigencia" length="13" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" update="false" insert="false" fetch="select">
+            <column name="codigo_contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="incluExcluCc" class="com.servinte.axioma.orm.IncluExcluCc" update="false" insert="false" fetch="select">
+            <column name="codigo_inclu_exclu_cc" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

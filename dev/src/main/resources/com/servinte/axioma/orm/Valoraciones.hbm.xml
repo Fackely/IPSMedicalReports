@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/07/2011 03:06:44 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Valoraciones" table="valoraciones" schema="historiaclinica">
+        <id name="numeroSolicitud" type="int">
+            <column name="numero_solicitud" />
+            <generator class="foreign">
+                <param name="property">solicitudes</param>
+            </generator>
+        </id>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico" />
+        </many-to-one>
+        <many-to-one name="solCirugiaPorServicio" class="com.servinte.axioma.orm.SolCirugiaPorServicio" fetch="select">
+            <column name="control_post_operatorio_cx" />
+        </many-to-one>
+        <one-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" constrained="true"></one-to-one>
+        <many-to-one name="causasExternas" class="com.servinte.axioma.orm.CausasExternas" fetch="select">
+            <column name="causa_externa" />
+        </many-to-one>
+        <property name="edad" type="string">
+            <column name="edad" length="20" />
+        </property>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="string">
+            <column name="hora_grabacion" length="5" not-null="true" />
+        </property>
+        <property name="fechaValoracion" type="date">
+            <column name="fecha_valoracion" length="13" not-null="true" />
+        </property>
+        <property name="horaValoracion" type="string">
+            <column name="hora_valoracion" length="5" not-null="true" />
+        </property>
+        <property name="cuidadoEspecial" type="string">
+            <column name="cuidado_especial" length="1" not-null="true" />
+        </property>
+        <property name="observacionCapitacion" type="string">
+            <column name="observacion_capitacion" length="5" />
+        </property>
+        <set name="infoParametrizableVals" table="info_parametrizable_val" schema="public" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InfoParametrizableVal" />
+        </set>
+        <set name="valDiagnosticoses" table="val_diagnosticos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="valoracion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValDiagnosticos" />
+        </set>
+        <set name="evolucioneses" table="evoluciones" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="valoracion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Evoluciones" />
+        </set>
+        <set name="valoracionCurvas" table="valoracion_curva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud_valoracion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValoracionCurva" />
+        </set>
+    </class>
+</hibernate-mapping>

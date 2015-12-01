@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UsuariosEntidadSub" table="usuarios_entidad_sub" schema="facturacion">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuario" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" />
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

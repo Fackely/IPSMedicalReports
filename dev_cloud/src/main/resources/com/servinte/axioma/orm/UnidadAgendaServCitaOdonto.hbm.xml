@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 30, 2010 8:37:21 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UnidadAgendaServCitaOdonto" table="unidad_agenda_serv_cita_odonto" schema="odontologia">
+        <comment>Registro de la parametrizaci&#195;&#179;n de las unidades de agenda por servicios de cita odontol&#195;&#179;gicos</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.seq_unidad_agenda_serv_odonto</param>
+			</generator>
+        </id>
+        <many-to-one name="unidadesConsulta" class="com.servinte.axioma.orm.UnidadesConsulta" fetch="select">
+            <column name="unidad_agenda" not-null="true">
+                <comment>Unidad de agenda de tipo Odontol&#195;&#179;gica</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="referenciasServicio" class="com.servinte.axioma.orm.ReferenciasServicio" fetch="select">
+            <column name="servicio" not-null="true">
+                <comment>Servicio odontol&#195;&#179;gico perteneciente a la unidad de agenda. Llave compuesta</comment>
+            </column>
+            <column name="tipo_tarifario" not-null="true">
+                <comment>Tipo tarifario con el que se asocia la referencia del servicio. Llave compuesta</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true">
+                <comment>Usuario que realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="tipoCita" type="string">
+            <column name="tipo_cita" length="6" not-null="true" unique="true">
+                <comment>Tipo de cita odontol&#195;&#179;gica</comment>
+            </column>
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true">
+                <comment>Fecha de creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true">
+                <comment>Hora de creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

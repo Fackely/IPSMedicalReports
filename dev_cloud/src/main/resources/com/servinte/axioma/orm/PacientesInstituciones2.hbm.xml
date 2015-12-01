@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PacientesInstituciones2" table="pacientes_instituciones2" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.PacientesInstituciones2Id">
+            <key-property name="codigoPaciente" type="int">
+                <column name="codigo_paciente" />
+            </key-property>
+            <key-property name="codigoInstitucionDuena" type="int">
+                <column name="codigo_institucion_duena" />
+            </key-property>
+            <key-property name="codigoInstitucionPermitida" type="int">
+                <column name="codigo_institucion_permitida" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="institucionesByCodigoInstitucionPermitida" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="codigo_institucion_permitida" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" update="false" insert="false" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="institucionesByCodigoInstitucionDuena" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="codigo_institucion_duena" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

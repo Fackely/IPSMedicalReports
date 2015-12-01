@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="cargueUsuarios.consultarCargueUsuariosNoIngresados">
+		<return-scalar column="FECHA_INICIAL" type="date" />
+		<return-scalar column="FECHA_FINAL" type="date" />
+		<return-scalar column="FECHA_CARGUE" type="date" />
+		<return-scalar column="CODIGO_CONV" type="integer" />
+		<return-scalar column="NOMBRE_CONV" type="string" />
+		<return-scalar column="CODIGO_CONT" type="integer" />
+		<return-scalar column="NUMERO_CONTRATO" type="string" />
+		<return-scalar column="NOMBRE_TIPO_CARGUE" type="string" />
+		<return-scalar column="ESTADO_CARGUE" type="string" />
+		<return-scalar column="USUARIO_REALIZA_CARGUE" type="string" />
+		<return-scalar column="NOMBRE_NATURALEZA_PACIENTE" type="string" />
+		<![CDATA[
+			SELECT CUC.FECHA_INICIAL,CUC.FECHA_FINAL,CUC.FECHA_CARGUE, CONV.CODIGO AS CODIGO_CONV, CONV.NOMBRE AS NOMBRE_CONV,CONT.CODIGO AS CODIGO_CONT,CONT.NUMERO_CONTRATO,TC.NOMBRE AS NOMBRE_TIPO_CARGUE,
+				CUC.ACTIVO AS ESTADO_CARGUE,CUC.USUARIO AS USUARIO_REALIZA_CARGUE, NATP.NOMBRE AS NOMBRE_NATURALEZA_PACIENTE
+			FROM CAPITACION.CONV_USUARIOS_CAPITADOS CUC
+			INNER JOIN CAPITACION.USUARIOS_CAPITADOS UC
+				ON CUC.USUARIO_CAPITADO = UC.CODIGO
+			INNER JOIN CAPITACION.TIPOS_CARGUE TC
+				ON TC.CODIGO=CUC.TIPO_CARGUE
+			LEFT JOIN FACTURACION.CONTRATOS CONT
+				ON CONT.CODIGO=CUC.CONTRATO
+			LEFT JOIN FACTURACION.CONVENIOS CONV
+				ON CONV.CODIGO=CONT.CONVENIO
+			LEFT JOIN MANEJOPACIENTE.NATURALEZA_PACIENTES NATP
+				ON NATP.CODIGO=CUC.NATURALEZA_PACIENTES
+			WHERE UC.TIPO_IDENTIFICACION = :tipoIdentificacion
+				AND UC.NUMERO_IDENTIFICACION = :numeroIdentificacion
+			ORDER BY CUC.FECHA_CARGUE DESC
+		]]>
+	</sql-query>
+	
+	<sql-query name="cargueUsuarios.consultarCargueUsuariosIngresados">
+		<return-scalar column="FECHA_INICIAL" type="date" />
+		<return-scalar column="FECHA_FINAL" type="date" />
+		<return-scalar column="FECHA_CARGUE" type="date" />
+		<return-scalar column="CODIGO_CONV" type="integer" />
+		<return-scalar column="NOMBRE_CONV" type="string" />
+		<return-scalar column="CODIGO_CONT" type="integer" />
+		<return-scalar column="NUMERO_CONTRATO" type="string" />
+		<return-scalar column="NOMBRE_TIPO_CARGUE" type="string" />
+		<return-scalar column="ESTADO_CARGUE" type="string" />
+		<return-scalar column="USUARIO_REALIZA_CARGUE" type="string" />
+		<return-scalar column="NOMBRE_NATURALEZA_PACIENTE" type="string" />
+		<![CDATA[
+			SELECT CUC.FECHA_INICIAL,CUC.FECHA_FINAL,CUC.FECHA_CARGUE, CONV.CODIGO AS CODIGO_CONV, CONV.NOMBRE AS NOMBRE_CONV,CONT.CODIGO AS CODIGO_CONT,CONT.NUMERO_CONTRATO,TC.NOMBRE AS NOMBRE_TIPO_CARGUE,
+				CUC.ACTIVO AS ESTADO_CARGUE,CUC.USUARIO AS USUARIO_REALIZA_CARGUE, NATP.NOMBRE AS NOMBRE_NATURALEZA_PACIENTE
+			FROM CAPITACION.USUARIO_X_CONVENIO CUC
+			INNER JOIN ADMINISTRACION.PERSONAS UC
+				ON CUC.PERSONA = UC.CODIGO
+			INNER JOIN CAPITACION.TIPOS_CARGUE TC
+				ON TC.CODIGO=CUC.TIPO_CARGUE
+			LEFT JOIN FACTURACION.CONTRATOS CONT
+				ON CONT.CODIGO=CUC.CONTRATO
+			LEFT JOIN FACTURACION.CONVENIOS CONV
+				ON CONV.CODIGO=CONT.CONVENIO
+			LEFT JOIN MANEJOPACIENTE.NATURALEZA_PACIENTES NATP
+				ON NATP.CODIGO=CUC.NATURALEZA_PACIENTES
+			WHERE UC.TIPO_IDENTIFICACION = :tipoIdentificacion
+				AND UC.NUMERO_IDENTIFICACION = :numeroIdentificacion
+			ORDER BY CUC.FECHA_CARGUE DESC
+		]]>
+	</sql-query>
+	
+</hibernate-mapping>

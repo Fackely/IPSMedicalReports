@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/04/2011 06:04:04 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DevolRecibosCaja" table="devol_recibos_caja" schema="tesoreria">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="recibosCaja" class="com.servinte.axioma.orm.RecibosCaja" fetch="select">
+            <column name="numero_rc" length="20" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioAprobacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_aprobacion" length="30" />
+        </many-to-one>
+        <many-to-one name="cajasCajeros" class="com.servinte.axioma.orm.CajasCajeros" fetch="select">
+            <column name="caja_devolucion" not-null="true" />
+            <column name="usuario_devolucion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="arqueosDefinitivos" class="com.servinte.axioma.orm.ArqueosDefinitivos" update="false" insert="false" fetch="select">
+            <column name="arqueo_definitivo" length="20" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioAnulacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_anulacion" length="30" />
+        </many-to-one>
+        <many-to-one name="turnoDeCaja" class="com.servinte.axioma.orm.TurnoDeCaja" fetch="select">
+            <column name="turno_afecta" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="formasPago" class="com.servinte.axioma.orm.FormasPago" fetch="select">
+            <column name="forma_pago" not-null="true" />
+        </many-to-one>
+        <many-to-one name="conceptosIngTesoreria" class="com.servinte.axioma.orm.ConceptosIngTesoreria" update="false" insert="false" fetch="select">
+            <column name="concepto" length="6" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cierresCajas" class="com.servinte.axioma.orm.CierresCajas" update="false" insert="false" fetch="select">
+            <column name="cierre_caja" length="20" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="motivosDevolucionRc" class="com.servinte.axioma.orm.MotivosDevolucionRc" fetch="select">
+            <column name="motivo_devolucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioDevolucion" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="usuario_devolucion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="valorDevolucion" type="double">
+            <column name="valor_devolucion" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="2000" />
+        </property>
+        <property name="docSoporte" type="string">
+            <column name="doc_soporte" length="30" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="fechaDevolucion" type="date">
+            <column name="fecha_devolucion" length="13" not-null="true" />
+        </property>
+        <property name="horaDevolucion" type="string">
+            <column name="hora_devolucion" length="5" not-null="true" />
+        </property>
+        <property name="fechaAprobacion" type="date">
+            <column name="fecha_aprobacion" length="13" />
+        </property>
+        <property name="horaAprobacion" type="string">
+            <column name="hora_aprobacion" length="5" />
+        </property>
+        <property name="motivoAnulacion" type="string">
+            <column name="motivo_anulacion" length="256" />
+        </property>
+        <property name="fechaAnulacion" type="date">
+            <column name="fecha_anulacion" length="13" />
+        </property>
+        <property name="horaAnulacion" type="string">
+            <column name="hora_anulacion" length="5" />
+        </property>
+        <property name="contabilizado" type="string">
+            <column name="contabilizado" length="1" not-null="true" />
+        </property>
+        <property name="estadoArqueo" type="string">
+            <column name="estado_arqueo" length="1" not-null="true" />
+        </property>
+        <set name="cierreCajaXDevolRecibos" table="cierre_caja_x_devol_recibo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="devol_recibo_caja" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.devol_recibos_caja</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaXDevolRecibo" />
+        </set>
+    </class>
+</hibernate-mapping>

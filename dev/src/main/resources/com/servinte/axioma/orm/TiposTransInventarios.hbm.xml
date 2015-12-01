@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 18, 2011 11:29:30 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposTransInventarios" table="tipos_trans_inventarios" schema="inventarios">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposConceptosInv" class="com.servinte.axioma.orm.TiposConceptosInv" fetch="select">
+            <column name="tipos_conceptos_inv" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposCostoInv" class="com.servinte.axioma.orm.TiposCostoInv" fetch="select">
+            <column name="tipos_costo_inv" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="12" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" not-null="true" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="activo" />
+        </property>
+        <property name="indicativoConsignacion" type="char">
+            <column name="indicativo_consignacion" length="1" not-null="true" />
+        </property>
+        <property name="codigoInterfaz" type="string">
+            <column name="codigo_interfaz" length="11" />
+        </property>
+        <set name="consecutivosInventarioses" inverse="true" lazy="true" table="consecutivos_inventarios" fetch="select">
+            <key>
+                <column name="tipo_transaccion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConsecutivosInventarios" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/11/2012 12:29:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.BackupDetCargos" table="backup_det_cargos" schema="facturacion">
+        <id name="id" type="long">
+            <column name="id" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_backup_det_cargos</param>
+			</generator>
+        </id>
+        <many-to-one name="logDistribucionCuenta" class="com.servinte.axioma.orm.LogDistribucionCuenta" fetch="select">
+            <column name="id_log_distrib_cuenta" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="subCuenta" type="java.lang.Integer">
+            <column name="sub_cuenta" />
+        </property>
+        <property name="convenio" type="int">
+            <column name="convenio" not-null="true" />
+        </property>
+        <property name="contrato" type="int">
+            <column name="contrato" not-null="true" />
+        </property>
+        <property name="esquemaTarifario" type="java.lang.Integer">
+            <column name="esquema_tarifario" />
+        </property>
+        <property name="cantidadCargada" type="java.lang.Integer">
+            <column name="cantidad_cargada" />
+        </property>
+        <property name="valorUnitarioTarifa" type="big_decimal">
+            <column name="valor_unitario_tarifa" precision="14" />
+        </property>
+        <property name="valorUnitarioCargado" type="big_decimal">
+            <column name="valor_unitario_cargado" precision="14" />
+        </property>
+        <property name="valorTotalCargado" type="big_decimal">
+            <column name="valor_total_cargado" precision="14" />
+        </property>
+        <property name="porcentajeCargado" type="big_decimal">
+            <column name="porcentaje_cargado" precision="5" />
+        </property>
+        <property name="porcentajeRecargo" type="big_decimal">
+            <column name="porcentaje_recargo" precision="5" />
+        </property>
+        <property name="valorUnitarioRecargo" type="big_decimal">
+            <column name="valor_unitario_recargo" precision="14" />
+        </property>
+        <property name="porcentajeDcto" type="big_decimal">
+            <column name="porcentaje_dcto" precision="5" />
+        </property>
+        <property name="valorUnitarioDcto" type="big_decimal">
+            <column name="valor_unitario_dcto" precision="14" />
+        </property>
+        <property name="valorUnitarioIva" type="big_decimal">
+            <column name="valor_unitario_iva" precision="14" />
+        </property>
+        <property name="requiereAutorizacion" type="string">
+            <column name="requiere_autorizacion" length="1" />
+        </property>
+        <property name="nroAutorizacion" type="string">
+            <column name="nro_autorizacion" length="15" />
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="cubierto" type="string">
+            <column name="cubierto" length="1" />
+        </property>
+        <property name="tipoDistribucion" type="string">
+            <column name="tipo_distribucion" length="4" not-null="true" />
+        </property>
+        <property name="solicitud" type="int">
+            <column name="solicitud" not-null="true" />
+        </property>
+        <property name="servicio" type="java.lang.Integer">
+            <column name="servicio" />
+        </property>
+        <property name="articulo" type="java.lang.Integer">
+            <column name="articulo" />
+        </property>
+        <property name="servicioCx" type="java.lang.Integer">
+            <column name="servicio_cx" />
+        </property>
+        <property name="tipoAsocio" type="java.lang.Integer">
+            <column name="tipo_asocio" />
+        </property>
+        <property name="facturado" type="string">
+            <column name="facturado" length="1" not-null="true" />
+        </property>
+        <property name="tipoSolicitud" type="java.lang.Integer">
+            <column name="tipo_solicitud" />
+        </property>
+        <property name="paquetizado" type="string">
+            <column name="paquetizado" length="1" not-null="true" />
+        </property>
+        <property name="cargoPadre" type="java.lang.Long">
+            <column name="cargo_padre" precision="10" scale="0" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="codSolSubcuenta" type="long">
+            <column name="cod_sol_subcuenta" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="codigoFactura" type="java.lang.Integer">
+            <column name="codigo_factura" />
+        </property>
+        <property name="eliminado" type="java.lang.Character">
+            <column name="eliminado" length="1" />
+        </property>
+        <property name="detCxHonorarios" type="java.lang.Integer">
+            <column name="det_cx_honorarios" />
+        </property>
+        <property name="detAsocioCxSalasMat" type="java.lang.Integer">
+            <column name="det_asocio_cx_salas_mat" />
+        </property>
+        <property name="esPortatil" type="char">
+            <column name="es_portatil" length="1" not-null="true" />
+        </property>
+        <property name="dejarExcento" type="char">
+            <column name="dejar_excento" length="1" not-null="true" />
+        </property>
+        <property name="porcentajeDctoPromServ" type="big_decimal">
+            <column name="porcentaje_dcto_prom_serv" precision="5" />
+        </property>
+        <property name="valorDescuentoPromServ" type="big_decimal">
+            <column name="valor_descuento_prom_serv" precision="14" />
+        </property>
+        <property name="porcHonorarioPromServ" type="big_decimal">
+            <column name="porc_honorario_prom_serv" precision="5" />
+        </property>
+        <property name="valorHonorarioPromServ" type="big_decimal">
+            <column name="valor_honorario_prom_serv" precision="14" />
+        </property>
+        <property name="programa" type="java.lang.Long">
+            <column name="programa" precision="12" scale="0" />
+        </property>
+        <property name="porcentajeDctoBonoServ" type="big_decimal">
+            <column name="porcentaje_dcto_bono_serv" precision="5" />
+        </property>
+        <property name="valorDescuentoBonoServ" type="big_decimal">
+            <column name="valor_descuento_bono_serv" precision="14" />
+        </property>
+        <property name="porcentajeDctoOdontologico" type="big_decimal">
+            <column name="porcentaje_dcto_odontologico" precision="5" />
+        </property>
+        <property name="valorDescuentoOdontologico" type="big_decimal">
+            <column name="valor_descuento_odontologico" precision="14" />
+        </property>
+        <property name="detPaqOdonConvenio" type="java.lang.Integer">
+            <column name="det_paq_odon_convenio" />
+        </property>
+        <property name="idDetCargo" type="long">
+            <column name="id_det_cargo" precision="10" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

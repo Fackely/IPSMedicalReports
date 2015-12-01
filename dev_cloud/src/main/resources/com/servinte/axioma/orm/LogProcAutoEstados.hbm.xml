@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogProcAutoEstados" table="log_proc_auto_estados" schema="odontologia">
+        <composite-id name="id" class="com.servinte.axioma.orm.LogProcAutoEstadosId">
+            <key-property name="codigoPk" type="long">
+                <column name="codigo_pk" precision="12" scale="0" />
+            </key-property>
+            <key-property name="inconsistencia" type="string">
+                <column name="inconsistencia" length="256" />
+            </key-property>
+            <key-property name="fecha" type="date">
+                <column name="fecha" length="13" />
+            </key-property>
+            <key-property name="hora" type="string">
+                <column name="hora" length="5" />
+            </key-property>
+            <key-property name="presupuesto" type="java.lang.Long">
+                <column name="presupuesto" precision="12" scale="0" />
+            </key-property>
+            <key-property name="planTratamiento" type="java.lang.Long">
+                <column name="plan_tratamiento" precision="12" scale="0" />
+            </key-property>
+            <key-property name="institucion" type="java.lang.Integer">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

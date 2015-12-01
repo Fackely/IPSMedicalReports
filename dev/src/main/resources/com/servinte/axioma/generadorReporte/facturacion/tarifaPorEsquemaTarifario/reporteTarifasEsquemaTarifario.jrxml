@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteTarifasEsquemaTarifario" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2100000000000073"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/facturacion/tarifaPorEsquemaTarifario/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subreporteTarifasEsquemaTarifario" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="usuarioProceso" class="java.lang.String"/>
+	<field name="logoDerecha" class="java.lang.String"/>
+	<field name="logoIzquierda" class="java.lang.String"/>
+	<field name="razonSocial" class="java.lang.String"/>
+	<field name="nombreEsquemaTarifario" class="java.lang.String"/>
+	<field name="dsListaTarifasServicios" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="76" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+				<reportElement x="452" y="3" width="120" height="70" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{logoDerecha} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA[$F{logoDerecha}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="axiomaTitulo" x="128" y="17" width="316" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE TARIFAS POR ESQUEMA TARIFARIO]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+				<reportElement key="logoDerecha" x="0" y="3" width="120" height="70">
+					<printWhenExpression><![CDATA[$F{logoIzquierda} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA[$F{logoIzquierda}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement key="razonSocial" style="axiomaTitulo" stretchType="RelativeToTallestObject" x="128" y="2" width="316" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement style="axiomaSubtitulo" x="128" y="10" width="130" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Esquema Tarifario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="268" y="10" width="176" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreEsquemaTarifario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreporteTarifasPorEsquemaTarifario" x="0" y="0" width="571" height="15" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{dsListaTarifasServicios}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreporteTarifasEsquemaTarifario}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="34" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement style="axiomaTexto" x="529" y="10" width="26" height="15"/>
+				<box leftPadding="1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="axiomaTexto" mode="Transparent" x="300" y="10" width="67" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="usuarioProcesa" style="axiomaTexto" x="86" y="10" width="120" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuarioProceso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaTexto" x="220" y="10" width="80" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha de Proceso:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="axiomaTexto" x="452" y="10" width="77" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="axiomaTexto" x="367" y="10" width="64" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[(new java.text.SimpleDateFormat("hh:mm")).format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaTexto" x="16" y="10" width="70" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Usuario Proceso:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

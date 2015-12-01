@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CargoViaIngresoServicio" table="cargo_via_ingreso_servicio" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="servicio" type="int">
+            <column name="servicio" not-null="true" />
+        </property>
+        <property name="cargoSolicitud" type="char">
+            <column name="cargo_solicitud" length="1" not-null="true" />
+        </property>
+        <property name="cargoProceso" type="char">
+            <column name="cargo_proceso" length="1" not-null="true" />
+        </property>
+        <property name="tipoPaciente" type="string">
+            <column name="tipo_paciente" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,2302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Written by Eclipse BIRT 2.0 -->
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.6" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.0.1 Build &lt;20060222-1204></property>
+    <property name="units">in</property>
+    <html-property name="description">contiene header and footer</html-property>
+    <text-property name="displayName">template axioma reports</text-property>
+    <parameters>
+        <scalar-parameter name="codigoInstitucion" id="434">
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">2</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="fechaInicial" id="435">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">2007-01-01</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="fechaFinal" id="436">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">2007-01-31</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="convenio" id="437">
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">75</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="salario" id="438">
+            <property name="valueType">static</property>
+            <property name="dataType">float</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">408000</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="94">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="datosInstitucion" id="164">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">razon_social</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">cod_min_salud</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">nit</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">direccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">departamento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">nombre_departamento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">ciudad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">nombre_ciudad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">telefono</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigo</property>
+                    <property name="paramName">codigoInstitucion</property>
+                    <property name="dataType">any</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">razon_social</property>
+                    <property name="nativeName">razon_social</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">cod_min_salud</property>
+                    <property name="nativeName">cod_min_salud</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">nit</property>
+                    <property name="nativeName">nit</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">direccion</property>
+                    <property name="nativeName">direccion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">departamento</property>
+                    <property name="nativeName">departamento</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">nombre_departamento</property>
+                    <property name="nativeName">nombre_departamento</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">ciudad</property>
+                    <property name="nativeName">ciudad</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">nombre_ciudad</property>
+                    <property name="nativeName">nombre_ciudad</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">telefono</property>
+                    <property name="nativeName">telefono</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+razon_social,
+cod_min_salud,
+nit,
+direccion,
+departamento,
+getnombredepto(pais,departamento) As nombre_departamento,
+ciudad,
+getnombreciudad(pais,departamento,ciudad) As nombre_ciudad,
+telefono 
+from instituciones 
+WHERE codigo = ?;</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="fechaActual" id="247">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">fecha_actual</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">fecha_actual</property>
+                    <property name="nativeName">fecha_actual</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">select to_char(current_date,'MMYYYY') AS fecha_actual;</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>fecha_actual</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>fecha_actual</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="totalAccidentesTransito" id="323">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">numero_rec_transito</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">valor_transito</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigoConv</property>
+                    <property name="paramName">convenio</property>
+                    <property name="dataType">any</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">salario</property>
+                    <property name="paramName">salario</property>
+                    <property name="dataType">any</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaInicial</property>
+                    <property name="paramName">fechaInicial</property>
+                    <property name="dataType">any</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaFinal</property>
+                    <property name="paramName">fechaFinal</property>
+                    <property name="dataType">any</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">numero_rec_transito</property>
+                    <property name="nativeName">numero_rec_transito</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">valor_transito</property>
+                    <property name="nativeName">valor_transito</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+count(f.consecutivo_factura) AS numero_rec_transito,
+CASE WHEN sum(f.valor_total) IS NULL THEN 0 ELSE sum(f.valor_total) END AS valor_transito 
+FROM facturas f 
+INNER JOIN cuentas c ON(c.id=f.cuenta) 
+INNER JOIN view_registro_accid_transito rat ON(rat.ingreso=c.id_ingreso) 
+WHERE 
+f.convenio = ? AND 
+f.valor_total &lt;= ? AND 
+(f.fecha BETWEEN ? AND ?) AND 
+f.estado_facturacion = 1 AND 
+c.tipo_evento='ACTE' AND rat.estado='PRO';</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>numero_reclamaciones</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>numero_reclamaciones</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>valor</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valor</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="totalCatastrofes" id="349">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">numero_rec_catastrofes</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">valor_catastrofes</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">convenio</property>
+                    <property name="paramName">convenio</property>
+                    <property name="dataType">any</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">salario</property>
+                    <property name="paramName">salario</property>
+                    <property name="dataType">any</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaInicial</property>
+                    <property name="paramName">fechaInicial</property>
+                    <property name="dataType">any</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaFinal</property>
+                    <property name="paramName">fechaFinal</property>
+                    <property name="dataType">any</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">numero_rec_catastrofes</property>
+                    <property name="nativeName">numero_rec_catastrofes</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">valor_catastrofes</property>
+                    <property name="nativeName">valor_catastrofes</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+count(f.consecutivo_factura) AS numero_rec_catastrofes,
+CASE WHEN sum(f.valor_total) IS NULL THEN 0 ELSE sum(f.valor_total) END AS valor_catastrofes 
+FROM facturas f 
+INNER JOIN cuentas c ON(c.id=f.cuenta) 
+INNER JOIN view_reg_evento_catastrofico rec ON(rec.ingreso=c.id_ingreso) 
+WHERE 
+f.convenio = ? AND 
+f.valor_total &lt;= ? AND 
+(f.fecha BETWEEN ? AND ?) AND
+f.estado_facturacion = 1 AND 
+c.tipo_evento='ECTE' AND rec.estado='FIN' and rec.naturaleza_evento in (1,8,2,3,4,5,9,11,12,13,6,7,10);</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>numero_reclamaciones</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>numero_reclamaciones</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>valor</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valor</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="totalTerroristas" id="368">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">numero_reclamaciones</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">valor</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">convenio</property>
+                    <property name="paramName">convenio</property>
+                    <property name="dataType">any</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">salario</property>
+                    <property name="paramName">salario</property>
+                    <property name="dataType">any</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaInicial</property>
+                    <property name="paramName">fechaInicial</property>
+                    <property name="dataType">any</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaFinal</property>
+                    <property name="paramName">fechaFinal</property>
+                    <property name="dataType">any</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">numero_reclamaciones</property>
+                    <property name="nativeName">numero_reclamaciones</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">valor</property>
+                    <property name="nativeName">valor</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+count(f.consecutivo_factura) AS numero_reclamaciones,
+CASE WHEN sum(f.valor_total) IS NULL THEN 0 ELSE sum(f.valor_total) END AS valor 
+FROM facturas f 
+INNER JOIN cuentas c ON(c.id=f.cuenta) 
+INNER JOIN view_reg_evento_catastrofico rec ON(rec.ingreso=c.id_ingreso) 
+WHERE 
+f.convenio = ? AND 
+f.valor_total &lt;= ? AND 
+(f.fecha BETWEEN ? AND ?) AND 
+f.estado_facturacion = 1 AND 
+c.tipo_evento='ECTE' AND rec.estado='FIN' and rec.naturaleza_evento in (14,15,16,17,18);</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>numero_reclamaciones</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>numero_reclamaciones</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>valor</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valor</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="totalDesplazados" id="387">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">numero_reclamaciones</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">valor</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">convenio</property>
+                    <property name="paramName">convenio</property>
+                    <property name="dataType">any</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">salario</property>
+                    <property name="paramName">salario</property>
+                    <property name="dataType">any</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaInicial</property>
+                    <property name="paramName">fechaInicial</property>
+                    <property name="dataType">any</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaFinal</property>
+                    <property name="paramName">fechaFinal</property>
+                    <property name="dataType">any</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">numero_reclamaciones</property>
+                    <property name="nativeName">numero_reclamaciones</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">valor</property>
+                    <property name="nativeName">valor</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+count(f.consecutivo_factura) AS numero_reclamaciones,
+CASE WHEN sum(f.valor_total) IS NULL THEN 0 ELSE sum(f.valor_total) END AS valor 
+FROM facturas f 
+INNER JOIN cuentas c ON(c.id=f.cuenta) 
+WHERE 
+f.convenio = ? AND 
+f.valor_total &lt;= ? AND 
+(f.fecha BETWEEN ? AND ?) AND 
+f.estado_facturacion = 1 AND 
+c.tipo_evento NOT IN ('ACTE','ECTE') AND c.desplazado = 'S';</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>numero_reclamaciones</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>numero_reclamaciones</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>valor</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valor</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="total" id="449">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">numero_reclamaciones</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">valor</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">convenio</property>
+                    <property name="paramName">convenio</property>
+                    <property name="dataType">any</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">salario</property>
+                    <property name="paramName">salario</property>
+                    <property name="dataType">any</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaInicial</property>
+                    <property name="paramName">fechaInicial</property>
+                    <property name="dataType">any</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaFinal</property>
+                    <property name="paramName">fechaFinal</property>
+                    <property name="dataType">any</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">numero_reclamaciones</property>
+                    <property name="nativeName">numero_reclamaciones</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">valor</property>
+                    <property name="nativeName">valor</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+count(f.consecutivo_factura) AS numero_reclamaciones,
+CASE WHEN sum(f.valor_total) IS NULL THEN 0 ELSE sum(f.valor_total) END AS valor 
+FROM facturas f 
+INNER JOIN cuentas c ON(c.id=f.cuenta) 
+LEFT OUTER JOIN view_registro_accid_transito rat ON(rat.ingreso=c.id_ingreso) 
+LEFT OUTER JOIN view_reg_evento_catastrofico rec ON(rec.ingreso=c.id_ingreso) 
+WHERE 
+f.convenio = ? AND 
+f.valor_total &lt;= ? AND 
+(f.fecha BETWEEN ? AND ?) AND 
+f.estado_facturacion = 1 AND 
+((c.tipo_evento='ACTE' AND rat.estado='PRO') OR (c.tipo_evento='ECTE' AND rec.estado='FIN') OR c.desplazado = 'S');</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <property name="headerHeight">4.5cm</property>
+            <property name="footerHeight">0cm</property>
+            <page-header>
+                <grid name="masterPageHeader" id="4">
+                    <property name="fontFamily">SansSerif</property>
+                    <property name="height">1.475in</property>
+                    <property name="width">7.217in</property>
+                    <column id="5">
+                        <property name="width">3.3473684211in</property>
+                    </column>
+                    <column id="6">
+                        <property name="width">3.8631578947in</property>
+                    </column>
+                    <row id="7">
+                        <property name="height">0.4947368421in</property>
+                        <cell id="8">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <property name="textAlign">center</property>
+                            <text id="97">
+                                <property name="fontWeight">bold</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[REPUBLICA DE COLOMBIA
+MINISTERIO DE LA PROTECCION SOCIAL]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="46">
+                        <property name="height">0.6631578947in</property>
+                        <cell id="47">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <text id="98">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[FORMULARIO DE MONTOS MINIMOS DE RECLAMACIONES CON CARGO A LA SUBCUENTA ECAT DEL FOSYGA, COMO RESULTADO DE SERVICIOS DE SALUD PRESTADOS A VICTIMAS DE ACCIDENTES DE TRANSITO Y EVENTOS CATASTROFICOS]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="99">
+                        <property name="height">0.297in</property>
+                        <cell id="100">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <text id="102">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[ANEXO N°1
+FORECAT CONSOLIDADO]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="103">
+            <property name="width">100%</property>
+            <column id="104">
+                <property name="width">25%</property>
+            </column>
+            <column id="105">
+                <property name="width">25%</property>
+            </column>
+            <column id="161">
+                <property name="width">5%</property>
+            </column>
+            <column id="106">
+                <property name="width">25%</property>
+            </column>
+            <column id="107">
+                <property name="width">20%</property>
+            </column>
+            <row id="108">
+                <cell id="109">
+                    <label id="113">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Fecha de Radicación:</text-property>
+                    </label>
+                </cell>
+                <cell id="110">
+                    <grid id="115">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="width">100%</property>
+                        <column id="116"/>
+                        <column id="117"/>
+                        <column id="118"/>
+                        <column id="119"/>
+                        <column id="120"/>
+                        <column id="121"/>
+                        <column id="122"/>
+                        <column id="123"/>
+                        <row id="124">
+                            <cell id="125">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="151">
+                                    <property name="color">#E5E5E5</property>
+                                    <text-property name="text">D</text-property>
+                                </label>
+                            </cell>
+                            <cell id="126">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="152">
+                                    <property name="color">#E5E5E5</property>
+                                    <text-property name="text">D</text-property>
+                                </label>
+                            </cell>
+                            <cell id="127">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="153">
+                                    <property name="color">#E5E5E5</property>
+                                    <text-property name="text">M</text-property>
+                                </label>
+                            </cell>
+                            <cell id="128">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="154">
+                                    <property name="color">#E5E5E5</property>
+                                    <text-property name="text">M</text-property>
+                                </label>
+                            </cell>
+                            <cell id="129">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="155">
+                                    <property name="color">#E5E5E5</property>
+                                    <text-property name="text">A</text-property>
+                                </label>
+                            </cell>
+                            <cell id="130">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="156">
+                                    <property name="color">#E5E5E5</property>
+                                    <text-property name="text">A</text-property>
+                                </label>
+                            </cell>
+                            <cell id="131">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="157">
+                                    <property name="color">#E5E5E5</property>
+                                    <text-property name="text">A</text-property>
+                                </label>
+                            </cell>
+                            <cell id="132">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="158">
+                                    <property name="color">#E5E5E5</property>
+                                    <text-property name="text">A</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="160">
+                    <label id="163">
+                        <text-property name="text">                </text-property>
+                    </label>
+                </cell>
+                <cell id="111">
+                    <label id="114">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">N° de Radicación:</text-property>
+                    </label>
+                </cell>
+                <cell id="112">
+                    <grid id="133">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="width">100%</property>
+                        <column id="134"/>
+                        <column id="135"/>
+                        <column id="136"/>
+                        <column id="137"/>
+                        <column id="138"/>
+                        <column id="139"/>
+                        <column id="140"/>
+                        <column id="141"/>
+                        <row id="142">
+                            <cell id="143">
+                                <property name="colSpan">8</property>
+                                <property name="rowSpan">1</property>
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="159">
+                                    <text-property name="text">         </text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="234">
+            <property name="width">100%</property>
+            <column id="235"/>
+            <row id="236">
+                <cell id="237">
+                    <label id="238">
+                        <text-property name="text">                                                                                                 </text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <table id="165">
+            <property name="width">100%</property>
+            <property name="dataSet">datosInstitucion</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">codigo</property>
+                    <expression name="expression">params["codigoInstitucion"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">razon_social</property>
+                    <expression name="expression">dataSetRow["razon_social"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cod_min_salud</property>
+                    <expression name="expression">dataSetRow["cod_min_salud"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nit</property>
+                    <expression name="expression">dataSetRow["nit"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">direccion</property>
+                    <expression name="expression">dataSetRow["direccion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">departamento</property>
+                    <expression name="expression">dataSetRow["departamento"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombre_departamento</property>
+                    <expression name="expression">dataSetRow["nombre_departamento"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">telefono</property>
+                    <expression name="expression">dataSetRow["telefono"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombre_ciudad</property>
+                    <expression name="expression">dataSetRow["nombre_ciudad"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ciudad</property>
+                    <expression name="expression">dataSetRow["ciudad"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="201">
+                <property name="width">15%</property>
+            </column>
+            <column id="202">
+                <property name="width">39%</property>
+            </column>
+            <column id="203">
+                <property name="width">6%</property>
+            </column>
+            <column id="229">
+                <property name="width">5%</property>
+            </column>
+            <column id="221">
+                <property name="width">10%</property>
+            </column>
+            <column id="204">
+                <property name="width">25%</property>
+            </column>
+            <header>
+                <row id="166">
+                    <cell id="167">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <label id="205">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">I. DATOS DE LA INSTITUCION PRESTADORA DE SERVICIOS DE SALUD</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="171">
+                    <cell id="172">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <label id="206">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Razón Social</text-property>
+                        </label>
+                    </cell>
+                    <cell id="173">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="207">
+                            <property name="resultSetColumn">razon_social</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="176">
+                    <cell id="177">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <label id="208">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Código IPS</text-property>
+                        </label>
+                    </cell>
+                    <cell id="178">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="209">
+                            <property name="resultSetColumn">cod_min_salud</property>
+                        </data>
+                    </cell>
+                    <cell id="179">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <label id="210">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Nit</text-property>
+                        </label>
+                    </cell>
+                    <cell id="224">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="211">
+                            <property name="resultSetColumn">nit</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="181">
+                    <cell id="182">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <label id="212">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Dirección</text-property>
+                        </label>
+                    </cell>
+                    <cell id="183">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="213">
+                            <property name="resultSetColumn">direccion</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="186">
+                    <cell id="187">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <label id="230">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Departamento</text-property>
+                        </label>
+                    </cell>
+                    <cell id="188">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="232">
+                            <property name="resultSetColumn">nombre_departamento</property>
+                        </data>
+                    </cell>
+                    <cell id="189">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <label id="233">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Cod.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="226">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="231">
+                            <property name="resultSetColumn">departamento</property>
+                        </data>
+                    </cell>
+                    <cell id="218">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <label id="239">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Teléfono</text-property>
+                        </label>
+                    </cell>
+                    <cell id="190">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="240">
+                            <property name="resultSetColumn">telefono</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="191">
+                    <cell id="192">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <label id="241">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Ciudad</text-property>
+                        </label>
+                    </cell>
+                    <cell id="193">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="243">
+                            <property name="resultSetColumn">nombre_ciudad</property>
+                        </data>
+                    </cell>
+                    <cell id="245">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <label id="242">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Cod.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="246">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="244">
+                            <property name="resultSetColumn">ciudad</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <table id="248">
+            <property name="width">100%</property>
+            <property name="dataSet">fechaActual</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">fecha_actual</property>
+                    <expression name="expression">dataSetRow["fecha_actual"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaInicial</property>
+                    <expression name="expression">params["fechaInicial"]</expression>
+                    <property name="dataType">any</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaFinal</property>
+                    <expression name="expression">params["fechaFinal"]</expression>
+                    <property name="dataType">any</property>
+                </structure>
+            </list-property>
+            <column id="264">
+                <property name="width">25%</property>
+            </column>
+            <column id="265">
+                <property name="width">7%</property>
+            </column>
+            <column id="444">
+                <property name="width">23%</property>
+            </column>
+            <column id="266">
+                <property name="width">20%</property>
+            </column>
+            <column id="267">
+                <property name="width">8%</property>
+            </column>
+            <column id="448">
+                <property name="width">17%</property>
+            </column>
+            <header>
+                <row id="249">
+                    <cell id="250">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="268">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">II. PERIODO RECLAMADO</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="254">
+                    <cell id="255">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="269">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Periodo Reclamado</text-property>
+                        </label>
+                    </cell>
+                    <cell id="256">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <data id="270">
+                            <property name="fontSize">10pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="resultSetColumn">fecha_actual</property>
+                        </data>
+                    </cell>
+                    <cell id="442">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                    </cell>
+                    <cell id="257">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="271">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Fecha Inicial</text-property>
+                        </label>
+                    </cell>
+                    <cell id="258">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <data id="453">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">ddMMYYYY</property>
+                            </structure>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">fechaInicial</property>
+                                    <expression name="expression">params["fechaInicial"]</expression>
+                                    <property name="dataType">date-time</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">fechaInicial</property>
+                        </data>
+                    </cell>
+                    <cell id="446">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                    </cell>
+                </row>
+                <row id="272">
+                    <cell id="273">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                    </cell>
+                    <cell id="274">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                    </cell>
+                    <cell id="443">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                    </cell>
+                    <cell id="275">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="277">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Fecha Final</text-property>
+                        </label>
+                    </cell>
+                    <cell id="276">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <data id="454">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">ddMMYYYY</property>
+                            </structure>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">fechaFinal</property>
+                                    <expression name="expression">params["fechaFinal"]</expression>
+                                    <property name="dataType">date-time</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">fechaFinal</property>
+                        </data>
+                    </cell>
+                    <cell id="447">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <table name="TablaConsolidado" id="278">
+            <property name="width">100%</property>
+            <property name="dataSet">total</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">convenio</property>
+                    <expression name="expression">params["convenio"]</expression>
+                </structure>
+                <structure>
+                    <property name="paramName">salario</property>
+                    <expression name="expression">params["salario"]</expression>
+                </structure>
+                <structure>
+                    <property name="paramName">fechaInicial</property>
+                    <expression name="expression">params["fechaInicial"]</expression>
+                </structure>
+                <structure>
+                    <property name="paramName">fechaFinal</property>
+                    <expression name="expression">params["fechaFinal"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">numero_reclamaciones</property>
+                    <expression name="expression">dataSetRow["numero_reclamaciones"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">valor</property>
+                    <expression name="expression">dataSetRow["valor"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <column id="311"/>
+            <column id="312">
+                <property name="textAlign">center</property>
+            </column>
+            <column id="313">
+                <property name="textAlign">right</property>
+            </column>
+            <header>
+                <row id="279">
+                    <cell id="280">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="314">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">III. CONSOLIDADO POR EVENTO</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="283">
+                    <cell id="284">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="315">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Tipo de Evento</text-property>
+                        </label>
+                    </cell>
+                    <cell id="285">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="textAlign">center</property>
+                        <label id="316">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">N° de Reclamaciones</text-property>
+                        </label>
+                    </cell>
+                    <cell id="286">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="textAlign">center</property>
+                        <label id="317">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Valor</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="287">
+                    <cell id="288">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="318">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">Accidente de Tránsito</text-property>
+                        </label>
+                    </cell>
+                    <cell id="289">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <table id="331">
+                            <property name="width">100%</property>
+                            <property name="dataSet">totalAccidentesTransito</property>
+                            <list-property name="paramBindings">
+                                <structure>
+                                    <property name="paramName">codigoConv</property>
+                                    <expression name="expression">params["convenio"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">salario</property>
+                                    <expression name="expression">params["salario"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaInicial</property>
+                                    <expression name="expression">params["fechaInicial"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaFinal</property>
+                                    <expression name="expression">params["fechaFinal"]</expression>
+                                </structure>
+                            </list-property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">numero_rec_transito</property>
+                                    <expression name="expression">dataSetRow["numero_rec_transito"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">valor_transito</property>
+                                    <expression name="expression">dataSetRow["valor_transito"]</expression>
+                                    <property name="dataType">float</property>
+                                </structure>
+                            </list-property>
+                            <column id="338"/>
+                            <detail>
+                                <row id="334">
+                                    <cell id="335">
+                                        <data id="339">
+                                            <property name="resultSetColumn">numero_rec_transito</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                    <cell id="290">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <table id="340">
+                            <property name="width">100%</property>
+                            <property name="dataSet">totalAccidentesTransito</property>
+                            <list-property name="paramBindings">
+                                <structure>
+                                    <property name="paramName">codigoConv</property>
+                                    <expression name="expression">params["convenio"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">salario</property>
+                                    <expression name="expression">params["salario"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaInicial</property>
+                                    <expression name="expression">params["fechaInicial"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaFinal</property>
+                                    <expression name="expression">params["fechaFinal"]</expression>
+                                </structure>
+                            </list-property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">numero_rec_transito</property>
+                                    <expression name="expression">dataSetRow["numero_rec_transito"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">valor_transito</property>
+                                    <expression name="expression">dataSetRow["valor_transito"]</expression>
+                                    <property name="dataType">float</property>
+                                </structure>
+                            </list-property>
+                            <column id="347"/>
+                            <detail>
+                                <row id="343">
+                                    <cell id="344">
+                                        <data id="348">
+                                            <property name="resultSetColumn">valor_transito</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                </row>
+                <row id="291">
+                    <cell id="292">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="319">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">Catástrofes Naturales</text-property>
+                        </label>
+                    </cell>
+                    <cell id="293">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <table id="350">
+                            <property name="width">100%</property>
+                            <property name="dataSet">totalCatastrofes</property>
+                            <list-property name="paramBindings">
+                                <structure>
+                                    <property name="paramName">convenio</property>
+                                    <expression name="expression">params["convenio"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">salario</property>
+                                    <expression name="expression">params["salario"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaInicial</property>
+                                    <expression name="expression">params["fechaInicial"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaFinal</property>
+                                    <expression name="expression">params["fechaFinal"]</expression>
+                                </structure>
+                            </list-property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">numero_rec_catastrofes</property>
+                                    <expression name="expression">dataSetRow["numero_rec_catastrofes"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
+                            <column id="357"/>
+                            <detail>
+                                <row id="353">
+                                    <cell id="354">
+                                        <data id="358">
+                                            <property name="resultSetColumn">numero_rec_catastrofes</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                    <cell id="294">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <table id="359">
+                            <property name="width">100%</property>
+                            <property name="dataSet">totalCatastrofes</property>
+                            <list-property name="paramBindings">
+                                <structure>
+                                    <property name="paramName">convenio</property>
+                                    <expression name="expression">params["convenio"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">salario</property>
+                                    <expression name="expression">params["salario"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaInicial</property>
+                                    <expression name="expression">params["fechaInicial"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaFinal</property>
+                                    <expression name="expression">params["fechaFinal"]</expression>
+                                </structure>
+                            </list-property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">numero_rec_catastrofes</property>
+                                    <expression name="expression">dataSetRow["numero_rec_catastrofes"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">valor_catastrofes</property>
+                                    <expression name="expression">dataSetRow["valor_catastrofes"]</expression>
+                                    <property name="dataType">float</property>
+                                </structure>
+                            </list-property>
+                            <column id="366"/>
+                            <detail>
+                                <row id="362">
+                                    <cell id="363">
+                                        <data id="367">
+                                            <property name="resultSetColumn">valor_catastrofes</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                </row>
+                <row id="295">
+                    <cell id="296">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="320">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">Eventos Terroristas</text-property>
+                        </label>
+                    </cell>
+                    <cell id="297">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <table id="369">
+                            <property name="width">100%</property>
+                            <property name="dataSet">totalTerroristas</property>
+                            <list-property name="paramBindings">
+                                <structure>
+                                    <property name="paramName">convenio</property>
+                                    <expression name="expression">params["convenio"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">salario</property>
+                                    <expression name="expression">params["salario"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaInicial</property>
+                                    <expression name="expression">params["fechaInicial"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaFinal</property>
+                                    <expression name="expression">params["fechaFinal"]</expression>
+                                </structure>
+                            </list-property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">numero_reclamaciones</property>
+                                    <expression name="expression">dataSetRow["numero_reclamaciones"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">valor</property>
+                                    <expression name="expression">dataSetRow["valor"]</expression>
+                                    <property name="dataType">float</property>
+                                </structure>
+                            </list-property>
+                            <column id="376"/>
+                            <detail>
+                                <row id="372">
+                                    <cell id="373">
+                                        <data id="377">
+                                            <property name="resultSetColumn">numero_reclamaciones</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                    <cell id="298">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <table id="378">
+                            <property name="width">100%</property>
+                            <property name="dataSet">totalTerroristas</property>
+                            <list-property name="paramBindings">
+                                <structure>
+                                    <property name="paramName">convenio</property>
+                                    <expression name="expression">params["convenio"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">salario</property>
+                                    <expression name="expression">params["salario"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaInicial</property>
+                                    <expression name="expression">params["fechaInicial"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaFinal</property>
+                                    <expression name="expression">params["fechaFinal"]</expression>
+                                </structure>
+                            </list-property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">numero_reclamaciones</property>
+                                    <expression name="expression">dataSetRow["numero_reclamaciones"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">valor</property>
+                                    <expression name="expression">dataSetRow["valor"]</expression>
+                                    <property name="dataType">float</property>
+                                </structure>
+                            </list-property>
+                            <column id="385"/>
+                            <detail>
+                                <row id="381">
+                                    <cell id="382">
+                                        <data id="386">
+                                            <property name="resultSetColumn">valor</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                </row>
+                <row id="299">
+                    <cell id="300">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="321">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">Población Desplazada</text-property>
+                        </label>
+                    </cell>
+                    <cell id="301">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <table id="388">
+                            <property name="width">100%</property>
+                            <property name="dataSet">totalDesplazados</property>
+                            <list-property name="paramBindings">
+                                <structure>
+                                    <property name="paramName">convenio</property>
+                                    <expression name="expression">params["convenio"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">salario</property>
+                                    <expression name="expression">params["salario"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaInicial</property>
+                                    <expression name="expression">params["fechaInicial"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaFinal</property>
+                                    <expression name="expression">params["fechaFinal"]</expression>
+                                </structure>
+                            </list-property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">numero_reclamaciones</property>
+                                    <expression name="expression">dataSetRow["numero_reclamaciones"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">valor</property>
+                                    <expression name="expression">dataSetRow["valor"]</expression>
+                                    <property name="dataType">float</property>
+                                </structure>
+                            </list-property>
+                            <column id="395"/>
+                            <detail>
+                                <row id="391">
+                                    <cell id="392">
+                                        <data id="396">
+                                            <property name="resultSetColumn">numero_reclamaciones</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                    <cell id="302">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <table id="397">
+                            <property name="width">100%</property>
+                            <property name="dataSet">totalDesplazados</property>
+                            <list-property name="paramBindings">
+                                <structure>
+                                    <property name="paramName">convenio</property>
+                                    <expression name="expression">params["convenio"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">salario</property>
+                                    <expression name="expression">params["salario"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaInicial</property>
+                                    <expression name="expression">params["fechaInicial"]</expression>
+                                </structure>
+                                <structure>
+                                    <property name="paramName">fechaFinal</property>
+                                    <expression name="expression">params["fechaFinal"]</expression>
+                                </structure>
+                            </list-property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">numero_reclamaciones</property>
+                                    <expression name="expression">dataSetRow["numero_reclamaciones"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">valor</property>
+                                    <expression name="expression">dataSetRow["valor"]</expression>
+                                    <property name="dataType">float</property>
+                                </structure>
+                            </list-property>
+                            <column id="404"/>
+                            <detail>
+                                <row id="400">
+                                    <cell id="401">
+                                        <data id="405">
+                                            <property name="resultSetColumn">valor</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                </row>
+                <row id="303">
+                    <cell id="304">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="322">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Total</text-property>
+                        </label>
+                    </cell>
+                    <cell id="305">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <data id="450">
+                            <property name="resultSetColumn">numero_reclamaciones</property>
+                        </data>
+                    </cell>
+                    <cell id="306">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <data id="451">
+                            <property name="resultSetColumn">valor</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <table id="407">
+            <property name="width">100%</property>
+            <property name="dataSet">datosInstitucion</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">codigo</property>
+                    <expression name="expression">params["codigoInstitucion"]</expression>
+                </structure>
+            </list-property>
+            <column id="414"/>
+            <header>
+                <row id="408">
+                    <cell id="409">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <label id="415">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">IV. DECLARACION DE LA INSTITUCION PRESTADORA DE SERVICIOS DE SALUD</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="410">
+                    <cell id="411">
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <text id="416">
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Como Representante Legal y Revisor Fiscal o Contador de la Institución Prestadora de Servicios de Salud, declaro bajo gravedad de juramento:
+1. Que la información contenida en este formulario es cierta y podrá ser verificada por la Dirección General de Financiamiento del Ministerio de la Protección Social, por el Administrador Fiduciario de Solidaridad y Garantía - FOSYGA -, por la Superintendencia Nacional de Salud o la Contraloría General de la República; de no ser así, acepto todas las consecuencias legales que produzca esta situación.
+2. Que las reclamaciones incluidas en el medio magnético cumplen con los requisitos establecidos en los Decretos de Ley 1032 de 1991, 663 de 1993 y 1281 de 2002 y Decretos 2878 de 1991 y 1283 de 1996 y demás normas que los adicionen, sustituyan o modifiquen.
+3. Que la Institución conserva las reclamaciones individuales con el completo de los requisitos establecidos en los Decretos Ley 1032 de 1991, 663 de 1993 y 1281 de 2002 y Decretos 2878 de 1991 y 1283 de 1996 y demás normas que lo adicionen, sustituyan o modifiquen.
+4. Que no se ha realizado fraccionamiento de servicios para incluirlos por este sistema de pago.
+5. Que los servicios de salud fueron prestados a víctimas de accidentes de tránsito ocasionados por vehículos no identificados o no asegurados o excedentes, de acuerdo con lo establecido en las normas vigentes.]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <grid id="417">
+            <property name="width">100%</property>
+            <column id="418"/>
+            <column id="419"/>
+            <row id="420">
+                <cell id="421">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <label id="429">
+                        <text-property name="text">                                           </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="423">
+                <cell id="424">
+                    <label id="430">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">____________________________________</text-property>
+                    </label>
+                </cell>
+                <cell id="425">
+                    <label id="431">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">____________________________________</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="426">
+                <cell id="427">
+                    <label id="432">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Firma del Representante Legal</text-property>
+                    </label>
+                </cell>
+                <cell id="428">
+                    <label id="433">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Firma del Revisor Fiscal o Contador</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

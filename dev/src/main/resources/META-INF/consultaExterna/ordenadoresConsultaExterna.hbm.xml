@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<query name="ordenadoresConsultaExterna.consultaProfesionalesSalud">
+		<![CDATA[
+			SELECT new com.servinte.axioma.dto.consultaExterna.CitaDto(CT.codigo,UC.descripcion,AG.fecha,AG.horaInicio)
+			FROM Cita CT
+			INNER JOIN CT.usuariosByUsuario US
+			INNER JOIN CT.pacientes PAC
+			INNER JOIN CT.unidadesConsulta UC
+			INNER JOIN CT.agenda AG
+			INNER JOIN CT.serviciosCitas SC
+			INNER JOIN SC.solicitudes SOL
+			INNER JOIN SOL.cuentas CU
+			INNER JOIN CU.ingresos ING
+			
+			WHERE CT.estadoCita = :codigoEstadoCita
+			AND ING.id = :codigoIngreso
+			AND US.login = :usuario
+			AND PAC.codigoPaciente = :codigoPaciente
+			
+			ORDER BY AG.fecha DESC,AG.horaInicio DESC
+		]]>
+	</query>
+	
+</hibernate-mapping>

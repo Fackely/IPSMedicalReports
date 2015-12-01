@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CuadroTurnos" table="cuadro_turnos" schema="public">
+        <id name="ctcodigocuadro" type="int">
+            <column name="ctcodigocuadro" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="categoria" class="com.servinte.axioma.orm.Categoria" fetch="select">
+            <column name="codigocategoria" not-null="true" />
+        </many-to-one>
+        <property name="fechainicio" type="date">
+            <column name="fechainicio" length="13" not-null="true" />
+        </property>
+        <property name="fechafin" type="date">
+            <column name="fechafin" length="13" not-null="true" />
+        </property>
+        <set name="restriccionesCuadros" inverse="true" lazy="true" table="restricciones_cuadro" fetch="select">
+            <key>
+                <column name="cuadro" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RestriccionesCuadro" />
+        </set>
+        <set name="ctTurnos" inverse="true" lazy="true" table="ct_turno" fetch="select">
+            <key>
+                <column name="ctcodigocuadro" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CtTurno" />
+        </set>
+    </class>
+</hibernate-mapping>

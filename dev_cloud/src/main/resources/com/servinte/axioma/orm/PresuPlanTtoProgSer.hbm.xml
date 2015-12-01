@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresuPlanTtoProgSer" table="presu_plan_tto_prog_ser" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="detPlanTratamiento" class="com.servinte.axioma.orm.DetPlanTratamiento" fetch="select">
+            <column name="det_plan_tratamiento" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="programasServiciosPlanT" class="com.servinte.axioma.orm.ProgramasServiciosPlanT" fetch="select">
+            <column name="programa_servicio_plan_t" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa" precision="12" scale="0" />
+        </many-to-one>
+        <property name="presupuesto" type="long">
+            <column name="presupuesto" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="activo" type="char">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

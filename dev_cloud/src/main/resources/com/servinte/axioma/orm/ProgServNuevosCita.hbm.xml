@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2010 3:40:57 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ProgServNuevosCita" table="prog_serv_nuevos_cita" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.seq_progsernutcita</param>
+			</generator>
+        </id>
+        <many-to-one name="motivosCambiosServicios" class="com.servinte.axioma.orm.MotivosCambiosServicios" fetch="select">
+            <column name="motivo_cambio" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa" />
+        </many-to-one>
+        <many-to-one name="programasHallazgoPieza" class="com.servinte.axioma.orm.ProgramasHallazgoPieza" fetch="select">
+            <column name="programa_hallazgo_pieza" />
+        </many-to-one>
+        <many-to-one name="solicitudCambioServicio" class="com.servinte.axioma.orm.SolicitudCambioServicio" fetch="select">
+            <column name="solicitud_cambio_servicio" not-null="true" />
+        </many-to-one>
+        <property name="cambio" type="string">
+            <column name="cambio" length="1" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="512" />
+        </property>
+        <property name="valorUnitario" type="big_decimal">
+            <column name="valor_unitario" precision="12" />
+        </property>
+    </class>
+</hibernate-mapping>

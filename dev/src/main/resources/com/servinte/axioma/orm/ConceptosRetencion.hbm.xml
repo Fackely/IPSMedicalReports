@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConceptosRetencion" table="conceptos_retencion" schema="administracion">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaDbAutoretencion" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_db_autoretencion" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaRetencion" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_retencion" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="tiposRetencion" class="com.servinte.axioma.orm.TiposRetencion" fetch="select">
+            <column name="tipo_retencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaCrAutoretencion" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_cr_autoretencion" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioInactivacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_inactivacion" length="30" />
+        </many-to-one>
+        <property name="codigoConcepto" type="string">
+            <column name="codigo_concepto" length="10" not-null="true" />
+        </property>
+        <property name="descripcionConcepto" type="string">
+            <column name="descripcion_concepto" length="128" not-null="true" />
+        </property>
+        <property name="codigoInterfaz" type="string">
+            <column name="codigo_interfaz" length="10" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="fechaInactivacion" type="date">
+            <column name="fecha_inactivacion" length="13" />
+        </property>
+        <property name="horaInactivacion" type="string">
+            <column name="hora_inactivacion" length="5" />
+        </property>
+        <set name="detVigConRetencions" inverse="true" lazy="true" table="det_vig_con_retencion" fetch="select">
+            <key>
+                <column name="concepto_retencion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetencion" />
+        </set>
+        <set name="conceptosRetencionTerceros" inverse="true" lazy="true" table="conceptos_retencion_tercero" fetch="select">
+            <key>
+                <column name="concepto_retencion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosRetencionTercero" />
+        </set>
+        <set name="logConceptosRetencions" inverse="true" lazy="true" table="log_conceptos_retencion" fetch="select">
+            <key>
+                <column name="concepto_retencion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogConceptosRetencion" />
+        </set>
+    </class>
+</hibernate-mapping>

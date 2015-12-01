@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteIngresoOdonto" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="732" leftMargin="30" rightMargin="30" topMargin="30" bottomMargin="30">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/odontologia/ingresosOdontologicos/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subreporteListadoResultadoPlano" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subrptIngresosConSinValIniPlano" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subrptConsolidadoIngresosOdontoPlano" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptTotalPorEstadoPlano" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="razonSocial" class="java.lang.String"/>
+	<field name="fechaInicial" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="edad" class="java.lang.String"/>
+	<field name="nombreProfesional" class="java.lang.String"/>
+	<field name="estadoPresupuesto" class="java.lang.String"/>
+	<field name="indicativoContrato" class="java.lang.String"/>
+	<field name="nombreEspecialidad" class="java.lang.String"/>
+	<field name="nombrePaquete" class="java.lang.String"/>
+	<field name="nombrePrograma" class="java.lang.String"/>
+	<field name="logoDerecha" class="java.lang.String"/>
+	<field name="logoIzquierda" class="java.lang.String"/>
+	<field name="dsResultadoConsulta" class="java.lang.Object"/>
+	<field name="usuarioProcesa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Immediate">
+			<staticText>
+				<reportElement key="reporteIngresosOdonto" style="axiomaTitulo" x="0" y="0" width="732" height="15"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte: Ingresos Odontológicos]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="fechaInicial" style="axiomaTexto" stretchType="RelativeToTallestObject" x="70" y="15" width="130" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaInicial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="fechaFinal" style="axiomaTexto" stretchType="RelativeToTallestObject" x="350" y="15" width="382" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="0" y="15" width="70" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="200" y="15" width="150" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Final:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="10" splitType="Immediate">
+			<subreport isUsingCache="true">
+				<reportElement key="subreporteListadoResultadoPlano" stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subrptConsolidadoIngresosOdontoPlano">
+					<subreportParameterExpression><![CDATA[$P{subrptConsolidadoIngresosOdontoPlano}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subrptTotalPorEstadoPlano">
+					<subreportParameterExpression><![CDATA[$P{subrptTotalPorEstadoPlano}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subrptIngresosConSinValIniPlano">
+					<subreportParameterExpression><![CDATA[$P{subrptIngresosConSinValIniPlano}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{dsResultadoConsulta}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreporteListadoResultadoPlano}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="40" splitType="Immediate"/>
+	</pageFooter>
+</jasperReport>

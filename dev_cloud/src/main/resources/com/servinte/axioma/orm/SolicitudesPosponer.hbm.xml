@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 15, 2010 5:58:35 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolicitudesPosponer" table="solicitudes_posponer" schema="ordenes">
+        <comment>Guarda las solicitudes y la fecha en que se pospone para su autorizaci&#195;&#179;n</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">ordenes.seq_solicitudes_posponer</param>
+			</generator>
+        </id>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="solicitud" not-null="true">
+                <comment>Solicitud a posponer</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </property>
+        <property name="fechaPosponer" type="date">
+            <column name="fecha_posponer" length="13" not-null="true">
+                <comment>Fecha a la que se pospone la solicitud</comment>
+            </column>
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="1000">
+                <comment>Observaciones</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

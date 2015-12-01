@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LecturaPlanosAt" table="lectura_planos_at" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.LecturaPlanosAtId">
+            <key-property name="numeroFactura" type="string">
+                <column name="numero_factura" length="20" />
+            </key-property>
+            <key-property name="codigoPrestador" type="string">
+                <column name="codigo_prestador" length="10" />
+            </key-property>
+            <key-property name="tipoIdentificacion" type="string">
+                <column name="tipo_identificacion" length="2" />
+            </key-property>
+            <key-property name="numeroIdentificacion" type="string">
+                <column name="numero_identificacion" length="20" />
+            </key-property>
+            <key-property name="numeroAutorizacion" type="string">
+                <column name="numero_autorizacion" length="15" />
+            </key-property>
+            <key-property name="tipoServicio" type="string">
+                <column name="tipo_servicio" length="1" />
+            </key-property>
+            <key-property name="codigoServicio" type="string">
+                <column name="codigo_servicio" length="20" />
+            </key-property>
+            <key-property name="nombreServicio" type="string">
+                <column name="nombre_servicio" length="60" />
+            </key-property>
+            <key-property name="cantidad" type="string">
+                <column name="cantidad" length="5" />
+            </key-property>
+            <key-property name="valorUnitario" type="string">
+                <column name="valor_unitario" length="15" />
+            </key-property>
+            <key-property name="valorTotal" type="string">
+                <column name="valor_total" length="15" />
+            </key-property>
+            <key-property name="usuario" type="string">
+                <column name="usuario" length="30" />
+            </key-property>
+            <key-property name="centroAtencion" type="int">
+                <column name="centro_atencion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" update="false" insert="false" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

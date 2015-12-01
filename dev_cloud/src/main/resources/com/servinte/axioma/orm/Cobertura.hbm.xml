@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Cobertura" table="cobertura" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.CoberturaId">
+            <key-property name="codigoCobertura" type="string">
+                <column name="codigo_cobertura" length="8" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="descripCobertura" type="string">
+            <column name="descrip_cobertura" length="128" not-null="true" />
+        </property>
+        <property name="observCobertura" type="string">
+            <column name="observ_cobertura" length="360" />
+        </property>
+        <property name="activo" type="java.lang.Character">
+            <column name="activo" length="1" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="tipoCobertura" type="string">
+            <column name="tipo_cobertura" length="4" />
+        </property>
+        <set name="coberturasXContratos" inverse="true" lazy="true" table="coberturas_x_contrato" fetch="select">
+            <key>
+                <column name="codigo_cobertura" length="8" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturasXContrato" />
+        </set>
+        <set name="coberturasEntidadSubs" inverse="true" lazy="true" table="coberturas_entidad_sub" fetch="select">
+            <key>
+                <column name="cobertura" length="8" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturasEntidadSub" />
+        </set>
+        <set name="detalleCoberturas" inverse="true" lazy="true" table="detalle_cobertura" fetch="select">
+            <key>
+                <column name="codigo_cobertura" length="8" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleCobertura" />
+        </set>
+        <set name="logCoberturasEntSubs" inverse="true" lazy="true" table="log_coberturas_ent_sub" fetch="select">
+            <key>
+                <column name="cobertura" length="8" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCoberturasEntSub" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+Funcionalidades.hbm.xml
+<set name="roleses" inverse="true" lazy="true" table="roles_funcionalidades" fetch="select">
+            <key>
+                <column name="codigo_func" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Roles">
+                <column name="nombre_rol" not-null="true" />
+            </many-to-many>
+        </set>
+        
+        
+Roles.hbm.xml
+        <set name="funcionalidadeses" inverse="false" lazy="true" table="roles_funcionalidades" fetch="select">
+            <key>
+                <column name="nombre_rol" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Funcionalidades">
+                <column name="codigo_func" not-null="true" />
+            </many-to-many>
+        </set>
+        
+EntregaCajaMayor.hbm.xml 
+		<many-to-one name="movimientosCajaByMovimientoCajaArqueo" lazy="false" class="com.servinte.axioma.orm.MovimientosCaja" fetch="select">
+            <column name="movimiento_caja_arqueo" precision="10" scale="0" not-null="true">
+                <comment>Movimiento de arqueo de caja asociado a la entrega a caja mayor</comment>
+            </column>
+        </many-to-one>
+        
+MovimientosCaja.hbm.xml 
+		<many-to-one name="turnoDeCaja" class="com.servinte.axioma.orm.TurnoDeCaja" lazy="false" fetch="select" cascade="all">
+            <column name="turno" precision="12" scale="0" not-null="true">
+                <comment>Turno que hace el movimiento</comment>
+            </column>
+        </many-to-one>
+        
+TurnoDeCaja.hbm.xml
+		<many-to-one name="cajas" class="com.servinte.axioma.orm.Cajas" lazy="false" fetch="select">
+            <column name="caja" not-null="true">
+                <comment>Caja que realizo la apertura</comment>
+            </column>
+        </many-to-one>
+        

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="consultaMovimientosFacturasVariasPlano" language="groovy" pageWidth="1960" pageHeight="612" orientation="Landscape" columnWidth="1920" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subreporteConsultaFacturaPlano" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<field name="fechaInicial" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.lang.String"/>
+	<field name="usuario" class="java.lang.String"/>
+	<field name="dsResultado" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="68" splitType="Stretch">
+			<textField>
+				<reportElement key="fechaInicial" x="100" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaInicial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" x="1014" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" x="813" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="Centro de Atención" style="axiomaTexto" x="108" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Centro de Atención]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" positionType="Float" mode="Transparent" x="1518" y="41" width="102" height="27"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Ajustes Débito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" mode="Transparent" x="1720" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pagos Aplicados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTitulo" x="0" y="20" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Fecha Inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="Ciudad" style="axiomaTexto" x="208" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ciudad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaTexto" x="0" y="41" width="108" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Institucion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" x="201" y="20" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Fecha Final:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" positionType="Float" mode="Transparent" x="1416" y="41" width="102" height="27"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Valor Inicial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" mode="Transparent" x="1820" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<textField>
+				<reportElement key="fechaFinal" x="303" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" x="713" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deudor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" x="1214" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido Inicial  Usuario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" x="1620" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ajustes Crédito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" x="913" y="41" width="101" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Deudor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="41" width="103" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Region]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="41" width="102" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="Presupuestos Odontológicos Contratados con Promoción " x="0" y="0" width="188" height="20"/>
+				<textElement/>
+				<text><![CDATA[Reporte Movimientos Facturas Varias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" x="513" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" x="1114" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" positionType="Float" mode="Transparent" x="1314" y="41" width="102" height="27"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Nombre Inicial Usuario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" style="axiomaTexto" x="613" y="41" width="100" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Elaboración]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="20" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement key="usuario" x="503" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="47" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreporteConsultaFacturaPlano" x="0" y="0" width="1920" height="47"/>
+				<subreportParameter name="subreporteConsultaFacturaPlano">
+					<subreportParameterExpression><![CDATA[$P{subreporteConsultaFacturaPlano}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{dsResultado}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreporteConsultaFacturaPlano}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="32" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

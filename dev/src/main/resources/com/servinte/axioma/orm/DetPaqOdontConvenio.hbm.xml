@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 8, 2010 9:47:13 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetPaqOdontConvenio" table="det_paq_odont_convenio" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+           <generator class="sequence" >
+				<param name="sequence">odontologia.seq_detpaqodoconv</param>
+			</generator>
+        </id>
+        <many-to-one name="paqOdontConvenio" class="com.servinte.axioma.orm.PaqOdontConvenio" fetch="select">
+            <column name="codigo_pk_paqconv" not-null="true" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifarios" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tarifario" not-null="true" />
+        </many-to-one>
+        <many-to-one name="paquetesOdontologicos" class="com.servinte.axioma.orm.PaquetesOdontologicos" fetch="select">
+            <column name="codigo_pk_paquete" not-null="true" />
+        </many-to-one>
+        <property name="fechaInicial" type="string">
+            <column name="fecha_inicial" length="10" not-null="true" />
+        </property>
+        <property name="fechaFinal" type="string">
+            <column name="fecha_final" length="10" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" />
+        </property>
+        <set name="presupuestoPaqueteses" inverse="true" lazy="true" table="presupuesto_paquetes" fetch="select">
+            <key>
+                <column name="det_paq_odon_convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoPaquetes" />
+        </set>
+        <set name="detCargoses" inverse="true" lazy="true" table="det_cargos" fetch="select">
+            <key>
+                <column name="det_paq_odon_convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 8, 2010 5:26:01 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CuotasOdontEspecialidad" table="cuotas_odont_especialidad" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence" >
+            	<param name="sequence">odontologia.seq_detcuotaodoesp</param>
+           	</generator>
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="tipoValor" type="string">
+            <column name="tipo_valor" length="5" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="string">
+            <column name="fecha_modifica" length="10" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="detalleCuotasOdontoEsps" inverse="true" lazy="true" table="detalle_cuotas_odonto_esp" fetch="select">
+            <key>
+                <column name="codigo_pk_cuota_odont" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleCuotasOdontoEsp" />
+        </set>
+    </class>
+</hibernate-mapping>

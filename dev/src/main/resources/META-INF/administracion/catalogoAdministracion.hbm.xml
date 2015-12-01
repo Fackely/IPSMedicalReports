@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<query name="catalogoAdministracion.consultarEspecialidadesValidas">
+		<![CDATA[
+			SELECT NEW com.servinte.axioma.dto.administracion.EspecialidadDto(
+							esp.codigo, esp.nombre, esp.consecutivo)
+				FROM Especialidades esp
+			WHERE esp.codigo > 0 and esp.codigo<> :codigoTodas
+			ORDER BY esp.nombre
+		]]>
+	</query>
+	<query name="catalogoAdministracion.consultaTiposIdentificacion">
+		<![CDATA[
+			SELECT NEW com.servinte.axioma.dto.administracion.TipoIdentificacionDto(
+							ti.acronimo, ti.nombre, ti.codInterfaz, ti.tipo, ti.soloNumeros)
+			FROM TiposIdentificacion ti
+			WHERE ti.tipo = :tipo1 OR ti.tipo = :tipo2 
+			ORDER BY ti.nombre asc
+		]]>
+	</query>
+	<query name="catalogoAdministracion.consultaTiposAfiliado">
+		<![CDATA[
+			SELECT NEW com.servinte.axioma.dto.administracion.TipoAfiliadoDto(
+							ta.acronimo, ta.nombre)
+			FROM TiposAfiliado ta
+			ORDER BY ta.nombre asc
+		]]>
+	</query>
+	
+	<query name="catalogoAdministracion.existeParametrizacionEntidadSubcontratadaPorCentroCosto">
+		SELECT es.codigoPk
+			FROM CentrosCostoEntidadesSub cces
+				INNER JOIN cces.entidadesSubcontratadas es
+		WHERE es.codigoPk=:codigoEntidad
+	</query>
+	
+	<query name="catalogoAdministracion.consultarSexos">
+		SELECT NEW com.servinte.axioma.dto.administracion.DtoSexo(s.codigo, s.nombre)
+		FROM com.servinte.axioma.orm.Sexo s
+	</query>
+	
+	
+	<sql-query name="catalogoAdministracion.consultarDatosProfesionales">
+		<return-scalar column="codigoProfesional" type="integer" />
+		<return-scalar column="nombreProfesional" type="string" />
+		<![CDATA[
+		SELECT  m.codigo_medico AS codigoProfesional, getNombrePersona(m.codigo_medico) AS nombreProfesional 
+		FROM medicos m 
+			INNER JOIN medicos_instituciones mi ON(m.codigo_medico=mi.codigo_medico) 
+			INNER JOIN ocupa_realizan_qx_inst o ON(o.ocupacion=m.ocupacion_medica AND mi.codigo_institucion=o.institucion)
+ 		WHERE m.codigo_medico NOT IN 
+ 			(SELECT min.codigo_medico FROM medicos_inactivos min 
+ 			WHERE m.codigo_medico=min.codigo_medico AND mi.codigo_institucion=min.codigo_institucion) 
+ 			AND mi.codigo_institucion=:institucion
+ 		ORDER BY getNombrePersona(m.codigo_medico)
+		]]>
+	</sql-query>
+	
+	<query name="catalogoAdministracion.consultarEspecialidadesXProfesional">
+		<![CDATA[
+			SELECT NEW com.servinte.axioma.dto.administracion.EspecialidadDto(
+						esp.codigo, esp.nombre, esp.consecutivo)
+			FROM EspecialidadesMedicos espm
+			INNER JOIN 	espm.especialidades esp
+			WHERE espm.medicos.codigoMedico =:codigoProfesional
+				AND espm.activaSistema = true
+			ORDER BY esp.nombre
+		]]>
+	</query>
+	
+	<query name="catalogoAdministracion.consultaFuncionalidades">
+		<![CDATA[
+			SELECT NEW com.servinte.axioma.dto.administracion.FuncionalidadDto(
+							fun.codigoFunc,fun.nombreFunc,fun.etiquetaFunc,fun.archivoFunc)
+			FROM DependenciasFunc dep
+			INNER JOIN dep.funcionalidadesByFuncionalidadHija funPadre
+			INNER JOIN dep.funcionalidadesByFuncionalidadPadre fun
+			WHERE funPadre.codigoFunc = :codigoFunPadre
+ 		]]>
+	</query>
+	
+</hibernate-mapping>

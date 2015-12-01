@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/09/2012 11:08:02 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MotivoAnulacionPet" table="motivo_anulacion_pet" schema="salascirugia">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="64" not-null="true" />
+        </property>
+        <set name="motivosAnulQxInsts" table="motivos_anul_qx_inst" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="motivos_anulacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotivosAnulQxInst" />
+        </set>
+    </class>
+</hibernate-mapping>

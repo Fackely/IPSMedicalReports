@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/05/2011 04:42:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ParamPresupuestosCap" table="param_presupuestos_cap" schema="capitacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_param_presupuestos_cap</param>
+			</generator>
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="anioVigencia" type="string">
+            <column name="anio_vigencia" length="4" not-null="true" />
+        </property>
+        <property name="valorContrato" type="big_decimal">
+            <column name="valor_contrato" precision="20" not-null="true" />
+        </property>
+        <property name="porcentajeGastoGeneral" type="big_decimal">
+            <column name="porcentaje_gasto_general" precision="5" not-null="true" />
+        </property>
+        <property name="valorGastoGeneral" type="big_decimal">
+            <column name="valor_gasto_general" precision="20" not-null="true" />
+        </property>
+        <property name="activo" type="char">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="fechaParam" type="date">
+            <column name="fecha_param" length="13" not-null="true" />
+        </property>
+        <property name="horaParam" type="string">
+            <column name="hora_param" length="5" not-null="true" />
+        </property>
+        <set name="logParamPresupuestoCaps" table="log_param_presupuesto_cap" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="param_presup_cap" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogParamPresupuestoCap" />
+        </set>
+        <set name="detalleValorizacionArts" table="detalle_valorizacion_art" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="param_presup_cap" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleValorizacionArt" />
+        </set>
+        <set name="valorizacionPresCapGens" table="valorizacion_pres_cap_gen" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="param_presup_cap" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValorizacionPresCapGen" />
+        </set>
+        <set name="detalleValorizacionServs" table="detalle_valorizacion_serv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="param_presup_cap" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleValorizacionServ" />
+        </set>
+    </class>
+</hibernate-mapping>

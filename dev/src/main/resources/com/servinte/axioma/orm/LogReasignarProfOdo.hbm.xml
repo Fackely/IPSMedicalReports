@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogReasignarProfOdo" table="log_reasignar_prof_odo" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="medicosByCodigoMedicoAnterior" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico_anterior" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_proceso" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="medicosByCodigoMedicoAsignado" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico_asignado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="fechaProceso" type="date">
+            <column name="fecha_proceso" length="13" not-null="true" />
+        </property>
+        <property name="horaProceso" type="string">
+            <column name="hora_proceso" length="5" not-null="true" />
+        </property>
+        <property name="codigoAgenda" type="java.lang.Long">
+            <column name="codigo_agenda" precision="12" scale="0" />
+        </property>
+        <property name="fechaAgenda" type="date">
+            <column name="fecha_agenda" length="13" not-null="true" />
+        </property>
+        <property name="horaAgendaInicial" type="string">
+            <column name="hora_agenda_inicial" length="5" not-null="true" />
+        </property>
+        <property name="horaAgendaFinal" type="string">
+            <column name="hora_agenda_final" length="5" not-null="true" />
+        </property>
+        <property name="unidadConsulta" type="int">
+            <column name="unidad_consulta" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

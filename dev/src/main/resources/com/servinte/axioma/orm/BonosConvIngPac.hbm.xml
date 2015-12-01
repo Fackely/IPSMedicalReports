@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 1, 2010 2:25:27 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.BonosConvIngPac" table="bonos_conv_ing_pac" schema="facturacion">
+        <comment>Registro de bonos de un Convenio-Paciente</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_bon_conv_ing_pac</param>
+			</generator>
+        </id>
+        <many-to-one name="conveniosIngresoPaciente" class="com.servinte.axioma.orm.ConveniosIngresoPaciente" fetch="select">
+            <column name="conve_ing_pac" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Campo de auditoria</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="emisionBonosDesc" class="com.servinte.axioma.orm.EmisionBonosDesc" fetch="select">
+            <column name="emision" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="numeroSerial" type="long">
+            <column name="numero_serial" precision="14" scale="0" not-null="true">
+                <comment>Numero seleccionado para el bono</comment>
+            </column>
+        </property>
+        <property name="valorDescuento" type="big_decimal">
+            <column name="valor_descuento" precision="14">
+                <comment>Valor del bono en caso de tenerlo</comment>
+            </column>
+        </property>
+        <property name="porcentajeDescuentos" type="big_decimal">
+            <column name="porcentaje_descuentos" precision="5">
+                <comment>Porcentaje del bono en caso de tenerlo</comment>
+            </column>
+        </property>
+        <property name="utilizado" type="char">
+            <column name="utilizado" length="1" not-null="true">
+                <comment>Indica si el bono fue utilizado o no</comment>
+            </column>
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Campo de auditoria e historicos</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Campo de auditoria e historicos</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

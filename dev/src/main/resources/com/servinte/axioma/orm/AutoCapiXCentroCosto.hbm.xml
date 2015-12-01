@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/02/2012 02:50:32 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutoCapiXCentroCosto" table="auto_capi_x_centro_costo" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.AutoCapiXCentroCostoId">
+            <key-property name="centroCosto" type="int">
+                <column name="centro_costo" />
+            </key-property>
+            <key-property name="autoEntSub" type="long">
+                <column name="auto_ent_sub" precision="12" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" update="false" insert="false" fetch="select">
+            <column name="auto_ent_sub" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" update="false" insert="false" fetch="select">
+            <column name="centro_costo" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

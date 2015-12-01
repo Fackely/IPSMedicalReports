@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 24, 2010 5:55:45 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NivelAutorOcupMedica" table="nivel_autor_ocup_medica" schema="capitacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence">
+				<param name="sequence">capitacion.seq_nivel_autor_ocup_med</param>
+			 </generator>
+        </id>
+        <many-to-one name="ocupacionesMedicas" class="com.servinte.axioma.orm.OcupacionesMedicas" fetch="select">
+            <column name="ocupacion_medica" not-null="true">
+                <comment>Ocupaci&#195;&#179;n m&#195;&#169;dica que se est&#195;&#161; registrando en el nivel de autorizaci&#195;&#179;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="nivelAutorUsuario" class="com.servinte.axioma.orm.NivelAutorUsuario" fetch="select">
+            <column name="nivel_autor_usuario" not-null="true">
+                <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <set name="prioridadOcupMedicas" inverse="true" lazy="true" table="prioridad_ocup_medica" fetch="select" cascade="all">
+            <key>
+                <column name="nivel_autor_ocup_medica" not-null="true">
+                    <comment>Nivel de autorizaci&#195;&#179;n de ocupaci&#195;&#179;n m&#195;&#169;dica relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PrioridadOcupMedica" />
+        </set>
+    </class>
+</hibernate-mapping>

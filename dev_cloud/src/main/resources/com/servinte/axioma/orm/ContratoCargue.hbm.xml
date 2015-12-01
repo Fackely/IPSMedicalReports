@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/06/2011 06:09:20 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ContratoCargue" table="contrato_cargue" schema="capitacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_contrato_cargue</param>
+			</generator> 
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true" />
+        </many-to-one>
+        <property name="fechaCargue" type="date">
+            <column name="fecha_cargue" length="13" not-null="true" />
+        </property>
+        <property name="fechaInicial" type="date">
+            <column name="fecha_inicial" length="13" not-null="true" />
+        </property>
+        <property name="fechaFinal" type="date">
+            <column name="fecha_final" length="13" not-null="true" />
+        </property>
+        <property name="totalPacientes" type="long">
+            <column name="total_pacientes" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="valorTotal" type="big_decimal">
+            <column name="valor_total" precision="10" not-null="true" />
+        </property>
+        <property name="upc" type="big_decimal">
+            <column name="upc" precision="10" not-null="true" />
+        </property>
+        <property name="cuentaCobro" type="java.lang.Long">
+            <column name="cuenta_cobro" precision="10" scale="0" />
+        </property>
+        <property name="institucion" type="java.lang.Integer">
+            <column name="institucion" />
+        </property>
+        <property name="anulado" type="boolean">
+            <column name="anulado" not-null="true" />
+        </property>
+        <property name="ajustesDebito" type="big_decimal">
+            <column name="ajustes_debito" precision="10" not-null="true" />
+        </property>
+        <property name="ajustesCredito" type="big_decimal">
+            <column name="ajustes_credito" precision="10" not-null="true" />
+        </property>
+        <property name="fechaFinalModificada" type="date">
+            <column name="fecha_final_modificada" length="13" />
+        </property>
+        <property name="horaCargue" type="string">
+            <column name="hora_cargue" length="5" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.16" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.0.v20080606 Build &lt;2.3.0.v20080618-0630></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="576">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ReferenciaInternaSinEstado" id="577">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <property name="queryText"> SELECT  DISTINCT getnombrepersona(r.codigo_paciente) As paciente,
+		 getedadsimpleresumido(current_date,to_date(getfechanacimientopaciente(r.codigo_paciente), 'DD/MM/YYYY')) AS edad,
+		 getDiagPrinValSircSinTipocie(r.numero_referencia) As diagnostico,
+		 getnombremedico (r.codigo_profesional) As medico_rem, 
+		 getnombreconvenio(r.convenio) As convenio,
+		 getnomconvcontrato(getconvenioxingreso(r.ingreso)) As convecontrat, 
+		 getdescripcioninstitucionsirc(itr.institucion_referir,itr.institucion) As ins_recibe,
+		 to_char(r.fecha_referencia,'DD/MM/YYYY') As fecha_solicitud, 
+		 r.hora_referencia As hora_solicitud,
+		 case when (r.estado='SOL' OR r.estado='ANU') then '' else to_char(sir.fecha_tramite,'DD/MM/YYYY') END As fecha_acep,
+		 case when (r.estado='SOL' OR r.estado='ANU') then '' else sir.hora_tramite END As hora_acept, 
+		 coalesce(to_char(e.fecha_egreso,'DD/MM/YYYY'),'') As fecha_salida,
+		 coalesce(substring(e.hora_egreso||'',0,6),'') As hora_salida,
+		 getdescripcioncamaphc(getultimacama(c.id,c.via_ingreso)) As cama,
+		 getnomcentrocosto(c.area) As area_paciente,
+		 getcodigopropservicio2(dss.servicio,0) ||'-'|| getdescripcionserviciosirc(sr.codigo_servicio_sirc,sir.institucion)||'-'|| sr.codigo_servicio_sirc As examen
+ FROM referencia r 
+ LEFT OUTER JOIN instit_tramite_referencia itr ON (itr.numero_referencia_tramite=r.numero_referencia )
+ LEFT OUTER JOIN servic_instit_referencia sir ON (sir.numero_referencia_tramite=r.numero_referencia AND sir.institucion=r.institucion AND sir.institucion_referir=itr.institucion_referir)
+ LEFT OUTER JOIN cuentas c ON (c.id_ingreso=r.ingreso)
+ LEFT OUTER JOIN egresos e ON (e.cuenta=c.id)
+ LEFT OUTER JOIN det_servicios_sirc dss ON (dss.servicio_sirc=sir.codigo_servicio_sirc AND dss.institucion=sir.institucion)
+ LEFT OUTER JOIN centros_costo cc ON (cc.codigo=c.area)
+ LEFT OUTER JOIN servicios_referencia sr ON (sr.numero_referencia = r.numero_referencia) 
+ WHERE </property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="axiomaTitulo" id="226">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">small</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="axiomaTexto" id="227">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="textAlign">left</property>
+        </style>
+        <style name="axiomaLabelCelda" id="228">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+        </style>
+        <style name="axiomaInfoCelda" id="229">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="textAlign">left</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <page-header>
+                <grid id="8">
+                    <property name="width">100%</property>
+                    <column id="9">
+                        <property name="width">3in</property>
+                    </column>
+                    <column id="10">
+                        <property name="width">5in</property>
+                    </column>
+                    <column id="11">
+                        <property name="width">2in</property>
+                    </column>
+                    <row id="12">
+                        <cell id="13">
+                            <property name="textAlign">center</property>
+                        </cell>
+                        <cell id="14">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                        <cell id="15"/>
+                    </row>
+                    <row id="16">
+                        <cell id="17"/>
+                        <cell id="18">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <grid id="81">
+                                <property name="marginTop">0pt</property>
+                                <property name="width">100%</property>
+                                <column id="82"/>
+                                <row id="83">
+                                    <cell id="84"/>
+                                </row>
+                                <row id="85">
+                                    <cell id="86"/>
+                                </row>
+                            </grid>
+                        </cell>
+                        <cell id="19"/>
+                    </row>
+                    <row id="87">
+                        <cell id="88">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="91">
+                        <cell id="92">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="100">
+                    <property name="width">100%</property>
+                    <column id="101">
+                        <property name="width">2.5in</property>
+                    </column>
+                    <column id="102">
+                        <property name="width">2.5in</property>
+                    </column>
+                    <column id="103">
+                        <property name="width">5in</property>
+                    </column>
+                    <row id="104">
+                        <cell id="105">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                        </cell>
+                        <cell id="106">
+                            <text id="575">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">right</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="107">
+                            <grid id="368">
+                                <property name="fontWeight">bold</property>
+                                <property name="width">100%</property>
+                                <column id="369">
+                                    <property name="width">4.125in</property>
+                                </column>
+                                <column id="370">
+                                    <property name="width">0.4479166667in</property>
+                                </column>
+                                <column id="371">
+                                    <property name="width">0.4791666667in</property>
+                                </column>
+                                <row id="372">
+                                    <cell id="373">
+                                        <auto-text id="374">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="375">
+                                        <text id="376">
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[de]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="377">
+                                        <auto-text id="378">
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="578">
+            <property name="width">100%</property>
+            <property name="dataSet">ReferenciaInternaSinEstado</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">paciente</property>
+                    <expression name="expression">dataSetRow["paciente"].substring(0,25).toLowerCase()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">edad</property>
+                    <expression name="expression">dataSetRow["edad"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">diagnostico</property>
+                    <expression name="expression">dataSetRow["diagnostico"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">medico_rem</property>
+                    <expression name="expression">dataSetRow["medico_rem"].substring(0,25).toLowerCase()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">convenio</property>
+                    <expression name="expression">dataSetRow["convenio"].substring(0.25).toLowerCase()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">convecontrat</property>
+                    <expression name="expression">dataSetRow["convecontrat"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ins_recibe</property>
+                    <expression name="expression">dataSetRow["ins_recibe"].substring(0,25).toLowerCase()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha_solicitud</property>
+                    <expression name="expression">dataSetRow["fecha_solicitud"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">hora_solicitud</property>
+                    <expression name="expression">dataSetRow["hora_solicitud"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha_acep</property>
+                    <expression name="expression">dataSetRow["fecha_acep"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">hora_acept</property>
+                    <expression name="expression">dataSetRow["hora_acept"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha_salida</property>
+                    <expression name="expression">dataSetRow["fecha_salida"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">hora_salida</property>
+                    <expression name="expression">dataSetRow["hora_salida"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cama</property>
+                    <expression name="expression">dataSetRow["cama"].substring(0,25)</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">area_paciente</property>
+                    <expression name="expression">dataSetRow["area_paciente"].substring(0,25)</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">examen</property>
+                    <expression name="expression">dataSetRow["examen"].substring(0,25)</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="627">
+                <property name="width">1.16in</property>
+            </column>
+            <column id="628">
+                <property name="width">0.27in</property>
+            </column>
+            <column id="629">
+                <property name="width">0.25in</property>
+            </column>
+            <column id="630">
+                <property name="width">1.1in</property>
+            </column>
+            <column id="631">
+                <property name="width">1in</property>
+            </column>
+            <column id="632">
+                <property name="width">0.8in</property>
+            </column>
+            <column id="633">
+                <property name="width">0.49in</property>
+            </column>
+            <column id="634">
+                <property name="width">0.3in</property>
+            </column>
+            <column id="635">
+                <property name="width">0.49in</property>
+            </column>
+            <column id="636">
+                <property name="width">0.3in</property>
+            </column>
+            <column id="637">
+                <property name="width">0.49in</property>
+            </column>
+            <column id="638">
+                <property name="width">0.3in</property>
+            </column>
+            <column id="639">
+                <property name="width">1.14in</property>
+            </column>
+            <column id="640">
+                <property name="width">0.729in</property>
+            </column>
+            <column id="641">
+                <property name="width">1in</property>
+            </column>
+            <header>
+                <row id="579">
+                    <property name="style">axiomaLabelCelda</property>
+                    <cell id="580">
+                        <property name="colSpan">12</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1125">
+                            <text-property name="text"></text-property>
+                        </label>
+                    </cell>
+                    <cell id="592">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="674">
+                            <property name="marginTop">0pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">MOTIVO REFERENCIA</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="1126">
+                    <property name="style">axiomaLabelCelda</property>
+                    <cell id="1127">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="675">
+                            <text-property name="text">PACIENTE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1128">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="691">
+                            <text-property name="text">EDAD</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1129">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="692">
+                            <text-property name="text">DX</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1130">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="693">
+                            <text-property name="text">MED REMITE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1131">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="694">
+                            <text-property name="text">CONVENIO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1132">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="695">
+                            <text-property name="text">INST RECIBE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1133">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="696">
+                            <text-property name="text">FECHA SOL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1134">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="697">
+                            <text-property name="text">HORA SOL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1135">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="698">
+                            <text-property name="text">FECHA ACEP</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1136">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="699">
+                            <text-property name="text">HORA ACEP</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1137">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="700">
+                            <text-property name="text">FECHA SALE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1138">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="701">
+                            <text-property name="text">HORA SALE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1139">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="702">
+                            <text-property name="text">CAMA</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1140">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="703">
+                            <text-property name="text">ÁREA PACIENTE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1141">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="704">
+                            <text-property name="text">EXAMEN</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="642">
+                    <property name="style">axiomaInfoCelda</property>
+                    <cell id="643">
+                        <data id="676">
+                            <property name="resultSetColumn">paciente</property>
+                        </data>
+                    </cell>
+                    <cell id="644">
+                        <data id="1142">
+                            <property name="resultSetColumn">edad</property>
+                        </data>
+                    </cell>
+                    <cell id="645">
+                        <data id="678">
+                            <property name="resultSetColumn">diagnostico</property>
+                        </data>
+                    </cell>
+                    <cell id="646">
+                        <data id="679">
+                            <property name="resultSetColumn">medico_rem</property>
+                        </data>
+                    </cell>
+                    <cell id="647">
+                        <data id="680">
+                            <property name="resultSetColumn">convenio</property>
+                        </data>
+                    </cell>
+                    <cell id="648">
+                        <data id="681">
+                            <property name="resultSetColumn">ins_recibe</property>
+                        </data>
+                    </cell>
+                    <cell id="649">
+                        <data id="682">
+                            <property name="resultSetColumn">fecha_solicitud</property>
+                        </data>
+                    </cell>
+                    <cell id="650">
+                        <data id="683">
+                            <property name="resultSetColumn">hora_solicitud</property>
+                        </data>
+                    </cell>
+                    <cell id="651">
+                        <data id="684">
+                            <property name="resultSetColumn">fecha_acep</property>
+                        </data>
+                    </cell>
+                    <cell id="652">
+                        <data id="685">
+                            <property name="resultSetColumn">hora_acept</property>
+                        </data>
+                    </cell>
+                    <cell id="653">
+                        <data id="687">
+                            <property name="resultSetColumn">fecha_salida</property>
+                        </data>
+                    </cell>
+                    <cell id="654">
+                        <data id="686">
+                            <property name="resultSetColumn">hora_salida</property>
+                        </data>
+                    </cell>
+                    <cell id="655">
+                        <data id="688">
+                            <property name="resultSetColumn">cama</property>
+                        </data>
+                    </cell>
+                    <cell id="656">
+                        <data id="689">
+                            <property name="resultSetColumn">area_paciente</property>
+                        </data>
+                    </cell>
+                    <cell id="657">
+                        <data id="690">
+                            <property name="resultSetColumn">examen</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="611">
+                    <cell id="612"/>
+                    <cell id="613"/>
+                    <cell id="614"/>
+                    <cell id="615"/>
+                    <cell id="616"/>
+                    <cell id="617"/>
+                    <cell id="618"/>
+                    <cell id="619"/>
+                    <cell id="620"/>
+                    <cell id="621"/>
+                    <cell id="622"/>
+                    <cell id="623"/>
+                    <cell id="624"/>
+                    <cell id="625"/>
+                    <cell id="626"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteIngresoOdonto" pageWidth="1000" pageHeight="612" orientation="Landscape" columnWidth="1000" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subreporteListadoResultado" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/odontologia/ingresosOdontologicos/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subreportePlanoInfoPaciente" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subreportePlanoConsolidadoMovimiento" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subreportePlanoDetalleMovimiento" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<field name="nombreInstitucion" class="java.lang.String"/>
+	<field name="nit" class="java.lang.String"/>
+	<field name="actividadEconomica" class="java.lang.String"/>
+	<field name="direccionTelefono" class="java.lang.String"/>
+	<field name="centroAtencionReporte" class="java.lang.String"/>
+	<field name="logoDerecha" class="java.lang.String"/>
+	<field name="logoIzquierda" class="java.lang.String"/>
+	<field name="dsInfoPaciente" class="java.lang.Object"/>
+	<field name="usuarioGeneraReporte" class="java.lang.String"/>
+	<field name="totalSaldoPaciente" class="java.lang.String"/>
+	<field name="dsConsolidadoMovimientos" class="java.lang.Object"/>
+	<field name="dsDetalleMovimientos" class="java.lang.Object"/>
+	<field name="esConsolidado" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement key="titulo" style="axiomaTitulo" x="0" y="0" width="1000" height="15"/>
+				<textElement textAlignment="Left">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Reporte: Movimientos Abonos Paciente]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="10" splitType="Immediate">
+			<subreport isUsingCache="true">
+				<reportElement key="subreportePlanoInfoPaciente" stretchType="RelativeToBandHeight" x="0" y="0" width="1000" height="10" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="totalSaldoPaciente">
+					<subreportParameterExpression><![CDATA[$F{totalSaldoPaciente}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{dsInfoPaciente}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreportePlanoInfoPaciente}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="10">
+			<subreport isUsingCache="true">
+				<reportElement key="subreporteConsolidadoMovimiento" stretchType="RelativeToBandHeight" x="0" y="0" width="1000" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true">
+					<printWhenExpression><![CDATA[$F{esConsolidado}]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="totalSaldoPaciente">
+					<subreportParameterExpression><![CDATA[$F{totalSaldoPaciente}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{dsConsolidadoMovimientos}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreportePlanoConsolidadoMovimiento}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="10">
+			<subreport isUsingCache="true">
+				<reportElement key="subreporteDetalleMovimiento" stretchType="RelativeToBandHeight" x="0" y="0" width="1000" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true">
+					<printWhenExpression><![CDATA[!$F{esConsolidado}]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="totalSaldoPaciente">
+					<subreportParameterExpression><![CDATA[$F{totalSaldoPaciente}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{dsDetalleMovimientos}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreportePlanoDetalleMovimiento}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

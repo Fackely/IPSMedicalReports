@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CierreIngresos" table="cierre_ingresos" schema="manejopaciente">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="motCierreAperturaIngresosByFkMotaper" class="com.servinte.axioma.orm.MotCierreAperturaIngresos" fetch="select">
+            <column name="motivo_apertura" length="4" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioApertura" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_apertura" length="30" />
+        </many-to-one>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="id_ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioCierre" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_cierre" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="motCierreAperturaIngresosByFkMotcierre" class="com.servinte.axioma.orm.MotCierreAperturaIngresos" update="false" insert="false" fetch="select">
+            <column name="motivo_cierre" length="4" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="fechaCierre" type="date">
+            <column name="fecha_cierre" length="13" not-null="true" />
+        </property>
+        <property name="horaCierre" type="string">
+            <column name="hora_cierre" length="5" not-null="true" />
+        </property>
+        <property name="fechaApertura" type="date">
+            <column name="fecha_apertura" length="13" />
+        </property>
+        <property name="horaApertura" type="string">
+            <column name="hora_apertura" length="5" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

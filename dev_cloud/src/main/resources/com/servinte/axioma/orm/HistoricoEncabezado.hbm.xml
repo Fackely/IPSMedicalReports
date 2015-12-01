@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/06/2011 11:52:49 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoricoEncabezado" table="historico_encabezado" schema="facturacion">
+        <comment>Registro de encabezados asociados a documentos legales (Facturas)</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+           	<generator class="sequence" >
+				<param name="sequence">facturacion.seq_historico_encabezado</param>
+			</generator>
+        </id>
+        <property name="nombreInstitucion" type="string">
+            <column name="nombre_institucion">
+                <comment>Nombre de la Instituci&#243;n</comment>
+            </column>
+        </property>
+        <property name="nitInstitucion" type="string">
+            <column name="nit_institucion" length="50">
+                <comment>NIT de la Instituci&#243;n</comment>
+            </column>
+        </property>
+        <property name="digitoVerificacion" type="string">
+            <column name="digito_verificacion" length="1">
+                <comment>D&#237;gito de Verificaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="sucursal" type="string">
+            <column name="sucursal">
+                <comment>Nombre del Centro de Atenci&#243;n</comment>
+            </column>
+        </property>
+        <property name="actividadEconomica" type="string">
+            <column name="actividad_economica">
+                <comment>Actividad Econ&#243;mica</comment>
+            </column>
+        </property>
+        <property name="prefijoFactura" type="string">
+            <column name="prefijo_factura" length="10">
+                <comment>Prefijo de la Factura</comment>
+            </column>
+        </property>
+        <property name="resolucion" type="string">
+            <column name="resolucion" length="3000">
+                <comment>Resoluci&#243;n</comment>
+            </column>
+        </property>
+        <property name="rangoInicial" type="string">
+            <column name="rango_inicial" length="50">
+                <comment>Rango Inicial de Facturaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="rangoFinal" type="string">
+            <column name="rango_final" length="50">
+                <comment>Rango Final de Facturaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="piePagina" type="string">
+            <column name="pie_pagina" length="1024">
+                <comment>Pie de p&#225;gina</comment>
+            </column>
+        </property>
+        <property name="responsable" type="string">
+            <column name="responsable">
+                <comment>Responsable - Convenio</comment>
+            </column>
+        </property>
+        <property name="nitResponsable" type="string">
+            <column name="nit_responsable" length="50">
+                <comment>NIT del Responsable - Convenio</comment>
+            </column>
+        </property>
+        <property name="encabezado" type="string">
+            <column name="encabezado" length="1024">
+                <comment>Encabezado de la Factura Odontol&#243;gica</comment>
+            </column>
+        </property>
+        <property name="tipoIdentificacionInst" type="string">
+            <column name="tipo_identificacion_inst" length="10" />
+        </property>
+        <property name="ciudadInstitucion" type="string">
+            <column name="ciudad_institucion" />
+        </property>
+        <property name="direccionInstitucion" type="string">
+            <column name="direccion_institucion" />
+        </property>
+        <property name="telefonoInstitucion" type="string">
+            <column name="telefono_institucion" length="50" />
+        </property>
+        <property name="logoInstitucion" type="string">
+            <column name="logo_institucion" length="1024" />
+        </property>
+        <set name="facturases" table="facturas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="historico_encabezado" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Facturas" />
+        </set>
+        <set name="facturasVariases" table="facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="historico_encabezado" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FacturasVarias" />
+        </set>
+    </class>
+</hibernate-mapping>

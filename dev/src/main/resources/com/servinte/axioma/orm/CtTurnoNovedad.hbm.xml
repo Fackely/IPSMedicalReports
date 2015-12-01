@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CtTurnoNovedad" table="ct_turno_novedad" schema="public">
+        <id name="codigoObservacion" type="int">
+            <column name="codigo_observacion" />
+            <generator class="foreign">
+                <param name="property">ctTurnoObservacion</param>
+            </generator>
+        </id>
+        <one-to-one name="ctTurnoObservacion" class="com.servinte.axioma.orm.CtTurnoObservacion" constrained="true"></one-to-one>
+        <many-to-one name="novedad" class="com.servinte.axioma.orm.Novedad" fetch="select">
+            <column name="tipo_novedad" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

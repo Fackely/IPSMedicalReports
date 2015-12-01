@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 28, 2011 9:03:30 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UsoConsecutivosCentroAten" table="uso_consecutivos_centro_aten" schema="administracion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="256" not-null="true" />
+        </property>
+        <property name="anioVigencia" type="string">
+            <column name="anio_vigencia" length="4" />
+        </property>
+        <property name="valor" type="big_decimal">
+            <column name="valor" precision="20" scale="0" not-null="true" />
+        </property>
+        <property name="usado" type="java.lang.Character">
+            <column name="usado" length="1" />
+        </property>
+        <property name="finalizado" type="java.lang.Character">
+            <column name="finalizado" length="1" />
+        </property>
+        <property name="fechaToma" type="timestamp">
+            <column name="fecha_toma" length="29" />
+        </property>
+    </class>
+</hibernate-mapping>

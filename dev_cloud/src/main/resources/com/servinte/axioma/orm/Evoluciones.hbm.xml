@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/07/2011 03:06:44 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Evoluciones" table="evoluciones" schema="historiaclinica">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposDiagnostico" class="com.servinte.axioma.orm.TiposDiagnostico" fetch="select">
+            <column name="tipo_diagnostico_principal" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposRecargo" class="com.servinte.axioma.orm.TiposRecargo" fetch="select">
+            <column name="recargo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_complicacion" length="10" />
+            <column name="diagnostico_complicacion_cie" />
+        </many-to-one>
+        <many-to-one name="valoraciones" class="com.servinte.axioma.orm.Valoraciones" fetch="select">
+            <column name="valoracion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad_solicitada" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoMonitoreo" class="com.servinte.axioma.orm.TipoMonitoreo" fetch="select">
+            <column name="proced_quirurgicos_obst" />
+        </many-to-one>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="string">
+            <column name="hora_grabacion" length="5" not-null="true" />
+        </property>
+        <property name="fechaEvolucion" type="date">
+            <column name="fecha_evolucion" length="13" not-null="true" />
+        </property>
+        <property name="horaEvolucion" type="string">
+            <column name="hora_evolucion" length="5" not-null="true" />
+        </property>
+        <property name="informacionDadaPaciente" type="string">
+            <column name="informacion_dada_paciente" length="4000" />
+        </property>
+        <property name="descComplicacion" type="string">
+            <column name="desc_complicacion" length="4000" />
+        </property>
+        <property name="tratamiento" type="string">
+            <column name="tratamiento" length="4000" />
+        </property>
+        <property name="resultadosTratamiento" type="string">
+            <column name="resultados_tratamiento" length="4000" />
+        </property>
+        <property name="cambiosManejo" type="string">
+            <column name="cambios_manejo" length="4000" />
+        </property>
+        <property name="hallazgosImportantes" type="string">
+            <column name="hallazgos_importantes" length="4000" />
+        </property>
+        <property name="resultadoExamenesDiag" type="string">
+            <column name="resultado_examenes_diag" length="4000" />
+        </property>
+        <property name="pronostico" type="string">
+            <column name="pronostico" length="4000" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="ordenSalida" type="boolean">
+            <column name="orden_salida" not-null="true" />
+        </property>
+        <property name="tipoEvolucion" type="int">
+            <column name="tipo_evolucion" not-null="true" />
+        </property>
+        <property name="cobrable" type="boolean">
+            <column name="cobrable" not-null="true" />
+        </property>
+        <property name="datosMedico" type="string">
+            <column name="datos_medico" length="4000" />
+        </property>
+        <property name="conductaSeguir" type="java.lang.Integer">
+            <column name="conducta_seguir" />
+        </property>
+        <property name="tipoReferencia" type="string">
+            <column name="tipo_referencia" length="3" />
+        </property>
+        <property name="diasIncapacidad" type="java.lang.Integer">
+            <column name="dias_incapacidad" />
+        </property>
+        <property name="observacionesIncapacidad" type="string">
+            <column name="observaciones_incapacidad" length="256" />
+        </property>
+        <set name="evolucionCurvas" table="evolucion_curva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_evolucion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EvolucionCurva" />
+        </set>
+        <set name="evolDiagnosticoses" table="evol_diagnosticos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="evolucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EvolDiagnosticos" />
+        </set>
+        <set name="egresosesForEvolucion" table="egresos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="evolucion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+        <set name="egresosesForEvolucionGeneroMotivoRev" table="egresos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="evolucion_genero_motivo_rev" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+    </class>
+</hibernate-mapping>

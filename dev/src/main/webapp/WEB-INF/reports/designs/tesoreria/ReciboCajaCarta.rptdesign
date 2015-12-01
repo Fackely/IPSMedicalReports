@@ -1,0 +1,1492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="recibocaja" id="740">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="fechaemision" id="741">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="horaemision" id="742">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="caja" id="743">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="estado" id="744">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="recibidode" id="745">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="tipoid" id="746">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="nroid" id="747">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="observaciones" id="748">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="usuariogenero" id="749">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="totalletras" id="756">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="23">
+            <property name="odaDriverClass">oracle.jdbc.driver.OracleDriver</property>
+            <property name="odaURL">jdbc:oracle:thin:@172.19.84.42:1521:versatrunk</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="conceptosRC" id="560">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">consecutivoconceptorc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">codigoconceptorc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">descripcionconceptorc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tipoconceptorc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">valortipoconceptorc</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">docsoporteconceptorc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">valorconceptorc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">tipoidbenefeciario</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">numeroidbeneficiario</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">nombrebeneficiario</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">consecutivoconceptorc</property>
+                    <property name="nativeName">consecutivoconceptorc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">codigoconceptorc</property>
+                    <property name="nativeName">codigoconceptorc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">descripcionconceptorc</property>
+                    <property name="nativeName">descripcionconceptorc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tipoconceptorc</property>
+                    <property name="nativeName">tipoconceptorc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">valortipoconceptorc</property>
+                    <property name="nativeName">valortipoconceptorc</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">docsoporteconceptorc</property>
+                    <property name="nativeName">docsoporteconceptorc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">valorconceptorc</property>
+                    <property name="nativeName">valorconceptorc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">tipoidbenefeciario</property>
+                    <property name="nativeName">tipoidbenefeciario</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">numeroidbeneficiario</property>
+                    <property name="nativeName">numeroidbeneficiario</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">nombrebeneficiario</property>
+                    <property name="nativeName">nombrebeneficiario</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT  
+'' as "consecutivoconceptorc",
+'' as "codigoconceptorc",
+'' as "descripcionconceptorc", 
+'' as "tipoconceptorc",
+1.1 as "valortipoconceptorc", 
+'' as "docsoporteconceptorc",
+'' as "valorconceptorc", 
+'' as "tipoidbenefeciario", 
+'' as "numeroidbeneficiario", 
+'' as "nombrebeneficiario" 
+from detalle_conceptos_rc crc</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>CONSECUTIVOCONCEPTORC</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>38</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CONSECUTIVOCONCEPTORC</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CONSECUTIVOCONCEPTORC</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>CODIGOCONCEPTORC</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>6</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CODIGOCONCEPTORC</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CODIGOCONCEPTORC</design:label>
+            <design:formattingHints>
+              <design:displaySize>6</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>DESCRIPCIONCONCEPTORC</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>256</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>DESCRIPCIONCONCEPTORC</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>DESCRIPCIONCONCEPTORC</design:label>
+            <design:formattingHints>
+              <design:displaySize>256</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>TIPOCONCEPTORC</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>38</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>TIPOCONCEPTORC</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>TIPOCONCEPTORC</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>VALORTIPOCONCEPTORC</design:name>
+            <design:position>5</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>VALORTIPOCONCEPTORC</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>VALORTIPOCONCEPTORC</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>DOCSOPORTECONCEPTORC</design:name>
+            <design:position>6</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>30</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>DOCSOPORTECONCEPTORC</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>DOCSOPORTECONCEPTORC</design:label>
+            <design:formattingHints>
+              <design:displaySize>30</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>VALORCONCEPTORC</design:name>
+            <design:position>7</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>126</design:precision>
+            <design:scale>-127</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>VALORCONCEPTORC</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>VALORCONCEPTORC</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>TIPOIDBENEFECIARIO</design:name>
+            <design:position>8</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>TIPOIDBENEFECIARIO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>TIPOIDBENEFECIARIO</design:label>
+            <design:formattingHints>
+              <design:displaySize>2</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>NUMEROIDBENEFICIARIO</design:name>
+            <design:position>9</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>30</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>NUMEROIDBENEFICIARIO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>NUMEROIDBENEFICIARIO</design:label>
+            <design:formattingHints>
+              <design:displaySize>30</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>NOMBREBENEFICIARIO</design:name>
+            <design:position>10</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>64</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>NOMBREBENEFICIARIO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>NOMBREBENEFICIARIO</design:label>
+            <design:formattingHints>
+              <design:displaySize>64</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="pagosRC" id="609">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">valor</property>
+                    <property name="displayName">valor</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">DESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">valor</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">DESCRIPCION</property>
+                    <property name="nativeName">descripcion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">valor</property>
+                    <property name="nativeName">valor</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+'' as "descripcion",
+'' as "valor" 
+from detalle_pagos_rc dprc</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>DESCRIPCION</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>287</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>DESCRIPCION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>DESCRIPCION</design:label>
+            <design:formattingHints>
+              <design:displaySize>287</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>VALOR</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>126</design:precision>
+            <design:scale>-127</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>VALOR</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>VALOR</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">"Verdana"</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">0pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">0pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">0pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">0pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">0pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">0pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">0pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">0pt</property>
+        </style>
+        <style name="axiomaTitulo" id="226">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">small</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="axiomaTexto" id="227">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="textAlign">left</property>
+        </style>
+        <style name="axiomaLabelCelda" id="228">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+        </style>
+        <style name="axiomaInfoCelda" id="229">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="textAlign">left</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">us-letter</property>
+            <property name="orientation">portrait</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1cm</property>
+            <property name="headerHeight">0.6in</property>
+            <property name="footerHeight">0.5in</property>
+            <page-header>
+                <grid id="8">
+                    <property name="width">100%</property>
+                    <column id="9"/>
+                    <column id="10"/>
+                    <column id="11"/>
+                    <row id="12">
+                        <cell id="13"/>
+                        <cell id="14">
+                            <property name="style">axiomaTitulo</property>
+                        </cell>
+                        <cell id="15"/>
+                    </row>
+                    <row id="16">
+                        <cell id="17">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="style">axiomaTexto</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="481">
+                    <property name="height">0.5729166666666666in</property>
+                    <property name="width">10.114583333333334in</property>
+                    <column id="482">
+                        <property name="width">2.6875in</property>
+                    </column>
+                    <column id="483">
+                        <property name="width">1.4791666666666667in</property>
+                    </column>
+                    <column id="484"/>
+                    <row id="485">
+                        <property name="height">0.4791666666666667in</property>
+                        <cell id="486">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">x-small</property>
+                        </cell>
+                        <cell id="487">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">x-small</property>
+                        </cell>
+                        <cell id="488">
+                            <grid id="503">
+                                <property name="height">0.3958333333333333in</property>
+                                <property name="width">3.28125in</property>
+                                <column id="504">
+                                    <property name="width">2.1458333333333335in</property>
+                                </column>
+                                <column id="505">
+                                    <property name="width">0.4791666666666667in</property>
+                                </column>
+                                <column id="506">
+                                    <property name="width">0.21875in</property>
+                                </column>
+                                <column id="507">
+                                    <property name="width">0.5208333333333334in</property>
+                                </column>
+                                <row id="508">
+                                    <property name="height">0.3958333333333333in</property>
+                                    <cell id="509">
+                                        <label id="146">
+                                            <property name="style">axiomaTexto</property>
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontSize">x-small</property>
+                                            <property name="textAlign">right</property>
+                                            <text-property name="text">Página</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="510">
+                                        <auto-text id="188">
+                                            <property name="style">axiomaTexto</property>
+                                            <property name="fontSize">x-small</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="511">
+                                        <label id="147">
+                                            <property name="style">axiomaTexto</property>
+                                            <property name="fontSize">x-small</property>
+                                            <property name="textAlign">center</property>
+                                            <text-property name="text">de</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="512">
+                                        <auto-text id="213">
+                                            <property name="style">axiomaTexto</property>
+                                            <property name="fontSize">x-small</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="537">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">0pt</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">0pt</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">0pt</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">0pt</property>
+            <property name="width">100%</property>
+            <column id="538"/>
+            <column id="539"/>
+            <column id="540"/>
+            <row id="541">
+                <cell id="542">
+                    <text-data id="305">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="color">#000000</property>
+                        <property name="textAlign">left</property>
+                        <expression name="valueExpr">"RECIBO DE CAJA No: "+params["recibocaja"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+                <cell id="543">
+                    <text-data id="553">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="color">#000000</property>
+                        <property name="textAlign">left</property>
+                        <expression name="valueExpr">"Fecha de Emisión: "+params["fechaemision"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+                <cell id="544">
+                    <text-data id="554">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="color">#000000</property>
+                        <property name="textAlign">left</property>
+                        <expression name="valueExpr">"Hora Emisión: "+params["horaemision"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="545">
+                <cell id="546">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <text-data id="555">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="color">#000000</property>
+                        <property name="textAlign">left</property>
+                        <expression name="valueExpr">"Caja: "+params["caja"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+                <cell id="760">
+                    <text-data id="761">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">x-small</property>
+                        <property name="textAlign">left</property>
+                        <expression name="valueExpr">"Estado: "+params["estado"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="549">
+                <cell id="550">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <text-data id="557">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="color">#000000</property>
+                        <property name="textAlign">left</property>
+                        <expression name="valueExpr">"Recibido de: "+params["recibidode"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="762">
+                <cell id="763">
+                    <data id="793">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">x-small</property>
+                        <property name="textAlign">left</property>
+                        <property name="dataSet">conceptosRC</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">nombrebeneficiario</property>
+                                <property name="displayName">nombrebeneficiario</property>
+                                <expression name="expression">"Beneficiario: "+dataSetRow["nombrebeneficiario"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">nombrebeneficiario</property>
+                    </data>
+                </cell>
+                <cell id="764">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <data id="794">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="textAlign">left</property>
+                        <property name="dataSet">conceptosRC</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">tipoidbenefeciario</property>
+                                <property name="displayName">tipoidbenefeciario</property>
+                                <expression name="expression">"Identificación: "+dataSetRow["tipoidbenefeciario"]+dataSetRow["numeroidbeneficiario"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">tipoidbenefeciario</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <table id="561">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">0pt</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">0pt</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">0pt</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">0pt</property>
+            <property name="width">100%</property>
+            <property name="dataSet">conceptosRC</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">consecutivoconceptorc</property>
+                    <expression name="expression">dataSetRow["consecutivoconceptorc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigoconceptorc</property>
+                    <expression name="expression">dataSetRow["codigoconceptorc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">descripcionconceptorc</property>
+                    <expression name="expression">dataSetRow["descripcionconceptorc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tipoconceptorc</property>
+                    <expression name="expression">dataSetRow["tipoconceptorc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valortipoconceptorc</property>
+                    <expression name="expression">dataSetRow["valorconceptorc"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">docsoporteconceptorc</property>
+                    <expression name="expression">dataSetRow["docsoporteconceptorc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valorconceptorc</property>
+                    <expression name="expression">dataSetRow["valorconceptorc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tipoidbenefeciario</property>
+                    <expression name="expression">dataSetRow["tipoidbenefeciario"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">numeroidbeneficiario</property>
+                    <expression name="expression">dataSetRow["numeroidbeneficiario"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombrebeneficiario</property>
+                    <expression name="expression">dataSetRow["nombrebeneficiario"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>conceptosRC</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["valorconceptorc"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <column id="577"/>
+            <column id="578"/>
+            <column id="580"/>
+            <header>
+                <row id="562">
+                    <cell id="563">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">0pt</property>
+                    </cell>
+                    <cell id="564">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">0pt</property>
+                    </cell>
+                    <cell id="566">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">0pt</property>
+                    </cell>
+                </row>
+            </header>
+            <group id="581">
+                <property name="groupName">conceptosRC</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr">row["codigoconceptorc"]</expression>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="582">
+                        <cell id="583">
+                            <property name="backgroundColor">#FFFFFF</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">0pt</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">0pt</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">0pt</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="593">
+                                <property name="style">axiomaLabelCelda</property>
+                                <property name="fontSize">small</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">Concepto</text-property>
+                            </label>
+                        </cell>
+                        <cell id="584">
+                            <property name="backgroundColor">#FFFFFF</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">0pt</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">0pt</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">0pt</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="594">
+                                <property name="style">axiomaLabelCelda</property>
+                                <property name="fontSize">small</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">Doc</text-property>
+                            </label>
+                        </cell>
+                        <cell id="586">
+                            <property name="backgroundColor">#FFFFFF</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">0pt</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">0pt</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">0pt</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="596">
+                                <property name="style">axiomaLabelCelda</property>
+                                <property name="fontSize">small</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">Valor</text-property>
+                            </label>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="587">
+                        <cell id="588">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="backgroundColor">#FFFFFF</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">0pt</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">0pt</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">0pt</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">right</property>
+                            <label id="606">
+                                <property name="style">axiomaLabelCelda</property>
+                                <property name="fontSize">small</property>
+                                <property name="textAlign">right</property>
+                                <text-property name="text">TOTAL</text-property>
+                            </label>
+                        </cell>
+                        <cell id="591">
+                            <property name="style">axiomaTexto</property>
+                            <property name="fontSize">x-small</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">0pt</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">0pt</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">0pt</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">right</property>
+                            <data id="739">
+                                <structure name="numberFormat">
+                                    <property name="category">Custom</property>
+                                    <property name="pattern">###,##0.00</property>
+                                </structure>
+                                <property name="resultSetColumn">Aggregation</property>
+                            </data>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="567">
+                    <cell id="568">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="726">
+                            <property name="style">axiomaTexto</property>
+                            <property name="fontSize">x-small</property>
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">descripcionconceptorc</property>
+                        </data>
+                    </cell>
+                    <cell id="569">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="728">
+                            <property name="style">axiomaTexto</property>
+                            <property name="fontSize">x-small</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">docsoporteconceptorc</property>
+                        </data>
+                    </cell>
+                    <cell id="571">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="791">
+                            <property name="style">axiomaTexto</property>
+                            <property name="fontSize">x-small</property>
+                            <structure name="numberFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">###,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">valortipoconceptorc</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="572">
+                    <cell id="573"/>
+                    <cell id="574"/>
+                    <cell id="576"/>
+                </row>
+            </footer>
+        </table>
+        <table id="649">
+            <property name="height">1.1979166666666667in</property>
+            <property name="width">7.729166666666667in</property>
+            <property name="dataSet">pagosRC</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">DESCRIPCION</property>
+                    <expression name="expression">dataSetRow["DESCRIPCION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valor</property>
+                    <expression name="expression">dataSetRow["valor"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression">dataSetRow["DESCRIPCION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="789">
+                <property name="width">5.104166666666667in</property>
+            </column>
+            <column id="662">
+                <property name="width">1.5625in</property>
+            </column>
+            <column id="663">
+                <property name="width">1.0625in</property>
+            </column>
+            <header>
+                <row id="650">
+                    <cell id="784">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">0pt</property>
+                    </cell>
+                    <cell id="651">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">0pt</property>
+                    </cell>
+                    <cell id="652">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">0pt</property>
+                    </cell>
+                </row>
+            </header>
+            <group id="665">
+                <property name="groupName">grupoPagosRC</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr">row["DESCRIPCION"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue">row["DESCRIPCION"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="666">
+                        <cell id="785"/>
+                        <cell id="667"/>
+                        <cell id="668"/>
+                    </row>
+                </header>
+                <footer>
+                    <row id="670">
+                        <cell id="787"/>
+                        <cell id="671"/>
+                        <cell id="672"/>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="654">
+                    <cell id="786">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">0pt</property>
+                        <label id="679">
+                            <property name="style">axiomaTitulo</property>
+                            <property name="fontSize">small</property>
+                            <property name="textAlign">right</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr">row.__rownum>0</expression>
+                                </structure>
+                            </list-property>
+                            <text-property name="text">TIPO DE PAGO:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="655">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">0pt</property>
+                        <data id="734">
+                            <property name="style">axiomaTexto</property>
+                            <property name="fontSize">small</property>
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">DESCRIPCION</property>
+                        </data>
+                    </cell>
+                    <cell id="656">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">0pt</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">0pt</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">0pt</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">0pt</property>
+                        <data id="736">
+                            <property name="style">axiomaTexto</property>
+                            <structure name="numberFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">###,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">valor</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="658">
+                    <cell id="788"/>
+                    <cell id="659"/>
+                    <cell id="660"/>
+                </row>
+            </footer>
+        </table>
+        <grid id="692">
+            <property name="width">100%</property>
+            <column id="693"/>
+            <row id="754">
+                <cell id="755">
+                    <property name="textAlign">left</property>
+                    <text-data id="752">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">8pt</property>
+                        <property name="color">#000000</property>
+                        <property name="textAlign">left</property>
+                        <expression name="valueExpr">"Total a pagar: "+params["totalletras"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="757">
+                <cell id="758">
+                    <property name="textAlign">left</property>
+                    <label id="759">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">small</property>
+                        <property name="color">white</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Concepto</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="694">
+                <cell id="695">
+                    <property name="textAlign">left</property>
+                    <label id="702">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">small</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">OBSERVACIONES</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="696">
+                <cell id="697">
+                    <text-data id="703">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="color">#000000</property>
+                        <property name="textAlign">left</property>
+                        <expression name="valueExpr">params["observaciones"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="698">
+                <cell id="699">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">5</property>
+                    <label id="720">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">small</property>
+                        <property name="color">white</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Concepto</text-property>
+                    </label>
+                    <label id="721">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">small</property>
+                        <property name="color">white</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Concepto</text-property>
+                    </label>
+                    <label id="722">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">small</property>
+                        <property name="color">white</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Concepto</text-property>
+                    </label>
+                    <label id="723">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">small</property>
+                        <property name="color">white</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Concepto</text-property>
+                    </label>
+                    <label id="724">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">small</property>
+                        <property name="color">white</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Concepto</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="716"/>
+            <row id="700"/>
+            <row id="718"/>
+            <row id="708"/>
+            <row id="710">
+                <cell id="711">
+                    <label id="714">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="fontSize">small</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">_________________________________________</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="712">
+                <cell id="713">
+                    <text-data id="715">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="color">#000000</property>
+                        <property name="textAlign">left</property>
+                        <expression name="valueExpr">"Elaborado por: "+params["usuariogenero"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CobAgrupServicios" table="cob_agrup_servicios" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposServicio" class="com.servinte.axioma.orm.TiposServicio" fetch="select">
+            <column name="tipo_servicio" length="1" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <many-to-one name="detalleCobertura" class="com.servinte.axioma.orm.DetalleCobertura" fetch="select">
+            <column name="codigo_detalle_cob" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="gruposServicios" class="com.servinte.axioma.orm.GruposServicios" fetch="select">
+            <column name="grupo_servicio" />
+        </many-to-one>
+        <property name="pos" type="java.lang.Character">
+            <column name="pos" length="1" />
+        </property>
+        <property name="requiereAutorizacion" type="char">
+            <column name="requiere_autorizacion" length="1" not-null="true" />
+        </property>
+        <property name="semanasMinCotizacion" type="java.lang.Integer">
+            <column name="semanas_min_cotizacion" precision="5" scale="0" />
+        </property>
+        <property name="cantidadMaxCubXIngreso" type="java.lang.Long">
+            <column name="cantidad_max_cub_x_ingreso" precision="10" scale="0" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="possubsidiado" type="java.lang.Character">
+            <column name="possubsidiado" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

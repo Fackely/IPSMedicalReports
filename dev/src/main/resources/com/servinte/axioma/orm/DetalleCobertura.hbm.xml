@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetalleCobertura" table="detalle_cobertura" schema="facturacion">
+        <id name="codigoDetalleCob" type="long">
+            <column name="codigo_detalle_cob" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="naturalezaPacientes" class="com.servinte.axioma.orm.NaturalezaPacientes" fetch="select">
+            <column name="naturaleza_paciente" />
+        </many-to-one>
+        <many-to-one name="tiposPaciente" class="com.servinte.axioma.orm.TiposPaciente" fetch="select">
+            <column name="tipo_paciente" length="1" />
+        </many-to-one>
+        <many-to-one name="cobertura" class="com.servinte.axioma.orm.Cobertura" fetch="select">
+            <column name="codigo_cobertura" length="8" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" />
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="coberturaServicioses" inverse="true" lazy="true" table="cobertura_servicios" fetch="select">
+            <key>
+                <column name="codigo_detalle_cob" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturaServicios" />
+        </set>
+        <set name="coberturaProgramases" inverse="true" lazy="true" table="cobertura_programas" fetch="select">
+            <key>
+                <column name="codigo_detalle_cob" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturaProgramas" />
+        </set>
+        <set name="cobAgrupServicioses" inverse="true" lazy="true" table="cob_agrup_servicios" fetch="select">
+            <key>
+                <column name="codigo_detalle_cob" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CobAgrupServicios" />
+        </set>
+        <set name="coberturaArticuloses" inverse="true" lazy="true" table="cobertura_articulos" fetch="select">
+            <key>
+                <column name="codigo_detalle_cob" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturaArticulos" />
+        </set>
+        <set name="cobAgrupArticuloses" inverse="true" lazy="true" table="cob_agrup_articulos" fetch="select">
+            <key>
+                <column name="codigo_detalle_cob" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CobAgrupArticulos" />
+        </set>
+    </class>
+</hibernate-mapping>

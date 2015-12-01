@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetCancelAgenOdo" table="det_cancel_agen_odo" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="citasOdontologicas" class="com.servinte.axioma.orm.CitasOdontologicas" fetch="select">
+            <column name="cita_odontologica" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cancelacionAgendaOdo" class="com.servinte.axioma.orm.CancelacionAgendaOdo" fetch="select">
+            <column name="cancelacion_agenda" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="horaInicio" type="string">
+            <column name="hora_inicio" length="5" not-null="true" />
+        </property>
+        <property name="horaFin" type="string">
+            <column name="hora_fin" length="5" not-null="true" />
+        </property>
+        <property name="numeroSolicitud" type="java.lang.Integer">
+            <column name="numero_solicitud" />
+        </property>
+    </class>
+</hibernate-mapping>

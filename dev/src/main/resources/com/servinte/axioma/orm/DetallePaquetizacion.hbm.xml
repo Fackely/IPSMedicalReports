@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetallePaquetizacion" table="detalle_paquetizacion" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="serviciosByServicioCx" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio_cx" />
+        </many-to-one>
+        <many-to-one name="paquetizacion" class="com.servinte.axioma.orm.Paquetizacion" fetch="select">
+            <column name="codigo_paquetizacion" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="serviciosByServicio" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <property name="numeroSolicitud" type="int">
+            <column name="numero_solicitud" not-null="true" />
+        </property>
+        <property name="articulo" type="java.lang.Integer">
+            <column name="articulo" />
+        </property>
+        <property name="cantidad" type="java.lang.Integer">
+            <column name="cantidad" />
+        </property>
+        <property name="tipoAsocio" type="java.lang.Integer">
+            <column name="tipo_asocio" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="principal" type="char">
+            <column name="principal" length="1" not-null="true" />
+        </property>
+        <property name="detCxHonorarios" type="java.lang.Integer">
+            <column name="det_cx_honorarios" />
+        </property>
+        <property name="detAsocioCxSalasMat" type="java.lang.Integer">
+            <column name="det_asocio_cx_salas_mat" />
+        </property>
+    </class>
+</hibernate-mapping>

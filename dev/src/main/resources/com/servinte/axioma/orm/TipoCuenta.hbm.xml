@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TipoCuenta" table="tipo_cuenta" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="64" not-null="true" />
+        </property>
+        <property name="orden" type="java.lang.Integer">
+            <column name="orden" />
+        </property>
+        <set name="cuentaConvenios" inverse="true" lazy="true" table="cuenta_convenio" fetch="select">
+            <key>
+                <column name="cod_tipo_cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaConvenio" />
+        </set>
+        <set name="cuentaRegimens" inverse="true" lazy="true" table="cuenta_regimen" fetch="select">
+            <key>
+                <column name="cod_tipo_cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaRegimen" />
+        </set>
+    </class>
+</hibernate-mapping>

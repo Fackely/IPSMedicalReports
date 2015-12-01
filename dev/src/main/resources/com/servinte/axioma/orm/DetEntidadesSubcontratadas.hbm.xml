@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetEntidadesSubcontratadas" table="det_entidades_subcontratadas" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="codigo_ent_sub" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="fechaInicial" type="date">
+            <column name="fecha_inicial" length="13" not-null="true" />
+        </property>
+        <property name="fechaFinal" type="date">
+            <column name="fecha_final" length="13" not-null="true" />
+        </property>
+        <property name="esqTarServ" type="int">
+            <column name="esq_tar_serv" not-null="true" />
+        </property>
+        <property name="esqTarInv" type="int">
+            <column name="esq_tar_inv" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

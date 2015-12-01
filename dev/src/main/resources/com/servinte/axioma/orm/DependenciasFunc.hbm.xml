@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 5, 2010 2:20:32 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DependenciasFunc" table="dependencias_func" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.DependenciasFuncId">
+            <key-property name="funcionalidadPadre" type="int">
+                <column name="funcionalidad_padre" />
+            </key-property>
+            <key-property name="funcionalidadHija" type="int">
+                <column name="funcionalidad_hija" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="funcionalidadesByFuncionalidadHija" class="com.servinte.axioma.orm.Funcionalidades" update="false" insert="false" fetch="select">
+            <column name="funcionalidad_hija" not-null="true" />
+        </many-to-one>
+        <many-to-one name="funcionalidadesByFuncionalidadPadre" class="com.servinte.axioma.orm.Funcionalidades" update="false" insert="false" fetch="select">
+            <column name="funcionalidad_padre" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
+

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 9, 2010 9:43:38 AM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConceptosDeEgreso" table="conceptos_de_egreso" schema="tesoreria">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+            	<param name="sequence">tesoreria.seq_conceptos_de_egreso</param>
+    		</generator>
+        </id>
+        <many-to-one name="cuentasContables" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="6" not-null="true" unique="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="19" not-null="true" />
+        </property>
+        <property name="activo" type="char">
+            <column name="activo" length="10" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="concEgrXusuXcatencions" inverse="true" lazy="true" table="conc_egr_xusu_xcatencion" fetch="select">
+            <key>
+                <column name="concepto_de_egreso" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConcEgrXusuXcatencion" />
+        </set>
+    </class>
+</hibernate-mapping>

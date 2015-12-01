@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 25, 2011 12:28:23 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SubgrupoInventario" table="subgrupo_inventario" schema="inventarios">
+        <composite-id name="id" class="com.servinte.axioma.orm.SubgrupoInventarioId">
+            <key-property name="clase" type="int">
+                <column name="clase" />
+            </key-property>
+            <key-property name="grupo" type="int">
+                <column name="grupo" />
+            </key-property>
+            <key-property name="subgrupo" type="int">
+                <column name="subgrupo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="grupoInventario" class="com.servinte.axioma.orm.GrupoInventario" update="false" insert="false" fetch="select">
+            <column name="grupo" not-null="true" />
+            <column name="clase" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaInventario" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_inventario" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="rubroPresupuestal" class="com.servinte.axioma.orm.RubroPresupuestal" fetch="select">
+            <column name="rubro_presupuestal" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaCosto" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_costo" precision="10" scale="0" />
+        </many-to-one>
+        <property name="codigo" type="int">
+            <column name="codigo" not-null="true" unique="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="64" not-null="true" />
+        </property>
+        <set name="exCoberAgruArtEntSubs" inverse="true" lazy="true" table="ex_cober_agru_art_ent_sub" fetch="select">
+            <key>
+                <column name="subgrupo_inventario" />
+                <column name="grupo_inventario" />
+                <column name="clase_inventario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberAgruArtEntSub" />
+        </set>
+        <set name="agruArtIncluexcluCcs" inverse="true" lazy="true" table="agru_art_incluexclu_cc" fetch="select">
+            <key>
+                <column name="clase" />
+                <column name="grupo" />
+                <column name="subgrupo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtIncluexcluCc" />
+        </set>
+        <set name="agrupArtDescComConvconts" inverse="true" lazy="true" table="agrup_art_desc_com_convcont" fetch="select">
+            <key>
+                <column name="clase" />
+                <column name="grupo" />
+                <column name="subgrupo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupArtDescComConvcont" />
+        </set>
+        <set name="cobAgrupArticuloses" inverse="true" lazy="true" table="cob_agrup_articulos" fetch="select">
+            <key>
+                <column name="clase" />
+                <column name="grupo" />
+                <column name="subgrupo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CobAgrupArticulos" />
+        </set>
+        <set name="agruArtIncluexcluEconts" inverse="true" lazy="true" table="agru_art_incluexclu_econt" fetch="select">
+            <key>
+                <column name="clase" />
+                <column name="grupo" />
+                <column name="subgrupo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtIncluexcluEcont" />
+        </set>
+        <set name="paqAgrupacionArticuloses" inverse="true" lazy="true" table="paq_agrupacion_articulos" fetch="select">
+            <key>
+                <column name="clase" />
+                <column name="grupo" />
+                <column name="subgrupo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaqAgrupacionArticulos" />
+        </set>
+        <set name="agrupArtExepCobConvxconts" inverse="true" lazy="true" table="agrup_art_exep_cob_convxcont" fetch="select">
+            <key>
+                <column name="clase" />
+                <column name="grupo" />
+                <column name="subgrupo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupArtExepCobConvxcont" />
+        </set>
+        <set name="agruArtExceTariConts" inverse="true" lazy="true" table="agru_art_exce_tari_cont" fetch="select">
+            <key>
+                <column name="clase" />
+                <column name="grupo" />
+                <column name="subgrupo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtExceTariCont" />
+        </set>
+    </class>
+</hibernate-mapping>

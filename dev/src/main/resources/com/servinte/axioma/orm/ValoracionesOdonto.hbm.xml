@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ValoracionesOdonto" table="valoraciones_odonto" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="citasOdontologicas" class="com.servinte.axioma.orm.CitasOdontologicas" fetch="select">
+            <column name="cita" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposDiagnostico" class="com.servinte.axioma.orm.TiposDiagnostico" fetch="select">
+            <column name="tipo_diagnostico" />
+        </many-to-one>
+        <property name="fechaConsulta" type="date">
+            <column name="fecha_consulta" length="13" />
+        </property>
+        <property name="horaConsulta" type="string">
+            <column name="hora_consulta" length="5" />
+        </property>
+        <property name="edadPaciente" type="string">
+            <column name="edad_paciente" length="256" not-null="true" />
+        </property>
+        <property name="motivoConsulta" type="string">
+            <column name="motivo_consulta" length="4000" />
+        </property>
+        <property name="enfermedadActual" type="string">
+            <column name="enfermedad_actual" length="4000" />
+        </property>
+        <property name="causaExterna" type="java.lang.Integer">
+            <column name="causa_externa" />
+        </property>
+        <property name="finalidadConsulta" type="string">
+            <column name="finalidad_consulta" length="2" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="logPlanTratamientos" inverse="true" lazy="true" table="log_plan_tratamiento" fetch="select">
+            <key>
+                <column name="valoracion" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPlanTratamiento" />
+        </set>
+        <set name="hisConfProgServPlanTs" inverse="true" lazy="true" table="his_conf_prog_serv_plan_t" fetch="select">
+            <key>
+                <column name="valoracion" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfProgServPlanT" />
+        </set>
+        <set name="valDiagnosticosOdos" inverse="true" lazy="true" table="val_diagnosticos_odo" fetch="select">
+            <key>
+                <column name="valoracion_odo" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValDiagnosticosOdo" />
+        </set>
+        <set name="logDetPlanTratamientos" inverse="true" lazy="true" table="log_det_plan_tratamiento" fetch="select">
+            <key>
+                <column name="valoracion" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetPlanTratamiento" />
+        </set>
+        <set name="hisConfDetPlanTs" inverse="true" lazy="true" table="his_conf_det_plan_t" fetch="select">
+            <key>
+                <column name="valoracion" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfDetPlanT" />
+        </set>
+        <set name="logProgramasServiciosPlanTs" inverse="true" lazy="true" table="log_programas_servicios_plan_t" fetch="select">
+            <key>
+                <column name="valoracion" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogProgramasServiciosPlanT" />
+        </set>
+        <set name="hisConfPlanTratamientos" inverse="true" lazy="true" table="his_conf_plan_tratamiento" fetch="select">
+            <key>
+                <column name="valoracion" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfPlanTratamiento" />
+        </set>
+    </class>
+</hibernate-mapping>

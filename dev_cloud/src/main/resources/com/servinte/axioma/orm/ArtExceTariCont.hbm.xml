@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ArtExceTariCont" table="art_exce_tari_cont" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="excepTarifasContrato" class="com.servinte.axioma.orm.ExcepTarifasContrato" fetch="select">
+            <column name="codigo_excepcion" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="codigoArticulo" type="int">
+            <column name="codigo_articulo" not-null="true" />
+        </property>
+        <property name="valorAjuste" type="big_decimal">
+            <column name="valor_ajuste" precision="12" />
+        </property>
+        <property name="baseExcepcion" type="string">
+            <column name="base_excepcion" length="6" />
+        </property>
+        <property name="nuevaTarifa" type="big_decimal">
+            <column name="nueva_tarifa" precision="12" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="fechaVigencia" type="date">
+            <column name="fecha_vigencia" length="13" not-null="true" />
+        </property>
+        <property name="valorBase" type="big_decimal">
+            <column name="valor_base" precision="12" />
+        </property>
+        <set name="porcentajeArtExces" inverse="true" lazy="true" table="porcentaje_art_exce" fetch="select">
+            <key>
+                <column name="art_exce_tari_cont" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PorcentajeArtExce" />
+        </set>
+    </class>
+</hibernate-mapping>

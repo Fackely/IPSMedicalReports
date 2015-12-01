@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/06/2011 12:41:12 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EntidadesSubcontratadas" table="entidades_subcontratadas" schema="facturacion">
+        <comment>Se almacenan las entidades subcontratadas manejadas en la instituci&#243;n. Se crea el registro de entidad subcontratada Otra para poder ingresar autorizaciones
+        de entidad subcontratada cuando dicha entidad no se encuentra a&#250;n registrada en el sistema</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="tercero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_cub" />
+        </many-to-one>
+        <many-to-one name="cuentasContables" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_cxp" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="6" not-null="true" />
+        </property>
+        <property name="razonSocial" type="string">
+            <column name="razon_social" length="128" not-null="true" />
+        </property>
+        <property name="codigoMinsalud" type="string">
+            <column name="codigo_minsalud" length="12" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="256" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="64" />
+        </property>
+        <property name="personaContactar" type="string">
+            <column name="persona_contactar" length="256" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" />
+        </property>
+        <property name="diasVencimientoFactura" type="java.lang.Integer">
+            <column name="dias_vencimiento_factura" />
+        </property>
+        <property name="permiteEstanciaPacientes" type="string">
+            <column name="permite_estancia_pacientes" length="1" />
+        </property>
+        <set name="solicitudesMedicamentoses" table="solicitudes_medicamentos" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesMedicamentos" />
+        </set>
+        <set name="ingresosEstancias" table="ingresos_estancia" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IngresosEstancia" />
+        </set>
+        <set name="viaIngresoEntSubs" table="via_ingreso_ent_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" not-null="true">
+                    <comment>Entidad Subcontratada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ViaIngresoEntSub" />
+        </set>
+        <set name="usuariosEntidadSubs" table="usuarios_entidad_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuariosEntidadSub" />
+        </set>
+        <set name="contratosEntidadesSubs" table="contratos_entidades_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ContratosEntidadesSub" />
+        </set>
+        <set name="logRipsEntidadesSubs" table="log_rips_entidades_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogRipsEntidadesSub" />
+        </set>
+        <set name="tarifasEntidadSubs" table="tarifas_entidad_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasEntidadSub" />
+        </set>
+        <set name="pacEntidadesSubcontratadases" table="pac_entidades_subcontratadas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PacEntidadesSubcontratadas" />
+        </set>
+        <set name="centroAtencions" table="centro_atencion" schema="administracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentroAtencion" />
+        </set>
+        <set name="logCentrosCostoEntSubs" table="log_centros_costo_ent_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCentrosCostoEntSub" />
+        </set>
+        <set name="facturases" table="facturas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Facturas" />
+        </set>
+        <set name="logLecturaPlanosEnts" table="log_lectura_planos_ent" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogLecturaPlanosEnt" />
+        </set>
+        <set name="autorizacionesEntidadesSubs" table="autorizaciones_entidades_sub" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_autorizada_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" />
+        </set>
+        <set name="detEntidadesSubcontratadases" table="det_entidades_subcontratadas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ent_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetEntidadesSubcontratadas" />
+        </set>
+        <set name="centrosCostoEntidadesSubs" table="centros_costo_entidades_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentrosCostoEntidadesSub" />
+        </set>
+        <set name="estanciaViaIngCentroCostos" table="estancia_via_ing_centro_costo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" not-null="true">
+                    <comment>Hace relaci&#243;n a la tabla facturacion.entidades_subcontratadas</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EstanciaViaIngCentroCosto" />
+        </set>
+        <set name="pedidos" table="pedido" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entidad_subcontratada" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Pedido" />
+        </set>
+    </class>
+</hibernate-mapping>

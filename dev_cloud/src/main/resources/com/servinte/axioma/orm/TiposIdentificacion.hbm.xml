@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 6, 2010 8:46:07 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposIdentificacion" table="tipos_identificacion" schema="administracion">
+        <id name="acronimo" type="string">
+            <column name="acronimo" length="3" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="60" not-null="true" />
+        </property>
+        <property name="codInterfaz" type="string">
+            <column name="cod_interfaz" length="2" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="5" />
+        </property>
+        <property name="soloNumeros" type="java.lang.Character">
+            <column name="solo_numeros" length="1" />
+        </property>
+        <set name="deudoreses" inverse="true" lazy="true" table="deudores" fetch="select">
+            <key>
+                <column name="tipo_identificacion" length="3" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Deudores" />
+        </set>
+        <set name="pacientesConvOdos" inverse="true" lazy="true" table="pacientes_conv_odo" fetch="select">
+            <key>
+                <column name="tipo_identificacion" length="3" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PacientesConvOdo" />
+        </set>
+        <set name="logAutorizacionIngEvens" inverse="true" lazy="true" table="log_autorizacion_ing_even" fetch="select">
+            <key>
+                <column name="tipo_identificacion" length="3" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogAutorizacionIngEven" />
+        </set>
+        <set name="registroAccidentesTransitosForTipoIdTransporta" inverse="true" lazy="true" table="registro_accidentes_transito" fetch="select">
+            <key>
+                <column name="tipo_id_transporta" length="3" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="registroAccidentesTransitosForTipoIdConductor" inverse="true" lazy="true" table="registro_accidentes_transito" fetch="select">
+            <key>
+                <column name="tipo_id_conductor" length="3" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="registroAccidentesTransitosForTipoIdDeclarante" inverse="true" lazy="true" table="registro_accidentes_transito" fetch="select">
+            <key>
+                <column name="tipo_id_declarante" length="3" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="titularPolizas" inverse="true" lazy="true" table="titular_poliza" fetch="select">
+            <key>
+                <column name="tipoid_titular" length="3" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TitularPoliza" />
+        </set>
+        <set name="personases" inverse="true" lazy="true" table="personas" fetch="select">
+            <key>
+                <column name="tipo_identificacion" length="3" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Personas" />
+        </set>
+        <set name="informeInconsistenciases" inverse="true" lazy="true" table="informe_inconsistencias" fetch="select">
+            <key>
+                <column name="tipo_identificacion" length="3" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeInconsistencias" />
+        </set>
+        <set name="responsablesPacienteses" inverse="true" lazy="true" table="responsables_pacientes" fetch="select">
+            <key>
+                <column name="tipo_identificacion" length="3" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ResponsablesPacientes" />
+        </set>
+        <set name="registroAccidentesTransitosForTipoIdProp" inverse="true" lazy="true" table="registro_accidentes_transito" fetch="select">
+            <key>
+                <column name="tipo_id_prop" length="3" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="tiposIdInstitucions" inverse="true" lazy="true" table="tipos_id_institucion" fetch="select">
+            <key>
+                <column name="acronimo" length="3" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposIdInstitucion" />
+        </set>
+        <set name="registroEventoCatastroficos" inverse="true" lazy="true" table="registro_evento_catastrofico" fetch="select">
+            <key>
+                <column name="tipo_id_transporta" length="3" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEventoCatastrofico" />
+        </set>
+        <set name="institucioneses" inverse="true" lazy="true" table="instituciones" fetch="select">
+            <key>
+                <column name="tipo_identificacion" length="3" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Instituciones" />
+        </set>
+        <set name="detalleConceptosRcs" inverse="true" lazy="true" table="detalle_conceptos_rc" fetch="select">
+            <key>
+                <column name="tipo_id_beneficiario" length="3" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleConceptosRc" />
+        </set>
+        <set name="empresasInstitucions" inverse="true" lazy="true" table="empresas_institucion" fetch="select">
+            <key>
+                <column name="tipo_identificacion" length="3" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EmpresasInstitucion" />
+        </set>
+    </class>
+</hibernate-mapping>

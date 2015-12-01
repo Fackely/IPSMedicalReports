@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 17, 2010 5:12:41 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.InicioAtencionCita" table="inicio_atencion_cita" schema="odontologia">
+        <id name="codigoCita" type="long">
+            <column name="codigo_cita" precision="12" scale="0" />
+            <generator class="foreign">
+                <param name="property">citasOdontologicas</param>
+            </generator>
+        </id>
+        <one-to-one name="citasOdontologicas" class="com.servinte.axioma.orm.CitasOdontologicas" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modificacion" length="30" not-null="true" />
+        </many-to-one>
+        <property name="horaInicio" type="string">
+            <column name="hora_inicio" length="5" not-null="true" />
+        </property>
+        <property name="fechaInicio" type="date">
+            <column name="fecha_inicio" length="13" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="fecha_modificacion" length="13" not-null="true" />
+        </property>
+        <property name="horaModificacion" type="string">
+            <column name="hora_modificacion" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

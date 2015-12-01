@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 14, 2010 2:25:22 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolicitudesSubcuenta" table="solicitudes_subcuenta" schema="ordenes">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="serviciosByServicioCx" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio_cx" />
+        </many-to-one>
+        <many-to-one name="solicitudesSubcuenta" class="com.servinte.axioma.orm.SolicitudesSubcuenta" fetch="select">
+            <column name="sol_subcuenta_padre" />
+        </many-to-one>
+        <many-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" fetch="select">
+            <column name="sub_cuenta" />
+        </many-to-one>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="solicitud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="serviciosByServicio" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="articulo" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="articulo" />
+        </many-to-one>
+        <property name="porcentaje" type="big_decimal">
+            <column name="porcentaje" precision="5" />
+        </property>
+        <property name="cantidad" type="big_decimal">
+            <column name="cantidad" precision="131089" scale="0" />
+        </property>
+        <property name="monto" type="java.lang.Double">
+            <column name="monto" precision="17" scale="17" />
+        </property>
+        <property name="cubierto" type="char">
+            <column name="cubierto" length="1" not-null="true" />
+        </property>
+        <property name="cuenta" type="java.lang.Integer">
+            <column name="cuenta" />
+        </property>
+        <property name="tipoSolicitud" type="int">
+            <column name="tipo_solicitud" not-null="true" />
+        </property>
+        <property name="paquetizada" type="char">
+            <column name="paquetizada" length="1" not-null="true" />
+        </property>
+        <property name="tipoAsocio" type="java.lang.Integer">
+            <column name="tipo_asocio" />
+        </property>
+        <property name="tipoDistribucion" type="string">
+            <column name="tipo_distribucion" length="4" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="facturado" type="char">
+            <column name="facturado" length="1" not-null="true" />
+        </property>
+        <property name="eliminado" type="char">
+            <column name="eliminado" length="1" not-null="true" />
+        </property>
+        <property name="actualizado" type="java.lang.Boolean">
+            <column name="actualizado" />
+        </property>
+        <property name="detCxHonorarios" type="java.lang.Integer">
+            <column name="det_cx_honorarios" />
+        </property>
+        <property name="detAsocioCxSalasMat" type="java.lang.Integer">
+            <column name="det_asocio_cx_salas_mat" />
+        </property>
+        <set name="detCargoses" inverse="true" lazy="true" table="det_cargos" fetch="select">
+            <key>
+                <column name="cod_sol_subcuenta" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+        <set name="solicitudesSubcuentas" inverse="true" lazy="true" table="solicitudes_subcuenta" fetch="select">
+            <key>
+                <column name="sol_subcuenta_padre" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesSubcuenta" />
+        </set>
+    </class>
+</hibernate-mapping>

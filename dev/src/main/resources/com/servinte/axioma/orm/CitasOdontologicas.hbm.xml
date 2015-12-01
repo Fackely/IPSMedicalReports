@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 29, 2010 4:55:48 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CitasOdontologicas" table="citas_odontologicas" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="agendaOdontologica" class="com.servinte.axioma.orm.AgendaOdontologica" fetch="select">
+            <column name="agenda" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioReserva" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_reserva" length="30" />
+        </many-to-one>
+        <many-to-one name="evolucionesOdo" class="com.servinte.axioma.orm.EvolucionesOdo" fetch="select">
+            <column name="evo_genera_prox_cita" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="motivosCita" class="com.servinte.axioma.orm.MotivosCita" fetch="select">
+            <column name="motivo_no_confirmacion" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioConfirmacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_confirmacion" length="30" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioConfirma" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_confirma" length="30" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioRegistra" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="4" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="6" />
+        </property>
+        <property name="duracion" type="java.lang.Integer">
+            <column name="duracion" />
+        </property>
+        <property name="horaInicio" type="string">
+            <column name="hora_inicio" length="5" />
+        </property>
+        <property name="horaFin" type="string">
+            <column name="hora_fin" length="5" />
+        </property>
+        <property name="fechaReserva" type="date">
+            <column name="fecha_reserva" length="13" />
+        </property>
+        <property name="horaReserva" type="string">
+            <column name="hora_reserva" length="5" />
+        </property>
+        <property name="motivoCancelacion" type="java.lang.Integer">
+            <column name="motivo_cancelacion" />
+        </property>
+        <property name="porConfirmar" type="string">
+            <column name="por_confirmar" length="1" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="motivoNoAtencion" type="string">
+            <column name="motivo_no_atencion" length="256" />
+        </property>
+        <property name="fechaRegistra" type="date">
+            <column name="fecha_registra" length="13" />
+        </property>
+        <property name="horaRegistra" type="string">
+            <column name="hora_registra" length="5" />
+        </property>
+        <property name="fechaConfirma" type="date">
+            <column name="fecha_confirma" length="13" />
+        </property>
+        <property name="horaConfirma" type="string">
+            <column name="hora_confirma" length="5" />
+        </property>
+        <property name="fechaProgramacion" type="date">
+            <column name="fecha_programacion" length="13" />
+        </property>
+        <property name="confirmacion" type="string">
+            <column name="confirmacion" length="1" />
+        </property>
+        <property name="observacionesConfirmacion" type="string">
+            <column name="observaciones_confirmacion" length="128" />
+        </property>
+        <property name="fechaConfirmacion" type="date">
+            <column name="fecha_confirmacion" length="13" />
+        </property>
+        <property name="horaConfirmacion" type="string">
+            <column name="hora_confirmacion" length="5" />
+        </property>
+        <property name="migrado" type="java.lang.Character">
+            <column name="migrado" length="1" />
+        </property>
+        <property name="indicativoCambioEstado" type="string">
+            <column name="indicativo_cambio_estado" length="4" />
+        </property>
+        <set name="hisConfProgServPlanTs" inverse="true" lazy="true" table="his_conf_prog_serv_plan_t" fetch="select">
+            <key>
+                <column name="cita" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfProgServPlanT" />
+        </set>
+        <set name="hisConfPlanTratamientos" inverse="true" lazy="true" table="his_conf_plan_tratamiento" fetch="select">
+            <key>
+                <column name="cita" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfPlanTratamiento" />
+        </set>
+        <set name="citasAsociadasAProgramadasForCitaAsociada" inverse="true" lazy="true" table="citas_asociadas_a_programada" fetch="select">
+            <key>
+                <column name="cita_asociada" precision="12" scale="0" not-null="true">
+                    <comment>Cita que se gener&#195;&#179; a partir de la programada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CitasAsociadasAProgramada" />
+        </set>
+        <set name="logDetPlanTratamientos" inverse="true" lazy="true" table="log_det_plan_tratamiento" fetch="select" cascade="delete">
+            <key>
+                <column name="cita" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetPlanTratamiento" />
+        </set>
+        <set name="hisConfDetPlanTs" inverse="true" lazy="true" table="his_conf_det_plan_t" fetch="select">
+            <key>
+                <column name="cita" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfDetPlanT" />
+        </set>
+        <set name="serviciosCitaOdontologicas" inverse="true" lazy="true" table="servicios_cita_odontologica" fetch="select" cascade="all">
+            <key>
+                <column name="cita_odontologica" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosCitaOdontologica" />
+        </set>
+        <set name="citasAsociadasAProgramadasForCitaProgramada" inverse="true" lazy="true" table="citas_asociadas_a_programada" fetch="select">
+            <key>
+                <column name="cita_programada" precision="12" scale="0" not-null="true">
+                    <comment>Cita programada originalmente, ya sea por el m&#195;&#169;dico o desde el presupuesto</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CitasAsociadasAProgramada" />
+        </set>
+        <set name="logCitasOdontologicases" inverse="true" lazy="true" table="log_citas_odontologicas" fetch="select" cascade="delete">
+            <key>
+                <column name="cita_odontologica" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCitasOdontologicas" />
+        </set>
+        <set name="valoracionesOdontos" inverse="true" lazy="true" table="valoraciones_odonto" fetch="select">
+            <key>
+                <column name="cita" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValoracionesOdonto" />
+        </set>
+        <one-to-one name="inicioAtencionCita" class="com.servinte.axioma.orm.InicioAtencionCita"></one-to-one>
+        <set name="evolucionesOdos" inverse="true" lazy="true" table="evoluciones_odo" fetch="select">
+            <key>
+                <column name="cita" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EvolucionesOdo" />
+        </set>
+        <set name="solicitudCambioServicios" inverse="true" lazy="true" table="solicitud_cambio_servicio" fetch="select">
+            <key>
+                <column name="codigo_cita" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudCambioServicio" />
+        </set>
+        <set name="logProgramasServiciosPlanTs" inverse="true" lazy="true" table="log_programas_servicios_plan_t" fetch="select" cascade="delete">
+            <key>
+                <column name="cita" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogProgramasServiciosPlanT" />
+        </set>
+        <set name="detPlanTratamientos" inverse="true" lazy="true" table="det_plan_tratamiento" fetch="select">
+            <key>
+                <column name="cita" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetPlanTratamiento" />
+        </set>
+        <set name="programasServiciosPlanTs" inverse="true" lazy="true" table="programas_servicios_plan_t" fetch="select">
+            <key>
+                <column name="cita" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgramasServiciosPlanT" />
+        </set>
+        <set name="planTratamientos" inverse="true" lazy="true" table="plan_tratamiento" fetch="select">
+            <key>
+                <column name="cita" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PlanTratamiento" />
+        </set>
+        <set name="detCancelAgenOdos" inverse="true" lazy="true" table="det_cancel_agen_odo" fetch="select">
+            <key>
+                <column name="cita_odontologica" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCancelAgenOdo" />
+        </set>
+        <set name="logPlanTratamientos" inverse="true" lazy="true" table="log_plan_tratamiento" fetch="select">
+            <key>
+                <column name="cita" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPlanTratamiento" />
+        </set>
+        <set name="logProcAutoCitases" inverse="true" lazy="true" table="log_proc_auto_citas" fetch="select">
+            <key>
+                <column name="cita_odontologica" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogProcAutoCitas" />
+        </set>
+    </class>
+</hibernate-mapping>

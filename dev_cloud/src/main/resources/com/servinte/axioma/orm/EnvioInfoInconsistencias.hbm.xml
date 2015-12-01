@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EnvioInfoInconsistencias" table="envio_info_inconsistencias" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio_envio" />
+        </many-to-one>
+        <many-to-one name="informeInconsistencias" class="com.servinte.axioma.orm.InformeInconsistencias" fetch="select">
+            <column name="informe_inconsist" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_envio" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresas" class="com.servinte.axioma.orm.Empresas" fetch="select">
+            <column name="empresa_envio" />
+        </many-to-one>
+        <property name="fechaEnvio" type="date">
+            <column name="fecha_envio" length="13" not-null="true" />
+        </property>
+        <property name="horaEnvio" type="string">
+            <column name="hora_envio" length="5" not-null="true" />
+        </property>
+        <property name="medioEnvio" type="string">
+            <column name="medio_envio" length="4" not-null="true" />
+        </property>
+        <property name="pathArchivo" type="string">
+            <column name="path_archivo" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

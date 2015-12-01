@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 12, 2011 9:11:29 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Programas" table="programas" schema="odontologia">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convencionesOdontologicas" class="com.servinte.axioma.orm.ConvencionesOdontologicas" fetch="select">
+            <column name="convencion" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="128" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="codigoPrograma" type="string">
+            <column name="codigo_programa" length="4" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <set name="progServAnterioresCitas" inverse="true" lazy="true" table="prog_serv_anteriores_cita" fetch="select">
+            <key>
+                <column name="programa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgServAnterioresCita" />
+        </set>
+        <set name="presuOdoConvDetServProgs" inverse="true" lazy="true" table="presu_odo_conv_det_serv_prog" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuOdoConvDetServProg" />
+        </set>
+        <set name="detHallProgSers" inverse="true" lazy="true" table="det_hall_prog_ser" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetHallProgSer" />
+        </set>
+        <set name="progPaqueteOdontos" inverse="true" lazy="true" table="prog_paquete_odonto" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgPaqueteOdonto" />
+        </set>
+        <set name="programasServiciosPlanTs" inverse="true" lazy="true" table="programas_servicios_plan_t" fetch="select">
+            <key>
+                <column name="programa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgramasServiciosPlanT" />
+        </set>
+        <set name="presuPlanTtoNumSupers" inverse="true" lazy="true" table="presu_plan_tto_num_super" fetch="select">
+            <key>
+                <column name="programa" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuPlanTtoNumSuper" />
+        </set>
+        <set name="proExeCobConvxconts" inverse="true" lazy="true" table="pro_exe_cob_convxcont" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProExeCobConvxcont" />
+        </set>
+        <set name="programasHallazgoPiezas" inverse="true" lazy="true" table="programas_hallazgo_pieza" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" not-null="true">
+                    <comment>Programa Odontol&#195;&#179;gico que aplica para una o varias superficies</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgramasHallazgoPieza" />
+        </set>
+        <set name="progServNuevosCitas" inverse="true" lazy="true" table="prog_serv_nuevos_cita" fetch="select">
+            <key>
+                <column name="programa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgServNuevosCita" />
+        </set>
+        <set name="progDescComConvxconts" inverse="true" lazy="true" table="prog_desc_com_convxcont" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgDescComConvxcont" />
+        </set>
+        <set name="presuPlanTtoProgSers" inverse="true" lazy="true" table="presu_plan_tto_prog_ser" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuPlanTtoProgSer" />
+        </set>
+        <set name="recomSerproSerpros" inverse="true" lazy="true" table="recom_serpro_serpro" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RecomSerproSerpro" />
+        </set>
+        <set name="exclusionesPresupuestos" inverse="true" lazy="true" table="exclusiones_presupuesto" fetch="select">
+            <key>
+                <column name="programa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExclusionesPresupuesto" />
+        </set>
+        <set name="detFacturaSolicituds" inverse="true" lazy="true" table="det_factura_solicitud" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFacturaSolicitud" />
+        </set>
+        <set name="logProgramasServiciosPlanTs" inverse="true" lazy="true" table="log_programas_servicios_plan_t" fetch="select">
+            <key>
+                <column name="programa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogProgramasServiciosPlanT" />
+        </set>
+        <set name="logDetPromocionesOdos" inverse="true" lazy="true" table="log_det_promociones_odo" fetch="select">
+            <key>
+                <column name="programa_odontologico" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetPromocionesOdo" />
+        </set>
+        <set name="coberturaProgramases" inverse="true" lazy="true" table="cobertura_programas" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturaProgramas" />
+        </set>
+        <set name="presupuestoOdoProgServs" inverse="true" lazy="true" table="presupuesto_odo_prog_serv" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoOdoProgServ" />
+        </set>
+        <set name="emisionBonosDescs" inverse="true" lazy="true" table="emision_bonos_desc" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EmisionBonosDesc" />
+        </set>
+        <set name="detCargoses" inverse="true" lazy="true" table="det_cargos" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+        <set name="incluProgramaConvenios" inverse="true" lazy="true" table="inclu_programa_convenio" fetch="select">
+            <key>
+                <column name="programa" precision="12" scale="0" not-null="true">
+                    <comment>Programa seleccionado por el usuario</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluProgramaConvenio" />
+        </set>
+        <set name="detalleProgramases" inverse="true" lazy="true" table="detalle_programas" fetch="select">
+            <key>
+                <column name="programas" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleProgramas" />
+        </set>
+        <set name="hisConfProgServPlanTs" inverse="true" lazy="true" table="his_conf_prog_serv_plan_t" fetch="select">
+            <key>
+                <column name="programa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfProgServPlanT" />
+        </set>
+        <set name="detPromocionesOdos" inverse="true" lazy="true" table="det_promociones_odo" fetch="select">
+            <key>
+                <column name="programa_odontologico" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetPromocionesOdo" />
+        </set>
+    </class>
+</hibernate-mapping>

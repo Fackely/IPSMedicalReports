@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CamposPerfilNed" table="campos_perfil_ned" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="perfilNed" class="com.servinte.axioma.orm.PerfilNed" fetch="select">
+            <column name="perfil_ned" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="escalaCampoSeccion" type="long">
+            <column name="escala_campo_seccion" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="512" />
+        </property>
+        <property name="valor" type="java.lang.Long">
+            <column name="valor" precision="12" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

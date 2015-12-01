@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ReliquidacionTarifas" table="reliquidacion_tarifas" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="esquemasTarifariosByEsqTarArtNuevo" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esq_tar_art_nuevo" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifariosByEsqTarServOriginal" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esq_tar_serv_original" not-null="true" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifariosByEsqTarServNuevo" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esq_tar_serv_nuevo" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifariosByEsqTarArtOriginal" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esq_tar_art_original" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_generacion" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fechaGeneracion" type="date">
+            <column name="fecha_generacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGeneracion" type="string">
+            <column name="hora_generacion" length="5" not-null="true" />
+        </property>
+        <property name="resultadoExitoso" type="string">
+            <column name="resultado_exitoso" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

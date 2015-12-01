@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 30, 2010 11:44:22 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ResultadoLaboratorioRegenf" table="resultado_laboratorio_regenf" schema="manejopaciente">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="paramResultadosLab" class="com.servinte.axioma.orm.ParamResultadosLab" fetch="select">
+            <column name="codigo_campo" precision="5" scale="0" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" />
+        </many-to-one>
+        <property name="codigoHistoEnca" type="int">
+            <column name="codigo_histo_enca" not-null="true" />
+        </property>
+        <property name="etiquietaCampo" type="string">
+            <column name="etiquieta_campo" length="30" not-null="true" />
+        </property>
+        <property name="orden" type="int">
+            <column name="orden" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="valor" type="string">
+            <column name="valor" length="512" />
+        </property>
+        <property name="campoOtro" type="string">
+            <column name="campo_otro" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

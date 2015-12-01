@@ -1,0 +1,428 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/07/2011 03:06:44 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CentrosCosto" table="centros_costo" schema="administracion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposArea" class="com.servinte.axioma.orm.TiposArea" fetch="select">
+            <column name="tipo_area" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="unidadesFuncionales" class="com.servinte.axioma.orm.UnidadesFuncionales" update="false" insert="false" fetch="select">
+            <column name="unidad_funcional" length="16" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="esActivo" type="java.lang.Boolean">
+            <column name="es_activo" />
+        </property>
+        <property name="identificador" type="string">
+            <column name="identificador" length="16" />
+        </property>
+        <property name="manejoCamas" type="java.lang.Boolean">
+            <column name="manejo_camas" />
+        </property>
+        <property name="codigoInterfaz" type="string">
+            <column name="codigo_interfaz" length="10" />
+        </property>
+        <property name="regResPorcTer" type="string">
+            <column name="reg_res_porc_ter" length="1" />
+        </property>
+        <property name="tipoEntidadEjecuta" type="string">
+            <column name="tipo_entidad_ejecuta" length="5" />
+        </property>
+        <set name="pedidosForCentroCostoSolicitante" table="pedido" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_solicitante" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Pedido" />
+        </set>
+        <set name="excCcInterconsultasForCentroCostoSolicita" table="exc_cc_interconsulta" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_solicita" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcCcInterconsulta" />
+        </set>
+        <set name="funSecParametrizadases" table="fun_sec_parametrizadas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FunSecParametrizadas" />
+        </set>
+        <set name="detFarmaciaCcs" table="det_farmacia_cc" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_farmacia_cc" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFarmaciaCc" />
+        </set>
+        <set name="solicitudesMedicamentoses" table="solicitudes_medicamentos" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_principal" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesMedicamentos" />
+        </set>
+        <set name="categorias" table="categoria" schema="public" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Categoria" />
+        </set>
+        <set name="unidadFunCuentaIngCcs" table="unidad_fun_cuenta_ing_cc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIngCc" />
+        </set>
+		<set name="farmaciaXCentroCostos" table="farmacia_x_centro_costo" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FarmaciaXCentroCosto" />
+        </set>        
+        <set name="consecutivosInventarioses" table="consecutivos_inventarios" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="almacen" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConsecutivosInventarios" />
+        </set>
+        <set name="logCitasOdontologicases" table="log_citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCitasOdontologicas" />
+        </set>
+        <set name="artIncluidosServippals" table="art_incluidos_servippal" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="farmacia" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtIncluidosServippal" />
+        </set>
+        <set name="cuentases" table="cuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="area" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Cuentas" />
+        </set>
+        <set name="logsActivarCamasReservadases" table="logs_activar_camas_reservadas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogsActivarCamasReservadas" />
+        </set>
+        <set name="servicioCuentaIngresos" table="servicio_cuenta_ingreso" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServicioCuentaIngreso" />
+        </set>
+        <set name="indCalidadCcs" table="ind_calidad_cc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IndCalidadCc" />
+        </set>
+        <set name="trasladoCentroAtencionsForNuevaArea" table="traslado_centro_atencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nueva_area" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladoCentroAtencion" />
+        </set>
+        <set name="ordenesAmbulatoriases" table="ordenes_ambulatorias" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_solicita" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdenesAmbulatorias" />
+        </set>
+        <set name="tipoServicioCuentaIngs" table="tipo_servicio_cuenta_ing" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TipoServicioCuentaIng" />
+        </set>
+        <set name="tipoMonitoreos" table="centros_costo_x_tipo_m" schema="manejopaciente" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.TipoMonitoreo">
+                <column name="tipo_monitoreo" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="conceptosIngTesorerias" table="conceptos_ing_tesoreria" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_centro_costo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosIngTesoreria" />
+        </set>
+        <set name="solicitudesesForCentroCostoSolicitante" table="solicitudes" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_solicitante" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Solicitudes" />
+        </set>
+        <set name="valoracionEnfermerias" table="valoracion_enfermeria" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValoracionEnfermeria" />
+        </set>
+        <set name="resultadoLaboratorioRegenfs" table="resultado_laboratorio_regenf" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ResultadoLaboratorioRegenf" />
+        </set>
+        <set name="autoCapiXCentroCostos" table="auto_capi_x_centro_costo" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutoCapiXCentroCosto" />
+        </set>
+        <set name="autorizacionesIngreEstancias" table="autorizaciones_ingre_estancia" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_solicitante" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesIngreEstancia" />
+        </set>
+        <set name="camas1s" table="camas1" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Camas1" />
+        </set>
+        <set name="centrosCostoEntidadesSubs" table="centros_costo_entidades_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentrosCostoEntidadesSub" />
+        </set>
+        <set name="historicoFiltroDistribucionsForCentroCostoSolicita" table="historico_filtro_distribucion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_solicita" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoFiltroDistribucion" />
+        </set>
+        <set name="adjuntosCuentas" table="adjuntos_cuenta" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdjuntosCuenta" />
+        </set>
+        <set name="trasladoCentroAtencionsForAreaInicial" table="traslado_centro_atencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="area_inicial" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladoCentroAtencion" />
+        </set>
+        <set name="historicoFiltroDistribucionsForCentroCostoEjecuta" table="historico_filtro_distribucion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_ejecuta" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoFiltroDistribucion" />
+        </set>
+        <set name="facturasVariases" table="facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FacturasVarias" />
+        </set>
+        <set name="centroCostoGrupoSers" table="centro_costo_grupo_ser" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentroCostoGrupoSer" />
+        </set>
+        <set name="grupoServicioCueIngrs" table="grupo_servicio_cue_ingr" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GrupoServicioCueIngr" />
+        </set>
+        <set name="especiServCueIngs" table="especi_serv_cue_ing" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EspeciServCueIng" />
+        </set>
+        <set name="usuarioses" table="centros_costo_usuario" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Usuarios">
+                <column name="usuario" length="30" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="estanciaAutomaticas" table="estancia_automatica" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="area" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EstanciaAutomatica" />
+        </set>
+        <set name="resultadoLaboratorioOrdens" table="resultado_laboratorio_orden" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ResultadoLaboratorioOrden" />
+        </set>
+        <set name="institucioneses" table="val_defecto_centro_costo_ter" schema="manejopaciente" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Instituciones">
+                <column name="institucion" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="detalleDespachoses" table="detalle_despachos" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="almacen_consignacion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachos" />
+        </set>
+        <set name="evolucioneses" table="evoluciones" schema="historiaclinica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Evoluciones" />
+        </set>
+        <set name="excepIncluexcluContrs" table="excep_incluexclu_contr" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_centro_costo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcepIncluexcluContr" />
+        </set>
+        <set name="seccionesValEnfermerias" table="secciones_val_enfermeria" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SeccionesValEnfermeria" />
+        </set>
+        <set name="citasOdontologicases" table="citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CitasOdontologicas" />
+        </set>
+        <set name="especialidadeses" table="especialidades" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_honorario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Especialidades" />
+        </set>
+        <set name="unidadesConsultas" table="cen_costo_x_un_consulta" schema="consultaexterna" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.UnidadesConsulta">
+                <column name="unidad_consulta" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="filtroDistribucionsForCentroCostoSolicita" table="filtro_distribucion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_solicita" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FiltroDistribucion" />
+        </set>
+        <set name="paramAsociadases" table="param_asociadas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ParamAsociadas" />
+        </set>
+        <set name="estanciaViaIngCentroCostos" table="estancia_via_ing_centro_costo" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true">
+                    <comment>Hace relaci&#243;n a la tabla administracion.centros_costo</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EstanciaViaIngCentroCosto" />
+        </set>
+        <set name="excCcInterconsultasForCentroCostoEjecuta" table="exc_cc_interconsulta" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_ejecuta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcCcInterconsulta" />
+        </set>
+        <set name="solicitudesesForCentroCostoSolicitado" table="solicitudes" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_solicitado" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Solicitudes" />
+        </set>
+        <set name="logCentrosCostoEntSubs" table="log_centros_costo_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCentrosCostoEntSub" />
+        </set>
+        <set name="filtroDistribucionsForCentroCostoEjecuta" table="filtro_distribucion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_ejecuta" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FiltroDistribucion" />
+        </set>
+        <set name="paramResultadosLabs" table="param_resultados_lab" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ParamResultadosLab" />
+        </set>
+        <set name="centroCostoViaIngresos" table="centro_costo_via_ingreso" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentroCostoViaIngreso" />
+        </set>
+        <set name="convenioses" table="convenios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_contable" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Convenios" />
+        </set>
+        <set name="turnoCentroCostos" table="turno_centro_costo" schema="public" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TurnoCentroCosto" />
+        </set>
+        <set name="detalleDespachoPedidos" table="detalle_despacho_pedido" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="almacen_consignacion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachoPedido" />
+        </set>
+        <set name="serviIncluidoServippals" table="servi_incluido_servippal" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_grupo_serv" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiIncluidoServippal" />
+        </set>
+        <set name="incluExcluCcs" table="inclu_exclu_cc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_centro_costo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluExcluCc" />
+        </set>
+        <set name="pedidosForCentroCostoSolicitado" table="pedido" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="centro_costo_solicitado" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Pedido" />
+        </set>
+        <set name="artServiIncluidoses" table="art_servi_incluidos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="farmacia" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtServiIncluidos" />
+        </set>
+    </class>
+</hibernate-mapping>

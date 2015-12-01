@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePlanoValoresFacturadosConvenio" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/facturacion/valorFacturadoPorConvenio/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subreportePlanoValoresFacturadosConvenio" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="fechaInicialFactura" class="java.lang.String"/>
+	<field name="fechaFinalFactura" class="java.lang.String"/>
+	<field name="dsValoresFacturadosConvenio" class="java.lang.Object"/>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement style="axiomaTitulo" x="1" y="10" width="369" height="17"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE VALORES FACTURADOS POR CONVENIO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement x="0" y="0" width="752" height="15" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{dsValoresFacturadosConvenio}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreportePlanoValoresFacturadosConvenio}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

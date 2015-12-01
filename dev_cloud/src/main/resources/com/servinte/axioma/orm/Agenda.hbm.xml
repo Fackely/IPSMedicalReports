@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2012 09:25:02 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Agenda" table="agenda" schema="consultaexterna">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico" />
+        </many-to-one>
+        <many-to-one name="diasSemana" class="com.servinte.axioma.orm.DiasSemana" fetch="select">
+            <column name="dia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="unidadesConsulta" class="com.servinte.axioma.orm.UnidadesConsulta" fetch="select">
+            <column name="unidad_consulta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fechaGen" type="date">
+            <column name="fecha_gen" length="13" not-null="true" />
+        </property>
+        <property name="horaGen" type="string">
+            <column name="hora_gen" length="15" not-null="true" />
+        </property>
+        <property name="consultorio" type="int">
+            <column name="consultorio" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="horaInicio" type="string">
+            <column name="hora_inicio" length="15" not-null="true" />
+        </property>
+        <property name="horaFin" type="string">
+            <column name="hora_fin" length="15" not-null="true" />
+        </property>
+        <property name="tiempoSesion" type="int">
+            <column name="tiempo_sesion" not-null="true" />
+        </property>
+        <property name="cupos" type="int">
+            <column name="cupos" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <set name="serviciosCitas" table="servicios_cita" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_agenda" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosCita" />
+        </set>
+        <set name="citas" table="cita" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_agenda" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Cita" />
+        </set>
+    </class>
+</hibernate-mapping>

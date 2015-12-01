@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 3/06/2011 09:54:54 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NaturalezaPacientes" table="naturaleza_pacientes" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true">
+                <comment>Usuario que realiza el registro de la naturaleza paciente</comment>
+            </column>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="100">
+                <comment>Descripci&#243;n de la naturaleza paciente</comment>
+            </column>
+        </property>
+        <property name="consecutivo" type="string">
+            <column name="consecutivo" length="3" not-null="true">
+                <comment>consecutivo de la naturaleza paciente</comment>
+            </column>
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true">
+                <comment>Fecha de registro de naturaleza paciente</comment>
+            </column>
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true">
+                <comment>Hora de registro de naturaleza paciente</comment>
+            </column>
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <set name="subCuentases" table="sub_cuentas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="naturaleza_paciente" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SubCuentas" />
+        </set>
+        <set name="convUsuariosCapitadoses" table="conv_usuarios_capitados" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="naturaleza_pacientes" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConvUsuariosCapitados" />
+        </set>
+        <set name="detalleCoberturas" table="detalle_cobertura" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="naturaleza_paciente" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleCobertura" />
+        </set>
+        <set name="logExCoberturasEntSubs" table="log_ex_coberturas_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="naturaleza" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogExCoberturasEntSub" />
+        </set>
+        <set name="historicoSubcuentases" table="historico_subcuentas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="naturaleza_paciente" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoSubcuentas" />
+        </set>
+        <set name="detalleMontos" table="detalle_monto" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="naturaleza_codigo">
+                    <comment>C&#243;digo PK de la naturaleza de paciente</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleMonto" />
+        </set>
+        <set name="excepcionesNaturalezas" table="excepciones_naturaleza" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cod_naturaleza" not-null="true">
+                    <comment>C&#243;digo de la naturaleza de paciente</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcepcionesNaturaleza" />
+        </set>
+        <set name="usuarioXConvenios" table="usuario_x_convenio" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="naturaleza_pacientes" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuarioXConvenio" />
+        </set>
+        <set name="exCoberturasEntidadSubs" table="ex_coberturas_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="naturaleza" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberturasEntidadSub" />
+        </set>
+        <set name="exepParaCobXConvconts" table="exep_para_cob_x_convcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="naturaleza_paciente" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExepParaCobXConvcont" />
+        </set>
+    </class>
+</hibernate-mapping>

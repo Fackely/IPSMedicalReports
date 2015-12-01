@@ -1,0 +1,3106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <html-property name="description">contiene header and footer</html-property>
+    <text-property name="displayName">template axioma reports</text-property>
+    <parameters>
+        <scalar-parameter name="codigoCentroAtencion" id="629">
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="concealValue">false</property>
+            <property name="isRequired">true</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+                <property name="pattern">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="codigoInstitucion" id="630">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="concealValue">false</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+                <property name="pattern">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ingreso" id="711">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="concealValue">false</property>
+            <property name="isRequired">true</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+                <property name="pattern">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="94">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="infoAccidentado" id="545">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+getnombrepersona(p.codigo) as apellidosNombres, 
+getedad(p.fecha_nacimiento) ||' '|| CASE WHEN (CURRENT_DATE - 365) &lt; p.fecha_nacimiento THEN 'meses' ELSE 'años' END AS edad, 
+s.nombre AS nombresexo, 
+p.tipo_identificacion ||' No. '|| p.numero_identificacion AS identificacion, 
+getnombreciudad(p.codigo_pais_id,p.codigo_depto_id, p.codigo_ciudad_id) as de, 
+p.direccion AS dir, 
+getnombreciudad(p.codigo_pais_vivienda,p.codigo_departamento_vivienda, p.codigo_ciudad_vivienda) as ciudad, 
+p.telefono,
+(SELECT  CASE WHEN getintegridaddominio(r1.ocupante) = 'Si' THEN 'Ocupante ' else 'Peaton ' end || getintegridaddominio(r1.condicion_accidentado) || ' quien resulta lesionado al '|| getintegridaddominio(r1.resulta_lesionado_al) || CASE WHEN r1.resulta_lesionado_al='AECV' THEN ' '|| r1.placa_vehiculo_ocasiona else '' end   from view_registro_accid_transito r1 WHERE r1.ingreso=i.id) as condicionaccidentado 
+FROM 
+personas p 
+INNER JOIN ingresos i ON (i.codigo_paciente=p.codigo) 
+INNER JOIN view_registro_accid_transito r ON (r.ingreso=i.id)
+INNER JOIN sexo s ON(s.codigo=p.sexo) 
+WHERE r.ingreso=? </property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="identificacionAccidente" id="556">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+r.lugar_accidente as sitio, 
+to_char(r.fecha_accidente,'DD/MM/YYYY') as fecha, 
+substr(r.hora_accidente, 1,5) as hora, 
+c.descripcion as municipio, 
+d.descripcion AS departamento, 
+getintegridaddominio(r.zona_accidente) as zona, 
+r.informacion_accidente as informeAccidente   
+FROM 
+view_registro_accid_transito r 
+INNER JOIN ciudades c ON (c.codigo_departamento=r.departamento_accidente AND r.ciudad_accidente=c.codigo_ciudad AND r.pais_accidente=c.codigo_pais) 
+INNER JOIN departamentos d ON (r.departamento_accidente=d.codigo_departamento and r.pais_accidente=d.codigo_pais) 
+WHERE r.ingreso=? </property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="informacionVehiculo" id="564">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+coalesce(r.marca_vehiculo, '') AS marca, 
+coalesce(r.placa, '') AS placa, 
+getdescriptipovehiculo(r.tipo_serv_v) AS tipo, 
+coalesce(con.nombre, '') AS nombreAseguradora, 
+coalesce(r.agencia, '') AS agencia, 
+getintegridaddominio(r.asegurado) as asegurado, 
+coalesce(r.numero_poliza, '') as numeroPoliza,  
+'DESDE: '||to_char(r.fecha_inicial_poliza, 'DD/MM/YYYY')||' HASTA: '||to_char(r.fecha_final_poliza, 'DD/MM/YYYY') AS vigenciaPoliza, 
+r.primer_apellido_conductor ||' '|| r.segundo_apellido_conductor ||' '|| r.primer_nombre_conductor ||' '|| r.segundo_nombre_conductor as apellido_nombre_conductor, 
+r.tipo_id_conductor, 
+r.numero_id_conductor, 
+getnombreciudad(r.pais_expedicion_id_conductor,r.dep_expedicion_id_conductor,r.ciu_expedicion_id_conductor) AS de, 
+r.direccion_conductor, 
+getnombreciudad(r.pais_conductor,r.departamento_conductor, r.ciudad_conductor) AS ciudad_conductor, 
+r.telefono_conductor 
+FROM 
+view_registro_accid_transito r 
+INNER JOIN convenios con ON (con.codigo=r.aseguradora) 
+WHERE r.ingreso=? </property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="remision" id="580">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+'' as personaRemitida_de, 
+'' as ciudadRemitida_de, 
+'' as fechaRemitida_de, 
+'' as personaRemitida_a, 
+'' as ciudadRemitida_a, 
+'' as fechaRemitida_a  
+FROM 
+view_registro_accid_transito r  
+WHERE r.ingreso=? </property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="datosCentroAsistencial" id="626">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">nombrecentro</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">nit</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">direccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">ciudad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">telefono</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigoCentroAtencion</property>
+                    <property name="paramName">codigoCentroAtencion</property>
+                    <property name="nativeName">codigoCentroAtencion</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">codigoInstitucion</property>
+                    <property name="paramName">codigoInstitucion</property>
+                    <property name="nativeName">codigoInstitucion</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">nombrecentro</property>
+                    <property name="nativeName">nombrecentro</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">nit</property>
+                    <property name="nativeName">nit</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">direccion</property>
+                    <property name="nativeName">direccion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">ciudad</property>
+                    <property name="nativeName">ciudad</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">telefono</property>
+                    <property name="nativeName">telefono</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT getnomcentroatencion(?) AS nombreCentro, i.nit, i.direccion, getnombreciudad(i.pais,i.departamento, i.ciudad) as ciudad, i.telefono FROM instituciones i WHERE i.codigo=?</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="datosAtencionAccidente" id="631">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+	TO_CHAR(c.fecha_apertura, 'DD/MM/YYYY') AS fechaApertura, 
+	SUBSTR(c.hora_apertura, 1,5) AS horaApertura, 
+	p.tipo_identificacion ||' '||p.numero_identificacion AS numHistoriaClinica, 
+	CASE WHEN c.via_ingreso in (1,3) THEN TO_CHAR(eg.fecha_egreso, 'DD/MM/YYYY') ||' '|| SUBSTR(eg.hora_egreso,1,5) ELSE TO_CHAR(c.fecha_apertura, 'DD/MM/YYYY') ||' '|| SUBSTR(c.hora_apertura,1,5)   END AS fechahoraegreso, 
+	CASE WHEN c.via_ingreso IN (1,3) THEN (c.fecha_apertura-eg.fecha_egreso)||'' else '' end AS diasEstancia    
+	FROM  ingresos ingr INNER JOIN view_registro_accid_transito r ON (r.ingreso=ingr.id) INNER JOIN cuentas c ON (c.id_ingreso=ingr.id) INNER JOIN personas p ON (p.codigo=c.codigo_paciente) INNER JOIN vias_ingreso vi ON(c.via_ingreso=vi.codigo) LEFT OUTER JOIN egresos eg ON (c.id=eg.cuenta) WHERE r.ingreso=? order by fechaApertura asc limit 1</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="tratamiento" id="678">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">desctratamiento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">desctratamiento</property>
+                    <property name="nativeName">desctratamiento</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+	(CASE WHEN vi.codigo=3 and( SELECT count(1) from solicitudes sol1 INNER JOIN valoraciones_urgencias vu1 ON (sol1.numero_solicitud=vu1.numero_solicitud) INNER JOIN cuentas c1 ON (c1.id=sol1.cuenta) WHERE c1.id_ingreso=ingr.id and vu1.codigo_conducta_valoracion=3)>0 THEN  'Observación' ELSE (CASE WHEN vi.codigo in (2,4) or ( vi.codigo=3 and( SELECT count(1) from solicitudes sol1 INNER JOIN valoraciones_urgencias vu1 ON (sol1.numero_solicitud=vu1.numero_solicitud) INNER JOIN cuentas c1 ON (c1.id=sol1.cuenta) WHERE c1.id_ingreso=ingr.id and vu1.codigo_conducta_valoracion=3)=0) THEN  'Ambulat.' ELSE 'Hospitalario' END) END) as descTratamiento FROM  ingresos ingr INNER JOIN cuentas c ON (c.id_ingreso=ingr.id) INNER JOIN vias_ingreso vi ON(c.via_ingreso=vi.codigo)  WHERE c.id_ingreso=?</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="diagnosticoIngreso" id="712">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">diagnosticoingreso</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">diagnosticoingreso</property>
+                    <property name="nativeName">diagnosticoingreso</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">select 
+	tabla.diagnosticoIngreso 
+from 
+	( 
+		select 
+			case when c.via_ingreso in (3,4) then (
+									SELECT 
+										getdiagnostico(vd.acronimo_diagnostico, vd.tipo_cie_diagnostico) 
+									from 
+										val_diagnosticos vd 
+										inner join solicitudes s on(vd.valoracion=s.numero_solicitud) 
+										inner join cuentas c on (c.id=s.cuenta) 
+									where 
+										c.id_ingreso=i.id and vd.principal=true limit 1
+								 ) 
+			when c.via_ingreso=1 then 		(
+									SELECT 
+										getdiagnostico(vh.diagnostico_ingreso, vh.diagnostico_cie_ingreso)
+									from
+										val_hospitalizacion vh
+										inner join solicitudes s on(vh.numero_solicitud=s.numero_solicitud) 
+										inner join cuentas c on (c.id=s.cuenta) 
+									where 
+										c.id_ingreso=i.id 		
+								)	
+
+			else 
+								(
+									case when (SELECT 
+											getdiagnostico(dp.diagnostico,dp.tipo_cie) 
+										from 
+											solicitudes s 
+											inner join cuentas c on(c.id=s.cuenta) 		
+											inner join hoja_quirurgica hq on(s.numero_solicitud =hq.numero_solicitud) 		
+											inner join diag_preoperatorio_cx dp on(dp.numero_solicitud=hq.numero_solicitud)
+										where 
+											c.id_ingreso=i.id 
+											and dp.principal=true order by s.numero_solicitud limit 1) is not null then
+										(SELECT 
+											getdiagnostico(dp.diagnostico,dp.tipo_cie)
+										from 
+											solicitudes s 
+											inner join cuentas c on(c.id=s.cuenta) 		
+											inner join hoja_quirurgica hq on(s.numero_solicitud =hq.numero_solicitud) 		
+											inner join diag_preoperatorio_cx dp on(dp.numero_solicitud=hq.numero_solicitud)
+										where 
+											c.id_ingreso=i.id 
+											and dp.principal=true order by s.numero_solicitud limit 1)
+									else
+										(SELECT 
+											getdiagnostico(dp.acronimo,dp.tipo_cie) 
+										FROM 
+											solicitudes s 
+											INNER JOIN cuentas c ON (c.id=s.cuenta) 
+											INNER JOIN sol_procedimientos sp ON (sp.numero_solicitud=s.numero_solicitud) 
+											INNER JOIN res_sol_proc rs ON (rs.numero_solicitud=sp.numero_solicitud) 
+											INNER JOIN diag_procedimientos dp ON (dp.codigo_respuesta=rs.codigo) 
+										where 
+											c.id_ingreso=i.id 
+											and dp.principal=true 
+											order by s.numero_solicitud limit 1 )
+									end					
+								) end as diagnosticoIngreso 
+			from 
+				ingresos i 
+				inner join cuentas c on (i.id=c.id_ingreso) 
+			where 
+				c.id_ingreso=?
+	)tabla 
+WHERE 
+	tabla.diagnosticoIngreso&lt;>'No seleccionado'</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="diagnosticoDefinitivo" id="714">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">diagnosticodefinitivo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">diagnosticodefinitivo</property>
+                    <property name="nativeName">diagnosticodefinitivo</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">select 
+	tabla.diagnosticoDefinitivo 
+from 
+	(	
+		select 
+			CASE WHEN c.via_ingreso in (1,3) then ( 
+									select 
+										getdiagnostico(e.diagnostico_principal, e.diagnostico_principal_cie) 
+									FROM 
+										egresos e 
+									WHERE 
+										e.cuenta=c.id 
+								) 
+			when c.via_ingreso=2 then 		(
+									case when (SELECT 
+											getdiagnostico(dp.diagnostico,dp.tipo_cie) 
+										from 
+											solicitudes s 
+											inner join cuentas c on(c.id=s.cuenta) 		
+											inner join hoja_quirurgica hq on(s.numero_solicitud =hq.numero_solicitud) 		
+											inner join diag_preoperatorio_cx dp on(dp.numero_solicitud=hq.numero_solicitud)
+										where 
+											c.id_ingreso=i.id 
+											and dp.principal=true order by s.numero_solicitud limit 1) is not null then
+										(SELECT 
+											getdiagnostico(dp.diagnostico,dp.tipo_cie)
+										from 
+											solicitudes s 
+											inner join cuentas c on(c.id=s.cuenta) 		
+											inner join hoja_quirurgica hq on(s.numero_solicitud =hq.numero_solicitud) 		
+											inner join diag_preoperatorio_cx dp on(dp.numero_solicitud=hq.numero_solicitud)
+										where 
+											c.id_ingreso=i.id 
+											and dp.principal=true order by s.numero_solicitud limit 1)
+									else
+										(SELECT 
+											getdiagnostico(dp.acronimo,dp.tipo_cie) 
+										FROM 
+											solicitudes s 
+											INNER JOIN cuentas c ON (c.id=s.cuenta) 
+											INNER JOIN sol_procedimientos sp ON (sp.numero_solicitud=s.numero_solicitud) 
+											INNER JOIN res_sol_proc rs ON (rs.numero_solicitud=sp.numero_solicitud) 
+											INNER JOIN diag_procedimientos dp ON (dp.codigo_respuesta=rs.codigo) 
+										where 
+											c.id_ingreso=i.id 
+											and dp.principal=true 
+											order by s.numero_solicitud limit 1 )
+									end					
+								)
+			else 
+								( 
+									select 
+										case when c.via_ingreso in (1,3,4) then ( 
+										SELECT 
+											getdiagnostico(vd.acronimo_diagnostico, vd.tipo_cie_diagnostico) 
+										from 
+											val_diagnosticos vd 
+											inner join solicitudes s on(vd.valoracion=s.numero_solicitud) 
+											inner join cuentas c on (c.id=s.cuenta) 
+										where 
+											c.id_ingreso=i.id 
+											and definitivo=true and principal=true limit 1) 
+										else ( 
+										SELECT 
+											case when dp.diagnostico is null then '' else getdiagnostico(dp.diagnostico,dp.tipo_cie
+										) end from solicitudes s 
+										inner join cuentas c on(c.id=s.cuenta) 
+										left outer join sol_cirugia_por_servicio sc on(s.numero_solicitud =sc.numero_solicitud) 
+					                    inner join salascirugia.INFORME_QX_POR_ESPECIALIDAD informe ON(informe.codigo=sc.COD_INFORME_ESPECIALIDAD)
+					                    inner join diag_post_opera_sol_cx dp on(dp.COD_INFORME_ESPECIALIDAD=informe.codigo)
+										where c.id_ingreso=i.id limit 1 ) end
+								) 
+								END AS diagnosticoDefinitivo 
+			from ingresos i 
+			inner join cuentas c on (i.id=c.id_ingreso) 
+			where c.id_ingreso=?) 
+			tabla where tabla.diagnosticoDefinitivo&lt;>'No seleccionado'</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="diagnosticosRelacionados" id="716">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">diagrel</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">diagrel</property>
+                    <property name="nativeName">diagrel</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText"> SELECT CASE WHEN getdiagnostico(diagnostico_relacionado1, diagnostico_relacionado1_cie)='No seleccionado' THEN '' ELSE getdiagnostico(diagnostico_relacionado1, diagnostico_relacionado1_cie) ||', ' END  || CASE WHEN getdiagnostico(diagnostico_relacionado2, diagnostico_relacionado2_cie)='No seleccionado' THEN '' ELSE  getdiagnostico(diagnostico_relacionado2, diagnostico_relacionado2_cie) ||', ' END || CASE WHEN getdiagnostico(diagnostico_relacionado3, diagnostico_relacionado3_cie)='No seleccionado' THEN '' ELSE getdiagnostico(diagnostico_relacionado3, diagnostico_relacionado3_cie) END as diagRel  from egresos e, cuentas c  WHERE e.cuenta=c.id and c.id_ingreso=?</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="datosMuerte" id="741">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+getdiagnostico(e.diagnostico_muerte, e.diagnostico_muerte_cie) AS diagnosticomuerte, 
+to_char(pac.fecha_muerte, 'DD/MM/YYYY') as fechaMuerte, 
+substr(pac.hora_muerte,1,5) as horaMuerte, 
+CASE WHEN certificado_defuncion='S' then getnombrepersona(ev.codigo_medico) else '________________________________' end as medicoDefuncion, 
+CASE WHEN certificado_defuncion='S' then m.numero_registro else '________________________________' end as numeroRegistroMed, 
+CASE WHEN certificado_defuncion='S' then getnombreciudad(m.codigo_pais_registro,m.codigo_depto_registro, m.codigo_ciudad_registro) else '________________________________' end as de 
+from egresos e 
+inner join evoluciones ev on(e.evolucion=ev.codigo and ev.orden_salida=true) 
+inner join cuentas c ON (c.id=e.cuenta) 
+inner join medicos m on (m.codigo_medico=ev.codigo_medico) 
+inner join pacientes pac on (pac.codigo_paciente=c.codigo_paciente) 
+where e.cuenta=c.id and c.id_ingreso=? 
+and pac.esta_vivo&lt;>true
+</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <property name="headerHeight">4cm</property>
+            <property name="footerHeight">3cm</property>
+            <page-header>
+                <grid name="masterPageHeader" id="4">
+                    <property name="fontFamily">"SansSerif"</property>
+                    <property name="height">1.475in</property>
+                    <property name="width">7.217in</property>
+                    <column id="5">
+                        <property name="width">2.673in</property>
+                    </column>
+                    <column id="6">
+                        <property name="width">4.544in</property>
+                    </column>
+                    <row id="7">
+                        <property name="height">1.178in</property>
+                        <cell id="8">
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="9"/>
+                    </row>
+                    <row id="46">
+                        <property name="height">0.297in</property>
+                        <cell id="47">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid name="masterPageFooter" id="24">
+                    <property name="marginTop">0.5cm</property>
+                    <property name="marginLeft">0cm</property>
+                    <property name="marginBottom">0cm</property>
+                    <property name="marginRight">0cm</property>
+                    <property name="height">0.851in</property>
+                    <property name="width">7.217in</property>
+                    <column id="25"/>
+                    <row id="26">
+                        <cell id="27">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="28">
+                        <cell id="29">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="30">
+                        <property name="height">0.396in</property>
+                        <cell id="31">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <grid name="footerStaticData" id="38">
+                                <property name="fontFamily">"SansSerif"</property>
+                                <property name="height">0.366in</property>
+                                <property name="width">7.148in</property>
+                                <column id="64"/>
+                                <column id="39"/>
+                                <column id="40"/>
+                                <row id="41">
+                                    <property name="height">0.366in</property>
+                                    <cell id="63">
+                                        <text id="65">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <text-property name="content"><![CDATA[Creado por: Axioma Birt Reports]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="42">
+                                        <text name="footerCreatedDate" id="44">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="43">
+                                        <text name="footerNumberPage" id="45">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[Page: <value-of>pageNumber</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="96">
+            <property name="fontWeight">bold</property>
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="paddingTop">0.2cm</property>
+            <property name="paddingLeft">0.2cm</property>
+            <property name="paddingBottom">0.2cm</property>
+            <property name="paddingRight">0.2cm</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">FORMULARIO ÚNICO DE RECLAMACIÓN DE LAS ENTIDADES HOSPITALARIAS POR EL SEGURO OBLIGATORIO DE ACCIDENTES DE TRANSITO (FUSOAT 01)</text-property>
+        </label>
+        <grid id="752">
+            <property name="width">100%</property>
+            <column id="753"/>
+            <row id="754">
+                <cell id="755">
+                    <property name="paddingTop">0.5cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="587">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="marginTop">0cm</property>
+            <property name="marginLeft">0cm</property>
+            <property name="marginBottom">0cm</property>
+            <property name="width">100%</property>
+            <property name="dataSet">datosCentroAsistencial</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">codigoCentroAtencion</property>
+                    <expression name="expression">params["codigoCentroAtencion"]</expression>
+                </structure>
+                <structure>
+                    <property name="paramName">codigoInstitucion</property>
+                    <expression name="expression">params["codigoInstitucion"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">nombrecentro</property>
+                    <expression name="expression">dataSetRow["nombrecentro"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">nit</property>
+                    <expression name="expression">dataSetRow["nit"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">direccion</property>
+                    <expression name="expression">dataSetRow["direccion"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">ciudad</property>
+                    <expression name="expression">dataSetRow["ciudad"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">telefono</property>
+                    <expression name="expression">dataSetRow["telefono"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="600">
+                <property name="width">1.4in</property>
+            </column>
+            <column id="601">
+                <property name="width">2.157in</property>
+            </column>
+            <column id="608">
+                <property name="width">0.736in</property>
+            </column>
+            <column id="613">
+                <property name="width">1.305in</property>
+            </column>
+            <column id="618">
+                <property name="width">0.494in</property>
+            </column>
+            <column id="623">
+                <property name="width">1.3052631579in</property>
+            </column>
+            <header>
+                <row id="588">
+                    <cell id="589">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="paddingTop">0.1cm</property>
+                        <property name="paddingLeft">0.1cm</property>
+                        <property name="paddingBottom">0.1cm</property>
+                        <property name="paddingRight">0.1cm</property>
+                        <label id="602">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">1. DATOS DEL CENTRO ASISTENCIAL</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="591">
+                    <cell id="592">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="paddingTop">0.1cm</property>
+                        <property name="paddingLeft">0.1cm</property>
+                        <property name="paddingBottom">0.1cm</property>
+                        <property name="paddingRight">0.1cm</property>
+                        <label id="603">
+                            <text-property name="text">Nombre del Centro:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="593">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="637">
+                            <property name="resultSetColumn">nombrecentro</property>
+                        </data>
+                    </cell>
+                    <cell id="616">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="614">
+                            <text-property name="text">Nit:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="621">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="638">
+                            <property name="resultSetColumn">nit</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="594">
+                    <property name="height">0.2947368421in</property>
+                    <cell id="595">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="paddingTop">0.1cm</property>
+                        <property name="paddingLeft">0.1cm</property>
+                        <property name="paddingBottom">0.1cm</property>
+                        <property name="paddingRight">0.1cm</property>
+                        <label id="619">
+                            <text-property name="text">Direccion:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="596">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="639">
+                            <property name="resultSetColumn">direccion</property>
+                        </data>
+                    </cell>
+                    <cell id="606">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="624">
+                            <text-property name="text">Ciudad:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="611">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="640">
+                            <property name="resultSetColumn">ciudad</property>
+                        </data>
+                    </cell>
+                    <cell id="617">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="625">
+                            <text-property name="text">Tel:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="622">
+                        <data id="641">
+                            <property name="resultSetColumn">telefono</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <grid id="748">
+            <property name="width">100%</property>
+            <column id="749"/>
+            <row id="750">
+                <cell id="751">
+                    <property name="paddingTop">0.5cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="120">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">infoAccidentado</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">apellidosnombres</property>
+                    <expression name="expression">dataSetRow["apellidosnombres"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">edad</property>
+                    <expression name="expression">dataSetRow["edad"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombresexo</property>
+                    <expression name="expression">dataSetRow["nombresexo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">identificacion</property>
+                    <expression name="expression">dataSetRow["identificacion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">de</property>
+                    <expression name="expression">dataSetRow["de"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dir</property>
+                    <expression name="expression">dataSetRow["dir"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ciudad</property>
+                    <expression name="expression">dataSetRow["ciudad"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">telefono</property>
+                    <expression name="expression">dataSetRow["telefono"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">condicionaccidentado</property>
+                    <expression name="expression">dataSetRow["condicionaccidentado"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="149">
+                <property name="width">1.621in</property>
+            </column>
+            <column id="150">
+                <property name="width">2.705in</property>
+            </column>
+            <column id="151">
+                <property name="width">0.621in</property>
+            </column>
+            <column id="169">
+                <property name="width">1.021in</property>
+            </column>
+            <column id="161">
+                <property name="width">0.715in</property>
+            </column>
+            <column id="185">
+                <property name="width">0.631in</property>
+            </column>
+            <header>
+                <row id="121">
+                    <cell id="122">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <label id="153">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">2. DATOS DEL ACCIDENTADO</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="194">
+                    <cell id="195">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <label id="201">
+                            <text-property name="text">2.1  Información del Accidentado</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="125">
+                    <cell id="126">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="186">
+                            <text-property name="text">Apellidos y Nombres:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="127">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="547">
+                            <property name="resultSetColumn">apellidosnombres</property>
+                        </data>
+                    </cell>
+                    <cell id="128">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="189">
+                            <text-property name="text">Edad:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="163">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="548">
+                            <property name="resultSetColumn">edad</property>
+                        </data>
+                    </cell>
+                    <cell id="155">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="190">
+                            <text-property name="text">Sexo:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="179">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="549">
+                            <property name="resultSetColumn">nombresexo</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="129">
+                    <cell id="130">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="187">
+                            <text-property name="text">Documento de Identidad:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="131">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="550">
+                            <property name="resultSetColumn">identificacion</property>
+                        </data>
+                    </cell>
+                    <cell id="132">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="191">
+                            <text-property name="text">de:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="164">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="551">
+                            <property name="resultSetColumn">de</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="133">
+                    <cell id="134">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="188">
+                            <text-property name="text">Dirección:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="135">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="552">
+                            <property name="resultSetColumn">dir</property>
+                        </data>
+                    </cell>
+                    <cell id="136">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="192">
+                            <text-property name="text">Ciudad:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="165">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="553">
+                            <property name="resultSetColumn">ciudad</property>
+                        </data>
+                    </cell>
+                    <cell id="157">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <label id="193">
+                            <text-property name="text">Teléfono:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="181">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="554">
+                            <property name="resultSetColumn">telefono</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="252">
+                    <cell id="253">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="259">
+                            <text-property name="text">Condición del Accidente:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="254">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <data id="555">
+                            <property name="resultSetColumn">condicionaccidentado</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <grid id="756">
+            <property name="width">100%</property>
+            <column id="757"/>
+            <row id="758">
+                <cell id="759">
+                    <property name="paddingTop">0.3cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="202">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">identificacionAccidente</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">sitio</property>
+                    <expression name="expression">dataSetRow["sitio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha</property>
+                    <expression name="expression">dataSetRow["fecha"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">hora</property>
+                    <expression name="expression">dataSetRow["hora"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">municipio</property>
+                    <expression name="expression">dataSetRow["municipio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">departamento</property>
+                    <expression name="expression">dataSetRow["departamento"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">zona</property>
+                    <expression name="expression">dataSetRow["zona"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">informeaccidente</property>
+                    <expression name="expression">dataSetRow["informeaccidente"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="245">
+                <property name="width">2.052in</property>
+            </column>
+            <column id="246">
+                <property name="width">1.242in</property>
+            </column>
+            <column id="247">
+                <property name="width">0.715in</property>
+            </column>
+            <column id="248">
+                <property name="width">1.368in</property>
+            </column>
+            <column id="249">
+                <property name="width">0.652in</property>
+            </column>
+            <column id="250">
+                <property name="width">1.4736842105in</property>
+            </column>
+            <header>
+                <row id="203">
+                    <cell id="204">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <label id="260">
+                            <text-property name="text">2.2  Identificación de accidente</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="210">
+                    <cell id="211">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="261">
+                            <text-property name="text">Sitio donde ocurrió el accidente:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="212">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="557">
+                            <property name="resultSetColumn">sitio</property>
+                        </data>
+                    </cell>
+                    <cell id="213">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="262">
+                            <text-property name="text">Fecha:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="214">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="558">
+                            <property name="resultSetColumn">fecha</property>
+                        </data>
+                    </cell>
+                    <cell id="215">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="263">
+                            <text-property name="text">Hora:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="216">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="559">
+                            <property name="resultSetColumn">hora</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="217">
+                    <cell id="218">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="264">
+                            <text-property name="text">Municipio:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="219">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="560">
+                            <property name="resultSetColumn">municipio</property>
+                        </data>
+                    </cell>
+                    <cell id="220">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="265">
+                            <text-property name="text">Dep:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="221">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="561">
+                            <property name="resultSetColumn">departamento</property>
+                        </data>
+                    </cell>
+                    <cell id="222">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="266">
+                            <text-property name="text">Zona:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="223">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="562">
+                            <property name="resultSetColumn">zona</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="224">
+                    <property name="height">0.4631578947in</property>
+                    <cell id="225">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="267">
+                            <property name="fontSize">9pt</property>
+                            <text-property name="text">Informe del accidente (Relato breve de los hechos)</text-property>
+                        </label>
+                    </cell>
+                    <cell id="226">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <data id="563">
+                            <property name="resultSetColumn">informeaccidente</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <grid id="792">
+            <property name="width">100%</property>
+            <column id="793"/>
+            <row id="794">
+                <cell id="795">
+                    <property name="paddingTop">0.3cm</property>
+                    <grid id="974">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="width">100%</property>
+                        <column id="975">
+                            <property name="width">1.2708333333333333in</property>
+                        </column>
+                        <column id="976"/>
+                        <column id="977"/>
+                        <column id="978">
+                            <property name="width">0.59375in</property>
+                        </column>
+                        <column id="979">
+                            <property name="width">0.4895833333333333in</property>
+                        </column>
+                        <column id="980">
+                            <property name="width">0.6354166666666666in</property>
+                        </column>
+                        <column id="981">
+                            <property name="width">0.4479166666666667in</property>
+                        </column>
+                        <column id="982">
+                            <property name="width">0.3541666666666667in</property>
+                        </column>
+                        <column id="983"/>
+                        <row id="984">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <cell id="985">
+                                <property name="colSpan">9</property>
+                                <property name="rowSpan">1</property>
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <label id="1064">
+                                    <text-property name="text">2.3 Información del Vehículo:</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="994">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <cell id="995">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1073">
+                                    <text-property name="text">Marca:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="996">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1070">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">marca</property>
+                                            <property name="displayName">marca</property>
+                                            <expression name="expression">dataSetRow["marca"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">marca</property>
+                                </data>
+                            </cell>
+                            <cell id="998">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1074">
+                                    <text-property name="text">Placa:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="999">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1071">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">placa</property>
+                                            <property name="displayName">placa</property>
+                                            <expression name="expression">dataSetRow["placa"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">placa</property>
+                                </data>
+                            </cell>
+                            <cell id="1001">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1075">
+                                    <text-property name="text">Tipo:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1002">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1072">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">tipo</property>
+                                            <property name="displayName">tipo</property>
+                                            <expression name="expression">dataSetRow["tipo"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">tipo</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="1004">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <cell id="1005">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1076">
+                                    <text-property name="text">Nombre Aseguradora:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1006">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1079">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">nombreaseguradora</property>
+                                            <property name="displayName">nombreaseguradora</property>
+                                            <expression name="expression">dataSetRow["nombreaseguradora"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">nombreaseguradora</property>
+                                </data>
+                            </cell>
+                            <cell id="1009">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1078">
+                                    <text-property name="text">Sucursal o Agencia:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1011">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1080">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">agencia</property>
+                                            <property name="displayName">agencia</property>
+                                            <expression name="expression">dataSetRow["agencia"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">agencia</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="1014">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <cell id="1015">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1077">
+                                    <text-property name="text">Asegurado:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1016">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1091">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">asegurado</property>
+                                            <property name="displayName">asegurado</property>
+                                            <expression name="expression">dataSetRow["asegurado"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">asegurado</property>
+                                </data>
+                            </cell>
+                            <cell id="1018">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1090">
+                                    <text-property name="text">Póliza Soat No:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1020">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1092">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">numeropoliza</property>
+                                            <property name="displayName">numeropoliza</property>
+                                            <expression name="expression">dataSetRow["numeropoliza"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">numeropoliza</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="1024">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <cell id="1025">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1087">
+                                    <text-property name="text">Vigencia de la Póliza:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1084">
+                                <property name="colSpan">7</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1093">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">vigenciapoliza</property>
+                                            <property name="displayName">vigenciapoliza</property>
+                                            <expression name="expression">dataSetRow["vigenciapoliza"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">vigenciapoliza</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="1034">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <cell id="1035">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1088">
+                                    <text-property name="text">Apellidos y Nombres del Conductor:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1086">
+                                <property name="colSpan">7</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1094">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">apellido_nombre_conductor</property>
+                                            <property name="displayName">apellido_nombre_conductor</property>
+                                            <expression name="expression">dataSetRow["apellido_nombre_conductor"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">apellido_nombre_conductor</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="1044">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <cell id="1045">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1095">
+                                    <text-property name="text">Doc. de Identidad:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1046">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1110">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">tipo_id_conductor</property>
+                                            <property name="displayName">tipo_id_conductor</property>
+                                            <expression name="expression">dataSetRow["tipo_id_conductor"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">tipo_id_conductor</property>
+                                </data>
+                            </cell>
+                            <cell id="1104">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1116">
+                                    <text-property name="text">No:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1048">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1111">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">numero_id_conductor</property>
+                                            <property name="displayName">numero_id_conductor</property>
+                                            <expression name="expression">dataSetRow["numero_id_conductor"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">numero_id_conductor</property>
+                                </data>
+                            </cell>
+                            <cell id="1106">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1117">
+                                    <text-property name="text">de:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1052">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1112">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">de</property>
+                                            <property name="displayName">de</property>
+                                            <expression name="expression">dataSetRow["de"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">de</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="1054">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <cell id="1055">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1096">
+                                    <text-property name="text">Dirección:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1056">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1113">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">direccion_conductor</property>
+                                            <property name="displayName">direccion_conductor</property>
+                                            <expression name="expression">dataSetRow["direccion_conductor"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">direccion_conductor</property>
+                                </data>
+                            </cell>
+                            <cell id="1058">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1118">
+                                    <text-property name="text">Ciudad:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1059">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <data id="1114">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">ciudad_conductor</property>
+                                            <property name="displayName">ciudad_conductor</property>
+                                            <expression name="expression">dataSetRow["ciudad_conductor"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">ciudad_conductor</property>
+                                </data>
+                            </cell>
+                            <cell id="1062">
+                                <property name="backgroundColor">#E5E5E5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1119">
+                                    <text-property name="text">Tel:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1063">
+                                <data id="1115">
+                                    <property name="dataSet">informacionVehiculo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">telefono_conductor</property>
+                                            <property name="displayName">telefono_conductor</property>
+                                            <expression name="expression">dataSetRow["telefono_conductor"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">telefono_conductor</property>
+                                </data>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="760">
+            <property name="width">100%</property>
+            <column id="761"/>
+            <row id="762">
+                <cell id="763">
+                    <property name="paddingTop">0.5cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="385">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">datosAtencionAccidente</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">fechaapertura</property>
+                    <expression name="expression">dataSetRow["fechaapertura"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">horaapertura</property>
+                    <expression name="expression">dataSetRow["horaapertura"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">numhistoriaclinica</property>
+                    <expression name="expression">dataSetRow["numhistoriaclinica"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fechahoraegreso</property>
+                    <expression name="expression">dataSetRow["fechahoraegreso"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">diasestancia</property>
+                    <expression name="expression">dataSetRow["diasestancia"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="446"/>
+            <column id="447"/>
+            <column id="448"/>
+            <column id="449"/>
+            <header>
+                <row id="386">
+                    <cell id="387">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <label id="450">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">3. 	DATOS SOBRE LA ATENCIÓN DEL ACCIDENTE:</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="391">
+                    <cell id="392">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <label id="451">
+                            <text-property name="text">3.1 En Centro Asistencial</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="396">
+                    <cell id="397">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <label id="453">
+                            <text-property name="text">Fecha de Ingreso:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="398">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="632">
+                            <property name="resultSetColumn">fechaapertura</property>
+                        </data>
+                    </cell>
+                    <cell id="399">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="452">
+                            <text-property name="text">Hora de Ingreso:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="400">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="633">
+                            <property name="resultSetColumn">horaapertura</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="401">
+                    <cell id="402">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="454">
+                            <text-property name="text">Historia Clínica No.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="403">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="634">
+                            <property name="resultSetColumn">numhistoriaclinica</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="406">
+                    <cell id="407">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="455">
+                            <text-property name="text">Fecha de Egreso:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="408">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="635">
+                            <property name="resultSetColumn">fechahoraegreso</property>
+                        </data>
+                    </cell>
+                    <cell id="409">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="456">
+                            <text-property name="text">Días de Estancia:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="410">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="636">
+                            <property name="resultSetColumn">diasestancia</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <grid id="764">
+            <property name="width">100%</property>
+            <column id="765"/>
+            <row id="766">
+                <cell id="767">
+                    <property name="paddingTop">0.3cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="642">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">tratamiento</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">desctratamiento</property>
+                    <expression name="expression">dataSetRow["desctratamiento"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="652">
+                <property name="width">0.915in</property>
+            </column>
+            <column id="653">
+                <property name="width">6.326in</property>
+            </column>
+            <header>
+                <row id="643">
+                    <cell id="644">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="457">
+                            <text-property name="text">Tratamiento:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="645">
+                        <data id="679">
+                            <property name="resultSetColumn">desctratamiento</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+        </table>
+        <grid id="768">
+            <property name="width">100%</property>
+            <column id="769"/>
+            <row id="770">
+                <cell id="771">
+                    <property name="paddingTop">0.3cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="654">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">diagnosticoIngreso</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">diagnosticoingreso</property>
+                    <expression name="expression">dataSetRow["diagnosticoingreso"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="664">
+                <property name="width">1.705in</property>
+            </column>
+            <column id="665">
+                <property name="width">5.536in</property>
+            </column>
+            <header>
+                <row id="655">
+                    <cell id="656">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="458">
+                            <text-property name="text">Diagnóstico(s) de Ingreso: </text-property>
+                        </label>
+                    </cell>
+                    <cell id="657">
+                        <data id="713">
+                            <property name="resultSetColumn">diagnosticoingreso</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+        </table>
+        <grid id="772">
+            <property name="width">100%</property>
+            <column id="773"/>
+            <row id="774">
+                <cell id="775">
+                    <property name="paddingTop">0.3cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="689">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">diagnosticoDefinitivo</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">diagnosticodefinitivo</property>
+                    <expression name="expression">dataSetRow["diagnosticodefinitivo"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="702">
+                <property name="width">1.736in</property>
+            </column>
+            <column id="703">
+                <property name="width">5.505in</property>
+            </column>
+            <header>
+                <row id="690">
+                    <cell id="691">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="707">
+                            <text-property name="text">Diagnóstico(s) definitivos:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="692">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="715">
+                            <property name="dataSet">diagnosticoDefinitivo</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">diagnosticodefinitivo</property>
+                                    <expression name="expression">dataSetRow["diagnosticodefinitivo"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">diagnosticodefinitivo</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+        </table>
+        <grid id="776">
+            <property name="width">100%</property>
+            <column id="777"/>
+            <row id="778">
+                <cell id="779">
+                    <property name="paddingTop">0.3cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="717">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">diagnosticosRelacionados</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">diagrel</property>
+                    <expression name="expression">dataSetRow["diagrel"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="734">
+                <property name="width">5.336in</property>
+            </column>
+            <detail>
+                <row id="721">
+                    <cell id="723">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="800">
+                            <property name="resultSetColumn">diagrel</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <grid id="784">
+            <property name="width">100%</property>
+            <column id="785"/>
+            <row id="786">
+                <cell id="787">
+                    <property name="paddingTop">0.3cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="461">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">remision</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">personaremitida_de</property>
+                    <expression name="expression">dataSetRow["personaremitida_de"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ciudadremitida_de</property>
+                    <expression name="expression">dataSetRow["ciudadremitida_de"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecharemitida_de</property>
+                    <expression name="expression">dataSetRow["fecharemitida_de"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">personaremitida_a</property>
+                    <expression name="expression">dataSetRow["personaremitida_a"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ciudadremitida_a</property>
+                    <expression name="expression">dataSetRow["ciudadremitida_a"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecharemitida_a</property>
+                    <expression name="expression">dataSetRow["fecharemitida_a"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="490">
+                <property name="width">1.505in</property>
+            </column>
+            <column id="491">
+                <property name="width">1.368in</property>
+            </column>
+            <column id="492">
+                <property name="width">1.042in</property>
+            </column>
+            <column id="493">
+                <property name="width">1.126in</property>
+            </column>
+            <column id="494">
+                <property name="width">0.989in</property>
+            </column>
+            <column id="495">
+                <property name="width">1.4947368421in</property>
+            </column>
+            <header>
+                <row id="462">
+                    <cell id="463">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <label id="496">
+                            <text-property name="text">3.2  Remisión</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="469">
+                    <cell id="470">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="497">
+                            <text-property name="text">Persona Remitida de:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="471">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="581">
+                            <property name="resultSetColumn">personaremitida_de</property>
+                        </data>
+                    </cell>
+                    <cell id="472">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="498">
+                            <text-property name="text">Ciudad:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="473">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="582">
+                            <property name="resultSetColumn">ciudadremitida_de</property>
+                        </data>
+                    </cell>
+                    <cell id="474">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="499">
+                            <text-property name="text">Fecha:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="475">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="583">
+                            <property name="resultSetColumn">fecharemitida_de</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="476">
+                    <property name="height">0.4842105263in</property>
+                    <cell id="477">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="500">
+                            <text-property name="text">Persona Remitida a:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="478">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="584">
+                            <property name="resultSetColumn">personaremitida_a</property>
+                        </data>
+                    </cell>
+                    <cell id="479">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="501">
+                            <text-property name="text">Ciudad:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="480">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="585">
+                            <property name="resultSetColumn">ciudadremitida_a</property>
+                        </data>
+                    </cell>
+                    <cell id="481">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="502">
+                            <text-property name="text">Fecha:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="482">
+                        <data id="586">
+                            <property name="resultSetColumn">fecharemitida_a</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <grid id="780">
+            <property name="width">100%</property>
+            <column id="781"/>
+            <row id="782">
+                <cell id="783">
+                    <property name="paddingTop">0.5cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="503">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">datosMuerte</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">getdiagnostico</property>
+                    <expression name="expression">dataSetRow["diagnosticomuerte"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fechamuerte</property>
+                    <expression name="expression">dataSetRow["fechamuerte"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">horamuerte</property>
+                    <expression name="expression">dataSetRow["horamuerte"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">medicodefuncion</property>
+                    <expression name="expression">dataSetRow["medicodefuncion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">numeroregistromed</property>
+                    <expression name="expression">dataSetRow["numeroregistromed"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">de</property>
+                    <expression name="expression">dataSetRow["de"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="534">
+                <property name="width">1.936in</property>
+            </column>
+            <column id="535">
+                <property name="width">1.821in</property>
+            </column>
+            <column id="536">
+                <property name="width">1.336in</property>
+            </column>
+            <column id="537">
+                <property name="width">2.147in</property>
+            </column>
+            <header>
+                <row id="504">
+                    <cell id="505">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <label id="538">
+                            <text-property name="text">4. DATOS SOBRE LA MUERTE DEL ACCIDENTADO (Estos datos no tienen valor legal)</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <footer>
+                <row id="801">
+                    <cell id="802">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <grid id="806">
+                            <property name="width">100%</property>
+                            <column id="807">
+                                <property name="width">1.915in</property>
+                            </column>
+                            <column id="808">
+                                <property name="width">1.81in</property>
+                            </column>
+                            <column id="809">
+                                <property name="width">1.421in</property>
+                            </column>
+                            <column id="810">
+                                <property name="width">2.094in</property>
+                            </column>
+                            <row id="811">
+                                <cell id="812">
+                                    <label id="539">
+                                        <text-property name="text">Causa Inmediata de la muerte:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="813">
+                                    <property name="colSpan">3</property>
+                                    <property name="rowSpan">1</property>
+                                    <data id="742">
+                                        <property name="dataSet">datosMuerte</property>
+                                        <list-property name="boundDataColumns">
+                                            <structure>
+                                                <property name="name">Column Binding</property>
+                                                <expression name="expression">dataSetRow["diagnosticomuerte"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">Column Binding</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="816">
+                                <cell id="817">
+                                    <label id="540">
+                                        <text-property name="text">Fecha de Muerte:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="818">
+                                    <data id="743">
+                                        <property name="resultSetColumn">fechamuerte</property>
+                                    </data>
+                                </cell>
+                                <cell id="819">
+                                    <label id="541">
+                                        <text-property name="text">Hora de muerte:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="820">
+                                    <data id="744">
+                                        <property name="resultSetColumn">horamuerte</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="821">
+                                <cell id="822">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <label id="542">
+                                        <property name="fontSize">9pt</property>
+                                        <text-property name="text">Apellidos y Nombres del médico que firmó el certificado de Defunción:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="824">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <data id="832">
+                                        <property name="resultSetColumn">medicodefuncion</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="826">
+                                <cell id="827">
+                                    <label id="543">
+                                        <text-property name="text">Registro Médico No:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="828">
+                                    <data id="831">
+                                        <property name="resultSetColumn">numeroregistromed</property>
+                                    </data>
+                                </cell>
+                                <cell id="829">
+                                    <label id="544">
+                                        <text-property name="text">De:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="830">
+                                    <data id="747">
+                                        <property name="resultSetColumn">de</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <grid id="788">
+            <property name="width">100%</property>
+            <column id="789"/>
+            <row id="790">
+                <cell id="791">
+                    <property name="paddingTop">0.5cm</property>
+                </cell>
+            </row>
+        </grid>
+        <text id="104">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="paddingTop">0.2cm</property>
+            <property name="paddingLeft">0.2cm</property>
+            <property name="paddingBottom">0.2cm</property>
+            <property name="paddingRight">0.2cm</property>
+            <property name="contentType">plain</property>
+            <text-property name="content"><![CDATA[DECLARACION DEL CENTRO ASISTENCIAL
+
+En representación del centro asistencial en mención declaro bajo la gravedad de juramento que la información diligenciada en este documento es cierta y puede ser verificada por la compañía de seguros y/o FONSAT, antes de los (30) treinta días de la fecha de presentación; de no ser así, acepto todas las consecuencias legales que produzca esta situación. ]]></text-property>
+        </text>
+        <grid id="796">
+            <property name="width">100%</property>
+            <column id="797"/>
+            <row id="798">
+                <cell id="799">
+                    <property name="paddingTop">3cm</property>
+                </cell>
+            </row>
+        </grid>
+        <label id="112">
+            <property name="textAlign">center</property>
+            <text-property name="text">__________________________________________</text-property>
+        </label>
+        <label id="117">
+            <property name="textAlign">center</property>
+            <text-property name="text">Firma y Sello Autorizados</text-property>
+        </label>
+    </body>
+</report>

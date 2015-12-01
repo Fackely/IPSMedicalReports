@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 3, 2010 4:30:55 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ContratosEntidadesSub" table="contratos_entidades_sub" schema="facturacion">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="numeroContrato" type="string">
+            <column name="numero_contrato" length="30" not-null="true" />
+        </property>
+        <property name="valorContrato" type="big_decimal">
+            <column name="valor_contrato" precision="14" not-null="true" />
+        </property>
+        <property name="fechaInicial" type="date">
+            <column name="fecha_inicial" length="13" not-null="true" />
+        </property>
+        <property name="fechaFinal" type="date">
+            <column name="fecha_final" length="13" not-null="true" />
+        </property>
+        <property name="fechaFirmaContrato" type="date">
+            <column name="fecha_firma_contrato" length="13" />
+        </property> 
+        <property name="observaciones" type="string"> 
+            <column name="observaciones" length="256" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" />
+        </property>
+        <property name="institucion" type="int">
+            <column name="institucion" not-null="true" />
+        </property>
+        <property name="tipoTarifa" type="string">
+            <column name="tipo_tarifa" length="3" not-null="true" />
+        </property>
+        <set name="exCoberturasEntidadSubs" table="ex_coberturas_entidad_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="contrato_entidad_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberturasEntidadSub" />
+        </set>
+        <set name="tarifasProcConEntSubs" inverse="true" lazy="true" table="tarifas_proc_con_ent_sub" fetch="select">
+            <key>
+                <column name="contrato_entidad_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasProcConEntSub" />
+        </set>
+        <set name="coberturasEntidadSubs" inverse="true" lazy="true" table="coberturas_entidad_sub" fetch="select">
+            <key>
+                <column name="contrato_entidad_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturasEntidadSub" />
+        </set>
+        <set name="tarifasEntidadSubs" inverse="true" lazy="true" table="tarifas_entidad_sub" fetch="select">
+            <key>
+                <column name="contrato" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasEntidadSub" />
+        </set>
+
+        <set name="exCoberturasEntidadSubs_1" table="ex_coberturas_entidad_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="contrato_entidad_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberturasEntidadSub" />
+        </set>
+        <set name="cargosEntidadSubs" table="cargos_entidad_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="contrato" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CargosEntidadSub" />
+        </set>
+        <set name="tarifasInvConEntSubs" table="tarifas_inv_con_ent_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="contrato_entidad_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasInvConEntSub" />
+        </set>
+        <set name="logContratosEntidadesSubs" inverse="true" lazy="true" table="log_contratos_entidades_sub" fetch="select">
+            <key>
+                <column name="contrato_entidad_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogContratosEntidadesSub" />
+        </set>
+    </class>
+</hibernate-mapping>

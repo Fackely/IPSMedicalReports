@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 22, 2011 12:26:12 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogRipsEntidadesSub" table="log_rips_entidades_sub" schema="facturacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+           <generator class="sequence" >
+				<param name="sequence">facturacion.seq_log_rips_ent_sub</param>
+			</generator>
+        </id>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_proceso" length="30" />
+        </many-to-one>
+        <many-to-one name="tarifariosOficiales" class="com.servinte.axioma.orm.TarifariosOficiales" fetch="select">
+            <column name="codificacion_servicios" not-null="true" />
+        </many-to-one>
+        <property name="fechaProceso" type="date">
+            <column name="fecha_proceso" length="13" />
+        </property>
+        <property name="horaProceso" type="string">
+            <column name="hora_proceso" length="5" />
+        </property>
+        <property name="codificacionMedicainsum" type="string">
+            <column name="codificacion_medicainsum" length="3" not-null="true" />
+        </property>
+        <set name="logRipsEntidadesSubArchivos" inverse="true" lazy="true" table="log_rips_entidades_sub_archivo" fetch="select">
+            <key>
+                <column name="log_rips_entidades_sub" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogRipsEntidadesSubArchivo" />
+        </set>
+    </class>
+</hibernate-mapping>

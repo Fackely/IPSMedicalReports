@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/05/2011 09:38:00 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.OrdenesAmbulatoriasPosponer" table="ordenes_ambulatorias_posponer" schema="ordenes">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+           <generator class="sequence" >
+				<param name="sequence">ordenes.seq_ordenes_amb_posponer</param>
+			</generator>
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ordenesAmbulatorias" class="com.servinte.axioma.orm.OrdenesAmbulatorias" fetch="select">
+            <column name="orden_ambulatoria" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="fechaPosponer" type="date">
+            <column name="fecha_posponer" length="13" not-null="true" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="1000" />
+        </property>
+    </class>
+</hibernate-mapping>

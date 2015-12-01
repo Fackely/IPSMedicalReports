@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ArtIncluidosServippal" table="art_incluidos_servippal" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="farmacia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="serviPpalincluidos" class="com.servinte.axioma.orm.ServiPpalincluidos" fetch="select">
+            <column name="cod_servi_ppal" not-null="true" />
+        </many-to-one>
+        <property name="articuloIncluido" type="int">
+            <column name="articulo_incluido" not-null="true" />
+        </property>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

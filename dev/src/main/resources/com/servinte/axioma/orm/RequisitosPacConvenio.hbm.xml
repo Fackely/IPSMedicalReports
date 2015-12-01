@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RequisitosPacConvenio" table="requisitos_pac_convenio" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.RequisitosPacConvenioId">
+            <key-property name="requisitoPaciente" type="int">
+                <column name="requisito_paciente" />
+            </key-property>
+            <key-property name="convenio" type="int">
+                <column name="convenio" />
+            </key-property>
+            <key-property name="viaIngreso" type="int">
+                <column name="via_ingreso" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="requisitosPaciente" class="com.servinte.axioma.orm.RequisitosPaciente" update="false" insert="false" fetch="select">
+            <column name="requisito_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" update="false" insert="false" fetch="select">
+            <column name="via_ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" update="false" insert="false" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

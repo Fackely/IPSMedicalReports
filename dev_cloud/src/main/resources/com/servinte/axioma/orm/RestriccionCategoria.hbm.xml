@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RestriccionCategoria" table="restriccion_categoria" schema="public">
+        <id name="codigorestriccion" type="int">
+            <column name="codigorestriccion" />
+            <generator class="assigned" />
+        </id>
+        <property name="descrrestriccion" type="string">
+            <column name="descrrestriccion" length="100" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="activo" />
+        </property>
+        <property name="text" type="java.lang.Boolean">
+            <column name="text" />
+        </property>
+        <set name="restriccionesCuadros" inverse="true" lazy="true" table="restricciones_cuadro" fetch="select">
+            <key>
+                <column name="restriccion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RestriccionesCuadro" />
+        </set>
+        <set name="categoriaRestriccions" inverse="true" lazy="true" table="categoria_restriccion" fetch="select">
+            <key>
+                <column name="codigorestriccion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CategoriaRestriccion" />
+        </set>
+    </class>
+</hibernate-mapping>

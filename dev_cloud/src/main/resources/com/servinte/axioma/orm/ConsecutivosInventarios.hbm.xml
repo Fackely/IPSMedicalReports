@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 18, 2011 11:29:30 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConsecutivosInventarios" table="consecutivos_inventarios" schema="inventarios">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposTransInventarios" class="com.servinte.axioma.orm.TiposTransInventarios" fetch="select">
+            <column name="tipo_transaccion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="almacen" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" not-null="true" />
+        </property>
+        <property name="valor" type="string">
+            <column name="valor" not-null="true" />
+        </property>
+        <property name="anioVigencia" type="string">
+            <column name="anio_vigencia" length="6" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

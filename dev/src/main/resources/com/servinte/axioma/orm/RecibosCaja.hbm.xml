@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:50:56 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RecibosCaja" table="recibos_caja" schema="tesoreria">
+        <composite-id name="id" class="com.servinte.axioma.orm.RecibosCajaId">
+            <key-property name="numeroReciboCaja" type="string">
+                <column name="numero_recibo_caja" length="20" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="arqueosDefinitivos" class="com.servinte.axioma.orm.ArqueosDefinitivos" update="false" insert="false" fetch="select">
+            <column name="arqueo_definitivo" length="20" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cajasCajeros" class="com.servinte.axioma.orm.CajasCajeros" fetch="select">
+            <column name="caja" not-null="true" />
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estadosRecibosCaja" class="com.servinte.axioma.orm.EstadosRecibosCaja" fetch="select">
+            <column name="estado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cierresCajas" class="com.servinte.axioma.orm.CierresCajas" update="false" insert="false" fetch="select">
+            <column name="cierre_caja" length="20" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="time">
+            <column name="hora" length="15" not-null="true" />
+        </property>
+        <property name="recibidoDe" type="string">
+            <column name="recibido_de" length="256" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+        <property name="tipoComprobante" type="string">
+            <column name="tipo_comprobante" length="4" />
+        </property>
+        <property name="nroComprobante" type="java.lang.Integer">
+            <column name="nro_comprobante" precision="8" scale="0" />
+        </property>
+        <property name="contabilizado" type="string">
+            <column name="contabilizado" length="1" not-null="true" />
+        </property>
+        <property name="consecutivoRecibo" type="string">
+            <column name="consecutivo_recibo" length="20" />
+        </property>
+        <set name="detalleConceptosRcs" inverse="true" lazy="true" table="detalle_conceptos_rc" fetch="select">
+            <key>
+                <column name="numero_recibo_caja" length="20" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleConceptosRc" />
+        </set>
+        <set name="devolRecibosCajas" inverse="true" lazy="true" table="devol_recibos_caja" fetch="select">
+            <key>
+                <column name="numero_rc" length="20" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DevolRecibosCaja" />
+        </set>
+        <!--   Esta relacion se documenta temporalmente mientras se resuelve el problema de la llave compuesta en la entidad RecibosCaja
+        
+        <one-to-one name="procesoDevolucionRc" class="com.servinte.axioma.orm.ProcesoDevolucionRc"></one-to-one>
+         -->
+        <set name="anulacionRecibosCajas" inverse="true" lazy="true" table="anulacion_recibos_caja" fetch="select">
+            <key>
+                <column name="numero_recibo_caja" length="20" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionRecibosCaja" />
+        </set>
+        <set name="detallePagosRcs" inverse="true" lazy="true" table="detalle_pagos_rc" fetch="select">
+            <key>
+                <column name="numero_recibo_caja" length="20" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetallePagosRc" />
+        </set>
+        <set name="recibosCajaXTurnos" inverse="true" lazy="true" table="recibos_caja_x_turno" fetch="select">
+            <key>
+                <column name="numero_rc" length="20" not-null="true">
+                    <comment>Referencia a la tabla recibox_caja, almacena el n&#195;&#186;mero de recibo de caja</comment>
+                </column>
+                <column name="institucion" not-null="true">
+                    <comment>Referencia a la tabla recibox_caja, almacena la instituci&#195;&#179;n en la que se gener&#195;&#179; el recibo de caja</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RecibosCajaXTurno" />
+        </set>
+        <set name="cierreCajaXReciboCajas" inverse="true" lazy="true" table="cierre_caja_x_recibo_caja" fetch="select" cascade="all">
+            <key>
+                <column name="recibo_caja" length="20" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.recibo_caja - llave compuesta</comment>
+                </column>
+                <column name="institucion" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.recibo_caja - llave compuesta</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaXReciboCaja" />
+        </set>
+    </class>
+</hibernate-mapping>

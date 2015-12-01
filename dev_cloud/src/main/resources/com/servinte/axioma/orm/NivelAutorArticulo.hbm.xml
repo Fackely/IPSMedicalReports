@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 28, 2010 9:53:51 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NivelAutorArticulo" table="nivel_autor_articulo" schema="capitacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+             <generator class="sequence">
+				<param name="sequence">capitacion.seq_nivel_autor_art</param>
+			</generator>
+        </id>
+        <many-to-one name="nivelAutorServMedic" class="com.servinte.axioma.orm.NivelAutorServMedic" fetch="select">
+            <column name="nivel_autor_serv_medic" not-null="true">
+                <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="articulo" type="java.lang.Integer">
+            <column name="articulo">
+                <comment>Art&#195;&#173;culo que se parametriza en el nivel de autorizaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

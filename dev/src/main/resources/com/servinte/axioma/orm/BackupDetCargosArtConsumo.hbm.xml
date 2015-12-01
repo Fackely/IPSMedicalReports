@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/11/2012 12:29:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.BackupDetCargosArtConsumo" table="backup_det_cargos_art_consumo" schema="facturacion">
+        <id name="id" type="long">
+            <column name="id" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_backup_detcargosartconsumo</param>
+			</generator>
+        </id>
+        <many-to-one name="logDistribucionCuenta" class="com.servinte.axioma.orm.LogDistribucionCuenta" fetch="select">
+            <column name="id_log_distrib_cuenta" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="detCargo" type="long">
+            <column name="det_cargo" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="articulo" type="int">
+            <column name="articulo" not-null="true" />
+        </property>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="valorUnitario" type="big_decimal">
+            <column name="valor_unitario" precision="14" not-null="true" />
+        </property>
+        <property name="valorTotal" type="big_decimal">
+            <column name="valor_total" precision="14" not-null="true" />
+        </property>
+        <property name="porcentaje" type="big_decimal">
+            <column name="porcentaje" precision="5" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="idDetCargosArtConsumo" type="long">
+            <column name="id_det_cargos_art_consumo" precision="10" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

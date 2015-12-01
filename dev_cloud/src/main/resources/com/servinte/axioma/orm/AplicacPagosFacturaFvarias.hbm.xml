@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AplicacPagosFacturaFvarias" table="aplicac_pagos_factura_fvarias" schema="facturasvarias">
+        <composite-id name="id" class="com.servinte.axioma.orm.AplicacPagosFacturaFvariasId">
+            <key-property name="aplicacionPagos" type="int">
+                <column name="aplicacion_pagos" />
+            </key-property>
+            <key-property name="factura" type="long">
+                <column name="factura" precision="12" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="aplicacionPagosFvarias" class="com.servinte.axioma.orm.AplicacionPagosFvarias" update="false" insert="false" fetch="select">
+            <column name="aplicacion_pagos" not-null="true" />
+        </many-to-one>
+        <property name="valorPago" type="java.lang.Double">
+            <column name="valor_pago" precision="17" scale="17" />
+        </property>
+    </class>
+</hibernate-mapping>

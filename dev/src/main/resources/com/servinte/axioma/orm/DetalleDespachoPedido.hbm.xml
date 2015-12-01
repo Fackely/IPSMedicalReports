@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 1, 2010 10:58:27 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetalleDespachoPedido" table="detalle_despacho_pedido" schema="inventarios">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetalleDespachoPedidoId">
+            <key-property name="pedido" type="int">
+                <column name="pedido" />
+            </key-property>
+            <key-property name="articulo" type="int">
+                <column name="articulo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="despachoPedido" class="com.servinte.axioma.orm.DespachoPedido" update="false" insert="false" fetch="select">
+            <column name="pedido" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tercerosByProveedorCompra" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="proveedor_compra" />
+        </many-to-one>
+        <many-to-one name="articulo" class="com.servinte.axioma.orm.Articulo" update="false" insert="false" fetch="select">
+            <column name="articulo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="almacen_consignacion" />
+        </many-to-one>
+        <many-to-one name="tercerosByProveedorCatalogo" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="proveedor_catalogo" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="costoUnitario" type="java.lang.Double">
+            <column name="costo_unitario" precision="17" scale="17" />
+        </property>
+        <property name="lote" type="string">
+            <column name="lote" length="20" />
+        </property>
+        <property name="fechaVencimiento" type="date">
+            <column name="fecha_vencimiento" length="13" />
+        </property>
+        <property name="tipoDespacho" type="string">
+            <column name="tipo_despacho" length="5" />
+        </property>
+    </class>
+</hibernate-mapping>

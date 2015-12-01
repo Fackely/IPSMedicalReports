@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/01/2012 02:40:59 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DatosFinanciacion" table="datos_financiacion" schema="carterapaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="detallePagosRc" class="com.servinte.axioma.orm.DetallePagosRc" fetch="select">
+            <column name="detalle_pago_rc" />
+        </many-to-one>
+        <many-to-one name="detalleConceptosRc" class="com.servinte.axioma.orm.DetalleConceptosRc" fetch="select">
+            <column name="detalle_concepto_rc" />
+        </many-to-one>
+        <many-to-one name="facturas" class="com.servinte.axioma.orm.Facturas" fetch="select">
+            <column name="codigo_factura" />
+        </many-to-one>
+        <many-to-one name="documentosGarantia" class="com.servinte.axioma.orm.DocumentosGarantia" fetch="select">
+            <column name="codigo_pk_docgarantia" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="ingreso" type="java.lang.Integer">
+            <column name="ingreso" />
+        </property>
+        <property name="consecutivo" type="string">
+            <column name="consecutivo" length="24" not-null="true" />
+        </property>
+        <property name="anioConsecutivo" type="string">
+            <column name="anio_consecutivo" length="4" not-null="true" />
+        </property>
+        <property name="tipoDocumento" type="string">
+            <column name="tipo_documento" length="4" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="fechaInicio" type="date">
+            <column name="fecha_inicio" length="13" not-null="true" />
+        </property>
+        <property name="diasPorCouta" type="int">
+            <column name="dias_por_couta" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+        <property name="nroCoutas" type="int">
+            <column name="nro_coutas" not-null="true" />
+        </property>
+        <property name="consecutivoFactura" type="string">
+            <column name="consecutivo_factura" length="20" />
+        </property>
+        <property name="fechaElaboracionFactura" type="date">
+            <column name="fecha_elaboracion_factura" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

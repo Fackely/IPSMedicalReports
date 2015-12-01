@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/06/2011 11:20:58 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Ciudades" table="ciudades" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.CiudadesId">
+            <key-property name="codigoCiudad" type="string">
+                <column name="codigo_ciudad" length="10" />
+            </key-property>
+            <key-property name="codigoDepartamento" type="string">
+                <column name="codigo_departamento" length="10" />
+            </key-property>
+            <key-property name="codigoPais" type="string">
+                <column name="codigo_pais" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="departamentos" class="com.servinte.axioma.orm.Departamentos" update="false" insert="false" fetch="select">
+            <column name="codigo_departamento" length="10" not-null="true" />
+            <column name="codigo_pais" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="paises" class="com.servinte.axioma.orm.Paises" update="false" insert="false" fetch="select">
+            <column name="codigo_pais" length="10" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="35" not-null="true" />
+        </property>
+        <property name="localidad" type="java.lang.Character">
+            <column name="localidad" length="1" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="registroAccidentesTransitosForFkRatCiu3" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciu_expedicion_id_conductor" length="10" />
+                <column name="dep_expedicion_id_conductor" length="10" />
+                <column name="pais_expedicion_id_conductor" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="registroAccidentesTransitosForFkRatCiu2" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_accidente" length="10" />
+                <column name="departamento_accidente" length="10" />
+                <column name="pais_accidente" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="registroAccidentesTransitosForFkRatCiu1" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_empresa" length="10" />
+                <column name="departamento_empresa" length="10" />
+                <column name="pais_empresa" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="usuariosCapitadoses" table="usuarios_capitados" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="municipio" length="10" />
+                <column name="departamento" length="10" />
+                <column name="pais" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuariosCapitados" />
+        </set>
+        <set name="institucioneses" table="instituciones" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad" length="10" not-null="true" />
+                <column name="departamento" length="10" not-null="true" />
+                <column name="pais" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Instituciones" />
+        </set>
+        <set name="registroAccidentesTransitosForFkRatCiudTrans" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_transporta" length="10" />
+                <column name="departamento_transporta" length="10" />
+                <column name="pais_transporta" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="informeAtencionIniUrgs" table="informe_atencion_ini_urg" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ciudad_referencia" length="10" />
+                <column name="codigo_depto_referencia" length="10" />
+                <column name="codigo_pais_referencia" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeAtencionIniUrg" />
+        </set>
+        <set name="empresasesForFkEmpCiuprin" table="empresas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_principal" length="10" />
+                <column name="depto_principal" length="10" />
+                <column name="pais_principal" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Empresas" />
+        </set>
+        <set name="personasesForFkPCiudadid" table="personas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ciudad_id" length="10" />
+                <column name="codigo_depto_id" length="10" />
+                <column name="codigo_pais_id" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Personas" />
+        </set>
+        <set name="centroAtencions" table="centro_atencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad" length="10" not-null="true" />
+                <column name="departamento" length="10" not-null="true" />
+                <column name="pais" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentroAtencion" />
+        </set>
+        <set name="movimientosChequesesForFkCiudaMcPlazaCiudades" table="movimientos_cheques" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_plaza" length="10" />
+                <column name="departamento_plaza" length="10" />
+                <column name="pais_plaza" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosCheques" />
+        </set>
+        <set name="movimientosTarjetases" table="movimientos_tarjetas" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad" length="10" not-null="true" />
+                <column name="departamento" length="10" not-null="true" />
+                <column name="pais" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosTarjetas" />
+        </set>
+        <set name="registroAccidentesTransitosForFkRatCiudExpIdTrans" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_exp_id_transporta" length="10" />
+                <column name="depto_exp_id_transporta" length="10" />
+                <column name="pais_exp_id_transporta" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="registroAccidentesTransitosForFkRatCiu6" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciu_expedicion_id_declarante" length="10" />
+                <column name="dep_expedicion_id_declarante" length="10" />
+                <column name="pais_expedicion_id_declarante" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="registroAccidentesTransitosForFkRatCiu5" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_conductor" length="10" />
+                <column name="departamento_conductor" length="10" />
+                <column name="pais_conductor" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="movimientosChequesesForFkCiudaMcGiradorCiudades" table="movimientos_cheques" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_girador" length="10" />
+                <column name="departamento_girador" length="10" />
+                <column name="pais_girador" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosCheques" />
+        </set>
+        <set name="registroAccidentesTransitosForFkRatCiudProp" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_prop" length="10" />
+                <column name="departamento_prop" length="10" />
+                <column name="pais_prop" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="empresasInstitucions" table="empresas_institucion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad" length="10" not-null="true" />
+                <column name="departamento" length="10" not-null="true" />
+                <column name="pais" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EmpresasInstitucion" />
+        </set>
+        <set name="responsablesPacientesesForFkRespPacCiudad" table="responsables_pacientes" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ciudad" length="10" />
+                <column name="codigo_depto" length="10" />
+                <column name="codigo_pais" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ResponsablesPacientes" />
+        </set>
+        <set name="localidadeses" table="localidades" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ciudad" length="10" not-null="true" />
+                <column name="codigo_departamento" length="10" not-null="true" />
+                <column name="codigo_pais" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Localidades" />
+        </set>
+        <set name="registroEventoCatastroficosForFkRevCiu6" table="registro_evento_catastrofico" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_exp_id_transporta" length="10" />
+                <column name="depto_exp_id_transporta" length="10" />
+                <column name="pais_exp_id_transporta" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEventoCatastrofico" />
+        </set>
+        <set name="detPromocionesOdos" table="det_promociones_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_centro_atencion" length="10" />
+                <column name="depto_centro_atencion" length="10" />
+                <column name="pais_centro_atencion" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetPromocionesOdo" />
+        </set>
+        <set name="registroEventoCatastroficosForFkRevCiu7" table="registro_evento_catastrofico" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_transporta" length="10" />
+                <column name="departamento_transporta" length="10" />
+                <column name="pais_transporta" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEventoCatastrofico" />
+        </set>
+        <set name="empresasesForFkEmpCiuc" table="empresas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_cuentas" length="10" />
+                <column name="depto_cuentas" length="10" />
+                <column name="pais_cuentas" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Empresas" />
+        </set>
+        <set name="personasesForFkPCiudadviv" table="personas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ciudad_vivienda" length="10" />
+                <column name="codigo_departamento_vivienda" length="10" />
+                <column name="codigo_pais_vivienda" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Personas" />
+        </set>
+        <set name="barrioses" table="barrios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ciudad" length="10" not-null="true" />
+                <column name="codigo_departamento" length="10" not-null="true" />
+                <column name="codigo_pais" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Barrios" />
+        </set>
+        <set name="personasesForFkPCiudadnac" table="personas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ciudad_nacimiento" length="10" />
+                <column name="codigo_departamento_nacimiento" length="10" />
+                <column name="codigo_pais_nacimiento" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Personas" />
+        </set>
+        <set name="registroEventoCatastroficosForFkRevCiu1" table="registro_evento_catastrofico" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_empresa" length="10" />
+                <column name="departamento_empresa" length="10" />
+                <column name="pais_empresa" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEventoCatastrofico" />
+        </set>
+        <set name="registroEventoCatastroficosForFkRevCiu2" table="registro_evento_catastrofico" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_evento" length="10" />
+                <column name="departamento_evento" length="10" />
+                <column name="pais_evento" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEventoCatastrofico" />
+        </set>
+        <set name="medicoses" table="medicos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ciudad_registro" length="10" not-null="true" />
+                <column name="codigo_depto_registro" length="10" not-null="true" />
+                <column name="codigo_pais_registro" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Medicos" />
+        </set>
+        <set name="logDetPromocionesOdos" table="log_det_promociones_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_centro_atencion" length="10" />
+                <column name="depto_centro_atencion" length="10" />
+                <column name="pais_centro_atencion" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetPromocionesOdo" />
+        </set>
+        <set name="registroAccidentesTransitosForFkRatCiudExpIdProp" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ciudad_exp_id_prop" length="10" />
+                <column name="depto_exp_id_prop" length="10" />
+                <column name="pais_exp_id_prop" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="responsablesPacientesesForFkRpCiudadDoc" table="responsables_pacientes" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ciudad_doc" length="10" />
+                <column name="codigo_depto_doc" length="10" />
+                <column name="codigo_pais_doc" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ResponsablesPacientes" />
+        </set>
+    </class>
+</hibernate-mapping>

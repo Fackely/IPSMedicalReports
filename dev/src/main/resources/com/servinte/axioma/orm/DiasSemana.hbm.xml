@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DiasSemana" table="dias_semana" schema="administracion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="dia" type="string">
+            <column name="dia" length="10" />
+        </property>
+        <set name="agendaOdontologicas" inverse="true" lazy="true" table="agenda_odontologica" fetch="select">
+            <key>
+                <column name="dia" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgendaOdontologica" />
+        </set>
+        <set name="cancelacionAgendaOdos" inverse="true" lazy="true" table="cancelacion_agenda_odo" fetch="select">
+            <key>
+                <column name="dia" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CancelacionAgendaOdo" />
+        </set>
+        <set name="agendas" table="agenda" schema="consultaexterna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dia" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Agenda" />
+        </set>
+    </class>
+</hibernate-mapping>

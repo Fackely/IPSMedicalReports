@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RespAutorizaciones" table="resp_autorizaciones" schema="manejopaciente">
+        <id name="detAutorizacion" type="long">
+            <column name="det_autorizacion" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposVigencia" class="com.servinte.axioma.orm.TiposVigencia" fetch="select">
+            <column name="tipo_vigencia" />
+        </many-to-one>
+        <many-to-one name="cargosUsuariosByCargoPersRecibe" class="com.servinte.axioma.orm.CargosUsuarios" fetch="select">
+            <column name="cargo_pers_recibe" />
+        </many-to-one>
+        <many-to-one name="cargosUsuariosByCargoPersRegistro" class="com.servinte.axioma.orm.CargosUsuarios" fetch="select">
+            <column name="cargo_pers_registro" not-null="true" />
+        </many-to-one>
+        <property name="vigencia" type="java.lang.Integer">
+            <column name="vigencia" />
+        </property>
+        <property name="numeroAutorizacion" type="string">
+            <column name="numero_autorizacion" length="15" not-null="true" />
+        </property>
+        <property name="personaAutoriza" type="string">
+            <column name="persona_autoriza" length="512" not-null="true" />
+        </property>
+        <property name="valorCobertura" type="big_decimal">
+            <column name="valor_cobertura" precision="14" />
+        </property>
+        <property name="tipoCobertura" type="string">
+            <column name="tipo_cobertura" length="5" />
+        </property>
+        <property name="valorPagoPaciente" type="big_decimal">
+            <column name="valor_pago_paciente" precision="14" />
+        </property>
+        <property name="tipoPagoPaciente" type="string">
+            <column name="tipo_pago_paciente" length="5" />
+        </property>
+        <property name="personaRecibe" type="string">
+            <column name="persona_recibe" length="512" />
+        </property>
+        <property name="personaRegistro" type="string">
+            <column name="persona_registro" length="30" not-null="true" />
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true" />
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true" />
+        </property>
+        <property name="fechaAutorizacion" type="date">
+            <column name="fecha_autorizacion" length="13" not-null="true" />
+        </property>
+        <property name="horaAutorizacion" type="string">
+            <column name="hora_autorizacion" length="5" not-null="true" />
+        </property>
+        <property name="fechaAnulacion" type="date">
+            <column name="fecha_anulacion" length="13" />
+        </property>
+        <property name="horaAnulacion" type="string">
+            <column name="hora_anulacion" length="5" />
+        </property>
+        <property name="usuarioAnulacion" type="string">
+            <column name="usuario_anulacion" length="30" />
+        </property>
+        <property name="motivoAnulacion" type="string">
+            <column name="motivo_anulacion" length="4000" />
+        </property>
+        <property name="cantidadSolicitada" type="int">
+            <column name="cantidad_solicitada" not-null="true" />
+        </property>
+        <property name="cantidadAutorizada" type="int">
+            <column name="cantidad_autorizada" not-null="true" />
+        </property>
+        <property name="fechaIniAutorizada" type="date">
+            <column name="fecha_ini_autorizada" length="13" />
+        </property>
+        <property name="observacionesAutorizacion" type="string">
+            <column name="observaciones_autorizacion" length="4000" />
+        </property>
+        <property name="fechaFinAutorizada" type="date">
+            <column name="fecha_fin_autorizada" length="13" />
+        </property>
+        <set name="adjRespAutorizacioneses" inverse="true" lazy="true" table="adj_resp_autorizaciones" fetch="select">
+            <key>
+                <column name="resp_autorizacion" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdjRespAutorizaciones" />
+        </set>
+    </class>
+</hibernate-mapping>

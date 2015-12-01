@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/05/2011 11:45:00 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CierreNivelAteGruServ" table="cierre_nivel_ate_gru_serv" schema="capitacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_cie_niv_ate_gru_serv</param>
+			</generator> 
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="valorAcumulado" type="big_decimal">
+            <column name="valor_acumulado" precision="20" not-null="true" />
+        </property>
+        <property name="fechaCierre" type="date">
+            <column name="fecha_cierre" length="13" not-null="true" />
+        </property>
+        <property name="tipoProceso" type="string">
+            <column name="tipo_proceso" length="4" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" />
+        </property>
+    </class>
+</hibernate-mapping>

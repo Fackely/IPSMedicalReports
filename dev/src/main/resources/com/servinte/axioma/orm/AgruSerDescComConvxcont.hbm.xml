@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AgruSerDescComConvxcont" table="agru_ser_desc_com_convxcont" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="descComConvcont" class="com.servinte.axioma.orm.DescComConvcont" fetch="select">
+            <column name="codigo_descuento" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposServicio" class="com.servinte.axioma.orm.TiposServicio" fetch="select">
+            <column name="tipo_servicio" length="1" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <many-to-one name="gruposServicios" class="com.servinte.axioma.orm.GruposServicios" fetch="select">
+            <column name="grupo_servicio" />
+        </many-to-one>
+        <property name="pos" type="java.lang.Character">
+            <column name="pos" length="1" />
+        </property>
+        <property name="porcentaje" type="big_decimal">
+            <column name="porcentaje" precision="5" />
+        </property>
+        <property name="valor" type="big_decimal">
+            <column name="valor" precision="12" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="fechaVigencia" type="date">
+            <column name="fecha_vigencia" length="13" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

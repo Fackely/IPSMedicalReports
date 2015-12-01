@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/06/2011 12:41:12 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.GruposServicios" table="grupos_servicios" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposSalas" class="com.servinte.axioma.orm.TiposSalas" fetch="select">
+            <column name="tipo_sala_standar" />
+        </many-to-one>
+        <many-to-one name="tiposMonto" class="com.servinte.axioma.orm.TiposMonto" fetch="select">
+            <column name="tipo_monto" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="128" not-null="true" />
+        </property>
+        <property name="acronimo" type="string">
+            <column name="acronimo" length="12" not-null="true" unique="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="3" />
+        </property>
+        <property name="multiple" type="java.lang.Character">
+            <column name="multiple" length="1" />
+        </property>
+        <property name="numDiasUrgente" type="java.lang.Byte">
+            <column name="num_dias_urgente" precision="2" scale="0" />
+        </property>
+        <property name="acroDiasUrgente" type="string">
+            <column name="acro_dias_urgente" length="6" />
+        </property>
+        <property name="numDiasNormal" type="java.lang.Byte">
+            <column name="num_dias_normal" precision="2" scale="0" />
+        </property>
+        <property name="acroDiasNormal" type="string">
+            <column name="acro_dias_normal" length="6" />
+        </property>
+        <set name="agruSerExepCobConvxconts" table="agru_ser_exep_cob_convxcont" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerExepCobConvxcont" />
+        </set>
+        <set name="servicioses" table="servicios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Servicios" />
+        </set>
+        <set name="cobAgrupServicioses" table="cob_agrup_servicios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CobAgrupServicios" />
+        </set>
+        <set name="agruSerExceTariConts" table="agru_ser_exce_tari_cont" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerExceTariCont" />
+        </set>
+        <set name="tarifasProcConEntSubs" table="tarifas_proc_con_ent_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasProcConEntSub" />
+        </set>
+        <set name="cierreTempGrupoServicios" table="cierre_temp_grupo_servicio" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempGrupoServicio" />
+        </set>
+        <set name="exCoberAgruSerEntSubs" table="ex_cober_agru_ser_ent_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberAgruSerEntSub" />
+        </set>
+        <set name="montoAgrupacionServicioses" table="monto_agrupacion_servicios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio_codigo">
+                    <comment>C&#243;digo PK del grupo de servicios asociado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MontoAgrupacionServicios" />
+        </set>
+        <set name="paqAgrupacionServicioses" table="paq_agrupacion_servicios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaqAgrupacionServicios" />
+        </set>
+        <set name="detAgruHonoraEspServs" table="det_agru_honora_esp_serv" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAgruHonoraEspServ" />
+        </set>
+        <set name="tiposRetencionGrupoSers" table="tipos_retencion_grupo_ser" schema="administracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionGrupoSer" />
+        </set>
+        <set name="cierreTempNivelAteGruServs" table="cierre_temp_nivel_ate_gru_serv" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempNivelAteGruServ" />
+        </set>
+        <set name="especiServCueIngs" table="especi_serv_cue_ing" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EspeciServCueIng" />
+        </set>
+        <set name="detalleValorizacionServs" table="detalle_valorizacion_serv" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleValorizacionServ" />
+        </set>
+        <set name="tipoServicioCuentaIngs" table="tipo_servicio_cuenta_ing" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TipoServicioCuentaIng" />
+        </set>
+        <set name="esqTarProcSubCuentases" table="esq_tar_proc_sub_cuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarProcSubCuentas" />
+        </set>
+        <set name="centroCostoGrupoSers" table="centro_costo_grupo_ser" schema="administracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentroCostoGrupoSer" />
+        </set>
+        <set name="agruSerDescComConvxconts" table="agru_ser_desc_com_convxcont" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerDescComConvxcont" />
+        </set>
+        <set name="esqTarProcedimientoContratos" table="esq_tar_procedimiento_contrato" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarProcedimientoContrato" />
+        </set>
+        <set name="parametricaValorEstandars" table="parametrica_valor_estandar" schema="consultaexterna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupos_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ParametricaValorEstandar" />
+        </set>        
+        <set name="logEsqTarProcContratos" table="log_esq_tar_proc_contrato" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEsqTarProcContrato" />
+        </set>
+        <set name="agruSerIncluexcluCcs" table="agru_ser_incluexclu_cc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerIncluexcluCc" />
+        </set>
+        <set name="agruSerIncluexcluEconts" table="agru_ser_incluexclu_econt" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerIncluexcluEcont" />
+        </set>
+        <set name="nivelAutorAgrServs" table="nivel_autor_agr_serv" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio">
+                    <comment>Grupo del servicio parametrizado en el nivel de autorizaci&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorAgrServ" />
+        </set>
+        <set name="detServFormatoImps" table="det_serv_formato_imp" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetServFormatoImp" />
+        </set>
+        <set name="detVigConRetGrupos" table="det_vig_con_ret_grupo" schema="administracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetGrupo" />
+        </set>
+        <set name="histoMontoAgrupServs" table="histo_monto_agrup_serv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grupo_servicio_codigo">
+                    <comment>C&#195;&#179;digo PK del grupo de servicios asociado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoMontoAgrupServ" />
+        </set>
+    </class>
+</hibernate-mapping>

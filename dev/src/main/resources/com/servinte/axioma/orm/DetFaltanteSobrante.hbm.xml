@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 22, 2010 10:09:16 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetFaltanteSobrante" table="det_faltante_sobrante" schema="tesoreria">
+        <comment>Guada los detalles de los faltantes o sobrantes</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_det_faltante_sobrante</param>
+			</generator>
+        </id>
+         <many-to-one name="faltanteSobrante" class="com.servinte.axioma.orm.FaltanteSobrante" fetch="select"  cascade="all">
+            <column name="faltante_sobrante_enc" precision="10" scale="0" not-null="true">
+                <comment>Documento de soporte encabezado del faltante / sobrante</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="responsable" length="30" not-null="true">
+                <comment>Responsable de la genenracion del faltante / sobrante</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="docSopMovimCajas" class="com.servinte.axioma.orm.DocSopMovimCajas" fetch="select">
+            <column name="doc_sop_movim_caja" precision="10" scale="0" not-null="true">
+                <comment>Documento de soporte del faltante / sobrante. En caso de no recibirse se registra el documento pero el campo det_faltante_sobrante.recibido sera marcado
+                de forma negativa</comment>
+            </column>
+        </many-to-one>
+        <property name="valorDiferencia" type="big_decimal">
+            <column name="valor_diferencia" precision="14" not-null="true">
+                <comment>Cantidad en dinero del faltante / sobrante</comment>
+            </column>
+        </property>
+        <property name="tipoDiferencia" type="string">
+            <column name="tipo_diferencia" length="2" not-null="true">
+                <comment>Tipo de forma de pago de la diferencia faltante / sobrante</comment>
+            </column>
+        </property>
+        <property name="recibido" type="java.lang.Character">
+            <column name="recibido" length="1">
+                <comment>Estado para identificar si el documento fue recibido o no</comment>
+            </column>
+        </property>
+        <property name="contabilizado" type="java.lang.Character">
+            <column name="contabilizado" length="1">
+                <comment>Indica si el faltante / sobrante ya ha sido contabilizado</comment>
+            </column>
+        </property>
+        <property name="tipoComprobante" type="string">
+            <column name="tipo_comprobante" length="4">
+                <comment>Tipo de comprobante del faltante / sobrante</comment>
+            </column>
+        </property>
+        <property name="numeroComprobante" type="java.lang.Integer">
+            <column name="numero_comprobante" precision="8" scale="0">
+                <comment>Numero comprobante del faltante / sobrante</comment>
+            </column>
+        </property>
+        <property name="consecutivo" type="big_decimal">
+            <column name="consecutivo" precision="20" scale="0">
+                <comment>Indica el n&#195;&#186;mero consecutivo del faltante / sobrante</comment>
+            </column>
+        </property>
+        <set name="histoCambioResponsables" inverse="true" lazy="true" table="histo_cambio_responsable" fetch="select">
+            <key>
+                <column name="det_faltante_sobrante" precision="10" scale="0" not-null="true">
+                    <comment>Detalle del faltante / sobrante del cual se cambio el responsable</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoCambioResponsable" />
+        </set>
+    </class>
+</hibernate-mapping>

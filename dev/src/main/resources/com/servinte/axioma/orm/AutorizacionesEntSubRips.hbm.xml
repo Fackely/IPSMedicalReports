@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 20, 2011 2:49:39 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutorizacionesEntSubRips" table="autorizaciones_ent_sub_rips" schema="manejopaciente">
+        <id name="autorizacionEntidadSub" type="long">
+            <column name="autorizacion_entidad_sub" precision="12" scale="0" />
+            <generator class="foreign">
+                <param name="property">autorizacionesEntidadesSub</param>
+            </generator>
+        </id>
+        <one-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

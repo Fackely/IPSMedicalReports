@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/06/2011 10:54:43 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AnulacionOrdenAmbulatorias" table="anulacion_orden_ambulatorias" schema="ordenes">
+        <id name="codigoOrden" type="long">
+            <column name="codigo_orden" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">ordenesAmbulatorias</param>
+            </generator>
+        </id>
+        <one-to-one name="ordenesAmbulatorias" class="com.servinte.axioma.orm.OrdenesAmbulatorias" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" />
+        </property>
+        <property name="motivoAnulacion" type="string">
+            <column name="motivo_anulacion" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

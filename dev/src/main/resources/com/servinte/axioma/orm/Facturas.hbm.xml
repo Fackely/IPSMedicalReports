@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/07/2011 07:26:52 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Facturas" table="facturas" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="histoDetalleMonto" class="com.servinte.axioma.orm.HistoDetalleMonto" fetch="select">
+            <column name="monto_cobro" />
+        </many-to-one>
+        <many-to-one name="empresasInstitucion" class="com.servinte.axioma.orm.EmpresasInstitucion" fetch="select">
+            <column name="empresa_institucion" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_duenio" />
+        </many-to-one>
+        <many-to-one name="estadosFacturaPaciente" class="com.servinte.axioma.orm.EstadosFacturaPaciente" fetch="select">
+            <column name="estado_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencionByCentroAten" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_aten" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" />
+        </many-to-one>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" fetch="select">
+            <column name="cod_paciente" />
+        </many-to-one>
+        <many-to-one name="pacEntidadesSubcontratadas" class="com.servinte.axioma.orm.PacEntidadesSubcontratadas" fetch="select">
+            <column name="pac_entidad_subcontratada" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" />
+        </many-to-one>
+        <many-to-one name="historicoEncabezado" class="com.servinte.axioma.orm.HistoricoEncabezado" fetch="select">
+            <column name="historico_encabezado" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="cod_res_particular" />
+        </many-to-one>
+        <many-to-one name="topesFacturacion" class="com.servinte.axioma.orm.TopesFacturacion" fetch="select">
+            <column name="tope_facturacion" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estadosFacturaF" class="com.servinte.axioma.orm.EstadosFacturaF" fetch="select">
+            <column name="estado_facturacion" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="usuario" length="30" not-null="true" />
+        </property>
+        <property name="consecutivoFactura" type="long">
+            <column name="consecutivo_factura" precision="14" scale="0" not-null="true" />
+        </property>
+        <property name="prefFactura" type="string">
+            <column name="pref_factura" length="10" />
+        </property>
+        <property name="valorPagos" type="double">
+            <column name="valor_pagos" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="ajustesCredito" type="double">
+            <column name="ajustes_credito" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="ajustesDebito" type="double">
+            <column name="ajustes_debito" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorAbonos" type="double">
+            <column name="valor_abonos" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorTotal" type="double">
+            <column name="valor_total" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorNetoPaciente" type="double">
+            <column name="valor_neto_paciente" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorConvenio" type="double">
+            <column name="valor_convenio" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorCartera" type="double">
+            <column name="valor_cartera" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorBrutoPac" type="double">
+            <column name="valor_bruto_pac" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valDescPac" type="double">
+            <column name="val_desc_pac" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="numeroCuentaCobro" type="java.lang.Double">
+            <column name="numero_cuenta_cobro" precision="17" scale="17" />
+        </property>
+        <property name="tipoFacturaSistema" type="java.lang.Boolean">
+            <column name="tipo_factura_sistema" />
+        </property>
+        <property name="subCuenta" type="java.lang.Integer">
+            <column name="sub_cuenta" />
+        </property>
+        <property name="facturaCerrada" type="boolean">
+            <column name="factura_cerrada" not-null="true" />
+        </property>
+        <property name="valorMonto" type="java.lang.Double">
+            <column name="valor_monto" precision="17" scale="17" />
+        </property>
+        <property name="porcentajeMonto" type="java.lang.Double">
+            <column name="porcentaje_monto" precision="17" scale="17" />
+        </property>
+        <property name="tipoAfiliado" type="java.lang.Character">
+            <column name="tipo_afiliado" length="1" />
+        </property>
+        <property name="estratoSocial" type="java.lang.Integer">
+            <column name="estrato_social" />
+        </property>
+        <property name="tipoMonto" type="java.lang.Integer">
+            <column name="tipo_monto" />
+        </property>
+        <property name="cuentaCobroCapitacion" type="java.lang.Long">
+            <column name="cuenta_cobro_capitacion" precision="10" scale="0" />
+        </property>
+        <property name="tipoComprobante" type="string">
+            <column name="tipo_comprobante" length="4" />
+        </property>
+        <property name="nroComprobante" type="java.lang.Integer">
+            <column name="nro_comprobante" precision="8" scale="0" />
+        </property>
+        <property name="valorFavorConvenio" type="big_decimal">
+            <column name="valor_favor_convenio" precision="14" />
+        </property>
+        <property name="resolucion" type="string">
+            <column name="resolucion" />
+        </property>
+        <property name="rgoInicFact" type="long">
+            <column name="rgo_inic_fact" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="rgoFinFact" type="long">
+            <column name="rgo_fin_fact" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="contabilizado" type="java.lang.Character">
+            <column name="contabilizado" length="1" />
+        </property>
+        <property name="valorLiquidadoPaciente" type="double">
+            <column name="valor_liquidado_paciente" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="tipoMovimiento" type="string">
+            <column name="tipo_movimiento" length="2" />
+        </property>
+        <property name="nroMovimiento" type="java.lang.Integer">
+            <column name="nro_movimiento" precision="8" scale="0" />
+        </property>
+        <property name="vigenciaIniMontoC" type="date">
+            <column name="vigencia_ini_monto_c" length="13" />
+        </property>
+        <property name="vigenciaIniTopeF" type="date">
+            <column name="vigencia_ini_tope_f" length="13" />
+        </property>
+        <property name="valorAnticipo" type="big_decimal">
+            <column name="valor_anticipo" precision="14" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" />
+        </property>
+        <set name="reclamacionesAccEveFacts" table="reclamaciones_acc_eve_fact" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_factura" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReclamacionesAccEveFact" />
+        </set>
+        <set name="movimientoses" table="movimientos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="factura" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Movimientos" />
+        </set>
+        <set name="detFacturaSolicituds" table="det_factura_solicitud" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="factura" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFacturaSolicitud" />
+        </set>
+        <one-to-one name="anulacionesFacturas" class="com.servinte.axioma.orm.AnulacionesFacturas"></one-to-one>
+        <set name="solicitudAnulFacts" table="solicitud_anul_fact" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_factura" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudAnulFact" />
+        </set>
+        <set name="historicoSubcuentases" table="historico_subcuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_factura" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoSubcuentas" />
+        </set>
+        <set name="datosFinanciacions" table="datos_financiacion" schema="carterapaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_factura" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DatosFinanciacion" />
+        </set>
+        <set name="historicoFiltroDistribucions" table="historico_filtro_distribucion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_factura" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoFiltroDistribucion" />
+        </set>
+        <set name="detCargoses" table="det_cargos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_factura" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+    </class>
+</hibernate-mapping>

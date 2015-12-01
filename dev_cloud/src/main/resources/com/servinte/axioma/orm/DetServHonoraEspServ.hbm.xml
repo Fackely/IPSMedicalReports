@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetServHonoraEspServ" table="det_serv_honora_esp_serv" schema="odontologia">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentasContablesByCuentaVigAntInst" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_vig_ant_inst" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaHonorarios" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_honorarios" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="honorariosEspServ" class="com.servinte.axioma.orm.HonorariosEspServ" fetch="select">
+            <column name="codigo_honorario" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaIngresoInst" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_ingreso_inst" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <property name="porcentajeParticipacion" type="big_decimal">
+            <column name="porcentaje_participacion" precision="5" />
+        </property>
+        <property name="valorParticipacion" type="big_decimal">
+            <column name="valor_participacion" precision="14" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

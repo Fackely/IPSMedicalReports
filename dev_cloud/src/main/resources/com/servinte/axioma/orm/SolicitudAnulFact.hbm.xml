@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolicitudAnulFact" table="solicitud_anul_fact" schema="facturacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuariosByUsuarioAnulAutoriza" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_anul_autoriza" length="30" />
+        </many-to-one>
+        <many-to-one name="facturas" class="com.servinte.axioma.orm.Facturas" fetch="select">
+            <column name="codigo_factura" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioAnula" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_anula" length="30" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioSolicita" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_solicita" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="motivosAnulFact" class="com.servinte.axioma.orm.MotivosAnulFact" fetch="select">
+            <column name="motivo_anulacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_solicita" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuAutorizanAnulFac" class="com.servinte.axioma.orm.UsuAutorizanAnulFac" fetch="select">
+            <column name="usuario_autoriza" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="consecutivoFactura" type="int">
+            <column name="consecutivo_factura" not-null="true" />
+        </property>
+        <property name="observacionesSol" type="string">
+            <column name="observaciones_sol" length="512" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="fechaSolicita" type="date">
+            <column name="fecha_solicita" length="13" not-null="true" />
+        </property>
+        <property name="horaSolicita" type="string">
+            <column name="hora_solicita" length="5" not-null="true" />
+        </property>
+        <property name="observacionesAnul" type="string">
+            <column name="observaciones_anul" length="512" />
+        </property>
+        <property name="fechaAnula" type="date">
+            <column name="fecha_anula" length="13" />
+        </property>
+        <property name="horaAnula" type="string">
+            <column name="hora_anula" length="5" />
+        </property>
+        <property name="anulacionAutorizada" type="string">
+            <column name="anulacion_autorizada" length="1" />
+        </property>
+        <property name="fechaAutoriza" type="date">
+            <column name="fecha_autoriza" length="13" />
+        </property>
+        <property name="horaAutoriza" type="string">
+            <column name="hora_autoriza" length="5" />
+        </property>
+        <property name="observacionesAutoriza" type="string">
+            <column name="observaciones_autoriza" length="512" />
+        </property>
+        <property name="observacionesAnulAutoriza" type="string">
+            <column name="observaciones_anul_autoriza" length="512" />
+        </property>
+        <property name="fechaAnulAutoriza" type="date">
+            <column name="fecha_anul_autoriza" length="13" />
+        </property>
+        <property name="horaAnulAutoriza" type="string">
+            <column name="hora_anul_autoriza" length="5" />
+        </property>
+    </class>
+</hibernate-mapping>

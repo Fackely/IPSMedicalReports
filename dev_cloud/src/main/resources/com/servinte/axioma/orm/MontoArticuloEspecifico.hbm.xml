@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2010 4:29:56 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MontoArticuloEspecifico" table="monto_articulo_especifico" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="sequence">
+				<param name="sequence">facturacion.seq_monto_art_espec</param>
+			</generator>
+        </id>
+        <many-to-one name="detalleMonto" class="com.servinte.axioma.orm.DetalleMonto" fetch="select">
+            <column name="detalle_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK del detalle del registro</comment>
+            </column>
+        </many-to-one>
+        <property name="articulo" type="java.lang.Integer">
+            <column name="articulo">
+                <comment>C&#195;&#179;digo PK del art&#195;&#173;culo relacionado</comment>
+            </column>
+        </property>
+        <property name="cantidadArticulos" type="java.lang.Integer">
+            <column name="cantidad_articulos">
+                <comment>Cantidad de art&#195;&#173;culos a agrupar</comment>
+            </column>
+        </property>
+        <property name="cantidadMonto" type="int">
+            <column name="cantidad_monto" not-null="true">
+                <comment>Cantidad de montos a cobrar</comment>
+            </column>
+        </property>
+        <property name="valorMonto" type="double">
+            <column name="valor_monto" precision="17" scale="17" not-null="true">
+                <comment>Valor del monto a cobrar</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

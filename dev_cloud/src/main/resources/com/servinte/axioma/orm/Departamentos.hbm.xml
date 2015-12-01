@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/06/2011 11:20:58 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Departamentos" table="departamentos" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.DepartamentosId">
+            <key-property name="codigoDepartamento" type="string">
+                <column name="codigo_departamento" length="10" />
+            </key-property>
+            <key-property name="codigoPais" type="string">
+                <column name="codigo_pais" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="paises" class="com.servinte.axioma.orm.Paises" update="false" insert="false" fetch="select">
+            <column name="codigo_pais" length="10" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="20" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="barrioses" table="barrios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_departamento" length="10" not-null="true" />
+                <column name="codigo_pais" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Barrios" />
+        </set>
+        <set name="localidadeses" table="localidades" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_departamento" length="10" not-null="true" />
+                <column name="codigo_pais" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Localidades" />
+        </set>
+        <set name="ciudadeses" table="ciudades" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_departamento" length="10" not-null="true" />
+                <column name="codigo_pais" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Ciudades" />
+        </set>
+    </class>
+</hibernate-mapping>

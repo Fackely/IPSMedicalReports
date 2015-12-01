@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetSecNotaFormatoFact" table="det_sec_nota_formato_fact" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetSecNotaFormatoFactId">
+            <key-property name="codigoFormato" type="int">
+                <column name="codigo_formato" />
+            </key-property>
+            <key-property name="firma" type="int">
+                <column name="firma" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="formatoImpresionFactura" class="com.servinte.axioma.orm.FormatoImpresionFactura" update="false" insert="false" fetch="select">
+            <column name="codigo_formato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoFirma" class="com.servinte.axioma.orm.TipoFirma" update="false" insert="false" fetch="select">
+            <column name="firma" not-null="true" />
+        </many-to-one>
+        <property name="descFirma" type="string">
+            <column name="desc_firma" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

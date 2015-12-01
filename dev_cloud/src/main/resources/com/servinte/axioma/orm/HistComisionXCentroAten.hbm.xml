@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 23, 2010 10:55:25 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistComisionXCentroAten" table="hist_comision_x_centro_aten" schema="tesoreria">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_hist_comi_x_centro_aten</param>
+			</generator>
+        </id>
+        <property name="tarjetaFinancieraComision" type="long">
+            <column name="tarjeta_financiera_comision" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="centroAtencion" type="int">
+            <column name="centro_atencion" not-null="true" />
+        </property>
+        <property name="comision" type="big_decimal">
+            <column name="comision" precision="5" not-null="true" />
+        </property>
+        <property name="accionRealizada" type="string">
+            <column name="accion_realizada" length="3" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

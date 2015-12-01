@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteUsuariosConsumidoresPresupuestoPlano" language="groovy" pageWidth="792" pageHeight="612" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.5937424601000023"/>
+	<property name="ireport.x" value="1373"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="usuariosConsumidoresPresupuestoPlano" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<field name="JRDUsuariosConsumidoresPresupuesto" class="java.lang.Object"/>
+	<field name="autorizaciones" class="java.lang.String"/>
+	<field name="convenio" class="java.lang.String"/>
+	<field name="viaIngreso" class="java.lang.String"/>
+	<field name="grupoServicios" class="java.lang.String"/>
+	<field name="claseInventarios" class="java.lang.String"/>
+	<field name="diagnostico" class="java.lang.String"/>
+	<field name="valorInicial" class="java.lang.String"/>
+	<field name="valorFinal" class="java.lang.String"/>
+	<field name="tipoIdentificacion" class="java.lang.String"/>
+	<field name="numeroIdentificacion" class="java.lang.String"/>
+	<field name="fechaInicial" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.lang.String"/>
+	<pageHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement key="tituloReporte" style="axiomaTexto" mode="Transparent" x="0" y="0" width="220" height="17"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Reporte Identificar Pacientes Consumidores del Presupuesto]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="0" y="16" width="220" height="17" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Autorizaciones: " + ($F{autorizaciones}!=null && !$F{autorizaciones}.equals("") ? $F{autorizaciones} : "Todos")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="0" y="33" width="220" height="17" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Rangos de Fechas: " + $F{fechaInicial} + " - " + $F{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="220" y="16" width="95" height="17" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Convenio: " + ($F{convenio}!=null && !$F{convenio}.equals("") ? $F{convenio} : "Todos")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="315" y="16" width="59" height="17" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Via Ingreso: " + ($F{viaIngreso}!=null && !$F{viaIngreso}.equals("") ? $F{viaIngreso} : "Todos")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="374" y="16" width="67" height="17" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Grupo Servicios: " + ($F{grupoServicios}!=null && !$F{grupoServicios}.equals("") ? $F{grupoServicios} : "Todos")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="441" y="16" width="117" height="17" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Clase de Inventarios: " + ($F{claseInventarios}!=null && !$F{claseInventarios}.equals("") ? $F{claseInventarios} : "Todos")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="558" y="16" width="54" height="17" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Diagnostico: " + ($F{diagnostico}!=null && !$F{diagnostico}.equals("") ? $F{diagnostico} : "Todos")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="611" y="16" width="72" height="17" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Valor Inicial: " + ($F{valorInicial}!=null && !$F{valorInicial}.equals("") ? $F{valorInicial} : "Todos")
+ + " - Valor Final: " + ($F{valorFinal}!=null && !$F{valorFinal}.equals("") ? $F{valorFinal} : "Todos")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="683" y="16" width="66" height="17" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Tipo Identificacion: " + ($F{tipoIdentificacion}!=null && !$F{tipoIdentificacion}.equals("") ? $F{tipoIdentificacion} : "Todos") + " - Numero Identificacion: " + ($F{numeroIdentificacion}!=null && !$F{numeroIdentificacion}.equals("") ? $F{numeroIdentificacion} : "Todos")]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="38" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="752" height="38" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{JRDUsuariosConsumidoresPresupuesto}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{usuariosConsumidoresPresupuestoPlano}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

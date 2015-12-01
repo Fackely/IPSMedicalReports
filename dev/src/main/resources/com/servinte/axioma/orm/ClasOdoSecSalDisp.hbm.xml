@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ClasOdoSecSalDisp" table="clas_odo_sec_sal_disp" schema="odontologia">
+        <id name="clasificacion" type="int">
+            <column name="clasificacion" />
+            <generator class="foreign">
+                <param name="property">clasificaPacientesOdo</param>
+            </generator>
+        </id>
+        <one-to-one name="clasificaPacientesOdo" class="com.servinte.axioma.orm.ClasificaPacientesOdo" constrained="true"></one-to-one>
+        <property name="valorPaciente" type="string">
+            <column name="valor_paciente" length="5" not-null="true" />
+        </property>
+        <property name="valor" type="java.lang.Integer">
+            <column name="valor" />
+        </property>
+        <property name="valorMax" type="java.lang.Integer">
+            <column name="valor_max" />
+        </property>
+    </class>
+</hibernate-mapping>

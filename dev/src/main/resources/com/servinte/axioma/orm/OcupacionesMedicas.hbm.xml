@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 23, 2010 2:39:34 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.OcupacionesMedicas" table="ocupaciones_medicas" schema="administracion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" not-null="true" />
+        </property>
+        <set name="nivelAutorOcupMedicas" inverse="true" lazy="true" table="nivel_autor_ocup_medica" fetch="select">
+            <key>
+                <column name="ocupacion_medica" not-null="true">
+                    <comment>Ocupaci&#195;&#179;n m&#195;&#169;dica que se est&#195;&#161; registrando en el nivel de autorizaci&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorOcupMedica" />
+        </set>
+        <set name="turnos" inverse="false" lazy="true" table="ocupacion_turnos" fetch="select">
+            <key>
+                <column name="ocupacion_medica" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Turno">
+                <column name="turnos" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="medicoses" inverse="true" lazy="true" table="medicos" fetch="select">
+            <key>
+                <column name="ocupacion_medica" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Medicos" />
+        </set>
+        <set name="ocupacionSalarioBases" inverse="true" lazy="true" table="ocupacion_salario_base" fetch="select">
+            <key>
+                <column name="ocupacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OcupacionSalarioBase" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReporteArticulosCE" pageWidth="592" pageHeight="792" columnWidth="592" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subReporteValorFacturasHonorarios" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteValorFacturasAnuladas" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<field name="esAnulado" class="java.lang.Integer"/>
+	<field name="nombreProfesional" class="java.lang.String"/>
+	<field name="JRDListaFacturas" class="java.lang.Object"/>
+	<field name="JRDListaFacturasAnuladas" class="java.lang.Object"/>
+	<field name="esFacturado" class="java.lang.Integer"/>
+	<field name="totalesFactura" class="java.lang.String"/>
+	<field name="totalesAnuladas" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement key="nombreProfesional" style="axiomaTexto" x="0" y="0" width="592" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Profesional de la Salud | "+$F{nombreProfesional}]]></textFieldExpression>
+			</textField>
+			<subreport isUsingCache="true">
+				<reportElement key="subReporteValorFacturasHonorarios" stretchType="RelativeToBandHeight" x="0" y="12" width="592" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReporteValorFacturasAnuladas">
+					<subreportParameterExpression><![CDATA[$P{subReporteValorFacturasAnuladas}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteValorFacturasHonorarios">
+					<subreportParameterExpression><![CDATA[$P{subReporteValorFacturasHonorarios}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{JRDListaFacturas}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteValorFacturasHonorarios}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="10">
+			<textField pattern="###0.0">
+				<reportElement key="valorHonorarioTotal" x="456" y="0" width="136" height="10"/>
+				<box leftPadding="0">
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{totalesFactura}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12">
+			<printWhenExpression><![CDATA[$F{esAnulado}==1]]></printWhenExpression>
+			<staticText>
+				<reportElement x="0" y="0" width="125" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Facturas Anuladas]]></text>
+			</staticText>
+		</band>
+		<band height="8">
+			<printWhenExpression><![CDATA[$F{esAnulado}==1]]></printWhenExpression>
+			<subreport isUsingCache="true">
+				<reportElement key="subReporteValorFacturasAnuladas" stretchType="RelativeToBandHeight" x="0" y="0" width="592" height="7" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReporteValorFacturasAnuladas">
+					<subreportParameterExpression><![CDATA[$P{subReporteValorFacturasAnuladas}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteValorFacturasHonorarios">
+					<subreportParameterExpression><![CDATA[$P{subReporteValorFacturasHonorarios}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{JRDListaFacturasAnuladas}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteValorFacturasAnuladas}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="10">
+			<printWhenExpression><![CDATA[$F{esAnulado}==1]]></printWhenExpression>
+			<textField pattern="###0.0">
+				<reportElement key="valorHonorarioTotal" x="453" y="0" width="136" height="10"/>
+				<box leftPadding="0">
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{totalesAnuladas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

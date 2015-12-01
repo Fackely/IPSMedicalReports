@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogEstadCargoRevisCuenta" table="log_estad_cargo_revis_cuenta" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+        <property name="codigoDetalleCargo" type="long">
+            <column name="codigo_detalle_cargo" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="estadoAnterior" type="int">
+            <column name="estado_anterior" not-null="true" />
+        </property>
+        <property name="estadoActual" type="int">
+            <column name="estado_actual" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

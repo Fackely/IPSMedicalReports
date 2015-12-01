@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 12, 2010 5:51:53 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DocSopMovimCajas" table="doc_sop_movim_cajas" schema="tesoreria">
+        <comment>Registro de los documentos de soporte relacionados con los movimientos de caja seg&#195;&#186;n su forma de pago</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_doc_sop_movim_cajas</param>
+			</generator>
+        </id>
+        <many-to-one name="formasPago" class="com.servinte.axioma.orm.FormasPago" fetch="select">
+            <column name="forma_pago" not-null="true">
+                <comment>Referencia hacia la tabla tesoreria.formas_pago</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="movimientosCaja" class="com.servinte.axioma.orm.MovimientosCaja" fetch="select">
+            <column name="movimiento_caja" precision="10" scale="0" not-null="true">
+                <comment>Referencia hacia la tabla tesoreria.movimientos_caja</comment>
+            </column>
+        </many-to-one>
+        <property name="nroDocumento" type="string">
+            <column name="nro_documento" length="30">
+                <comment>N&#195;&#186;mero de documento de soporte</comment>
+            </column>
+        </property>
+        <property name="valor" type="big_decimal">
+            <column name="valor">
+                <comment>Valor registrado</comment>
+            </column>
+        </property>
+        <set name="detallePagosRcs" inverse="false" lazy="true" table="det_pagos_x_doc_sop_mov" fetch="select" cascade="all-delete-orphan">
+            <key>
+                <column name="doc_sop_mov_caja" precision="10" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.DetallePagosRc">
+                <column name="det_pago_rc" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="detFaltanteSobrantes" inverse="true" lazy="true" table="det_faltante_sobrante" fetch="select" cascade="all">
+            <key>
+                <column name="doc_sop_movim_caja" precision="10" scale="0" not-null="true">
+                    <comment>Documento de soporte del faltante / sobrante. En caso de no recibirse se registra el documento pero el campo det_faltante_sobrante.recibido sera
+                    marcado de forma negativa</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFaltanteSobrante" />
+        </set>
+    </class>
+</hibernate-mapping>

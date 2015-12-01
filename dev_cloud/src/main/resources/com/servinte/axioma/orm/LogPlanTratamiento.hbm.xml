@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogPlanTratamiento" table="log_plan_tratamiento" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico" />
+        </many-to-one>
+        <many-to-one name="planTratamiento" class="com.servinte.axioma.orm.PlanTratamiento" fetch="select">
+            <column name="plan_tratamiento" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="citasOdontologicas" class="com.servinte.axioma.orm.CitasOdontologicas" fetch="select">
+            <column name="cita" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <many-to-one name="valoracionesOdonto" class="com.servinte.axioma.orm.ValoracionesOdonto" fetch="select">
+            <column name="valoracion" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="motivosAtencion" class="com.servinte.axioma.orm.MotivosAtencion" fetch="select">
+            <column name="motivo" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="porConfirmar" type="string">
+            <column name="por_confirmar" length="1" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+        <property name="evolucion" type="java.lang.Long">
+            <column name="evolucion" precision="12" scale="0" />
+        </property>
+        <property name="imagen" type="string">
+            <column name="imagen" length="512" />
+        </property>
+    </class>
+</hibernate-mapping>

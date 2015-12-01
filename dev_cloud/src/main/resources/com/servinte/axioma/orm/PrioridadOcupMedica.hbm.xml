@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 24, 2010 5:55:45 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PrioridadOcupMedica" table="prioridad_ocup_medica" schema="capitacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence">
+				<param name="sequence">capitacion.seq_prioridad_ocu_med</param>
+			 </generator>
+        </id>
+        <property name="nroPrioridad" type="int">
+            <column name="nro_prioridad" not-null="true" />
+        </property>
+        <many-to-one name="nivelAutorOcupMedica" class="com.servinte.axioma.orm.NivelAutorOcupMedica" fetch="select">
+            <column name="nivel_autor_ocup_medica" not-null="true">
+                <comment>Nivel de autorizaci&#195;&#179;n de ocupaci&#195;&#179;n m&#195;&#169;dica relacionada</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

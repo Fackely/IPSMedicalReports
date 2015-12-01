@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 9, 2010 11:32:13 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetAutorizacionConvIngPac" table="det_autorizacion_conv_ing_pac" schema="facturacion">
+        <comment>Detalle Registro de autorizaciones de un Convenio-Paciente</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+			<generator class="sequence" >
+				<param name="sequence">facturacion.seq_det_auto_conv_ing_pac</param>
+			</generator>
+        </id>
+        <many-to-one name="autorizacionConvIngPac" class="com.servinte.axioma.orm.AutorizacionConvIngPac" fetch="select">
+            <column name="auto_conv_ing_pac" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="tipoMedioAuto" type="string">
+            <column name="tipo_medio_auto" length="4" not-null="true">
+                <comment>Acronimo del tipo de autorizacion</comment>
+            </column>
+        </property>
+        <property name="observacionesCambio" type="string">
+            <column name="observaciones_cambio">
+                <comment>Observaciones de la autorizacion</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

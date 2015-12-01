@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReporteProfesional" language="groovy" pageWidth="752" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.7715610000000026"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<field name="profesional" class="java.lang.String"/>
+	<field name="especialidad" class="java.lang.String"/>
+	<field name="fechaSol" class="java.lang.String"/>
+	<field name="estadoSol" class="java.lang.String"/>
+	<field name="idPaciente" class="java.lang.String"/>
+	<field name="nombrePaciente" class="java.lang.String"/>
+	<field name="estadoCita" class="java.lang.String"/>
+	<field name="usuario" class="java.lang.String"/>
+	<field name="servicioInicial" class="java.lang.String"/>
+	<field name="servicioFinal" class="java.lang.String"/>
+	<field name="valorInicialCita" class="java.lang.String"/>
+	<field name="valorFinalCita" class="java.lang.String"/>
+	<group name="Profesional">
+		<groupExpression><![CDATA[$F{profesional}]]></groupExpression>
+		<groupHeader>
+			<band height="38">
+				<frame>
+					<reportElement style="colorEncabezado" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="752" height="38" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<staticText>
+						<reportElement style="axiomaItem" x="2" y="1" width="180" height="17"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ Profesional que solicita el cambio:]]></text>
+					</staticText>
+					<textField>
+						<reportElement key="profesional" style="axiomaTexto" x="182" y="1" width="175" height="17" isRemoveLineWhenBlank="true"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{profesional}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="357" y="0" width="86" height="18"/>
+						<box>
+							<pen lineWidth="0.0"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ Especialidades:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="especialidad" style="axiomaTexto" stretchType="RelativeToBandHeight" x="443" y="1" width="309" height="17" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{especialidad}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaTexto" positionType="FixRelativeToBottom" mode="Opaque" x="682" y="18" width="70" height="20" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Usuario]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaTexto" positionType="FixRelativeToBottom" mode="Opaque" x="605" y="18" width="77" height="20" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Vlr Final Cita]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaTexto" positionType="FixRelativeToBottom" mode="Opaque" x="529" y="18" width="76" height="20" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Vlr Inicial Cita]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaTexto" positionType="FixRelativeToBottom" mode="Opaque" x="443" y="18" width="86" height="20" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Servicios Finales]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaTexto" positionType="FixRelativeToBottom" mode="Opaque" x="357" y="18" width="86" height="20" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+							<font size="8" isBold="true" isPdfEmbedded="false"/>
+						</textElement>
+						<text><![CDATA[Servicios Iniciales]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaTexto" positionType="FixRelativeToBottom" mode="Opaque" x="300" y="18" width="57" height="20" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Estado Cita]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaTexto" positionType="FixRelativeToBottom" mode="Opaque" x="195" y="18" width="105" height="20" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Paciente]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaTexto" positionType="FixRelativeToBottom" mode="Opaque" x="120" y="18" width="75" height="20" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Id Paciente]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaTexto" positionType="FixRelativeToBottom" mode="Opaque" x="60" y="18" width="60" height="20" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Estado Sol]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaTexto" positionType="FixRelativeToBottom" mode="Opaque" x="0" y="18" width="60" height="20" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Fecha Sol]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="21" splitType="Immediate">
+			<frame>
+				<reportElement x="0" y="0" width="752" height="21"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="fechaSol" style="axiomaTexto" stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="Profesional"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaSol}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="estadoSol" style="axiomaTexto" stretchType="RelativeToBandHeight" x="60" y="0" width="60" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="Profesional"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{estadoSol}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="idPaciente" style="axiomaTexto" stretchType="RelativeToBandHeight" x="120" y="0" width="75" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="Profesional"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{idPaciente}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="nombrePaciente" style="axiomaTexto" stretchType="RelativeToBandHeight" x="195" y="0" width="105" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="Profesional"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrePaciente}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="estadoCita" style="axiomaTexto" stretchType="RelativeToBandHeight" x="300" y="0" width="57" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="Profesional"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{estadoCita}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="estadoCita" style="axiomaTexto" stretchType="RelativeToBandHeight" x="682" y="0" width="70" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="Profesional"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{usuario}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="servicioInicial" style="axiomaTexto" stretchType="RelativeToBandHeight" x="357" y="0" width="86" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="Profesional"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{servicioInicial}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="servicioFinal" style="axiomaTexto" stretchType="RelativeToBandHeight" x="443" y="0" width="86" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="Profesional"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{servicioFinal}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement key="valorInicialCita" style="axiomaTexto" stretchType="RelativeToBandHeight" x="529" y="0" width="76" height="21" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{valorInicialCita}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="valorFinalCita" style="axiomaTexto" stretchType="RelativeToBandHeight" x="605" y="0" width="77" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{valorFinalCita}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

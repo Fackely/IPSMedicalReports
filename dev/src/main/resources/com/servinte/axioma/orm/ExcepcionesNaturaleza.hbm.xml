@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 18, 2010 4:43:52 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ExcepcionesNaturaleza" table="excepciones_naturaleza" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="sequence" > 
+				<param name="sequence">manejopaciente.seq_excepciones_naturaleza</param>
+			 </generator>
+        </id>
+        <many-to-one name="naturalezaPacientes" class="com.servinte.axioma.orm.NaturalezaPacientes" fetch="select">
+            <column name="cod_naturaleza" not-null="true">
+                <comment>C&#195;&#179;digo de la naturaleza de paciente </comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tiposRegimen" class="com.servinte.axioma.orm.TiposRegimen" fetch="select">
+            <column name="acr_regimen" length="1" not-null="true">
+                <comment>Acr&#195;&#179;nimo PK del tipo de r&#195;&#169;gimen</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true">
+                <comment>Usuario quien registra la excepci&#195;&#179;n</comment>
+            </column>
+        </many-to-one>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true">
+                <comment>Indicador de la excepci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true">
+                <comment>Fecha de registro de la excepci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true">
+                <comment>Hora de registro de la excepci&#195;&#179;n</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

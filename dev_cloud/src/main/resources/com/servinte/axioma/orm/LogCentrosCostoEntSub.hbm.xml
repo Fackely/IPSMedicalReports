@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogCentrosCostoEntSub" table="log_centros_costo_ent_sub" schema="facturacion">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" not-null="true" />
+        </many-to-one>
+        <property name="eliminado" type="string">
+            <column name="eliminado" length="1" not-null="true" />
+        </property>
+        <property name="nroPrioridadAnterior" type="java.lang.Integer">
+            <column name="nro_prioridad_anterior" />
+        </property>
+        <property name="nroPrioridadNueva" type="java.lang.Integer">
+            <column name="nro_prioridad_nueva" />
+        </property>
+        <property name="respOtrosUsuAnterior" type="string">
+            <column name="resp_otros_usu_anterior" length="1" />
+        </property>
+        <property name="respOtrosUsuNuevo" type="string">
+            <column name="resp_otros_usu_nuevo" length="1" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

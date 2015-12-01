@@ -1,0 +1,388 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<query name="catalogoFacturacion.obtenerContratoVigenteEntidadSubContratada">
+	 	<![CDATA[
+	 	FROM ContratosEntidadesSub contrato
+	 	WHERE contrato.entidadesSubcontratadas.codigoPk = :codigoEntidadSubContratada
+			AND contrato.fechaInicial <= :fechaInicial
+			AND contrato.fechaFinal >= :fechaFinal
+		]]>	
+	</query>
+	
+	
+	<query name="catalogoFacturacion.obtenerDetalleServicioXTarifarioOficial">
+	 	SELECT NEW com.servinte.axioma.dto.facturacion.DetalleServicioDto(
+ 					rs.codigoPropietario, rs.descripcion)
+	 		FROM Servicios serv
+	 			INNER JOIN serv.referenciasServicios rs 
+				INNER JOIN rs.tarifariosOficiales to 
+		WHERE serv.codigo= :codigoServicio
+			AND to.codigo =:codigoTarifario
+	</query>
+	
+		
+	<query name="catalogoFacturacion.obtenerMontosCobro">
+	 	SELECT NEW com.servinte.axioma.dto.facturacion.BusquedaMontosCobroDto(viaIngreso.codigo, viaIngreso.nombre,
+				tipoPaciente.acronimo, tipoPaciente.nombre,
+				estratoSocial.codigo, estratoSocial.descripcion,
+				naturalezaPacientes.codigo, naturalezaPacientes.nombre,
+				tipoMonto.codigo, tipoMonto.nombre,
+				detalleMonto.tipoDetalle, detalleMonto.detalleCodigo,
+				tipoAfiliado.acronimo, tipoAfiliado.nombre,
+				detalleMontoGeneral.valor, detalleMontoGeneral.porcentaje, detalleMontoGeneral.cantidadMonto)
+	 		FROM MontosCobro montos
+	 			INNER JOIN montos.detalleMontos detalleMonto
+				INNER JOIN detalleMonto.viasIngreso viaIngreso
+				INNER JOIN detalleMonto.tiposPaciente tipoPaciente
+				INNER JOIN detalleMonto.tiposMonto tipoMonto
+				INNER JOIN detalleMonto.tiposAfiliado tipoAfiliado	
+				INNER JOIN detalleMonto.estratosSociales estratoSocial
+				LEFT JOIN detalleMonto.naturalezaPacientes naturalezaPacientes
+				LEFT JOIN detalleMonto.detalleMontoGeneral detalleMontoGeneral
+			WHERE montos.codigo IN (:listaMontos)
+				AND detalleMonto.activo = :estado 
+				AND viaIngreso.codigo = :viaIngreso
+				AND tipoAfiliado.acronimo = :tipoAfiliado
+				AND tipoPaciente.acronimo = :tipoPaciente
+				AND estratoSocial.codigo = :clasificacionSocioEconomica
+				AND naturalezaPacientes.codigo = :naturalezaPaciente
+	</query>
+	
+	
+	<query name="catalogoFacturacion.obtenerMontosCobroNaturalezaNull">
+	 	SELECT NEW com.servinte.axioma.dto.facturacion.BusquedaMontosCobroDto(viaIngreso.codigo, viaIngreso.nombre,
+				tipoPaciente.acronimo, tipoPaciente.nombre,
+				estratoSocial.codigo, estratoSocial.descripcion,
+				naturalezaPacientes.codigo, naturalezaPacientes.nombre,
+				tipoMonto.codigo, tipoMonto.nombre,
+				detalleMonto.tipoDetalle, detalleMonto.detalleCodigo,
+				tipoAfiliado.acronimo, tipoAfiliado.nombre,
+				detalleMontoGeneral.valor, detalleMontoGeneral.porcentaje, detalleMontoGeneral.cantidadMonto)
+	 		FROM MontosCobro montos
+	 			INNER JOIN montos.detalleMontos detalleMonto
+				INNER JOIN detalleMonto.viasIngreso viaIngreso
+				INNER JOIN detalleMonto.tiposPaciente tipoPaciente
+				INNER JOIN detalleMonto.tiposMonto tipoMonto
+				INNER JOIN detalleMonto.tiposAfiliado tipoAfiliado	
+				INNER JOIN detalleMonto.estratosSociales estratoSocial
+				LEFT JOIN detalleMonto.naturalezaPacientes naturalezaPacientes
+				LEFT JOIN detalleMonto.detalleMontoGeneral detalleMontoGeneral
+			WHERE montos.codigo IN (:listaMontos)
+				AND detalleMonto.activo = :estado 
+				AND viaIngreso.codigo = :viaIngreso
+				AND tipoAfiliado.acronimo = :tipoAfiliado
+				AND tipoPaciente.acronimo = :tipoPaciente
+				AND estratoSocial.codigo = :clasificacionSocioEconomica
+				AND naturalezaPacientes.codigo is null
+	</query>
+
+
+	<query name="catalogoFacturacion.obtenerMontosCobroAutorizaciones">
+	 	SELECT NEW com.servinte.axioma.dto.facturacion.BusquedaMontosCobroDto(viaIngreso.codigo, viaIngreso.nombre,
+				tipoPaciente.acronimo, tipoPaciente.nombre,
+				estratoSocial.codigo, estratoSocial.descripcion,
+				naturalezaPacientes.codigo, naturalezaPacientes.nombre,
+				tipoMonto.codigo, tipoMonto.nombre,
+				detalleMonto.tipoDetalle, detalleMonto.detalleCodigo,
+				tipoAfiliado.acronimo, tipoAfiliado.nombre,
+				detalleMontoGeneral.valor, detalleMontoGeneral.porcentaje, detalleMontoGeneral.cantidadMonto)
+	 		FROM MontosCobro montos
+	 			INNER JOIN montos.detalleMontos detalleMonto
+				INNER JOIN detalleMonto.viasIngreso viaIngreso
+				INNER JOIN detalleMonto.tiposPaciente tipoPaciente
+				INNER JOIN detalleMonto.tiposMonto tipoMonto
+				INNER JOIN detalleMonto.tiposAfiliado tipoAfiliado	
+				INNER JOIN detalleMonto.estratosSociales estratoSocial
+				LEFT JOIN detalleMonto.naturalezaPacientes naturalezaPacientes
+				LEFT JOIN detalleMonto.detalleMontoGeneral detalleMontoGeneral
+			WHERE montos.codigo IN (:listaMontos)
+				AND detalleMonto.activo = :estado 
+				AND viaIngreso.codigo = :viaIngreso
+				AND tipoAfiliado.acronimo = :tipoAfiliado
+				AND tipoPaciente.acronimo = :tipoPaciente
+				AND tipoMonto.codigo = :tipoMonto
+				AND estratoSocial.codigo = :clasificacionSocioEconomica
+				AND naturalezaPacientes.codigo = :naturalezaPaciente
+	</query>
+	
+	
+	<query name="catalogoFacturacion.obtenerMontosCobroAutorizacionesNaturalezaNull">
+	 	SELECT NEW com.servinte.axioma.dto.facturacion.BusquedaMontosCobroDto(viaIngreso.codigo, viaIngreso.nombre,
+				tipoPaciente.acronimo, tipoPaciente.nombre,
+				estratoSocial.codigo, estratoSocial.descripcion,
+				naturalezaPacientes.codigo, naturalezaPacientes.nombre,
+				tipoMonto.codigo, tipoMonto.nombre,
+				detalleMonto.tipoDetalle, detalleMonto.detalleCodigo,
+				tipoAfiliado.acronimo, tipoAfiliado.nombre,
+				detalleMontoGeneral.valor, detalleMontoGeneral.porcentaje, detalleMontoGeneral.cantidadMonto)
+	 		FROM MontosCobro montos
+	 			INNER JOIN montos.detalleMontos detalleMonto
+				INNER JOIN detalleMonto.viasIngreso viaIngreso
+				INNER JOIN detalleMonto.tiposPaciente tipoPaciente
+				INNER JOIN detalleMonto.tiposMonto tipoMonto
+				INNER JOIN detalleMonto.tiposAfiliado tipoAfiliado	
+				INNER JOIN detalleMonto.estratosSociales estratoSocial
+				LEFT JOIN detalleMonto.naturalezaPacientes naturalezaPacientes
+				LEFT JOIN detalleMonto.detalleMontoGeneral detalleMontoGeneral
+			WHERE montos.codigo IN (:listaMontos)
+				AND detalleMonto.activo = :estado 
+				AND viaIngreso.codigo = :viaIngreso
+				AND tipoAfiliado.acronimo = :tipoAfiliado
+				AND tipoPaciente.acronimo = :tipoPaciente
+				AND tipoMonto.codigo = :tipoMonto
+				AND estratoSocial.codigo = :clasificacionSocioEconomica
+				AND naturalezaPacientes.codigo is null
+	</query>
+
+
+	<query name="catalogoFacturacion.obtenerMontoMedicamentoInsumoEspecifico">
+	 	SELECT NEW com.servinte.axioma.dto.facturacion.InfoMontoDetalladoMedicamentoInsumoDto(
+	 			mae.codigo, mae.articulo, mae.cantidadArticulos, mae.cantidadMonto, mae.valorMonto)
+	 	FROM MontoArticuloEspecifico mae
+		WHERE mae.detalleMonto = :codigoDetalleMonto
+			AND mae.articulo = :codigoArticulo
+	</query>
+	
+	
+	<query name="catalogoFacturacion.obtenerMontoServicioEspecifico">
+	 	SELECT NEW com.servinte.axioma.dto.facturacion.InfoMontoDetalladoServicioDto(
+	 			mse.codigo, mse.servicios.codigo, mse.cantidadServicio, mse.cantidadMonto, mse.valorMonto)
+	 	FROM MontoServicioEspecifico mse
+		WHERE mse.detalleMonto = :codigoDetalleMonto
+			AND mse.servicios.codigo = :codigoServicio
+	</query>
+	
+	
+	<sql-query name="catalogoFacturacion.obtenerMontoAgrupadoMedicamentoInsumo">
+		<return-scalar column="codigo" type="integer" />
+		<return-scalar column="subgrupo_inventario" type="integer" />
+		<return-scalar column="grupo_inventario" type="integer" />
+		<return-scalar column="clase_inventario" type="integer" />
+		<return-scalar column="naturaleza_articulo" type="string" />
+		<return-scalar column="cantidad_articulos" type="integer" />
+		<return-scalar column="cantidad_monto" type="integer" />
+		<return-scalar column="valor_monto" type="double" />
+		SELECT maa.codigo AS codigo,
+			maa.clase_inventario,
+			maa.grupo_inventario,
+			maa.subgrupo_inventario,
+			maa.naturaleza_articulo,
+			maa.cantidad_articulos,
+			maa.cantidad_monto,
+			maa.valor_monto
+		FROM monto_agrupacion_articulos maa
+		WHERE detalle_codigo = :codigoDetalleMonto
+			AND (maa.subgrupo_inventario=
+					(SELECT a.subgrupo FROM articulo a WHERE a.codigo=:codigoArticulo)
+				OR maa.subgrupo_inventario IS NULL)
+			AND (maa.grupo_inventario =
+					(SELECT s.grupo FROM subgrupo_inventario s WHERE s.codigo =
+						(SELECT a.subgrupo FROM articulo a WHERE a.codigo= :codigoArticulo)
+				) OR maa.grupo_inventario IS NULL)
+			AND (maa.clase_inventario =
+					(SELECT s.clase	FROM subgrupo_inventario s WHERE s.codigo =
+						(SELECT a.subgrupo FROM articulo a WHERE a.codigo = :codigoArticulo)
+				) OR maa.clase_inventario IS NULL)
+			AND (maa.naturaleza_articulo=
+					(SELECT a.naturaleza FROM articulo a WHERE a.codigo= :codigoArticulo)
+				OR maa.naturaleza_articulo IS NULL) 
+		ORDER BY maa.subgrupo_inventario,
+				 maa.grupo_inventario,
+				 maa.clase_inventario,
+				 maa.naturaleza_articulo
+	</sql-query>
+
+
+	<sql-query name="catalogoFacturacion.obtenerMontoAgrupadoServicio">
+		<return-scalar column="codigo" type="integer" />
+		<return-scalar column="grupo_servicio_codigo" type="integer" />
+		<return-scalar column="acronimo_tipo_servicio" type="string" />
+		<return-scalar column="especialidad_codigo" type="integer" />
+		<return-scalar column="cantidad_servicio" type="integer" />
+		<return-scalar column="cantidad_monto" type="integer" />
+		<return-scalar column="valor_monto" type="double" />
+			SELECT mas.codigo,
+				mas.grupo_servicio_codigo,
+				mas.acronimo_tipo_servicio,
+				mas.especialidad_codigo,
+				mas.cantidad_servicio,
+				mas.cantidad_monto,
+				mas.valor_monto
+			FROM monto_agrupacion_servicios mas
+			WHERE detalle_codigo = :codigoDetalleMonto
+				AND ((especialidad_codigo=
+						(SELECT s.especialidad FROM servicios s WHERE s.codigo = :codigoServicio)
+					) OR especialidad_codigo IS NULL)
+				AND ((acronimo_tipo_servicio=
+						(SELECT s.tipo_servicio FROM servicios s WHERE s.codigo = :codigoServicio)
+					) OR (acronimo_tipo_servicio IS NULL))
+				AND ((grupo_servicio_codigo=
+						(SELECT s.grupo_servicio FROM servicios s WHERE s.codigo = :codigoServicio)
+					) OR grupo_servicio_codigo IS NULL)
+			ORDER BY especialidad_codigo,
+					 acronimo_tipo_servicio,
+					 grupo_servicio_codigo
+	</sql-query>
+
+
+	<sql-query name="catalogoFacturacion.obtenerMontosCobroXConvenioFecha">
+		<return-scalar column="cod" type="integer" />
+		SELECT codigo AS cod FROM montos_cobro 
+			WHERE convenio = :codigoConvenio 
+				AND vigencia_inicial = GETVIGENCIACONVENIO(:codigoConvenio, :fecha)
+	</sql-query>
+	
+	<sql-query name="catalogoFacturacion.obtenerCentrosCostoPorGrupoServicios">
+		<return-scalar column="codigo" type="integer" />
+		<return-scalar column="nombre" type="string" />
+		<return-scalar column="tipoEntidad" type="string" />
+		SELECT DISTINCT cc.codigo AS codigo, cc.nombre AS nombre, cc.tipo_entidad_ejecuta AS tipoEntidad 
+		FROM facturacion.grupos_servicios gs
+		  INNER JOIN administracion.centro_costo_grupo_ser ccgs ON (ccgs.grupo_servicio=gs.codigo)
+		  INNER JOIN facturacion.centros_costo_entidades_sub cces ON (cces.centro_costo = ccgs.centro_costo)
+		  INNER JOIN administracion.centros_costo cc ON (cc.codigo=cces.centro_costo)
+		WHERE gs.codigo in (:gruposServicios)
+		  AND cces.nro_prioridad in (:prioridades)
+		  AND cc.centro_atencion = :centroAtencion
+		  AND cc.tipo_area = :tipoArea
+		ORDER BY cc.nombre
+	</sql-query>
+	
+	<sql-query name="catalogoFacturacion.obtenerCentrosCostoPorUnidadConsultaServicios">
+		<return-scalar column="codigo" type="integer" />
+		<return-scalar column="nombre" type="string" />
+		<return-scalar column="tipoEntidad" type="string" />
+		SELECT DISTINCT cc.codigo AS codigo, cc.nombre AS nombre, cc.tipo_entidad_ejecuta AS tipoEntidad 
+		FROM consultaexterna.unidades_consulta uc
+		  INNER JOIN consultaexterna.cen_costo_x_un_consulta ccuc ON (ccuc.unidad_consulta=uc.codigo)
+		  INNER JOIN facturacion.centros_costo_entidades_sub cces ON (cces.centro_costo = ccuc.centro_costo)
+		  INNER JOIN administracion.centros_costo cc ON (cc.codigo=cces.centro_costo)
+		WHERE uc.codigo in (:unidadesConsultaServicios)
+		  AND cces.nro_prioridad in (:prioridades)
+		  AND cc.centro_atencion = :centroAtencion
+		  AND cc.tipo_area = :tipoArea
+		ORDER BY cc.nombre
+	</sql-query>
+	
+	<sql-query name="catalogoFacturacion.obtenerCentrosCostoPorGrupoUnidadConsultaServicios">
+		<return-scalar column="codigo" type="integer" />
+		<return-scalar column="nombre" type="string" />
+		<return-scalar column="tipoEntidad" type="string" />
+		SELECT DISTINCT centrosCosto.codigo, centrosCosto.nombre, 
+							centrosCosto.tipoEntidad
+		FROM
+			((SELECT DISTINCT cc.codigo AS codigo, cc.nombre AS nombre, cc.tipo_entidad_ejecuta AS tipoEntidad
+				FROM facturacion.grupos_servicios gs
+				  INNER JOIN administracion.centro_costo_grupo_ser ccgs ON (ccgs.grupo_servicio=gs.codigo)
+				  INNER JOIN facturacion.centros_costo_entidades_sub cces ON (cces.centro_costo = ccgs.centro_costo)
+				  INNER JOIN administracion.centros_costo cc ON (cc.codigo=cces.centro_costo)
+				WHERE gs.codigo in (:gruposServicios)
+				  AND cces.nro_prioridad in (:prioridades)
+				  AND cc.centro_atencion = :centroAtencion
+				  AND cc.tipo_area = :tipoArea)
+			 UNION 
+			(SELECT DISTINCT cc.codigo AS codigo, cc.nombre AS nombre, cc.tipo_entidad_ejecuta AS tipoEntidad 
+				FROM consultaexterna.unidades_consulta uc
+				  INNER JOIN consultaexterna.cen_costo_x_un_consulta ccuc ON (ccuc.unidad_consulta=uc.codigo)
+				  INNER JOIN facturacion.centros_costo_entidades_sub cces ON (cces.centro_costo = ccuc.centro_costo)
+				  INNER JOIN administracion.centros_costo cc ON (cc.codigo=cces.centro_costo)
+				WHERE uc.codigo in (:unidadesConsultaServicios)
+				  AND cces.nro_prioridad in (:prioridades)
+				  AND cc.centro_atencion = :centroAtencion
+				  AND cc.tipo_area = :tipoArea)) centrosCosto
+		ORDER BY centrosCosto.nombre
+	</sql-query>
+	
+	<sql-query name="catalogoFacturacion.obtenerCentrosCostoMedicamentosInsumos">
+		<return-scalar column="codigo" type="integer" />
+		<return-scalar column="nombre" type="string" />
+		<return-scalar column="tipoEntidad" type="string" />
+		SELECT DISTINCT cc.codigo AS codigo, cc.nombre AS nombre , cc.tipo_entidad_ejecuta AS tipoEntidad 
+		FROM facturacion.centros_costo_entidades_sub cces
+		  INNER JOIN administracion.centros_costo cc ON (cc.codigo=cces.centro_costo)
+		WHERE cces.nro_prioridad in (:prioridades)
+		  AND cc.centro_atencion = :centroAtencion
+		  AND cc.tipo_area = :tipoArea
+		ORDER BY cc.nombre
+	</sql-query>
+	
+	<query name="catalogoFacturacion.obtenerGrupoServicioXServicio">
+	 	SELECT NEW com.servinte.axioma.dto.facturacion.GrupoServicioDto(
+					gruposerv.codigo, gruposerv.tiposMonto.codigo,	gruposerv.instituciones.codigo,
+					gruposerv.descripcion, gruposerv.acronimo, gruposerv.activo,
+					gruposerv.tipo,	gruposerv.multiple,	tipoSala.codigo,
+					gruposerv.numDiasUrgente, gruposerv.acroDiasUrgente,
+					gruposerv.numDiasNormal, gruposerv.acroDiasNormal)
+	 	FROM GruposServicios gruposerv
+	 		INNER JOIN gruposerv.servicioses servicio
+	 		LEFT JOIN gruposerv.tiposSalas tipoSala
+	 	WHERE servicio.codigo= :codigoServicio
+	</query>
+	
+	<query name="catalogoFacturacion.obtenerUnidadesConsultaServicio">
+	 	SELECT uc.codigo
+	 	FROM Servicios serv
+	 		INNER JOIN serv.unidadesConsultas uc
+	 	WHERE serv.codigo= :codigoServicio
+	</query>
+	
+	<query name="catalogoFacturacion.obtenerCentrosCostoEntidadSubContratadaXTipoArea">
+	 	SELECT NEW com.princetonsa.dto.manejoPaciente.DtoCentroCosto (cc.codigo, cc.identificador, 
+	 		cc.codigoInterfaz, cc.nombre, cc.tipoEntidadEjecuta)
+		FROM CentrosCosto cc
+		  	INNER JOIN cc.centrosCostoEntidadesSubs centroCostoEntidadeSub
+		  	INNER JOIN centroCostoEntidadeSub.entidadesSubcontratadas entidadSubContratada
+		  	INNER JOIN cc.tiposArea tipoArea
+		WHERE entidadSubContratada.codigoPk = :codigoEntidadSubContratada 
+		  AND cc.esActivo = :esActivo 
+		  AND tipoArea.codigo = :tipoArea
+	</query>
+	<query name="catalogoFacturacion.obtenerEsquemaTarifarioProcedimientosContrato">
+		<![CDATA[
+			SELECT new com.princetonsa.dto.inventario.DTOEsqTarProcedimientoContrato(
+				etpc.codigo,cont.codigo,et.codigo, gs.codigo )
+			FROM EsqTarProcedimientoContrato etpc
+			INNER JOIN etpc.contratos cont
+			INNER JOIN etpc.esquemasTarifarios et
+			INNER JOIN etpc.centroAtencion ca
+			LEFT JOIN  etpc.gruposServicios gs
+			WHERE cont.codigo = :codigoContrato
+			AND ca.consecutivo = :codigoCentroAtencion
+			AND etpc.fechaVigencia <= :fechaVigencia
+			ORDER BY etpc.fechaVigencia desc
+		]]>		
+	</query>
+	<query name="catalogoFacturacion.obtenerEsquemaTarifarioInventariosContrato">
+		<![CDATA[
+			SELECT new com.princetonsa.dto.inventario.DTOEsqTarInventarioContrato(
+				etpc.codigo,cont.codigo,et.codigo, ci.codigo )
+			FROM EsqTarInventariosContrato etpc
+			INNER JOIN etpc.contratos cont
+			INNER JOIN etpc.esquemasTarifarios et
+			INNER JOIN etpc.centroAtencion ca
+			LEFT JOIN etpc.claseInventario ci
+			WHERE cont.codigo = :codigoContrato
+			AND ca.consecutivo = :codigoCentroAtencion
+			AND etpc.fechaVigencia <= :fechaVigencia
+			ORDER BY etpc.fechaVigencia desc
+		]]>		
+	</query>		
+	
+	<query name="catalogoFacturacion.consultarGruposServicio">
+			SELECT NEW com.servinte.axioma.dto.facturacion.GrupoServicioDto (gs.codigo, 
+			gs.tiposMonto.codigo, gs.instituciones.codigo, gs.descripcion, gs.acronimo, gs.activo, gs.tipo, gs.multiple,
+			gs.tiposSalas.codigo, gs.numDiasUrgente, gs.acroDiasUrgente, gs.numDiasNormal, gs.acroDiasNormal)				
+			FROM GruposServicios gs
+			ORDER BY gs.descripcion asc
+	</query>	
+	
+	<query name="catalogoFacturacion.consultaGrupoServicioxServicio">
+			SELECT NEW com.servinte.axioma.dto.facturacion.GrupoServicioDto (gs.codigo,gs.descripcion)
+			FROM GruposServicios gs
+			INNER JOIN gs.servicioses serv
+			WHERE serv.codigo = :codigoServicio
+	</query>
+</hibernate-mapping>

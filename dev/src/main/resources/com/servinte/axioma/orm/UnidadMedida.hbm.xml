@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 25, 2011 12:12:09 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UnidadMedida" table="unidad_medida" schema="inventarios">
+        <id name="acronimo" type="string">
+            <column name="acronimo" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="128" not-null="true" />
+        </property>
+        <property name="unidosis" type="boolean">
+            <column name="unidosis" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <set name="unidosisXArticulos" inverse="true" lazy="true" table="unidosis_x_articulo" fetch="select">
+            <key>
+                <column name="unidad_medida" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidosisXArticulo" />
+        </set>
+        <set name="articulos" inverse="true" lazy="true" table="articulo" fetch="select">
+            <key>
+                <column name="unidad_medida" length="10" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Articulo" />
+        </set>
+    </class>
+</hibernate-mapping>

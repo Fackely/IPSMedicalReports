@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LoginUsuarios" table="login_usuarios" schema="administracion">
+        <id name="codigo" type="big_decimal">
+            <column name="codigo" precision="131089" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="login" length="30" />
+        </many-to-one>
+        <property name="idSession" type="string">
+            <column name="id_session" length="128" />
+        </property>
+        <property name="fechaLogin" type="date">
+            <column name="fecha_login" length="13" />
+        </property>
+        <property name="horaLogin" type="string">
+            <column name="hora_login" length="8" />
+        </property>
+        <property name="fechaLogout" type="date">
+            <column name="fecha_logout" length="13" />
+        </property>
+        <property name="horaLogout" type="string">
+            <column name="hora_logout" length="8" />
+        </property>
+        <property name="activo" type="java.lang.Character">
+            <column name="activo" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

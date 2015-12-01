@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PaqAgrupacionArticulos" table="paq_agrupacion_articulos" schema="facturacion">
+        <id name="codigoPaqAgrupArticulo" type="long">
+            <column name="codigo_paq_agrup_articulo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="paquetes" class="com.servinte.axioma.orm.Paquetes" fetch="select">
+            <column name="codigo_paquete" length="8" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="clase" type="java.lang.Integer">
+            <column name="clase" />
+        </property>
+        <property name="grupo" type="java.lang.Integer">
+            <column name="grupo" />
+        </property>
+        <property name="subgrupo" type="java.lang.Integer">
+            <column name="subgrupo" />
+        </property>
+        <property name="naturaleza" type="string">
+            <column name="naturaleza" length="2" />
+        </property>
+        <property name="cantidad" type="java.lang.Integer">
+            <column name="cantidad" precision="6" scale="0" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="grupoEspecialArticulo" type="java.lang.Long">
+            <column name="grupo_especial_articulo" precision="12" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

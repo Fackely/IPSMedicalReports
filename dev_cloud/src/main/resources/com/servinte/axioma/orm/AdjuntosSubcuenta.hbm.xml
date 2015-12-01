@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AdjuntosSubcuenta" table="adjuntos_subcuenta" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="15" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" fetch="select">
+            <column name="subcuenta" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="nombreOriginal" type="string">
+            <column name="nombre_original" length="256" not-null="true" />
+        </property>
+        <property name="nombreGenerado" type="string">
+            <column name="nombre_generado" length="256" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

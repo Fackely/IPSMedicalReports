@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 21, 2010 12:24:09 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CierresCajas" table="cierres_cajas" schema="tesoreria">
+        <composite-id name="id" class="com.servinte.axioma.orm.CierresCajasId">
+            <key-property name="consecutivo" type="string">
+                <column name="consecutivo" length="20" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cajasByCaja" class="com.servinte.axioma.orm.Cajas" fetch="select">
+            <column name="caja" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" />
+        </many-to-one>
+        <many-to-one name="cajasByCajaPpal" class="com.servinte.axioma.orm.Cajas" fetch="select">
+            <column name="caja_ppal" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuario" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByCajero" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="cajero" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="trasladosCaja" class="com.servinte.axioma.orm.TrasladosCaja" update="false" insert="false" fetch="select">
+            <column name="traslado_caja" precision="10" scale="0" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="fechaCierre" type="date">
+            <column name="fecha_cierre" length="13" not-null="true" />
+        </property>
+        <property name="horaCierre" type="time">
+            <column name="hora_cierre" length="15" not-null="true" />
+        </property>
+        <property name="fechaCerrada" type="date">
+            <column name="fecha_cerrada" length="13" not-null="true" />
+        </property>
+        <property name="tipoArqueo" type="int">
+            <column name="tipo_arqueo" not-null="true" />
+        </property>
+        <property name="consecutivoCierre" type="string">
+            <column name="consecutivo_cierre" length="32" />
+        </property>
+        <property name="indicativoSolicitud" type="string">
+            <column name="indicativo_solicitud" length="32" />
+        </property>
+        <property name="numeroSolicitudRealizada" type="string">
+            <column name="numero_solicitud_realizada" length="32" />
+        </property>
+        <set name="recibosCajas" inverse="true" lazy="true" table="recibos_caja" fetch="select">
+            <key>
+                <column name="cierre_caja" length="20" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RecibosCaja" />
+        </set>
+        <set name="devolRecibosCajas" inverse="true" lazy="true" table="devol_recibos_caja" fetch="select">
+            <key>
+                <column name="cierre_caja" length="20" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DevolRecibosCaja" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/06/2011 03:09:16 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.OrdenesAmbulatorias" table="ordenes_ambulatorias" schema="ordenes">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" />
+        </many-to-one>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_diagnostico" length="10" />
+            <column name="tipo_cie_diagnostico" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_solicita" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad_solicita" />
+        </many-to-one>
+        <many-to-one name="estadosOrdAmbulatorias" class="com.servinte.axioma.orm.EstadosOrdAmbulatorias" fetch="select">
+            <column name="estado" precision="2" scale="0" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioSolicita" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_solicita" length="30" />
+        </many-to-one>
+        <many-to-one name="tiposOrdenesAmbulatorias" class="com.servinte.axioma.orm.TiposOrdenesAmbulatorias" fetch="select">
+            <column name="tipo_orden" precision="2" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioConfirma" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_confirma" length="30" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" />
+        </many-to-one>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta_solicitante" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_solicita" />
+        </many-to-one>
+        <many-to-one name="citaAsociada" class="com.servinte.axioma.orm.Cita" fetch="select">
+            <column name="cita_asociada" />
+        </many-to-one>
+        <property name="consecutivoOrden" type="string">
+            <column name="consecutivo_orden" length="20" />
+        </property>
+        <property name="pyp" type="java.lang.Boolean">
+            <column name="pyp" />
+        </property>
+        <property name="urgente" type="java.lang.Boolean">
+            <column name="urgente" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="fechaConfirmacion" type="date">
+            <column name="fecha_confirmacion" length="13" />
+        </property>
+        <property name="horaConfirmacion" type="string">
+            <column name="hora_confirmacion" length="5" />
+        </property>
+        <property name="consultaExterna" type="java.lang.Boolean">
+            <column name="consulta_externa" />
+        </property>
+        <property name="otros" type="string">
+            <column name="otros" length="4000" />
+        </property>
+        <property name="controlEspecial" type="java.lang.Character">
+            <column name="control_especial" length="1" />
+        </property>
+        <one-to-one name="detOrdenAmbServicio" class="com.servinte.axioma.orm.DetOrdenAmbServicio"></one-to-one>
+        <one-to-one name="anulacionOrdenAmbulatorias" class="com.servinte.axioma.orm.AnulacionOrdenAmbulatorias"></one-to-one>
+        <set name="ordenesAmbulatoriasPosponers" table="ordenes_ambulatorias_posponer" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="orden_ambulatoria" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdenesAmbulatoriasPosponer" />
+        </set>
+        <set name="detAutorizacioneses" table="det_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="orden_ambulatoria" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAutorizaciones" />
+        </set>
+        <set name="autoEntsubOrdenambulas" table="auto_entsub_ordenambula" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_ordenambula" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutoEntsubOrdenambula" />
+        </set>
+        <set name="solicitudeses" table="ordenes_amb_solicitudes" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="orden" precision="10" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Solicitudes">
+                <column name="numero_solicitud" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="detOrdenAmbArticulos" table="det_orden_amb_articulo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_orden" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetOrdenAmbArticulo" />
+        </set>
+        <set name="justificacionArtSols" table="justificacion_art_sol" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="orden_ambulatoria" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.JustificacionArtSol" />
+        </set>
+        <set name="ordAmbJustArtSols" table="ord_amb_just_art_sol" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_orden" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdAmbJustArtSol" />
+        </set>
+    </class>
+</hibernate-mapping>

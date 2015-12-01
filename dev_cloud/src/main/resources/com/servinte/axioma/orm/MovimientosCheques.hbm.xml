@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 30, 2010 9:31:50 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MovimientosCheques" table="movimientos_cheques" schema="tesoreria">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ciudadesByFkCiudaMcGiradorCiudades" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_girador" length="10" />
+            <column name="departamento_girador" length="10" />
+            <column name="pais_girador" length="10" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkCiudaMcPlazaCiudades" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_plaza" length="10" />
+            <column name="departamento_plaza" length="10" />
+            <column name="pais_plaza" length="10" />
+        </many-to-one>
+        <many-to-one name="entidadesFinancieras" class="com.servinte.axioma.orm.EntidadesFinancieras" fetch="select">
+            <column name="entidad_financiera" not-null="true" />
+        </many-to-one>
+        <many-to-one name="detallePagosRc" class="com.servinte.axioma.orm.DetallePagosRc" fetch="select">
+            <column name="det_pago_rc" />
+        </many-to-one>
+        <property name="numeroCheque" type="string">
+            <column name="numero_cheque" length="30" not-null="true" />
+        </property>
+        <property name="numeroCuenta" type="string">
+            <column name="numero_cuenta" length="30" />
+        </property>
+        <property name="fechaGiro" type="date">
+            <column name="fecha_giro" length="13" not-null="true" />
+        </property>
+        <property name="valor" type="double">
+            <column name="valor" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="girador" type="string">
+            <column name="girador" length="64" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="30" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="15" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+        <property name="autorizacion" type="string">
+            <column name="autorizacion" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

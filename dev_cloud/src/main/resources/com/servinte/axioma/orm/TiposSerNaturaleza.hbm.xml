@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposSerNaturaleza" table="tipos_ser_naturaleza" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.TiposSerNaturalezaId">
+            <key-property name="tipoServicio" type="string">
+                <column name="tipo_servicio" length="1" />
+            </key-property>
+            <key-property name="naturalezaServicio" type="string">
+                <column name="naturaleza_servicio" length="2" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tiposServicio" class="com.servinte.axioma.orm.TiposServicio" update="false" insert="false" fetch="select">
+            <column name="tipo_servicio" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="naturalezasServicio" class="com.servinte.axioma.orm.NaturalezasServicio" update="false" insert="false" fetch="select">
+            <column name="naturaleza_servicio" length="2" not-null="true" />
+        </many-to-one>
+        <property name="automatica" type="boolean">
+            <column name="automatica" not-null="true" />
+        </property>
+        <set name="servicioses" inverse="true" lazy="true" table="servicios" fetch="select">
+            <key>
+                <column name="tipo_servicio" length="1" not-null="true" />
+                <column name="naturaleza_servicio" length="2" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Servicios" />
+        </set>
+    </class>
+</hibernate-mapping>

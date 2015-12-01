@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2010 2:49:56 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoMontosCobro" table="histo_montos_cobro" schema="facturacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_his_monto_cobro</param>
+			</generator>
+        </id>
+        <many-to-one name="montosCobro" class="com.servinte.axioma.orm.MontosCobro" fetch="select">
+            <column name="monto_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK del monto de cobo relacionado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="accionRealizada" type="string">
+            <column name="accion_realizada" length="3" not-null="true">
+                <comment>Acci&#195;&#179;n que se realiz&#195;&#179; sobre el registro</comment>
+            </column>
+        </property>
+        <set name="histoDetalleMontos" inverse="true" lazy="true" table="histo_detalle_monto" fetch="select" cascade="all">
+            <key>
+                <column name="monto_codigo" not-null="true">
+                    <comment>C&#195;&#179;digo PK del monto de cobro relacionado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoDetalleMonto" />
+        </set>
+    </class>
+</hibernate-mapping>

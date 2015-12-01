@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 7, 2011 11:17:36 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NaturalezaArticulo" table="naturaleza_articulo" schema="inventarios">
+        <composite-id name="id" class="com.servinte.axioma.orm.NaturalezaArticuloId">
+            <key-property name="acronimo" type="string">
+                <column name="acronimo" length="2" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="32" not-null="true" />
+        </property>
+        <property name="esPos" type="java.lang.Character">
+            <column name="es_pos" length="1" />
+        </property>
+        <property name="codigoRips" type="string">
+            <column name="codigo_rips" length="2" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="codigoInterfaz" type="string">
+            <column name="codigo_interfaz" length="10" />
+        </property>
+        <property name="esMedicamento" type="char">
+            <column name="es_medicamento" length="1" not-null="true" />
+        </property>
+        <set name="paqAgrupacionArticuloses" inverse="true" lazy="true" table="paq_agrupacion_articulos" fetch="select">
+            <key>
+                <column name="naturaleza" length="2" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaqAgrupacionArticulos" />
+        </set>
+        <set name="cierreTempNivelAteNatArts" inverse="true" lazy="true" table="cierre_temp_nivel_ate_nat_art" fetch="select">
+            <key>
+                <column name="naturaleza_articulo" length="2" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempNivelAteNatArt" />
+        </set>
+        <set name="agrupArtExepCobConvxconts" inverse="true" lazy="true" table="agrup_art_exep_cob_convxcont" fetch="select">
+            <key>
+                <column name="naturaleza" length="2" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupArtExepCobConvxcont" />
+        </set>
+        <set name="agruArtIncluexcluCcs" inverse="true" lazy="true" table="agru_art_incluexclu_cc" fetch="select">
+            <key>
+                <column name="naturaleza" length="2" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtIncluexcluCc" />
+        </set>
+        <set name="exCoberAgruArtEntSubs" inverse="true" lazy="true" table="ex_cober_agru_art_ent_sub" fetch="select">
+            <key>
+                <column name="naturaleza" length="2" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberAgruArtEntSub" />
+        </set>
+        <set name="cobAgrupArticuloses" inverse="true" lazy="true" table="cob_agrup_articulos" fetch="select">
+            <key>
+                <column name="naturaleza" length="2" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CobAgrupArticulos" />
+        </set>
+        <set name="cierreTempNaturArts" inverse="true" lazy="true" table="cierre_temp_natur_art" fetch="select">
+            <key>
+                <column name="naturaleza_articulo" length="2" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempNaturArt" />
+        </set>
+        <set name="agrupArtDescComConvconts" inverse="true" lazy="true" table="agrup_art_desc_com_convcont" fetch="select">
+            <key>
+                <column name="naturaleza" length="2" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupArtDescComConvcont" />
+        </set>
+        <set name="agruArtIncluexcluEconts" inverse="true" lazy="true" table="agru_art_incluexclu_econt" fetch="select">
+            <key>
+                <column name="naturaleza" length="2" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtIncluexcluEcont" />
+        </set>
+        <set name="agruArtExceTariConts" inverse="true" lazy="true" table="agru_art_exce_tari_cont" fetch="select">
+            <key>
+                <column name="naturaleza" length="2" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtExceTariCont" />
+        </set>
+        <set name="articulos" inverse="true" lazy="true" table="articulo" fetch="select">
+            <key>
+                <column name="naturaleza" length="2" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Articulo" />
+        </set>
+    </class>
+</hibernate-mapping>

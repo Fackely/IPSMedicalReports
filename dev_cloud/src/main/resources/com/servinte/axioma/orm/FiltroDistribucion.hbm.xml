@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FiltroDistribucion" table="filtro_distribucion" schema="facturacion">
+        <id name="subCuenta" type="int">
+            <column name="sub_cuenta" />
+            <generator class="foreign">
+                <param name="property">subCuentas</param>
+            </generator>
+        </id>
+        <one-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" constrained="true"></one-to-one>
+        <many-to-one name="centrosCostoByCentroCostoEjecuta" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_ejecuta" />
+        </many-to-one>
+        <many-to-one name="centrosCostoByCentroCostoSolicita" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_solicita" />
+        </many-to-one>
+        <many-to-one name="tiposPaciente" class="com.servinte.axioma.orm.TiposPaciente" fetch="select">
+            <column name="tipo_paciente" length="1" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" />
+        </many-to-one>
+        <property name="fechaInicialSolicitud" type="date">
+            <column name="fecha_inicial_solicitud" length="13" />
+        </property>
+        <property name="fechaFinalSolicitud" type="date">
+            <column name="fecha_final_solicitud" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

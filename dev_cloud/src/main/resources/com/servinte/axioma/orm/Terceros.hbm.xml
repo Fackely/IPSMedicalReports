@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 1, 2010 10:58:27 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Terceros" table="terceros" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipoTercero" class="com.servinte.axioma.orm.TipoTercero" fetch="select">
+            <column name="tipo_tercero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="numeroIdentificacion" type="string">
+            <column name="numero_identificacion" length="20" not-null="true" unique="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="128" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="digitoVerificacion" type="java.lang.Boolean">
+            <column name="digito_verificacion" precision="1" scale="0" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="256" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="128" />
+        </property>
+        <set name="detalleDespachosesForProveedorCatalogo" inverse="true" lazy="true" table="detalle_despachos" fetch="select">
+            <key>
+                <column name="proveedor_catalogo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachos" />
+        </set>
+        <set name="conceptosIngTesorerias" inverse="true" lazy="true" table="conceptos_ing_tesoreria" fetch="select">
+            <key>
+                <column name="nit_homologacion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosIngTesoreria" />
+        </set>
+        <set name="aliadoOdontologicos" inverse="true" lazy="true" table="aliado_odontologico" fetch="select">
+            <key>
+                <column name="tercero" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AliadoOdontologico" />
+        </set>
+        <set name="conceptosFacturasVariases" inverse="true" lazy="true" table="conceptos_facturas_varias" fetch="select">
+            <key>
+                <column name="tercero" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosFacturasVarias" />
+        </set>
+        <set name="entidadesSubcontratadases" inverse="true" lazy="true" table="entidades_subcontratadas" fetch="select">
+            <key>
+                <column name="tercero" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntidadesSubcontratadas" />
+        </set>
+        <set name="detalleDespachosesForProveedorCompra" inverse="true" lazy="true" table="detalle_despachos" fetch="select">
+            <key>
+                <column name="proveedor_compra" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachos" />
+        </set>
+        <set name="registroEgresosDeCajas" inverse="true" lazy="true" table="registro_egresos_de_caja" fetch="select">
+            <key>
+                <column name="tercero" not-null="true">
+                    <comment>Terceros registrados en el sistema</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEgresosDeCaja" />
+        </set>
+        <set name="detalleDespachoPedidosForProveedorCompra" inverse="true" lazy="true" table="detalle_despacho_pedido" fetch="select">
+            <key>
+                <column name="proveedor_compra" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachoPedido" />
+        </set>
+        <set name="facturases" inverse="true" lazy="true" table="facturas" fetch="select">
+            <key>
+                <column name="cod_res_particular" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Facturas" />
+        </set>
+        <set name="detalleDespachoPedidosForProveedorCatalogo" inverse="true" lazy="true" table="detalle_despacho_pedido" fetch="select">
+            <key>
+                <column name="proveedor_catalogo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachoPedido" />
+        </set>
+        <set name="pooleses" inverse="true" lazy="true" table="pooles" fetch="select">
+            <key>
+                <column name="tercero_responsable" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Pooles" />
+        </set>
+        <set name="logAliadoOdontologicos" inverse="true" lazy="true" table="log_aliado_odontologico" fetch="select">
+            <key>
+                <column name="tercero" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogAliadoOdontologico" />
+        </set>
+        <set name="transportadoraValoreses" inverse="true" lazy="true" table="transportadora_valores" fetch="select">
+            <key>
+                <column name="razon_social" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TransportadoraValores" />
+        </set>
+        <set name="empresases" inverse="true" lazy="true" table="empresas" fetch="select">
+            <key>
+                <column name="tercero" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Empresas" />
+        </set>
+        <set name="deudoreses" inverse="true" lazy="true" table="deudores" fetch="select">
+            <key>
+                <column name="codigo_tercero" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Deudores" />
+        </set>
+        <set name="entidadesFinancierases" inverse="true" lazy="true" table="entidades_financieras" fetch="select">
+            <key>
+                <column name="tercero" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntidadesFinancieras" />
+        </set>
+        <set name="conceptosRetencionTerceros" inverse="true" lazy="true" table="conceptos_retencion_tercero" fetch="select">
+            <key>
+                <column name="tercero" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosRetencionTercero" />
+        </set>
+    </class>
+</hibernate-mapping>

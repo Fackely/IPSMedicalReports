@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 30, 2011 8:31:36 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutorizacionesEstanciaCapita" table="autorizaciones_estancia_capita" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">manejopaciente.seq_auto_estancia_capita</param>
+			</generator>
+        </id>
+        <many-to-one name="autorizacionesIngreEstancia" class="com.servinte.axioma.orm.AutorizacionesIngreEstancia" fetch="select">
+            <column name="autorizacion_ingre_estancia" precision="12" scale="0" not-null="true">
+                <comment>Llave primaria que hace relaci&#195;&#179;n a la tabla de manejopaciente.autorizaciones_ingre_estancia</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="autorizacionesCapitacionSub" class="com.servinte.axioma.orm.AutorizacionesCapitacionSub" fetch="select">
+            <column name="autorizacion_capitacion_sub" precision="12" scale="0" not-null="true">
+                <comment>Hace relaci&#195;&#179;n a la tabla de manejopaciente.autorizaciones_capitacion_sub</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

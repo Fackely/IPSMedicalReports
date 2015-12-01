@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2011 5:31:35 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogRipsEntSubInconsisCamp" table="log_rips_ent_sub_inconsis_camp" schema="facturacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_log_rips_ent_sub_inc_camp</param>
+			</generator>
+        </id>
+        <many-to-one name="logRipsEntidadesSubRegistr" class="com.servinte.axioma.orm.LogRipsEntidadesSubRegistr" fetch="select">
+            <column name="log_rips_entidades_sub_registr" not-null="true" />
+        </many-to-one>
+        <property name="nombreCampo" type="string">
+            <column name="nombre_campo" length="100" />
+        </property>
+        <property name="tipoInconsistencia" type="string">
+            <column name="tipo_inconsistencia" length="3" not-null="true" />
+        </property>
+        <property name="valorCampo" type="string">
+            <column name="valor_campo" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

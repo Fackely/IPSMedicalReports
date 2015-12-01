@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/06/2011 10:00:00 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ArticulosPeticionQx" table="articulos_peticion_qx" schema="salascirugia">
+        <composite-id name="id" class="com.servinte.axioma.orm.ArticulosPeticionQxId">
+            <key-property name="articulo" type="int">
+                <column name="articulo" />
+            </key-property>
+            <key-property name="peticionQx" type="int">
+                <column name="peticion_qx" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="peticionQx" class="com.servinte.axioma.orm.PeticionQx" update="false" insert="false" fetch="select">
+            <column name="peticion_qx" not-null="true" />
+        </many-to-one>
+        <many-to-one name="articulo" class="com.servinte.axioma.orm.Articulo" update="false" insert="false" fetch="select">
+            <column name="articulo" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

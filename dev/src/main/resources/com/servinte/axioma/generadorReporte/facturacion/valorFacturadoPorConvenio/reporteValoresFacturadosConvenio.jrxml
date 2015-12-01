@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteValoresFacturadosConvenio" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1000000000000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/facturacion/valorFacturadoPorConvenio/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subreporteValoresFacturadosConvenio" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="usuarioProceso" class="java.lang.String"/>
+	<field name="logoDerecha" class="java.lang.String"/>
+	<field name="razonSocial" class="java.lang.String"/>
+	<field name="nit" class="java.lang.String"/>
+	<field name="fechaInicialFactura" class="java.lang.String"/>
+	<field name="fechaFinalFactura" class="java.lang.String"/>
+	<field name="nombreInstitucion" class="java.lang.String"/>
+	<field name="nombreCentroAtencion" class="java.lang.String"/>
+	<field name="dsListaValoresFacturadosConvenios" class="java.lang.Object"/>
+	<field name="actividadEconomica" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+				<reportElement key="" x="10" y="0" width="120" height="70" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{logoDerecha} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA[$F{logoDerecha}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement key="razonSocial" style="axiomaTitulo" stretchType="RelativeToTallestObject" x="140" y="0" width="598" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="nit" style="axiomaTitulo" stretchType="RelativeToTallestObject" x="140" y="21" width="598" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nit}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="40" width="598" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{actividadEconomica}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="57" width="598" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE VALORES FACTURADOS POR CONVENIO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="135" y="8" width="225" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaInicialFactura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="8" width="125" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicial Factura:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="8" width="125" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Fecha Final Factura:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="495" y="8" width="243" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaFinalFactura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="38" width="67" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Institución:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="77" y="38" width="283" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreInstitucion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="495" y="38" width="243" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreCentroAtencion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="370" y="38" width="125" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Centro de Atención:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreporteValoresFacturadosConvenio" x="0" y="0" width="752" height="15" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{dsListaValoresFacturadosConvenios}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreporteValoresFacturadosConvenio}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="35" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="usuarioProcesa" style="axiomaTexto" x="357" y="10" width="139" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuarioProceso}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="axiomaTexto" x="602" y="10" width="26" height="15"/>
+				<box leftPadding="1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="axiomaTexto" x="272" y="10" width="51" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[(new java.text.SimpleDateFormat("hh:mm")).format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="axiomaTexto" mode="Transparent" x="195" y="10" width="77" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="axiomaTexto" x="525" y="10" width="77" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaTexto" x="138" y="10" width="57" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Impresión:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

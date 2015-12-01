@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RipsConsultorios" table="rips_consultorios" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="parametrosRipsByPersonalAtiende" class="com.servinte.axioma.orm.ParametrosRips" fetch="select">
+            <column name="personal_atiende" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="parametrosRipsByAmbitoRealizacion" class="com.servinte.axioma.orm.ParametrosRips" fetch="select">
+            <column name="ambito_realizacion" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkDiagnosticoPrincipal" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_principal" length="10" />
+            <column name="tipo_cie_ppal" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="parametrosRipsByFormaRealizacion" class="com.servinte.axioma.orm.ParametrosRips" fetch="select">
+            <column name="forma_realizacion" />
+        </many-to-one>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkDiagnosticoRel3" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_rel3" length="10" />
+            <column name="tipo_cie_rel3" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkDiagnosticoRel2" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_rel2" length="10" />
+            <column name="tipo_cie_rel2" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkDiagnosticoRel1" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_rel1" length="10" />
+            <column name="tipo_cie_rel1" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposDiagnostico" class="com.servinte.axioma.orm.TiposDiagnostico" fetch="select">
+            <column name="tipo_diagnostico" />
+        </many-to-one>
+        <property name="fechaInicial" type="date">
+            <column name="fecha_inicial" length="13" not-null="true" />
+        </property>
+        <property name="fechaFinal" type="date">
+            <column name="fecha_final" length="13" not-null="true" />
+        </property>
+        <property name="causaExterna" type="java.lang.Integer">
+            <column name="causa_externa" />
+        </property>
+        <property name="finalidadConsulta" type="string">
+            <column name="finalidad_consulta" length="2" />
+        </property>
+        <property name="valorTotal" type="double">
+            <column name="valor_total" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorCopago" type="java.lang.Double">
+            <column name="valor_copago" precision="17" scale="17" />
+        </property>
+        <property name="valorEmpresa" type="java.lang.Double">
+            <column name="valor_empresa" precision="17" scale="17" />
+        </property>
+        <property name="autorizacion" type="string">
+            <column name="autorizacion" length="15" />
+        </property>
+        <property name="numeroSolicitud" type="java.lang.Integer">
+            <column name="numero_solicitud" />
+        </property>
+        <property name="numeroFactura" type="string">
+            <column name="numero_factura" length="20" />
+        </property>
+        <property name="numeroRemision" type="java.lang.Integer">
+            <column name="numero_remision" />
+        </property>
+        <property name="rips" type="java.lang.Boolean">
+            <column name="rips" />
+        </property>
+        <property name="fechaFactura" type="date">
+            <column name="fecha_factura" length="13" />
+        </property>
+        <property name="fechaGeneracion" type="date">
+            <column name="fecha_generacion" length="13" />
+        </property>
+        <property name="horaGeneracion" type="time">
+            <column name="hora_generacion" length="15" />
+        </property>
+        <property name="fechaRemision" type="date">
+            <column name="fecha_remision" length="13" />
+        </property>
+        <property name="fechaAtencion" type="date">
+            <column name="fecha_atencion" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

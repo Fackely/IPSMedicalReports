@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RecargosTarifas" table="recargos_tarifas" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <many-to-one name="tiposRecargo" class="com.servinte.axioma.orm.TiposRecargo" fetch="select">
+            <column name="tipo_recargo" />
+        </many-to-one>
+        <property name="porcentaje" type="java.lang.Double">
+            <column name="porcentaje" precision="17" scale="17" />
+        </property>
+        <property name="valor" type="java.lang.Double">
+            <column name="valor" precision="17" scale="17" />
+        </property>
+        <property name="tipoPaciente" type="string">
+            <column name="tipo_paciente" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

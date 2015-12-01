@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/07/2012 09:05:30 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CargosEntidadSub" table="cargos_entidad_sub" schema="facturacion">
+        <id name="codigoDetalleCargo" type="long">
+            <column name="codigo_detalle_cargo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="articuloByArtPrincipal" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="art_principal" />
+        </many-to-one>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="solicitud" />
+        </many-to-one>
+        <many-to-one name="estadosSolFact" class="com.servinte.axioma.orm.EstadosSolFact" fetch="select">
+            <column name="estado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pedido" class="com.servinte.axioma.orm.Pedido" fetch="select">
+            <column name="pedido" />
+        </many-to-one>
+        <many-to-one name="contratosEntidadesSub" class="com.servinte.axioma.orm.ContratosEntidadesSub" fetch="select">
+            <column name="contrato" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifarios" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tarifario" />
+        </many-to-one>
+        <many-to-one name="articuloByArticulo" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="articulo" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="autorizacion" precision="12" scale="0" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+        <property name="valorUnitario" type="big_decimal">
+            <column name="valor_unitario" precision="14" />
+        </property>
+        <property name="vieneDespacho" type="string">
+            <column name="viene_despacho" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

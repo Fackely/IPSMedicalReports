@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 21, 2010 11:07:50 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MotivosCambiosServicios" table="motivos_cambios_servicios" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.seq_motcamserv</param>
+			</generator>
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="4" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="6" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="string">
+            <column name="fecha_modifica" length="10" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="progServAnterioresCitas" inverse="true" lazy="true" table="prog_serv_anteriores_cita" fetch="select">
+            <key>
+                <column name="motivo_cambio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgServAnterioresCita" />
+        </set>
+        <set name="progServNuevosCitas" inverse="true" lazy="true" table="prog_serv_nuevos_cita" fetch="select">
+            <key>
+                <column name="motivo_cambio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgServNuevosCita" />
+        </set>
+        <set name="solicitudCambioServicios" inverse="true" lazy="true" table="solicitud_cambio_servicio" fetch="select">
+            <key>
+                <column name="motivo_anulacion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudCambioServicio" />
+        </set>
+    </class>
+</hibernate-mapping>

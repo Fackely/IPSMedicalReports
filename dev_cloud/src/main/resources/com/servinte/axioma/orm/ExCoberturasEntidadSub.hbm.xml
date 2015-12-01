@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ExCoberturasEntidadSub" table="ex_coberturas_entidad_sub" schema="facturacion">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="naturalezaPacientes" class="com.servinte.axioma.orm.NaturalezaPacientes" fetch="select">
+            <column name="naturaleza" />
+        </many-to-one>
+        <many-to-one name="tiposPaciente" class="com.servinte.axioma.orm.TiposPaciente" fetch="select">
+            <column name="tipo_paciente" length="1" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="contratosEntidadesSub" class="com.servinte.axioma.orm.ContratosEntidadesSub" fetch="select">
+            <column name="contrato_entidad_sub" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioInactivacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_inactivacion" length="30" />
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="fechaInactivacion" type="date">
+            <column name="fecha_inactivacion" length="13" />
+        </property>
+        <property name="horaInactivacion" type="string">
+            <column name="hora_inactivacion" length="5" />
+        </property>
+        <set name="exCoberArtEntSubs" inverse="true" lazy="true" table="ex_cober_art_ent_sub" fetch="select">
+            <key>
+                <column name="ex_cober_entidad_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberArtEntSub" />
+        </set>
+        <set name="exCoberSerEntSubs" inverse="true" lazy="true" table="ex_cober_ser_ent_sub" fetch="select">
+            <key>
+                <column name="ex_cober_entidad_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberSerEntSub" />
+        </set>
+        <set name="exCoberAgruArtEntSubs" inverse="true" lazy="true" table="ex_cober_agru_art_ent_sub" fetch="select">
+            <key>
+                <column name="ex_cobertura_entidad" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberAgruArtEntSub" />
+        </set>
+        <set name="exCoberAgruSerEntSubs" inverse="true" lazy="true" table="ex_cober_agru_ser_ent_sub" fetch="select">
+            <key>
+                <column name="ex_cober_entidad_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberAgruSerEntSub" />
+        </set>
+        <set name="logExCoberturasEntSubs" inverse="true" lazy="true" table="log_ex_coberturas_ent_sub" fetch="select">
+            <key>
+                <column name="ex_cobertura_entidad_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogExCoberturasEntSub" />
+        </set>
+    </class>
+</hibernate-mapping>

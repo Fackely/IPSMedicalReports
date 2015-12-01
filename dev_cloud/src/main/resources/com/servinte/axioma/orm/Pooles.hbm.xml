@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Pooles" table="pooles" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentasContables" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_x_pagar" />
+        </many-to-one>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="tercero_responsable" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="64" />
+        </property>
+        <property name="activo" type="int">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="diasVencimientoFact" type="java.lang.Integer">
+            <column name="dias_vencimiento_fact" />
+        </property>
+        <set name="participacionesPooleses" inverse="true" lazy="true" table="participaciones_pooles" fetch="select">
+            <key>
+                <column name="pool" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ParticipacionesPooles" />
+        </set>
+        <set name="poolesConvenios" inverse="true" lazy="true" table="pooles_convenio" fetch="select">
+            <key>
+                <column name="pool" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesConvenio" />
+        </set>
+        <set name="poolesEsquemaTarifarios" inverse="true" lazy="true" table="pooles_esquema_tarifario" fetch="select">
+            <key>
+                <column name="pool" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesEsquemaTarifario" />
+        </set>
+        <set name="honorariosPools" inverse="true" lazy="true" table="honorarios_pool" fetch="select">
+            <key>
+                <column name="pool" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HonorariosPool" />
+        </set>
+        <set name="paquetizacionDetFacturas" inverse="true" lazy="true" table="paquetizacion_det_factura" fetch="select">
+            <key>
+                <column name="pool" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetizacionDetFactura" />
+        </set>
+        <set name="conceptPagPoolXConvs" inverse="true" lazy="true" table="concept_pag_pool_x_conv" fetch="select">
+            <key>
+                <column name="pool" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptPagPoolXConv" />
+        </set>
+    </class>
+</hibernate-mapping>

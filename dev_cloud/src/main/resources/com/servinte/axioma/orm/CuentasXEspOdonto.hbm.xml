@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2010 11:43:32 AM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CuentasXEspOdonto" table="cuentas_x_esp_odonto" schema="interfaz">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">interfaz.seq_cuentas_interfaz_odo</param>
+			</generator>
+        </id>
+        <many-to-one name="cuentasContablesByCuentaContable" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaVigAnterior" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_vig_anterior" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaCostoHonorarios" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_costo_honorarios" precision="10" scale="0" />
+        </many-to-one>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

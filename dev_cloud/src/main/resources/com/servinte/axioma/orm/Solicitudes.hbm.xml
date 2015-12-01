@@ -1,0 +1,319 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/06/2011 10:00:00 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Solicitudes" table="solicitudes" schema="ordenes">
+        <id name="numeroSolicitud" type="int">
+            <column name="numero_solicitud" />
+            <generator class="assigned" />
+        </id>
+       <many-to-one name="tiposSolicitud" class="com.servinte.axioma.orm.TiposSolicitud" fetch="select">
+            <column name="tipo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="medicosByCodigoMedico" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico" />
+        </many-to-one>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_diagnostico" length="10" />
+            <column name="tipo_cie_diagnostico" />
+        </many-to-one>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCostoByCentroCostoSolicitado" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_solicitado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="medicosByCodigoMedicoResponde" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico_responde" />
+        </many-to-one>
+        <many-to-one name="medicosByCodigoMedicoInterpretacion" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico_interpretacion" />
+        </many-to-one>
+        <many-to-one name="especialidadesByEspecialidadSolicitante" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad_solicitante" not-null="true" />
+        </many-to-one>
+        <many-to-one name="especialidadesByEspecialidadSolicitada" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad_solicitada" />
+        </many-to-one>
+        <many-to-one name="centrosCostoByCentroCostoSolicitante" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_solicitante" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ocupacionesMedicas" class="com.servinte.axioma.orm.OcupacionesMedicas" fetch="select">
+            <column name="ocupacion_solicitada" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pooles" class="com.servinte.axioma.orm.Pooles" fetch="select">
+            <column name="pool" />
+        </many-to-one>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="string">
+            <column name="hora_grabacion" length="5" not-null="true" />
+        </property>
+        <property name="fechaSolicitud" type="date">
+            <column name="fecha_solicitud" length="13" not-null="true" />
+        </property>
+        <property name="horaSolicitud" type="string">
+            <column name="hora_solicitud" length="5" not-null="true" />
+        </property>
+        <property name="numeroAutorizacion" type="string">
+            <column name="numero_autorizacion" length="15" />
+        </property>
+        <property name="consecutivoOrdenesMedicas" type="int">
+            <column name="consecutivo_ordenes_medicas" not-null="true" />
+        </property>
+        <property name="cobrable" type="boolean">
+            <column name="cobrable" not-null="true" />
+        </property>
+        <property name="interpretacion" type="string">
+            <column name="interpretacion" length="4000" />
+        </property>
+        <property name="fechaInterpretacion" type="date">
+            <column name="fecha_interpretacion" length="13" />
+        </property>
+        <property name="horaInterpretacion" type="string">
+            <column name="hora_interpretacion" length="5" />
+        </property>
+        <property name="vaEpicrisis" type="boolean">
+            <column name="va_epicrisis" not-null="true" />
+        </property>
+        <property name="urgente" type="boolean">
+            <column name="urgente" not-null="true" />
+        </property>
+        <property name="estadoHistoriaClinica" type="int">
+            <column name="estado_historia_clinica" not-null="true" />
+        </property>
+        <property name="datosMedico" type="string">
+            <column name="datos_medico" length="4000" />
+        </property>
+        <property name="datosMedicoResponde" type="string">
+            <column name="datos_medico_responde" length="4000" />
+        </property>
+        <property name="pyp" type="java.lang.Boolean">
+            <column name="pyp" />
+        </property>
+        <property name="tipoComprobante" type="string">
+            <column name="tipo_comprobante" length="4" />
+        </property>
+        <property name="nroComprobante" type="java.lang.Integer">
+            <column name="nro_comprobante" precision="8" scale="0" />
+        </property>
+        <property name="contabilizado" type="java.lang.Integer">
+            <column name="contabilizado" />
+        </property>
+        <property name="tieneCita" type="string">
+            <column name="tiene_cita" length="1" not-null="true" />
+        </property>
+        <property name="liqAsocios" type="java.lang.Character">
+            <column name="liq_asocios" length="1" />
+        </property>
+        <property name="consecutivoLaboratorio" type="java.lang.Integer">
+            <column name="consecutivo_laboratorio" />
+        </property>
+        <property name="justificacionSolicitud" type="string">
+            <column name="justificacion_solicitud" length="4000" />
+        </property>
+        <set name="registroEntregaEntsubSolicis" table="registro_entrega_entsub_solici" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEntregaEntsubSolici" />
+        </set>
+        <set name="logProfSaludNoHonorarios" table="log_prof_salud_no_honorario" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogProfSaludNoHonorario" />
+        </set>
+        <set name="serviciosCitaOdontologicas" table="servicios_cita_odontologica" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosCitaOdontologica" />
+        </set>
+        <set name="justificacionArtSols" table="sol_x_just_art_sol" schema="inventarios" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.JustificacionArtSol">
+                <column name="codigo_justificacion" precision="12" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="detCancelAgenOdos" table="det_cancel_agen_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCancelAgenOdo" />
+        </set>
+        <set name="detTrasSolTransplantesForSolicitudTrasladada" table="det_tras_sol_transplante" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud_trasladada" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetTrasSolTransplante" />
+        </set>
+        <set name="solDespachoSinAutos" table="sol_despacho_sin_auto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolDespachoSinAuto" />
+        </set>
+        <set name="adjuntosCuentas" table="adjuntos_cuenta" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdjuntosCuenta" />
+        </set>
+        <set name="detAutorizacioneses" table="det_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAutorizaciones" />
+        </set>
+        <set name="detallePaquetizacions" table="detalle_paquetizacion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetallePaquetizacion" />
+        </set>
+        <set name="anulacionCargosFarmacias" table="anulacion_cargos_farmacia" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionCargosFarmacia" />
+        </set>
+        <one-to-one name="anulacionesSolicitud" class="com.servinte.axioma.orm.AnulacionesSolicitud"></one-to-one>
+        <set name="solicitudesPosponers" table="solicitudes_posponer" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" not-null="true">
+                    <comment>Solicitud a posponer</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesPosponer" />
+        </set>
+        <one-to-one name="solProcedimientos" class="com.servinte.axioma.orm.SolProcedimientos"></one-to-one>
+        <set name="detServAutorizadoses" table="det_serv_autorizados" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetServAutorizados" />
+        </set>
+        <one-to-one name="cargosDirectos" class="com.servinte.axioma.orm.CargosDirectos"></one-to-one>
+        <set name="detFacturaSolicituds" table="det_factura_solicitud" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFacturaSolicitud" />
+        </set>
+        <set name="ripsConsultorioses" table="rips_consultorios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RipsConsultorios" />
+        </set>
+        <set name="logServiciosCitaOdos" table="log_servicios_cita_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogServiciosCitaOdo" />
+        </set>
+        <set name="detCargoses" table="det_cargos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+        <set name="detAutorizacionesEstancias" table="det_autorizaciones_estancia" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAutorizacionesEstancia" />
+        </set>
+        <one-to-one name="excepcionesRipsCon" class="com.servinte.axioma.orm.ExcepcionesRipsCon"></one-to-one>
+        <set name="paquetizacions" table="paquetizacion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud_paquete" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Paquetizacion" />
+        </set>
+        <one-to-one name="solicitudesCirugia" class="com.servinte.axioma.orm.SolicitudesCirugia"></one-to-one>
+        <set name="ordenesAmbulatoriases" table="ordenes_amb_solicitudes" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.OrdenesAmbulatorias">
+                <column name="orden" precision="10" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="inactivacionesCargoses" table="inactivaciones_cargos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InactivacionesCargos" />
+        </set>
+        <set name="solicitudesSubcuentas" table="solicitudes_subcuenta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesSubcuenta" />
+        </set>
+        <one-to-one name="solicitudesMedicamentos" class="com.servinte.axioma.orm.SolicitudesMedicamentos"></one-to-one>
+        <set name="tarifasEntidadSubs" table="tarifas_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasEntidadSub" />
+        </set>
+        <one-to-one name="solicitudesConsulta" class="com.servinte.axioma.orm.SolicitudesConsulta"></one-to-one>
+        <set name="detAnulCargosFarmacias" table="det_anul_cargos_farmacia" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAnulCargosFarmacia" />
+        </set>
+        <set name="reingresoSalidaHospiDias" table="reingreso_salida_hospi_dia" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud_salida" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReingresoSalidaHospiDia" />
+        </set>
+        <set name="paquetizacionDetFacturas" table="paquetizacion_det_factura" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetizacionDetFactura" />
+        </set>
+        <one-to-one name="solicitudesInter" class="com.servinte.axioma.orm.SolicitudesInter"></one-to-one>
+        <set name="detTrasSolTransplantesForSolicitudGenerada" table="det_tras_sol_transplante" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud_generada" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetTrasSolTransplante" />
+        </set>
+        <set name="autoEntsubSolicitudeses" table="auto_entsub_solicitudes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutoEntsubSolicitudes" />
+        </set>
+        <set name="servArtIncCitaOdos" table="serv_art_inc_cita_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServArtIncCitaOdo" />
+        </set>
+        <set name="tarifasRevCuentas" table="tarifas_rev_cuenta" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasRevCuenta" />
+        </set>
+        
+          <set name="serviciosCitas" table="servicios_cita" schema="consultaexterna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosCita" />
+        </set>
+    </class>
+</hibernate-mapping>

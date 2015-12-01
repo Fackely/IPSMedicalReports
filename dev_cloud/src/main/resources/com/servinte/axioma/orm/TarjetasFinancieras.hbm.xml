@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 9, 2010 3:43:40 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TarjetasFinancieras" table="tarjetas_financieras" schema="tesoreria">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+           <generator class="sequence" >
+				<param name="sequence">seq_tarjetas_financieras</param>
+		  </generator>
+        </id>
+        <many-to-one name="tiposTarjetaFinanciera" class="com.servinte.axioma.orm.TiposTarjetaFinanciera" fetch="select">
+            <column name="tipo_tarjeta_financiera" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="4" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="32" not-null="true" />
+        </property>
+        <property name="baseRete" type="double">
+            <column name="base_rete" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="retefte" type="double">
+            <column name="retefte" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="directoBanco" type="boolean">
+            <column name="directo_banco" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="cuentaContableComision" type="java.lang.Long">
+            <column name="cuenta_contable_comision" precision="10" scale="0" />
+        </property>
+        <property name="cuentaContableRetefte" type="java.lang.Long">
+            <column name="cuenta_contable_retefte" precision="10" scale="0" />
+        </property>
+        <property name="reteiva" type="big_decimal">
+            <column name="reteiva" precision="5" />
+        </property>
+        <property name="cuentaContableReteiva" type="java.lang.Long">
+            <column name="cuenta_contable_reteiva" precision="10" scale="0" />
+        </property>
+        <property name="cuentaContableReteica" type="java.lang.Long">
+            <column name="cuenta_contable_reteica" precision="10" scale="0" />
+        </property>
+        <set name="tarjetaFinancieraReteicas" inverse="true" lazy="true" table="tarjeta_financiera_reteica" fetch="select">
+            <key>
+                <column name="tarjeta_financiera" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarjetaFinancieraReteica" />
+        </set>
+        <set name="movimientosTarjetases" inverse="true" lazy="true" table="movimientos_tarjetas" fetch="select">
+            <key>
+                <column name="codigo_tarjeta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosTarjetas" />
+        </set>
+        <set name="tarjetaFinancieraComisions" inverse="true" lazy="true" table="tarjeta_financiera_comision" fetch="select">
+            <key>
+                <column name="tarjeta_financiera" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarjetaFinancieraComision" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreportePresupuestosOdontoPromo" pageWidth="752" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="3.797498335832416"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subReportePromocion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="descripcionInstCentroCont" class="java.lang.String"/>
+	<field name="dsResultadoPromocion" class="java.lang.Object"/>
+	<field name="consCentroAtencionContrato" class="java.lang.Integer"/>
+	<group name="Institucion">
+		<groupExpression><![CDATA[$F{consCentroAtencionContrato}]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="0" width="752" height="31" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionInstCentroCont" style="axiomaTexto" x="0" y="4" width="752" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="10" isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionInstCentroCont}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="752" height="50"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<subreport>
+					<reportElement key="subReportePromocion" x="0" y="0" width="752" height="50" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="subReportePromocion">
+						<subreportParameterExpression><![CDATA[$P{subReportePromocion}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$F{dsResultadoPromocion}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReportePromocion}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

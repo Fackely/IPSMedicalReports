@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subrptCitasOdontoResumido" pageWidth="732" pageHeight="62" orientation="Landscape" columnWidth="732" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subrptServicios" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="numCitasSinCancelacion" class="java.lang.Integer"/>
+	<field name="descripcionEspecialidad" class="java.lang.String"/>
+	<field name="ayudanteTipoCita" class="java.lang.String"/>
+	<field name="ayudanteEstadoCita" class="java.lang.String"/>
+	<field name="numeroCitas" class="java.lang.Integer"/>
+	<variable name="totalCitasEspecialidad" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{numeroCitas}]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="especialidad" style="axiomaTexto" stretchType="RelativeToBandHeight" x="0" y="0" width="232" height="15" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="3" leftPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionEspecialidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="tipo" style="axiomaTexto" stretchType="RelativeToBandHeight" x="232" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="3" leftPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteTipoCita}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="estado" style="axiomaTexto" stretchType="RelativeToBandHeight" x="382" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="3" leftPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteEstadoCita}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="valor" style="axiomaTexto" stretchType="RelativeToBandHeight" x="532" y="0" width="200" height="15" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="3" leftPadding="3" rightPadding="3">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{numeroCitas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

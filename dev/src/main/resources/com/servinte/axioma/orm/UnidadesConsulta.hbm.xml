@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 27, 2010 6:29:21 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UnidadesConsulta" table="unidades_consulta" schema="consultaexterna">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="4000" not-null="true" />
+        </property>
+        <property name="activa" type="java.lang.Boolean">
+            <column name="activa" />
+        </property>
+        <property name="tipoAtencion" type="string">
+            <column name="tipo_atencion" length="4" not-null="true" />
+        </property>
+        <property name="color" type="string">
+            <column name="color" length="7" />
+        </property>
+        <set name="cancelacionAgendaOdos" inverse="true" lazy="true" table="cancelacion_agenda_odo" fetch="select">
+            <key>
+                <column name="unidad_agenda" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CancelacionAgendaOdo" />
+        </set>
+        <set name="servicioses" inverse="false" lazy="true" table="servicios_unidades_consulta" fetch="select">
+            <key>
+                <column name="unidad_consulta" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Servicios">
+                <column name="codigo_servicio" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="centrosCostos" table="cen_costo_x_un_consulta" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="unidad_consulta" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.CentrosCosto">
+                <column name="centro_costo" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="logServiciosCitaOdos" table="log_servicios_cita_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="unidad_agenda" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogServiciosCitaOdo" />
+        </set>
+        <set name="unidadAgendaServCitaOdontos" inverse="true" lazy="true" table="unidad_agenda_serv_cita_odonto" fetch="select">
+            <key>
+                <column name="unidad_agenda" not-null="true">
+                    <comment>Unidad de agenda de tipo Odontol&#195;&#179;gica</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadAgendaServCitaOdonto" />
+        </set>
+        <set name="serviciosCitaOdontologicas" inverse="true" lazy="true" table="servicios_cita_odontologica" fetch="select">
+            <key>
+                <column name="unidad_agenda" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosCitaOdontologica" />
+        </set>
+        <set name="logReasignarProfOdos" inverse="true" lazy="true" table="log_reasignar_prof_odo" fetch="select">
+            <key>
+                <column name="unidad_consulta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogReasignarProfOdo" />
+        </set>
+        <set name="agendaOdontologicas" inverse="true" lazy="true" table="agenda_odontologica" fetch="select">
+            <key>
+                <column name="unidad_agenda" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgendaOdontologica" />
+        </set>
+        
+         <set name="citas" inverse="true" lazy="true" table="cita" fetch="select">
+            <key>
+                <column name="unidad_consulta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Cita" />
+        </set>
+        <set name="agendas" table="agenda" schema="consultaexterna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="unidad_consulta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Agenda" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 8, 2010 5:59:05 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AgendaOdontologica" table="agenda_odontologica" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="unidadesConsulta" class="com.servinte.axioma.orm.UnidadesConsulta" fetch="select">
+            <column name="unidad_agenda" not-null="true" />
+        </many-to-one>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico" />
+        </many-to-one>
+        <many-to-one name="diasSemana" class="com.servinte.axioma.orm.DiasSemana" fetch="select">
+            <column name="dia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="consultorio" type="int">
+            <column name="consultorio" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="horaInicio" type="string">
+            <column name="hora_inicio" length="5" not-null="true" />
+        </property>
+        <property name="horaFin" type="string">
+            <column name="hora_fin" length="5" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="cupos" type="int">
+            <column name="cupos" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" />
+        </property>
+        <set name="logCitasOdontologicases" inverse="true" lazy="true" table="log_citas_odontologicas" fetch="select">
+            <key>
+                <column name="agenda" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCitasOdontologicas" />
+        </set>
+        <set name="logReasignarProfOdos" inverse="true" lazy="true" table="log_reasignar_prof_odo" fetch="select">
+            <key>
+                <column name="codigo_agenda" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogReasignarProfOdo" />
+        </set>
+        <set name="cuposAgendaOdos" inverse="true" lazy="true" table="cupos_agenda_odo" fetch="select">
+            <key>
+                <column name="agenda_odontologica" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuposAgendaOdo" />
+        </set>
+        <set name="serviciosCitaOdontologicas" inverse="true" lazy="true" table="servicios_cita_odontologica" fetch="select">
+            <key>
+                <column name="codigo_agenda" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosCitaOdontologica" />
+        </set>
+        <set name="logServiciosCitaOdos" inverse="true" lazy="true" table="log_servicios_cita_odo" fetch="select">
+            <key>
+                <column name="codigo_agenda" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogServiciosCitaOdo" />
+        </set>
+        <set name="citasOdontologicases" inverse="true" lazy="true" table="citas_odontologicas" fetch="select">
+            <key>
+                <column name="agenda" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CitasOdontologicas" />
+        </set>
+    </class>
+</hibernate-mapping>

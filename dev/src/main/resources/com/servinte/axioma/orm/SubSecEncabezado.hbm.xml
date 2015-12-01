@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SubSecEncabezado" table="sub_sec_encabezado" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.SubSecEncabezadoId">
+            <key-property name="codigoFormato" type="int">
+                <column name="codigo_formato" />
+            </key-property>
+            <key-property name="codigoSeccion" type="int">
+                <column name="codigo_seccion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="secEncabeFormatoImpFac" class="com.servinte.axioma.orm.SecEncabeFormatoImpFac" update="false" insert="false" fetch="select">
+            <column name="codigo_formato" not-null="true" />
+        </many-to-one>
+        <property name="prioridad" type="java.lang.Integer">
+            <column name="prioridad" />
+        </property>
+        <set name="detSubSecEncabezados" inverse="true" lazy="true" table="det_sub_sec_encabezado" fetch="select">
+            <key>
+                <column name="codigo_formato" not-null="true" />
+                <column name="codigo_seccion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetSubSecEncabezado" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 29, 2011 5:59:59 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposOrdenesAmbulatorias" table="tipos_ordenes_ambulatorias" schema="ordenes">
+        <id name="codigo" type="byte">
+            <column name="codigo" precision="2" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="30" />
+        </property>
+        <set name="ordenesAmbulatoriases" inverse="true" lazy="true" table="ordenes_ambulatorias" fetch="select">
+            <key>
+                <column name="tipo_orden" precision="2" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdenesAmbulatorias" />
+        </set>
+    </class>
+</hibernate-mapping>

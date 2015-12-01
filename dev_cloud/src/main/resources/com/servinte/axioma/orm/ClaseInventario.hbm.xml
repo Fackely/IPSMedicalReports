@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4/05/2011 11:22:19 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ClaseInventario" table="clase_inventario" schema="inventarios">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentasContablesByCuentaInventario" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_inventario" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="rubroPresupuestal" class="com.servinte.axioma.orm.RubroPresupuestal" fetch="select">
+            <column name="rubro_presupuestal" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaCosto" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_costo" precision="10" scale="0" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="64" not-null="true" />
+        </property>
+        <property name="codigoInterfaz" type="string">
+            <column name="codigo_interfaz" length="3" />
+        </property>
+        <set name="esqTarInventariosContratos" table="esq_tar_inventarios_contrato" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase_inventario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarInventariosContrato" />
+        </set>
+        <set name="detVigConRetClases" table="det_vig_con_ret_clase" schema="administracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetClase" />
+        </set>
+        <set name="tarifasInvConEntSubs" table="tarifas_inv_con_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase_inventario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasInvConEntSub" />
+        </set>
+        <set name="agruArtExceTariConts" table="agru_art_exce_tari_cont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtExceTariCont" />
+        </set>
+        <set name="agrupArtExepCobConvxconts" table="agrup_art_exep_cob_convxcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupArtExepCobConvxcont" />
+        </set>
+        <set name="agrupArtDescComConvconts" table="agrup_art_desc_com_convcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupArtDescComConvcont" />
+        </set>
+        <set name="parametricaValorEstandars" table="parametrica_valor_estandar" schema="consultaexterna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase_inventarios" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ParametricaValorEstandar" />
+        </set>
+        <set name="cobAgrupArticuloses" table="cob_agrup_articulos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CobAgrupArticulos" />
+        </set>
+        <set name="detalleValorizacionArts" table="detalle_valorizacion_art" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase_inventario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleValorizacionArt" />
+        </set>
+        <set name="grupoInventarios" table="grupo_inventario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GrupoInventario" />
+        </set>
+        <set name="exCoberAgruArtEntSubs" table="ex_cober_agru_art_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase_inventario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberAgruArtEntSub" />
+        </set>
+        <set name="logEsqTarInvContratos" table="log_esq_tar_inv_contrato" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase_inventario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEsqTarInvContrato" />
+        </set>
+        <set name="esqTarInvtSubCuentases" table="esq_tar_invt_sub_cuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase_inventario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarInvtSubCuentas" />
+        </set>
+        <set name="tiposRetencionClaseInvs" table="tipos_retencion_clase_inv" schema="administracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionClaseInv" />
+        </set>
+        <set name="agruArtIncluexcluCcs" table="agru_art_incluexclu_cc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtIncluexcluCc" />
+        </set>
+        <set name="agruArtIncluexcluEconts" table="agru_art_incluexclu_econt" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtIncluexcluEcont" />
+        </set>
+        <set name="paqAgrupacionArticuloses" table="paq_agrupacion_articulos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaqAgrupacionArticulos" />
+        </set>
+        <set name="cierreTempNivAteClInvArts" table="cierre_temp_niv_ate_cl_inv_art" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase_inventario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempNivAteClInvArt" />
+        </set>
+        <set name="cierreTempClaseInvArts" table="cierre_temp_clase_inv_art" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clase_inventario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempClaseInvArt" />
+        </set>
+    </class>
+</hibernate-mapping>

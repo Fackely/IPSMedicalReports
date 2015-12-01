@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ProcesoDevolucionRc" table="proceso_devolucion_rc" schema="tesoreria">
+        <composite-id name="id" class="com.servinte.axioma.orm.ProcesoDevolucionRcId">
+            <key-property name="numeroRc" type="string">
+                <column name="numero_rc" length="20" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <!--  
+        Esta relacion se documenta temporalmente mientras se resuelve el problema de la llave compuesta en la entidad RecibosCaja
+        
+        <one-to-one name="recibosCaja" class="com.servinte.axioma.orm.RecibosCaja" constrained="true"></one-to-one>
+        -->
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+        <property name="idSesion" type="string">
+            <column name="id_sesion" length="64" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

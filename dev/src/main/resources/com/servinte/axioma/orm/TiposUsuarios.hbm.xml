@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:51:42 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposUsuarios" table="tipos_usuarios" schema="odontologia">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="roles" class="com.servinte.axioma.orm.Roles" fetch="select">
+            <column name="rol" length="64" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="128" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="actividad" type="string">
+            <column name="actividad" length="5" />
+        </property>
+        <set name="concEgrXusuXcatencions" inverse="true" lazy="true" table="conc_egr_xusu_xcatencion" fetch="select">
+            <key>
+                <column name="tipo_usuario_autoriza" precision="10" scale="0" not-null="true">
+                    <comment>Estas opciones corresponden a las definidas a nivel de base de datos en la tabla -tiposUsuario- seg&#195;&#186;n el campo -actividad-</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConcEgrXusuXcatencion" />
+        </set>
+        <set name="detDescuentosOdons" inverse="true" lazy="true" table="det_descuentos_odon" fetch="select">
+            <key>
+                <column name="tipo_usuario_autoriza" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetDescuentosOdon" />
+        </set>
+        <set name="descuentosOdonAtens" inverse="true" lazy="true" table="descuentos_odon_aten" fetch="select">
+            <key>
+                <column name="nivel_autorizacion" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DescuentosOdonAten" />
+        </set>
+        <set name="hisDetDescuentosOdons" inverse="true" lazy="true" table="his_det_descuentos_odon" fetch="select">
+            <key>
+                <column name="tipo_usuario_autoriza" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisDetDescuentosOdon" />
+        </set>
+        <set name="hisDescuentosOdonAtens" inverse="true" lazy="true" table="his_descuentos_odon_aten" fetch="select">
+            <key>
+                <column name="nivel_autorizacion_mod" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisDescuentosOdonAten" />
+        </set>
+    </class>
+</hibernate-mapping>

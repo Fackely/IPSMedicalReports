@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 22, 2010 10:09:16 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FaltanteSobrante" table="faltante_sobrante" schema="tesoreria">
+        <comment>Guada los encabezados de los faltantes o sobrantes</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_faltante_sobrante</param>
+			</generator>
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Usuario que ingresa el cambio de responsable</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Fecha en que se agrega el faltante / sobrante</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Hora en que se agrega el faltante / sobrante</comment>
+            </column>
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="4" not-null="true">
+                <comment>estado en que se encuentra el faltante / sobrante</comment>
+            </column>
+        </property>
+        <set name="detFaltanteSobrantes" inverse="true" lazy="true" table="det_faltante_sobrante" fetch="select">
+            <key>
+                <column name="faltante_sobrante_enc" precision="10" scale="0" not-null="true">
+                    <comment>Documento de soporte encabezado del faltante / sobrante</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFaltanteSobrante" />
+        </set>
+    </class>
+</hibernate-mapping>

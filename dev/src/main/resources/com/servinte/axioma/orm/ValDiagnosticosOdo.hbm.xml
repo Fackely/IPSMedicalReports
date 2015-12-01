@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ValDiagnosticosOdo" table="val_diagnosticos_odo" schema="odontologia">
+        <composite-id name="id" class="com.servinte.axioma.orm.ValDiagnosticosOdoId">
+            <key-property name="valoracionOdo" type="long">
+                <column name="valoracion_odo" precision="12" scale="0" />
+            </key-property>
+            <key-property name="acronimoDiagnostico" type="string">
+                <column name="acronimo_diagnostico" length="10" />
+            </key-property>
+            <key-property name="tipoCieDiagnostico" type="int">
+                <column name="tipo_cie_diagnostico" />
+            </key-property>
+            <key-property name="principal" type="string">
+                <column name="principal" length="1" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" update="false" insert="false" fetch="select">
+            <column name="acronimo_diagnostico" length="10" not-null="true" />
+            <column name="tipo_cie_diagnostico" not-null="true" />
+        </many-to-one>
+        <many-to-one name="valoracionesOdonto" class="com.servinte.axioma.orm.ValoracionesOdonto" update="false" insert="false" fetch="select">
+            <column name="valoracion_odo" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" />
+        </property>
+    </class>
+</hibernate-mapping>

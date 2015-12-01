@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogAutorizacionIngEven" table="log_autorizacion_ing_even" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.LogAutorizacionIngEvenId">
+            <key-property name="autorizacionIngresoEvento" type="string">
+                <column name="autorizacion_ingreso_evento" length="30" />
+            </key-property>
+            <key-property name="codigoPersona" type="java.lang.Integer">
+                <column name="codigo_persona" />
+            </key-property>
+            <key-property name="numeroIdentificacion" type="string">
+                <column name="numero_identificacion" length="20" />
+            </key-property>
+            <key-property name="tipoIdentificacion" type="string">
+                <column name="tipo_identificacion" length="3" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+            <key-property name="funcionalidad" type="int">
+                <column name="funcionalidad" />
+            </key-property>
+            <key-property name="usuarioModifica" type="string">
+                <column name="usuario_modifica" length="30" />
+            </key-property>
+            <key-property name="fechaModifica" type="date">
+                <column name="fecha_modifica" length="13" />
+            </key-property>
+            <key-property name="horaModifica" type="string">
+                <column name="hora_modifica" length="5" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="funcionalidades" class="com.servinte.axioma.orm.Funcionalidades" update="false" insert="false" fetch="select">
+            <column name="funcionalidad" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacion" class="com.servinte.axioma.orm.TiposIdentificacion" update="false" insert="false" fetch="select">
+            <column name="tipo_identificacion" length="3" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" update="false" insert="false" fetch="select">
+            <column name="codigo_persona" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

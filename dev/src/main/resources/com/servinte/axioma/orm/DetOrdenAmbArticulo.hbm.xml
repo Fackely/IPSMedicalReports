@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/05/2011 11:36:23 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetOrdenAmbArticulo" table="det_orden_amb_articulo" schema="ordenes">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetOrdenAmbArticuloId">
+            <key-property name="codigoOrden" type="long">
+                <column name="codigo_orden" precision="10" scale="0" />
+            </key-property>
+            <key-property name="articulo" type="int">
+                <column name="articulo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="viasAdministracion" class="com.servinte.axioma.orm.ViasAdministracion" fetch="select">
+            <column name="via" />
+        </many-to-one>
+        <many-to-one name="tiposFrecuencia" class="com.servinte.axioma.orm.TiposFrecuencia" fetch="select">
+            <column name="tipo_frecuencia" />
+        </many-to-one>
+        <many-to-one name="ordenesAmbulatorias" class="com.servinte.axioma.orm.OrdenesAmbulatorias" update="false" insert="false" fetch="select">
+            <column name="codigo_orden" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato_convenio" />
+        </many-to-one>
+        <many-to-one name="unidosisXArticulo" class="com.servinte.axioma.orm.UnidosisXArticulo" fetch="select">
+            <column name="unidosis_articulo" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="articulo" class="com.servinte.axioma.orm.Articulo" update="false" insert="false" fetch="select">
+            <column name="articulo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="auto_ent_sub" precision="12" scale="0" />
+        </many-to-one>
+        <property name="dosis" type="string">
+            <column name="dosis" length="256" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="512" />
+        </property>
+        <property name="frecuencia" type="java.lang.Long">
+            <column name="frecuencia" precision="10" scale="0" />
+        </property>
+        <property name="cantidad" type="java.lang.Long">
+            <column name="cantidad" precision="10" scale="0" />
+        </property>
+        <property name="medicamento" type="java.lang.Boolean">
+            <column name="medicamento" />
+        </property>
+        <property name="duracionTratamiento" type="java.lang.Integer">
+            <column name="duracion_tratamiento" />
+        </property>
+        <property name="cubierto" type="string">
+            <column name="cubierto" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

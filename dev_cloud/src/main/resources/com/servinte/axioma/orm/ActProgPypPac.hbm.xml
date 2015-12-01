@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/09/2012 02:53:00 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ActProgPypPac" table="act_prog_pyp_pac" schema="pyp">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ordenesAmbulatorias" class="com.servinte.axioma.orm.OrdenesAmbulatorias" fetch="select">
+            <column name="numero_orden" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioProgramar" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_programar" length="30" />
+        </many-to-one>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="numero_solicitud" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioCancelar" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_cancelar" length="30" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioEjecutar" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_ejecutar" length="30" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioSolicitar" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_solicitar" length="30" />
+        </many-to-one>
+        <property name="codigoProgPypPac" type="long">
+            <column name="codigo_prog_pyp_pac" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="actividad" type="long">
+            <column name="actividad" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="estado" type="byte">
+            <column name="estado" precision="2" scale="0" not-null="true" />
+        </property>
+        <property name="fechaSolicitar" type="date">
+            <column name="fecha_solicitar" length="13" />
+        </property>
+        <property name="horaSolicitar" type="string">
+            <column name="hora_solicitar" length="5" />
+        </property>
+        <property name="fechaProgramar" type="date">
+            <column name="fecha_programar" length="13" />
+        </property>
+        <property name="horaProgramar" type="string">
+            <column name="hora_programar" length="5" />
+        </property>
+        <property name="fechaEjecutar" type="date">
+            <column name="fecha_ejecutar" length="13" />
+        </property>
+        <property name="horaEjecutar" type="string">
+            <column name="hora_ejecutar" length="5" />
+        </property>
+        <property name="fechaCancelar" type="date">
+            <column name="fecha_cancelar" length="13" />
+        </property>
+        <property name="horaCancelar" type="string">
+            <column name="hora_cancelar" length="5" />
+        </property>
+        <property name="motivoCancelacion" type="string">
+            <column name="motivo_cancelacion" />
+        </property>
+        <property name="frecuencia" type="java.lang.Long">
+            <column name="frecuencia" precision="10" scale="0" />
+        </property>
+        <property name="tipoFrecuencia" type="java.lang.Short">
+            <column name="tipo_frecuencia" precision="3" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

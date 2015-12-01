@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/05/2011 09:38:00 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposPaciente" table="tipos_paciente" schema="manejopaciente">
+        <id name="acronimo" type="string">
+            <column name="acronimo" length="1" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="32" />
+        </property>
+        <set name="garantiaPacientes" table="garantia_paciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_tipo_paciente" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GarantiaPaciente" />
+        </set>
+        <set name="cuentases" table="cuentas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Cuentas" />
+        </set>
+        <set name="viasIngresos" table="tip_pac_via_ingreso" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.ViasIngreso">
+                <column name="via_ingreso" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="detalleMontos" table="detalle_monto" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente_codigo" length="1" not-null="true">
+                    <comment>C&#243;digo PK del tipo de paciente</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleMonto" />
+        </set>
+        <set name="excepTarifasContratos" table="excep_tarifas_contrato" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcepTarifasContrato" />
+        </set>
+        <set name="centroCostoViaIngresos" table="centro_costo_via_ingreso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentroCostoViaIngreso" />
+        </set>
+        <set name="detalleCoberturas" table="detalle_cobertura" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleCobertura" />
+        </set>
+        <set name="peticionQxes" table="peticion_qx" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PeticionQx" />
+        </set>
+        <set name="filtroDistribucions" table="filtro_distribucion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FiltroDistribucion" />
+        </set>
+        <set name="exCoberturasEntidadSubs" table="ex_coberturas_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberturasEntidadSub" />
+        </set>
+        <set name="paquetesConvenios" table="paquetes_convenio" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetesConvenio" />
+        </set>
+        <set name="exepParaCobXConvconts" table="exep_para_cob_x_convcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExepParaCobXConvcont" />
+        </set>
+        <set name="logExCoberturasEntSubs" table="log_ex_coberturas_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_paciente" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogExCoberturasEntSub" />
+        </set>
+    </class>
+</hibernate-mapping>

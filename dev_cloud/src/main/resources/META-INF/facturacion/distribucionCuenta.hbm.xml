@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<query name="distribucionCuenta.obtenerInfoBackUpSubCuentas">
+		SELECT NEW com.servinte.axioma.dto.facturacion.BackupSubCuentaDto(sub.subCuenta, ing.id, natp.codigo,
+						detm.detalleCodigo, cont.codigo, pac.codigoPaciente, ests.codigo,
+						usu.login, tipa.acronimo, cobs.codigo, conv.codigo, empi.codigo,
+						sub.nroPoliza, sub.nroCarnet, sub.fechaModifica, sub.nroAutorizacion,
+						sub.fechaAfiliacion, sub.semanasCotizacion, sub.valorUtilizadoSoat,
+						sub.nroPrioridad, sub.porcentajeAutorizado, sub.montoAutorizado,
+						sub.obsParametrosDistribucion, sub.facturado, sub.horaModifica, 
+						sub.numeroSolicitudVolante, sub.mesesCotizacion, sub.valorAutorizacion,
+						sub.medioAutorizacion, sub.bono, sub.tipoCobroPaciente, sub.tipoMontoCobro,
+						sub.porcentajeMontoCobro, sub.migrado)
+			FROM SubCuentas sub
+				INNER JOIN sub.ingresos ing
+				LEFT JOIN sub.naturalezaPacientes natp
+				LEFT JOIN sub.detalleMonto detm
+				LEFT JOIN sub.contratos cont
+				LEFT JOIN sub.pacientes pac
+				LEFT JOIN sub.estratosSociales ests
+				LEFT JOIN sub.usuarios usu
+				LEFT JOIN sub.tiposAfiliado tipa
+				LEFT JOIN sub.coberturasSalud cobs
+				LEFT JOIN sub.convenios conv
+				LEFT JOIN sub.empresasInstitucion empi
+		WHERE ing.id=:codigoIngreso
+	</query>
+	
+	<query name="distribucionCuenta.obtenerInfoBackUpDetCargos">
+		SELECT NEW com.servinte.axioma.dto.facturacion.BackupDetCargosDto(det.codigoDetalleCargo,
+					fact.codigo, dpoc.codigoPk, esf.codigo, det1.codigoDetalleCargo, art.codigo,
+					prog.codigo, conv.codigo, ssc.codigo, servcx.codigo, cont.codigo, sub.subCuenta,
+					sol.numeroSolicitud, usu.login, serv.codigo, esqt.codigo, 
+					det.cantidadCargada, det.valorUnitarioTarifa, det.valorUnitarioCargado, det.valorTotalCargado,
+					det.porcentajeCargado, det.porcentajeRecargo, det.valorUnitarioRecargo, det.porcentajeDcto,
+					det.valorUnitarioDcto, det.valorUnitarioIva, det.requiereAutorizacion, det.nroAutorizacion,
+					det.cubierto, det.tipoDistribucion, det.tipoAsocio, det.facturado, det.tipoSolicitud, 
+					det.paquetizado, det.fechaModifica, det.horaModifica, det.observaciones, det.eliminado,
+					det.detCxHonorarios, det.detAsocioCxSalasMat, det.esPortatil, det.dejarExcento,
+					det.porcentajeDctoPromServ, det.valorDescuentoPromServ, det.porcHonorarioPromServ,
+					det.valorHonorarioPromServ, det.porcentajeDctoBonoServ, det.valorDescuentoBonoServ,
+					det.porcentajeDctoOdontologico, det.valorDescuentoOdontologico)
+			FROM DetCargos det
+				INNER JOIN det.subCuentas sub
+				LEFT JOIN det.facturas fact
+				LEFT JOIN det.detPaqOdontConvenio dpoc
+				LEFT JOIN det.estadosSolFact esf
+				LEFT JOIN det.detCargos det1
+				LEFT JOIN det.articulo art
+				LEFT JOIN det.programas prog
+				LEFT JOIN det.convenios conv
+				LEFT JOIN det.solicitudesSubcuenta ssc
+				LEFT JOIN det.serviciosByServicioCx servcx
+				LEFT JOIN det.contratos cont
+				LEFT JOIN det.solicitudes sol
+				LEFT JOIN det.usuarios usu
+				LEFT JOIN det.serviciosByServicio serv
+				LEFT JOIN det.esquemasTarifarios esqt
+		WHERE sub.subCuenta=:codigoSubCuenta
+	</query>
+	
+	<query name="distribucionCuenta.obtenerInfoBackUpDetCargosArtConsumo">
+		SELECT NEW com.servinte.axioma.dto.facturacion.BackupDetCargosArtConsumoDto(detac.codigo,
+						usu.login, det.codigoDetalleCargo, detac.articulo, detac.cantidad, detac.valorUnitario,
+						detac.valorTotal, detac.porcentaje, detac.fechaModifica, detac.horaModifica)
+			FROM DetCargosArtConsumo detac
+				INNER JOIN detac.detCargos det
+				INNER JOIN det.subCuentas sub
+				LEFT JOIN detac.usuarios usu
+		WHERE sub.subCuenta=:codigoSubCuenta
+	</query>
+	
+	<query name="distribucionCuenta.obtenerInfoBackUpSolicitudesSubCuenta">
+		SELECT NEW com.servinte.axioma.dto.facturacion.BackupSolicitudesSubCuentaDto(solsc.codigo,
+						servcx.codigo, solsc1.codigo, sub.subCuenta, sol.numeroSolicitud, usu.login,
+						serv.codigo, art.codigo, solsc.porcentaje, solsc.cantidad, solsc.monto, solsc.cubierto,
+						solsc.cuenta, solsc.tipoSolicitud, solsc.paquetizada, solsc.tipoAsocio, solsc.tipoDistribucion,
+						solsc.fechaModifica, solsc.horaModifica, solsc.facturado, solsc.eliminado, solsc.actualizado,
+						solsc.detCxHonorarios, solsc.detAsocioCxSalasMat)
+			FROM SolicitudesSubcuenta solsc
+				INNER JOIN solsc.subCuentas sub
+				LEFT JOIN solsc.serviciosByServicioCx servcx
+				LEFT JOIN solsc.solicitudesSubcuenta solsc1
+				LEFT JOIN solsc.solicitudes sol
+				LEFT JOIN solsc.usuarios usu
+				LEFT JOIN solsc.serviciosByServicio serv
+				LEFT JOIN solsc.articulo art
+		WHERE sub.subCuenta=:codigoSubCuenta
+	</query>
+	
+	<query name="distribucionCuenta.obtenerInfoBackUpDetCargosPorSolicitudes">
+		SELECT NEW com.servinte.axioma.dto.facturacion.BackupDetCargosDto(det.codigoDetalleCargo,
+					fact.codigo, dpoc.codigoPk, esf.codigo, det1.codigoDetalleCargo, art.codigo,
+					prog.codigo, conv.codigo, ssc.codigo, servcx.codigo, cont.codigo, sub.subCuenta,
+					sol.numeroSolicitud, usu.login, serv.codigo, esqt.codigo, 
+					det.cantidadCargada, det.valorUnitarioTarifa, det.valorUnitarioCargado, det.valorTotalCargado,
+					det.porcentajeCargado, det.porcentajeRecargo, det.valorUnitarioRecargo, det.porcentajeDcto,
+					det.valorUnitarioDcto, det.valorUnitarioIva, det.requiereAutorizacion, det.nroAutorizacion,
+					det.cubierto, det.tipoDistribucion, det.tipoAsocio, det.facturado, det.tipoSolicitud, 
+					det.paquetizado, det.fechaModifica, det.horaModifica, det.observaciones, det.eliminado,
+					det.detCxHonorarios, det.detAsocioCxSalasMat, det.esPortatil, det.dejarExcento,
+					det.porcentajeDctoPromServ, det.valorDescuentoPromServ, det.porcHonorarioPromServ,
+					det.valorHonorarioPromServ, det.porcentajeDctoBonoServ, det.valorDescuentoBonoServ,
+					det.porcentajeDctoOdontologico, det.valorDescuentoOdontologico)
+			FROM DetCargos det
+				INNER JOIN det.solicitudes sol
+				INNER JOIN det.subCuentas sub
+				LEFT JOIN det.facturas fact
+				LEFT JOIN det.detPaqOdontConvenio dpoc
+				LEFT JOIN det.estadosSolFact esf
+				LEFT JOIN det.detCargos det1
+				LEFT JOIN det.articulo art
+				LEFT JOIN det.programas prog
+				LEFT JOIN det.convenios conv
+				LEFT JOIN det.solicitudesSubcuenta ssc
+				LEFT JOIN det.serviciosByServicioCx servcx
+				LEFT JOIN det.contratos cont
+				LEFT JOIN det.usuarios usu
+				LEFT JOIN det.serviciosByServicio serv
+				LEFT JOIN det.esquemasTarifarios esqt
+		WHERE sol.numeroSolicitud IN (:numeroSolicitudes)
+	</query>
+	
+	<query name="distribucionCuenta.obtenerInfoBackUpDetCargosArtConsumoPorSolicitudes">
+		SELECT NEW com.servinte.axioma.dto.facturacion.BackupDetCargosArtConsumoDto(detac.codigo,
+						usu.login, det.codigoDetalleCargo, detac.articulo, detac.cantidad, detac.valorUnitario,
+						detac.valorTotal, detac.porcentaje, detac.fechaModifica, detac.horaModifica)
+			FROM DetCargosArtConsumo detac
+				INNER JOIN detac.detCargos det
+				INNER JOIN det.solicitudes sol
+				LEFT JOIN detac.usuarios usu
+		WHERE sol.numeroSolicitud IN (:numeroSolicitudes)
+	</query>
+	
+	<query name="distribucionCuenta.obtenerInfoBackUpSolicitudesSubCuentaPorSolicitudes">
+		SELECT NEW com.servinte.axioma.dto.facturacion.BackupSolicitudesSubCuentaDto(solsc.codigo,
+						servcx.codigo, solsc1.codigo, sub.subCuenta, sol.numeroSolicitud, usu.login,
+						serv.codigo, art.codigo, solsc.porcentaje, solsc.cantidad, solsc.monto, solsc.cubierto,
+						solsc.cuenta, solsc.tipoSolicitud, solsc.paquetizada, solsc.tipoAsocio, solsc.tipoDistribucion,
+						solsc.fechaModifica, solsc.horaModifica, solsc.facturado, solsc.eliminado, solsc.actualizado,
+						solsc.detCxHonorarios, solsc.detAsocioCxSalasMat)
+			FROM SolicitudesSubcuenta solsc
+				INNER JOIN solsc.solicitudes sol
+				INNER JOIN solsc.subCuentas sub
+				LEFT JOIN solsc.serviciosByServicioCx servcx
+				LEFT JOIN solsc.solicitudesSubcuenta solsc1
+				LEFT JOIN solsc.usuarios usu
+				LEFT JOIN solsc.serviciosByServicio serv
+				LEFT JOIN solsc.articulo art
+		WHERE sol.numeroSolicitud IN (:numeroSolicitudes)
+	</query>
+	
+</hibernate-mapping>

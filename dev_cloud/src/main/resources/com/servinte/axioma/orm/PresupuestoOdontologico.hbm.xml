@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 12, 2011 9:11:29 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresupuestoOdontologico" table="presupuesto_odontologico" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="planTratamiento" class="com.servinte.axioma.orm.PlanTratamiento" fetch="select">
+            <column name="plan_tratamiento" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioGeneracion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_generacion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="4" not-null="true" />
+        </property>
+        <property name="motivo" type="java.lang.Integer">
+            <column name="motivo" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="fechaGeneracion" type="date">
+            <column name="fecha_generacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGeneracion" type="string">
+            <column name="hora_generacion" length="5" not-null="true" />
+        </property>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+        <set name="excluPresuEncabezados" inverse="true" lazy="true" table="exclu_presu_encabezado" fetch="select">
+            <key>
+                <column name="presupuesto" precision="12" scale="0" not-null="true">
+                    <comment>Presupuesto al cual va a quedar asociado el registro de exclusi&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcluPresuEncabezado" />
+        </set>
+        <set name="logPresupuestoOdos" inverse="true" lazy="true" table="log_presupuesto_odo" fetch="select">
+            <key>
+                <column name="presupuesto_odo" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoOdo" />
+        </set>
+        <set name="incluPresuEncabezados" inverse="true" lazy="true" table="inclu_presu_encabezado" fetch="select">
+            <key>
+                <column name="presupuesto" precision="12" scale="0" not-null="true">
+                    <comment>Presupuesto al cual va a quedar asociado el registro de contrataci&#195;&#179;n de las inclusiones</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluPresuEncabezado" />
+        </set>
+        <set name="exclusionesPresupuestos" inverse="true" lazy="true" table="exclusiones_presupuesto" fetch="select">
+            <key>
+                <column name="presupuesto" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExclusionesPresupuesto" />
+        </set>
+        <set name="presuPlanTtoNumSupers" inverse="true" lazy="true" table="presu_plan_tto_num_super" fetch="select">
+            <key>
+                <column name="presupuesto" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuPlanTtoNumSuper" />
+        </set>
+        <set name="presupuestoOdoProgServs" inverse="true" lazy="true" table="presupuesto_odo_prog_serv" fetch="select">
+            <key>
+                <column name="presupuesto" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoOdoProgServ" />
+        </set>
+        <one-to-one name="presupuestoContratado" class="com.servinte.axioma.orm.PresupuestoContratado"></one-to-one>
+        <set name="presupuestoLogImpresions" inverse="true" lazy="true" table="presupuesto_log_impresion" fetch="select">
+            <key>
+                <column name="presupuesto" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoLogImpresion" />
+        </set>
+        <set name="logPresupuestoOdonts" inverse="true" lazy="true" table="log_presupuesto_odont" fetch="select">
+            <key>
+                <column name="presupuesto" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoOdont" />
+        </set>
+        <set name="otrosSis" inverse="true" lazy="true" table="otros_si" fetch="select">
+            <key>
+                <column name="presupuesto_odontologico" precision="12" scale="0" not-null="true">
+                    <comment>Presupuesto odontologico asociado al otro si</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OtrosSi" />
+        </set>
+        <set name="logPresupuestoDctoOdons" inverse="true" lazy="true" table="log_presupuesto_dcto_odon" fetch="select">
+            <key>
+                <column name="presupuesto" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoDctoOdon" />
+        </set>
+        <set name="presupuestoDctoOdons" inverse="true" lazy="true" table="presupuesto_dcto_odon" fetch="select">
+            <key>
+                <column name="presupuesto" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoDctoOdon" />
+        </set>
+        <set name="presupuestoPaqueteses" inverse="true" lazy="true" table="presupuesto_paquetes" fetch="select">
+            <key>
+                <column name="presupuesto" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoPaquetes" />
+        </set>
+    </class>
+</hibernate-mapping>

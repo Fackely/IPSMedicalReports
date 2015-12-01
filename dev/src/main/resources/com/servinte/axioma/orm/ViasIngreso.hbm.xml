@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2011 05:03:03 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ViasIngreso" table="vias_ingreso" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="40" />
+        </property>
+        <property name="reciboAutomatico" type="char">
+            <column name="recibo_automatico" length="1" not-null="true" />
+        </property>
+        <property name="identificador" type="string">
+            <column name="identificador" length="3" />
+        </property>
+        <property name="responsablePaciente" type="char">
+            <column name="responsable_paciente" length="1" not-null="true" />
+        </property>
+        <property name="verificacionDerechos" type="char">
+            <column name="verificacion_derechos" length="1" not-null="true" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="corteFacturacion" type="char">
+            <column name="corte_facturacion" length="1" not-null="true" />
+        </property>
+        <property name="validarCierreNotaEnfer" type="java.lang.Character">
+            <column name="validar_cierre_nota_enfer" length="1" />
+        </property>
+        <property name="validarEpicrisisFinali" type="java.lang.Character">
+            <column name="validar_epicrisis_finali" length="1" />
+        </property>
+        <set name="requisitosPacConvenios" table="requisitos_pac_convenio" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RequisitosPacConvenio" />
+        </set>
+        <set name="soporteFacturases" table="soporte_facturas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SoporteFacturas" />
+        </set>
+        <set name="autorizacionesEntSubMontoses" table="autorizaciones_ent_sub_montos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubMontos" />
+        </set>
+        <set name="nivelAutorizacions" table="nivel_autorizacion" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true">
+                    <comment>V&#237;a ingreso del nivel de autorizaci&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorizacion" />
+        </set>
+        <set name="cargoViaIngresoServicios" table="cargo_via_ingreso_servicio" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CargoViaIngresoServicio" />
+        </set>
+        <set name="historicoFiltroDistribucions" table="historico_filtro_distribucion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoFiltroDistribucion" />
+        </set>
+        <set name="garantiaPacientes" table="garantia_paciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_via_ingreso" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GarantiaPaciente" />
+        </set>
+        <set name="excepcionesTarifases" table="excepciones_tarifas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcepcionesTarifas" />
+        </set>
+        <set name="excepTarifasContratos" table="excep_tarifas_contrato" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcepTarifasContrato" />
+        </set>
+        <set name="tiposPacientes" table="tip_pac_via_ingreso" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.TiposPaciente">
+                <column name="tipo_paciente" length="1" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="filtroDistribucions" table="filtro_distribucion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FiltroDistribucion" />
+        </set>
+        <set name="logConsolidadoFacturacions" table="log_consolidado_facturacion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogConsolidadoFacturacion" />
+        </set>
+        <set name="detParamEntidSubcontratadas" table="det_param_entid_subcontratada" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetParamEntidSubcontratada" />
+        </set>
+        <set name="informeInconsistenciases" table="informe_inconsistencias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeInconsistencias" />
+        </set>
+        <set name="estanciaViaIngCentroCostos" table="estancia_via_ing_centro_costo" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true">
+                    <comment>Hace relaci&#243;n a la tabla manejopaciente.vias_ingreso</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EstanciaViaIngCentroCosto" />
+        </set>
+        <set name="centroCostoViaIngresos" table="centro_costo_via_ingreso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentroCostoViaIngreso" />
+        </set>
+        <set name="cuentases" table="cuentas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Cuentas" />
+        </set>
+        <set name="horasReprocesos" table="horas_reproceso" schema="administracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HorasReproceso" />
+        </set>
+        <set name="detalleCoberturas" table="detalle_cobertura" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleCobertura" />
+        </set>
+        <set name="recargosTarifases" table="recargos_tarifas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RecargosTarifas" />
+        </set>
+        <set name="descComConvconts" table="desc_com_convcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DescComConvcont" />
+        </set>
+        <set name="logExCoberturasEntSubs" table="log_ex_coberturas_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogExCoberturasEntSub" />
+        </set>
+        <set name="ingresosEstancias" table="ingresos_estancia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso_admision" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IngresosEstancia" />
+        </set>
+        <set name="exCoberturasEntidadSubs" table="ex_coberturas_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberturasEntidadSub" />
+        </set>
+        <set name="exepParaCobXConvconts" table="exep_para_cob_x_convcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExepParaCobXConvcont" />
+        </set>
+        <set name="viaIngresoEntSubs" table="via_ingreso_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" not-null="true">
+                    <comment>Via de ignreso</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ViaIngresoEntSub" />
+        </set>
+        <set name="paquetesConvenios" table="paquetes_convenio" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetesConvenio" />
+        </set>
+        <set name="detalleMontos" table="detalle_monto" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso_codigo" not-null="true">
+                    <comment>C&#243;digo PK de la v&#237;a de Ingreso del paciente</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleMonto" />
+        </set>
+        <set name="facturases" table="facturas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="via_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Facturas" />
+        </set>
+    </class>
+</hibernate-mapping>

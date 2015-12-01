@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.InformeInconsistencias" table="informe_inconsistencias" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposInconsistencias" class="com.servinte.axioma.orm.TiposInconsistencias" fetch="select">
+            <column name="tipo_inconsistencia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" fetch="select">
+            <column name="sub_cuenta" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modificacion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacion" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_identificacion" length="3" not-null="true" />
+        </many-to-one>
+        <many-to-one name="coberturasSalud" class="com.servinte.axioma.orm.CoberturasSalud" fetch="select">
+            <column name="cobertura_salud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <property name="nombreConvenio" type="string">
+            <column name="nombre_convenio" length="256" not-null="true" />
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="primer_apellido" length="30" not-null="true" />
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="segundo_apellido" length="30" />
+        </property>
+        <property name="primerNombre" type="string">
+            <column name="primer_nombre" length="30" not-null="true" />
+        </property>
+        <property name="segundoNombre" type="string">
+            <column name="segundo_nombre" length="30" />
+        </property>
+        <property name="numeroIdentificacion" type="string">
+            <column name="numero_identificacion" length="17" not-null="true" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="13" not-null="true" />
+        </property>
+        <property name="direccionResidencia" type="string">
+            <column name="direccion_residencia" length="80" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="32" not-null="true" />
+        </property>
+        <property name="departamento" type="string">
+            <column name="departamento" length="128" not-null="true" />
+        </property>
+        <property name="codigoDepartamento" type="string">
+            <column name="codigo_departamento" length="2" not-null="true" />
+        </property>
+        <property name="municipio" type="string">
+            <column name="municipio" length="128" not-null="true" />
+        </property>
+        <property name="codigoMunicipio" type="string">
+            <column name="codigo_municipio" length="3" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="consecutivo" type="string">
+            <column name="consecutivo" length="20" not-null="true" />
+        </property>
+        <property name="anioConsecutivo" type="string">
+            <column name="anio_consecutivo" length="4" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="fechaGeneracion" type="date">
+            <column name="fecha_generacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGeneracion" type="string">
+            <column name="hora_generacion" length="5" not-null="true" />
+        </property>
+        <property name="usuarioGeneracion" type="string">
+            <column name="usuario_generacion" length="30" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="fecha_modificacion" length="13" not-null="true" />
+        </property>
+        <property name="horaModificacion" type="string">
+            <column name="hora_modificacion" length="5" not-null="true" />
+        </property>
+        <set name="envioInfoInconsistenciases" inverse="true" lazy="true" table="envio_info_inconsistencias" fetch="select">
+            <key>
+                <column name="informe_inconsist" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioInfoInconsistencias" />
+        </set>
+        <set name="infoInconVarIncorrectas" inverse="true" lazy="true" table="info_incon_var_incorrecta" fetch="select">
+            <key>
+                <column name="informe_inconsistencias" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InfoInconVarIncorrecta" />
+        </set>
+    </class>
+</hibernate-mapping>

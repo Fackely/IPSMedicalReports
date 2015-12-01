@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:51:42 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Roles" table="roles" schema="administracion">
+        <id name="nombreRol" type="string">
+            <column name="nombre_rol" length="64" />
+            <generator class="assigned" />
+        </id>
+        <property name="codigo" type="int">
+            <column name="codigo" not-null="true" />
+        </property>
+        <set name="tiposUsuarioses" inverse="true" lazy="true" table="tipos_usuarios" fetch="select">
+            <key>
+                <column name="rol" length="64" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposUsuarios" />
+        </set>
+        <set name="usuarioses" inverse="true" lazy="true" table="roles_usuarios" fetch="select">
+            <key>
+                <column name="nombre_rol" length="64" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Usuarios">
+                <column name="login" length="30" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="rolesFuncionalidadeses" inverse="true" lazy="true" table="roles_funcionalidades" fetch="select">
+            <key>
+                <column name="nombre_rol" length="64" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RolesFuncionalidades" />
+        </set>
+    </class>
+</hibernate-mapping>

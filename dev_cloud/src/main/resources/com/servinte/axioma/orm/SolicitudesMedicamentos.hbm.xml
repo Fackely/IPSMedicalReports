@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 14, 2010 2:25:22 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolicitudesMedicamentos" table="solicitudes_medicamentos" schema="ordenes">
+        <id name="numeroSolicitud" type="int">
+            <column name="numero_solicitud" />
+            <generator class="foreign">
+                <param name="property">solicitudes</param>
+            </generator>
+        </id>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" />
+        </many-to-one>
+        <one-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" constrained="true"></one-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_principal" not-null="true" />
+        </many-to-one>
+        <property name="observacionesGenerales" type="string">
+            <column name="observaciones_generales" length="4000" />
+        </property>
+        <property name="ordenDieta" type="java.lang.Integer">
+            <column name="orden_dieta" />
+        </property>
+        <property name="numeroOrdenMdd" type="java.lang.Long">
+            <column name="numero_orden_mdd" precision="12" scale="0" />
+        </property>
+        <property name="pendienteCompletar" type="java.lang.Character">
+            <column name="pendiente_completar" length="1" />
+        </property>
+        <property name="controlEspecial" type="java.lang.Character">
+            <column name="control_especial" length="1" />
+        </property>
+        <set name="despachos" inverse="true" lazy="true" table="despacho" fetch="select">
+            <key>
+                <column name="numero_solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Despacho" />
+        </set>
+        <set name="detalleSolicitudeses" inverse="true" lazy="true" table="detalle_solicitudes" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleSolicitudes" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetTrasladosCaja" table="det_traslados_caja" schema="tesoreria">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="formasPago" class="com.servinte.axioma.orm.FormasPago" fetch="select">
+            <column name="forma_pago" not-null="true" />
+        </many-to-one>
+        <many-to-one name="trasladosCaja" class="com.servinte.axioma.orm.TrasladosCaja" fetch="select">
+            <column name="traslado_caja" precision="10" scale="0" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="total" type="big_decimal">
+            <column name="total" precision="16" scale="4" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/07/2011 10:38:30 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutorizacionesEntSubMontos" table="autorizaciones_ent_sub_montos" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">manejopaciente.seq_auto_ent_sub_montos</param>
+			</generator>
+        </id>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="detalleMonto" class="com.servinte.axioma.orm.DetalleMonto" fetch="select">
+            <column name="cod_detalle_monto" />
+        </many-to-one>
+        <property name="cantidadMonto" type="java.lang.Integer">
+            <column name="cantidad_monto"/>
+        </property>
+        <property name="valormonto" type="java.lang.Double">
+            <column name="valormonto" precision="17" scale="17" />
+        </property>
+        <property name="porcentajemonto" type="java.lang.Double">
+            <column name="porcentajemonto" precision="17" scale="17" />
+        </property>
+        <property name="tipomonto" type="java.lang.Integer">
+            <column name="tipomonto" />
+        </property>
+        <property name="tipodetallemonto" type="string">
+            <column name="tipodetallemonto" length="6" />
+        </property>
+    </class>
+</hibernate-mapping>

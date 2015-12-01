@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 8, 2010 2:12:13 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CierreCajaAcepTrasCaja" table="cierre_caja_acep_tras_caja" schema="tesoreria">
+        <comment>Registro de los cierres de caja a transportadora</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_cierre_caja_acep_tras_caj</param>
+			</generator>
+        </id>
+        <many-to-one name="aceptacionTrasladoCaja" class="com.servinte.axioma.orm.AceptacionTrasladoCaja" fetch="select">
+            <column name="aceptacion_traslado_caja" precision="10" scale="0" not-null="true">
+                <comment>Registro de aceptacion de caja</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="movimientosCaja" class="com.servinte.axioma.orm.MovimientosCaja" fetch="select">
+            <column name="movimiento_caja" precision="10" scale="0" not-null="true">
+                <comment>Movimiento de caja relacionado</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

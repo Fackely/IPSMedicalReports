@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 9, 2010 4:15:34 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MultasCitas" table="multas_citas" schema="consultaexterna">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuariosByUsuarioGeneracion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_generacion" length="30" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioAnuCond" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_anu_cond" length="30" />
+        </many-to-one>
+        <property name="fechaGeneracion" type="date">
+            <column name="fecha_generacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGeneracion" type="string">
+            <column name="hora_generacion" length="5" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="valor" type="long">
+            <column name="valor" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="cita" type="int">
+            <column name="cita" not-null="true" />
+        </property>
+        <property name="motAnuCondMulta" type="java.lang.Integer">
+            <column name="mot_anu_cond_multa" />
+        </property>
+        <property name="fechaAnuCond" type="date">
+            <column name="fecha_anu_cond" length="13" />
+        </property>
+        <property name="horaAnuCond" type="string">
+            <column name="hora_anu_cond" length="5" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="1000" />
+        </property>
+        <set name="multasFacturasVariases" inverse="true" lazy="true" table="multas_facturas_varias" fetch="select">
+            <key>
+                <column name="multa_cita" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MultasFacturasVarias" />
+        </set>
+    </class>
+</hibernate-mapping>

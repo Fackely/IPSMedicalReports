@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 13, 2010 11:42:36 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NivelAutorizacion" table="nivel_autorizacion" schema="capitacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+             <generator class="sequence">
+				<param name="sequence">capitacion.seq_nivel_autoriza</param>
+			</generator>
+        </id>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" not-null="true">
+                <comment>V&#195;&#173;a ingreso del nivel de autorizaci&#195;&#179;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="65" not-null="true">
+                <comment>Descripci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="tipoAutorizacion" type="string">
+            <column name="tipo_autorizacion" length="6" not-null="true">
+                <comment>Tipo de Autorizaci&#195;&#179;n del nivel de autorizaci&#195;&#179;n: AUTOMATICO - MANUAL</comment>
+            </column>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <set name="autorizacionesEntSubArticus" inverse="true" lazy="true" table="autorizaciones_ent_sub_articu" fetch="select">
+            <key>
+                <column name="nivel_autorizacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubArticu" />
+        </set>
+        <set name="autorizacionesEntSubServis" inverse="true" lazy="true" table="autorizaciones_ent_sub_servi" fetch="select">
+            <key>
+                <column name="nivel_autorizacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubServi" />
+        </set>
+        <set name="nivelAutorUsuarios" inverse="true" lazy="true" table="nivel_autor_usuario" fetch="select">
+            <key>
+                <column name="nivel_autorizacion" not-null="true">
+                    <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorUsuario" />
+        </set>
+        <set name="nivelAutorServMedics" inverse="true" lazy="true" table="nivel_autor_serv_medic" fetch="select">
+            <key>
+                <column name="nivel_autorizacion" not-null="true">
+                    <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorServMedic" />
+        </set>
+    </class>
+</hibernate-mapping>

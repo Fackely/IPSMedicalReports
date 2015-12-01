@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ServEsteticos" table="serv_esteticos" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.ServEsteticosId">
+            <key-property name="gruposEsteticos" type="string">
+                <column name="grupos_esteticos" length="8" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+            <key-property name="servicio" type="int">
+                <column name="servicio" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" update="false" insert="false" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="serviciosGruposEsteticos" class="com.servinte.axioma.orm.ServiciosGruposEsteticos" update="false" insert="false" fetch="select">
+            <column name="grupos_esteticos" length="8" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

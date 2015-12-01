@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/06/2011 12:41:12 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AnulacionPeticionQx" table="anulacion_peticion_qx" schema="salascirugia">
+        <id name="peticion_qx" type="int">
+            <column name="peticion_qx" />
+            <generator class="foreign">
+                <param name="property">peticionQx</param>
+            </generator>
+        </id>
+        <one-to-one name="peticionQx" class="com.servinte.axioma.orm.PeticionQx" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="motivosAnulQxInst" class="com.servinte.axioma.orm.MotivosAnulQxInst" fetch="select">
+            <column name="motivos_anulacion" not-null="true" />
+        </many-to-one>
+        <property name="comentario" type="string">
+            <column name="comentario" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

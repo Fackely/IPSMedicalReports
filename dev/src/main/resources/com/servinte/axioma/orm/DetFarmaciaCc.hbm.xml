@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/01/2012 07:10:21 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetFarmaciaCc" table="det_farmacia_cc" schema="inventarios">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetFarmaciaCcId">
+            <key-property name="codigoFarmaciaCc" type="int">
+                <column name="codigo_farmacia_cc" />
+            </key-property>
+            <key-property name="farmacia" type="int">
+                <column name="farmacia" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="farmaciaXCentroCosto" class="com.servinte.axioma.orm.FarmaciaXCentroCosto" update="false" insert="false" fetch="select">
+            <column name="farmacia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" update="false" insert="false" fetch="select">
+            <column name="codigo_farmacia_cc" not-null="true" />
+        </many-to-one>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

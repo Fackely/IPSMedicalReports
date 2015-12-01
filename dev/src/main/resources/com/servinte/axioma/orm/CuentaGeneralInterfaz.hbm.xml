@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 16, 2010 8:51:43 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CuentaGeneralInterfaz" table="cuenta_general_interfaz" schema="interfaz">
+        <comment>Contiene las cuentas generales por instituci&#195;&#179;n</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentasContablesByCuentaFaltantes" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_faltantes" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaDescDevolAbonosPacientes" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_desc_devol_abonos_pacientes" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaDescuentoFacturas" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_descuento_facturas" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaXPagarHonorarios" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_x_pagar_honorarios" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaAnticipoConvenio" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_anticipo_convenio" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaDescuentosOdontologicos" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_descuentos_odontologicos" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaValCargoConv" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_val_cargo_conv" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaDescuentoBonos" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_descuento_bonos" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaSobrantes" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_sobrantes" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaDescuentoPromocion" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_descuento_promocion" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaTraslado" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_traslado" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaValCargoPaci" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_val_cargo_paci" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true">
+                <comment>Instituci&#195;&#179;n a la que pertenece</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaPorCobrarTraslados" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_por_cobrar_traslados" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaDevolAbonosPacientes" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_devol_abonos_pacientes" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaAbonoPaciente" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_abono_paciente" precision="10" scale="0">
+                <comment>Cuenta relacionada</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

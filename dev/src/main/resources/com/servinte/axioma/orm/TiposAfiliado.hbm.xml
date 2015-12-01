@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 3/06/2011 09:54:54 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposAfiliado" table="tipos_afiliado" schema="manejopaciente">
+        <id name="acronimo" type="char">
+            <column name="acronimo" length="1" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" not-null="true" />
+        </property>
+        <set name="autorizacionesCapitacionSubs" table="autorizaciones_capitacion_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_afiliado" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesCapitacionSub" />
+        </set>
+        <set name="historicoSubcuentases" table="historico_subcuentas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_afiliado" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoSubcuentas" />
+        </set>
+        <set name="ingresosEstancias" table="ingresos_estancia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_afiliado" length="1">
+                    <comment>Tipo de afiliaci&#243;n del paciente: cotizante o beneficiario</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IngresosEstancia" />
+        </set>
+        <set name="convUsuariosCapitadoses" table="conv_usuarios_capitados" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_afiliado" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConvUsuariosCapitados" />
+        </set>
+        <set name="detalleMontos" table="detalle_monto" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_afiliado_codigo" length="1" not-null="true">
+                    <comment>C&#243;digo PK del tipo de afiliado del paciente</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleMonto" />
+        </set>
+        <set name="subCuentases" table="sub_cuentas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_afiliado" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SubCuentas" />
+        </set>
+        <set name="usuarioXConvenios" table="usuario_x_convenio" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_afiliado" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuarioXConvenio" />
+        </set>
+    </class>
+</hibernate-mapping>

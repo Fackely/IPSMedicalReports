@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresupuestoPaciente" table="presupuesto_paciente" schema="manejopaciente">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnost_intervencion" length="10" not-null="true" />
+            <column name="tipo_cie" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="login_usuario" length="30" />
+        </many-to-one>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="medico_tratante" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <property name="fechaPresupuesto" type="date">
+            <column name="fecha_presupuesto" length="13" not-null="true" />
+        </property>
+        <property name="horaPresupuesto" type="time">
+            <column name="hora_presupuesto" length="15" not-null="true" />
+        </property>
+        <property name="contrato" type="int">
+            <column name="contrato" not-null="true" />
+        </property>
+        <property name="paquete" type="string">
+            <column name="paquete" length="8" not-null="true" />
+        </property>
+        <set name="presupuestoArticuloses" inverse="true" lazy="true" table="presupuesto_articulos" fetch="select">
+            <key>
+                <column name="presupuesto" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoArticulos" />
+        </set>
+        <set name="presupuestoServicioses" inverse="true" lazy="true" table="presupuesto_servicios" fetch="select">
+            <key>
+                <column name="presupuesto" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoServicios" />
+        </set>
+        <set name="servicioses" inverse="false" lazy="true" table="presupuesto_intervencion" fetch="select">
+            <key>
+                <column name="presupuesto" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Servicios">
+                <column name="servicio_intervencion" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

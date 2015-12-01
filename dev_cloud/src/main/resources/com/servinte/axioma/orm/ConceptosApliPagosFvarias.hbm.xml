@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConceptosApliPagosFvarias" table="conceptos_apli_pagos_fvarias" schema="facturasvarias">
+        <composite-id name="id" class="com.servinte.axioma.orm.ConceptosApliPagosFvariasId">
+            <key-property name="aplicacionPagosFvarias" type="int">
+                <column name="aplicacion_pagos_fvarias" />
+            </key-property>
+            <key-property name="conceptoPagos" type="string">
+                <column name="concepto_pagos" length="6" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="aplicacionPagosFvarias" class="com.servinte.axioma.orm.AplicacionPagosFvarias" update="false" insert="false" fetch="select">
+            <column name="aplicacion_pagos_fvarias" not-null="true" />
+        </many-to-one>
+        <property name="institucion" type="int">
+            <column name="institucion" not-null="true" />
+        </property>
+        <property name="valorBase" type="java.lang.Double">
+            <column name="valor_base" precision="17" scale="17" />
+        </property>
+        <property name="porcentaje" type="java.lang.Double">
+            <column name="porcentaje" precision="17" scale="17" />
+        </property>
+        <property name="valorConcepto" type="java.lang.Double">
+            <column name="valor_concepto" precision="17" scale="17" />
+        </property>
+    </class>
+</hibernate-mapping>

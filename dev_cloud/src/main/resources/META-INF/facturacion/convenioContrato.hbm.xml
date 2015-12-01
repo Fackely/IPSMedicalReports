@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<query name="convenioContrato.consultarConveniosPorInstitucionPorTipoContrato">
+		SELECT NEW com.servinte.axioma.dto.facturacion.ConvenioDto(
+						conv.codigo, conv.nombre)
+			FROM Convenios conv
+				INNER JOIN conv.tiposContrato tc
+				INNER JOIN conv.instituciones ins
+		WHERE tc.codigo = :tipoContrato
+			AND ins.codigo = :codigoInstitucion
+			AND conv.activo = :isActivo
+			AND conv.capitacionSubcontratada = :manejaCapitacionSub
+		ORDER BY conv.nombre
+	</query>
+	
+	<query name="convenioContrato.consultarContratosVigentesPorConvenio">
+		<![CDATA[
+			SELECT NEW com.servinte.axioma.dto.facturacion.ContratoDto(
+							cont.codigo, cont.numeroContrato, cont.fechaInicial,
+							cont.fechaFinal)
+				FROM Contratos cont
+					INNER JOIN cont.convenios conv
+			WHERE conv.codigo = :codigoConvenio
+				AND cont.fechaInicial <= current_date()
+				AND cont.fechaFinal >= current_date()
+			ORDER BY cont.numeroContrato
+		]]>
+	</query>
+	
+	<query name="convenioContrato.consultarConveniosPorInstitucion">
+		SELECT NEW com.servinte.axioma.dto.facturacion.ConvenioDto(
+						conv.codigo, conv.nombre)
+			FROM Convenios conv
+				INNER JOIN conv.instituciones ins
+		WHERE ins.codigo = :codigoInstitucion
+			AND conv.activo = :isActivo
+		ORDER BY conv.nombre
+	</query>
+	
+	<query name="convenioContrato.consultarTodosConveniosPorInstitucion">
+		SELECT NEW com.servinte.axioma.dto.facturacion.ConvenioDto(
+						conv.codigo, conv.nombre)
+			FROM Convenios conv
+				INNER JOIN conv.instituciones ins
+		WHERE ins.codigo = :codigoInstitucion
+		ORDER BY conv.nombre
+	</query>
+	
+</hibernate-mapping>

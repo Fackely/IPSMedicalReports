@@ -1,0 +1,381 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>servinte.ipsm</groupId>
+  <artifactId>test</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>dev_reportes_1 Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+    <properties>
+    
+    <birt.runtime.location>/home/axioma/aplicaciones/birt-runtime-2_3_1/WebViewerExample</birt.runtime.location>      
+    <birt.version>2.3.2</birt.version>
+    <birt.runtime.libs>${birt.runtime.location}/WEB-INF/lib</birt.runtime.libs>
+
+    <xml.resources.location>/home/axioma/archivosDespliegue/ipsm_test_55_reportes</xml.resources.location>
+    
+    <compiler.source>1.6</compiler.source>
+	<compiler.target>1.6</compiler.target>
+	<source.encoding>ISO-8859-1</source.encoding>
+	<resource.encoding>ISO-8859-1</resource.encoding>
+	<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+	
+  </properties>
+  <build>
+    <finalName>test</finalName>
+    <plugins>
+		<!-- Tomcat Maven plugin -->
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>tomcat-maven-plugin</artifactId>
+			<version>1.1</version>
+			<configuration>
+				<server>local_tomcat</server>
+				<url>http://localhost:8080/manager</url>
+				<webapp>web</webapp>
+			</configuration>
+		</plugin>
+		<!-- Maven compiler plugin -->
+		<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.4</version>
+			<configuration>
+				<source>${compiler.source}</source>
+				<target>${compiler.target}</target>
+				<encoding>${resource.encoding}</encoding>
+			</configuration>
+		</plugin>
+		<!-- Maven Surefire plugin -->
+		<!--<plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-surefire-plugin</artifactId>
+	        <version>2.12.2</version>
+	        <configuration>
+	          <skipTests>true</skipTests>
+	        </configuration>
+	    </plugin>-->
+	    <!-- Maven war plugin -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>2.1.1</version>
+			
+			<configuration>
+				<webXml>${xml.resources.location}/web.xml</webXml>       
+			</configuration>
+			
+		</plugin>
+	</plugins>
+  </build>
+   <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.10</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.15</version>
+		<exclusions>
+	        <exclusion>
+	            <groupId>com.sun.jmx</groupId>
+	            <artifactId>jmxri</artifactId>
+	        </exclusion>
+	        <exclusion>
+	            <groupId>com.sun.jdmk</groupId>
+	            <artifactId>jmxtools</artifactId>
+	        </exclusion>
+	    </exclusions>
+	</dependency>
+	<dependency> 
+	  <groupId>org.slf4j</groupId>
+	  <artifactId>slf4j-log4j12</artifactId>
+	  <version>1.6.5</version>
+	</dependency>
+	<!--  
+	<dependency>
+		<groupId>struts</groupId>
+		<artifactId>struts</artifactId>
+		<version>1.2.8</version>
+	</dependency>
+	-->
+	<dependency>
+		<groupId>org.apache.struts</groupId>
+		<artifactId>struts-core</artifactId>
+		<version>1.3.5</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.struts</groupId>
+		<artifactId>struts-extras</artifactId>
+		<version>1.3.5</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.struts</groupId>
+		<artifactId>struts-taglib</artifactId>
+		<version>1.3.5</version>
+	</dependency>
+	
+	<!-- Drivers Bases de Datos -->
+	
+	<dependency>
+	  <groupId>postgresql</groupId>
+	  <artifactId>postgresql</artifactId>
+	  <version>pg74.216.jdbc3</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>com.oracle</groupId>
+	  <artifactId>ojdbc6</artifactId>
+	  <version>11.1.0.7.0-Production</version>
+	</dependency>
+		            
+	<dependency>
+		<groupId>commons-dbcp</groupId>
+		<artifactId>commons-dbcp</artifactId>
+		<version>1.3</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-c3p0</artifactId>
+		<version>3.3.0.GA</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>c3p0</groupId>
+		<artifactId>c3p0</artifactId>
+		<version>0.9.1.2</version>
+	</dependency>
+	
+	<!-- Fin Drivers Bases de Datos -->
+	
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>2.5</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jsp-api</artifactId>
+		<version>2.0</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>jasper</artifactId>
+		<version>6.0.32</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>jsptags</groupId>
+		<artifactId>pager-taglib</artifactId>
+		<version>2.0</version>
+	</dependency>
+	<dependency>
+		<groupId>servinte</groupId>
+	  	<artifactId>AxiomaUtil</artifactId>
+	  	<version>1.0.1</version>
+	</dependency>
+	<dependency>
+		<groupId>net.sourceforge.jexcelapi</groupId>
+		<artifactId>jxl</artifactId>
+		<version>2.6.12</version>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>3.3.0.GA</version>
+	</dependency>
+	<dependency>
+	  <groupId>axis</groupId>
+	  <artifactId>axis-ant</artifactId>
+	  <version>1.4</version>
+	</dependency>
+	<dependency>
+		<groupId>javassist</groupId>
+		<artifactId>javassist</artifactId>
+		<version>3.12.1.GA</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.axis</groupId>
+		<artifactId>axis</artifactId>
+		<version>1.4</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-discovery</groupId>
+		<artifactId>commons-discovery</artifactId>
+		<version>0.4</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-io</groupId>
+		<artifactId>commons-io</artifactId>
+		<version>1.4</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-fileupload</groupId>
+		<artifactId>commons-fileupload</artifactId>
+		<version>1.2</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-codec</groupId>
+		<artifactId>commons-codec</artifactId>
+		<version>1.4</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-lang</groupId>
+		<artifactId>commons-lang</artifactId>
+		<version>2.3</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.xml</groupId>
+		<artifactId>jaxrpc-api</artifactId>
+		<version>1.1</version>
+	</dependency>
+	<dependency>
+		<groupId>wsdl4j</groupId>
+		<artifactId>wsdl4j</artifactId>
+		<version>1.6.2</version>
+	</dependency>
+	<!-- Reports -->
+	<dependency>
+		<groupId>com.lowagie</groupId>
+		<artifactId>itext</artifactId>
+		<version>2.1.7</version>
+	</dependency>
+	<dependency>
+		<groupId>net.sf.jasperreports</groupId>
+		<artifactId>jasperreports</artifactId>
+		<version>3.7.3</version>
+	</dependency>
+	<dependency>
+		<groupId>net.sourceforge.dynamicreports</groupId>
+		<artifactId>dynamicreports-core</artifactId>
+		<version>2.0.1</version>
+	</dependency>
+	<dependency>
+		<groupId>net.sourceforge.dynamicreports</groupId>
+		<artifactId>dynamicreports-examples</artifactId>
+		<version>2.0.1</version>
+	</dependency>
+	<dependency>
+        <groupId>ar.com.fdvs</groupId>
+        <artifactId>DynamicJasper</artifactId>
+        <version>3.1.2</version>
+        <exclusions>
+            <exclusion>
+                <groupId>jasperreports</groupId>
+                <artifactId>jasperreports</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+	<dependency>
+		<groupId>org.apache.poi</groupId>
+		<artifactId>poi</artifactId>
+		<version>3.6</version>
+	</dependency>
+            	
+	<!-- end Reports -->
+	<dependency>
+		<groupId>com.sun.xml.bind</groupId>
+		<artifactId>jaxb-impl</artifactId>
+		<version>2.2.1</version>
+	</dependency>
+	
+	<!-- Birt Dependencies -->
+    
+    <dependency>
+      <groupId>org.eclipse.birt</groupId>
+      <artifactId>chartengineapi</artifactId>
+      <version>${birt.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.birt</groupId>
+      <artifactId>coreapi</artifactId>
+      <version>${birt.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.birt</groupId>
+      <artifactId>dataadapterapi</artifactId>
+      <version>${birt.version}</version>
+    </dependency>
+
+	<!-- Esta libreria unicamente se encuentra en nexus, no se encontro la version exacta -->
+    <dependency>
+      <groupId>org.eclipse.birt</groupId>
+      <artifactId>engineapi</artifactId>
+      <version>original</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.birt</groupId>
+      <artifactId>modelapi</artifactId>
+      <version>${birt.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.birt</groupId>
+      <artifactId>scriptapi</artifactId>
+      <version>${birt.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.birt</groupId>
+      <artifactId>dteapi</artifactId>
+      <version>${birt.version}</version>
+    </dependency>
+
+	<dependency>
+      <groupId>org.eclipse.birt</groupId>
+  	  <artifactId>dataextraction</artifactId>
+      <version>${birt.version}</version>
+  	</dependency>
+  	
+  	<!-- Esta libreria unicamente se encuentra en nexus, no se encontro la version exacta -->
+  	<dependency>
+	  <groupId>org.eclipse.birt</groupId>
+	  <artifactId>emitter</artifactId>
+	  <version>1.0.0</version>
+	</dependency>
+  	
+    <dependency>
+        <groupId>com.ibm.icu</groupId>
+        <artifactId>icu4j</artifactId>
+        <version>3.8.1</version>
+    </dependency>
+
+	<!-- Esta libreria unicamente se encuentra en nexus, no se encontro la version exacta -->
+    <dependency>
+      <groupId>rhino</groupId>
+      <artifactId>js</artifactId>
+      <version>original</version>
+    </dependency>
+   
+	<!-- end Birt Dependencies -->
+    <dependency>
+    	<groupId>it.sauronsoftware</groupId>
+    	<artifactId>cron4j</artifactId>
+    	<version>2.2.2</version>
+    </dependency>
+    <dependency>
+		<groupId>org.directwebremoting</groupId>
+		<artifactId>dwr</artifactId>
+		<version>2.0.3</version>
+	</dependency>
+	<dependency>
+		<groupId>org.codehaus.groovy</groupId>
+		<artifactId>groovy-all</artifactId>
+		<version>1.5.5</version>
+	</dependency>
+	<dependency>
+		<groupId>net.sf.ehcache</groupId>
+		<artifactId>ehcache-core</artifactId>
+		<version>2.6.0</version>
+	</dependency>	
+  </dependencies>
+</project>

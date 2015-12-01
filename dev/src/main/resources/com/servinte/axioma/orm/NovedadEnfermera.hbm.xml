@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NovedadEnfermera" table="novedad_enfermera" schema="public">
+        <id name="codigoregistro" type="int">
+            <column name="codigoregistro" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="novedad" class="com.servinte.axioma.orm.Novedad" fetch="select">
+            <column name="codigonovedad" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" fetch="select">
+            <column name="codigomedico" not-null="true" />
+        </many-to-one>
+        <property name="prioridad" type="java.lang.Boolean">
+            <column name="prioridad" />
+        </property>
+        <property name="fecharegistro" type="date">
+            <column name="fecharegistro" length="13" />
+        </property>
+        <property name="fechaprogramacion" type="date">
+            <column name="fechaprogramacion" length="13" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="200" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="activo" />
+        </property>
+    </class>
+</hibernate-mapping>

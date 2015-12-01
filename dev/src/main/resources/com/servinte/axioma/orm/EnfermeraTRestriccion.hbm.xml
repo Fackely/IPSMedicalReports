@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EnfermeraTRestriccion" table="enfermera_t_restriccion" schema="public">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" fetch="select">
+            <column name="medico" not-null="true" />
+        </many-to-one>
+        <many-to-one name="turno" class="com.servinte.axioma.orm.Turno" fetch="select">
+            <column name="turno" not-null="true" />
+        </many-to-one>
+        <property name="fechaInicio" type="date">
+            <column name="fecha_inicio" length="13" />
+        </property>
+        <property name="fechaFin" type="date">
+            <column name="fecha_fin" length="13" />
+        </property>
+        <property name="valor" type="int">
+            <column name="valor" not-null="true" />
+        </property>
+        <property name="todosDias" type="boolean">
+            <column name="todos_dias" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

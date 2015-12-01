@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 24, 2010 2:03:23 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutorizacionArticuloDespacho" table="autorizacion_articulo_despacho" schema="ordenes">
+        <comment>Relacione el articulo autorizado con el despachado y el equivalente en cantidad del articulo despachado</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">ordenes.seq_auto_arti_desp</param>
+			</generator>
+        </id>
+        <many-to-one name="autorizacionesEntSubArticu" class="com.servinte.axioma.orm.AutorizacionesEntSubArticu" fetch="select">
+            <column name="autorizacion_ent_sub_articu" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="articuloByArticuloAutorizado" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="articulo_autorizado" not-null="true">
+                <comment>Articulo autorizado a despachar</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="articuloByArticuloDespachado" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="articulo_despachado" not-null="true">
+                <comment>Articulo real despachado</comment>
+            </column>
+        </many-to-one>
+        <property name="cantidadAutrizado" type="int">
+            <column name="cantidad_autrizado" not-null="true">
+                <comment>Cantidad autorizada a despachar del articulo autorizado</comment>
+            </column>
+        </property>
+        <property name="cantidadDespachada" type="int">
+            <column name="cantidad_despachada" not-null="true">
+                <comment>Cantidad real despachada del articulo real despachado</comment>
+            </column>
+        </property>
+        <property name="cantidadEquivalente" type="int">
+            <column name="cantidad_equivalente" not-null="true">
+                <comment>Equivalencia en cantidad del el articulo despachado y el autorizado</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

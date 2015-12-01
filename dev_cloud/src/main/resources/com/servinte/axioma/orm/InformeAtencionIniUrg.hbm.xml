@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.InformeAtencionIniUrg" table="informe_atencion_ini_urg" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="destinoPacConducta" class="com.servinte.axioma.orm.DestinoPacConducta" fetch="select">
+            <column name="destino_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" fetch="select">
+            <column name="sub_cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_generacion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ciudades" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="codigo_ciudad_referencia" length="10" />
+            <column name="codigo_depto_referencia" length="10" />
+            <column name="codigo_pais_referencia" length="10" />
+        </many-to-one>
+        <many-to-one name="coberturasSalud" class="com.servinte.axioma.orm.CoberturasSalud" fetch="select">
+            <column name="cobertura_salud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <property name="consecutivo" type="string">
+            <column name="consecutivo" length="20" not-null="true" />
+        </property>
+        <property name="anioConsecutivo" type="java.lang.Integer">
+            <column name="anio_consecutivo" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="fechaGeneracion" type="date">
+            <column name="fecha_generacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGeneracion" type="string">
+            <column name="hora_generacion" length="5" not-null="true" />
+        </property>
+        <property name="causaExterna" type="int">
+            <column name="causa_externa" not-null="true" />
+        </property>
+        <property name="colorTriage" type="java.lang.Integer">
+            <column name="color_triage" precision="5" scale="0" />
+        </property>
+        <property name="pacVieneRemitido" type="string">
+            <column name="pac_viene_remitido" length="1" />
+        </property>
+        <property name="institucionSolicita" type="string">
+            <column name="institucion_solicita" length="10" />
+        </property>
+        <property name="institucion" type="java.lang.Integer">
+            <column name="institucion" />
+        </property>
+        <property name="motivoConsulta" type="string">
+            <column name="motivo_consulta" length="4000" />
+        </property>
+        <property name="fechaIngUrgencias" type="date">
+            <column name="fecha_ing_urgencias" length="13" not-null="true" />
+        </property>
+        <property name="horaIngUrgencias" type="string">
+            <column name="hora_ing_urgencias" length="5" not-null="true" />
+        </property>
+        <set name="envioInfoAtenIniUrgs" inverse="true" lazy="true" table="envio_info_aten_ini_urg" fetch="select">
+            <key>
+                <column name="info_atencion_ini_urg" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioInfoAtenIniUrg" />
+        </set>
+        <set name="diagInfoAtenIniUrgs" inverse="true" lazy="true" table="diag_info_aten_ini_urg" fetch="select">
+            <key>
+                <column name="info_atencion_ini_urg" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DiagInfoAtenIniUrg" />
+        </set>
+    </class>
+</hibernate-mapping>

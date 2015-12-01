@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subrptInstitucion" pageWidth="1500" pageHeight="62" orientation="Landscape" columnWidth="1500" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="760"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<field name="codigoInstitucion" class="java.lang.Long"/>
+	<field name="descripcionInstitucion" class="java.lang.String"/>
+	<field name="consecutivoCentroAtencion" class="java.lang.Integer"/>
+	<field name="descripcionCentroAtencion" class="java.lang.String"/>
+	<field name="descripcionCiudad" class="java.lang.String"/>
+	<field name="descripcionRegion" class="java.lang.String"/>
+	<field name="nombreConvenio" class="java.lang.String"/>
+	<field name="fechaRC" class="java.lang.String"/>
+	<field name="conceptoRC" class="java.lang.String"/>
+	<field name="nroRC" class="java.lang.String"/>
+	<field name="estadoRC" class="java.lang.String"/>
+	<field name="usuario" class="java.lang.String"/>
+	<field name="formaPago" class="java.lang.String"/>
+	<field name="valorFormateado" class="java.lang.String"/>
+	<field name="numeroIdConvenio" class="java.lang.String"/>
+	<variable name="enBlanco" class="java.lang.String">
+		<initialValueExpression><![CDATA[" "]]></initialValueExpression>
+	</variable>
+	<group name="institucion">
+		<groupExpression><![CDATA[$F{codigoInstitucion}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<frame>
+					<reportElement style="colorEncabezado" mode="Transparent" x="0" y="0" width="1500" height="15" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+						<topPen lineWidth="1.0" lineStyle="Solid"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<staticText>
+						<reportElement key="institucion" style="axiomaItem" stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Institución]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="centro" style="axiomaItem" stretchType="RelativeToBandHeight" x="150" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Centro de Atención]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="tipoTarjeta" style="axiomaItem" stretchType="RelativeToBandHeight" x="300" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Ciudad]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="" style="axiomaItem" stretchType="RelativeToBandHeight" x="400" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Región]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="" style="axiomaItem" stretchType="RelativeToBandHeight" x="500" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Convenio]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="" style="axiomaItem" stretchType="RelativeToBandHeight" x="750" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Concepto]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="" style="axiomaItem" stretchType="RelativeToBandHeight" x="900" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Nro RC]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="" style="axiomaItem" stretchType="RelativeToBandHeight" x="1000" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Estado]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="" style="axiomaItem" stretchType="RelativeToBandHeight" x="1250" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Forma de Pago]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="" style="axiomaItem" stretchType="RelativeToBandHeight" x="1100" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Usuario]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="" style="axiomaItem" stretchType="RelativeToBandHeight" x="1400" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Valor]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="" style="axiomaItem" stretchType="RelativeToBandHeight" x="650" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Fecha]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="centroAtencion">
+		<groupExpression><![CDATA[$F{consecutivoCentroAtencion}]]></groupExpression>
+	</group>
+	<group name="convenios">
+		<groupExpression><![CDATA[$F{numeroIdConvenio}]]></groupExpression>
+	</group>
+	<detail>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="institucion" style="axiomaTexto" stretchType="RelativeToTallestObject" x="0" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionInstitucion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="centroAtencion" style="axiomaTexto" stretchType="RelativeToTallestObject" x="150" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionCentroAtencion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="descripcionCiudad" style="axiomaTexto" stretchType="RelativeToTallestObject" x="300" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionCiudad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="descripcionRegion" style="axiomaTexto" stretchType="RelativeToTallestObject" x="400" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionRegion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="convenio" style="axiomaTexto" stretchType="RelativeToTallestObject" x="500" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreConvenio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="concepto" style="axiomaTexto" stretchType="RelativeToTallestObject" x="750" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{conceptoRC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="nroRC" style="axiomaTexto" stretchType="RelativeToTallestObject" x="900" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nroRC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="estado" style="axiomaTexto" stretchType="RelativeToTallestObject" x="1000" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estadoRC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="usuario" style="axiomaTexto" stretchType="RelativeToTallestObject" x="1100" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="fechaRC" style="axiomaTexto" stretchType="RelativeToTallestObject" x="650" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaRC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="formaPago" style="axiomaTexto" stretchType="RelativeToTallestObject" x="1250" y="0" width="150" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{formaPago}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="valor" style="axiomaTexto" stretchType="RelativeToTallestObject" x="1400" y="0" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{valorFormateado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 8, 2010 2:12:13 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MovimientosBonos" table="movimientos_bonos" schema="tesoreria">
+        <comment>Registro de los movimientos de bonos</comment>
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="detallePagosRc" class="com.servinte.axioma.orm.DetallePagosRc" fetch="select">
+            <column name="det_pago_rc" not-null="true">
+                <comment>Referencia hacia la tabla tesoreria.detalle_pagos_rc, donde se registran cada uno de los pagos realizados de los recibos de caja seg&#195;&#186;n su forma
+                de pago</comment>
+            </column>
+        </many-to-one>
+        <property name="numSerial" type="string">
+            <column name="num_serial" length="30" not-null="true" unique="true">
+                <comment>N&#195;&#186;mero de serial del bono recibido</comment>
+            </column>
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256">
+                <comment>Observaciones del proceso de recibo de bonos</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

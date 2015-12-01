@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ViewProfesionalesActivos" table="view_profesionales_activos" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.ViewProfesionalesActivosId">
+            <key-property name="codigoMedico" type="java.lang.Integer">
+                <column name="codigo_medico" />
+            </key-property>
+            <key-property name="ocupacionMedica" type="java.lang.Integer">
+                <column name="ocupacion_medica" />
+            </key-property>
+            <key-property name="fechaVinculacion" type="date">
+                <column name="fecha_vinculacion" length="13" />
+            </key-property>
+            <key-property name="tipoVinculacion" type="java.lang.Integer">
+                <column name="tipo_vinculacion" />
+            </key-property>
+            <key-property name="numeroRegistro" type="string">
+                <column name="numero_registro" length="30" />
+            </key-property>
+            <key-property name="nombreMedico" type="string">
+                <column name="nombre_medico" />
+            </key-property>
+            <key-property name="institucion" type="java.lang.Integer">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConveniosPacientes" table="convenios_pacientes" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.ConveniosPacientesId">
+            <key-property name="codigoPaciente" type="int">
+                <column name="codigo_paciente" />
+            </key-property>
+            <key-property name="convenio" type="int">
+                <column name="convenio" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="estratosSociales" class="com.servinte.axioma.orm.EstratosSociales" fetch="select">
+            <column name="estrato_social" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" update="false" insert="false" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" update="false" insert="false" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <property name="fechaAfiliacion" type="date">
+            <column name="fecha_afiliacion" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/12/2012 11:43:39 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolXJustArtSol" table="sol_x_just_art_sol" schema="inventarios">
+        <composite-id name="id" class="com.servinte.axioma.orm.SolXJustArtSolId">
+            <key-property name="numeroSolicitud" type="int">
+                <column name="numero_solicitud" />
+            </key-property>
+            <key-property name="codigoJustificacion" type="long">
+                <column name="codigo_justificacion" precision="12" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" update="false" insert="false" fetch="select">
+            <column name="numero_solicitud" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

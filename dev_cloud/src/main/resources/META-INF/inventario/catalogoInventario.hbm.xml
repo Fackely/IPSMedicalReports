@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="catalogoInventario.obtenerClaseInventarioPorSubGrupo">
+		<return-scalar column="codigo" type="integer" />
+		<return-scalar column="nombre" type="string" />
+		<return-scalar column="grupo" type="integer" />
+		SELECT ci.codigo, ci.nombre, sgi.grupo
+		FROM inventarios.subgrupo_inventario sgi
+		  INNER JOIN inventarios.grupo_inventario gi ON (gi.codigo=sgi.grupo)
+		  INNER JOIN inventarios.clase_inventario ci ON (ci.codigo=gi.clase AND ci.codigo=sgi.clase)
+		WHERE sgi.codigo=:codigoSubGrupo
+	</sql-query>
+
+	<query name="catalogoInventario.consultarClaseInventario">
+			SELECT NEW com.servinte.axioma.dto.inventario.ClaseInventarioDto (ci.codigo, 
+			ci.nombre, ci.instituciones.codigo)			
+			FROM ClaseInventario ci
+			ORDER BY ci.nombre asc
+	</query>
+
+</hibernate-mapping>

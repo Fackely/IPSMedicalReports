@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<xsd:schema  elementFormDefault="unqualified"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified">
+	<xsd:element name="SolicitudAutorizacionServicios" type="EstructuraSolicitudAutorizacion"></xsd:element>
+
+	<xsd:complexType name="NombreCompleto">
+		<xsd:sequence>
+                        <xsd:element name="PrimerApellido" type="xsd:string" />
+			<xsd:element name="SegundoApellido" type="xsd:string" />
+			<xsd:element name="PrimerNombre" type="xsd:string" />
+			<xsd:element name="SegundoNombre" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Identificacion">
+		<xsd:sequence>
+			<xsd:element name="TipoIdentificacion" type="xsd:string" />
+			<xsd:element name="NumeroIdentificacion" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="UbicacionGeografica">
+		<xsd:sequence>
+			<xsd:element name="DireccionResidenciaHabitual" type="xsd:string" />
+                        <xsd:element name="TelefonoFijo" type="xsd:int" />
+                        <xsd:element name="Departamento" type="xsd:string" />
+			<xsd:element name="Ciudad" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InformacionPersonal">
+		<xsd:sequence>
+                        <xsd:element name="FechaNacimiento" type="xsd:string" />
+			<xsd:element name="Ubicacion" type="UbicacionGeografica" maxOccurs="1" minOccurs="1"></xsd:element>
+			<xsd:element name="TelefonoCelular" type="xsd:string" />
+			<xsd:element name="CorreoElectronico" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Paciente">
+		<xsd:sequence>
+			<xsd:element name="Nombre" type="NombreCompleto" />
+			<xsd:element name="Identificacion" type="Identificacion" maxOccurs="1" minOccurs="1" />
+			<xsd:element name="DatosPersonales" type="InformacionPersonal" maxOccurs="1" minOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Diagnostico">
+		<xsd:sequence>
+      			<xsd:element name="CodigoCIE10Principal" type="xsd:string" />
+      			<xsd:element name="DescripcionPrincipal" type="xsd:string" />
+      			<xsd:element name="CodigoCIE101" type="xsd:string" />
+      			<xsd:element name="Descripcion1" type="xsd:string" />
+      			<xsd:element name="CodigoCIE102" type="xsd:string" />
+      			<xsd:element name="Descripcion2" type="xsd:string" />
+     		</xsd:sequence>
+	</xsd:complexType>
+	
+  	<xsd:complexType name="ServicioSalud">
+		<xsd:sequence>
+      			<xsd:element name="TipoServicio1" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS1" type="xsd:string" />
+      			<xsd:element name="Cantidad1" type="xsd:int" />
+			<xsd:element name="Descripcion1" type="xsd:string" />
+    
+      			<xsd:element name="TipoServicio2" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS2" type="xsd:string" />
+      			<xsd:element name="Cantidad2" type="xsd:int" />
+      			<xsd:element name="Descripcion2" type="xsd:string" />
+      
+     			<xsd:element name="TipoServicio3" type="xsd:string" />
+   			<xsd:element name="CodigoCUPS3" type="xsd:string" />
+      			<xsd:element name="Cantidad3" type="xsd:int" />
+      			<xsd:element name="Descripcion3" type="xsd:string" />
+      
+      			<xsd:element name="TipoServicio4" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS4" type="xsd:string" />
+      			<xsd:element name="Cantidad4" type="xsd:int" />
+      			<xsd:element name="Descripcion4" type="xsd:string" />
+      
+      			<xsd:element name="TipoServicio5" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS5" type="xsd:string" />
+      			<xsd:element name="Cantidad5" type="xsd:int" />
+      			<xsd:element name="Descripcion5" type="xsd:string" />
+     
+      			<xsd:element name="TipoServicio6" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS6" type="xsd:string" />
+      			<xsd:element name="Cantidad6" type="xsd:int" />
+      			<xsd:element name="Descripcion6" type="xsd:string" />
+
+      			<xsd:element name="TipoServicio7" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS7" type="xsd:string" />
+      			<xsd:element name="Cantidad7" type="xsd:int" />
+      			<xsd:element name="Descripcion7" type="xsd:string" />
+
+      			<xsd:element name="TipoServicio8" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS8" type="xsd:string" />
+      			<xsd:element name="Cantidad8" type="xsd:int" />
+      			<xsd:element name="Descripcion8" type="xsd:string" />
+
+      			<xsd:element name="TipoServicio9" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS9" type="xsd:string" />
+      			<xsd:element name="Cantidad9" type="xsd:int" />
+      			<xsd:element name="Descripcion9" type="xsd:string" />
+
+      			<xsd:element name="TipoServicio10" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS10" type="xsd:string" />
+      			<xsd:element name="Cantidad10" type="xsd:int" />
+      			<xsd:element name="Descripcion10" type="xsd:string" />
+
+      			<xsd:element name="TipoServicio11" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS11" type="xsd:string" />
+      			<xsd:element name="Cantidad11" type="xsd:int" />
+      			<xsd:element name="Descripcion11" type="xsd:string" />
+
+      			<xsd:element name="TipoServicio12" type="xsd:string" />
+      			<xsd:element name="CodigoCUPS12" type="xsd:string" />
+      			<xsd:element name="Cantidad12" type="xsd:int" />
+      			<xsd:element name="Descripcion12" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+  
+  	<xsd:complexType name ="General">
+    		<xsd:sequence >
+      			<xsd:element name="Numero" type="xsd:string" />
+      			<xsd:element name="Fecha" type="xsd:date" />
+      			<xsd:element name="Hora" type="xsd:time" />
+      			<xsd:element name ="Prestador" type ="xsd:string"/>
+      			<xsd:element name ="TipoIdPrestador" type ="xsd:string"/>
+      			<xsd:element name ="IDPrestador" type ="xsd:string"/>
+      			<xsd:element name ="DigVerif" type ="xsd:int"/>
+      			<xsd:element name ="CodPrestador" type ="xsd:string"/>
+      			<xsd:element name ="DireccionPrestador" type ="xsd:string"/>
+      			<xsd:element name ="IndicTelefPrestador" type ="xsd:int"/>
+      			<xsd:element name ="TelefonoPrestador" type ="xsd:int"/>
+      			<xsd:element name ="DepartamentoPrestador" type ="xsd:string"/>
+      			<xsd:element name ="MunicipioPrestador" type ="xsd:string"/>
+    		</xsd:sequence>
+  	</xsd:complexType>
+
+  	<xsd:complexType name="Pagador">
+    		<xsd:sequence>
+      			<xsd:element name ="EntidadResponsable" type ="xsd:string"/>
+      			<xsd:element name ="CodigoEntidad" type ="xsd:string"/>
+    		</xsd:sequence>
+  	</xsd:complexType>
+
+  	<xsd:complexType name="EstructuraSolicitudAutorizacion">
+		<xsd:sequence>
+			<xsd:element name="General" type="General" />
+      			<xsd:element name="Pagador" type="Pagador" />
+      			<xsd:element name="Paciente" type="Paciente" />
+      			<xsd:element name ="CoberturaSalud" type="xsd:string"/>
+      			<xsd:element name="OrigenAtencion" type="xsd:string" />
+			<xsd:element name="UbicacionPaciente" type="xsd:int" />
+                        <xsd:element name="ServicioHospitalizacion" type="xsd:string" />
+			<xsd:element name="CamaHospitalizacion" type="xsd:string" />
+			<xsd:element name="GuiaManejoIntegral" type="xsd:string" />
+                        <xsd:element name="ServiciosSolicitados" type="ServicioSalud" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="JustificacionClinica" type="xsd:string" />
+			<xsd:element name="ImpresionDiagnostica" type="Diagnostico" minOccurs="1" maxOccurs="unbounded" />
+      			<xsd:element name="ProfesionalSolicitante" type="ProfesionalSalud" maxOccurs="1" minOccurs="1" />
+    		</xsd:sequence>
+	</xsd:complexType>
+  
+	<xsd:complexType name="ProfesionalSalud">
+		<xsd:sequence>
+			<xsd:element name="Nombre" type="xsd:string" />
+			<xsd:element name="Cargo" type="xsd:string" />
+      			<xsd:element name="IndicaTel" type="xsd:int" />
+      			<xsd:element name="Telefono" type="xsd:int" />
+      			<xsd:element name="ExtTele" type="xsd:int" />
+			<xsd:element name="TelefonoCelular" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

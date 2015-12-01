@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <parameters>
+        <scalar-parameter name="centro_atencion" id="99">
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">true</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="90">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ListadoCamas" id="91">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">nombreconvenio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">ocupacioncamas</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">porcentaje</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param1</property>
+                    <property name="paramName">centro_atencion</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">params["centro_atencion"]</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param2</property>
+                    <property name="paramName">centro_atencion</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">nombreconvenio</property>
+                    <property name="nativeName">nombreconvenio</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">ocupacioncamas</property>
+                    <property name="nativeName">ocupacioncamas</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">porcentaje</property>
+                    <property name="nativeName">porcentaje</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <property name="queryText">select 
+	getnombreconvenio(tc.convenio) as nombreconvenio, 
+	count(tc.convenio) as ocupacioncamas, 
+	(select sum(1) from traslado_cama tc inner join camas1 c on(tc.codigo_nueva_cama=c.codigo) inner join centros_costo cc on(c.centro_costo=cc.codigo) where tc.fecha_finalizacion is null and tc.hora_finalizacion is null and c.estado in(-1) and centro_atencion=?) as porcentaje 
+from 
+	traslado_cama tc 
+	inner join camas1 c on(tc.codigo_nueva_cama=c.codigo) 
+	inner join estados_cama ec on(c.estado=ec.codigo) 
+	inner join centros_costo cc on(c.centro_costo=cc.codigo) 
+where 
+	tc.fecha_finalizacion is null 
+	and tc.hora_finalizacion is null 
+	and c.estado in(-1) 
+	and centro_atencion=? 
+group by getnombreconvenio(tc.convenio)
+order by getnombreconvenio(tc.convenio)</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nombreconvenio</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombreconvenio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>ocupacioncamas</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ocupacioncamas</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>porcentaje</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>65531</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>porcentaje</design:label>
+            <design:formattingHints>
+              <design:displaySize>131067</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1cm</property>
+            <page-header>
+                <grid id="173">
+                    <property name="width">100%</property>
+                    <column id="174">
+                        <property name="width">4.7395833333in</property>
+                    </column>
+                    <column id="175">
+                        <property name="width">3.6458333333in</property>
+                    </column>
+                    <row id="176">
+                        <cell id="177"/>
+                        <cell id="178">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="179">
+                        <cell id="180"/>
+                        <cell id="181">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="182">
+                        <cell id="183"/>
+                        <cell id="184">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="185">
+                        <cell id="186"/>
+                        <cell id="187">
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="188">
+                        <cell id="189"/>
+                        <cell id="190">
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="191">
+                        <cell id="192"/>
+                        <cell id="193">
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="18">
+                    <property name="width">100%</property>
+                    <column id="19">
+                        <property name="width">3.7291666667in</property>
+                    </column>
+                    <column id="20">
+                        <property name="width">3.2708333333in</property>
+                    </column>
+                    <column id="21">
+                        <property name="width">1.3854166667in</property>
+                    </column>
+                    <row id="22">
+                        <cell id="23">
+                            <label id="194">
+                                <property name="paddingTop">0.1em</property>
+                            </label>
+                        </cell>
+                        <cell id="24">
+                            <label id="195">
+                                <property name="paddingTop">0.1em</property>
+                            </label>
+                            <text id="37">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="25">
+                            <label id="197">
+                                <property name="paddingTop">0.1em</property>
+                            </label>
+                            <grid id="157">
+                                <property name="fontWeight">bold</property>
+                                <property name="width">100%</property>
+                                <column id="158">
+                                    <property name="width">0.625in</property>
+                                </column>
+                                <column id="159">
+                                    <property name="width">0.25in</property>
+                                </column>
+                                <column id="160">
+                                    <property name="width">0.4479166667in</property>
+                                </column>
+                                <row id="161">
+                                    <cell id="162">
+                                        <auto-text id="163">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="164">
+                                        <text id="165">
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[de]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="166">
+                                        <auto-text id="167">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="119">
+            <property name="width">100%</property>
+            <property name="dataSet">ListadoCamas</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">param2</property>
+                    <expression name="expression">params["centro_atencion"].value</expression>
+                </structure>
+                <structure>
+                    <property name="paramName">param1</property>
+                    <expression name="expression">params["centro_atencion"].value</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">nombreconvenio</property>
+                    <expression name="expression">dataSetRow["nombreconvenio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ocupacioncamas</property>
+                    <expression name="expression">dataSetRow["ocupacioncamas"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">porcentaje</property>
+                    <expression name="expression">dataSetRow["ocupacioncamas"]/dataSetRow["porcentaje"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">TotalOcupacionCamas</property>
+                    <expression name="expression">Total.sum(row["ocupacioncamas"])</expression>
+                    <property name="dataType">any</property>
+                </structure>
+                <structure>
+                    <property name="name">TotalPorcentaje</property>
+                    <expression name="expression">Total.sum(row["porcentaje"])</expression>
+                    <property name="dataType">any</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="132">
+                <property name="width">6.5in</property>
+            </column>
+            <column id="133">
+                <property name="width">1.375in</property>
+            </column>
+            <column id="134">
+                <property name="width">2in</property>
+            </column>
+            <header>
+                <row id="120">
+                    <cell id="121">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="168">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">CONVENIO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="122">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="170">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">OCUPACIÓN CAMAS</text-property>
+                        </label>
+                    </cell>
+                    <cell id="123">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="172">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">PORCENTAJE (%)</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="124">
+                    <cell id="125">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <data id="138">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">nombreconvenio</property>
+                        </data>
+                    </cell>
+                    <cell id="126">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <data id="139">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">0pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">ocupacioncamas</property>
+                        </data>
+                    </cell>
+                    <cell id="127">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="140">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">0pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Percent</property>
+                                <property name="pattern">Percent</property>
+                            </structure>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">porcentaje</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="128">
+                    <cell id="129">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <label id="149">
+                            <property name="paddingTop">0.15cm</property>
+                        </label>
+                        <label id="145">
+                            <property name="fontSize">10pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <text-property name="text">Totales</text-property>
+                        </label>
+                    </cell>
+                    <cell id="130">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <label id="150">
+                            <property name="paddingTop">0.15cm</property>
+                        </label>
+                        <data id="146">
+                            <property name="fontSize">10pt</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">TotalOcupacionCamas</property>
+                        </data>
+                    </cell>
+                    <cell id="131">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="153">
+                            <property name="paddingTop">0.15cm</property>
+                        </label>
+                        <data id="148">
+                            <property name="fontSize">10pt</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Percent</property>
+                                <property name="pattern">Percent</property>
+                            </structure>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">TotalPorcentaje</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

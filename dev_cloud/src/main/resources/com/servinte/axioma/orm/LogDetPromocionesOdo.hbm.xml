@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogDetPromocionesOdo" table="log_det_promociones_odo" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sexo" class="com.servinte.axioma.orm.Sexo" fetch="select">
+            <column name="sexo" />
+        </many-to-one>
+        <many-to-one name="ocupaciones" class="com.servinte.axioma.orm.Ocupaciones" fetch="select">
+            <column name="ocupacion_paciente" />
+        </many-to-one>
+        <many-to-one name="categoriasAtencion" class="com.servinte.axioma.orm.CategoriasAtencion" fetch="select">
+            <column name="categoria_centro_atencion" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa_odontologico" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="estadosCiviles" class="com.servinte.axioma.orm.EstadosCiviles" fetch="select">
+            <column name="estado_civil" length="1" />
+        </many-to-one>
+        <property name="detPromocionOdo" type="int">
+            <column name="det_promocion_odo" not-null="true" />
+        </property>
+        <property name="promocionOdontologia" type="int">
+            <column name="promocion_odontologia" not-null="true" />
+        </property>
+        <property name="regionCentroAtencion" type="java.lang.Long">
+            <column name="region_centro_atencion" precision="10" scale="0" />
+        </property>
+        <property name="paisCentroAtencion" type="string">
+            <column name="pais_centro_atencion" length="10" />
+        </property>
+        <property name="ciudadCentroAtencion" type="string">
+            <column name="ciudad_centro_atencion" length="10" />
+        </property>
+        <property name="deptoCentroAtencion" type="string">
+            <column name="depto_centro_atencion" length="10" />
+        </property>
+        <property name="edadInicial" type="java.lang.Integer">
+            <column name="edad_inicial" />
+        </property>
+        <property name="edadFinal" type="java.lang.Integer">
+            <column name="edad_final" />
+        </property>
+        <property name="nroHijos" type="java.lang.Integer">
+            <column name="nro_hijos" />
+        </property>
+        <property name="porcentajeDescuento" type="big_decimal">
+            <column name="porcentaje_descuento" precision="5" />
+        </property>
+        <property name="valorDescuento" type="big_decimal">
+            <column name="valor_descuento" precision="12" />
+        </property>
+        <property name="porcentajeHonorario" type="big_decimal">
+            <column name="porcentaje_honorario" precision="5" />
+        </property>
+        <property name="valorHonorario" type="java.lang.Long">
+            <column name="valor_honorario" precision="12" scale="0" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReportePlantillaOdontologica" pageWidth="572" pageHeight="792" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.1000000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subReporteSeccionesFijas" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subReporteDetalleDeHallazgos" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subReporteHallazgosPiezasDentales" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subReporteHallazgosBoca" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subReporteTratamientosInternos" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subReporteTratamientosExternos" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subReporteProgramaServicioCitaAsignada" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subReporteCreadorColumnas" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="dsSeccionesFijas" class="java.lang.Object"/>
+	<group name="Plantilla">
+		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<frame>
+					<reportElement style="colorEncabezado" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="572" height="21" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<line>
+						<reportElement x="0" y="19" width="572" height="1"/>
+					</line>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="nombre" style="axiomaTexto" x="11" y="0" width="561" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement>
+							<font size="10" isBold="false"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="38" splitType="Stretch">
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="572" height="38"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<subreport isUsingCache="true">
+					<reportElement key="subReporteSeccionesFijas" x="0" y="0" width="572" height="38" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="subReporteProgramaServicioCitaAsignada">
+						<subreportParameterExpression><![CDATA[$P{subReporteProgramaServicioCitaAsignada}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subReporteCreadorColumnas">
+						<subreportParameterExpression><![CDATA[$P{subReporteCreadorColumnas}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subReporteDetalleDeHallazgos">
+						<subreportParameterExpression><![CDATA[$P{subReporteDetalleDeHallazgos}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subReporteTratamientosExternos">
+						<subreportParameterExpression><![CDATA[$P{subReporteTratamientosExternos}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subReporteHallazgosPiezasDentales">
+						<subreportParameterExpression><![CDATA[$P{subReporteHallazgosPiezasDentales}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subReporteHallazgosBoca">
+						<subreportParameterExpression><![CDATA[$P{subReporteHallazgosBoca}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subReporteTratamientosInternos">
+						<subreportParameterExpression><![CDATA[$P{subReporteTratamientosInternos}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$F{dsSeccionesFijas}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteSeccionesFijas}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

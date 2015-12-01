@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<query name="nivelAutorizacion.consultarNivelesAutorizacionUsuario">
+		SELECT NEW com.servinte.axioma.dto.capitacion.NivelAutorizacionDto(
+						na.codigoPk, na.descripcion, vi.codigo, vi.nombre)
+			FROM NivelAutorUsuEspec naue
+				INNER JOIN naue.nivelAutorUsuario nau
+				INNER JOIN nau.nivelAutorizacion na
+				INNER JOIN na.viasIngreso vi
+				INNER JOIN naue.usuariosByUsuario usu
+		WHERE usu.login = :loginUsuario
+			AND na.tipoAutorizacion = :tipoAutorizacion
+			AND na.activo = :isActivo
+	</query>
+	
+	<query name="nivelAutorizacion.consultarNivelesAutorizacionOcupacionUsuario">
+		SELECT NEW com.servinte.axioma.dto.capitacion.NivelAutorizacionDto(
+						na.codigoPk, na.descripcion, vi.codigo, vi.nombre)
+			FROM NivelAutorOcupMedica naom
+				INNER JOIN naom.nivelAutorUsuario nau
+				INNER JOIN nau.nivelAutorizacion na
+				INNER JOIN na.viasIngreso vi
+				INNER JOIN naom.ocupacionesMedicas om
+				INNER JOIN om.medicoses med
+				INNER JOIN med.personas per
+		WHERE per.codigo = :codigoPersonaUsuario
+			AND na.tipoAutorizacion = :tipoAutorizacion
+			AND na.activo = :isActivo
+	</query>
+	
+	<query name="nivelAutorizacion.obtenerPrioridadesNivelAutorizacionUsuario">
+		SELECT DISTINCT pue.nroPrioridad
+			FROM NivelAutorizacion na
+				INNER JOIN na.nivelAutorUsuarios nau
+				INNER JOIN nau.nivelAutorUsuEspecs naue
+				INNER JOIN naue.usuariosByUsuario usu
+				INNER JOIN naue.prioridadUsuEsps pue
+		WHERE na.codigoPk = :codigoNivelAutorizacion
+			AND usu.login = :loginUsuario
+	</query>
+	
+	<query name="nivelAutorizacion.obtenerPrioridadesNivelAutorizacionOcupacionUsuario">
+		SELECT DISTINCT pom.nroPrioridad
+			FROM NivelAutorizacion na
+				INNER JOIN na.nivelAutorUsuarios nau
+				INNER JOIN nau.nivelAutorOcupMedicas naom
+				INNER JOIN naom.ocupacionesMedicas om
+				INNER JOIN om.medicoses med
+				INNER JOIN med.personas per
+				INNER JOIN naom.prioridadOcupMedicas pom
+		WHERE na.codigoPk = :codigoNivelAutorizacion
+			AND per.codigo = :codigoPersonaUsuario
+	</query>
+	
+	<query name="nivelAutorizacion.existeNivelAutorizacionMedicamentosInsumos">
+		SELECT na.codigoPk
+			FROM NivelAutorizacion na
+				INNER JOIN na.nivelAutorServMedics nasm
+				INNER JOIN nasm.nivelAutorArticulos naa
+		WHERE naa.articulo IN (:codigosMedicamentos)
+	</query>
+	
+	<query name="nivelAutorizacion.obtenerNivelAutorizacionMedicamentoInsumo">
+		SELECT na.codigoPk
+			FROM NivelAutorizacion na
+				INNER JOIN na.nivelAutorServMedics nasm
+				INNER JOIN nasm.nivelAutorArticulos naa
+		WHERE naa.articulo = :codigoMedicamento
+	</query>
+	
+	<sql-query name="nivelAutorizacion.obtenerNivelAutorizacionMedicamentoInsumoAgrupado">
+		<return-scalar column="codigoNivel" type="integer" />
+		<![CDATA[
+			SELECT na.codigo_pk AS codigoNivel
+			  FROM capitacion.nivel_autorizacion na
+			    INNER JOIN capitacion.nivel_autor_serv_medic nasm ON (nasm.nivel_autorizacion=na.codigo_pk)
+			    INNER JOIN capitacion.nivel_autor_agr_art naaa ON (naaa.nivel_autor_serv_medic=nasm.codigo_pk)
+			    LEFT JOIN inventarios.subgrupo_inventario sgi ON (sgi.codigo=naaa.subgrupo_inventario)
+			    LEFT JOIN inventarios.naturaleza_articulo nata ON (nata.acronimo=naaa.naturaleza_articulo)
+			WHERE (sgi.codigo = :codigoSubGrupo OR sgi.codigo IS NULL)
+			  AND (naaa.clase_inventario = :codigoClaseInv OR naaa.clase_inventario IS NULL)
+			  AND (naaa.grupo_inventario = :codigoGrupoInv OR naaa.grupo_inventario IS NULL)
+			  AND (nata.acronimo = :acronimoNaturaleza OR nata.acronimo IS NULL)
+		]]>
+	</sql-query>
+	
+	<query name="nivelAutorizacion.existeNivelAutorizacionServicios">
+		SELECT na.codigoPk
+			FROM NivelAutorizacion na
+				INNER JOIN na.nivelAutorServMedics nasm
+				INNER JOIN nasm.nivelAutorServicios nas
+				INNER JOIN nas.servicios serv
+		WHERE serv.codigo IN (:codigosServicios)
+	</query>
+	
+	<query name="nivelAutorizacion.obtenerNivelAutorizacionServicio">
+		SELECT na.codigoPk
+			FROM NivelAutorizacion na
+				INNER JOIN na.nivelAutorServMedics nasm
+				INNER JOIN nasm.nivelAutorServicios nas
+				INNER JOIN nas.servicios serv
+		WHERE serv.codigo = :codigoServicio
+	</query>
+	
+	<query name="nivelAutorizacion.obtenerNivelAutorizacionServicioAgrupado">
+		SELECT na.codigoPk
+			FROM NivelAutorizacion na
+				INNER JOIN na.nivelAutorServMedics nasm
+				INNER JOIN nasm.nivelAutorAgrServs naas
+				LEFT JOIN naas.especialidades esp
+				LEFT JOIN naas.tiposServicio tips
+				LEFT JOIN naas.gruposServicios gs
+		WHERE (esp.codigo = :codigoEspecialidad OR esp.codigo IS NULL)
+			AND (tips.acronimo = :acronimoTipoServicio OR tips.acronimo IS NULL) 
+			AND (gs.codigo = :codigoGrupoServico OR gs.codigo IS NULL)
+	</query>
+	
+</hibernate-mapping>

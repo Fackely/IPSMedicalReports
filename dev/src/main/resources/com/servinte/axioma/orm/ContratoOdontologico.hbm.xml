@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 30, 2010 2:13:57 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ContratoOdontologico" table="contrato_odontologico" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+            	<param name="sequence">
+            		odontologia.seq_contrato_odontologico
+            	</param>
+            </generator>
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="codigo_institucion" />
+        </many-to-one>
+        <property name="clausulas" type="string">
+            <column name="clausulas" />
+        </property>
+        <property name="piePagina" type="string">
+            <column name="pie_pagina" />
+        </property>
+        <property name="imprimirFirmasInsti" type="string">
+            <column name="imprimir_firmas_insti" length="1" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="firmasContratoOtrosiInsts" inverse="true" lazy="true" table="firmas_contrato_otrosi_inst" fetch="select" cascade="all-delete-orphan">
+            <key>
+                <column name="contrato_odo" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FirmasContratoOtrosiInst" />
+        </set>
+    </class>
+</hibernate-mapping>

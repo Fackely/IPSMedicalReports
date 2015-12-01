@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NivelRompimientoServ" table="nivel_rompimiento_serv" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" not-null="true" />
+        </property>
+        <set name="detSecServFormatoFacts" inverse="true" lazy="true" table="det_sec_serv_formato_fact" fetch="select">
+            <key>
+                <column name="nivel_rompimiento" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetSecServFormatoFact" />
+        </set>
+    </class>
+</hibernate-mapping>

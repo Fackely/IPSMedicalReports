@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/10/2012 04:00:09 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EvolucionCurva" table="evolucion_curva" schema="historiaclinica">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="sequence" >
+				<param name="sequence">historiaclinica.seq_evolucion_curva</param>
+			</generator>
+        </id>
+        <many-to-one name="curvaCrecimientoParametrizab" class="com.servinte.axioma.orm.CurvaCrecimientoParametrizab" fetch="select">
+            <column name="id_curva_crecimiento_paramet" />
+        </many-to-one>
+        <many-to-one name="evoluciones" class="com.servinte.axioma.orm.Evoluciones" fetch="select">
+            <column name="codigo_evolucion" />
+        </many-to-one>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="13" />
+        </property>
+        <set name="historicoImagenPlantillas" table="historico_imagen_plantilla" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_evolucion_curva" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoImagenPlantilla" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogEsqTarInvContrato" table="log_esq_tar_inv_contrato" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.LogEsqTarInvContratoId">
+            <key-property name="codigo" type="long">
+                <column name="codigo" precision="10" scale="0" />
+            </key-property>
+            <key-property name="esqTarInventarioContrato" type="long">
+                <column name="esq_tar_inventario_contrato" precision="10" scale="0" />
+            </key-property>
+            <key-property name="claseInventario" type="java.lang.Integer">
+                <column name="clase_inventario" />
+            </key-property>
+            <key-property name="esquemaTarifario" type="int">
+                <column name="esquema_tarifario" />
+            </key-property>
+            <key-property name="fechaVigencia" type="date">
+                <column name="fecha_vigencia" length="13" />
+            </key-property>
+            <key-property name="fechaModifica" type="date">
+                <column name="fecha_modifica" length="13" />
+            </key-property>
+            <key-property name="horaModifica" type="string">
+                <column name="hora_modifica" length="5" />
+            </key-property>
+            <key-property name="usuarioModifica" type="string">
+                <column name="usuario_modifica" length="30" />
+            </key-property>
+            <key-property name="eliminado" type="char">
+                <column name="eliminado" length="1" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifarios" class="com.servinte.axioma.orm.EsquemasTarifarios" update="false" insert="false" fetch="select">
+            <column name="esquema_tarifario" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

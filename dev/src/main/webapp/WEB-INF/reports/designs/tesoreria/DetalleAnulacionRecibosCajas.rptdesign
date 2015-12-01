@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="4">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://100.0.0.17:5432/axioma_integracion</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DetalleAnulacion" id="5">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <property name="queryText">SELECT
+	arc.numero_recibo_caja as numero_recibo_caja,
+	arc.consecutivo_anulacion as numeroanulacion,
+	arc.usuario as loginusuario,
+	getnombremedico(u.codigo_persona) as nomusuario,
+	to_char(arc.fecha,'DD/MM/YYYY') as fecha,
+	substr(arc.hora,1,5) as hora,
+	arc.motivo_anulacion as codmotivo,
+	marc.descripcion as descmotivoanulacion,
+	arc.observaciones as observaciones,
+	getTotalReciboCaja(arc.numero_recibo_caja,arc.institucion) as valortotalrc,
+	to_char(rc.fecha,'DD/MM/YYYY') ||' - '|| substr(rc.hora,1,5) as fechahoraelaboracionrc,
+	rc.recibido_de as recibido_de
+FROM
+	anulacion_recibos_caja arc
+	INNER JOIN usuarios u on(u.login=arc.usuario)
+	INNER JOIN motivos_anulacion_rc marc on (marc.codigo=arc.motivo_anulacion)
+	INNER JOIN recibos_caja rc on (rc.numero_recibo_caja=arc.numero_recibo_caja)
+WHERE
+	1=2</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>numero_recibo_caja</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>numero_recibo_caja</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>numeroanulacion</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>numeroanulacion</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>loginusuario</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>loginusuario</design:label>
+            <design:formattingHints>
+              <design:displaySize>30</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nomusuario</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nomusuario</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>fecha</design:name>
+            <design:position>5</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>fecha</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>hora</design:name>
+            <design:position>6</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>hora</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>codmotivo</design:name>
+            <design:position>7</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>codmotivo</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>descmotivoanulacion</design:name>
+            <design:position>8</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>descmotivoanulacion</design:label>
+            <design:formattingHints>
+              <design:displaySize>64</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>observaciones</design:name>
+            <design:position>9</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>observaciones</design:label>
+            <design:formattingHints>
+              <design:displaySize>256</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>valortotalrc</design:name>
+            <design:position>10</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valortotalrc</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>fechahoraelaboracionrc</design:name>
+            <design:position>11</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>fechahoraelaboracionrc</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>recibido_de</design:name>
+            <design:position>12</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>recibido_de</design:label>
+            <design:formattingHints>
+              <design:displaySize>256</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <property name="headerHeight">4cm</property>
+            <property name="footerHeight">3cm</property>
+            <page-header>
+                <grid id="6">
+                    <property name="width">100%</property>
+                    <column id="7">
+                        <property name="width">2.673in</property>
+                    </column>
+                    <column id="8">
+                        <property name="width">4.632in</property>
+                    </column>
+                    <row id="9">
+                        <property name="height">1.178in</property>
+                        <cell id="10"/>
+                        <cell id="11"/>
+                    </row>
+                    <row id="12">
+                        <property name="height">0.295in</property>
+                        <cell id="13"/>
+                        <cell id="14"/>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="15">
+                    <property name="width">100%</property>
+                    <column id="16"/>
+                    <row id="17">
+                        <cell id="18"/>
+                    </row>
+                    <row id="19">
+                        <cell id="20"/>
+                    </row>
+                    <row id="21">
+                        <property name="height">0.396in</property>
+                        <cell id="22">
+                            <grid id="23">
+                                <property name="width">100%</property>
+                                <column id="24"/>
+                                <column id="25"/>
+                                <column id="26"/>
+                                <row id="27">
+                                    <cell id="28">
+                                        <text id="65">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <text-property name="content"><![CDATA[Creado por: Axioma Birt Reports]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="29">
+                                        <text name="footerCreatedDate" id="44">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="30">
+                                        <text name="footerNumberPage" id="45">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[Page: <value-of>pageNumber</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="406">
+            <property name="fontFamily">"SansSerif"</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">ANULACIÓN DEL RECIBO DE CAJA</text-property>
+        </label>
+        <table id="407">
+            <property name="height">2.65625in</property>
+            <property name="width">7.520833333333333in</property>
+            <property name="dataSet">DetalleAnulacion</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">numeroanulacion</property>
+                    <expression name="expression">dataSetRow["numeroanulacion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha</property>
+                    <expression name="expression">dataSetRow["fecha"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">hora</property>
+                    <expression name="expression">dataSetRow["hora"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">loginusuario</property>
+                    <expression name="expression">dataSetRow["loginusuario"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">numero_recibo_caja</property>
+                    <expression name="expression">dataSetRow["numero_recibo_caja"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fechahoraelaboracionrc</property>
+                    <expression name="expression">dataSetRow["fechahoraelaboracionrc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valortotalrc</property>
+                    <expression name="expression">dataSetRow["valortotalrc"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">recibido_de</property>
+                    <expression name="expression">dataSetRow["recibido_de"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">descmotivoanulacion</property>
+                    <expression name="expression">dataSetRow["descmotivoanulacion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">observaciones</property>
+                    <expression name="expression">dataSetRow["observaciones"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="457">
+                <property name="width">1.2083333333333333in</property>
+            </column>
+            <column id="458">
+                <property name="width">1.1354166666666667in</property>
+            </column>
+            <column id="459">
+                <property name="width">1.4583333333333333in</property>
+            </column>
+            <column id="460">
+                <property name="width">1.0729166666666667in</property>
+            </column>
+            <column id="461">
+                <property name="width">1.21875in</property>
+            </column>
+            <column id="462">
+                <property name="width">0.7604166666666666in</property>
+            </column>
+            <header>
+                <row id="408">
+                    <cell id="409">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="415">
+                    <cell id="416">
+                        <label id="198">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text-property name="text">Anulación No.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="417">
+                        <data id="463">
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="resultSetColumn">numeroanulacion</property>
+                        </data>
+                    </cell>
+                    <cell id="418">
+                        <label id="218">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text-property name="text">Fecha/Hora Anulación</text-property>
+                        </label>
+                    </cell>
+                    <cell id="419">
+                        <data id="464">
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="resultSetColumn">fecha</property>
+                        </data>
+                        <data id="465">
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="resultSetColumn">hora</property>
+                        </data>
+                    </cell>
+                    <cell id="420">
+                        <label id="223">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text-property name="text">Usuario Anulación</text-property>
+                        </label>
+                    </cell>
+                    <cell id="421">
+                        <data id="466">
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="resultSetColumn">loginusuario</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="422">
+                    <cell id="423">
+                        <label id="225">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text-property name="text">Recibo de Caja No.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="424">
+                        <data id="467">
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="resultSetColumn">numero_recibo_caja</property>
+                        </data>
+                    </cell>
+                    <cell id="425">
+                        <label id="227">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text-property name="text">Fecha Elabora Recibo de Caja</text-property>
+                        </label>
+                    </cell>
+                    <cell id="426">
+                        <data id="468">
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="resultSetColumn">fechahoraelaboracionrc</property>
+                        </data>
+                    </cell>
+                    <cell id="427">
+                        <label id="229">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text-property name="text">Valor</text-property>
+                        </label>
+                    </cell>
+                    <cell id="428">
+                        <data id="469">
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="resultSetColumn">valortotalrc</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="429">
+                    <cell id="430">
+                        <label id="231">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text-property name="text">Recibido de</text-property>
+                        </label>
+                    </cell>
+                    <cell id="431">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <data id="470">
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="resultSetColumn">recibido_de</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="436">
+                    <cell id="437">
+                        <label id="233">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text-property name="text">Motivo Anulación</text-property>
+                        </label>
+                    </cell>
+                    <cell id="438">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <data id="471">
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="resultSetColumn">descmotivoanulacion</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="443">
+                    <cell id="444">
+                        <label id="234">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text-property name="text">Observaciones Anul.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="445">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <data id="472">
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="resultSetColumn">observaciones</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="450">
+                    <cell id="451">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteCitasOdonto" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="732" leftMargin="30" rightMargin="30" topMargin="30" bottomMargin="30">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/odontologia/ingresosOdontologicos/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subrptInstitucion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptCentrosAtencion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptEspecialidades" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptCitasConCancelacion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptServicios" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptCitasSinCancelacion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptCitasOdontoResumido" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="razonSocial" class="java.lang.String"/>
+	<field name="fechaInicial" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.lang.String"/>
+	<field name="logoDerecha" class="java.lang.String"/>
+	<field name="logoIzquierda" class="java.lang.String"/>
+	<field name="dsListadoResultado" class="java.lang.Object"/>
+	<field name="usuario" class="java.lang.String"/>
+	<field name="especialidad" class="java.lang.String"/>
+	<field name="unidadAgenda" class="java.lang.String"/>
+	<field name="servicios" class="java.lang.String"/>
+	<field name="tiposCita" class="java.lang.String"/>
+	<field name="estadosCita" class="java.lang.String"/>
+	<field name="profesional" class="java.lang.String"/>
+	<field name="conCancelacion" class="java.lang.String"/>
+	<field name="canceladasPor" class="java.lang.String"/>
+	<field name="esResumido" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="140" splitType="Immediate">
+			<staticText>
+				<reportElement key="titulo" style="axiomaTitulo" x="210" y="15" width="300" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CITAS ODONTOLÓGICAS]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="razonSocial" style="axiomaTitulo" stretchType="RelativeToTallestObject" x="210" y="0" width="300" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="fechaInicial" style="axiomaTexto" stretchType="RelativeToTallestObject" x="270" y="55" width="100" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaInicial}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="fechaFinal" style="axiomaTexto" stretchType="RelativeToTallestObject" x="455" y="55" width="100" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="200" y="55" width="70" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="385" y="55" width="70" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Final:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="270" y="70" width="100" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad de Agenda:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="unidadAgenda" style="axiomaTexto" stretchType="RelativeToTallestObject" x="370" y="70" width="120" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{unidadAgenda}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="70" y="70" width="140" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especialidad Unid Agenda:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="especialidad" style="axiomaTexto" stretchType="RelativeToTallestObject" x="210" y="70" width="60" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{especialidad}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+				<reportElement key="logoDerecha" x="50" y="0" width="120" height="70">
+					<printWhenExpression><![CDATA[$F{logoIzquierda} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA[$F{logoIzquierda}]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+				<reportElement x="580" y="0" width="120" height="70" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{logoDerecha} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA[$F{logoDerecha}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="axiomaItem" x="490" y="70" width="60" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servicios:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="unidadAgenda" style="axiomaTexto" stretchType="RelativeToTallestObject" x="550" y="70" width="130" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{servicios}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="110" y="82" width="70" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Cita:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="tipoCita" style="axiomaTexto" stretchType="RelativeToTallestObject" x="180" y="82" width="80" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tiposCita}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="260" y="82" width="80" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado Cita:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="estadoCita" style="axiomaTexto" stretchType="RelativeToTallestObject" x="340" y="82" width="80" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estadosCita}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="420" y="82" width="80" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profesional:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="profesional" style="axiomaTexto" stretchType="RelativeToTallestObject" x="500" y="82" width="100" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{profesional}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="150" y="94" width="130" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Citas con Cancelación:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="conCancelacion" style="axiomaTexto" stretchType="RelativeToTallestObject" x="280" y="94" width="80" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{conCancelacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="360" y="94" width="100" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Canceladas por:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="canceladasPor" style="axiomaTexto" stretchType="RelativeToTallestObject" x="460" y="94" width="80" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{canceladasPor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="fechaInicial" style="axiomaTexto" stretchType="RelativeToTallestObject" x="210" y="30" width="300" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{esResumido} ? "RESUMIDO" : "DETALLADO" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="600" y="82" width="50" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="usuario" style="axiomaTexto" stretchType="RelativeToTallestObject" x="650" y="82" width="82" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{usuario}.isEmpty() ? "Todos" : $F{usuario} )]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="10" splitType="Immediate">
+			<subreport isUsingCache="true" runToBottom="false">
+				<reportElement key="subrptInstitucion" stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subrptCentrosAtencion">
+					<subreportParameterExpression><![CDATA[$P{subrptCentrosAtencion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subrptCitasOdontoResumido">
+					<subreportParameterExpression><![CDATA[$P{subrptCitasOdontoResumido}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subrptServicios">
+					<subreportParameterExpression><![CDATA[$P{subrptServicios}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subrptEspecialidades">
+					<subreportParameterExpression><![CDATA[$P{subrptEspecialidades}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subrptCitasConCancelacion">
+					<subreportParameterExpression><![CDATA[$P{subrptCitasConCancelacion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subrptCitasSinCancelacion">
+					<subreportParameterExpression><![CDATA[$P{subrptCitasSinCancelacion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{dsListadoResultado}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subrptInstitucion}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="90" splitType="Immediate">
+			<textField pattern="dd/MM/yyyy HH:mm" isBlankWhenNull="true">
+				<reportElement style="axiomaTexto" mode="Transparent" x="385" y="75" width="100" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaTexto" x="300" y="75" width="80" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha de Proceso:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="axiomaTexto" x="490" y="75" width="77" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="axiomaTexto" x="567" y="75" width="26" height="15"/>
+				<box leftPadding="1"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="usuarioProcesa" style="axiomaTexto" x="170" y="75" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaTexto" x="100" y="75" width="70" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Usuario Proceso:]]></text>
+			</staticText>
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="15" width="732" height="45" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true">
+					<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+				</reportElement>
+				<staticText>
+					<reportElement style="axiomaItem" mode="Opaque" x="0" y="0" width="732" height="15" backcolor="#D5C9C9">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Convenciones]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="15" width="120" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Convenciones Tipo Cita]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="30" width="120" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Convenciones Tipo Cita]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="120" y="15" width="80" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Auditoria = Aud]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="200" y="15" width="100" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Atención Prioritaria = Prior]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="300" y="15" width="70" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Control = Cont]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="370" y="15" width="80" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Interconsulta = Int]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="450" y="15" width="90" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Tratamiento = Trat]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="540" y="15" width="90" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Revaloración = Rev]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="630" y="15" width="102" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Valoración Inicial = V Inic]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="120" y="30" width="70" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Programada = Prog]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="490" y="30" width="80" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[No Atención = N Aten]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="410" y="30" width="80" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[No Asistió = N Asis]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="320" y="30" width="90" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[A Reprogramar = A Rep]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="570" y="30" width="80" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Atendida = Aten]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="260" y="30" width="60" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Asignada = Asig]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="190" y="30" width="70" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Reservada = Res]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" mode="Transparent" x="650" y="30" width="82" height="15" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[!$F{esResumido}]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" leftPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Cancelada = Can]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+</jasperReport>

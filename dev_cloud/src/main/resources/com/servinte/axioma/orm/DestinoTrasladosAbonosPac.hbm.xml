@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 22, 2010 12:52:37 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DestinoTrasladosAbonosPac" table="destino_traslados_abonos_pac" schema="tesoreria">
+        <comment>Registro de los traslados de los abonos de los pacientes con los movimientos de abonos</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">tesoreria.seq_destino_trasl_abonos_pac</param>
+			</generator>
+        </id>
+        <many-to-one name="trasladosAbonos" class="com.servinte.axioma.orm.TrasladosAbonos" fetch="select">
+            <column name="traslado" precision="10" scale="0" not-null="true">
+                <comment>Referencia a la tabla tesoreria.traslados_abonos</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="movimientosAbonos" class="com.servinte.axioma.orm.MovimientosAbonos" fetch="select" cascade="all">
+            <column name="movimiento_abono_destino" not-null="true">
+                <comment>Referencia a la tabla tesoreria.movimientos_abonos</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

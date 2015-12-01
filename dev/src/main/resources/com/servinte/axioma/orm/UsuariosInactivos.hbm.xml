@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UsuariosInactivos" table="usuarios_inactivos" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.UsuariosInactivosId">
+            <key-property name="login" type="string">
+                <column name="login" length="30" />
+            </key-property>
+            <key-property name="codigoInstitucion" type="int">
+                <column name="codigo_institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="login" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="codigo_institucion" not-null="true" />
+        </many-to-one>
+        <property name="password" type="string">
+            <column name="password" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

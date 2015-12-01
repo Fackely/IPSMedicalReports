@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 6, 2010 10:39:15 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConsentimientoInfoOdonto" table="consentimiento_info_odonto" schema="odontologia">
+        <id name="codigoPk" type="big_decimal">
+            <column name="codigo_pk" precision="131089" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="planTratamiento" class="com.servinte.axioma.orm.PlanTratamiento" fetch="select">
+            <column name="plan_tratamiento" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="motivosNoConsentimientoInfo" class="com.servinte.axioma.orm.MotivosNoConsentimientoInfo" fetch="select">
+            <column name="motivo_no_consentimiento" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="programasHallazgoPieza" class="com.servinte.axioma.orm.ProgramasHallazgoPieza" fetch="select">
+            <column name="programa_hallazgo_pieza" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="recibioConsentimiento" type="string">
+            <column name="recibio_consentimiento" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="string">
+            <column name="fecha_modifica" length="10" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

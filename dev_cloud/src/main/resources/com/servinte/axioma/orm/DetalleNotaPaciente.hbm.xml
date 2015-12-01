@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/07/2011 02:32:58 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetalleNotaPaciente" table="detalle_nota_paciente" schema="tesoreria">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_detalle_nota_paciente</param>
+			</generator>
+        </id>
+        <many-to-one name="notaPaciente" class="com.servinte.axioma.orm.NotaPaciente" fetch="select">
+            <column name="nota_paciente" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso_paciente" />
+        </many-to-one>
+        <property name="valor" type="big_decimal">
+            <column name="valor" precision="12" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

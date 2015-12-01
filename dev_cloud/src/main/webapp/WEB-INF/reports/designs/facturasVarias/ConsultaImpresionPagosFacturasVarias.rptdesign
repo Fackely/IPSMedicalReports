@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Written by Eclipse BIRT 2.0 -->
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.6" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.1.2.v20070205-1728 Build &lt;20070205-1728></property>
+    <property name="units">in</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="125">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ConsultaImpresionPagosFacturasVarias" id="126">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <property name="queryText">SELECT
+	getconsecutivofacturavarias(factura) AS factura,
+	valor_pago AS valor_pago
+FROM
+	aplicac_pagos_factura_fvarias
+WHERE
+	1=1
+ORDER BY
+	factura;</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1in</property>
+            <property name="leftMargin">1.25in</property>
+            <property name="bottomMargin">1in</property>
+            <property name="rightMargin">1.25in</property>
+            <page-header>
+                <grid id="145">
+                    <property name="width">100%</property>
+                    <column id="146">
+                        <property name="width">5.6770833333in</property>
+                    </column>
+                    <column id="147">
+                        <property name="width">2.7083333333in</property>
+                    </column>
+                    <row id="148">
+                        <cell id="149"/>
+                        <cell id="150">
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="151">
+                        <cell id="152"/>
+                        <cell id="153">
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="154">
+                        <cell id="155"/>
+                        <cell id="156"/>
+                    </row>
+                    <row id="157">
+                        <cell id="158"/>
+                        <cell id="159"/>
+                    </row>
+                    <row id="160">
+                        <cell id="161"/>
+                        <cell id="162"/>
+                    </row>
+                    <row id="163">
+                        <cell id="164"/>
+                        <cell id="165"/>
+                    </row>
+                    <row id="166">
+                        <cell id="167"/>
+                        <cell id="168"/>
+                    </row>
+                    <row id="169">
+                        <cell id="170"/>
+                        <cell id="171"/>
+                    </row>
+                    <row id="172">
+                        <cell id="173"/>
+                        <cell id="174"/>
+                    </row>
+                    <row id="175">
+                        <cell id="176"/>
+                        <cell id="177"/>
+                    </row>
+                    <row id="178">
+                        <cell id="179">
+                            <label id="181">
+                                <property name="fontSize">10pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="paddingTop">0.2cm</property>
+                                <property name="paddingLeft">0pt</property>
+                                <property name="paddingBottom">0.2cm</property>
+                                <text-property name="text">DETALLE FACTURAS</text-property>
+                            </label>
+                        </cell>
+                        <cell id="180"/>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="202">
+                    <property name="fontWeight">bold</property>
+                    <property name="width">100%</property>
+                    <column id="203"/>
+                    <column id="204"/>
+                    <row id="205">
+                        <cell id="206">
+                            <text id="208">
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="207">
+                            <grid id="209">
+                                <property name="fontWeight">bold</property>
+                                <property name="width">100%</property>
+                                <column id="210">
+                                    <property name="width">3.4583333333in</property>
+                                </column>
+                                <column id="211">
+                                    <property name="width">0.3541666667in</property>
+                                </column>
+                                <column id="212">
+                                    <property name="width">0.3229166667in</property>
+                                </column>
+                                <row id="213">
+                                    <cell id="214">
+                                        <auto-text id="215">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="216">
+                                        <text id="217">
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[de]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="218">
+                                        <auto-text id="219">
+                                            <property name="textAlign">center</property>
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="128">
+            <property name="width">100%</property>
+            <property name="dataSet">ConsultaImpresionPagosFacturasVarias</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">factura</property>
+                    <expression name="expression">dataSetRow["factura"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">valor_pago</property>
+                    <expression name="expression">dataSetRow["valor_pago"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">totalValorPago</property>
+                    <expression name="expression">Total.sum(row["valor_pago"])</expression>
+                    <property name="dataType">any</property>
+                </structure>
+            </list-property>
+            <column id="138"/>
+            <column id="139"/>
+            <header>
+                <row id="129">
+                    <cell id="130">
+                        <property name="backgroundColor">silver</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="140">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">0.1cm</property>
+                            <property name="paddingBottom">0.1cm</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">FACTURA</text-property>
+                        </label>
+                    </cell>
+                    <cell id="131">
+                        <property name="backgroundColor">silver</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="141">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">0.1cm</property>
+                            <property name="paddingBottom">0.1cm</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">VALOR PAGO</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="132">
+                    <cell id="133">
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <data id="143">
+                            <property name="paddingTop">5pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">5pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">factura</property>
+                        </data>
+                    </cell>
+                    <cell id="134">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="144">
+                            <property name="paddingTop">5pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">5pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">¤###,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">valor_pago</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="135">
+                    <cell id="136">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="142">
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingTop">5pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">5pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">VALOR TOTAL PAGO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="137">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="184">
+                            <property name="paddingTop">5pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="paddingBottom">5pt</property>
+                            <property name="paddingRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">¤###,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">totalValorPago</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <grid id="188">
+            <property name="width">100%</property>
+            <column id="189"/>
+            <column id="190"/>
+            <row id="191">
+                <cell id="192">
+                    <label id="197">
+                        <property name="paddingTop">2cm</property>
+                        <text-property name="text">_______________________________________</text-property>
+                    </label>
+                </cell>
+                <cell id="193">
+                    <label id="198">
+                        <property name="paddingTop">2cm</property>
+                        <text-property name="text">_______________________________________</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="194">
+                <cell id="195">
+                    <label id="199">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingTop">0.2cm</property>
+                        <property name="paddingLeft">0.1cm</property>
+                        <text-property name="text">ELABORÓ</text-property>
+                    </label>
+                </cell>
+                <cell id="196">
+                    <label id="200">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingTop">0.2cm</property>
+                        <property name="paddingLeft">0.1cm</property>
+                        <text-property name="text">APROBÓ</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

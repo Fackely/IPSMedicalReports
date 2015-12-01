@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.GarantiaPaciente" table="garantia_paciente" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.GarantiaPacienteId">
+            <key-property name="codigoViaIngreso" type="int">
+                <column name="codigo_via_ingreso" />
+            </key-property>
+            <key-property name="acronimoTipoPaciente" type="string">
+                <column name="acronimo_tipo_paciente" length="1" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tiposPaciente" class="com.servinte.axioma.orm.TiposPaciente" update="false" insert="false" fetch="select">
+            <column name="acronimo_tipo_paciente" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" update="false" insert="false" fetch="select">
+            <column name="codigo_via_ingreso" not-null="true" />
+        </many-to-one>
+        <property name="garantia" type="java.lang.Character">
+            <column name="garantia" length="1" />
+        </property>
+        <property name="codigoInterfaz" type="string">
+            <column name="codigo_interfaz" length="2" />
+        </property>
+        <property name="bloqueaIngDeuXSaldoMora" type="string">
+            <column name="bloquea_ing_deu_x_saldo_mora" length="1" />
+        </property>
+        <property name="bloqueaIngPacXSaldoMora" type="string">
+            <column name="bloquea_ing_pac_x_saldo_mora" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

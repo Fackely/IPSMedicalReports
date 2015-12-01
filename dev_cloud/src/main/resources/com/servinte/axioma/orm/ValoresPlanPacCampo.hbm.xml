@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ValoresPlanPacCampo" table="valores_plan_pac_campo" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="convencionesOdontologicas" class="com.servinte.axioma.orm.ConvencionesOdontologicas" fetch="select">
+            <column name="convencion" />
+        </many-to-one>
+        <many-to-one name="plantillasPacCampos" class="com.servinte.axioma.orm.PlantillasPacCampos" fetch="select">
+            <column name="plantilla_pac_campo" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="valor" type="string">
+            <column name="valor" length="4000" />
+        </property>
+        <property name="valoresOpcion" type="string">
+            <column name="valores_opcion" length="1024" />
+        </property>
+        <property name="imagenOpcion" type="string">
+            <column name="imagen_opcion" length="256" />
+        </property>
+        <property name="seleccionado" type="string">
+            <column name="seleccionado" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

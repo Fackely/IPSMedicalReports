@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2/06/2011 08:10:33 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolicitudesCirugia" table="solicitudes_cirugia" schema="salascirugia">
+        <id name="numeroSolicitud" type="int">
+            <column name="numero_solicitud" />
+            <generator class="foreign">
+                <param name="property">solicitudes</param>
+            </generator>
+        </id>
+        <many-to-one name="usuariosByUsuarioDeseleccionSalida" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_deseleccion_salida" length="30" />
+        </many-to-one>
+        <many-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" fetch="select">
+            <column name="sub_cuenta" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <one-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" constrained="true"></one-to-one>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diag_fallece" length="10" />
+            <column name="tipo_cie_fallece" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioGrabacionSalida" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_grabacion_salida" length="30" />
+        </many-to-one>
+        <property name="codigoPeticion" type="java.lang.Integer">
+            <column name="codigo_peticion" />
+        </property>
+        <property name="indQx" type="string">
+            <column name="ind_qx" length="6" not-null="true" />
+        </property>
+        <property name="fechaInicialCx" type="date">
+            <column name="fecha_inicial_cx" length="13" />
+        </property>
+        <property name="horaInicialCx" type="string">
+            <column name="hora_inicial_cx" length="5" />
+        </property>
+        <property name="fechaFinalCx" type="date">
+            <column name="fecha_final_cx" length="13" />
+        </property>
+        <property name="horaFinalCx" type="string">
+            <column name="hora_final_cx" length="5" />
+        </property>
+        <property name="liquidarAnestesia" type="string">
+            <column name="liquidar_anestesia" length="1" />
+        </property>
+        <property name="duracionFinalCx" type="string">
+            <column name="duracion_final_cx" length="5" />
+        </property>
+        <property name="fechaIngresoSala" type="date">
+            <column name="fecha_ingreso_sala" length="13" />
+        </property>
+        <property name="horaIngresoSala" type="string">
+            <column name="hora_ingreso_sala" length="5" />
+        </property>
+        <property name="fechaSalidaSala" type="date">
+            <column name="fecha_salida_sala" length="13" />
+        </property>
+        <property name="horaSalidaSala" type="string">
+            <column name="hora_salida_sala" length="5" />
+        </property>
+        <property name="salidaSalaPaciente" type="java.lang.Long">
+            <column name="salida_sala_paciente" precision="12" scale="0" />
+        </property>
+        <property name="fechaGrabacionSalida" type="date">
+            <column name="fecha_grabacion_salida" length="13" />
+        </property>
+        <property name="horaGrabacionSalida" type="string">
+            <column name="hora_grabacion_salida" length="5" />
+        </property>
+        <property name="fechaDeseleccionSalida" type="date">
+            <column name="fecha_deseleccion_salida" length="13" />
+        </property>
+        <property name="horaDeseleccionSalida" type="string">
+            <column name="hora_deseleccion_salida" length="5" />
+        </property>
+        <property name="indiTarifaConsumoMateriales" type="string">
+            <column name="indi_tarifa_consumo_materiales" length="1" />
+        </property>
+        <property name="epicrisisSalidaPac" type="char">
+            <column name="epicrisis_salida_pac" length="1" not-null="true" />
+        </property>
+        <property name="fechaFallece" type="date">
+            <column name="fecha_fallece" length="13" />
+        </property>
+        <property name="horaFallece" type="string">
+            <column name="hora_fallece" length="5" />
+        </property>
+        <set name="solCirugiaPorServicios" table="sol_cirugia_por_servicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolCirugiaPorServicio" />
+        </set>
+        <one-to-one name="anulacionSolCx" class="com.servinte.axioma.orm.AnulacionSolCx"></one-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/10/2012 04:00:09 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoricoImagenPlantilla" table="historico_imagen_plantilla" schema="historiaclinica">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="sequence" >
+				<param name="sequence">historiaclinica.seq_historico_imagen_plantilla</param>
+			</generator>
+        </id>
+        <many-to-one name="valoracionCurva" class="com.servinte.axioma.orm.ValoracionCurva" fetch="select">
+            <column name="id_valoracion_curva" />
+        </many-to-one>
+        <many-to-one name="evolucionCurva" class="com.servinte.axioma.orm.EvolucionCurva" fetch="select">
+            <column name="id_evolucion_curva" />
+        </many-to-one>
+        <many-to-one name="imagenParametrizada" class="com.servinte.axioma.orm.ImagenParametrizada" fetch="select">
+            <column name="id_imagen_parametrizada" />
+        </many-to-one>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="13" />
+        </property>
+        <property name="urlImagen" type="string">
+            <column name="url_imagen" length="1000" />
+        </property>
+        <set name="puntosImagens" table="puntos_imagen" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_historico_imagen_plantilla" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PuntosImagen" />
+        </set>
+    </class>
+</hibernate-mapping>

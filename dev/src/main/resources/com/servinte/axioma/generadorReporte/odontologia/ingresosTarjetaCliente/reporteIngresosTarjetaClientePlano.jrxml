@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteIngresoOdonto" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="732" leftMargin="30" rightMargin="30" topMargin="30" bottomMargin="30">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/odontologia/ingresosOdontologicos/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subrptIngresosTarjetaClientePlano" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="dsListadoResultado" class="java.lang.Object"/>
+	<field name="fechaFinal" class="java.lang.String"/>
+	<field name="fechaInicial" class="java.lang.String"/>
+	<title>
+		<band height="27" splitType="Immediate">
+			<staticText>
+				<reportElement key="titulo" style="axiomaTitulo" x="0" y="0" width="732" height="15"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte: Ingresos Por Tarjeta Cliente]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="fechaInicial" style="axiomaTexto" stretchType="RelativeToTallestObject" x="150" y="15" width="150" height="12"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaInicial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="fechaFinal" style="axiomaTexto" stretchType="RelativeToTallestObject" x="450" y="15" width="282" height="12"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="0" y="15" width="150" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="300" y="15" width="150" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Final:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="10" splitType="Immediate">
+			<subreport isUsingCache="true" runToBottom="false">
+				<reportElement key="subrptIngresosTarjetaClientePlano" stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{dsListadoResultado}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subrptIngresosTarjetaClientePlano}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

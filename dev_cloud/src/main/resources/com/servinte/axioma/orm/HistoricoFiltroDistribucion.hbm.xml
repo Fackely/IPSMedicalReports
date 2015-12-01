@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoricoFiltroDistribucion" table="historico_filtro_distribucion" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.HistoricoFiltroDistribucionId">
+            <key-property name="subCuenta" type="int">
+                <column name="sub_cuenta" />
+            </key-property>
+            <key-property name="codigoFactura" type="int">
+                <column name="codigo_factura" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="facturas" class="com.servinte.axioma.orm.Facturas" update="false" insert="false" fetch="select">
+            <column name="codigo_factura" not-null="true" />
+        </many-to-one>
+        <many-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" update="false" insert="false" fetch="select">
+            <column name="sub_cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCostoByCentroCostoEjecuta" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_ejecuta" />
+        </many-to-one>
+        <many-to-one name="centrosCostoByCentroCostoSolicita" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_solicita" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" />
+        </many-to-one>
+        <property name="fechaInicialSolicitud" type="date">
+            <column name="fecha_inicial_solicitud" length="13" />
+        </property>
+        <property name="fechaFinalSolicitud" type="date">
+            <column name="fecha_final_solicitud" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

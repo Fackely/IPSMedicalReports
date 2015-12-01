@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2010 4:29:56 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposMonto" table="tipos_monto" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" />
+        </property>
+        <set name="detalleMontos" inverse="true" lazy="true" table="detalle_monto" fetch="select">
+            <key>
+                <column name="tipo_monto_codigo" not-null="true">
+                    <comment>C&#195;&#179;digo PK del tipo de monto del registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleMonto" />
+        </set>
+        <set name="gruposServicioses" table="grupos_servicios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_monto" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GruposServicios" />
+        </set>
+        <set name="topesFacturacions" table="topes_facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_monto" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TopesFacturacion" />
+        </set>
+    </class>
+</hibernate-mapping>

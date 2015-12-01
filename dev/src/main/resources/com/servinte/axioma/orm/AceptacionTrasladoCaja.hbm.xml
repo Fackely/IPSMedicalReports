@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 8, 2010 2:12:13 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AceptacionTrasladoCaja" table="aceptacion_traslado_caja" schema="tesoreria">
+        <comment>Registro de las aceptaciones de traslado de caja</comment>
+        <id name="movimientoCaja" type="long">
+            <column name="movimiento_caja" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">movimientosCaja</param>
+            </generator>
+        </id>
+        <many-to-one name="solicitudTrasladoCaja" class="com.servinte.axioma.orm.SolicitudTrasladoCaja" fetch="select">
+            <column name="solicitud_traslado_caja" precision="10" scale="0" not-null="true">
+                <comment>Solicitud que es aceptada o rechazada</comment>
+            </column>
+        </many-to-one>
+        <one-to-one name="movimientosCaja" class="com.servinte.axioma.orm.MovimientosCaja" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="testigo" length="30">
+                <comment>Testigo de la aceptacion registrado en el sistema</comment>
+            </column>
+        </many-to-one>
+        <set name="cierreCajaAcepTrasCajas" inverse="true" lazy="true" table="cierre_caja_acep_tras_caja" fetch="select">
+            <key>
+                <column name="aceptacion_traslado_caja" precision="10" scale="0" not-null="true">
+                    <comment>Registro de aceptacion de caja</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaAcepTrasCaja" />
+        </set>
+    </class>
+</hibernate-mapping>

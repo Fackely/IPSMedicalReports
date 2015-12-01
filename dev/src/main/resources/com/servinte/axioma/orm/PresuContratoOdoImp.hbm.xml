@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresuContratoOdoImp" table="presu_contrato_odo_imp" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="presupuestoContratado" class="com.servinte.axioma.orm.PresupuestoContratado" fetch="select">
+            <column name="codigo_presu_contrato_odo" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="clausulas" type="string">
+            <column name="clausulas" />
+        </property>
+        <property name="piePagina" type="string">
+            <column name="pie_pagina" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="presuFirmasContratos" inverse="true" lazy="true" table="presu_firmas_contrato" fetch="select">
+            <key>
+                <column name="cpresu_contrato_odo" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuFirmasContrato" />
+        </set>
+    </class>
+</hibernate-mapping>

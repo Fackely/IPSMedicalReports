@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2010 2:49:56 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoDetMontoGen" table="histo_det_monto_gen" schema="facturacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="foreign">
+                <param name="property">histoDetalleMonto</param>
+            </generator>
+        </id>
+        <one-to-one name="histoDetalleMonto" class="com.servinte.axioma.orm.HistoDetalleMonto" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="valor" type="java.lang.Double">
+            <column name="valor" precision="17" scale="17">
+                <comment>Valor del detalle del monto</comment>
+            </column>
+        </property>
+        <property name="porcentaje" type="java.lang.Double">
+            <column name="porcentaje" precision="17" scale="17">
+                <comment>Porcentaje del detalle del monto</comment>
+            </column>
+        </property>
+        <property name="cantidadMonto" type="int">
+            <column name="cantidad_monto" not-null="true">
+                <comment>Cantidad de montos a cobrar</comment>
+            </column>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="accionRealizada" type="string">
+            <column name="accion_realizada" length="3" not-null="true">
+                <comment>Acci&#195;&#179;n que se realiz&#195;&#179; sobre el registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

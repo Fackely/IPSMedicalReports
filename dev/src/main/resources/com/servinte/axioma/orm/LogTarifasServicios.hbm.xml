@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogTarifasServicios" table="log_tarifas_servicios" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposLiquidacionSoat" class="com.servinte.axioma.orm.TiposLiquidacionSoat" fetch="select">
+            <column name="tipo_liquidacion" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifarios" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tarifario" not-null="true" />
+        </many-to-one>
+        <property name="valorTarifa" type="java.lang.Double">
+            <column name="valor_tarifa" precision="17" scale="17" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="actualizaAutomatica" type="string">
+            <column name="actualiza_automatica" length="5" not-null="true" />
+        </property>
+        <property name="tipoLiquidacionAntes" type="java.lang.Integer">
+            <column name="tipo_liquidacion_antes" />
+        </property>
+        <property name="valorTarifaAntes" type="java.lang.Double">
+            <column name="valor_tarifa_antes" precision="17" scale="17" />
+        </property>
+        <property name="liqAsocios" type="char">
+            <column name="liq_asocios" length="1" not-null="true" />
+        </property>
+        <property name="liqAsociosAntes" type="char">
+            <column name="liq_asocios_antes" length="1" not-null="true" />
+        </property>
+        <property name="fechaVigencia" type="date">
+            <column name="fecha_vigencia" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresupuestoContratado" table="presupuesto_contratado" schema="odontologia">
+        <id name="codigoPkPresupuesto" type="long">
+            <column name="codigo_pk_presupuesto" precision="12" scale="0" />
+            <generator class="foreign">
+                <param name="property">presupuestoOdontologico</param>
+            </generator>
+        </id>
+        <one-to-one name="presupuestoOdontologico" class="com.servinte.axioma.orm.PresupuestoOdontologico" constrained="true"></one-to-one>
+        <property name="piePaginaPresupuesto" type="string">
+            <column name="pie_pagina_presupuesto" length="256" />
+        </property>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" not-null="true" />
+        </property>
+        <set name="presuContratoOdoImps" inverse="true" lazy="true" table="presu_contrato_odo_imp" fetch="select">
+            <key>
+                <column name="codigo_presu_contrato_odo" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuContratoOdoImp" />
+        </set>
+    </class>
+</hibernate-mapping>

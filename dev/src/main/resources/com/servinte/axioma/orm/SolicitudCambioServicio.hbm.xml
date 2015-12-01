@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/06/2010 07:45:29 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolicitudCambioServicio" table="solicitud_cambio_servicio" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.solcambserv</param>
+			</generator>
+        </id>
+        <many-to-one name="usuariosByUsuarioAnulacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_anulacion" length="30" />
+        </many-to-one>
+        <many-to-one name="motivosCambiosServicios" class="com.servinte.axioma.orm.MotivosCambiosServicios" fetch="select">
+            <column name="motivo_anulacion" />
+        </many-to-one>
+        <many-to-one name="citasOdontologicas" class="com.servinte.axioma.orm.CitasOdontologicas" fetch="select">
+            <column name="codigo_cita" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioSolicita" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_solicita" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioConfirma" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_confirma" length="30" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="4" not-null="true" />
+        </property>
+        <property name="observacionesGenerales" type="string">
+            <column name="observaciones_generales" length="512" />
+        </property>
+        <property name="fechaSolicita" type="string">
+            <column name="fecha_solicita" length="10" not-null="true" />
+        </property>
+        <property name="horaSolicita" type="string">
+            <column name="hora_solicita" length="5" not-null="true" />
+        </property>
+        <property name="fechaConfirma" type="string">
+            <column name="fecha_confirma" length="10" />
+        </property>
+        <property name="horaConfirma" type="string">
+            <column name="hora_confirma" length="5" />
+        </property>
+        <property name="confirmacionAutomatica" type="string">
+            <column name="confirmacion_automatica" length="1" not-null="true" />
+        </property>
+        <property name="fechaAnulacion" type="string">
+            <column name="fecha_anulacion" length="10" />
+        </property>
+        <property name="horaAnulacion" type="string">
+            <column name="hora_anulacion" length="5" />
+        </property>
+        <property name="estadoCita" type="string">
+            <column name="estado_cita" length="4" not-null="true" />
+        </property>
+        <set name="progServNuevosCitas" inverse="true" lazy="true" table="prog_serv_nuevos_cita" fetch="select">
+            <key>
+                <column name="solicitud_cambio_servicio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgServNuevosCita" />
+        </set>
+        <set name="progServAnterioresCitas" inverse="true" lazy="true" table="prog_serv_anteriores_cita" fetch="select">
+            <key>
+                <column name="solicitud_cambio_servicio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgServAnterioresCita" />
+        </set>
+    </class>
+</hibernate-mapping>

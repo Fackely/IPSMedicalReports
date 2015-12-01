@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DxPtes" table="dx_ptes" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.DxPtesId">
+            <key-property name="centroAtencion" type="string">
+                <column name="centro_atencion" length="256" />
+            </key-property>
+            <key-property name="centroCosto" type="string">
+                <column name="centro_costo" length="50" />
+            </key-property>
+            <key-property name="codigoPaciente" type="java.lang.Integer">
+                <column name="codigo_paciente" />
+            </key-property>
+            <key-property name="fechaEgreso" type="date">
+                <column name="fecha_egreso" length="13" />
+            </key-property>
+            <key-property name="diagnosticoPrincipal" type="string">
+                <column name="diagnostico_principal" length="10" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

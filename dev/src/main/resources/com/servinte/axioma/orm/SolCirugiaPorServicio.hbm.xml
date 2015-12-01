@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2/06/2011 08:10:33 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolCirugiaPorServicio" table="sol_cirugia_por_servicio" schema="salascirugia">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="solicitudesCirugia" class="com.servinte.axioma.orm.SolicitudesCirugia" fetch="select">
+            <column name="numero_solicitud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato_convenio" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="finalidadesServicio" class="com.servinte.axioma.orm.FinalidadesServicio" fetch="select">
+            <column name="finalidad" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifarios" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tarifario" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="auto_ent_sub" precision="12" scale="0" />
+        </many-to-one>
+        <property name="tiposCirugia" type="java.lang.Integer">
+            <column name="tipos_cirugia" />
+        </property>
+        <property name="consecutivo" type="int">
+            <column name="consecutivo" not-null="true" />
+        </property>
+        <property name="grupoUvr" type="java.lang.Double">
+            <column name="grupo_uvr" precision="17" scale="17" />
+        </property>
+        <property name="institucion" type="int">
+            <column name="institucion" not-null="true" />
+        </property>
+        <property name="numeroAutorizacion" type="string">
+            <column name="numero_autorizacion" length="15" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+        <property name="viaCx" type="string">
+            <column name="via_cx" length="5" />
+        </property>
+        <property name="indBilateral" type="string">
+            <column name="ind_bilateral" length="1" not-null="true" />
+        </property>
+        <property name="indViaAcceso" type="string">
+            <column name="ind_via_acceso" length="1" not-null="true" />
+        </property>
+        <property name="liquidarServicio" type="string">
+            <column name="liquidar_servicio" length="1" not-null="true" />
+        </property>
+        <property name="epicrisis" type="char">
+            <column name="epicrisis" length="1" not-null="true" />
+        </property>
+ 		<property name="cubierto" type="string">
+            <column name="cubierto" length="1" />
+        </property>
+        <set name="diagPostOperaSolCxes" table="diag_post_opera_sol_cx" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cod_sol_cx_servicio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DiagPostOperaSolCx" />
+        </set>
+    </class>
+</hibernate-mapping>

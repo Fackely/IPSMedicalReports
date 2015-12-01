@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetDescuentosOdon" table="det_descuentos_odon" schema="odontologia">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="descuentosOdon" class="com.servinte.axioma.orm.DescuentosOdon" fetch="select">
+            <column name="consecutivo_descuento" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposUsuarios" class="com.servinte.axioma.orm.TiposUsuarios" fetch="select">
+            <column name="tipo_usuario_autoriza" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="valorMinPresupuesto" type="big_decimal">
+            <column name="valor_min_presupuesto" precision="14" not-null="true" />
+        </property>
+        <property name="valorMaxPresupuesto" type="big_decimal">
+            <column name="valor_max_presupuesto" precision="14" not-null="true" />
+        </property>
+        <property name="diasVigenciaDescuento" type="int">
+            <column name="dias_vigencia_descuento" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="porcentajeDescuento" type="big_decimal">
+            <column name="porcentaje_descuento" precision="5" not-null="true" />
+        </property>
+        <set name="logPresupuestoDctoOdons" inverse="true" lazy="true" table="log_presupuesto_dcto_odon" fetch="select">
+            <key>
+                <column name="det_dcto_odo" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoDctoOdon" />
+        </set>
+        <set name="presupuestoDctoOdons" inverse="true" lazy="true" table="presupuesto_dcto_odon" fetch="select">
+            <key>
+                <column name="det_dcto_odo" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoDctoOdon" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CuentaRegimen" table="cuenta_regimen" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.CuentaRegimenId">
+            <key-property name="codTipoCuenta" type="int">
+                <column name="cod_tipo_cuenta" />
+            </key-property>
+            <key-property name="acrTipoRegimen" type="string">
+                <column name="acr_tipo_regimen" length="1" />
+            </key-property>
+            <key-property name="codInstitucion" type="int">
+                <column name="cod_institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tiposRegimen" class="com.servinte.axioma.orm.TiposRegimen" update="false" insert="false" fetch="select">
+            <column name="acr_tipo_regimen" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoCuenta" class="com.servinte.axioma.orm.TipoCuenta" update="false" insert="false" fetch="select">
+            <column name="cod_tipo_cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentasContables" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable_cxc_cap" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="rubroPresupuestal" class="com.servinte.axioma.orm.RubroPresupuestal" fetch="select">
+            <column name="rubro_presupuestal" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="cod_institucion" not-null="true" />
+        </many-to-one>
+        <property name="valor" type="string">
+            <column name="valor" length="64" />
+        </property>
+    </class>
+</hibernate-mapping>

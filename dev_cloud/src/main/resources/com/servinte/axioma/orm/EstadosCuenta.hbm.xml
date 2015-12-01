@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EstadosCuenta" table="estados_cuenta" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="40" />
+        </property>
+        <set name="cuentases" inverse="true" lazy="true" table="cuentas" fetch="select">
+            <key>
+                <column name="estado_cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Cuentas" />
+        </set>
+        <set name="anulacionesFacturases" inverse="true" lazy="true" table="anulaciones_facturas" fetch="select">
+            <key>
+                <column name="estado_cuenta_madre" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionesFacturas" />
+        </set>
+        <set name="cuentasProcesoFacts" inverse="true" lazy="true" table="cuentas_proceso_fact" fetch="select">
+            <key>
+                <column name="estado" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasProcesoFact" />
+        </set>
+        <set name="cuentasProcesoDists" inverse="true" lazy="true" table="cuentas_proceso_dist" fetch="select">
+            <key>
+                <column name="estado" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasProcesoDist" />
+        </set>
+    </class>
+</hibernate-mapping>

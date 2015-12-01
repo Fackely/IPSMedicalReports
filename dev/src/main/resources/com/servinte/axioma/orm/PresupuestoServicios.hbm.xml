@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresupuestoServicios" table="presupuesto_servicios" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.PresupuestoServiciosId">
+            <key-property name="presupuesto" type="int">
+                <column name="presupuesto" />
+            </key-property>
+            <key-property name="servicio" type="int">
+                <column name="servicio" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="presupuestoPaciente" class="com.servinte.axioma.orm.PresupuestoPaciente" update="false" insert="false" fetch="select">
+            <column name="presupuesto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" update="false" insert="false" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="valorUnitario" type="double">
+            <column name="valor_unitario" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="esquemaTarifario" type="java.lang.Integer">
+            <column name="esquema_tarifario" />
+        </property>
+    </class>
+</hibernate-mapping>

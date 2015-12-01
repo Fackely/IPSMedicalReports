@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/08/2011 11:24:27 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ReclamacionesAccEveFact" table="reclamaciones_acc_eve_fact" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">manejopaciente.seq_rec_acc_eve_fac</param>
+			</generator>
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioRadicacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_radicacion" length="30" />
+        </many-to-one>
+        <many-to-one name="facturas" class="com.servinte.axioma.orm.Facturas" fetch="select">
+            <column name="codigo_factura" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioAnulacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_anulacion" length="30" />
+        </many-to-one>
+        <many-to-one name="registroEventoCatastrofico" class="com.servinte.axioma.orm.RegistroEventoCatastrofico" fetch="select">
+            <column name="codigo_evento" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="registroAccidentesTransito" class="com.servinte.axioma.orm.RegistroAccidentesTransito" fetch="select">
+            <column name="codigo_accidente" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioRegistra" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fechaRaclamacion" type="date">
+            <column name="fecha_raclamacion" length="13" not-null="true" />
+        </property>
+        <property name="horaReclamacion" type="string">
+            <column name="hora_reclamacion" length="5" not-null="true" />
+        </property>
+        <property name="nroReclamacion" type="string">
+            <column name="nro_reclamacion" length="20" not-null="true" />
+        </property>
+        <property name="anioConsReclamacion" type="string">
+            <column name="anio_cons_reclamacion" length="4" />
+        </property>
+        <property name="respuestaGlosa" type="string">
+            <column name="respuesta_glosa" length="7" />
+        </property>
+        <property name="numRadicaAnterior" type="string">
+            <column name="num_radica_anterior" length="20" />
+        </property>
+        <property name="tipoReclamacion" type="string">
+            <column name="tipo_reclamacion" length="6" not-null="true" />
+        </property>
+        <property name="tipoEvento" type="string">
+            <column name="tipo_evento" length="4" not-null="true" />
+        </property>
+        <property name="fechaRegistra" type="date">
+            <column name="fecha_registra" length="13" not-null="true" />
+        </property>
+        <property name="horaRegistra" type="string">
+            <column name="hora_registra" length="5" not-null="true" />
+        </property>
+        <property name="fechaModifca" type="date">
+            <column name="fecha_modifca" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="5" />
+        </property>
+        <property name="nroRadicado" type="string">
+            <column name="nro_radicado" length="20" />
+        </property>
+        <property name="fechaRadicacion" type="date">
+            <column name="fecha_radicacion" length="13" />
+        </property>
+        <property name="horaRadicacion" type="string">
+            <column name="hora_radicacion" length="5" />
+        </property>
+        <property name="fechaAnulacion" type="date">
+            <column name="fecha_anulacion" length="13" />
+        </property>
+        <property name="horaAnulacion" type="string">
+            <column name="hora_anulacion" length="5" />
+        </property>
+        <property name="motivoAnulacion" type="string">
+            <column name="motivo_anulacion" length="256" />
+        </property>
+        <property name="anioConsRadicaAnterior" type="string">
+            <column name="anio_cons_radica_anterior" length="4" />
+        </property>
+        <property name="fechaRadica" type="date">
+            <column name="fecha_radica" length="13" />
+        </property>
+        <property name="horaRadica" type="string">
+            <column name="hora_radica" length="5" />
+        </property>
+        <one-to-one name="serviciosReclamados" class="com.servinte.axioma.orm.ServiciosReclamados"></one-to-one>
+        <one-to-one name="certAtenMedicaFurips" class="com.servinte.axioma.orm.CertAtenMedicaFurips"></one-to-one>
+        <one-to-one name="amparoXReclamar" class="com.servinte.axioma.orm.AmparoXReclamar"></one-to-one>
+        <one-to-one name="certAtenMedicaFurpro" class="com.servinte.axioma.orm.CertAtenMedicaFurpro"></one-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 30, 2011 8:31:36 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutorizacionesCapitacionSub" table="autorizaciones_capitacion_sub" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">manejopaciente.seq_auto_estancia_capita</param>
+			</generator>
+        </id>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio_recobro">
+                <comment>C&#195;&#179;digo del convenio de recobro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_autoriza" length="30">
+                <comment>Campo en el que se guarda el usuario que se genero la autorizaci&#195;&#179;n de capitaci&#195;&#179;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tiposAfiliado" class="com.servinte.axioma.orm.TiposAfiliado" fetch="select">
+            <column name="tipo_afiliado" length="1" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo de la autorizaci&#195;&#179;n de entidad subcontratada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="estratosSociales" class="com.servinte.axioma.orm.EstratosSociales" fetch="select">
+            <column name="clasificacion_socio_economica">
+                <comment>Campo en el que se guarda la clasificaci&#195;&#179;n socioeconomica del paciente</comment>
+            </column>
+        </many-to-one>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" not-null="true">
+                <comment>Consecutivo de la autorizaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="tipoAutorizacion" type="string">
+            <column name="tipo_autorizacion" length="4" not-null="true">
+                <comment>Tipo de generaci&#195;&#179;n de la autorizaci&#195;&#179;n: autom&#195;&#161;tica o manual</comment>
+            </column>
+        </property>
+        <property name="otroConvenioRecobro" type="string">
+            <column name="otro_convenio_recobro" length="128">
+                <comment>Descripci&#195;&#179;n del convenio de recobro, en caso de que este no exista como convenio en el sistema</comment>
+            </column>
+        </property>
+        <property name="indicativoTemporal" type="char">
+            <column name="indicativo_temporal" length="1" not-null="true">
+                <comment>Campo que indica si se debe crear la entidad subcontratada</comment>
+            </column>
+        </property>
+        <property name="descripcionEntidad" type="string">
+            <column name="descripcion_entidad">
+                <comment>Campo en el que se guarda la descripci&#195;&#179;n de la entidad subcontratada en caso de que esta no exista en el sistema</comment>
+            </column>
+        </property>
+        <property name="indicadorPrioridad" type="java.lang.Integer">
+            <column name="indicador_prioridad">
+                <comment>Campo en el que se guarda la prioridad de la autorizaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="direccionEntidad" type="string">
+            <column name="direccion_entidad" length="256">
+                <comment>Campo en el que se guarda la direcci&#195;&#179;n de la entidad subcontratada en caso de que esta no exista en el sistema</comment>
+            </column>
+        </property>
+        <property name="telefonoEntidad" type="string">
+            <column name="telefono_entidad" length="60">
+                <comment>Campo en el que se guarda el tel&#195;&#169;fono de la entidad subcontratada en caso de que esta no exista en el sistema</comment>
+            </column>
+        </property>
+        <property name="fechaAutoriza" type="date">
+            <column name="fecha_autoriza" length="13">
+                <comment>Campo en el que se guarda la fecha en la que se genero la autorizaci&#195;&#179;n de capitaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="horaAutoriza" type="string">
+            <column name="hora_autoriza" length="5">
+                <comment>Campo en el que se guarda la hora en la que se genero la autorizaci&#195;&#179;n de capitaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="tipoEntQueSeAuto" type="string">
+            <column name="tipo_ent_que_se_auto" length="3">
+                <comment>Campo en el que se guarda el tipo de entidad que ejecuta la autorizaci&#195;&#179;n sea interna o externa</comment>
+            </column>
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="1000">
+                <comment>Campo en el que se guarda las observaciones de la autorizaci&#195;&#179;n de capitaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <set name="histoAutorizacionCapitaSubs" table="histo_autorizacion_capita_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autorizaciones_capitacion_sub" precision="12" scale="0" not-null="true">
+                    <comment>Llave primaria de la tabla, for&#195;&#161;nea a la autorizaci&#195;&#179;n de capitaci&#195;&#179;n subcontratada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoAutorizacionCapitaSub" />
+        </set>
+        <set name="autorizacionesEstanciaCapitas" inverse="true" lazy="true" table="autorizaciones_estancia_capita" fetch="select">
+            <key>
+                <column name="autorizacion_capitacion_sub" precision="12" scale="0" not-null="true">
+                    <comment>Hace relaci&#195;&#179;n a la tabla de manejopaciente.autorizaciones_capitacion_sub</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEstanciaCapita" />
+        </set>
+    </class>
+</hibernate-mapping>

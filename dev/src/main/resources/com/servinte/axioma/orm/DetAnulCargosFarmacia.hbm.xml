@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetAnulCargosFarmacia" table="det_anul_cargos_farmacia" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetAnulCargosFarmaciaId">
+            <key-property name="codigoAnulacion" type="long">
+                <column name="codigo_anulacion" precision="10" scale="0" />
+            </key-property>
+            <key-property name="numeroSolicitud" type="int">
+                <column name="numero_solicitud" />
+            </key-property>
+            <key-property name="articulo" type="int">
+                <column name="articulo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="anulacionCargosFarmacia" class="com.servinte.axioma.orm.AnulacionCargosFarmacia" update="false" insert="false" fetch="select">
+            <column name="codigo_anulacion" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="cantidadAnulada" type="java.lang.Integer">
+            <column name="cantidad_anulada" />
+        </property>
+    </class>
+</hibernate-mapping>

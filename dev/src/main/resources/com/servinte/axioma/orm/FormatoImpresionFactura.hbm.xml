@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FormatoImpresionFactura" table="formato_impresion_factura" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tarifariosOficiales" class="com.servinte.axioma.orm.TarifariosOficiales" fetch="select">
+            <column name="cod_imprimir_servicios" />
+        </many-to-one>
+        <many-to-one name="codificacionImpArticulo" class="com.servinte.axioma.orm.CodificacionImpArticulo" fetch="select">
+            <column name="cod_imprimir_articulos" />
+        </many-to-one>
+        <property name="nombreFormato" type="string">
+            <column name="nombre_formato" length="30" not-null="true" />
+        </property>
+        <property name="formatoPreimpreso" type="java.lang.Boolean">
+            <column name="formato_preimpreso" />
+        </property>
+        <property name="institucion" type="int">
+            <column name="institucion" not-null="true" />
+        </property>
+        <set name="detSecTotFormatoFacts" inverse="true" lazy="true" table="det_sec_tot_formato_fact" fetch="select">
+            <key>
+                <column name="codigo_formato" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetSecTotFormatoFact" />
+        </set>
+        <set name="detArtFormatoFacts" inverse="true" lazy="true" table="det_art_formato_fact" fetch="select">
+            <key>
+                <column name="codigo_formato" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetArtFormatoFact" />
+        </set>
+        <one-to-one name="secTotalesFormatoFact" class="com.servinte.axioma.orm.SecTotalesFormatoFact"></one-to-one>
+        <one-to-one name="secEncabeFormatoImpFac" class="com.servinte.axioma.orm.SecEncabeFormatoImpFac"></one-to-one>
+        <one-to-one name="secServFormatoImpFact" class="com.servinte.axioma.orm.SecServFormatoImpFact"></one-to-one>
+        <set name="convenioses" inverse="true" lazy="true" table="convenios" fetch="select">
+            <key>
+                <column name="formato_factura" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Convenios" />
+        </set>
+        <one-to-one name="secNotaPieFormatoFact" class="com.servinte.axioma.orm.SecNotaPieFormatoFact"></one-to-one>
+        <one-to-one name="secArtFormatoImpFact" class="com.servinte.axioma.orm.SecArtFormatoImpFact"></one-to-one>
+        <set name="detSecNotaFormatoFacts" inverse="true" lazy="true" table="det_sec_nota_formato_fact" fetch="select">
+            <key>
+                <column name="codigo_formato" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetSecNotaFormatoFact" />
+        </set>
+        <set name="detFormatoImpFacts" inverse="true" lazy="true" table="det_formato_imp_fact" fetch="select">
+            <key>
+                <column name="codigo_formato" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFormatoImpFact" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/07/2011 02:32:58 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NotaPaciente" table="nota_paciente" schema="tesoreria">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_nota_paciente</param>
+			</generator>	
+        </id>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencionByCentroAtencionOrigen" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_origen" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencionByCentroAtencionRegistro" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_registro" not-null="true" />
+        </many-to-one>
+        <many-to-one name="conceptoNotaPaciente" class="com.servinte.axioma.orm.ConceptoNotaPaciente" fetch="select">
+            <column name="concepto_nota_paciente" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="consecutivo" type="big_decimal">
+            <column name="consecutivo" precision="20" scale="0" not-null="true" />
+        </property>
+        <property name="naturaleza" type="string">
+            <column name="naturaleza" length="1" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="1000" />
+        </property>
+        <set name="detalleNotaPacientes" table="detalle_nota_paciente" inverse="true" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="nota_paciente" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleNotaPaciente" />
+        </set>
+    </class>
+</hibernate-mapping>

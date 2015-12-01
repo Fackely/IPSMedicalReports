@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReporteConvenio" pageWidth="592" pageHeight="792" columnWidth="592" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subReporteConvenio" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteDetalles" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteDetallesExterna" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteDetallesSimple" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<field name="convenio" class="java.lang.String"/>
+	<field name="paciente" class="java.lang.String"/>
+	<field name="documento" class="java.lang.String"/>
+	<field name="cantidadIngresos" class="java.lang.String"/>
+	<field name="JRDConvenio" class="java.lang.Object"/>
+	<field name="JRDDetalles" class="java.lang.Object"/>
+	<field name="codigoViaIngreso" class="java.lang.Integer"/>
+	<variable name="totalPaciente" class="java.lang.Integer" calculation="Sum"/>
+	<group name="Articulos" isStartNewPage="true">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="0" y="0" width="592" height="12" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" Convenio: " + $F{convenio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="0" y="12" width="255" height="12" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" markup="none">
+					<font size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" Paciente: " + $F{paciente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="255" y="12" width="169" height="12" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" markup="none">
+					<font size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" Identificación: " + $F{documento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="424" y="12" width="168" height="12" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" markup="none">
+					<font size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" Cantidad de Ingresos: " + $F{cantidadIngresos}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12">
+			<subreport isUsingCache="true" runToBottom="false">
+				<reportElement key="" stretchType="RelativeToBandHeight" x="0" y="0" width="592" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReporteDetallesExterna">
+					<subreportParameterExpression><![CDATA[$P{subReporteDetallesExterna}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{JRDDetalles}]]></dataSourceExpression>
+				<returnValue subreportVariable="totalPacientes" toVariable="totalPaciente"/>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$F{codigoViaIngreso}.equals( new Integer( 4 ) ) ? $P{subReporteDetalles} : $P{subReporteDetallesSimple}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="31">
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="503" y="0" width="89" height="12" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" markup="none">
+					<font size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{totalPaciente}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="0" y="0" width="503" height="12" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" markup="none">
+					<font size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total Paciente"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

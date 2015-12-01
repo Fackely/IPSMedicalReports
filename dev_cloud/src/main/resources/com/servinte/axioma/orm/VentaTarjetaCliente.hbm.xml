@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 19, 2010 5:10:54 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.VentaTarjetaCliente" table="venta_tarjeta_cliente" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence">
+            	<param name="sequence">odontologia.seq_venta_tarjeta</param>
+            </generator>
+        </id>
+        <many-to-one name="deudores" class="com.servinte.axioma.orm.Deudores" fetch="select">
+            <column name="deudor" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="codigo_servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="codigo_contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioVendedor" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_vendedor" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposTarjCliente" class="com.servinte.axioma.orm.TiposTarjCliente" fetch="select">
+            <column name="tipo_tarjeta" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="facturasVarias" class="com.servinte.axioma.orm.FacturasVarias" fetch="select">
+            <column name="codigo_fac_var" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="tipoVenta" type="string">
+            <column name="tipo_venta" length="4" not-null="true" />
+        </property>
+        <property name="valorUnitarioTarjeta" type="big_decimal">
+            <column name="valor_unitario_tarjeta" precision="12" not-null="true" />
+        </property>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="valorTotalTarjetas" type="big_decimal">
+            <column name="valor_total_tarjetas" precision="12" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+        <property name="estadoVenta" type="string">
+            <column name="estado_venta" length="3" not-null="true" />
+        </property>
+        <property name="fechaVenta" type="date">
+            <column name="fecha_venta" length="13" not-null="true" />
+        </property>
+        <property name="horaVenta" type="string">
+            <column name="hora_venta" length="5" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="consecutivoVenta" type="string">
+            <column name="consecutivo_venta" length="20" not-null="true" />
+        </property>
+        <one-to-one name="ventaEmpresarial" class="com.servinte.axioma.orm.VentaEmpresarial"></one-to-one>
+        <set name="beneficiarioTarjetaClientes" inverse="true" lazy="true" table="beneficiario_tarjeta_cliente" fetch="select">
+            <key>
+                <column name="venta_tarjeta_cliente" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.BeneficiarioTarjetaCliente" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TrasladoCentroAtencion" table="traslado_centro_atencion" schema="administracion">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="trasladoCama" class="com.servinte.axioma.orm.TrasladoCama" fetch="select">
+            <column name="traslado_cama" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_responsable" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencionByCentroAtencionInicial" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_inicial" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCostoByAreaInicial" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="area_inicial" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCostoByNuevaArea" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="nueva_area" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencionByNuevoCentroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="nuevo_centro_atencion" not-null="true" />
+        </many-to-one>
+        <property name="observaciones" type="string">
+            <column name="observaciones" />
+        </property>
+        <property name="fechaTraslado" type="date">
+            <column name="fecha_traslado" length="13" not-null="true" />
+        </property>
+        <property name="horaTraslado" type="string">
+            <column name="hora_traslado" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

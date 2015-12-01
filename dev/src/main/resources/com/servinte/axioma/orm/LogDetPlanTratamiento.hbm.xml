@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogDetPlanTratamiento" table="log_det_plan_tratamiento" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="piezaDental" class="com.servinte.axioma.orm.PiezaDental" fetch="select">
+            <column name="pieza_dental" />
+        </many-to-one>
+        <many-to-one name="citasOdontologicas" class="com.servinte.axioma.orm.CitasOdontologicas" fetch="select">
+            <column name="cita" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="detPlanTratamiento" class="com.servinte.axioma.orm.DetPlanTratamiento" fetch="select">
+            <column name="det_plan_tratamiento" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hallazgosOdontologicos" class="com.servinte.axioma.orm.HallazgosOdontologicos" fetch="select">
+            <column name="hallazgo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convencionesOdontologicas" class="com.servinte.axioma.orm.ConvencionesOdontologicas" fetch="select">
+            <column name="convencion" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <many-to-one name="valoracionesOdonto" class="com.servinte.axioma.orm.ValoracionesOdonto" fetch="select">
+            <column name="valoracion" precision="12" scale="0" />
+        </many-to-one>
+        <property name="superficie" type="java.lang.Integer">
+            <column name="superficie" />
+        </property>
+        <property name="clasificacion" type="string">
+            <column name="clasificacion" length="3" />
+        </property>
+        <property name="porConfirmar" type="string">
+            <column name="por_confirmar" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="evolucion" type="java.lang.Long">
+            <column name="evolucion" precision="12" scale="0" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RolesFuncionalidades" table="roles_funcionalidades" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.RolesFuncionalidadesId">
+            <key-property name="nombreRol" type="string">
+                <column name="nombre_rol" length="64" />
+            </key-property>
+            <key-property name="codigoFunc" type="int">
+                <column name="codigo_func" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="roles" class="com.servinte.axioma.orm.Roles" update="false" insert="false" fetch="select">
+            <column name="nombre_rol" length="64" not-null="true" />
+        </many-to-one>
+        <many-to-one name="funcionalidades" class="com.servinte.axioma.orm.Funcionalidades" update="false" insert="false" fetch="select">
+            <column name="codigo_func" not-null="true" />
+        </many-to-one>
+        <property name="isssl" type="boolean">
+            <column name="isssl" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

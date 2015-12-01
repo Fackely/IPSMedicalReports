@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/12/2012 12:05:03 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.OrdAmbJustArtSol" table="ord_amb_just_art_sol" schema="inventarios">
+        <composite-id name="id" class="com.servinte.axioma.orm.OrdAmbJustArtSolId">
+            <key-property name="codigoOrden" type="int">
+                <column name="codigo_orden" />
+            </key-property>
+            <key-property name="codigoJustificacion" type="long">
+                <column name="codigo_justificacion" precision="12" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="justificacionArtSol" class="com.servinte.axioma.orm.JustificacionArtSol" update="false" insert="false" fetch="select">
+            <column name="codigo_justificacion" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ordenesAmbulatorias" class="com.servinte.axioma.orm.OrdenesAmbulatorias" update="false" insert="false" fetch="select">
+            <column name="codigo_orden" not-null="true" />
+        </many-to-one>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

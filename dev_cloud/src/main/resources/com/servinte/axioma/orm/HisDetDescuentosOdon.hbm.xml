@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HisDetDescuentosOdon" table="his_det_descuentos_odon" schema="odontologia">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposUsuarios" class="com.servinte.axioma.orm.TiposUsuarios" fetch="select">
+            <column name="tipo_usuario_autoriza" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="consecutivoDescuento" type="long">
+            <column name="consecutivo_descuento" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="valorMinPresupuesto" type="big_decimal">
+            <column name="valor_min_presupuesto" precision="14" not-null="true" />
+        </property>
+        <property name="valorMaxPresupuesto" type="big_decimal">
+            <column name="valor_max_presupuesto" precision="14" not-null="true" />
+        </property>
+        <property name="valorMinPreMod" type="big_decimal">
+            <column name="valor_min_pre_mod" precision="14" not-null="true" />
+        </property>
+        <property name="valorMaxPreMod" type="big_decimal">
+            <column name="valor_max_pre_mod" precision="14" not-null="true" />
+        </property>
+        <property name="diasVigenciaDescuento" type="int">
+            <column name="dias_vigencia_descuento" not-null="true" />
+        </property>
+        <property name="diasVigenciaDescMod" type="int">
+            <column name="dias_vigencia_desc_mod" not-null="true" />
+        </property>
+        <property name="tipoUsuarioAutMod" type="long">
+            <column name="tipo_usuario_aut_mod" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="porcentajeDescuento" type="big_decimal">
+            <column name="porcentaje_descuento" precision="5" not-null="true" />
+        </property>
+        <property name="porcentajeDescuentoMod" type="big_decimal">
+            <column name="porcentaje_descuento_mod" precision="5" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="eliminado" type="java.lang.Character">
+            <column name="eliminado" length="1" />
+        </property>
+        <property name="detalle" type="java.lang.Long">
+            <column name="detalle" precision="10" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

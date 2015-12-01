@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Modulos" table="modulos" schema="administracion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="256" not-null="true" unique="true" />
+        </property>
+        <property name="mostrarEnParamGenerales" type="char">
+            <column name="mostrar_en_param_generales" length="1" not-null="true" />
+        </property>
+        <set name="funRangosEstadisticoses" inverse="true" lazy="true" table="fun_rangos_estadisticos" fetch="select">
+            <key>
+                <column name="modulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FunRangosEstadisticos" />
+        </set>
+        <set name="valoresPorDefectoModuloses" inverse="true" lazy="true" table="valores_por_defecto_modulos" fetch="select">
+            <key>
+                <column name="modulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValoresPorDefectoModulos" />
+        </set>
+        <set name="consecutivosModuloses" inverse="true" lazy="true" table="consecutivos_modulos" fetch="select">
+            <key>
+                <column name="modulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConsecutivosModulos" />
+        </set>
+        <set name="funcionalidadeses" inverse="false" lazy="true" table="dep_modulo_func" fetch="select">
+            <key>
+                <column name="modulo" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Funcionalidades">
+                <column name="funcionalidad" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

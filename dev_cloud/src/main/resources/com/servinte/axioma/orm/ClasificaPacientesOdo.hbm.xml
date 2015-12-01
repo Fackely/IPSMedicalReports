@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2010 6:06:35 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ClasificaPacientesOdo" table="clasifica_pacientes_odo" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="nomenclatura" type="string">
+            <column name="nomenclatura" length="2" not-null="true" />
+        </property>
+        <property name="prioridad" type="int">
+            <column name="prioridad" not-null="true" />
+        </property>
+        <property name="tipoProceso" type="string">
+            <column name="tipo_proceso" length="4" not-null="true" />
+        </property>
+        <property name="asignableDesdeAgenda" type="string">
+            <column name="asignable_desde_agenda" length="1" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="clasOdoSecTiposCitas" inverse="true" lazy="true" table="clas_odo_sec_tipos_cita" fetch="select">
+            <key>
+                <column name="clasificacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasOdoSecTiposCita" />
+        </set>
+        <set name="clasOdoSecDiasPacienteses" inverse="true" lazy="true" table="clas_odo_sec_dias_pacientes" fetch="select">
+            <key>
+                <column name="clasificacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasOdoSecDiasPacientes" />
+        </set>
+        <set name="clasOdoSecEstCitas" inverse="true" lazy="true" table="clas_odo_sec_est_cita" fetch="select">
+            <key>
+                <column name="clasificacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasOdoSecEstCita" />
+        </set>
+        <one-to-one name="clasOdoSecSalDisp" class="com.servinte.axioma.orm.ClasOdoSecSalDisp"></one-to-one>
+        <set name="clasOdoSecEspes" inverse="true" lazy="true" table="clas_odo_sec_espe" fetch="select">
+            <key>
+                <column name="clasificacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasOdoSecEspe" />
+        </set>
+        <set name="clasOdoSecRestFuncs" inverse="true" lazy="true" table="clas_odo_sec_rest_func" fetch="select">
+            <key>
+                <column name="clasificacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasOdoSecRestFunc" />
+        </set>
+        <set name="clasOdoSecServicioses" inverse="true" lazy="true" table="clas_odo_sec_servicios" fetch="select">
+            <key>
+                <column name="clasificacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasOdoSecServicios" />
+        </set>
+        <set name="clasOdoSecIndConfs" inverse="true" lazy="true" table="clas_odo_sec_ind_conf" fetch="select">
+            <key>
+                <column name="clasificacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasOdoSecIndConf" />
+        </set>
+        <set name="clasOdoSecEstadosPreses" inverse="true" lazy="true" table="clas_odo_sec_estados_pres" fetch="select">
+            <key>
+                <column name="clasificacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasOdoSecEstadosPres" />
+        </set>
+    </class>
+</hibernate-mapping>

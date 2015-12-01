@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2010 6:06:35 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogEnvioEmailAutomatico" table="log_envio_email_automatico" schema="administracion">
+        <comment>guada el log de los mails enviados</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+           	<generator class="sequence" >
+				<param name="sequence">administracion.seq_log_envio_email_automatic</param>
+			</generator>
+        </id>
+        <property name="fechaProceso" type="date">
+            <column name="fecha_proceso" length="13" not-null="true">
+                <comment>fecha en que se corrio el proceso</comment>
+            </column>
+        </property>
+        <property name="horaProceso" type="string">
+            <column name="hora_proceso" length="5" not-null="true">
+                <comment>hora en que se corrio el proceso</comment>
+            </column>
+        </property>
+        <property name="nombreFuncionalidad" type="string">
+            <column name="nombre_funcionalidad" not-null="true">
+                <comment>Funcionalidad que llamo el proceso</comment>
+            </column>
+        </property>
+        <property name="correoDestino" type="string">
+            <column name="correo_destino" not-null="true">
+                <comment>destanatario del correo</comment>
+            </column>
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true">
+                <comment>indica si fue o no enviado el correo</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.IncluExcluCc" table="inclu_exclu_cc" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="inclusionesExclusiones" class="com.servinte.axioma.orm.InclusionesExclusiones" fetch="select">
+            <column name="codigo_inclu_exclu" length="8" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="codigo_centro_costo" />
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="artIncluexcluCcs" inverse="true" lazy="true" table="art_incluexclu_cc" fetch="select">
+            <key>
+                <column name="codigo_inclu_exclu_cc" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtIncluexcluCc" />
+        </set>
+        <set name="serIncluexcluCcs" inverse="true" lazy="true" table="ser_incluexclu_cc" fetch="select">
+            <key>
+                <column name="codigo_inclu_exclu_cc" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SerIncluexcluCc" />
+        </set>
+        <set name="agruSerIncluexcluCcs" inverse="true" lazy="true" table="agru_ser_incluexclu_cc" fetch="select">
+            <key>
+                <column name="codigo_inclu_exclu_cc" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerIncluexcluCc" />
+        </set>
+        <set name="incluexcluContratos" inverse="true" lazy="true" table="incluexclu_contrato" fetch="select">
+            <key>
+                <column name="codigo_inclu_exclu_cc" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluexcluContrato" />
+        </set>
+        <set name="agruArtIncluexcluCcs" inverse="true" lazy="true" table="agru_art_incluexclu_cc" fetch="select">
+            <key>
+                <column name="codigo_inclu_exclu_cc" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtIncluexcluCc" />
+        </set>
+    </class>
+</hibernate-mapping>

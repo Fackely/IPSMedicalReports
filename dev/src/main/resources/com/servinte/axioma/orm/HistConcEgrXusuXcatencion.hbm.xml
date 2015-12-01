@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 14, 2010 4:50:56 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistConcEgrXusuXcatencion" table="hist_conc_egr_xusu_xcatencion" schema="tesoreria">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">seq_hconc_egro_xusu_xcatencio</param>
+    		</generator>
+        </id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="conceptoDeEgreso" type="string">
+            <column name="concepto_de_egreso" not-null="true" />
+        </property>
+        <property name="fechaInicialVigencia" type="date">
+            <column name="fecha_inicial_vigencia" length="13" not-null="true" />
+        </property>
+        <property name="fechaFinalVigencia" type="date">
+            <column name="fecha_final_vigencia" length="13" not-null="true" />
+        </property>
+        <property name="valorMaximoAutorizado" type="big_decimal">
+            <column name="valor_maximo_autorizado" not-null="true" />
+        </property>
+        <property name="periodicidadDias" type="java.lang.Integer">
+            <column name="periodicidad_dias" />
+        </property>
+        <property name="activo" type="char">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="tipoUsuarioAutoriza" type="string">
+            <column name="tipo_usuario_autoriza" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="accionRealizada" type="string">
+            <column name="accion_realizada" length="3" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

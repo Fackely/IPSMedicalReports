@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <html-property name="description">contiene header and footer</html-property>
+    <property name="units">in</property>
+    <text-property name="displayName">template axioma reports</text-property>
+    <property name="layoutPreference">auto layout</property>
+    <list-property name="configVars">
+        <structure>
+            <property name="name">codigoInstitucion</property>
+            <property name="value">2</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="codigoCentroAtencion" id="117">
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">decimal</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">0</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+                <property name="pattern">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="codigoInstitucion" id="118">
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">decimal</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">0</value>
+            </simple-property-list>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+                <property name="pattern">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ingreso" id="366">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">decimal</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">0</value>
+            </simple-property-list>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+                <property name="pattern">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="94">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="informacionInstitcion" id="116">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigoCentroAtencion</property>
+                    <property name="nativeName">codigoCentroAtencion</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">codigoInstitucion</property>
+                    <property name="nativeName">codigoInstitucion</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <xml-property name="queryText"><![CDATA[SELECT  
+'El suscrito médico del Servicio de Urgencias de la Institución Prestadora de Servicios '|| i.razon_social ||' '|| getnomcentroatencion(?) as descripcion1, 
+'Con Domicilio en '|| i.direccion as descripcion2, 
+'Departamento '|| d.descripcion ||' '|| c.descripcion as descripcion3  
+FROM 
+instituciones i 
+INNER JOIN departamentos d ON (d.codigo_departamento=i.departamento and i.pais=d.codigo_pais) 
+INNER JOIN ciudades c on (c.codigo_departamento=i.departamento AND c.codigo_ciudad=i.ciudad and i.pais=c.codigo_pais) 
+WHERE i.codigo=?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="informacionPaciente" id="122">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <xml-property name="queryText"><![CDATA[ SELECT 'Certifica que atendió en el servicio de urgencias al señor(a): '|| p.primer_nombre ||' '|| p.segundo_nombre ||' '|| primer_apellido||' '|| segundo_apellido as descipcionPaciente1,
+ 'Identificado con '|| p.tipo_identificacion ||' No '|| p.numero_identificacion ||' de '||getnombreciudad(p.codigo_pais_id,p.codigo_depto_id, p.codigo_ciudad_id) as descipcionPaciente2,
+ 'Residente en '||p.direccion ||' Ciudad '|| getnombreciudad(p.codigo_pais_vivienda,p.codigo_departamento_vivienda, p.codigo_ciudad_vivienda) as descripcionPaciente3,
+ 'Departamento '||getnombredepto(p.codigo_pais_vivienda,p.codigo_departamento_vivienda) as descripcionPaciente4 
+ FROM 
+ cuentas c, personas p, view_registro_accid_transito r
+ WHERE 
+ r.ingreso=c.id_ingreso and 
+ c.codigo_paciente= p.codigo 
+ and c.id_ingreso=?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="indoDeclarante" id="154">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <xml-property name="queryText"><![CDATA[SELECT 'Quien según declaración de '||CASE WHEN r.apellido_nombre_declarante IS NULL THEN '' ELSE r.apellido_nombre_declarante END AS declarante, r.tipo_id_declarante ||' No. '||r.numero_id_declarante ||' Expedida en '|| getnombreciudad(pais_expedicion_id_declarante,dep_expedicion_id_declarante, ciu_expedicion_id_declarante) AS infoDeclarante, 'Fué victima del accidente de tránsito ocurrido el '||to_char(r.fecha_accidente, 'DD/MM/YYYY')||' a las '|| substr(r.hora_accidente, 1,5) ||' horas, ingresando al servicio de urgencias de esta institución el día '|| to_char (adu.fecha_admision, 'DD/MM/YYYY')|| ' a las '|| substr(adu.hora_admision, 1,5) ||' horas con los siguientes hallazgos: ' as descripcionHechos  FROM ingresos i INNER JOIN view_registro_accid_transito r ON(r.ingreso=i.id) INNER JOIN cuentas c ON(c.id_ingreso=i.id) INNER JOIN admisiones_urgencias adu ON (c.id=adu.cuenta) WHERE c.id_ingreso=?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="signosVitales" id="159">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <xml-property name="queryText"><![CDATA[SELECT 'TA '|| getValSignosVitales(numero_solicitud,12)||', '||getValSignosVitales(numero_solicitud,13)||' mmHg  FC '|| getValSignosVitales(numero_solicitud,15)||' x min.  FR '||getValSignosVitales(numero_solicitud,16)||' x min  T° '||getValSignosVitales(numero_solicitud,17)||' C° '   AS signosVitales FROM valoraciones where numero_solicitud=(SELECT numero_solicitud as numeroSolicitud from valoraciones where numero_solicitud=(SELECT min(sol.numero_solicitud) from solicitudes sol INNER JOIN valoraciones val ON (sol.numero_solicitud=val.numero_solicitud) INNER JOIN cuentas c ON (c.id=sol.cuenta) WHERE c.id_ingreso=?))]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="datosPositivos" id="248">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <xml-property name="queryText"><![CDATA[ SELECT 
+ 	(SELECT ip.valor from info_parametrizada ip where ip.codigo_tabla= v.numero_solicitud and ip.parametrizacion_asociada=5) AS cabezaOrganosSentidos, 
+ 	(SELECT ip.valor from info_parametrizada ip where ip.codigo_tabla= v.numero_solicitud and ip.parametrizacion_asociada=59)  AS cuello, 
+ 	(SELECT ip.valor from info_parametrizada ip where ip.codigo_tabla= v.numero_solicitud and ip.parametrizacion_asociada=6) AS toraxYCardiovascular, 
+ 	(SELECT ip.valor from info_parametrizada ip where ip.codigo_tabla= v.numero_solicitud and ip.parametrizacion_asociada=7) AS abdomen, 
+ 	(SELECT ip.valor from info_parametrizada ip where ip.codigo_tabla= v.numero_solicitud and ip.parametrizacion_asociada=8) AS genitourinario, 
+ 	(SELECT ip.valor from info_parametrizada ip where ip.codigo_tabla= v.numero_solicitud and ip.parametrizacion_asociada=60) as pelvis, 
+ 	(SELECT ip.valor from info_parametrizada ip where ip.codigo_tabla= v.numero_solicitud and ip.parametrizacion_asociada=10) AS dorsoYExtremidades,  
+ 	(SELECT ip.valor from info_parametrizada ip where ip.codigo_tabla= v.numero_solicitud and ip.parametrizacion_asociada=11)  AS neurologico  
+ FROM valoraciones v 
+ 	where v.numero_solicitud=(SELECT v1.numero_solicitud as numeroSolicitud 
+ 								from valoraciones v1 
+ 								where v1.numero_solicitud=(
+ 								SELECT min(sol.numero_solicitud) 
+ 									from solicitudes sol 
+ 									INNER JOIN valoraciones val ON (sol.numero_solicitud=val.numero_solicitud) 
+ 									INNER JOIN cuentas c ON (c.id=sol.cuenta) WHERE c.id_ingreso=?))]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="infoDiagnosticosEgreso" id="257">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <xml-property name="queryText"><![CDATA[SELECT getDiagnostico(e.diagnostico_principal, e.diagnostico_principal_cie) AS diagnosticoPrincipal, CASE WHEN getDiagnostico(e.diagnostico_relacionado1, e.diagnostico_relacionado1_cie)='No seleccionado' THEN '' ELSE getDiagnostico(e.diagnostico_relacionado1, e.diagnostico_relacionado1_cie) END AS diagRelacionado1, CASE WHEN getDiagnostico(e.diagnostico_relacionado2, e.diagnostico_relacionado2_cie)='No seleccionado' THEN '' ELSE getDiagnostico(e.diagnostico_relacionado2, e.diagnostico_relacionado2_cie) END AS diagRelacionado2,  CASE WHEN getDiagnostico(e.diagnostico_relacionado3, e.diagnostico_relacionado3_cie)='No seleccionado' THEN '' ELSE getDiagnostico(e.diagnostico_relacionado3, e.diagnostico_relacionado3_cie) END AS diagRelacionado3 FROM egresos e INNER JOIN cuentas c ON (c.id=e.cuenta) where c.id_ingreso=? and getDiagnostico(e.diagnostico_principal, e.diagnostico_principal_cie)<>'No seleccionado']]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="infoMedico" id="306">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <xml-property name="queryText"><![CDATA[SELECT getnombrepersona(s.codigo_medico_responde), m.numero_registro FROM solicitudes s INNER JOIN medicos m ON m.codigo_medico= s.codigo_medico_responde WHERE s.numero_solicitud=(SELECT numero_solicitud as numeroSolicitud from valoraciones where numero_solicitud=(SELECT min(sol.numero_solicitud) from solicitudes sol INNER JOIN valoraciones val ON (sol.numero_solicitud=val.numero_solicitud) INNER JOIN cuentas c ON (c.id=sol.cuenta) WHERE c.id_ingreso=?))]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="estadosConcienciaEmbriaguezValoracion" id="335">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <xml-property name="queryText"><![CDATA[SELECT ec.nombre AS estadoConciencia, CASE WHEN estado_embriaguez IS TRUE then 'Si' else 'No' end AS estadoEmbriaguez FROM valoraciones_urgencias vu INNER JOIN estados_conciencia ec ON (ec.codigo= vu.codigo_estado_conciencia)WHERE vu.numero_solicitud=(SELECT numero_solicitud as numeroSolicitud from valoraciones where numero_solicitud=(SELECT min(sol.numero_solicitud) from solicitudes sol INNER JOIN valoraciones val ON (sol.numero_solicitud=val.numero_solicitud) INNER JOIN cuentas c ON (c.id=sol.cuenta) WHERE c.id_ingreso=?))]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="glasgow" id="397">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="nativeName">idCuenta</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <xml-property name="queryText"><![CDATA[SELECT valor FROM val_signos_vitales WHERE signo_vital=18 AND valoracion=(select numero_solicitud  FROM valoraciones where numero_solicitud=(SELECT numero_solicitud as numeroSolicitud from valoraciones where numero_solicitud=(SELECT min(sol.numero_solicitud) from solicitudes sol INNER JOIN valoraciones val ON (sol.numero_solicitud=val.numero_solicitud) INNER JOIN cuentas c ON (c.id=sol.cuenta) WHERE c.id_ingreso=?)))]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1cm</property>
+            <property name="headerHeight">4cm</property>
+            <property name="footerHeight">3cm</property>
+            <page-header>
+                <grid name="masterPageHeader" id="4">
+                    <property name="fontFamily">"SansSerif"</property>
+                    <property name="height">1.4631578947368422in</property>
+                    <property name="width">7.421052631578948in</property>
+                    <column id="5">
+                        <property name="width">2.673in</property>
+                    </column>
+                    <column id="6">
+                        <property name="width">4.757894736842105in</property>
+                    </column>
+                    <row id="7">
+                        <property name="height">1.178in</property>
+                        <cell id="8">
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="9"/>
+                    </row>
+                    <row id="46">
+                        <property name="height">0.297in</property>
+                        <cell id="47">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid name="masterPageFooter" id="24">
+                    <property name="marginTop">0.5cm</property>
+                    <property name="marginLeft">0cm</property>
+                    <property name="marginBottom">0cm</property>
+                    <property name="marginRight">0cm</property>
+                    <property name="height">1.0947368421052632in</property>
+                    <property name="width">7.431578947368421in</property>
+                    <column id="25">
+                        <property name="width">7.431578947368421in</property>
+                    </column>
+                    <row id="26">
+                        <cell id="27">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="28">
+                        <cell id="29">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="30">
+                        <property name="height">0.396in</property>
+                        <cell id="31">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <grid name="footerStaticData" id="38">
+                                <property name="fontFamily">"SansSerif"</property>
+                                <property name="height">0.5473684210526316in</property>
+                                <property name="width">7.378947368421053in</property>
+                                <column id="64"/>
+                                <column id="39"/>
+                                <column id="40">
+                                    <property name="width">2.610526315789474in</property>
+                                </column>
+                                <row id="41">
+                                    <property name="height">0.366in</property>
+                                    <cell id="63">
+                                        <text id="65">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <text-property name="content"><![CDATA[Creado por: Axioma Birt Reports]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="42">
+                                        <text name="footerCreatedDate" id="44">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="43">
+                                        <text name="footerNumberPage" id="45">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[Page: <value-of>pageNumber</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="98">
+            <property name="fontSize">9pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">MINISTERIO DE SALUD</text-property>
+        </label>
+        <label id="97">
+            <property name="fontWeight">bold</property>
+            <property name="marginTop">0cm</property>
+            <property name="marginBottom">0.8cm</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">CERTIFICADO DE ATENCIÓN MÉDICA PRA VICTIMAS DE ACCIDENTES DE TRANSITO, EXPEDIDO POR LA INSTITUCIÓN PRESTADORA DE SERVICIOS DE SALUD</text-property>
+        </label>
+        <table id="522">
+            <property name="width">100%</property>
+            <property name="dataSet">informacionInstitcion</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">descripcion1</property>
+                    <expression name="expression">dataSetRow["descripcion1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">descripcion2</property>
+                    <expression name="expression">dataSetRow["descripcion2"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">descripcion3</property>
+                    <expression name="expression">dataSetRow["descripcion3"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="529"/>
+            <header>
+                <row id="523">
+                    <cell id="524">
+                        <data id="530">
+                            <property name="resultSetColumn">descripcion1</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="525">
+                    <cell id="526">
+                        <data id="531">
+                            <property name="resultSetColumn">descripcion2</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="527">
+                    <cell id="528">
+                        <data id="532">
+                            <property name="dataSet">informacionInstitcion</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">descripcion1</property>
+                                    <expression name="expression">dataSetRow["descripcion1"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">descripcion2</property>
+                                    <expression name="expression">dataSetRow["descripcion2"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">descripcion3</property>
+                                    <expression name="expression">dataSetRow["descripcion3"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">descripcion3</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <table id="124">
+            <property name="width">100%</property>
+            <property name="dataSet">informacionPaciente</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">descipcionpaciente1</property>
+                    <expression name="expression">dataSetRow["descipcionpaciente1"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">descipcionpaciente2</property>
+                    <expression name="expression">dataSetRow["descipcionpaciente2"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">descripcionpaciente3</property>
+                    <expression name="expression">dataSetRow["descripcionpaciente3"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">descripcionpaciente4</property>
+                    <expression name="expression">dataSetRow["descripcionpaciente4"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="137"/>
+            <detail>
+                <row id="127">
+                    <cell id="128">
+                        <data id="138">
+                            <property name="resultSetColumn">descipcionpaciente1</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="129">
+                    <cell id="130">
+                        <data id="139">
+                            <property name="resultSetColumn">descipcionpaciente2</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="131">
+                    <cell id="132">
+                        <data id="140">
+                            <property name="resultSetColumn">descripcionpaciente3</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="133">
+                    <cell id="134">
+                        <data id="141">
+                            <property name="resultSetColumn">descripcionpaciente4</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <table id="142">
+            <property name="width">100%</property>
+            <property name="dataSet">indoDeclarante</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">declarante</property>
+                    <expression name="expression">dataSetRow["declarante"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">infodeclarante</property>
+                    <expression name="expression">dataSetRow["infodeclarante"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">descripcionhechos</property>
+                    <expression name="expression">dataSetRow["descripcionhechos"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="153"/>
+            <detail>
+                <row id="145">
+                    <cell id="146">
+                        <data id="155">
+                            <property name="resultSetColumn">declarante</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="147">
+                    <cell id="148">
+                        <data id="156">
+                            <property name="resultSetColumn">infodeclarante</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="149">
+                    <cell id="150">
+                        <data id="157">
+                            <property name="resultSetColumn">descripcionhechos</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <table id="160">
+            <property name="width">100%</property>
+            <property name="dataSet">signosVitales</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">signosvitales</property>
+                    <expression name="expression">dataSetRow["signosvitales"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="170">
+                <property name="width">1.031in</property>
+            </column>
+            <column id="171">
+                <property name="width">6.284in</property>
+            </column>
+            <header>
+                <row id="161">
+                    <cell id="162">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">0.8pt</property>
+                    </cell>
+                </row>
+            </header>
+            <footer>
+                <row id="399">
+                    <cell id="400">
+                        <label id="173">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Signos Vitales:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="401">
+                        <data id="175">
+                            <property name="resultSetColumn">signosvitales</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <table id="336">
+            <property name="width">100%</property>
+            <property name="dataSet">estadosConcienciaEmbriaguezValoracion</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">estadoconciencia</property>
+                    <expression name="expression">dataSetRow["estadoconciencia"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">estadoembriaguez</property>
+                    <expression name="expression">dataSetRow["estadoembriaguez"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="357"/>
+            <column id="358">
+                <property name="width">1.536in</property>
+            </column>
+            <column id="359">
+                <property name="width">2.126in</property>
+            </column>
+            <column id="360"/>
+            <header>
+                <row id="402">
+                    <cell id="403">
+                        <label id="361">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Estado de Conciencia:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="404">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <data id="363">
+                            <property name="resultSetColumn">estadoconciencia</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+            <footer>
+                <row id="409">
+                    <cell id="410">
+                        <label id="362">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Estado de Embriaguez:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="411">
+                        <data id="364">
+                            <property name="resultSetColumn">estadoembriaguez</property>
+                        </data>
+                    </cell>
+                    <cell id="412">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <label id="365">
+                            <property name="fontSize">9pt</property>
+                            <text-property name="text">(En caso de embriaguez tomar muestra para alcoholemia u otras drogas)</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <table id="384">
+            <property name="width">100%</property>
+            <property name="dataSet">glasgow</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">valor</property>
+                    <expression name="expression">dataSetRow["valor"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="394">
+                <property name="width">1.831in</property>
+            </column>
+            <column id="395">
+                <property name="width">5.484in</property>
+            </column>
+            <header>
+                <row id="385">
+                    <cell id="386">
+                        <label id="396">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Glasgow:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="387">
+                        <data id="398">
+                            <property name="resultSetColumn">valor</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+        </table>
+        <grid id="367">
+            <property name="width">100%</property>
+            <column id="368"/>
+            <row id="369">
+                <cell id="370">
+                    <property name="paddingTop">0.8cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="203">
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="canShrink">true</property>
+            <property name="width">100%</property>
+            <property name="dataSet">datosPositivos</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">cabezaorganossentidos</property>
+                    <expression name="expression">dataSetRow["cabezaorganossentidos"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">cuello</property>
+                    <expression name="expression">dataSetRow["cuello"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">toraxycardiovascular</property>
+                    <expression name="expression">dataSetRow["toraxycardiovascular"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">abdomen</property>
+                    <expression name="expression">dataSetRow["abdomen"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">genitourinario</property>
+                    <expression name="expression">dataSetRow["genitourinario"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">pelvis</property>
+                    <expression name="expression">dataSetRow["pelvis"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">dorsoyextremidades</property>
+                    <expression name="expression">dataSetRow["dorsoyextremidades"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">neurologico</property>
+                    <expression name="expression">dataSetRow["neurologico"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="237">
+                <property name="width">2.084in</property>
+            </column>
+            <column id="238">
+                <property name="width">5.231in</property>
+            </column>
+            <header>
+                <row id="204">
+                    <cell id="205">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="paddingTop">0.2cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0.2cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="239">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">DATOS POSITIVOS</text-property>
+                        </label>
+                        <grid id="492">
+                            <property name="width">100%</property>
+                            <column id="493">
+                                <property name="width">2.168in</property>
+                            </column>
+                            <column id="494">
+                                <property name="width">4.978in</property>
+                            </column>
+                            <row id="495">
+                                <cell id="496">
+                                    <label id="240">
+                                        <text-property name="text">Cabeza y Organos de los sentidos:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="497">
+                                    <data id="249">
+                                        <property name="resultSetColumn">cabezaorganossentidos</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="498">
+                                <cell id="499">
+                                    <label id="241">
+                                        <text-property name="text">Cuello:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="500">
+                                    <data id="250">
+                                        <property name="resultSetColumn">cuello</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="501">
+                                <cell id="502">
+                                    <label id="242">
+                                        <text-property name="text">Tórax y Cardiopulmonar:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="503">
+                                    <data id="251">
+                                        <property name="resultSetColumn">toraxycardiovascular</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="504">
+                                <cell id="505">
+                                    <label id="243">
+                                        <text-property name="text">Abdomen:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="506">
+                                    <data id="252">
+                                        <property name="resultSetColumn">abdomen</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="507">
+                                <cell id="508">
+                                    <label id="244">
+                                        <text-property name="text">Genitourinario:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="509">
+                                    <data id="253">
+                                        <property name="resultSetColumn">genitourinario</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="510">
+                                <cell id="511">
+                                    <label id="245">
+                                        <text-property name="text">Pelvis:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="512">
+                                    <data id="254">
+                                        <property name="resultSetColumn">pelvis</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="513">
+                                <cell id="514">
+                                    <label id="246">
+                                        <text-property name="text">Dorso y Extermidades:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="515">
+                                    <data id="255">
+                                        <property name="resultSetColumn">dorsoyextremidades</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="516">
+                                <cell id="517">
+                                    <label id="247">
+                                        <text-property name="text">Neurológico:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="518">
+                                    <data id="256">
+                                        <property name="resultSetColumn">neurologico</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                </row>
+            </header>
+            <footer>
+                <row id="234">
+                    <cell id="235"/>
+                    <cell id="236"/>
+                </row>
+            </footer>
+        </table>
+        <table id="278">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">infoDiagnosticosEgreso</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">diagnosticoprincipal</property>
+                    <expression name="expression">dataSetRow["diagnosticoprincipal"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">diagrelacionado1</property>
+                    <expression name="expression">dataSetRow["diagrelacionado1"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">diagrelacionado2</property>
+                    <expression name="expression">dataSetRow["diagrelacionado2"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">diagrelacionado3</property>
+                    <expression name="expression">dataSetRow["diagrelacionado3"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="297">
+                <property name="width">1.484in</property>
+            </column>
+            <column id="298">
+                <property name="width">5.831in</property>
+            </column>
+            <header>
+                <row id="279">
+                    <cell id="280">
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="299">
+                            <text-property name="text">Impresión Diagnóstica:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="281">
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="301">
+                            <property name="resultSetColumn">diagnosticoprincipal</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+            <footer>
+                <row id="294">
+                    <cell id="295">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <grid id="376">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="width">100%</property>
+                            <column id="377"/>
+                            <column id="378"/>
+                            <column id="379"/>
+                            <row id="519">
+                                <cell id="520">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <label id="300">
+                                        <text-property name="text">Diagnóstico Definitivo:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="521">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <data id="302">
+                                        <property name="resultSetColumn">diagnosticoprincipal</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="380">
+                                <cell id="381">
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <data id="303">
+                                        <property name="resultSetColumn">diagrelacionado1</property>
+                                    </data>
+                                </cell>
+                                <cell id="382">
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <data id="304">
+                                        <property name="resultSetColumn">diagrelacionado2</property>
+                                    </data>
+                                </cell>
+                                <cell id="383">
+                                    <data id="305">
+                                        <property name="resultSetColumn">diagrelacionado3</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <grid id="371">
+            <property name="width">100%</property>
+            <column id="372"/>
+            <row id="373">
+                <cell id="374">
+                    <property name="paddingTop">2.2cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="307">
+            <property name="width">100%</property>
+            <property name="dataSet">infoMedico</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">getnombrepersona</property>
+                    <expression name="expression">dataSetRow["getnombrepersona"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">numero_registro</property>
+                    <expression name="expression">dataSetRow["numero_registro"]</expression>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="317">
+                <property name="width">2.0526315789in</property>
+            </column>
+            <column id="318">
+                <property name="width">1.9263157895in</property>
+            </column>
+            <column id="327">
+                <property name="width">1.4736842105in</property>
+            </column>
+            <column id="323">
+                <property name="width">1.9473684211in</property>
+            </column>
+            <header>
+                <row id="308">
+                    <cell id="309">
+                        <label id="319">
+                            <text-property name="text">Nombres y Apellidos Médico:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="310">
+                        <data id="331">
+                            <property name="resultSetColumn">getnombrepersona</property>
+                        </data>
+                    </cell>
+                    <cell id="324">
+                        <label id="328">
+                            <text-property name="text">Firma y Sello:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="320">
+                        <label id="329">
+                            <text-property name="text">_______________________</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="311">
+                    <cell id="312">
+                        <label id="330">
+                            <text-property name="text">Registro Médico No:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="313">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <data id="332">
+                            <property name="resultSetColumn">numero_registro</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="314">
+                    <property name="height">0.2421052632in</property>
+                    <cell id="315"/>
+                    <cell id="316"/>
+                    <cell id="326"/>
+                    <cell id="322"/>
+                </row>
+            </footer>
+        </table>
+        <grid name="piehiscli" id="533">
+            <property name="width">100%</property>
+            <column id="534"/>
+            <row id="535">
+                <cell id="536"/>
+            </row>
+        </grid>
+    </body>
+</report>

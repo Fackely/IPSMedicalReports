@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2010 10:02:14 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposConvenio" table="tipos_convenio" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.TiposConvenioId">
+            <key-property name="codigo" type="string">
+                <column name="codigo" length="8" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tiposRegimen" class="com.servinte.axioma.orm.TiposRegimen" fetch="select">
+            <column name="tipo_regimen" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaContableDesPac" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable_des_pac" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaContableValConv" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable_val_conv" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaContable" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaContableValPac" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable_val_pac" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaDebitoGlsRecibida" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_debito_gls_recibida" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="clasificacionTipoConvenio" class="com.servinte.axioma.orm.ClasificacionTipoConvenio" fetch="select">
+            <column name="clasificacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaContableCxcCap" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable_cxc_cap" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="rubroPresupuestal" class="com.servinte.axioma.orm.RubroPresupuestal" fetch="select">
+            <column name="rubro_presupuestal" precision="10" scale="0" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="128" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="cuentaContableUtil" type="java.lang.Long">
+            <column name="cuenta_contable_util" precision="10" scale="0" />
+        </property>
+        <property name="cuentaContablePerd" type="java.lang.Long">
+            <column name="cuenta_contable_perd" precision="10" scale="0" />
+        </property>
+        <property name="cuentaCreditoGlsRecibida" type="java.lang.Long">
+            <column name="cuenta_credito_gls_recibida" precision="10" scale="0" />
+        </property>
+        <property name="cuentaDebitoGlsAceptada" type="java.lang.Long">
+            <column name="cuenta_debito_gls_aceptada" precision="10" scale="0" />
+        </property>
+        <property name="cuentaCreditoGlsAceptada" type="java.lang.Long">
+            <column name="cuenta_credito_gls_aceptada" precision="10" scale="0" />
+        </property>
+        <set name="convenioses" inverse="true" lazy="true" table="convenios" fetch="select">
+            <key>
+                <column name="tipo_convenio" length="8" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Convenios" />
+        </set>
+    </class>
+</hibernate-mapping>

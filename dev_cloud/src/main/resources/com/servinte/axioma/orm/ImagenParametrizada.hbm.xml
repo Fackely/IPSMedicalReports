@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 9/10/2012 02:52:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ImagenParametrizada" table="imagen_parametrizada" schema="historiaclinica">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="sequence" >
+				<param name="sequence">historiaclinica.seq_imagen_parametrizada</param>
+			</generator>
+        </id>
+        <many-to-one name="curvaCrecimientoParametrizab" class="com.servinte.axioma.orm.CurvaCrecimientoParametrizab" fetch="select">
+            <column name="id_curva_crecimiento" />
+        </many-to-one>
+        <property name="imagenIzquierda" type="string">
+            <column name="imagen_izquierda" length="1000" />
+        </property>
+        <property name="imagenDerecha" type="string">
+            <column name="imagen_derecha" length="1000" />
+        </property>
+        <property name="imagenCurva" type="string">
+            <column name="imagen_curva" length="1000" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="activo" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="13" />
+        </property>
+        <set name="historicoImagenPlantillas" table="historico_imagen_plantilla" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_imagen_parametrizada" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoImagenPlantilla" />
+        </set>
+    </class>
+</hibernate-mapping>

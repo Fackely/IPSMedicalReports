@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 8, 2010 3:20:33 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposTarjCliente" table="tipos_tarj_cliente" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="serviciosByServicioEmpresarial" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio_empresarial" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="serviciosByServicioFamiliar" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio_familiar" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="serviciosByServicioPersonal" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio_personal" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <property name="codigoTipoTarj" type="string">
+            <column name="codigo_tipo_tarj" length="3" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="128" not-null="true" />
+        </property>
+        <property name="aliado" type="char">
+            <column name="aliado" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="numBeneficiariosFam" type="java.lang.Integer">
+            <column name="num_beneficiarios_fam" />
+        </property>
+        <property name="consecutivoSerial" type="java.lang.Long">
+            <column name="consecutivo_serial" precision="12" scale="0" />
+        </property>
+        <set name="logEncaEmiTarjetaClientes" inverse="true" lazy="true" table="log_enca_emi_tarjeta_cliente" fetch="select">
+            <key>
+                <column name="tipo_targeta" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEncaEmiTarjetaCliente" />
+        </set>
+        <set name="encaEmiTarjetaClientes" inverse="true" lazy="true" table="enca_emi_tarjeta_cliente" fetch="select">
+            <key>
+                <column name="tipo_tarjeta" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EncaEmiTarjetaCliente" />
+        </set>
+        <set name="ventaTarjetaClientes" inverse="true" lazy="true" table="venta_tarjeta_cliente" fetch="select">
+            <key>
+                <column name="tipo_tarjeta" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.VentaTarjetaCliente" />
+        </set>
+        <set name="beneficiarioTarjetaClientes" inverse="true" lazy="true" table="beneficiario_tarjeta_cliente" fetch="select">
+            <key>
+                <column name="tipo_tarjeta_cliente" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.BeneficiarioTarjetaCliente" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2010 2:49:56 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoMontoAgrupServ" table="histo_monto_agrup_serv" schema="facturacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_his_monto_agrup_ser</param>
+			</generator>
+        </id>
+        <many-to-one name="tiposServicio" class="com.servinte.axioma.orm.TiposServicio" fetch="select">
+            <column name="acronimo_tipo_servicio" length="1">
+                <comment>C&#195;&#179;digo PK del tipo de servicio asociado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="gruposServicios" class="com.servinte.axioma.orm.GruposServicios" fetch="select">
+            <column name="grupo_servicio_codigo">
+                <comment>C&#195;&#179;digo PK del grupo de servicios asociado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad_codigo">
+                <comment>C&#195;&#179;digo PK de la especialidad asociada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="histoDetalleMonto" class="com.servinte.axioma.orm.HistoDetalleMonto" fetch="select">
+            <column name="histo_detalle_monto" not-null="true">
+                <comment>C&#195;&#179;digo PK del hsit&#195;&#179;rico del detalle del monto de cobro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="cantidadServicio" type="java.lang.Integer">
+            <column name="cantidad_servicio">
+                <comment>Cantidad de servicios agrupados</comment>
+            </column>
+        </property>
+        <property name="cantidadMonto" type="int">
+            <column name="cantidad_monto" not-null="true">
+                <comment>Cantidad de montos a cobrar</comment>
+            </column>
+        </property>
+        <property name="valorMonto" type="double">
+            <column name="valor_monto" precision="17" scale="17" not-null="true">
+                <comment>Valor del monto a cobrar</comment>
+            </column>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="accionRealizada" type="string">
+            <column name="accion_realizada" length="3" not-null="true">
+                <comment>Acci&#195;&#179;n que se realiz&#195;&#179; sobre el registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

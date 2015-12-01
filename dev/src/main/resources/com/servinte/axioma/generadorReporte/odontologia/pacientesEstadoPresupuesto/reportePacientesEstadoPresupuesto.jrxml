@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePacientesEstadoPresupuesto" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subreporteDetalleEstadoPresupuestoInstitucion" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subreporteDetalleEstadoPresupuestoCentroAtencion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreporteDetalleEstadoPresupuestoEstado" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="fechaInicial" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.lang.String"/>
+	<field name="edadPaciente" class="java.lang.String"/>
+	<field name="sexoPaciente" class="java.lang.String"/>
+	<field name="paqueteOdontologico" class="java.lang.String"/>
+	<field name="programaeOdontologico" class="java.lang.String"/>
+	<field name="usuarioProceso" class="java.lang.String"/>
+	<field name="dsListaInstitucion" class="java.lang.Object"/>
+	<field name="razonSocial" class="java.lang.String"/>
+	<field name="logoDerecha" class="java.lang.String"/>
+	<field name="logoIzquierda" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="148" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+				<reportElement key="logoDerecha" x="1" y="5" width="120" height="70">
+					<printWhenExpression><![CDATA[$F{logoIzquierda} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA[$F{logoIzquierda}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="axiomaTitulo" x="128" y="17" width="316" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE PACIENTES POR ESTADOS DEL PRESUPUESTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaSubtitulo" x="141" y="79" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaSubtitulo" x="305" y="79" width="71" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Final:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaSubtitulo" x="80" y="122" width="132" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paquete Odontológico:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaSubtitulo" x="114" y="99" width="127" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad Paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaSubtitulo" x="305" y="99" width="90" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo Paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaSubtitulo" x="305" y="122" width="63" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="241" y="79" width="59" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaInicial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="241" y="99" width="59" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{edadPaciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="213" y="122" width="88" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{paqueteOdontologico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="79" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="99" width="139" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sexoPaciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="122" width="133" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{programaeOdontologico}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+				<reportElement x="452" y="3" width="120" height="70" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{logoDerecha} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA[$F{logoDerecha}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement key="razonSocial" style="axiomaTitulo" stretchType="RelativeToTallestObject" x="128" y="2" width="316" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreporteDetalleEstadoInstitucion" x="1" y="1" width="570" height="10" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subreporteDetalleEstadoPresupuestoCentroAtencion">
+					<subreportParameterExpression><![CDATA[$P{subreporteDetalleEstadoPresupuestoCentroAtencion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subreporteDetalleEstadoPresupuestoEstado">
+					<subreportParameterExpression><![CDATA[$P{subreporteDetalleEstadoPresupuestoEstado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{dsListaInstitucion}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreporteDetalleEstadoPresupuestoInstitucion}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="18" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="usuarioProcesa" style="axiomaTexto" x="111" y="3" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuarioProceso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaTexto" x="41" y="3" width="70" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Usuario Proceso:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="axiomaTexto" mode="Transparent" x="321" y="3" width="47" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaTexto" x="241" y="3" width="80" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha de Proceso:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement style="axiomaTexto" x="511" y="3" width="26" height="15"/>
+				<box leftPadding="1"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="axiomaTexto" x="434" y="3" width="77" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="axiomaTexto" x="368" y="3" width="49" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[(new java.text.SimpleDateFormat("hh:mm")).format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

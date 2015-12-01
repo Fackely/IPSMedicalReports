@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogConsolidadoFacturacion" table="log_consolidado_facturacion" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" />
+        </many-to-one>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="string">
+            <column name="hora_grabacion" length="5" not-null="true" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="usuario" length="30" not-null="true" />
+        </property>
+        <property name="nombreReporte" type="string">
+            <column name="nombre_reporte" length="30" not-null="true" />
+        </property>
+        <property name="tipoSalida" type="string">
+            <column name="tipo_salida" length="30" not-null="true" />
+        </property>
+        <property name="institucion" type="int">
+            <column name="institucion" not-null="true" />
+        </property>
+        <property name="facturaInicial" type="java.lang.Integer">
+            <column name="factura_inicial" />
+        </property>
+        <property name="facturaFinal" type="java.lang.Integer">
+            <column name="factura_final" />
+        </property>
+        <property name="fechaInicial" type="date">
+            <column name="fecha_inicial" length="13" />
+        </property>
+        <property name="fechaFinal" type="date">
+            <column name="fecha_final" length="13" />
+        </property>
+        <property name="rutaArchivoPlano" type="string">
+            <column name="ruta_archivo_plano" length="512" />
+        </property>
+    </class>
+</hibernate-mapping>

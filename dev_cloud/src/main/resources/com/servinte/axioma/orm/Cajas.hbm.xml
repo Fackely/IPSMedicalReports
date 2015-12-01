@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 11, 2010 2:57:59 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Cajas" table="cajas" schema="tesoreria">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposCaja" class="com.servinte.axioma.orm.TiposCaja" fetch="select">
+            <column name="tipo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="int">
+            <column name="codigo" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="valorBase" type="big_decimal">
+            <column name="valor_base" />
+        </property>
+        <set name="registroEgresosDeCajas" inverse="true" lazy="true" table="registro_egresos_de_caja" fetch="select">
+            <key>
+                <column name="caja" not-null="true">
+                    <comment>Cajas que se encuentran registradas en el sistema. Pueden ser para el usuario actual o por Centro de Atenci&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEgresosDeCaja" />
+        </set>
+        <set name="cierresCajasesForCaja" inverse="true" lazy="true" table="cierres_cajas" fetch="select">
+            <key>
+                <column name="caja" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierresCajas" />
+        </set>
+        <set name="trasladosCajasForCajaPpal" inverse="true" lazy="true" table="traslados_caja" fetch="select">
+            <key>
+                <column name="caja_ppal" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladosCaja" />
+        </set>
+        <set name="entregaCajaMayors" inverse="true" lazy="true" table="entrega_caja_mayor" fetch="select">
+            <key>
+                <column name="caja_destino" not-null="true">
+                    <comment>Caja Mayor / Principal a la que se le realiza la entrega</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntregaCajaMayor" />
+        </set>
+        <set name="trasladosCajasForCajaMayor" inverse="true" lazy="true" table="traslados_caja" fetch="select">
+            <key>
+                <column name="caja_mayor" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladosCaja" />
+        </set>
+        <set name="turnoDeCajas" inverse="true" lazy="true" table="turno_de_caja" fetch="select">
+            <key>
+                <column name="caja" not-null="true">
+                    <comment>Caja que realizo la apertura</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TurnoDeCaja" />
+        </set>
+        <set name="detalleMovCajaCierres" inverse="true" lazy="true" table="detalle_mov_caja_cierre" fetch="select">
+            <key>
+                <column name="caja_destino" not-null="true">
+                    <comment>Caja Principal Destino Seleccionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleMovCajaCierre" />
+        </set>
+        <set name="cierresCajasesForCajaPpal" inverse="true" lazy="true" table="cierres_cajas" fetch="select">
+            <key>
+                <column name="caja_ppal" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierresCajas" />
+        </set>
+        <set name="solicitudTrasladoCajas" inverse="true" lazy="true" table="solicitud_traslado_caja" fetch="select">
+            <key>
+                <column name="caja_seleccionada" not-null="true">
+                    <comment>Caja solicitado para el traslado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudTrasladoCaja" />
+        </set>
+        <set name="cajasCajeroses" inverse="true" lazy="true" table="cajas_cajeros" fetch="select">
+            <key>
+                <column name="caja" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CajasCajeros" />
+        </set>
+        <set name="arqueosDefinitivoses" inverse="true" lazy="true" table="arqueos_definitivos" fetch="select">
+            <key>
+                <column name="caja" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArqueosDefinitivos" />
+        </set>
+    </class>
+</hibernate-mapping>

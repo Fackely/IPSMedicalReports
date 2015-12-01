@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 9, 2010 3:23:28 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CentrosAtenTransportadora" table="centros_aten_transportadora" schema="tesoreria">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence">
+            	<param name="sequence">tesoreria.seq_centros_aten_transport</param>
+            </generator>
+        </id>
+        <many-to-one name="transportadoraValores" class="com.servinte.axioma.orm.TransportadoraValores" fetch="select">
+            <column name="transportadora" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

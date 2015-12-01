@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 6, 2011 5:48:39 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ViaIngresoEntSub" table="via_ingreso_ent_sub" schema="facturacion">
+        <comment>Relaciona las vias de ingreso con las entidades subcontratadas</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+		    	<param name="sequence">facturacion.seq_via_ingreso_ent_sub</param>
+		    </generator>
+        </id>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" not-null="true">
+                <comment>Entidad Subcontratada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" not-null="true">
+                <comment>Via de ignreso</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 21, 2011 9:36:22 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ServiciosReclamados" table="servicios_reclamados" schema="manejopaciente">
+        <id name="codigoReclamacion" type="long">
+            <column name="codigo_reclamacion" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">reclamacionesAccEveFact</param>
+            </generator>
+        </id>
+        <one-to-one name="reclamacionesAccEveFact" class="com.servinte.axioma.orm.ReclamacionesAccEveFact" constrained="true"></one-to-one>
+        <property name="protesis" type="string">
+            <column name="protesis" length="1" not-null="true" />
+        </property>
+        <property name="adaptacionProtesis" type="string">
+            <column name="adaptacion_protesis" length="1" not-null="true" />
+        </property>
+        <property name="rehabilitacion" type="string">
+            <column name="rehabilitacion" length="1" not-null="true" />
+        </property>
+        <property name="valorProtesis" type="big_decimal">
+            <column name="valor_protesis" precision="20" scale="6" />
+        </property>
+        <property name="valorAdapProtesis" type="big_decimal">
+            <column name="valor_adap_protesis" precision="20" scale="6" />
+        </property>
+        <property name="valorRehabilitacion" type="big_decimal">
+            <column name="valor_rehabilitacion" precision="20" scale="6" />
+        </property>
+        <property name="descProtServPres" type="string">
+            <column name="desc_prot_serv_pres" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

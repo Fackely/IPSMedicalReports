@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2012 05:39:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolProcedimientos" table="sol_procedimientos" schema="ordenes">
+        <id name="numeroSolicitud" type="int">
+            <column name="numero_solicitud" />
+            <generator class="foreign">
+                <param name="property">solicitudes</param>
+            </generator>
+        </id>
+        <many-to-one name="serviciosByCodigoServicioSolicitado" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="codigo_servicio_solicitado" />
+        </many-to-one>
+        <many-to-one name="tiposFrecuencia" class="com.servinte.axioma.orm.TiposFrecuencia" fetch="select">
+            <column name="tipo_frecuencia" />
+        </many-to-one>
+        <one-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" constrained="true"></one-to-one>
+        <many-to-one name="usuariosByUsuarioProceso" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_proceso" length="30" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioTomaMuestra" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_toma_muestra" length="30" />
+        </many-to-one>
+        <many-to-one name="serviciosByPortatilAsociado" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="portatil_asociado" />
+        </many-to-one>
+        <many-to-one name="finalidadesServicio" class="com.servinte.axioma.orm.FinalidadesServicio" fetch="select">
+            <column name="finalidad" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="auto_ent_sub" precision="12" scale="0" />
+        </many-to-one>
+        <property name="nombreOtros" type="string">
+            <column name="nombre_otros" length="256" />
+        </property>
+        <property name="comentario" type="string">
+            <column name="comentario" length="4000" />
+        </property>
+        <property name="resultadosOtros" type="string">
+            <column name="resultados_otros" length="4000" />
+        </property>
+        <property name="numeroDocumento" type="int">
+            <column name="numero_documento" not-null="true" />
+        </property>
+        <property name="frecuencia" type="java.lang.Double">
+            <column name="frecuencia" precision="17" scale="17" />
+        </property>
+        <property name="solicitudMultiple" type="boolean">
+            <column name="solicitud_multiple" not-null="true" />
+        </property>
+        <property name="finalizada" type="java.lang.Boolean">
+            <column name="finalizada" />
+        </property>
+        <property name="respuestaMultiple" type="char">
+            <column name="respuesta_multiple" length="1" not-null="true" />
+        </property>
+        <property name="finalizadaRespuesta" type="char">
+            <column name="finalizada_respuesta" length="1" not-null="true" />
+        </property>
+        <property name="fechaTomaMuestra" type="date">
+            <column name="fecha_toma_muestra" length="13" />
+        </property>
+        <property name="horaTomaMuestra" type="string">
+            <column name="hora_toma_muestra" length="5" />
+        </property>
+        <property name="fechaProceso" type="date">
+            <column name="fecha_proceso" length="13" />
+        </property>
+        <property name="horaProceso" type="string">
+            <column name="hora_proceso" length="5" />
+        </property>
+        <property name="motivoAnulPortatil" type="string">
+            <column name="motivo_anul_portatil" length="1024" />
+        </property>
+        <property name="epicrisis" type="char">
+            <column name="epicrisis" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

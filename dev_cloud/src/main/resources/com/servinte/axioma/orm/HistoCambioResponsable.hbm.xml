@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 3, 2010 4:27:55 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoCambioResponsable" table="histo_cambio_responsable" schema="tesoreria">
+        <comment>Guada el historial de cambio de responsables en los faltantes / sobrantes</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+           <generator class="sequence">
+				<param name="sequence">seq_histo_cambio_responsable</param>
+			</generator>
+        </id>
+        <many-to-one name="usuariosByResponsable" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="responsable" length="30" not-null="true">
+                <comment>Nuevo responsable</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true">
+                <comment>centro de atencion donde se ingresa el cambio de responsable</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Usuario que registra el cambio</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="detFaltanteSobrante" class="com.servinte.axioma.orm.DetFaltanteSobrante" fetch="select">
+            <column name="det_faltante_sobrante" precision="10" scale="0" not-null="true">
+                <comment>Detalle del faltante / sobrante del cual se cambio el responsable</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Fecha en que se ingresa el cambio de responsable</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Hora en que se ingresa el cambio de responsable</comment>
+            </column>
+        </property>
+        <property name="motivo" type="string">
+            <column name="motivo" not-null="true">
+                <comment>motivo del cambio de responsable</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

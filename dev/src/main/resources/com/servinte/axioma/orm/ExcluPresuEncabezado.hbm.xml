@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 12, 2011 5:49:22 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ExcluPresuEncabezado" table="exclu_presu_encabezado" schema="odontologia">
+        <comment>Encabezado asociado a las exclusiones realizadas al plan de tratamiento del paciente</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.seq_exclu_presu_encabezado</param>
+			</generator>
+        </id>
+        <many-to-one name="presupuestoOdontologico" class="com.servinte.axioma.orm.PresupuestoOdontologico" fetch="select">
+            <column name="presupuesto" precision="12" scale="0" not-null="true">
+                <comment>Presupuesto al cual va a quedar asociado el registro de exclusi&#195;&#179;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true">
+                <comment>Usuario que registra o modifica la aprobaci&#195;&#179;n de las exclusiones</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="otrosSi" class="com.servinte.axioma.orm.OtrosSi" fetch="select">
+            <column name="otro_si" precision="12" scale="0">
+                <comment>Registro de Otro si asociado a las exclusiones</comment>
+            </column>
+        </many-to-one>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" not-null="true">
+                <comment>Consecutivo de la exclusi&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true">
+                <comment>Fecha en la que se registra o modifica el proceso de aprobaci&#195;&#179;n de las exclusiones</comment>
+            </column>
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true">
+                <comment>Hora en la que se registra o modifica el proceso de aprobaci&#195;&#179;n de las exclusiones</comment>
+            </column>
+        </property>
+        <set name="exclusionesPresupuestos" inverse="true" lazy="true" table="exclusiones_presupuesto" fetch="select">
+            <key>
+                <column name="exclu_presu_encabezado" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExclusionesPresupuesto" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HorasReproceso" table="horas_reproceso" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.HorasReprocesoId">
+            <key-property name="viaIngreso" type="int">
+                <column name="via_ingreso" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" update="false" insert="false" fetch="select">
+            <column name="via_ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

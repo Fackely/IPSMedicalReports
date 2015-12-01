@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2012 05:39:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolicitudesInter" table="solicitudes_inter" schema="ordenes">
+        <id name="numeroSolicitud" type="int">
+            <column name="numero_solicitud" />
+            <generator class="foreign">
+                <param name="property">solicitudes</param>
+            </generator>
+        </id>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="codigo_servicio_solicitado" />
+        </many-to-one>
+        <one-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" constrained="true"></one-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="auto_ent_sub" precision="12" scale="0" />
+        </many-to-one>
+        <property name="nombreOtros" type="string">
+            <column name="nombre_otros" length="256" />
+        </property>
+        <property name="motivoSolicitud" type="string">
+            <column name="motivo_solicitud" length="4000" not-null="true" />
+        </property>
+        <property name="resumenHistoriaClinica" type="string">
+            <column name="resumen_historia_clinica" length="4000" />
+        </property>
+        <property name="comentario" type="string">
+            <column name="comentario" length="4000" />
+        </property>
+        <property name="codigoManejoInterconsulta" type="java.lang.Integer">
+            <column name="codigo_manejo_interconsulta" />
+        </property>
+        <property name="respuestaOtros" type="string">
+            <column name="respuesta_otros" length="4000" />
+        </property>
+        <property name="manejoConjuntoFinalizado" type="boolean">
+            <column name="manejo_conjunto_finalizado" not-null="true" />
+        </property>
+        <property name="epicrisisInterpretacion" type="char">
+            <column name="epicrisis_interpretacion" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

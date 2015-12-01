@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 13, 2010 1:53:04 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MontosCobro" table="montos_cobro" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="sequence">
+				<param name="sequence">facturacion.seq_montos_cobro</param>
+			</generator>
+        </id>
+        <many-to-one name="empresasInstitucion" class="com.servinte.axioma.orm.EmpresasInstitucion" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <property name="vigenciaInicial" type="date">
+            <column name="vigencia_inicial" length="13" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <set name="histoMontosCobros" inverse="true" lazy="true" table="histo_montos_cobro" fetch="select">
+            <key>
+                <column name="monto_codigo" not-null="true">
+                    <comment>C&#195;&#179;digo PK del monto de cobo relacionado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoMontosCobro" />
+        </set>
+        <set name="detalleMontos" inverse="true" lazy="true" table="detalle_monto" fetch="select" cascade="all">
+            <key>
+                <column name="monto_codigo" not-null="true">
+                    <comment>C&#195;&#179;digo PK del monto de cobro relaciona</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleMonto" />
+        </set>
+    </class>
+</hibernate-mapping>

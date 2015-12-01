@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>servinte.ipsm</groupId>
+  <artifactId>dev_reportes</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name> Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+    <properties>
+    
+	<birt.runtime.location>C:/aplicaciones/birt/birt-runtime-2_3_1/WebViewerExample</birt.runtime.location>      
+    <birt.version>2.3.2</birt.version>
+    <birt.runtime.libs>${birt.runtime.location}/WEB-INF/lib</birt.runtime.libs>
+
+    <xml.resources.location>/home/axioma/archivosDespliegue/ipsm_dev_reportes/</xml.resources.location>
+    
+    <compiler.source>1.6</compiler.source>
+	<compiler.target>1.6</compiler.target>
+	<source.encoding>ISO-8859-1</source.encoding>
+	<resource.encoding>ISO-8859-1</resource.encoding>
+	<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+	
+  </properties>
+  <build>
+    <finalName>dev_reportes</finalName>
+    <plugins>
+		<!-- Tomcat Maven plugin -->
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>tomcat-maven-plugin</artifactId>
+			<version>1.1</version>
+			<configuration>
+				<server>local_tomcat</server>
+				<url>http://localhost:8080/manager</url>
+				<webapp>web</webapp>
+			</configuration>
+		</plugin>
+		<!-- Maven compiler plugin -->
+		<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.4</version>
+			<configuration>
+				<source>${compiler.source}</source>
+				<target>${compiler.target}</target>
+				<encoding>${resource.encoding}</encoding>
+			</configuration>
+		</plugin>
+		<!-- Maven Surefire plugin -->
+		<!--<plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-surefire-plugin</artifactId>
+	        <version>2.12.2</version>
+	        <configuration>
+	          <skipTests>true</skipTests>
+	        </configuration>
+	    </plugin>-->
+	    <!-- Maven war plugin -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>2.1.1</version>
+			
+			<configuration>
+				<webXml>${xml.resources.location}/web.xml</webXml>       
+			</configuration>
+			
+		</plugin>
+	</plugins>
+  </build>  
+</project>

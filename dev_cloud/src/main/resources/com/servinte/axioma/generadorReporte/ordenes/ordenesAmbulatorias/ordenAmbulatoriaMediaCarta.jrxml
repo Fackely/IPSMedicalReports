@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ordenAmbulatoria" pageWidth="612" pageHeight="396" columnWidth="592" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subReporteServicios" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteServiciosOrdenes" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteServiciosOtros" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteArticulos" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteArticulosCE" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteArticulosMedicamentos" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteArticulosMedicamentosCE" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteArticulosInsumos" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteArticulosOtros" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteArticulosInsumosCE" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteArticulosOtrosCE" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="parameter1" class="java.lang.Double" isForPrompting="false"/>
+	<field name="razonSocial" class="java.lang.String"/>
+	<field name="nit" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="usuario" class="java.lang.String"/>
+	<field name="logoDerecha" class="java.lang.String"/>
+	<field name="logoIzquierda" class="java.lang.String"/>
+	<field name="JRDlistaServicios" class="java.lang.Object"/>
+	<field name="JRDlistaArticulos" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="actividadEconomica" class="java.lang.String"/>
+	<field name="saltoPaginaReporte" class="java.lang.Boolean"/>
+	<field name="tipoImpresion" class="java.lang.String"/>
+	<field name="JRDlistaArticulosCE" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="tipoReportesArt" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="65">
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="592" height="65" isPrintInFirstWholeBand="true"/>
+				<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+					<reportElement x="472" y="0" width="120" height="65" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$F{logoDerecha} != null]]></printWhenExpression>
+					</reportElement>
+					<imageExpression class="java.lang.String"><![CDATA[$F{logoDerecha}]]></imageExpression>
+				</image>
+				<textField isBlankWhenNull="true">
+					<reportElement key="razonSocial" style="axiomaTitulo" stretchType="RelativeToTallestObject" x="124" y="0" width="343" height="15" isPrintInFirstWholeBand="true"/>
+					<textElement textAlignment="Center">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{razonSocial}]]></textFieldExpression>
+				</textField>
+				<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+					<reportElement key="logoDerecha" x="0" y="0" width="120" height="65">
+						<printWhenExpression><![CDATA[$F{logoIzquierda} != null]]></printWhenExpression>
+					</reportElement>
+					<imageExpression class="java.lang.String"><![CDATA[$F{logoIzquierda}]]></imageExpression>
+				</image>
+				<textField isBlankWhenNull="true">
+					<reportElement key="direccion" style="axiomaTexto" stretchType="RelativeToTallestObject" x="124" y="27" width="343" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="nit" style="axiomaTexto" stretchType="RelativeToTallestObject" x="124" y="15" width="343" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nit}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="actividadEconomica" style="axiomaTexto" stretchType="RelativeToTallestObject" x="124" y="39" width="343" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{actividadEconomica}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="12">
+			<subreport isUsingCache="true" runToBottom="false">
+				<reportElement key="subReporteServicios" stretchType="RelativeToBandHeight" x="0" y="0" width="592" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReporteServiciosOrdenes">
+					<subreportParameterExpression><![CDATA[$P{subReporteServiciosOrdenes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteServiciosOtros">
+					<subreportParameterExpression><![CDATA[$P{subReporteServiciosOtros}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteServicios">
+					<subreportParameterExpression><![CDATA[$P{subReporteServicios}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{JRDlistaServicios}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteServicios}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20">
+			<printWhenExpression><![CDATA[$F{tipoReportesArt}.intValue()!= 2 ]]></printWhenExpression>
+			<subreport isUsingCache="true">
+				<reportElement key="subReporteArticulos" stretchType="RelativeToBandHeight" x="0" y="3" width="592" height="13" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReporteArticulosInsumos">
+					<subreportParameterExpression><![CDATA[$P{subReporteArticulosInsumos}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteArticulos">
+					<subreportParameterExpression><![CDATA[$P{subReporteArticulos}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteArticulosMedicamentos">
+					<subreportParameterExpression><![CDATA[$P{subReporteArticulosMedicamentos}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteArticulosOtros">
+					<subreportParameterExpression><![CDATA[$P{subReporteArticulosOtros}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{JRDlistaArticulos}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteArticulos}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="18" splitType="Immediate">
+			<printWhenExpression><![CDATA[$F{tipoReportesArt}.intValue() != 1]]></printWhenExpression>
+			<break>
+				<reportElement x="0" y="15" width="257" height="1" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{saltoPaginaReporte}]]></printWhenExpression>
+				</reportElement>
+			</break>
+			<subreport isUsingCache="true">
+				<reportElement key="subReporteArticulosCE" stretchType="RelativeToBandHeight" x="0" y="1" width="592" height="13" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReporteArticulosOtrosCE">
+					<subreportParameterExpression><![CDATA[$P{subReporteArticulosOtrosCE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteArticulosCE">
+					<subreportParameterExpression><![CDATA[$P{subReporteArticulosCE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteArticulosInsumosCE">
+					<subreportParameterExpression><![CDATA[$P{subReporteArticulosInsumosCE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteArticulosMedicamentosCE">
+					<subreportParameterExpression><![CDATA[$P{subReporteArticulosMedicamentosCE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{JRDlistaArticulosCE}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteArticulosCE}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="26">
+			<frame>
+				<reportElement x="0" y="0" width="592" height="26"/>
+				<textField evaluationTime="Report">
+					<reportElement style="axiomaTexto" x="549" y="11" width="26" height="15" isPrintWhenDetailOverflows="true"/>
+					<box leftPadding="1"/>
+					<textElement textAlignment="Left">
+						<font size="7" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="axiomaTexto" x="14" y="11" width="53" height="15" isPrintWhenDetailOverflows="true"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Impresión: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="axiomaTexto" x="472" y="11" width="77" height="15" isPrintWhenDetailOverflows="true"/>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" mode="Transparent" x="68" y="11" width="87" height="15" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+						<font size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="usuario" style="axiomaTexto" x="219" y="14" width="138" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{usuario}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="usuario" style="axiomaTexto" x="219" y="2" width="138" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoImpresion}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+</jasperReport>

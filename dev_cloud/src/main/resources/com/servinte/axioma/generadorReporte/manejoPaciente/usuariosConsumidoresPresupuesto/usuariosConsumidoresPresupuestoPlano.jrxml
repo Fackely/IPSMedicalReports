@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="usuariosConsumidoresPresupuestoPlano" language="groovy" pageWidth="750" pageHeight="612" orientation="Landscape" columnWidth="750" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="4.392300000000001"/>
+	<property name="ireport.x" value="2649"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<field name="rangoMeses" class="java.lang.String"/>
+	<field name="nombrePaciente" class="java.lang.String"/>
+	<field name="numeroIdentificacion" class="java.lang.String"/>
+	<field name="nombreTipoIdentificacion" class="java.lang.String"/>
+	<field name="cantidadIngresos" class="java.lang.Long"/>
+	<field name="cantidadAutorizada" class="java.lang.Long"/>
+	<field name="nombreGrupoServicio" class="java.lang.String"/>
+	<field name="cantidadAutorizadaServ" class="java.lang.Double"/>
+	<field name="valorAutorizadoServ" class="java.lang.Double"/>
+	<field name="valorFacturadoServ" class="java.lang.Double"/>
+	<field name="autorizado" class="java.lang.String"/>
+	<pageHeader>
+		<band height="40">
+			<staticText>
+				<reportElement key="tituloPaciente" style="axiomaTexto" mode="Transparent" x="0" y="0" width="220" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="tituloIdentificacion" style="axiomaTexto" mode="Transparent" x="220" y="0" width="95" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Identificación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="tituloPaciente" style="axiomaTexto" mode="Transparent" x="315" y="0" width="59" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Cantidad Ingresos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" mode="Opaque" x="374" y="0" width="67" height="40" backcolor="#FEFEFE"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad Autorizaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" mode="Opaque" x="441" y="0" width="117" height="40" backcolor="#FEFEFE"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grupo Servicio/Clase Inventario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" mode="Opaque" x="558" y="0" width="53" height="40" backcolor="#FEFEFE"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad Autorizada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" mode="Opaque" x="611" y="0" width="72" height="40" backcolor="#FEFEFE"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Autorizado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" mode="Opaque" x="683" y="0" width="67" height="40" backcolor="#FEFEFE"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Facturado]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="15">
+			<textField isStretchWithOverflow="true">
+				<reportElement key="nombrePaciente" style="axiomaTexto" stretchType="RelativeToTallestObject" x="0" y="0" width="220" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrePaciente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement key="identificacion" style="axiomaTexto" stretchType="RelativeToTallestObject" x="220" y="0" width="95" height="15" isPrintWhenDetailOverflows="true" forecolor="#010101"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreTipoIdentificacion}+" "+$F{numeroIdentificacion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement key="cantidadIngresos" style="axiomaTexto" stretchType="RelativeToTallestObject" x="315" y="0" width="59" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{cantidadIngresos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement key="cantidadAutorizada" style="axiomaTexto" stretchType="RelativeToTallestObject" x="374" y="0" width="67" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{cantidadAutorizada}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement key="nombreGrupoServicio" style="axiomaTexto" stretchType="RelativeToTallestObject" x="441" y="0" width="117" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreGrupoServicio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement key="cantidadAutorizadaServ" style="axiomaTexto" stretchType="RelativeToTallestObject" x="558" y="0" width="53" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{cantidadAutorizadaServ}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0" isBlankWhenNull="false">
+				<reportElement key="valorFacturadoServ" style="axiomaTexto" stretchType="RelativeToTallestObject" x="683" y="0" width="67" height="15" isPrintWhenDetailOverflows="true">
+					<printWhenExpression><![CDATA[$F{autorizado}.equals( "2" )]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valorFacturadoServ}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement key="valorAutorizadoServ" style="axiomaTexto" stretchType="RelativeToTallestObject" x="611" y="0" width="72" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valorAutorizadoServ}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

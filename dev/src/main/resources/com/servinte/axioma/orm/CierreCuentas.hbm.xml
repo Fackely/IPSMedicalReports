@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CierreCuentas" table="cierre_cuentas" schema="manejopaciente">
+        <id name="cuenta" type="int">
+            <column name="cuenta" />
+            <generator class="foreign">
+                <param name="property">cuentas</param>
+            </generator>
+        </id>
+        <one-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="time">
+            <column name="hora" length="15" not-null="true" />
+        </property>
+        <property name="motivo" type="string">
+            <column name="motivo" length="4000" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

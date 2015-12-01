@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConvencionesOdontologicas" table="convenciones_odontologicas" schema="odontologia">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="elementosGraficosByImagen" class="com.servinte.axioma.orm.ElementosGraficos" fetch="select">
+            <column name="imagen" />
+        </many-to-one>
+        <many-to-one name="elementosGraficosByTrama" class="com.servinte.axioma.orm.ElementosGraficos" fetch="select">
+            <column name="trama" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="3" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" not-null="true" />
+        </property>
+        <property name="archivoConvencion" type="string">
+            <column name="archivo_convencion" length="512" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="7" not-null="true" />
+        </property>
+        <property name="color" type="string">
+            <column name="color" length="7" />
+        </property>
+        <property name="borde" type="string">
+            <column name="borde" length="7" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="fecha_modificacion" length="13" not-null="true" />
+        </property>
+        <property name="horaModificacion" type="string">
+            <column name="hora_modificacion" length="5" not-null="true" />
+        </property>
+        <property name="usuarioModificacion" type="string">
+            <column name="usuario_modificacion" length="30" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <set name="valoresPlanPacCampos" inverse="true" lazy="true" table="valores_plan_pac_campo" fetch="select">
+            <key>
+                <column name="convencion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValoresPlanPacCampo" />
+        </set>
+        <set name="logDetPlanTratamientos" inverse="true" lazy="true" table="log_det_plan_tratamiento" fetch="select">
+            <key>
+                <column name="convencion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetPlanTratamiento" />
+        </set>
+        <set name="hisConfProgServPlanTs" inverse="true" lazy="true" table="his_conf_prog_serv_plan_t" fetch="select">
+            <key>
+                <column name="convencion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfProgServPlanT" />
+        </set>
+        <set name="programases" inverse="true" lazy="true" table="programas" fetch="select">
+            <key>
+                <column name="convencion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Programas" />
+        </set>
+        <set name="logProgramasServiciosPlanTs" inverse="true" lazy="true" table="log_programas_servicios_plan_t" fetch="select">
+            <key>
+                <column name="convencion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogProgramasServiciosPlanT" />
+        </set>
+        <set name="hallazgosOdontologicoses" inverse="true" lazy="true" table="hallazgos_odontologicos" fetch="select">
+            <key>
+                <column name="convencion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HallazgosOdontologicos" />
+        </set>
+        <set name="detPlanTratamientos" inverse="true" lazy="true" table="det_plan_tratamiento" fetch="select">
+            <key>
+                <column name="convencion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetPlanTratamiento" />
+        </set>
+        <set name="hisConfDetPlanTs" inverse="true" lazy="true" table="his_conf_det_plan_t" fetch="select">
+            <key>
+                <column name="convencion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfDetPlanT" />
+        </set>
+        <set name="programasServiciosPlanTs" inverse="true" lazy="true" table="programas_servicios_plan_t" fetch="select">
+            <key>
+                <column name="convencion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgramasServiciosPlanT" />
+        </set>
+    </class>
+</hibernate-mapping>

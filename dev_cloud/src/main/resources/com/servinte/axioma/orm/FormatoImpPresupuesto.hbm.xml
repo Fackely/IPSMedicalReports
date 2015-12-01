@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FormatoImpPresupuesto" table="formato_imp_presupuesto" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="nombreFormato" type="string">
+            <column name="nombre_formato" length="256" not-null="true" />
+        </property>
+        <property name="tituloFormato" type="string">
+            <column name="titulo_formato" length="256" not-null="true" />
+        </property>
+        <property name="cantidad" type="java.lang.Boolean">
+            <column name="cantidad" />
+        </property>
+        <property name="descCantidad" type="string">
+            <column name="desc_cantidad" length="256" />
+        </property>
+        <property name="valorUnitario" type="java.lang.Boolean">
+            <column name="valor_unitario" />
+        </property>
+        <property name="descValUnitario" type="string">
+            <column name="desc_val_unitario" length="256" />
+        </property>
+        <property name="valorTotal" type="java.lang.Boolean">
+            <column name="valor_total" />
+        </property>
+        <property name="descValTotal" type="string">
+            <column name="desc_val_total" length="256" />
+        </property>
+        <property name="notaPiePagina" type="string">
+            <column name="nota_pie_pagina" length="2000" />
+        </property>
+        <property name="fechaHora" type="java.lang.Boolean">
+            <column name="fecha_hora" />
+        </property>
+        <set name="detServFormatoImps" inverse="true" lazy="true" table="det_serv_formato_imp" fetch="select">
+            <key>
+                <column name="codigo_formato" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetServFormatoImp" />
+        </set>
+        <set name="detArtFormatoImps" inverse="true" lazy="true" table="det_art_formato_imp" fetch="select">
+            <key>
+                <column name="codigo_formato" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetArtFormatoImp" />
+        </set>
+    </class>
+</hibernate-mapping>

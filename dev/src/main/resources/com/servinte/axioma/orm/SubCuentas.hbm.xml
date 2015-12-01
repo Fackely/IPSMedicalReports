@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/06/2011 04:22:06 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SubCuentas" table="sub_cuentas" schema="manejopaciente">
+        <id name="subCuenta" type="int">
+            <column name="sub_cuenta" />
+            <generator class="sequence" >
+				<param name="sequence">manejopaciente.seq_sub_cuentas</param>
+			</generator>
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="naturalezaPacientes" class="com.servinte.axioma.orm.NaturalezaPacientes" fetch="select">
+            <column name="naturaleza_paciente" />
+        </many-to-one>
+        <many-to-one name="detalleMonto" class="com.servinte.axioma.orm.DetalleMonto" fetch="select">
+            <column name="monto_cobro" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estratosSociales" class="com.servinte.axioma.orm.EstratosSociales" fetch="select">
+            <column name="clasificacion_socioeconomica" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposAfiliado" class="com.servinte.axioma.orm.TiposAfiliado" fetch="select">
+            <column name="tipo_afiliado" length="1" />
+        </many-to-one>
+        <many-to-one name="coberturasSalud" class="com.servinte.axioma.orm.CoberturasSalud" fetch="select">
+            <column name="tipo_cobertura" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresasInstitucion" class="com.servinte.axioma.orm.EmpresasInstitucion" fetch="select">
+            <column name="empresas_institucion" precision="10" scale="0" />
+        </many-to-one>
+        <property name="nroPoliza" type="string">
+            <column name="nro_poliza" length="15" />
+        </property>
+        <property name="nroCarnet" type="string">
+            <column name="nro_carnet" length="15" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="nroAutorizacion" type="string">
+            <column name="nro_autorizacion" length="15" />
+        </property>
+        <property name="fechaAfiliacion" type="date">
+            <column name="fecha_afiliacion" length="13" />
+        </property>
+        <property name="semanasCotizacion" type="java.lang.Integer">
+            <column name="semanas_cotizacion" />
+        </property>
+        <property name="valorUtilizadoSoat" type="big_decimal">
+            <column name="valor_utilizado_soat" precision="14" />
+        </property>
+        <property name="nroPrioridad" type="int">
+            <column name="nro_prioridad" not-null="true" />
+        </property>
+        <property name="porcentajeAutorizado" type="big_decimal">
+            <column name="porcentaje_autorizado" precision="5" />
+        </property>
+        <property name="montoAutorizado" type="big_decimal">
+            <column name="monto_autorizado" precision="14" />
+        </property>
+        <property name="obsParametrosDistribucion" type="string">
+            <column name="obs_parametros_distribucion" length="4000" />
+        </property>
+        <property name="facturado" type="char">
+            <column name="facturado" length="1" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="numeroSolicitudVolante" type="java.lang.Long">
+            <column name="numero_solicitud_volante" precision="16" scale="0" />
+        </property>
+        <property name="mesesCotizacion" type="java.lang.Integer">
+            <column name="meses_cotizacion" />
+        </property>
+        <property name="valorAutorizacion" type="big_decimal">
+            <column name="valor_autorizacion" precision="14" />
+        </property>
+        <property name="medioAutorizacion" type="string">
+            <column name="medio_autorizacion" length="4" />
+        </property>
+        <property name="bono" type="java.lang.Long">
+            <column name="bono" precision="14" scale="0" />
+        </property>
+        <property name="tipoCobroPaciente" type="string">
+            <column name="tipo_cobro_paciente" length="5" />
+        </property>
+        <property name="tipoMontoCobro" type="string">
+            <column name="tipo_monto_cobro" length="6" />
+        </property>
+        <property name="porcentajeMontoCobro" type="big_decimal">
+            <column name="porcentaje_monto_cobro" precision="131089" scale="0" />
+        </property>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+        <set name="solicitudesCirugias" inverse="true" lazy="true" table="solicitudes_cirugia" fetch="select">
+            <key>
+                <column name="sub_cuenta" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesCirugia" />
+        </set>
+        <set name="adjuntosSubcuentas" inverse="true" lazy="true" table="adjuntos_subcuenta" fetch="select">
+            <key>
+                <column name="subcuenta" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdjuntosSubcuenta" />
+        </set>
+        <set name="historicoFiltroDistribucions" inverse="true" lazy="true" table="historico_filtro_distribucion" fetch="select">
+            <key>
+                <column name="sub_cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoFiltroDistribucion" />
+        </set>
+        <set name="esqTarInvtSubCuentases" inverse="true" lazy="true" table="esq_tar_invt_sub_cuentas" fetch="select">
+            <key>
+                <column name="sub_cuenta" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarInvtSubCuentas" />
+        </set>
+        <set name="detCargoses" inverse="true" lazy="true" table="det_cargos" fetch="select">
+            <key>
+                <column name="sub_cuenta" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+        <set name="requisitosPacSubcuentas" inverse="true" lazy="true" table="requisitos_pac_subcuenta" fetch="select">
+            <key>
+                <column name="subcuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RequisitosPacSubcuenta" />
+        </set>
+        <one-to-one name="titularPoliza" class="com.servinte.axioma.orm.TitularPoliza"></one-to-one>
+        <one-to-one name="filtroDistribucion" class="com.servinte.axioma.orm.FiltroDistribucion"></one-to-one>
+        <set name="solicitudesSubcuentas" inverse="true" lazy="true" table="solicitudes_subcuenta" fetch="select">
+            <key>
+                <column name="sub_cuenta" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesSubcuenta" />
+        </set>
+        <set name="anulacionCargosFarmacias" inverse="true" lazy="true" table="anulacion_cargos_farmacia" fetch="select">
+            <key>
+                <column name="sub_cuenta" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionCargosFarmacia" />
+        </set>
+        <set name="esqTarProcSubCuentases" inverse="true" lazy="true" table="esq_tar_proc_sub_cuentas" fetch="select">
+            <key>
+                <column name="sub_cuenta" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarProcSubCuentas" />
+        </set>
+        <set name="informeAtencionIniUrgs" inverse="true" lazy="true" table="informe_atencion_ini_urg" fetch="select">
+            <key>
+                <column name="sub_cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeAtencionIniUrg" />
+        </set>
+        <set name="verificacionesDerechoses" inverse="true" lazy="true" table="verificaciones_derechos" fetch="select">
+            <key>
+                <column name="sub_cuenta" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.VerificacionesDerechos" />
+        </set>
+        <set name="informacionPolizas" inverse="true" lazy="true" table="informacion_poliza" fetch="select">
+            <key>
+                <column name="sub_cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformacionPoliza" />
+        </set>
+        <set name="logActualizAutorizacioneses" inverse="true" lazy="true" table="log_actualiz_autorizaciones" fetch="select">
+            <key>
+                <column name="sub_cuenta" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogActualizAutorizaciones" />
+        </set>
+        <set name="informeInconsistenciases" inverse="true" lazy="true" table="informe_inconsistencias" fetch="select">
+            <key>
+                <column name="sub_cuenta" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeInconsistencias" />
+        </set>
+        <set name="paquetizacions" inverse="true" lazy="true" table="paquetizacion" fetch="select">
+            <key>
+                <column name="sub_cuenta" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Paquetizacion" />
+        </set>
+        <set name="autorizacioneses" inverse="true" lazy="true" table="autorizaciones" fetch="select">
+            <key>
+                <column name="sub_cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Autorizaciones" />
+        </set>
+    </class>
+</hibernate-mapping>

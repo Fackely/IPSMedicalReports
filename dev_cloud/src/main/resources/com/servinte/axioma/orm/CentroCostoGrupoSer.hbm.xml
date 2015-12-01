@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CentroCostoGrupoSer" table="centro_costo_grupo_ser" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.CentroCostoGrupoSerId">
+            <key-property name="centroAtencion" type="int">
+                <column name="centro_atencion" />
+            </key-property>
+            <key-property name="grupoServicio" type="int">
+                <column name="grupo_servicio" />
+            </key-property>
+            <key-property name="centroCosto" type="int">
+                <column name="centro_costo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" update="false" insert="false" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="gruposServicios" class="com.servinte.axioma.orm.GruposServicios" update="false" insert="false" fetch="select">
+            <column name="grupo_servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" update="false" insert="false" fetch="select">
+            <column name="centro_costo" not-null="true" />
+        </many-to-one>
+        <property name="consecutivo" type="java.lang.Integer">
+            <column name="consecutivo" />
+        </property>
+    </class>
+</hibernate-mapping>

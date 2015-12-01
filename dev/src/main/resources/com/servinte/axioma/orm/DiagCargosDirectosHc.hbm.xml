@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DiagCargosDirectosHc" table="diag_cargos_directos_hc" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_diagnostico" length="10" not-null="true" />
+            <column name="tipo_cie_diagnostico" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cargosDirectosHc" class="com.servinte.axioma.orm.CargosDirectosHc" fetch="select">
+            <column name="codigo_cargo_directo" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="tipoDiagnostico" type="string">
+            <column name="tipo_diagnostico" length="4" />
+        </property>
+        <property name="principal" type="string">
+            <column name="principal" length="1" not-null="true" />
+        </property>
+        <property name="complicacion" type="string">
+            <column name="complicacion" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

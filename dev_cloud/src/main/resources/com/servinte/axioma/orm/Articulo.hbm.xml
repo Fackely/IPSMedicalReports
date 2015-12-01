@@ -1,0 +1,413 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 29, 2011 5:59:59 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Articulo" table="articulo" schema="inventarios">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+         <many-to-one name="nivelAtencion" class="com.servinte.axioma.orm.NivelAtencion" fetch="select">
+            <column name="nivel_atencion" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="unidadMedida" class="com.servinte.axioma.orm.UnidadMedida" fetch="select">
+            <column name="unidad_medida" length="10" />
+        </many-to-one>
+        <many-to-one name="naturalezaArticulo" class="com.servinte.axioma.orm.NaturalezaArticulo" fetch="select">
+            <column name="naturaleza" length="2" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="subgrupo" type="int">
+            <column name="subgrupo" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" not-null="true" />
+        </property>
+        <property name="minsalud" type="string">
+            <column name="minsalud" length="11" />
+        </property>
+        <many-to-one name="formaFarmaceutica" class="com.servinte.axioma.orm.FormaFarmaceutica" update="false" insert="false" fetch="select">
+            <column name="forma_farmaceutica" length="10" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="concentracion" type="string">
+            <column name="concentracion" length="20" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="categoria" type="int">
+            <column name="categoria" not-null="true" />
+        </property>
+        <property name="stockMinimo" type="int">
+            <column name="stock_minimo" not-null="true" />
+        </property>
+        <property name="stockMaximo" type="int">
+            <column name="stock_maximo" not-null="true" />
+        </property>
+        <property name="puntoPedido" type="int">
+            <column name="punto_pedido" not-null="true" />
+        </property>
+        <property name="cantidadCompra" type="int">
+            <column name="cantidad_compra" not-null="true" />
+        </property>
+        <property name="costoPromedio" type="big_decimal">
+            <column name="costo_promedio" precision="20" scale="6" not-null="true" />
+        </property>
+        <property name="registroInvima" type="string">
+            <column name="registro_invima" length="100" />
+        </property>
+        <property name="manejaLotes" type="char">
+            <column name="maneja_lotes" length="1" not-null="true" />
+        </property>
+        <property name="manejaFechaVencimiento" type="char">
+            <column name="maneja_fecha_vencimiento" length="1" not-null="true" />
+        </property>
+        <property name="porcentajeIva" type="big_decimal">
+            <column name="porcentaje_iva" precision="5" not-null="true" />
+        </property>
+        <property name="precioUltimaCompra" type="big_decimal">
+            <column name="precio_ultima_compra" precision="20" scale="8" />
+        </property>
+        <property name="precioBaseVenta" type="big_decimal">
+            <column name="precio_base_venta" precision="20" scale="8" />
+        </property>
+        <property name="fechaPrecioBaseVenta" type="date">
+            <column name="fecha_precio_base_venta" length="13" />
+        </property>
+        <property name="maximaCantidadMes" type="java.lang.Long">
+            <column name="maxima_cantidad_mes" precision="10" scale="0" />
+        </property>
+        <property name="multidosis" type="char">
+            <column name="multidosis" length="1" not-null="true" />
+        </property>
+        <property name="codigoInterfaz" type="string">
+            <column name="codigo_interfaz" length="11" />
+        </property>
+        <property name="costoDonacion" type="big_decimal">
+            <column name="costo_donacion" precision="20" scale="6" />
+        </property>
+        <property name="indicativoAutomatico" type="char">
+            <column name="indicativo_automatico" length="1" not-null="true" />
+        </property>
+        <property name="indicativoPorCompletar" type="char">
+            <column name="indicativo_por_completar" length="1" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="precioCompraMasAlta" type="big_decimal">
+            <column name="precio_compra_mas_alta" precision="20" scale="8" />
+        </property>
+        <property name="descripcionAlterna" type="string">
+            <column name="descripcion_alterna" length="256" />
+        </property>
+        <property name="numeroExpediente" type="string">
+            <column name="numero_expediente" length="8" />
+        </property>
+        <property name="consPresentComercial" type="string">
+            <column name="cons_present_comercial" length="2" />
+        </property>
+        <property name="presentacionComercial" type="string">
+            <column name="presentacion_comercial" length="60" />
+        </property>
+        <property name="clasificacionAtc" type="string">
+            <column name="clasificacion_atc" length="16" />
+        </property>
+        <property name="registroArt" type="string">
+            <column name="registro_art" length="16" />
+        </property>
+        <property name="vigencia" type="string">
+            <column name="vigencia" length="16" />
+        </property>
+        <property name="rolesXProducto" type="string">
+            <column name="roles_x_producto" length="60" />
+        </property>
+        <property name="titular" type="string">
+            <column name="titular" length="30" />
+        </property>
+        <property name="fabricante" type="string">
+            <column name="fabricante" length="40" />
+        </property>
+        <property name="importador" type="string">
+            <column name="importador" length="40" />
+        </property>
+        <property name="atencionOdontologica" type="string">
+            <column name="atencion_odontologica" length="1" not-null="true" />
+        </property>
+        <set name="detCargoses" inverse="true" lazy="true" table="det_cargos" fetch="select">
+            <key>
+                <column name="articulo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+        <set name="convenioProveedors" inverse="true" lazy="true" table="convenio_proveedor" fetch="select">
+            <key>
+                <column name="codigo_axioma" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConvenioProveedor" />
+        </set>
+        <set name="autorizacionesEntSubArticus" inverse="true" lazy="true" table="autorizaciones_ent_sub_articu" fetch="select">
+            <key>
+                <column name="articulo" not-null="true">
+                    <comment>C&#195;&#179;digo del medicamento o insumo relacionado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubArticu" />
+        </set>
+        <set name="detCargosArtConsumos" inverse="true" lazy="true" table="det_cargos_art_consumo" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargosArtConsumo" />
+        </set>
+        <set name="solDespachoSinAutos" inverse="true" lazy="true" table="sol_despacho_sin_auto" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolDespachoSinAuto" />
+        </set>
+        <set name="presupuestoArticuloses" inverse="true" lazy="true" table="presupuesto_articulos" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoArticulos" />
+        </set>
+        <set name="detallePaquetizacions" inverse="true" lazy="true" table="detalle_paquetizacion" fetch="select">
+            <key>
+                <column name="articulo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetallePaquetizacion" />
+        </set>
+        <set name="detAsociosDetFacturas" inverse="true" lazy="true" table="det_asocios_det_factura" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAsociosDetFactura" />
+        </set>
+        <set name="tarifasEntidadSubsForArticulo" inverse="true" lazy="true" table="tarifas_entidad_sub" fetch="select">
+            <key>
+                <column name="articulo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasEntidadSub" />
+        </set>
+        <set name="cierreNivelAteClaseins" table="cierre_nivel_ate_clasein" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreNivelAteClasein" />
+        </set>
+        <set name="autorizacionArticuloDespachosForArticuloDespachado" table="autorizacion_articulo_despacho" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="articulo_despachado" not-null="true">
+                    <comment>Articulo real despachado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionArticuloDespacho" />
+        </set>
+        <set name="artServiIncluidoses" inverse="true" lazy="true" table="art_servi_incluidos" fetch="select">
+            <key>
+                <column name="cod_art_incluido" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtServiIncluidos" />
+        </set>
+        <set name="detFacturaSolicituds" inverse="true" lazy="true" table="det_factura_solicitud" fetch="select">
+            <key>
+                <column name="articulo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFacturaSolicitud" />
+        </set>
+        <set name="paqCompArticuloses" inverse="true" lazy="true" table="paq_comp_articulos" fetch="select">
+            <key>
+                <column name="codigo_articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaqCompArticulos" />
+        </set>
+        <set name="artIncluexcluEconts" inverse="true" lazy="true" table="art_incluexclu_econt" fetch="select">
+            <key>
+                <column name="codigo_articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtIncluexcluEcont" />
+        </set>
+        <set name="detalleSolicitudesesForArticuloPrincipal" inverse="true" lazy="true" table="detalle_solicitudes" fetch="select">
+            <key>
+                <column name="articulo_principal" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleSolicitudes" />
+        </set>
+        <set name="servArtIncCitaOdos" inverse="true" lazy="true" table="serv_art_inc_cita_odo" fetch="select">
+            <key>
+                <column name="articulo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServArtIncCitaOdo" />
+        </set>
+        <set name="detalleSolicitudesesForArticulo" inverse="true" lazy="true" table="detalle_solicitudes" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleSolicitudes" />
+        </set>
+        <set name="artDescComConvxconts" inverse="true" lazy="true" table="art_desc_com_convxcont" fetch="select">
+            <key>
+                <column name="codigo_articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtDescComConvxcont" />
+        </set>
+        <set name="tarifasEntidadSubsForArtPrincipal" inverse="true" lazy="true" table="tarifas_entidad_sub" fetch="select">
+            <key>
+                <column name="art_principal" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasEntidadSub" />
+        </set>
+        <set name="solicitudesSubcuentas" inverse="true" lazy="true" table="solicitudes_subcuenta" fetch="select">
+            <key>
+                <column name="articulo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesSubcuenta" />
+        </set>
+        <set name="nivelAutorArticulos" inverse="true" lazy="true" table="nivel_autor_articulo" fetch="select">
+            <key>
+                <column name="articulo">
+                    <comment>Art&#195;&#173;culo que se parametriza en el nivel de autorizaci&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorArticulo" />
+        </set>
+        <set name="autorizacionArticuloDespachosForArticuloAutorizado" inverse="true" lazy="true" table="autorizacion_articulo_despacho" fetch="select">
+            <key>
+                <column name="articulo_autorizado" not-null="true">
+                    <comment>Articulo autorizado a despachar</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionArticuloDespacho" />
+        </set>
+        <set name="paquetizacionDetFacturas" inverse="true" lazy="true" table="paquetizacion_det_factura" fetch="select">
+            <key>
+                <column name="articulo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetizacionDetFactura" />
+        </set>
+        <set name="detOrdenAmbArticulos" inverse="true" lazy="true" table="det_orden_amb_articulo" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetOrdenAmbArticulo" />
+        </set>
+        <set name="detAutorizacioneses" inverse="true" lazy="true" table="det_autorizaciones" fetch="select">
+            <key>
+                <column name="articulo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAutorizaciones" />
+        </set>
+        <set name="artIncluidosServippals" inverse="true" lazy="true" table="art_incluidos_servippal" fetch="select">
+            <key>
+                <column name="articulo_incluido" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtIncluidosServippal" />
+        </set>
+        <set name="histoMontoArticuloEsps" inverse="true" lazy="true" table="histo_monto_articulo_esp" fetch="select">
+            <key>
+                <column name="articulo">
+                    <comment>C&#195;&#179;digo PK del art&#195;&#173;culo relacionado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoMontoArticuloEsp" />
+        </set>
+        <set name="detallePedidoses" inverse="true" lazy="true" table="detalle_pedidos" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetallePedidos" />
+        </set>
+        <set name="detalleDespachosesForArtPrincipal" inverse="true" lazy="true" table="detalle_despachos" fetch="select">
+            <key>
+                <column name="art_principal" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachos" />
+        </set>
+        <set name="tarifasInventarios" inverse="true" lazy="true" table="tarifas_inventario" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasInventario" />
+        </set>
+        <set name="coberturaArticuloses" inverse="true" lazy="true" table="cobertura_articulos" fetch="select">
+            <key>
+                <column name="codigo_articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturaArticulos" />
+        </set>
+        <set name="montoArticuloEspecificos" inverse="true" lazy="true" table="monto_articulo_especifico" fetch="select">
+            <key>
+                <column name="articulo">
+                    <comment>C&#195;&#179;digo PK del art&#195;&#173;culo relacionado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MontoArticuloEspecifico" />
+        </set>
+        <set name="unidosisXArticulos" inverse="true" lazy="true" table="unidosis_x_articulo" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidosisXArticulo" />
+        </set>
+        <set name="detalleDespachosesForArticulo" inverse="true" lazy="true" table="detalle_despachos" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachos" />
+        </set>
+        <set name="tarifasRevCuentas" inverse="true" lazy="true" table="tarifas_rev_cuenta" fetch="select">
+            <key>
+                <column name="articulo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasRevCuenta" />
+        </set>
+        <set name="detAnulCargosFarmacias" inverse="true" lazy="true" table="det_anul_cargos_farmacia" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAnulCargosFarmacia" />
+        </set>
+        <set name="detalleDespachoPedidos" inverse="true" lazy="true" table="detalle_despacho_pedido" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachoPedido" />
+        </set>
+        <set name="artIncluexcluCcs" inverse="true" lazy="true" table="art_incluexclu_cc" fetch="select">
+            <key>
+                <column name="codigo_articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtIncluexcluCc" />
+        </set>
+        <set name="artExceTariConts" inverse="true" lazy="true" table="art_exce_tari_cont" fetch="select">
+            <key>
+                <column name="codigo_articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtExceTariCont" />
+        </set>
+        <set name="artExpCobConvxconts" inverse="true" lazy="true" table="art_exp_cob_convxcont" fetch="select">
+            <key>
+                <column name="codigo_articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtExpCobConvxcont" />
+        </set>
+        <set name="exCoberArtEntSubs" inverse="true" lazy="true" table="ex_cober_art_ent_sub" fetch="select">
+            <key>
+                <column name="articulo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberArtEntSub" />
+        </set>
+    </class>
+</hibernate-mapping>

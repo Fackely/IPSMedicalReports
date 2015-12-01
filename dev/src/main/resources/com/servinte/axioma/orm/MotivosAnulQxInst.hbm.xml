@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/09/2012 06:32:08 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MotivosAnulQxInst" table="motivos_anul_qx_inst" schema="salascirugia">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="motivoAnulacionPet" class="com.servinte.axioma.orm.MotivoAnulacionPet" fetch="select">
+            <column name="motivos_anulacion" not-null="true" />
+        </many-to-one>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <set name="anulacionPeticionQxes" table="anulacion_peticion_qx" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="motivos_anulacion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionPeticionQx" />
+        </set>
+    </class>
+</hibernate-mapping>

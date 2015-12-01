@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 19, 2010 5:10:54 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HorasFaltantes" table="horas_faltantes" schema="cuadroturnos">
+        <id name="codigoPersona" type="int">
+            <column name="codigo_persona" />
+            <generator class="foreign">
+                <param name="property">personas</param>
+            </generator>
+        </id>
+        <one-to-one name="personas" class="com.servinte.axioma.orm.Personas" constrained="true"></one-to-one>
+        <property name="numeroHoras" type="double">
+            <column name="numero_horas" precision="17" scale="17" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

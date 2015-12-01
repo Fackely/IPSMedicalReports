@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 3, 2010 4:30:55 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogAliadoOdontologico" table="log_aliado_odontologico" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="tercero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="aliadoOdontologico" class="com.servinte.axioma.orm.AliadoOdontologico" fetch="select">
+            <column name="aliado_odontologico" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="10" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="128" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="128" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="10" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="128" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

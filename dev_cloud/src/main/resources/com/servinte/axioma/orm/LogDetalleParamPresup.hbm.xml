@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/05/2011 04:42:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogDetalleParamPresup" table="log_detalle_param_presup" schema="capitacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_log_detalle_param_presup</param>
+			</generator>
+        </id>
+        <many-to-one name="logParamPresupuestoCap" class="com.servinte.axioma.orm.LogParamPresupuestoCap" fetch="select">
+            <column name="log_param_presupuesto_cap" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="nivelAtencion" type="string">
+            <column name="nivel_atencion" not-null="true" />
+        </property>
+        <property name="nivelModificacion" type="string">
+            <column name="nivel_modificacion" not-null="true" />
+        </property>
+        <property name="descipcion" type="string">
+            <column name="descipcion" not-null="true" />
+        </property>
+        <property name="mes" type="string">
+            <column name="mes" length="30" not-null="true" />
+        </property>
+        <property name="porcentajeAnterior" type="big_decimal">
+            <column name="porcentaje_anterior" precision="5" not-null="true" />
+        </property>
+        <property name="porcentajeActual" type="big_decimal">
+            <column name="porcentaje_actual" precision="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

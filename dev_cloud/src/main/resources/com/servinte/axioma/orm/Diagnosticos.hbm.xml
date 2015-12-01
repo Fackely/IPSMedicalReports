@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/07/2011 03:06:44 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Diagnosticos" table="diagnosticos" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.DiagnosticosId">
+            <key-property name="acronimo" type="string">
+                <column name="acronimo" length="10" />
+            </key-property>
+            <key-property name="tipoCie" type="int">
+                <column name="tipo_cie" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tiposCie" class="com.servinte.axioma.orm.TiposCie" update="false" insert="false" fetch="select">
+            <column name="tipo_cie" not-null="true" />
+        </many-to-one>
+        <many-to-one name="sexo" class="com.servinte.axioma.orm.Sexo" fetch="select">
+            <column name="sexo" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="4000" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="codigoenfermedadesnotificables" type="java.lang.Integer">
+            <column name="codigoenfermedadesnotificables" />
+        </property>
+        <property name="edadInicial" type="int">
+            <column name="edad_inicial" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="edadFinal" type="int">
+            <column name="edad_final" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="esPrincipal" type="char">
+            <column name="es_principal" length="1" not-null="true" />
+        </property>
+        <property name="esMuerte" type="char">
+            <column name="es_muerte" length="1" not-null="true" />
+        </property>
+        <set name="peticionQxes" table="peticion_qx" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_diagnostico" length="10" />
+                <column name="tipo_cie_diagnostico" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PeticionQx" />
+        </set>
+        <set name="egresosesForFkEgresosDiagMuerte" table="egresos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_muerte" length="10" not-null="true" />
+                <column name="diagnostico_muerte_cie" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+        <set name="ingresosEstanciasForFkIeDxPpal" table="ingresos_estancia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_principal" length="10" not-null="true" />
+                <column name="tipo_cie_principal" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IngresosEstancia" />
+        </set>
+        <set name="diagCargosDirectosHcs" table="diag_cargos_directos_hc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_diagnostico" length="10" not-null="true" />
+                <column name="tipo_cie_diagnostico" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DiagCargosDirectosHc" />
+        </set>
+        <set name="certAtenMedicaFurprosForPkCeratemedfurproRelegr3" table="cert_aten_medica_furpro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_rel3_egreso" length="10" />
+                <column name="tipo_cie_dx_rel3_egreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurpro" />
+        </set>
+        <set name="certAtenMedicaFurprosForPkCeratemedfurproRelegr2" table="cert_aten_medica_furpro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_rel2_egreso" length="10" />
+                <column name="tipo_cie_dx_rel1_egreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurpro" />
+        </set>
+        <set name="solicitudeses" table="solicitudes" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_diagnostico" length="10" />
+                <column name="tipo_cie_diagnostico" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Solicitudes" />
+        </set>
+        <set name="indCalidadDxes" table="ind_calidad_dx" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx" length="10" not-null="true" />
+                <column name="tipo_cie_dx" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IndCalidadDx" />
+        </set>
+        <set name="certAtenMedicaFurprosForPkCeratemedfurproRelegr4" table="cert_aten_medica_furpro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_rel4_egreso" length="10" />
+                <column name="tipo_cie_dx_rel4_egreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurpro" />
+        </set>
+        <set name="certAtenMedicaFurprosForPkCeratemedfurproRelegr1" table="cert_aten_medica_furpro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_rel1_egreso" length="10" />
+                <column name="tipo_cie_dx_rel1_egreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurpro" />
+        </set>
+        <set name="certAtenMedicaFuripsesForPkCeratemedfuripsDxegr" table="cert_aten_medica_furips" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_egreso" length="10" />
+                <column name="tipo_cie_dx_egreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurips" />
+        </set>
+        <set name="valDiagnosticosOdos" table="val_diagnosticos_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_diagnostico" length="10" not-null="true" />
+                <column name="tipo_cie_diagnostico" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValDiagnosticosOdo" />
+        </set>
+        <set name="valDiagnosticoses" table="val_diagnosticos" schema="historiaclinica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_diagnostico" length="10" not-null="true" />
+                <column name="tipo_cie_diagnostico" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValDiagnosticos" />
+        </set>
+        <set name="solicitudesCirugias" table="solicitudes_cirugia" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diag_fallece" length="10" />
+                <column name="tipo_cie_fallece" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesCirugia" />
+        </set>
+        <set name="egresosesForFkEgresosDiagPrinc" table="egresos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_principal" length="10" not-null="true" />
+                <column name="diagnostico_principal_cie" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+        <set name="ripsConsultoriosesForFkDiagnosticoRel1" table="rips_consultorios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_rel1" length="10" />
+                <column name="tipo_cie_rel1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RipsConsultorios" />
+        </set>
+        <set name="presupuestoPacientes" table="presupuesto_paciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnost_intervencion" length="10" not-null="true" />
+                <column name="tipo_cie" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoPaciente" />
+        </set>
+        <set name="ripsConsultoriosesForFkDiagnosticoRel3" table="rips_consultorios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_rel3" length="10" />
+                <column name="tipo_cie_rel3" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RipsConsultorios" />
+        </set>
+        <set name="egresosesForFkEgresosDiagnosticoC" table="egresos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_complicacion" length="10" />
+                <column name="diagnostico_complicacion_cie" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+        <set name="ripsConsultoriosesForFkDiagnosticoRel2" table="rips_consultorios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_rel2" length="10" />
+                <column name="tipo_cie_rel2" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RipsConsultorios" />
+        </set>
+        <set name="egresosesForFkEgresosDiagnosticor2" table="egresos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_relacionado2" length="10" not-null="true" />
+                <column name="diagnostico_relacionado2_cie" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+        <set name="egresosesForFkEgresosDiagnosticor1" table="egresos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_relacionado1" length="10" not-null="true" />
+                <column name="diagnostico_relacionado1_cie" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+        <set name="ripsConsultoriosesForFkDiagnosticoPrincipal" table="rips_consultorios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_principal" length="10" />
+                <column name="tipo_cie_ppal" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RipsConsultorios" />
+        </set>
+        <set name="ordenesAmbulatoriases" table="ordenes_ambulatorias" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_diagnostico" length="10" />
+                <column name="tipo_cie_diagnostico" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdenesAmbulatorias" />
+        </set>
+        <set name="egresosesForFkEgresosDiagnosticor3" table="egresos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_relacionado3" length="10" not-null="true" />
+                <column name="diagnostico_relacionado3_cie" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+        <set name="admisionesHospis" table="admisiones_hospi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_admision" length="10" not-null="true" />
+                <column name="diagnostico_cie_admision" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdmisionesHospi" />
+        </set>
+        <set name="hallazgosOdontologicoses" table="hallazgos_odontologicos" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico" length="10" />
+                <column name="tipo_cie" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HallazgosOdontologicos" />
+        </set>
+        <set name="evolucioneses" table="evoluciones" schema="historiaclinica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_complicacion" length="10" />
+                <column name="diagnostico_complicacion_cie" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Evoluciones" />
+        </set>
+        <set name="diagAutorizacioneses" table="diag_autorizaciones" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo" length="10" not-null="true" />
+                <column name="tipo_cie" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DiagAutorizaciones" />
+        </set>
+        <set name="diagInfoAtenIniUrgs" table="diag_info_aten_ini_urg" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo" length="10" not-null="true" />
+                <column name="tipo_cie" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DiagInfoAtenIniUrg" />
+        </set>
+        <set name="ingresosEstanciasForFkIeDxCompli" table="ingresos_estancia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico_complicacion" length="10" />
+                <column name="tipo_cie_complicacion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IngresosEstancia" />
+        </set>
+        <set name="certAtenMedicaFurprosForPkCeratemedfurproDxegr" table="cert_aten_medica_furpro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_egreso" length="10" />
+                <column name="tipo_cie_dx_egreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurpro" />
+        </set>
+        <set name="certAtenMedicaFuripsesForPkCeratemedfuripsReling2" table="cert_aten_medica_furips" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_rel2_ingreso" length="10" />
+                <column name="tipo_cie_dx_rel1_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurips" />
+        </set>
+        <set name="certAtenMedicaFuripsesForPkCeratemedfuripsReling1" table="cert_aten_medica_furips" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_rel1_ingreso" length="10" />
+                <column name="tipo_cie_dx_rel1_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurips" />
+        </set>
+        <set name="certAtenMedicaFuripsesForPkCeratemedfuripsRelegr1" table="cert_aten_medica_furips" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_rel1_egreso" length="10" />
+                <column name="tipo_cie_dx_rel1_egreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurips" />
+        </set>
+        <set name="certAtenMedicaFuripsesForPkCeratemedfuripsRelegr2" table="cert_aten_medica_furips" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_rel2_egreso" length="10" />
+                <column name="tipo_cie_dx_rel1_egreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurips" />
+        </set>
+        <set name="certAtenMedicaFuripsesForPkCeratemedfuripsDxing" table="cert_aten_medica_furips" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_dx_ingreso" length="10" />
+                <column name="tipo_cie_dx_ingreso" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CertAtenMedicaFurips" />
+        </set>
+        <set name="filtroDiagnosticoses" table="filtro_diagnosticos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="diagnostico" length="10" not-null="true" />
+                <column name="tipo_cie" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FiltroDiagnosticos" />
+        </set>
+        <set name="evolDiagnosticoses" table="evol_diagnosticos" schema="historiaclinica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acronimo_diagnostico" length="10" not-null="true" />
+                <column name="tipo_cie_diagnostico" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EvolDiagnosticos" />
+        </set>
+    </class>
+</hibernate-mapping>

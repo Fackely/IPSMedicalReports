@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/08/2012 10:54:44 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PeticionQx" table="peticion_qx" schema="salascirugia">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" />
+        </many-to-one>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_diagnostico" length="10" />
+            <column name="tipo_cie_diagnostico" />
+        </many-to-one>
+        <many-to-one name="tiposPaciente" class="com.servinte.axioma.orm.TiposPaciente" fetch="select">
+            <column name="tipo_paciente" length="1" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" fetch="select">
+            <column name="solicitante" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estadosPeticion" class="com.servinte.axioma.orm.EstadosPeticion" fetch="select">
+            <column name="estado_peticion" not-null="true" />
+        </many-to-one>
+        <property name="fechaPeticion" type="date">
+            <column name="fecha_peticion" length="13" not-null="true" />
+        </property>
+        <property name="horaPeticion" type="string">
+            <column name="hora_peticion" length="5" not-null="true" />
+        </property>
+        <property name="duracion" type="string">
+            <column name="duracion" length="5" />
+        </property>
+        <property name="fechaCirugia" type="date">
+            <column name="fecha_cirugia" length="13" />
+        </property>
+        <property name="requiereUci" type="java.lang.Boolean">
+            <column name="requiere_uci" />
+        </property>
+        <property name="institucion" type="int">
+            <column name="institucion" not-null="true" />
+        </property>
+        <property name="tipoAnestesia" type="java.lang.Integer">
+            <column name="tipo_anestesia" />
+        </property>
+        <property name="programable" type="char">
+            <column name="programable" length="1" not-null="true" />
+        </property>
+        <property name="obsMaterialesEspeciales" type="string">
+            <column name="obs_materiales_especiales" length="4000" />
+        </property>
+        <property name="urgente" type="java.lang.Boolean">
+            <column name="urgente" />
+        </property>
+        <set name="peticionesPosponers" table="peticiones_posponer" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="peticion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PeticionesPosponer" />
+        </set>
+        <set name="solicitudesCirugias" table="solicitudes_cirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_peticion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesCirugia" />
+        </set>
+        <set name="autoEntsubPeticioneses" table="auto_entsub_peticiones" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_peticion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutoEntsubPeticiones" />
+        </set>
+        <set name="peticionesServicios" table="peticiones_servicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="peticion_qx" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PeticionesServicio" />
+        </set>
+        <one-to-one name="anulacionPeticionQx" class="com.servinte.axioma.orm.AnulacionPeticionQx"></one-to-one>
+        <set name="articulosPeticionQxes" table="articulos_peticion_qx" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="peticion_qx" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArticulosPeticionQx" />
+        </set>
+    </class>
+</hibernate-mapping>

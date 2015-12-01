@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 12, 2010 4:02:42 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EntregaTransportadora" table="entrega_transportadora" schema="tesoreria">
+        <comment>Registro de los movimientos Entrega a Transportadora de valores</comment>
+        <id name="movimientoCaja" type="long">
+            <column name="movimiento_caja" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">movimientosCajaByCodigoPk</param>
+            </generator>
+        </id>
+        <many-to-one name="transportadoraValores" class="com.servinte.axioma.orm.TransportadoraValores" fetch="select">
+            <column name="transportadora" not-null="true">
+                <comment>Referencia hacia la tabla tesoreria.transportadora_valores</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cuentasBancarias" class="com.servinte.axioma.orm.CuentasBancarias" fetch="select">
+            <column name="cuenta_bancaria" precision="3" scale="0">
+                <comment>Referencia hacia la tabla tesoreria.cuentas_bancarias</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="movimientosCajaByMovimientoCajaArqueo" class="com.servinte.axioma.orm.MovimientosCaja" fetch="select">
+            <column name="movimiento_caja_arqueo" precision="10" scale="0" not-null="true">
+                <comment>Movimiento de arqueo entrega parcial asociado a la entrega a transportadora</comment>
+            </column>
+        </many-to-one>
+        <one-to-one name="movimientosCajaByCodigoPk" class="com.servinte.axioma.orm.MovimientosCaja" constrained="true"></one-to-one>
+        <property name="responsable" type="string">
+            <column name="responsable" length="100" not-null="true">
+                <comment>Persona a quien se le entrega el dinero</comment>
+            </column>
+        </property>
+        <property name="carnet" type="string">
+            <column name="carnet" length="20">
+                <comment>N&#195;&#186;mero de carnet de la persona de la transportadora, a la cual se le entrega el efectivo y los recibos de caja por forma de pago
+                Cheque</comment>
+            </column>
+        </property>
+        <property name="guia" type="string">
+            <column name="guia" length="20">
+                <comment>N&#195;&#186;mero de Gu&#195;&#173;a entregado por el personal de la transportadora a la Caja en el momento de la entrega</comment>
+            </column>
+        </property>
+        <property name="carro" type="string">
+            <column name="carro" length="20">
+                <comment>N&#195;&#186;mero del carro de la transportadora, al cual se se le hace entrega del Dinero</comment>
+            </column>
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="5" not-null="true">
+                <comment>Estado de la entrega a la transportadora</comment>
+            </column>
+        </property>
+        <set name="cierreCajaTransportadoras" inverse="true" lazy="true" table="cierre_caja_transportadora" fetch="select">
+            <key>
+                <column name="entrega_transportadora" precision="10" scale="0" not-null="true">
+                    <comment>Entrega a Transportadora de Valores registrada asociada al cierre</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaTransportadora" />
+        </set>
+    </class>
+</hibernate-mapping>

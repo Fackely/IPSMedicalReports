@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogDetVigConRetencion" table="log_det_vig_con_retencion" schema="administracion">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="detVigConRetencion" class="com.servinte.axioma.orm.DetVigConRetencion" fetch="select">
+            <column name="det_vig_con_retencion" not-null="true" />
+        </many-to-one>
+        <property name="indicativoIntegral" type="string">
+            <column name="indicativo_integral" length="1" not-null="true" />
+        </property>
+        <property name="baseMinima" type="java.lang.Integer">
+            <column name="base_minima" />
+        </property>
+        <property name="porcentajeRetInt" type="big_decimal">
+            <column name="porcentaje_ret_int" precision="5" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposIdInstitucion" table="tipos_id_institucion" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.TiposIdInstitucionId">
+            <key-property name="acronimo" type="string">
+                <column name="acronimo" length="3" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tiposIdentificacion" class="com.servinte.axioma.orm.TiposIdentificacion" update="false" insert="false" fetch="select">
+            <column name="acronimo" length="3" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="esConsecutivo" type="boolean">
+            <column name="es_consecutivo" not-null="true" />
+        </property>
+        <property name="excentoDeudor" type="char">
+            <column name="excento_deudor" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

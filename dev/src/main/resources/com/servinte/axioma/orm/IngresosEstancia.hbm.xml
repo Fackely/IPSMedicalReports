@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 5/07/2011 11:51:31 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.IngresosEstancia" table="ingresos_estancia" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence">
+			    <param name="sequence">manejopaciente.seq_ingresos_estancia</param>
+			</generator>
+        </id>
+        <many-to-one name="diagnosticosByFkIeDxCompli" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_complicacion" length="10" />
+            <column name="tipo_cie_complicacion" />
+        </many-to-one>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso_admision" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposAfiliado" class="com.servinte.axioma.orm.TiposAfiliado" fetch="select">
+            <column name="tipo_afiliado" length="1" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estratosSociales" class="com.servinte.axioma.orm.EstratosSociales" fetch="select">
+            <column name="clasificacion_socio_economica" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkIeDxPpal" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_principal" length="10" not-null="true" />
+            <column name="tipo_cie_principal" not-null="true" />
+        </many-to-one>
+        <property name="fechaAdmision" type="date">
+            <column name="fecha_admision" length="13" not-null="true" />
+        </property>
+        <property name="horaAdmision" type="string">
+            <column name="hora_admision" length="5" not-null="true" />
+        </property>
+        <property name="medicoSolicitante" type="string">
+            <column name="medico_solicitante" length="128" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="1000" />
+        </property>
+        <property name="descripcionEntidadSub" type="string">
+            <column name="descripcion_entidad_sub" length="128" />
+        </property>
+        <property name="telefonoEntidadSub" type="string">
+            <column name="telefono_entidad_sub" length="512" />
+        </property>
+        <property name="direccionEntidadSub" type="string">
+            <column name="direccion_entidad_sub" length="256" />
+        </property>
+        <set name="autorizacionesIngreEstancias" inverse="true" lazy="true" table="autorizaciones_ingre_estancia" fetch="select">
+            <key>
+                <column name="ingreso_estancia" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesIngreEstancia" />
+        </set>
+    </class>
+</hibernate-mapping>

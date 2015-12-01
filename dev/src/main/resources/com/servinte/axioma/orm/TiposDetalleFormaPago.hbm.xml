@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 15, 2010 4:08:27 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposDetalleFormaPago" table="tipos_detalle_forma_pago" schema="tesoreria">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="30" />
+        </property>
+        <property name="prioridad" type="java.lang.Integer">
+            <column name="prioridad" />
+        </property>
+        <set name="formasPagos" inverse="true" lazy="true" table="formas_pago" fetch="select">
+            <key>
+                <column name="tipo_detalle" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FormasPago" />
+        </set>
+    </class>
+</hibernate-mapping>

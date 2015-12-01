@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2011 5:31:35 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogRipsEntidadesSubRegistr" table="log_rips_entidades_sub_registr" schema="facturacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+             <generator class="sequence" >
+				<param name="sequence">facturacion.seq_log_rips_ent_sub_reg</param>
+			</generator>
+        </id>
+        <many-to-one name="logRipsEntidadesSubArchivo" class="com.servinte.axioma.orm.LogRipsEntidadesSubArchivo" fetch="select">
+            <column name="log_rips_entidades_sub_archivo" not-null="true" />
+        </many-to-one>
+        <property name="numeroFila" type="java.lang.Integer">
+            <column name="numero_fila" />
+        </property>
+        <property name="procesado" type="java.lang.Character">
+            <column name="procesado" length="1" />
+        </property>
+        <property name="autorizado" type="java.lang.Character">
+            <column name="autorizado" length="1" />
+        </property>
+        <set name="logRipsEntSubRegValors" inverse="true" lazy="true" table="log_rips_ent_sub_reg_valor" fetch="select">
+            <key>
+                <column name="log_rips_entidades_sub_registr" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogRipsEntSubRegValor" />
+        </set>
+        <set name="logRipsEntSubInconsisCamps" inverse="true" lazy="true" table="log_rips_ent_sub_inconsis_camp" fetch="select">
+            <key>
+                <column name="log_rips_entidades_sub_registr" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogRipsEntSubInconsisCamp" />
+        </set>
+    </class>
+</hibernate-mapping>

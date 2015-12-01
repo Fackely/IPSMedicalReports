@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 25, 2011 4:25:30 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NivelAutorServMedic" table="nivel_autor_serv_medic" schema="capitacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+             <generator class="sequence">
+				<param name="sequence">capitacion.seq_nivel_aut_serv_med</param>
+			</generator>
+        </id>
+        <many-to-one name="nivelAutorizacion" class="com.servinte.axioma.orm.NivelAutorizacion" fetch="select">
+            <column name="nivel_autorizacion" not-null="true">
+                <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <set name="nivelAutorAgrServs" inverse="true" lazy="true" table="nivel_autor_agr_serv" fetch="select" cascade="all">
+            <key>
+                <column name="nivel_autor_serv_medic" not-null="true">
+                    <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorAgrServ" />
+        </set>
+        <set name="nivelAutorServicios" inverse="true" lazy="true" table="nivel_autor_servicio" fetch="select" cascade="all">
+            <key>
+                <column name="nivel_autor_serv_medic" not-null="true">
+                    <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorServicio" />
+        </set>
+        <set name="nivelAutorAgrArts" inverse="true" lazy="true" table="nivel_autor_agr_art" fetch="select">
+            <key>
+                <column name="nivel_autor_serv_medic" not-null="true">
+                    <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorAgrArt" />
+        </set>
+        <set name="nivelAutorArticulos" inverse="true" lazy="true" table="nivel_autor_articulo" fetch="select" cascade="all">
+            <key>
+                <column name="nivel_autor_serv_medic" not-null="true">
+                    <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorArticulo" />
+        </set>
+    </class>
+</hibernate-mapping>

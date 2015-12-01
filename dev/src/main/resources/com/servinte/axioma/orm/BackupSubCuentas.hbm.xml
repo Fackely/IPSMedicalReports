@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/11/2012 12:29:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.BackupSubCuentas" table="backup_sub_cuentas" schema="facturacion">
+        <id name="id" type="long">
+            <column name="id" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_backup_sub_cuentas</param>
+			</generator>
+        </id>
+        <many-to-one name="logDistribucionCuenta" class="com.servinte.axioma.orm.LogDistribucionCuenta" fetch="select">
+            <column name="id_log_distrib_cuenta" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="idSubCuenta" type="int">
+            <column name="id_sub_cuenta" not-null="true" />
+        </property>
+        <property name="convenio" type="int">
+            <column name="convenio" not-null="true" />
+        </property>
+        <property name="naturalezaPaciente" type="java.lang.Integer">
+            <column name="naturaleza_paciente" />
+        </property>
+        <property name="montoCobro" type="java.lang.Integer">
+            <column name="monto_cobro" />
+        </property>
+        <property name="nroPoliza" type="string">
+            <column name="nro_poliza" length="20" />
+        </property>
+        <property name="nroCarnet" type="string">
+            <column name="nro_carnet" length="15" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="contrato" type="int">
+            <column name="contrato" not-null="true" />
+        </property>
+        <property name="ingreso" type="int">
+            <column name="ingreso" not-null="true" />
+        </property>
+        <property name="tipoAfiliado" type="java.lang.Character">
+            <column name="tipo_afiliado" length="1" />
+        </property>
+        <property name="clasificacionSocioeconomica" type="java.lang.Integer">
+            <column name="clasificacion_socioeconomica" />
+        </property>
+        <property name="nroAutorizacion" type="string">
+            <column name="nro_autorizacion" length="15" />
+        </property>
+        <property name="fechaAfiliacion" type="date">
+            <column name="fecha_afiliacion" length="13" />
+        </property>
+        <property name="semanasCotizacion" type="java.lang.Integer">
+            <column name="semanas_cotizacion" />
+        </property>
+        <property name="codigoPaciente" type="int">
+            <column name="codigo_paciente" not-null="true" />
+        </property>
+        <property name="valorUtilizadoSoat" type="big_decimal">
+            <column name="valor_utilizado_soat" precision="14" />
+        </property>
+        <property name="nroPrioridad" type="int">
+            <column name="nro_prioridad" not-null="true" />
+        </property>
+        <property name="porcentajeAutorizado" type="big_decimal">
+            <column name="porcentaje_autorizado" precision="5" />
+        </property>
+        <property name="montoAutorizado" type="big_decimal">
+            <column name="monto_autorizado" precision="14" />
+        </property>
+        <property name="obsParametrosDistribucion" type="string">
+            <column name="obs_parametros_distribucion" length="4000" />
+        </property>
+        <property name="facturado" type="char">
+            <column name="facturado" length="1" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="empresasInstitucion" type="java.lang.Long">
+            <column name="empresas_institucion" precision="10" scale="0" />
+        </property>
+        <property name="numeroSolicitudVolante" type="java.lang.Long">
+            <column name="numero_solicitud_volante" precision="16" scale="0" />
+        </property>
+        <property name="mesesCotizacion" type="java.lang.Integer">
+            <column name="meses_cotizacion" />
+        </property>
+        <property name="tipoCobertura" type="java.lang.Integer">
+            <column name="tipo_cobertura" />
+        </property>
+        <property name="valorAutorizacion" type="big_decimal">
+            <column name="valor_autorizacion" precision="14" />
+        </property>
+        <property name="medioAutorizacion" type="string">
+            <column name="medio_autorizacion" length="4" />
+        </property>
+        <property name="bono" type="java.lang.Long">
+            <column name="bono" precision="14" scale="0" />
+        </property>
+        <property name="tipoCobroPaciente" type="string">
+            <column name="tipo_cobro_paciente" length="5" />
+        </property>
+        <property name="tipoMontoCobro" type="string">
+            <column name="tipo_monto_cobro" length="6" />
+        </property>
+        <property name="porcentajeMontoCobro" type="big_decimal">
+            <column name="porcentaje_monto_cobro" precision="131089" scale="0" />
+        </property>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

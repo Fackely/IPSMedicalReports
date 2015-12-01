@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 18, 2010 5:00:10 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ComisionXCentroAtencion" table="comision_x_centro_atencion" schema="tesoreria">
+        <comment>Registro de la parametrizaci&#195;&#131;&#194;&#179;n de la comisi&#195;&#131;&#194;&#179;n de la Tarjeta Financiera por Centro de
+        Atenci&#195;&#131;&#194;&#179;n</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_comision_x_centro_atencion</param>
+			</generator>
+        </id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true">
+                <comment>Referencia al Centro de Atenci&#195;&#131;&#194;&#179;n asociado al registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tarjetaFinancieraComision" class="com.servinte.axioma.orm.TarjetaFinancieraComision" fetch="select">
+            <column name="tarjeta_financiera_comision" precision="12" scale="0" not-null="true">
+                <comment>Referencia a la Tarjeta Financiera asociada al registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true">
+                <comment>Usuario que realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="comision" type="big_decimal">
+            <column name="comision" precision="5" not-null="true">
+                <comment>Porcentaje para el c&#195;&#131;&#194;&#161;lculo de la comisi&#195;&#131;&#194;&#179;n sobre las Tarjetas para el Centro de
+                Atenci&#195;&#131;&#194;&#179;n</comment>
+            </column>
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true">
+                <comment>Fecha de realizaci&#195;&#131;&#194;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true">
+                <comment>Hora de realizaci&#195;&#131;&#194;&#179;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

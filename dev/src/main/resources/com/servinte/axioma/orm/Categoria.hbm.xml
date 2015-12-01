@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Categoria" table="categoria" schema="public">
+        <id name="catIdentificador" type="int">
+            <column name="cat_identificador" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" not-null="true" />
+        </many-to-one>
+        <property name="catNombre" type="string">
+            <column name="cat_nombre" length="35" not-null="true" />
+        </property>
+        <property name="catDescripcion" type="string">
+            <column name="cat_descripcion" length="50" />
+        </property>
+        <property name="catActivo" type="boolean">
+            <column name="cat_activo" not-null="true" />
+        </property>
+        <property name="color" type="string">
+            <column name="color" length="7" not-null="true" />
+        </property>
+        <set name="cuadroTurnoses" inverse="true" lazy="true" table="cuadro_turnos" fetch="select">
+            <key>
+                <column name="codigocategoria" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuadroTurnos" />
+        </set>
+        <set name="categoriaRestriccions" inverse="true" lazy="true" table="categoria_restriccion" fetch="select">
+            <key>
+                <column name="cat_identificador" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CategoriaRestriccion" />
+        </set>
+        <set name="ctCubrirTurnos" inverse="true" lazy="true" table="ct_cubrir_turno" fetch="select">
+            <key>
+                <column name="categoria" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CtCubrirTurno" />
+        </set>
+        <set name="categoriaEnfermeras" inverse="true" lazy="true" table="categoria_enfermera" fetch="select">
+            <key>
+                <column name="cat_identificador" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CategoriaEnfermera" />
+        </set>
+    </class>
+</hibernate-mapping>

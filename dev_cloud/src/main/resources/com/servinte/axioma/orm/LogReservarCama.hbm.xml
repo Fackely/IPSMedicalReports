@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogReservarCama" table="log_reservar_cama" schema="manejopaciente">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="codigoPaciente" type="int">
+            <column name="codigo_paciente" not-null="true" />
+        </property>
+        <property name="nombresPaciente" type="string">
+            <column name="nombres_paciente" length="120" not-null="true" />
+        </property>
+        <property name="tipoIdentificacion" type="string">
+            <column name="tipo_identificacion" length="2" not-null="true" />
+        </property>
+        <property name="numeroIdentificacion" type="string">
+            <column name="numero_identificacion" length="20" not-null="true" />
+        </property>
+        <property name="codCentroAtencionSel" type="int">
+            <column name="cod_centro_atencion_sel" not-null="true" />
+        </property>
+        <property name="centroAtencionSel" type="string">
+            <column name="centro_atencion_sel" length="256" not-null="true" />
+        </property>
+        <property name="codigoCama" type="int">
+            <column name="codigo_cama" not-null="true" />
+        </property>
+        <property name="cama" type="string">
+            <column name="cama" length="4000" not-null="true" />
+        </property>
+        <property name="fechaOcupacion" type="date">
+            <column name="fecha_ocupacion" length="13" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="usuario" length="30" not-null="true" />
+        </property>
+        <property name="codCentroAtencionRes" type="int">
+            <column name="cod_centro_atencion_res" not-null="true" />
+        </property>
+        <property name="centroAtencionRes" type="string">
+            <column name="centro_atencion_res" length="256" not-null="true" />
+        </property>
+        <property name="codigoReserva" type="java.lang.Long">
+            <column name="codigo_reserva" precision="10" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<query name="ingreso.obtenerCentroAtencionAsignadoPaciente">
+		SELECT NEW com.servinte.axioma.dto.administracion.CentroAtencionDto(
+						ca.consecutivo, ca.codigo, ca.descripcion)
+			FROM Pacientes AS pac
+				INNER JOIN pac.centroAtencionByCentroAtencionPyp ca
+		WHERE pac.codigoPaciente = :codigoPaciente
+	</query>
+	
+	<query name="ingreso.consultarInfoSubCuentaPorIngresoPorConvenio">
+		SELECT NEW com.servinte.axioma.dto.manejoPaciente.InfoSubCuentaDto(
+						ta.acronimo, ta.nombre, np.codigo, np.nombre, es.codigo, es.descripcion,
+						dm.detalleCodigo, tm.codigo, tm.nombre, dm.tipoDetalle,
+						dmg.cantidadMonto, dmg.porcentaje, dmg.valor, sc.tipoCobroPaciente,
+						sc.porcentajeMontoCobro)
+			FROM SubCuentas AS sc
+				INNER JOIN sc.ingresos ing
+				INNER JOIN sc.convenios conv
+				LEFT JOIN sc.tiposAfiliado ta
+				LEFT JOIN sc.estratosSociales es
+				LEFT JOIN sc.naturalezaPacientes np
+				LEFT JOIN sc.detalleMonto dm
+				LEFT JOIN dm.tiposMonto tm
+				LEFT JOIN dm.detalleMontoGeneral dmg
+		WHERE ing.id = :codigoIngreso
+			AND conv.codigo = :codigoConvenio
+		ORDER BY sc.fechaModifica DESC, sc.horaModifica DESC
+	</query>
+	
+	
+	<query name="ingreso.consultarInfoCuentaPorIngreso">
+		SELECT NEW com.princetonsa.dto.comun.DtoCheckBox(tp.acronimo, ec.codigo)
+			FROM Cuentas cue
+				INNER JOIN cue.ingresos ing
+				INNER JOIN cue.estadosCuenta ec
+				INNER JOIN cue.tiposPaciente tp
+		WHERE ing.id = :codigoIngreso
+		ORDER BY cue.fechaApertura DESC, cue.horaApertura DESC
+	</query>
+
+	<query name="ingreso.consultaInformacionIngresoPorId">
+		SELECT NEW com.servinte.axioma.dto.historiaClinica.InfoIngresoDto(ing.id, ing.fechaEgreso, ing.horaEgreso)
+			FROM Ingresos ing
+		WHERE ing.id = :idIngreso		
+	</query>
+
+		
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CajasCajeros" table="cajas_cajeros" schema="tesoreria">
+        <composite-id name="id" class="com.servinte.axioma.orm.CajasCajerosId">
+            <key-property name="caja" type="int">
+                <column name="caja" />
+            </key-property>
+            <key-property name="usuario" type="string">
+                <column name="usuario" length="30" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cajas" class="com.servinte.axioma.orm.Cajas" update="false" insert="false" fetch="select">
+            <column name="caja" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="aperturaTurno" type="string">
+            <column name="apertura_turno" length="10" />
+        </property>
+        <set name="devolRecibosCajas" table="devol_recibos_caja" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="caja_devolucion" not-null="true" />
+                <column name="usuario_devolucion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DevolRecibosCaja" />
+        </set>
+        <set name="recibosCajas" inverse="true" lazy="true" table="recibos_caja" fetch="select">
+            <key>
+                <column name="caja" not-null="true" />
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RecibosCaja" />
+        </set>
+    </class>
+</hibernate-mapping>

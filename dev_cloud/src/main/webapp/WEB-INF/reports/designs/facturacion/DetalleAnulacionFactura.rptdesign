@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.16" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.0.v20080606 Build &lt;2.3.0.v20080618-0630></property>
+    <property name="units">in</property>
+    <html-property name="description">contiene header and footer</html-property>
+    <text-property name="displayName">template axioma reports</text-property>
+    <parameters>
+        <scalar-parameter name="codigoAxiomaAnulacionFactura" id="96">
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="isRequired">true</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+                <property name="pattern">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="94">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="detalleAnulacion" id="95">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">codigo</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">consecutivoanulacion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">fechahoraanulacion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">loginusuario</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">consecutivofactura</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">fechahoraelaboracion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">valortotal</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">estadocuenta</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">nombrepaciente</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">nombreresponsable</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">motivoanulacion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">observaciones</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">nombrecentroatencion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">descentidadsubcontratada</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigoAxiomaAnulacionFactura</property>
+                    <property name="nativeName">codigoAxiomaAnulacionFactura</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">codigo</property>
+                    <property name="nativeName">codigo</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">consecutivoanulacion</property>
+                    <property name="nativeName">consecutivoanulacion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">fechahoraanulacion</property>
+                    <property name="nativeName">fechahoraanulacion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">loginusuario</property>
+                    <property name="nativeName">loginusuario</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">consecutivofactura</property>
+                    <property name="nativeName">consecutivofactura</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">fechahoraelaboracion</property>
+                    <property name="nativeName">fechahoraelaboracion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">valortotal</property>
+                    <property name="nativeName">valortotal</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">estadocuenta</property>
+                    <property name="nativeName">estadocuenta</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">nombrepaciente</property>
+                    <property name="nativeName">nombrepaciente</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">nombreresponsable</property>
+                    <property name="nativeName">nombreresponsable</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">motivoanulacion</property>
+                    <property name="nativeName">motivoanulacion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">observaciones</property>
+                    <property name="nativeName">observaciones</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">nombrecentroatencion</property>
+                    <property name="nativeName">nombrecentroatencion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">descentidadsubcontratada</property>
+                    <property name="nativeName">descentidadsubcontratada</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT a.codigo, 
+a.consecutivo_anulacion AS consecutivoAnulacion, 
+to_char(a.fecha_grabacion, 'DD/MM/YYYY') ||' '|| substr(a.hora_grabacion,1,5) AS fechaHoraAnulacion, 
+a.usuario AS loginUsuario, 
+a.consecutivo_factura ||' '|| case when f.empresa_institucion is null then '' else ' ('|| getdescempresainstitucion(f.empresa_institucion) ||')' end AS consecutivoFactura, 
+to_char(f.fecha, 'DD/MM/YYYY') ||' '|| substr(f.hora,1,5) AS fechaHoraElaboracion, 
+f.valor_total AS valorTotal, 
+ec.nombre AS estadoCuenta, 
+p.primer_nombre ||' '|| p.segundo_nombre ||' '|| p.primer_apellido ||' '|| p.segundo_apellido AS nombrePaciente, 
+CASE WHEN f.cod_res_particular IS NULL THEN (SELECT c.nombre FROM convenios c WHERE f.convenio=c.codigo) ELSE (SELECT t.descripcion FROM terceros t WHERE t.codigo=f.cod_res_particular) END AS nombreResponsable, 
+a.motivo_anulacion ||' - '|| maf.descripcion AS motivoAnulacion, 
+CASE WHEN a.observaciones IS NULL THEN '' ELSE a.observaciones END AS observaciones,
+getnomcentroatencion(f.centro_aten) as nombreCentroAtencion,
+coalesce(getdescentitadsubcontratada(f.entidad_subcontratada), '') as descentidadsubcontratada 
+FROM anulaciones_facturas a 
+INNER JOIN facturas f ON (f.codigo= a.codigo) 
+INNER JOIN personas p ON (f.cod_paciente=p.codigo) 
+INNER JOIN cuentas c ON(f.cuenta=c.id) 
+INNER JOIN estados_cuenta ec ON (ec.codigo=c.estado_cuenta) 
+INNER JOIN motivos_anul_fact maf ON (maf.codigo=a.motivo_anulacion)
+WHERE a.codigo=?</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <property name="headerHeight">4cm</property>
+            <property name="footerHeight">3cm</property>
+            <page-header>
+                <grid name="masterPageHeader" id="4">
+                    <property name="fontFamily">"SansSerif"</property>
+                    <property name="height">1.475in</property>
+                    <property name="width">7.217in</property>
+                    <column id="5">
+                        <property name="width">2.673in</property>
+                    </column>
+                    <column id="6">
+                        <property name="width">4.544in</property>
+                    </column>
+                    <row id="7">
+                        <property name="height">1.178in</property>
+                        <cell id="8">
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                        <cell id="9">
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0.5cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0.5cm</property>
+                        </cell>
+                    </row>
+                    <row id="46">
+                        <property name="height">0.297in</property>
+                        <cell id="47">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="drop">none</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid name="masterPageFooter" id="24">
+                    <property name="marginTop">0.5cm</property>
+                    <property name="marginLeft">0cm</property>
+                    <property name="marginBottom">0cm</property>
+                    <property name="marginRight">0cm</property>
+                    <property name="height">0.851in</property>
+                    <property name="width">7.217in</property>
+                    <column id="25"/>
+                    <row id="26">
+                        <cell id="27">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="28">
+                        <cell id="29">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                        </cell>
+                    </row>
+                    <row id="30">
+                        <property name="height">0.396in</property>
+                        <cell id="31">
+                            <property name="fontFamily">"SansSerif"</property>
+                            <property name="paddingTop">0cm</property>
+                            <property name="paddingLeft">0cm</property>
+                            <property name="paddingBottom">0cm</property>
+                            <property name="paddingRight">0cm</property>
+                            <grid name="footerStaticData" id="38">
+                                <property name="fontFamily">"SansSerif"</property>
+                                <property name="height">0.366in</property>
+                                <property name="width">7.148in</property>
+                                <column id="64"/>
+                                <column id="39"/>
+                                <column id="40"/>
+                                <row id="41">
+                                    <property name="height">0.366in</property>
+                                    <cell id="63">
+                                        <text id="65">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <text-property name="content"><![CDATA[Creado por: Axioma Birt Reports]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="42">
+                                        <text name="footerCreatedDate" id="44">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="43">
+                                        <text name="footerNumberPage" id="45">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[Page: <value-of>pageNumber</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="190">
+            <property name="width">100%</property>
+            <column id="191"/>
+            <row id="192">
+                <cell id="193">
+                    <label id="196">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">ANULACION DE FACTURA</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="194">
+                <cell id="195">
+                    <property name="paddingTop">0.4cm</property>
+                    <property name="paddingBottom">0.4cm</property>
+                </cell>
+            </row>
+        </grid>
+        <table id="98">
+            <property name="height">2.4895833333333335in</property>
+            <property name="width">7.322916666666667in</property>
+            <property name="dataSet">detalleAnulacion</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">codigoAxiomaAnulacionFactura</property>
+                    <expression name="expression">params["codigoAxiomaAnulacionFactura"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">consecutivoanulacion</property>
+                    <expression name="expression">dataSetRow["consecutivoanulacion"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">fechahoraanulacion</property>
+                    <expression name="expression">dataSetRow["fechahoraanulacion"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">loginusuario</property>
+                    <expression name="expression">dataSetRow["loginusuario"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">consecutivofactura</property>
+                    <expression name="expression">dataSetRow["consecutivofactura"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">fechahoraelaboracion</property>
+                    <expression name="expression">dataSetRow["fechahoraelaboracion"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">valortotal</property>
+                    <expression name="expression">dataSetRow["valortotal"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">nombrepaciente</property>
+                    <expression name="expression">dataSetRow["nombrepaciente"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">estadocuenta</property>
+                    <expression name="expression">dataSetRow["estadocuenta"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">nombreresponsable</property>
+                    <expression name="expression">dataSetRow["nombreresponsable"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">nombrecentroatencion</property>
+                    <expression name="expression">dataSetRow["nombrecentroatencion"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">motivoanulacion</property>
+                    <expression name="expression">dataSetRow["motivoanulacion"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">observaciones</property>
+                    <expression name="expression">dataSetRow["observaciones"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">descentidadsubcontratada</property>
+                    <expression name="expression">dataSetRow["descentidadsubcontratada"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="155">
+                <property name="width">1.1145833333333333in</property>
+            </column>
+            <column id="156">
+                <property name="width">1.148in</property>
+            </column>
+            <column id="157">
+                <property name="width">1.0729166666666667in</property>
+            </column>
+            <column id="158">
+                <property name="width">1.188in</property>
+            </column>
+            <column id="159">
+                <property name="width">1.158in</property>
+            </column>
+            <column id="160">
+                <property name="width">1.0208333333333333in</property>
+            </column>
+            <header>
+                <row id="99">
+                    <cell id="100">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="161">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Anulación No.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="101">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="172">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">consecutivoanulacion</property>
+                        </data>
+                    </cell>
+                    <cell id="102">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="167">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Fecha/Hora Anul.:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="103">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="173">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">fechahoraanulacion</property>
+                        </data>
+                    </cell>
+                    <cell id="104">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="168">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Usuario Anul.:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="105">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="174">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">loginusuario</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="106">
+                    <cell id="107">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="162">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Factura No.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="108">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="209">
+                            <property name="resultSetColumn">consecutivofactura</property>
+                        </data>
+                    </cell>
+                    <cell id="109">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="169">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Fecha/Hora Elabora Fra:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="110">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="176">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">fechahoraelaboracion</property>
+                        </data>
+                    </cell>
+                    <cell id="111">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="170">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Valor Total:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="112">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="177">
+                            <property name="fontFamily">sans-serif</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="resultSetColumn">valortotal</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="113">
+                    <cell id="114">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="163">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Paciente:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="115">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="178">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">nombrepaciente</property>
+                        </data>
+                    </cell>
+                    <cell id="118">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="171">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Estado Cuenta:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="119">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="179">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">estadocuenta</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="120">
+                    <cell id="121">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="164">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Convenio:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="122">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="180">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">nombreresponsable</property>
+                        </data>
+                    </cell>
+                    <cell id="208">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="205">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">9pt</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Centro Atención:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="203">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="206">
+                            <property name="resultSetColumn">nombrecentroatencion</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="127">
+                    <cell id="128">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="165">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Motivo Anul:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="129">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="181">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">motivoanulacion</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="134">
+                    <cell id="135">
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="166">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Observaciones:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="136">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="182">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">observaciones</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="210">
+                    <cell id="211">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <label id="217">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Entidad subcontratada</text-property>
+                        </label>
+                    </cell>
+                    <cell id="213">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">0cm</property>
+                        <property name="paddingLeft">0.2cm</property>
+                        <property name="paddingBottom">0cm</property>
+                        <property name="paddingRight">0.2cm</property>
+                        <data id="218">
+                            <property name="resultSetColumn">descentidadsubcontratada</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="148">
+                    <cell id="149">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <property name="paddingTop">0.2cm</property>
+                        <property name="paddingBottom">0.2cm</property>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

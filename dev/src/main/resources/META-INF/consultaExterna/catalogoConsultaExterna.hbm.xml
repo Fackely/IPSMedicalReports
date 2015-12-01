@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<query name="catalogoConsultaExterna.consultarOrdenMedicamentos">
+		SELECT NEW com.servinte.axioma.dto.consultaExterna.ValorEstandarOrdenadoresDto(pve.codigo, ci.codigo, 
+		ci.nombre, uc.codigo, uc.descripcion, pve.valorEstOrdCita, pve.valorEstSermedOrden, pve.valorEstSermedCita,pve.esServicio)
+			FROM ParametricaValorEstandar pve
+				INNER JOIN pve.claseInventario ci
+				INNER JOIN pve.unidadesConsulta uc
+				ORDER BY ci.nombre asc, uc.descripcion asc
+		
+	</query>
+	
+	
+	
+	<query name="catalogoConsultaExterna.consultarOrdenServicios">
+		SELECT NEW com.servinte.axioma.dto.consultaExterna.ValorEstandarOrdenadoresDto(pve.codigo, gs.codigo,
+		gs.descripcion, uc.codigo, uc.descripcion, pve.valorEstOrdCita, pve.valorEstSermedOrden, pve.valorEstSermedCita,pve.esServicio)
+			FROM ParametricaValorEstandar pve
+				INNER JOIN pve.gruposServicios gs
+				INNER JOIN pve.unidadesConsulta uc
+				ORDER BY gs.descripcion asc, uc.descripcion asc
+		
+	</query>
+	
+	<query name="catalogoConsultaExterna.consultarUnidadAgenda">
+		SELECT NEW com.servinte.axioma.dto.consultaExterna.DtoUnidadesConsulta(uc.codigo, uc.descripcion)
+			FROM UnidadesConsulta uc
+			ORDER BY uc.descripcion asc
+			
+		
+	</query>
+	
+	<query name="catalogoConsultaExterna.consultarUnidadAgendaPorCentroAtencion">
+		<![CDATA[
+		SELECT DISTINCT NEW com.servinte.axioma.dto.consultaExterna.DtoUnidadesConsulta(UC.codigo, UC.descripcion)
+			FROM UnidadesConsulta UC
+			INNER JOIN UC.centrosCostos CC
+			INNER JOIN CC.centroAtencion CA
+			WHERE CA.consecutivo = :codigoCentroAtencion 
+			ORDER BY UC.descripcion asc
+		]]>		
+	</query>
+
+	<sql-query name="catalogoConsultaExterna.eliminarOrden">
+		<![CDATA[
+			DELETE 
+			FROM CONSULTAEXTERNA.PARAMETRICA_VALOR_ESTANDAR PVE
+			WHERE PVE.CODIGO =:codigo
+		]]>
+	
+	</sql-query>
+	
+	<query name="catalogoConsultaExterna.consultarValidacionServicio">
+		SELECT count(*)
+			FROM ParametricaValorEstandar pve
+				INNER JOIN pve.gruposServicios gs
+				INNER JOIN pve.unidadesConsulta uc
+				WHERE gs.codigo=:codigoGS AND uc.codigo=:codigoUA
+		
+	</query>
+	
+	<query name="catalogoConsultaExterna.consultarValidacionServicioModificar">
+		<![CDATA[
+		SELECT count(*)
+			FROM ParametricaValorEstandar pve
+				INNER JOIN pve.gruposServicios gs
+				INNER JOIN pve.unidadesConsulta uc
+				WHERE pve.codigo<>:codigoPa AND gs.codigo=:codigoGS AND uc.codigo=:codigoUA
+		]]>
+	</query>
+	
+	<query name="catalogoConsultaExterna.consultarValidacionMedicamento">
+		SELECT count(*)
+			FROM ParametricaValorEstandar pve
+				INNER JOIN pve.claseInventario ci
+				INNER JOIN pve.unidadesConsulta uc
+				WHERE ci.codigo=:codigoCI AND uc.codigo=:codigoUA
+		
+	</query>
+	
+	<query name="catalogoConsultaExterna.consultarValidacionMedicamentoModificar">
+		<![CDATA[
+		SELECT count(*)
+			FROM ParametricaValorEstandar pve
+				INNER JOIN pve.claseInventario ci
+				INNER JOIN pve.unidadesConsulta uc
+				WHERE pve.codigo<>:codigoPa AND ci.codigo=:codigoCI AND uc.codigo=:codigoUA
+		]]>
+	</query>
+</hibernate-mapping>

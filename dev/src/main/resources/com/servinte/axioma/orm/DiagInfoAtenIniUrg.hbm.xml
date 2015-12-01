@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DiagInfoAtenIniUrg" table="diag_info_aten_ini_urg" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="informeAtencionIniUrg" class="com.servinte.axioma.orm.InformeAtencionIniUrg" fetch="select">
+            <column name="info_atencion_ini_urg" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo" length="10" not-null="true" />
+            <column name="tipo_cie" not-null="true" />
+        </many-to-one>
+        <property name="principal" type="string">
+            <column name="principal" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

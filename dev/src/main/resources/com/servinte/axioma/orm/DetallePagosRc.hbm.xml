@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 8, 2010 2:12:13 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetallePagosRc" table="detalle_pagos_rc" schema="tesoreria">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="sequence">
+            	<param name="sequence">tesoreria.seq_detalle_pagos_rc</param>
+            </generator>
+        </id>
+        <many-to-one name="formasPago" class="com.servinte.axioma.orm.FormasPago" fetch="select">
+            <column name="forma_pago" not-null="true" />
+        </many-to-one>
+        <many-to-one name="recibosCaja" class="com.servinte.axioma.orm.RecibosCaja" fetch="select">
+            <column name="numero_recibo_caja" length="20" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="valor" type="double">
+            <column name="valor" precision="17" scale="17" not-null="true" />
+        </property>
+        <set name="movimientosTarjetases" inverse="true" lazy="true" table="movimientos_tarjetas" fetch="select">
+            <key>
+                <column name="det_pago_rc" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosTarjetas" />
+        </set>
+        <set name="docSopMovimCajases" inverse="true" lazy="true" table="det_pagos_x_doc_sop_mov" fetch="select" >
+            <key>
+                <column name="det_pago_rc" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.DocSopMovimCajas">
+                <column name="doc_sop_mov_caja" precision="10" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="movimientosBonoses" inverse="true" lazy="true" table="movimientos_bonos" fetch="select">
+            <key>
+                <column name="det_pago_rc" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.detalle_pagos_rc, donde se registran cada uno de los pagos realizados de los recibos de caja seg&#195;&#186;n su
+                    forma de pago</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosBonos" />
+        </set>
+        <set name="movimientosChequeses" inverse="true" lazy="true" table="movimientos_cheques" fetch="select">
+            <key>
+                <column name="det_pago_rc" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosCheques" />
+        </set>
+		<set name="datosFinanciacions" table="datos_financiacion" schema="carterapaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="detalle_pago_rc" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DatosFinanciacion" />
+        </set>
+    </class>
+</hibernate-mapping>

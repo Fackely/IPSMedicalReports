@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 18, 2010 4:43:52 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposRegimen" table="tipos_regimen" schema="manejopaciente">
+        <id name="acronimo" type="string">
+            <column name="acronimo" length="1" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" not-null="true" />
+        </property>
+        <property name="requiereDeudor" type="char">
+            <column name="requiere_deudor" length="1" not-null="true" />
+        </property>
+        <property name="reqVerificDerechos" type="char">
+            <column name="req_verific_derechos" length="1" not-null="true" />
+        </property>
+        <set name="conceptosTiposRegimens" inverse="true" lazy="true" table="conceptos_tipos_regimen" fetch="select">
+            <key>
+                <column name="acronimo_tr" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosTiposRegimen" />
+        </set>
+        <set name="cuentaRegimens" inverse="true" lazy="true" table="cuenta_regimen" fetch="select">
+            <key>
+                <column name="acr_tipo_regimen" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaRegimen" />
+        </set>
+        <set name="estratosSocialeses" inverse="true" lazy="true" table="estratos_sociales" fetch="select">
+            <key>
+                <column name="tipo_regimen" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EstratosSociales" />
+        </set>
+        <set name="excepcionesNaturalezas" inverse="true" lazy="true" table="excepciones_naturaleza" fetch="select">
+            <key>
+                <column name="acr_regimen" length="1" not-null="true">
+                    <comment>Acr&#195;&#179;nimo PK del tipo de r&#195;&#169;gimen</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcepcionesNaturaleza" />
+        </set>
+        <set name="topesFacturacions" inverse="true" lazy="true" table="topes_facturacion" fetch="select">
+            <key>
+                <column name="tipo_regimen" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TopesFacturacion" />
+        </set>
+        <set name="coberSaludTipoRegs" inverse="true" lazy="true" table="cober_salud_tipo_reg" fetch="select">
+            <key>
+                <column name="tipo_regimen" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberSaludTipoReg" />
+        </set>
+        <set name="convenioses" inverse="true" lazy="true" table="convenios" fetch="select">
+            <key>
+                <column name="tipo_regimen" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Convenios" />
+        </set>
+        <set name="tiposConvenios" inverse="true" lazy="true" table="tipos_convenio" fetch="select">
+            <key>
+                <column name="tipo_regimen" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposConvenio" />
+        </set>
+    </class>
+</hibernate-mapping>

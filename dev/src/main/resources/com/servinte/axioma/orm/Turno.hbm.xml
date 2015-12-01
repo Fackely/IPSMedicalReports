@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Turno" table="turno" schema="public">
+        <id name="codigoturno" type="int">
+            <column name="codigoturno" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposTurno" class="com.servinte.axioma.orm.TiposTurno" fetch="select">
+            <column name="tipo_turno" length="1" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="200" not-null="true" />
+        </property>
+        <property name="horadesde" type="time">
+            <column name="horadesde" length="15" not-null="true" />
+        </property>
+        <property name="numeroHoras" type="big_decimal">
+            <column name="numero_horas" precision="131089" scale="0" not-null="true" />
+        </property>
+        <property name="simbolo" type="string">
+            <column name="simbolo" length="2" not-null="true" />
+        </property>
+        <property name="colorLetra" type="string">
+            <column name="color_letra" length="7" not-null="true" />
+        </property>
+        <property name="colorFondo" type="string">
+            <column name="color_fondo" length="7" not-null="true" />
+        </property>
+        <property name="esFestivo" type="boolean">
+            <column name="es_festivo" precision="1" scale="0" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <set name="ocupacionesMedicases" inverse="false" lazy="true" table="ocupacion_turnos" fetch="select">
+            <key>
+                <column name="turnos" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.OcupacionesMedicas">
+                <column name="ocupacion_medica" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="ctTurnoGenerals" inverse="true" lazy="true" table="ct_turno_general" fetch="select">
+            <key>
+                <column name="codigoturno" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CtTurnoGeneral" />
+        </set>
+        <set name="enfermeraTRestriccions" inverse="true" lazy="true" table="enfermera_t_restriccion" fetch="select">
+            <key>
+                <column name="turno" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnfermeraTRestriccion" />
+        </set>
+    </class>
+</hibernate-mapping>

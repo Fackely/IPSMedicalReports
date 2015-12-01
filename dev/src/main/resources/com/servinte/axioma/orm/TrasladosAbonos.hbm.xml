@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 22, 2010 12:52:37 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TrasladosAbonos" table="traslados_abonos" schema="tesoreria">
+        <comment>De los traslados de abono</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">tesoreria.seq_traslados_abonos</param>
+			</generator>
+        </id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_proceso">
+                <comment>Centro de atencion donde se ejecuta el proceso</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true">
+                <comment>Usuario relacionado</comment>
+            </column>
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true">
+                <comment>Fecha del proceso</comment>
+            </column>
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true">
+                <comment>Hora del proceso</comment>
+            </column>
+        </property>
+        <property name="contabilizado" type="char">
+            <column name="contabilizado" length="1" not-null="true">
+                <comment>Indica si esta contabilizado por una interfaz. Por defecto</comment>
+            </column>
+        </property>
+        <property name="tipoComprobante" type="string">
+            <column name="tipo_comprobante" length="4">
+                <comment>Llave primaria</comment>
+            </column>
+        </property>
+        <property name="numeroComprobante" type="int">
+            <column name="numero_comprobante" precision="8" scale="0" not-null="true">
+                <comment>Llave primaria</comment>
+            </column>
+        </property>
+        <property name="consecutivo" type="big_decimal">
+            <column name="consecutivo" precision="20" scale="0" not-null="true">
+                <comment>Consecutivo del sistema</comment>
+            </column>
+        </property>
+        <set name="destinoTrasladosAbonosPacs" inverse="true" lazy="true" table="destino_traslados_abonos_pac" fetch="select" cascade="all">
+            <key>
+                <column name="traslado" precision="10" scale="0" not-null="true">
+                    <comment>Referencia a la tabla tesoreria.traslados_abonos</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DestinoTrasladosAbonosPac" />
+        </set>
+        <set name="origenTrasladosAbonosPacs" inverse="true" lazy="true" table="origen_traslados_abonos_pac" fetch="select" cascade="all">
+            <key>
+                <column name="traslado" precision="10" scale="0" not-null="true">
+                    <comment>Referencia a la tabla tesoreria.traslados_abonos</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrigenTrasladosAbonosPac" />
+        </set>
+    </class>
+</hibernate-mapping>

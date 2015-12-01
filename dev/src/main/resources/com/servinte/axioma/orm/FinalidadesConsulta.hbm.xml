@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 21, 2011 3:36:22 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FinalidadesConsulta" table="finalidades_consulta" schema="historiaclinica">
+        <id name="acronimo" type="string">
+            <column name="acronimo" length="2" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="128" />
+        </property>
+        <set name="valoracionesOdontos" inverse="true" lazy="true" table="valoraciones_odonto" fetch="select">
+            <key>
+                <column name="finalidad_consulta" length="2" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValoracionesOdonto" />
+        </set>
+        <set name="ripsConsultorioses" inverse="true" lazy="true" table="rips_consultorios" fetch="select">
+            <key>
+                <column name="finalidad_consulta" length="2" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RipsConsultorios" />
+        </set>
+        <set name="cargosDirectosHcs" inverse="true" lazy="true" table="cargos_directos_hc" fetch="select">
+            <key>
+                <column name="finalidad_consulta" length="2" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CargosDirectosHc" />
+        </set>
+    </class>
+</hibernate-mapping>

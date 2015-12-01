@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 1, 2011 8:58:44 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresupuestoOdoProgServ" table="presupuesto_odo_prog_serv" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="presupuestoOdontologico" class="com.servinte.axioma.orm.PresupuestoOdontologico" fetch="select">
+            <column name="presupuesto" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="inclusionesPresupuesto" class="com.servinte.axioma.orm.InclusionesPresupuesto" fetch="select">
+            <column name="inclusion" precision="12" scale="0" />
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+        <set name="presupuestoPiezases" inverse="true" lazy="true" table="presupuesto_piezas" fetch="select">
+            <key>
+                <column name="presupuesto_odo_prog_serv" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoPiezas" />
+        </set>
+        <set name="presupuestoOdoConvenios" inverse="true" lazy="true" table="presupuesto_odo_convenio" fetch="select">
+            <key>
+                <column name="presupuesto_odo_prog_serv" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoOdoConvenio" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FuncionalidadesRestriccion" table="funcionalidades_restriccion" schema="odontologia">
+        <id name="codigoFunc" type="int">
+            <column name="codigo_func" />
+            <generator class="foreign">
+                <param name="property">funcionalidades</param>
+            </generator>
+        </id>
+        <one-to-one name="funcionalidades" class="com.servinte.axioma.orm.Funcionalidades" constrained="true"></one-to-one>
+    </class>
+</hibernate-mapping>

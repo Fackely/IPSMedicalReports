@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/07/2011 06:11:28 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MovimientosAbonos" table="movimientos_abonos" schema="tesoreria">
+        <comment>Contiene todos los movimientos de abonos</comment>
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="sequence">
+				<param name="sequence">tesoreria.seq_movimientos_abonos</param>
+			</generator>
+        </id>
+        <many-to-one name="tiposMovAbonos" class="com.servinte.axioma.orm.TiposMovAbonos" fetch="select">
+            <column name="tipo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" fetch="select">
+            <column name="paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencionByCentroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" />
+        </many-to-one>
+        <many-to-one name="centroAtencionByCentroAtencionDuenio" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_duenio" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" />
+        </many-to-one>
+        <property name="codigoDocumento" type="int">
+            <column name="codigo_documento" not-null="true">
+                <comment>Dato relacionado al movimiento dependiendo el tipo: 1 | Generaci&#195;&#179;n Recibo de Caja | suma -&gt; tesoreria.recibos_caja (numero_racibo_caja) 2 |
+                Facturaci&#195;&#179;n | resta -&gt; facturacion.facturas (codigo) 3 | Anulaci&#195;&#179;n Factura | suma -&gt; facturacion.anulaciones_facturas (codigo) 4 |
+                Anulaci&#195;&#179;n/Devoluci&#195;&#179;n Recibo de Caja | resta -&gt; tesoreria.devol_recibos_caja (codigo) 5 | Salida Reserva Abono | resta -&gt;
+                odontologia.citas_odontologicas(codigo_pk) 6 | Entrada Reserva Abono | suma -&gt; odontologia.citas_odontologicas(codigo_pk) 7 | Anulacion Reserva Abono | suma
+                -&gt; odontologia.citas_odontologicas(codigo_pk) 8 | Ingreso Por Traslado | suma -&gt; tesoreria.origen_traslados_abonos_pac.docu 9 | Salida Por Traslado | resta
+                -&gt; tesoreria.destino_traslados_abonos_pac.docu 10 | Saldo Inicial Positivo | suma -&gt; 11 | Saldo Inicial Negativo | resta -&gt; 12 | AjusteSaldo Inicial
+                Positivo | suma -&gt; 13 | Ajuste Saldo Inicial Negativo | resta -&gt; 14 | Devoluci&#195;&#179;n Abono | resta -&gt;</comment>
+            </column>
+        </property>
+        <property name="valor" type="java.lang.Double">
+            <column name="valor" precision="17" scale="17" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" />
+        </property>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+        <set name="origenTrasladosAbonosPacs" table="origen_traslados_abonos_pac" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="movimiento_abono_origen" not-null="true">
+                    <comment>Referencia a la tabla tesoreria.movimientos_abonos</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrigenTrasladosAbonosPac" />
+        </set>
+        <set name="destinoTrasladosAbonosPacs" table="destino_traslados_abonos_pac" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="movimiento_abono_destino" not-null="true">
+                    <comment>Referencia a la tabla tesoreria.movimientos_abonos</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DestinoTrasladosAbonosPac" />
+        </set>
+    </class>
+</hibernate-mapping>

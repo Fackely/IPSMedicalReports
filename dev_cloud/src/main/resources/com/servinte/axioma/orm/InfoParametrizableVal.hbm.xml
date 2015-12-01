@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.InfoParametrizableVal" table="info_parametrizable_val" schema="public">
+        <composite-id name="id" class="com.servinte.axioma.orm.InfoParametrizableValId">
+            <key-property name="codigoFunsecpar" type="int">
+                <column name="codigo_funsecpar" />
+            </key-property>
+            <key-property name="numeroSolicitud" type="int">
+                <column name="numero_solicitud" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="funSecParametrizadas" class="com.servinte.axioma.orm.FunSecParametrizadas" update="false" insert="false" fetch="select">
+            <column name="codigo_funsecpar" not-null="true" />
+        </many-to-one>
+        <property name="valor" type="string">
+            <column name="valor" />
+        </property>
+    </class>
+</hibernate-mapping>

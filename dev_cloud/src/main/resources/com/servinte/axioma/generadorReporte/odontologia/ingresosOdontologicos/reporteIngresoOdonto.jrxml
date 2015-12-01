@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteIngresoOdonto" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="732" leftMargin="30" rightMargin="30" topMargin="30" bottomMargin="30" uuid="d7f52b1d-0741-495d-bd4d-e4607abf7215">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subreporteListadoResultado" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/odontologia/ingresosOdontologicos/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subreporteIngresosConValIni" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subreporteIngresosSinValIni" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subrptConsolidadoIngresosOdonto" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptTotalPorEstado" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="razonSocial" class="java.lang.String"/>
+	<field name="fechaInicial" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="edad" class="java.lang.String"/>
+	<field name="nombreProfesional" class="java.lang.String"/>
+	<field name="estadoPresupuesto" class="java.lang.String"/>
+	<field name="indicativoContrato" class="java.lang.String"/>
+	<field name="nombreEspecialidad" class="java.lang.String"/>
+	<field name="nombrePaquete" class="java.lang.String"/>
+	<field name="nombrePrograma" class="java.lang.String"/>
+	<field name="logoDerecha" class="java.lang.String"/>
+	<field name="logoIzquierda" class="java.lang.String"/>
+	<field name="dsResultadoConsulta" class="java.lang.Object"/>
+	<field name="usuarioProcesa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="130" splitType="Immediate">
+			<staticText>
+				<reportElement uuid="91a51b3b-789c-4515-91d5-52d32f5e51e7" key="titulo" style="axiomaTitulo" x="210" y="15" width="300" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE INGRESOS ODONTOLÓGICOS]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="4f098a22-0ac6-44fc-a966-75558aee7d92" key="razonSocial" style="axiomaTitulo" stretchType="RelativeToTallestObject" x="210" y="0" width="300" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="f2e70a47-654f-4056-9c7f-d86a6ab589f7" key="fechaInicial" style="axiomaTexto" stretchType="RelativeToTallestObject" x="270" y="50" width="100" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fechaInicial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="997569b1-50ea-4782-b100-69437d903ceb" key="fechaFinal" style="axiomaTexto" stretchType="RelativeToTallestObject" x="455" y="50" width="100" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="96883204-41da-4df3-a912-526a580ea409" style="axiomaItem" x="200" y="50" width="70" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0071f83a-2768-4272-963d-a610f86f6ae0" style="axiomaItem" x="385" y="50" width="70" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Final:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5adeeae1-4145-45ed-8bbc-7bd527491910" style="axiomaItem" x="80" y="65" width="30" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="95de3273-cf29-4d65-a4a9-84e1fb0864f7" key="sexo" style="axiomaTexto" stretchType="RelativeToTallestObject" x="110" y="65" width="120" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="06a13383-fa54-43d0-b88b-e3ae6ca1a844" style="axiomaItem" x="270" y="65" width="30" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="f1604b60-5268-41d2-94e5-089ea9401cf1" key="edad" style="axiomaTexto" stretchType="RelativeToTallestObject" x="300" y="65" width="50" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9b46ded3-3f5c-4ba7-8eec-5277bf399576" style="axiomaItem" x="370" y="65" width="120" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profesional que valoró:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="f2e99e4d-a171-4ad3-a909-2f69bd52c776" key="nombreProfesional" style="axiomaTexto" stretchType="RelativeToTallestObject" x="490" y="65" width="200" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombreProfesional}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="aae07b5f-cdea-4352-b5d7-e792e3632b87" style="axiomaItem" x="130" y="80" width="125" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado del Presupuesto:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="52845e5e-fd0d-4896-893d-0dd22270913b" key="estadoPresupuesto" style="axiomaTexto" stretchType="RelativeToTallestObject" x="255" y="80" width="100" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{estadoPresupuesto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="624c7b5a-2eeb-49ed-9438-c89be8964ab5" style="axiomaItem" x="370" y="80" width="100" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indicativo Contrato:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="24b57c53-1328-45ef-b3fc-653d98d43788" style="axiomaTexto" stretchType="RelativeToTallestObject" x="470" y="80" width="100" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{indicativoContrato}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="78fbfc32-9127-4081-b4ec-8572a79fa6ab" style="axiomaItem" x="100" y="95" width="70" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especialidad:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e585391a-df2b-47c3-847b-86f3be2e51c5" key="nombreEspecialidad" style="axiomaTexto" stretchType="RelativeToTallestObject" x="170" y="95" width="120" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombreEspecialidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="17a497b3-56d9-40b1-a688-5f753fb63bbb" style="axiomaItem" x="310" y="95" width="50" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paquete:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="1c4a7306-5708-45ff-84b0-17d3ee388474" key="nombrePaquete" style="axiomaTexto" stretchType="RelativeToTallestObject" x="360" y="95" width="100" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombrePaquete}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="49a9d333-6055-485c-9862-a9f9e3d4a6c1" style="axiomaItem" x="470" y="95" width="60" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="5f99a491-29c2-4d7d-97fb-58c8326adadf" key="nombrePrograma" style="axiomaTexto" stretchType="RelativeToTallestObject" x="530" y="95" width="120" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombrePrograma}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+				<reportElement uuid="77262f34-141d-4c03-8cf6-3bc194653c80" key="logoDerecha" x="50" y="0" width="120" height="70">
+					<printWhenExpression><![CDATA[$F{logoIzquierda} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$F{logoIzquierda}]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+				<reportElement uuid="101fb915-8c55-4ff4-a59c-5a90fe5265b1" x="580" y="0" width="120" height="70" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{logoDerecha} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$F{logoDerecha}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="56f36d32-f5f9-4d5a-8c5b-e09b7d94b010" x="42" y="73" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="10" splitType="Immediate">
+			<subreport isUsingCache="true">
+				<reportElement uuid="edd2a853-aa51-44a0-94b0-8af493c77625" key="subreporteListadoResultado" stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subrptTotalPorEstado">
+					<subreportParameterExpression><![CDATA[$P{subrptTotalPorEstado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subreporteIngresosSinValIni">
+					<subreportParameterExpression><![CDATA[$P{subreporteIngresosSinValIni}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subrptConsolidadoIngresosOdonto">
+					<subreportParameterExpression><![CDATA[$P{subrptConsolidadoIngresosOdonto}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subreporteIngresosConValIni">
+					<subreportParameterExpression><![CDATA[$P{subreporteIngresosConValIni}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{dsResultadoConsulta}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{subreporteListadoResultado}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="40" splitType="Immediate">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="ab38dfee-5ae3-4d76-b96e-e2225e9f1b3e" style="axiomaTexto" mode="Transparent" x="385" y="15" width="100" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="bfd5d88e-1ed7-484f-a6e2-110d6584884a" style="axiomaTexto" x="300" y="15" width="80" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha de Proceso:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="aa73f0d2-f8f0-4b77-8f4b-24719edc50a0" style="axiomaTexto" x="490" y="15" width="77" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="aa18e26d-bcf8-43fe-9379-8a7ede0be971" style="axiomaTexto" x="567" y="15" width="26" height="15"/>
+				<box leftPadding="1"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="2f7bc395-494f-407c-8b82-1950b7232267" key="usuarioProcesa" style="axiomaTexto" x="170" y="15" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{usuarioProcesa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7437fee1-8a31-4981-bfdb-5b28b0c371cb" style="axiomaTexto" x="100" y="15" width="70" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Usuario Proceso:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

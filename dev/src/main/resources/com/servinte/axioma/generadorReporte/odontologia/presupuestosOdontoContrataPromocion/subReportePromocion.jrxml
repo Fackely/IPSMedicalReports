@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReportePromocion" language="groovy" pageWidth="752" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.3310000000000026"/>
+	<property name="ireport.x" value="164"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<field name="nombrePromocion" class="java.lang.String"/>
+	<field name="codigoPrograma" class="java.lang.String"/>
+	<field name="nombrePrograma" class="java.lang.String"/>
+	<field name="ayudanteFechaIniVige" class="java.lang.String"/>
+	<field name="ayudanteFechaFinVige" class="java.lang.String"/>
+	<field name="descCentroAtencionDuenio" class="java.lang.String"/>
+	<field name="consCentroAtencionDuenio" class="java.lang.String"/>
+	<field name="nombreCompletoProfesionalContrato" class="java.lang.String"/>
+	<field name="consecutivoPresupuesto" class="java.lang.Long"/>
+	<field name="ayudanteEstadoPresupuesto" class="java.lang.String"/>
+	<field name="numeroContrato" class="java.lang.String"/>
+	<field name="ayudanteFechaContrato" class="java.lang.String"/>
+	<field name="valorPresupuestoFormato" class="java.lang.String"/>
+	<field name="valorDescuentoPromFormato" class="java.lang.String"/>
+	<field name="ayudanteNumeroId" class="java.lang.String"/>
+	<field name="nombreCompletoPaciente" class="java.lang.String"/>
+	<field name="totalPromocion" class="java.lang.String"/>
+	<group name="Promocion" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$V{PAGE_NUMBER}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<frame>
+					<reportElement style="colorEncabezado" mode="Transparent" x="0" y="0" width="752" height="50" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<staticText>
+						<reportElement x="0" y="0" width="59" height="20"/>
+						<textElement textAlignment="Right">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Promocion:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="0" y="20" width="86" height="30"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Centro de Atencion Dueño]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="86" y="20" width="60" height="30"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ID Paciente]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="146" y="20" width="133" height="30"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Paciente]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="279" y="20" width="67" height="30"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Fecha del Contrato]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="346" y="20" width="54" height="30"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Nro Presupuesto]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="400" y="20" width="52" height="30"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Nro Contrato]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="452" y="20" width="67" height="30"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Indicativo Contrato]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="519" y="20" width="99" height="30"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Profesional que Contrato]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="618" y="20" width="79" height="30"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Valor Contrato]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="697" y="20" width="55" height="30"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Vlr Dsc  Promoción]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="200" y="0" width="46" height="20"/>
+						<textElement textAlignment="Right">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Vigencia:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="395" y="0" width="56" height="20"/>
+						<textElement textAlignment="Right">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Programa:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="nombrePromocion" style="axiomaTexto" x="59" y="0" width="141" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrePromocion}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="246" y="0" width="67" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteFechaIniVige}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="326" y="0" width="67" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteFechaFinVige}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="473" y="0" width="279" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrePrograma}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="313" y="0" width="13" height="20"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[-]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="codigoPrograma" style="axiomaTexto" x="451" y="0" width="22" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoPrograma}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<frame>
+					<reportElement key="" x="0" y="0" width="752" height="20"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="nombrePromocion" style="axiomaTexto" x="603" y="0" width="80" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement textAlignment="Left">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrePromocion}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="400" y="0" width="193" height="20"/>
+						<textElement textAlignment="Right">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Valor Total descuento Promoción]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="totalPromocion" style="axiomaTexto" x="682" y="0" width="69" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement textAlignment="Right">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{totalPromocion}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="752" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="nombreCompletoProfesionalContrato" style="axiomaTexto" x="519" y="0" width="99" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreCompletoProfesionalContrato}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="consecutivoPresupuesto" style="axiomaTexto" x="346" y="0" width="54" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{consecutivoPresupuesto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="ayudanteEstadoPresupuesto" style="axiomaTexto" x="452" y="0" width="67" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteEstadoPresupuesto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="ayudanteFechaContrato" style="axiomaTexto" x="279" y="0" width="67" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteFechaContrato}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="valorPresupuestoFormato" style="axiomaTexto" x="618" y="0" width="79" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{valorPresupuestoFormato}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="valorDescuentoPromFormato" style="axiomaTexto" x="697" y="0" width="55" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{valorDescuentoPromFormato}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="ayudanteNumeroId" style="axiomaTexto" x="86" y="0" width="60" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteNumeroId}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="nombreCompletoPaciente" style="axiomaTexto" x="146" y="0" width="133" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreCompletoPaciente}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="numeroContrato" style="axiomaTexto" x="400" y="0" width="52" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{numeroContrato}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="descCentroAtencionDuenio" style="axiomaTexto" x="0" y="0" width="86" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{descCentroAtencionDuenio}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

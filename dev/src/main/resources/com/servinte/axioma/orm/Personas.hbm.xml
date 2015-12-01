@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/06/2011 05:10:02 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Personas" table="personas" schema="administracion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="sequence">
+				<param name="sequence">administracion.seq_personas</param>
+			</generator>
+        </id>
+        <many-to-one name="ciudadesByFkPCiudadid" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="codigo_ciudad_id" length="10" />
+            <column name="codigo_depto_id" length="10" />
+            <column name="codigo_pais_id" length="10" />
+        </many-to-one>
+        <many-to-one name="sexo" class="com.servinte.axioma.orm.Sexo" fetch="select">
+            <column name="sexo" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkPCiudadviv" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="codigo_ciudad_vivienda" length="10" />
+            <column name="codigo_departamento_vivienda" length="10" />
+            <column name="codigo_pais_vivienda" length="10" />
+        </many-to-one>
+        <many-to-one name="tiposPersonas" class="com.servinte.axioma.orm.TiposPersonas" fetch="select">
+            <column name="tipo_persona" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkPCiudadnac" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="codigo_ciudad_nacimiento" length="10" />
+            <column name="codigo_departamento_nacimiento" length="10" />
+            <column name="codigo_pais_nacimiento" length="10" />
+        </many-to-one>
+        <many-to-one name="barrios" class="com.servinte.axioma.orm.Barrios" fetch="select">
+            <column name="codigo_barrio_vivienda" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacion" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_identificacion" length="3" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estadosCiviles" class="com.servinte.axioma.orm.EstadosCiviles" fetch="select">
+            <column name="estado_civil" length="1" />
+        </many-to-one>
+        <property name="numeroIdentificacion" type="string">
+            <column name="numero_identificacion" length="20" not-null="true" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="13" />
+        </property>
+        <property name="libretaMilitar" type="string">
+            <column name="libreta_militar" length="30" />
+        </property>
+        <property name="primerNombre" type="string">
+            <column name="primer_nombre" length="30" not-null="true" />
+        </property>
+        <property name="segundoNombre" type="string">
+            <column name="segundo_nombre" length="30" />
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="primer_apellido" length="30" not-null="true" />
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="segundo_apellido" length="30" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="256" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="512" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="64" />
+        </property>
+        <property name="codigoLocalidadVivienda" type="string">
+            <column name="codigo_localidad_vivienda" length="10" />
+        </property>
+        <property name="telefonoCelular" type="java.lang.Long">
+            <column name="telefono_celular" precision="10" scale="0" />
+        </property>
+        <property name="telefonoFijo" type="java.lang.Integer">
+            <column name="telefono_fijo" precision="7" scale="0" />
+        </property>
+        <property name="indicativoInterfaz" type="string">
+            <column name="indicativo_interfaz" length="1" not-null="true" />
+        </property>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+        <one-to-one name="medicos" class="com.servinte.axioma.orm.Medicos"></one-to-one>
+        <set name="movimientosAbonoses" table="movimientos_abonos" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="paciente" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosAbonos" />
+        </set>
+        <set name="autorizacioneses" table="autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="persona_solicita" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Autorizaciones" />
+        </set>
+        <set name="novedadEnfermeras" table="novedad_enfermera" schema="public" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigomedico" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NovedadEnfermera" />
+        </set>
+        <set name="usuarioses" table="usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_persona" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Usuarios" />
+        </set>
+        <set name="inconsistenciaPersonas" table="inconsistencia_persona" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="persona" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InconsistenciaPersona" />
+        </set>
+        <set name="facturases" table="facturas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cod_paciente" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Facturas" />
+        </set>
+        <set name="egresoses" table="egresos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_persona_reversion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+        <set name="vacacioneses" table="vacaciones" schema="public" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_medico" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Vacaciones" />
+        </set>
+        <set name="enfermeraRestriccions" table="enfermera_restriccion" schema="public" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigomedico" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnfermeraRestriccion" />
+        </set>
+        <set name="categoriaEnfermeras" table="categoria_enfermera" schema="public" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_medico" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CategoriaEnfermera" />
+        </set>
+        <set name="usuarioXConvenios" table="usuario_x_convenio" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="persona" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuarioXConvenio" />
+        </set>
+        <set name="enfermeraTRestriccions" table="enfermera_t_restriccion" schema="public" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="medico" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnfermeraTRestriccion" />
+        </set>
+        <set name="logAutorizacionIngEvens" table="log_autorizacion_ing_even" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_persona" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogAutorizacionIngEven" />
+        </set>
+        <set name="ctTurnoGenerals" table="ct_turno_general" schema="public" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigomedico" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CtTurnoGeneral" />
+        </set>
+        <set name="peticionQxes" table="peticion_qx" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="solicitante" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PeticionQx" />
+        </set>
+        <set name="beneficiariosPacientes" table="beneficiarios_paciente" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="persona_beneficiario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.BeneficiariosPaciente" />
+        </set>
+        <one-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes"></one-to-one>
+    </class>
+</hibernate-mapping>

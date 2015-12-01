@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AdmisionesUrgencias" table="admisiones_urgencias" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.AdmisionesUrgenciasId">
+            <key-property name="codigo" type="int">
+                <column name="codigo" />
+            </key-property>
+            <key-property name="anio" type="int">
+                <column name="anio" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico" />
+        </many-to-one>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="camas1" class="com.servinte.axioma.orm.Camas1" fetch="select">
+            <column name="cama_observacion" />
+        </many-to-one>
+        <many-to-one name="oriAdmisionHospi" class="com.servinte.axioma.orm.OriAdmisionHospi" fetch="select">
+            <column name="origen_admision_urgencias" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="login_usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fechaAdmision" type="date">
+            <column name="fecha_admision" length="13" not-null="true" />
+        </property>
+        <property name="horaAdmision" type="time">
+            <column name="hora_admision" length="15" not-null="true" />
+        </property>
+        <property name="numeroAutorizacion" type="string">
+            <column name="numero_autorizacion" length="15" />
+        </property>
+        <property name="causaExterna" type="int">
+            <column name="causa_externa" not-null="true" />
+        </property>
+        <property name="fechaIngresoObservacion" type="date">
+            <column name="fecha_ingreso_observacion" length="13" />
+        </property>
+        <property name="horaIngresoObservacion" type="time">
+            <column name="hora_ingreso_observacion" length="15" />
+        </property>
+        <property name="fechaEgresoObservacion" type="date">
+            <column name="fecha_egreso_observacion" length="13" />
+        </property>
+        <property name="horaEgresoObservacion" type="time">
+            <column name="hora_egreso_observacion" length="15" />
+        </property>
+        <property name="consecutivoTriage" type="java.lang.Long">
+            <column name="consecutivo_triage" precision="10" scale="0" />
+        </property>
+        <property name="consecutivoTriageFecha" type="string">
+            <column name="consecutivo_triage_fecha" length="4" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="6">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="MovimientosConsignaciones" id="7">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">centroAtencion</property>
+                    <property name="paramName">centroAtencion</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+t.numero_identificacion as nitproveedor, 
+t.descripcion as descproveedor, 
+a.codigo as  codigoarticulo, 
+a.codigo_interfaz as codigointerfaz, 
+a.descripcion as descarticulo, 
+getunidadmedidaarticulo(a.codigo) as unidadmedida, 
+(sum(convertiranumero(cantidadentrada))-sum(convertiranumero(cantidadsalida))) as cantidad, 
+a.costo_promedio as costounitario, 
+((sum(convertiranumero(cantidadentrada))-sum(convertiranumero(cantidadsalida)))*a.costo_promedio) as valortotal  
+FROM view_movimientos_inventarios vmi 
+INNER JOIN tipos_trans_inventarios tti on (vmi.codigotransaccion=tti.codigo and tti.indicativo_consignacion='S') 
+INNER JOIN centros_costo cc ON(cc.codigo=convertiranumero(vmi.almacen)) 
+INNER JOIN articulo a ON(a.codigo=convertiranumero(vmi.articulo)) 
+INNER JOIN terceros t on(t.numero_identificacion=vmi.proveedorcompra) 
+WHERE vmi.proveedorcompra is not null
+</property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="crosstab-cell" id="4">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">us-letter</property>
+            <property name="orientation">landscape</property>
+            <property name="leftMargin">0.8333333333333334in</property>
+            <property name="rightMargin">0.6979166666666666in</property>
+            <page-header>
+                <grid id="105">
+                    <property name="width">100%</property>
+                    <column id="106"/>
+                    <column id="107"/>
+                    <column id="108"/>
+                    <row id="109">
+                        <cell id="110"/>
+                        <cell id="111"/>
+                        <cell id="112"/>
+                    </row>
+                    <row id="113">
+                        <cell id="114"/>
+                        <cell id="115"/>
+                        <cell id="116"/>
+                    </row>
+                    <row id="117">
+                        <cell id="118"/>
+                        <cell id="119"/>
+                        <cell id="120"/>
+                    </row>
+                    <row id="121">
+                        <cell id="122"/>
+                        <cell id="123"/>
+                        <cell id="124"/>
+                    </row>
+                    <row id="125">
+                        <cell id="126"/>
+                        <cell id="127"/>
+                        <cell id="128"/>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="129">
+                    <property name="width">100%</property>
+                    <column id="130"/>
+                    <column id="131"/>
+                    <column id="132"/>
+                    <row id="133">
+                        <cell id="134"/>
+                        <cell id="135">
+                            <text id="148">
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="136">
+                            <grid id="137">
+                                <property name="width">100%</property>
+                                <column id="138">
+                                    <property name="width">2.1770833333333335in</property>
+                                </column>
+                                <column id="139">
+                                    <property name="width">0.46875in</property>
+                                </column>
+                                <column id="140"/>
+                                <row id="141">
+                                    <cell id="142">
+                                        <auto-text id="143">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="144">
+                                        <text id="145">
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[de]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="146">
+                                        <auto-text id="147">
+                                            <property name="textAlign">left</property>
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="8">
+            <property name="height">1.8125in</property>
+            <property name="width">9.416666666666666in</property>
+            <property name="dataSet">MovimientosConsignaciones</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">nitproveedor</property>
+                    <expression name="expression">dataSetRow["nitproveedor"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">descproveedor</property>
+                    <expression name="expression">dataSetRow["descproveedor"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigoarticulo</property>
+                    <expression name="expression">dataSetRow["codigoarticulo"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">codigointerfaz</property>
+                    <expression name="expression">dataSetRow["codigointerfaz"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">descarticulo</property>
+                    <expression name="expression">dataSetRow["descarticulo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">unidadmedida</property>
+                    <expression name="expression">dataSetRow["unidadmedida"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cantidad</property>
+                    <expression name="expression">dataSetRow["cantidad"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">costounitario</property>
+                    <expression name="expression">dataSetRow["costounitario"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valortotal</property>
+                    <expression name="expression">dataSetRow["valortotal"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Total</property>
+                    <expression name="expression">"Total Proveedor ( "+dataSetRow["nitproveedor"]+")"</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GrupoProveedor</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GrupoProveedor</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["valortotal"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <column id="36">
+                <property name="width">1in</property>
+            </column>
+            <column id="37">
+                <property name="width">1.1770833333333333in</property>
+            </column>
+            <column id="38">
+                <property name="width">1.09375in</property>
+            </column>
+            <column id="39">
+                <property name="width">1.4270833333333333in</property>
+            </column>
+            <column id="40">
+                <property name="width">1.09375in</property>
+            </column>
+            <column id="41">
+                <property name="width">1.0625in</property>
+            </column>
+            <column id="42">
+                <property name="width">1.0104166666666667in</property>
+            </column>
+            <column id="43"/>
+            <header>
+                <row id="9">
+                    <cell id="10"/>
+                    <cell id="11"/>
+                    <cell id="12"/>
+                    <cell id="13"/>
+                    <cell id="14"/>
+                    <cell id="15"/>
+                    <cell id="16"/>
+                    <cell id="17"/>
+                </row>
+            </header>
+            <group id="44">
+                <property name="groupName">GrupoProveedor</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr">row["nitproveedor"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue">row["nitproveedor"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="45">
+                        <cell id="46"/>
+                        <cell id="47"/>
+                        <cell id="48"/>
+                        <cell id="49"/>
+                        <cell id="50"/>
+                        <cell id="51"/>
+                        <cell id="52"/>
+                        <cell id="53"/>
+                    </row>
+                    <row id="64">
+                        <cell id="65">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="73">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">Nit</text-property>
+                            </label>
+                        </cell>
+                        <cell id="66">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="74">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">Proveedor</text-property>
+                            </label>
+                        </cell>
+                        <cell id="67">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="75">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">Cod. Art.</text-property>
+                            </label>
+                        </cell>
+                        <cell id="68">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="76">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">Articulo</text-property>
+                            </label>
+                        </cell>
+                        <cell id="69">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="77">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">U. Med.</text-property>
+                            </label>
+                        </cell>
+                        <cell id="70">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="78">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">Cant.</text-property>
+                            </label>
+                        </cell>
+                        <cell id="71">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="79">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">Costo</text-property>
+                            </label>
+                        </cell>
+                        <cell id="72">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <label id="80">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">Valor Total</text-property>
+                            </label>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="54">
+                        <cell id="55">
+                            <property name="colSpan">5</property>
+                            <property name="rowSpan">1</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="102">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">Total</property>
+                            </data>
+                        </cell>
+                        <cell id="60">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="103">
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">Aggregation</property>
+                            </data>
+                        </cell>
+                        <cell id="61">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                        </cell>
+                        <cell id="62">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="textAlign">right</property>
+                            <data id="104">
+                                <property name="resultSetColumn">Aggregation_1</property>
+                            </data>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="18">
+                    <cell id="19">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="82">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">nitproveedor</property>
+                        </data>
+                    </cell>
+                    <cell id="20">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="textAlign">center</property>
+                        <data id="84">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">descproveedor</property>
+                        </data>
+                    </cell>
+                    <cell id="21">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="86">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">codigoarticulo</property>
+                        </data>
+                    </cell>
+                    <cell id="22">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="88">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">descarticulo</property>
+                        </data>
+                    </cell>
+                    <cell id="23">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="90">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">unidadmedida</property>
+                        </data>
+                    </cell>
+                    <cell id="24">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="92">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">cantidad</property>
+                        </data>
+                    </cell>
+                    <cell id="25">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="94">
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">costounitario</property>
+                        </data>
+                    </cell>
+                    <cell id="26">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="97">
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">valortotal</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="27">
+                    <cell id="28"/>
+                    <cell id="29"/>
+                    <cell id="30"/>
+                    <cell id="31"/>
+                    <cell id="32"/>
+                    <cell id="33"/>
+                    <cell id="34"/>
+                    <cell id="35"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

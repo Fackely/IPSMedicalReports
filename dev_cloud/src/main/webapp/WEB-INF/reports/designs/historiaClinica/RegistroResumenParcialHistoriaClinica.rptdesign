@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="19">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="RegistroResumenParcialHistoriaClinica" id="20">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">profesional</property>
+                    <property name="displayName">profesional</property>
+                </structure>
+                <structure>
+                    <property name="columnName">noted</property>
+                    <property name="displayName">noted</property>
+                </structure>
+                <structure>
+                    <property name="columnName">infomedico</property>
+                    <property name="displayName">infomedico</property>
+                </structure>
+                <structure>
+                    <property name="columnName">documentomedico</property>
+                    <property name="displayName">documentomedico</property>
+                </structure>
+                <structure>
+                    <property name="columnName">registromedico</property>
+                    <property name="displayName">registromedico</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">profesional</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">noted</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">infomedico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">documentomedico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">registromedico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">profesional</property>
+                    <property name="nativeName">profesional</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">noted</property>
+                    <property name="nativeName">noted</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">infomedico</property>
+                    <property name="nativeName">infomedico</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">documentomedico</property>
+                    <property name="nativeName">documentomedico</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">registromedico</property>
+                    <property name="nativeName">registromedico</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT                                  
+        getnombremedico(m.codigo_medico) as profesional,                                                                                    
+        rch.notas as noted,                                                                                                                          
+        rch.infomedico as infomedico,                                                                                                                     
+        p.tipo_identificacion || ' ' || p.numero_identificacion as documentomedico,                                                         
+        m.numero_registro as registromedico                                                                                                 
+FROM                                                                                                                                        
+        resumen_historia_clinica rch                                                                                                        
+INNER JOIN                                                                                                                                  
+        usuarios u ON (rch.profesional_responsable=u.login)                                                                                 
+INNER JOIN                                                                                                                                  
+        medicos m ON (u.codigo_persona = m.codigo_medico)  INNER JOIN   personas p ON (m.codigo_medico = p.codigo)
+WHERE
+          1=1
+</property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="NewStyle" id="1433"/>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="topMargin">2cm</property>
+            <property name="leftMargin">2cm</property>
+            <property name="bottomMargin">2cm</property>
+            <property name="rightMargin">2cm</property>
+            <property name="headerHeight">0.5in</property>
+            <page-header>
+                <grid id="4">
+                    <property name="width">100%</property>
+                    <column id="5"/>
+                    <column id="6"/>
+                    <column id="93"/>
+                    <row id="7">
+                        <cell id="8"/>
+                        <cell id="9">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                        </cell>
+                    </row>
+                    <row id="10">
+                        <cell id="11"/>
+                        <cell id="12">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                        </cell>
+                    </row>
+                    <row id="13">
+                        <cell id="14">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                        </cell>
+                    </row>
+                    <row id="16">
+                        <cell id="17">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                        </cell>
+                    </row>
+                    <row id="72">
+                        <cell id="73">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                    </row>
+                    <row id="98">
+                        <cell id="99">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                        <cell id="101">
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                    </row>
+                    <row id="75">
+                        <cell id="76">
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                        <cell id="77">
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                        <cell id="90">
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                    </row>
+                    <row id="78">
+                        <cell id="79">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                    </row>
+                    <row id="81">
+                        <cell id="82">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                        <cell id="92">
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                    </row>
+                    <row id="94">
+                        <cell id="95">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                        <cell id="97">
+                            <property name="fontSize">smaller</property>
+                            <property name="borderLeftColor">#1A1A1A</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#1A1A1A</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#1A1A1A</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="168">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1px</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1px</property>
+            <property name="width">100%</property>
+            <column id="169">
+                <property name="width">1.4479166666666667in</property>
+            </column>
+            <column id="170">
+                <property name="width">2.5104166666666665in</property>
+            </column>
+            <column id="171">
+                <property name="width">1.0833333333333333in</property>
+            </column>
+            <column id="172"/>
+            <row id="173">
+                <cell id="174">
+                    <property name="colSpan">4</property>
+                    <property name="rowSpan">1</property>
+                    <property name="backgroundColor">#BFBFBF</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <label id="193">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">RESUMEN HISTORIA CLINICA</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="178">
+                <cell id="179">
+                    <property name="colSpan">4</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="1443">
+                        <property name="dataSet">RegistroResumenParcialHistoriaClinica</property>
+                        <list-property name="boundDataColumns">
+                             <structure>
+                                <property name="name">noted</property>
+                                <property name="displayName">noted</property>
+                                <expression name="expression">dataSetRow["noted"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">noted</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="183">
+                <cell id="184">
+                    <property name="backgroundColor">#E5E5E5</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <label id="194">
+                        <property name="fontSize">small</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">MÉDICO TRATANTE</text-property>
+                    </label>
+                </cell>
+                <cell id="185">
+                    <property name="backgroundColor">#E5E5E5</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <label id="195">
+                        <property name="fontSize">small</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">ESPECIALIDAD</text-property>
+                    </label>
+                </cell>
+                <cell id="186">
+                    <property name="backgroundColor">#E5E5E5</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <label id="196">
+                        <property name="fontSize">small</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">TIPO Y No. ID</text-property>
+                    </label>
+                </cell>
+                <cell id="187">
+                    <property name="backgroundColor">#E5E5E5</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <label id="197">
+                        <property name="fontSize">small</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">No. REGISTRO  MÉDICO</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="188">
+                <cell id="189">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="1439">
+                        <property name="dataSet">RegistroResumenParcialHistoriaClinica</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">profesional</property>
+                                <property name="displayName">profesional</property>
+                                <expression name="expression">dataSetRow["profesional"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">profesional</property>
+                    </data>
+                </cell>
+                <cell id="190">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="1440">
+                        <property name="dataSet">RegistroResumenParcialHistoriaClinica</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">infomedico</property>
+                                <property name="displayName">infomedico</property>
+                                <expression name="expression">dataSetRow["infomedico"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">infomedico</property>
+                    </data>
+                </cell>
+                <cell id="191">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="1441">
+                        <property name="dataSet">RegistroResumenParcialHistoriaClinica</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">documentomedico</property>
+                                <property name="displayName">documentomedico</property>
+                                <expression name="expression">dataSetRow["documentomedico"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">documentomedico</property>
+                    </data>
+                </cell>
+                <cell id="192">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="1442">
+                        <property name="dataSet">RegistroResumenParcialHistoriaClinica</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">registromedico</property>
+                                <property name="displayName">registromedico</property>
+                                <expression name="expression">dataSetRow["registromedico"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">registromedico</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <grid name="piehiscli" id="1428">
+            <property name="width">100%</property>
+            <column id="1429"/>
+            <row id="1430">
+                <cell id="1431">
+                    <property name="style">axiomaTitulo</property>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

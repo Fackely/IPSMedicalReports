@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/07/2011 03:06:44 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Egresos" table="egresos" schema="manejopaciente">
+        <id name="cuenta" type="int">
+            <column name="cuenta" />
+            <generator class="foreign">
+                <param name="property">cuentas</param>
+            </generator>
+        </id>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" fetch="select">
+            <column name="codigo_persona_reversion" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkEgresosDiagPrinc" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_principal" length="10" not-null="true" />
+            <column name="diagnostico_principal_cie" not-null="true" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkEgresosDiagnosticor1" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_relacionado1" length="10" not-null="true" />
+            <column name="diagnostico_relacionado1_cie" not-null="true" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkEgresosDiagnosticor3" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_relacionado3" length="10" not-null="true" />
+            <column name="diagnostico_relacionado3_cie" not-null="true" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkEgresosDiagnosticor2" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_relacionado2" length="10" not-null="true" />
+            <column name="diagnostico_relacionado2_cie" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoMonitoreo" class="com.servinte.axioma.orm.TipoMonitoreo" fetch="select">
+            <column name="tipo_monitoreo" />
+        </many-to-one>
+        <many-to-one name="evolucionesByEvolucionGeneroMotivoRev" class="com.servinte.axioma.orm.Evoluciones" fetch="select">
+            <column name="evolucion_genero_motivo_rev" />
+        </many-to-one>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkEgresosDiagMuerte" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_muerte" length="10" not-null="true" />
+            <column name="diagnostico_muerte_cie" not-null="true" />
+        </many-to-one>
+        <many-to-one name="evolucionesByEvolucion" class="com.servinte.axioma.orm.Evoluciones" fetch="select">
+            <column name="evolucion" />
+        </many-to-one>
+        <one-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_responsable" length="30" />
+        </many-to-one>
+        <many-to-one name="causasExternas" class="com.servinte.axioma.orm.CausasExternas" fetch="select">
+            <column name="causa_externa" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByFkEgresosDiagnosticoC" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_complicacion" length="10" />
+            <column name="diagnostico_complicacion_cie" />
+        </many-to-one>
+        <property name="estadoSalida" type="java.lang.Boolean">
+            <column name="estado_salida" />
+        </property>
+        <property name="destinoSalida" type="java.lang.Integer">
+            <column name="destino_salida" />
+        </property>
+        <property name="otroDestinoSalida" type="string">
+            <column name="otro_destino_salida" length="64" />
+        </property>
+        <property name="fechaEgreso" type="date">
+            <column name="fecha_egreso" length="13" />
+        </property>
+        <property name="horaEgreso" type="string">
+            <column name="hora_egreso" length="5" />
+        </property>
+        <property name="fechaReversionEgreso" type="date">
+            <column name="fecha_reversion_egreso" length="13" />
+        </property>
+        <property name="horaReversionEgreso" type="string">
+            <column name="hora_reversion_egreso" length="5" />
+        </property>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" />
+        </property>
+        <property name="horaGrabacion" type="string">
+            <column name="hora_grabacion" length="5" />
+        </property>
+        <property name="motivoReversion" type="string">
+            <column name="motivo_reversion" />
+        </property>
+        <property name="mostrarMotivoRevEpicrisis" type="java.lang.Boolean">
+            <column name="mostrar_motivo_rev_epicrisis" />
+        </property>
+        <property name="esAutomatico" type="boolean">
+            <column name="es_automatico" not-null="true" />
+        </property>
+        <property name="resProc" type="java.lang.Long">
+            <column name="res_proc" precision="10" scale="0" />
+        </property>
+        <property name="acompanadoPor" type="string">
+            <column name="acompanado_por" length="30" />
+        </property>
+        <property name="remitidoA" type="string">
+            <column name="remitido_a" length="30" />
+        </property>
+        <property name="placaNro" type="string">
+            <column name="placa_nro" length="10" />
+        </property>
+        <property name="conductorAmbulancia" type="string">
+            <column name="conductor_ambulancia" length="30" />
+        </property>
+        <property name="quienRecibe" type="string">
+            <column name="quien_recibe" length="30" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

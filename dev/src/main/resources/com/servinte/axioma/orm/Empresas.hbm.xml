@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Empresas" table="empresas" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="tercero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkEmpCiuprin" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_principal" length="10" />
+            <column name="depto_principal" length="10" />
+            <column name="pais_principal" length="10" />
+        </many-to-one>
+        <many-to-one name="nivelesIngreso" class="com.servinte.axioma.orm.NivelesIngreso" fetch="select">
+            <column name="nivel_ingreso" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="formasPago" class="com.servinte.axioma.orm.FormasPago" fetch="select">
+            <column name="forma_pago" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkEmpCiuc" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_cuentas" length="10" />
+            <column name="depto_cuentas" length="10" />
+            <column name="pais_cuentas" length="10" />
+        </many-to-one>
+        <property name="razonSocial" type="string">
+            <column name="razon_social" length="80" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="512" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="256" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="265" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="direccionCuentas" type="string">
+            <column name="direccion_cuentas" length="256" />
+        </property>
+        <property name="direccionSucursal" type="string">
+            <column name="direccion_sucursal" length="256" />
+        </property>
+        <property name="telefonoSucursal" type="string">
+            <column name="telefono_sucursal" length="128" />
+        </property>
+        <property name="nombreRepresentante" type="string">
+            <column name="nombre_representante" length="128" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="512" />
+        </property>
+        <property name="faxSedePrincipal" type="string">
+            <column name="fax_sede_principal" length="20" />
+        </property>
+        <property name="faxSucursalLocal" type="string">
+            <column name="fax_sucursal_local" length="20" />
+        </property>
+        <property name="direccionTerritorial" type="string">
+            <column name="direccion_territorial" length="1" />
+        </property>
+        <property name="numeroAfiliados" type="java.lang.Long">
+            <column name="numero_afiliados" precision="10" scale="0" />
+        </property>
+        <set name="envioInfoInconsistenciases" inverse="true" lazy="true" table="envio_info_inconsistencias" fetch="select">
+            <key>
+                <column name="empresa_envio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioInfoInconsistencias" />
+        </set>
+        <set name="envioInfoAtenIniUrgs" inverse="true" lazy="true" table="envio_info_aten_ini_urg" fetch="select">
+            <key>
+                <column name="entidad_envio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioInfoAtenIniUrg" />
+        </set>
+        <set name="convenioses" inverse="true" lazy="true" table="convenios" fetch="select">
+            <key>
+                <column name="empresa" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Convenios" />
+        </set>
+        <set name="deudoreses" inverse="true" lazy="true" table="deudores" fetch="select">
+            <key>
+                <column name="codigo_empresa" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Deudores" />
+        </set>
+        <set name="contactosEmpresas" inverse="true" lazy="true" table="contactos_empresa" fetch="select">
+            <key>
+                <column name="empresa" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ContactosEmpresa" />
+        </set>
+    </class>
+</hibernate-mapping>

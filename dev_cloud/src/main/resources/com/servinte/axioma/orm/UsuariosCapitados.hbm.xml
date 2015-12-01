@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/06/2011 03:34:43 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UsuariosCapitados" table="usuarios_capitados" schema="capitacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_usuarios_capitados</param>
+			</generator> 
+        </id>
+        <many-to-one name="sexo" class="com.servinte.axioma.orm.Sexo" fetch="select">
+            <column name="sexo" />
+        </many-to-one>
+        <many-to-one name="barrios" class="com.servinte.axioma.orm.Barrios" fetch="select">
+            <column name="barrio" />
+        </many-to-one>
+        <many-to-one name="ciudades" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="municipio" length="10" />
+            <column name="departamento" length="10" />
+            <column name="pais" length="10" />
+        </many-to-one>
+        <property name="numeroIdentificacion" type="string">
+            <column name="numero_identificacion" length="20" not-null="true" />
+        </property>
+        <property name="tipoIdentificacion" type="string">
+            <column name="tipo_identificacion" length="2" not-null="true" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="13" />
+        </property>
+        <property name="primerNombre" type="string">
+            <column name="primer_nombre" length="30" not-null="true" />
+        </property>
+        <property name="segundoNombre" type="string">
+            <column name="segundo_nombre" length="30" />
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="primer_apellido" length="30" not-null="true" />
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="segundo_apellido" length="30" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="256" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="512" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="64" />
+        </property>
+        <property name="localidad" type="string">
+            <column name="localidad" length="10" />
+        </property>
+        <set name="convUsuariosCapitadoses" inverse="true" lazy="true" table="conv_usuarios_capitados" fetch="select" cascade="delete">
+            <key>
+                <column name="usuario_capitado" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConvUsuariosCapitados" />
+        </set>
+    </class>
+</hibernate-mapping>

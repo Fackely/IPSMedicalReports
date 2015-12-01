@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 15, 2011 5:27:23 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AmparoXReclamar" table="amparo_x_reclamar" schema="manejopaciente">
+        <id name="codigoReclamacion" type="long">
+            <column name="codigo_reclamacion" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">reclamacionesAccEveFact</param>
+            </generator>
+        </id>
+        <one-to-one name="reclamacionesAccEveFact" class="com.servinte.axioma.orm.ReclamacionesAccEveFact" constrained="true"></one-to-one>
+        <property name="totalFacAmpGastMedqx" type="big_decimal">
+            <column name="total_fac_amp_gast_medqx" precision="20" scale="6" />
+        </property>
+        <property name="totalRecAmpGastMedqx" type="big_decimal">
+            <column name="total_rec_amp_gast_medqx" precision="20" scale="6" />
+        </property>
+        <property name="totalFacAmpGastTransmov" type="big_decimal">
+            <column name="total_fac_amp_gast_transmov" precision="20" scale="6" />
+        </property>
+        <property name="totalRecAmpGastTransmov" type="big_decimal">
+            <column name="total_rec_amp_gast_transmov" precision="20" scale="6" />
+        </property>
+    </class>
+</hibernate-mapping>

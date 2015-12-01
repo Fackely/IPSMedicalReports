@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreporteListadoResultado" pageWidth="810" pageHeight="25" orientation="Landscape" columnWidth="810" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.500000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subreportePresupuestosPorEstados" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="descripcionEmpresaInstitucion" class="java.lang.String"/>
+	<field name="descripcionCiudad" class="java.lang.String"/>
+	<field name="descripcionPais" class="java.lang.String"/>
+	<field name="descripcionRegionCobertura" class="java.lang.String"/>
+	<field name="consecutivoCentroAtencion" class="java.lang.Integer"/>
+	<field name="dsListadoConsolidadoPorEstado" class="java.lang.Object"/>
+	<field name="descCentroAtencionContrato" class="java.lang.String"/>
+	<field name="nombreInstitucion" class="java.lang.String"/>
+	<field name="parametroMultiEmp" class="java.lang.Boolean"/>
+	<group name="CentroAtencion">
+		<groupExpression><![CDATA[$F{consecutivoCentroAtencion}]]></groupExpression>
+		<groupHeader>
+			<band height="15" splitType="Stretch">
+				<frame>
+					<reportElement style="colorEncabezado" stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="810" height="15" isPrintWhenDetailOverflows="true" printWhenGroupChanges="CentroAtencion" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+						<topPen lineWidth="1.0" lineStyle="Solid"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<rectangle radius="2">
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="810" height="15" isPrintWhenDetailOverflows="true" printWhenGroupChanges="CentroAtencion" backcolor="#CCCCCC"/>
+						<graphicElement>
+							<pen lineWidth="1.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descCentroAtencionContrato" style="axiomaTexto" x="367" y="2" width="100" height="12"/>
+						<box topPadding="1"/>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descCentroAtencionContrato}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionCiudad" style="axiomaTexto" x="468" y="2" width="70" height="12"/>
+						<box topPadding="1"/>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionCiudad}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionPais" style="axiomaTexto" x="541" y="2" width="70" height="12"/>
+						<box topPadding="1"/>
+						<textElement textAlignment="Center">
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionPais}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionRegionCobertura" style="axiomaTexto" x="654" y="2" width="70" height="13"/>
+						<box topPadding="1"/>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionRegionCobertura}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="217" y="2" width="157" height="12"/>
+						<box topPadding="1" leftPadding="5"/>
+						<textElement>
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Centro de Atención que contrató:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaItem" x="615" y="2" width="40" height="12" isRemoveLineWhenBlank="true"/>
+						<box topPadding="1"/>
+						<textElement>
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Región:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="nombreInstitucion" style="axiomaTexto" x="60" y="2" width="157" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<box topPadding="2" leftPadding="5"/>
+						<textElement verticalAlignment="Middle">
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreInstitucion}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="1" y="2" width="59" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<box leftPadding="5"/>
+						<textElement>
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Institución:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="538" y="2" width="4" height="12"/>
+						<textElement/>
+						<text><![CDATA[(]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="610" y="2" width="4" height="12"/>
+						<textElement/>
+						<text><![CDATA[)]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="10">
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="810" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="CentroAtencion"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<subreport isUsingCache="true" runToBottom="false">
+					<reportElement key="subreportePresupuestosPorEstados" stretchType="RelativeToBandHeight" x="0" y="0" width="810" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="CentroAtencion"/>
+					<subreportParameter name="subreportePresupuestosPorEstados">
+						<subreportParameterExpression><![CDATA[$P{subreportePresupuestosPorEstados}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$F{dsListadoConsolidadoPorEstado}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreportePresupuestosPorEstados}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

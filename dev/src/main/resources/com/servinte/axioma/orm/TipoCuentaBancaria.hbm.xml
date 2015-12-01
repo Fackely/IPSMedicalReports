@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TipoCuentaBancaria" table="tipo_cuenta_bancaria" schema="tesoreria">
+        <comment>Registro de los tipos de cuenta bancaria registrados en el sistema</comment>
+        <id name="codigo" type="char">
+            <column name="codigo" length="1" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="64" not-null="true">
+                <comment>Descripci&#195;&#179;n del tipo de cuenta bancaria</comment>
+            </column>
+        </property>
+        <set name="cuentasBancariases" inverse="true" lazy="true" table="cuentas_bancarias" fetch="select">
+            <key>
+                <column name="tipo_cuenta" length="1" not-null="true">
+                    <comment>Campo en donde se selecciona el tipo de cuenta bancaria. Las opciones de este campo son: (C: Cuenta Corriente, A: Cuenta Ahorrros, R:Cuenta Rentable,
+                    E: Caja empresa, O: Otro Tipo cuenta)</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasBancarias" />
+        </set>
+    </class>
+</hibernate-mapping>

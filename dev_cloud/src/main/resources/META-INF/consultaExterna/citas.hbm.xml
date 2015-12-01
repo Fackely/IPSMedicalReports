@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<query name="citas.consultarCitasAtendidas">
+		<![CDATA[
+			SELECT new com.servinte.axioma.dto.consultaExterna.CitaDto(CT.codigo,UC.descripcion,AG.fecha,AG.horaInicio)
+			FROM Cita CT
+			INNER JOIN CT.usuariosByUsuarioModifica US
+			INNER JOIN CT.pacientes PAC
+			INNER JOIN CT.unidadesConsulta UC
+			INNER JOIN CT.agenda AG
+			INNER JOIN CT.serviciosCitas SC
+			INNER JOIN SC.solicitudes SOL
+			INNER JOIN SOL.cuentas CU
+			INNER JOIN CU.ingresos ING
+			
+			WHERE CT.estadoCita = :codigoEstadoCita
+			AND ING.id = :codigoIngreso
+			AND US.login = :usuario
+			AND PAC.codigoPaciente = :codigoPaciente
+			
+			ORDER BY AG.fecha DESC,AG.horaInicio DESC
+		]]>
+	</query>
+
+	<query name="citas.consultarProfesionalesAtiendenCitas">
+		<![CDATA[
+			SELECT DISTINCT new com.servinte.axioma.dto.administracion.ProfesionalSaludDto(MED.codigoMedico, TI.acronimo,
+			PER.numeroIdentificacion, US.login,
+			PER.primerNombre, PER.segundoNombre, PER.primerApellido,
+			PER.segundoApellido) 
+			FROM Medicos MED
+			INNER JOIN MED.personas PER
+			INNER JOIN PER.usuarioses US
+			INNER JOIN MED.institucioneses_1 INS
+			INNER JOIN PER.tiposIdentificacion TI 			
+			WHERE
+				INS.codigo = :codigoInstitucion
+			ORDER BY PER.primerApellido,PER.segundoApellido,PER.primerNombre,PER.segundoNombre
+		]]>
+	</query>
+		
+</hibernate-mapping>

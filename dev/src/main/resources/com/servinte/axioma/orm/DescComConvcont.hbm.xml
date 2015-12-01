@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DescComConvcont" table="desc_com_convcont" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="codigo_contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="tipoPaciente" type="string">
+            <column name="tipo_paciente" length="1" />
+        </property>
+        <property name="fechaVigencia" type="date">
+            <column name="fecha_vigencia" length="13" not-null="true" />
+        </property>
+        <set name="progDescComConvxconts" inverse="true" lazy="true" table="prog_desc_com_convxcont" fetch="select">
+            <key>
+                <column name="codigo_descuento" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgDescComConvxcont" />
+        </set>
+        <set name="artDescComConvxconts" inverse="true" lazy="true" table="art_desc_com_convxcont" fetch="select">
+            <key>
+                <column name="codigo_descuento" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtDescComConvxcont" />
+        </set>
+        <set name="agrupArtDescComConvconts" inverse="true" lazy="true" table="agrup_art_desc_com_convcont" fetch="select">
+            <key>
+                <column name="codigo_descuento" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupArtDescComConvcont" />
+        </set>
+        <set name="agruSerDescComConvxconts" inverse="true" lazy="true" table="agru_ser_desc_com_convxcont" fetch="select">
+            <key>
+                <column name="codigo_descuento" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerDescComConvxcont" />
+        </set>
+        <set name="servDescComConvxconts" inverse="true" lazy="true" table="serv_desc_com_convxcont" fetch="select">
+            <key>
+                <column name="codigo_descuento" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServDescComConvxcont" />
+        </set>
+    </class>
+</hibernate-mapping>

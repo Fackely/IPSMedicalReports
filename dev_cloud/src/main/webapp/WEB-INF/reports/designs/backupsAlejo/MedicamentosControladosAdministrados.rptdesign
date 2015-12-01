@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.16" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.0.v20080606 Build &lt;2.3.0.v20080618-0630></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="6">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="MedicamentosControladosAdministrados" id="7">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">usuario</property>
+                    <property name="displayName">usuario</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numingreso</property>
+                    <property name="displayName">numingreso</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fechaingresoadmin</property>
+                    <property name="displayName">fechaingresoadmin</property>
+                </structure>
+                <structure>
+                    <property name="columnName">horaingresoadmin</property>
+                    <property name="displayName">horaingresoadmin</property>
+                </structure>
+                <structure>
+                    <property name="columnName">codcentrocosto</property>
+                    <property name="displayName">codcentrocosto</property>
+                </structure>
+                <structure>
+                    <property name="columnName">nomcentrocosto</property>
+                    <property name="displayName">nomcentrocosto</property>
+                </structure>
+                <structure>
+                    <property name="columnName">codmed</property>
+                    <property name="displayName">codmed</property>
+                </structure>
+                <structure>
+                    <property name="columnName">nomarticulo</property>
+                    <property name="displayName">nomarticulo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">unidadmedida</property>
+                    <property name="displayName">unidadmedida</property>
+                </structure>
+                <structure>
+                    <property name="columnName">porcentajeiva</property>
+                    <property name="displayName">porcentajeiva</property>
+                </structure>
+                <structure>
+                    <property name="columnName">cantadmin</property>
+                    <property name="displayName">cantadmin</property>
+                </structure>
+                <structure>
+                    <property name="columnName">viaingreso</property>
+                    <property name="displayName">viaingreso</property>
+                </structure>
+                <structure>
+                    <property name="columnName">paciente</property>
+                    <property name="displayName">paciente</property>
+                </structure>
+                <structure>
+                    <property name="columnName">idpaciente</property>
+                    <property name="displayName">idpaciente</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estado</property>
+                    <property name="displayName">estado</property>
+                </structure>
+                <structure>
+                    <property name="columnName">cantidadart</property>
+                    <property name="displayName">cantidadart</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numsolicitud</property>
+                    <property name="displayName">numsolicitud</property>
+                </structure>
+                <structure>
+                    <property name="columnName">valortotal</property>
+                    <property name="displayName">valortotal</property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombreconvenio</property>
+                    <property name="displayName">nombreconvenio</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">usuario</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">numingreso</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">fechaingresoadmin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">horaingresoadmin</property>
+                        <property name="dataType">time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">codcentrocosto</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">nomcentrocosto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">codmed</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">nomarticulo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">unidadmedida</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">porcentajeiva</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">cantadmin</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">viaingreso</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">paciente</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">idpaciente</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">estado</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">cantidadart</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">numsolicitud</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">valortotal</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">nombreconvenio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">usuario</property>
+                    <property name="nativeName">usuario</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">numingreso</property>
+                    <property name="nativeName">numingreso</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">fechaingresoadmin</property>
+                    <property name="nativeName">fechaingresoadmin</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">horaingresoadmin</property>
+                    <property name="nativeName">horaingresoadmin</property>
+                    <property name="dataType">time</property>
+                    <property name="nativeDataType">92</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">codcentrocosto</property>
+                    <property name="nativeName">codcentrocosto</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">nomcentrocosto</property>
+                    <property name="nativeName">nomcentrocosto</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">codmed</property>
+                    <property name="nativeName">codmed</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">nomarticulo</property>
+                    <property name="nativeName">nomarticulo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">unidadmedida</property>
+                    <property name="nativeName">unidadmedida</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">porcentajeiva</property>
+                    <property name="nativeName">porcentajeiva</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">cantadmin</property>
+                    <property name="nativeName">cantadmin</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">viaingreso</property>
+                    <property name="nativeName">viaingreso</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">paciente</property>
+                    <property name="nativeName">paciente</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">idpaciente</property>
+                    <property name="nativeName">idpaciente</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">estado</property>
+                    <property name="nativeName">estado</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">cantidadart</property>
+                    <property name="nativeName">cantidadart</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">numsolicitud</property>
+                    <property name="nativeName">numsolicitud</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">valortotal</property>
+                    <property name="nativeName">valortotal</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">nombreconvenio</property>
+                    <property name="nativeName">nombreconvenio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+	am.usuario AS usuario, 
+	i.consecutivo AS numingreso, 
+	to_char(da.fecha, 'DD/MM/YYYY') AS fechaingresoadmin, 
+	da.hora AS horaingresoadmin, 
+	s.centro_costo_solicitante AS codcentrocosto, 
+	getnomcentrocosto(s.centro_costo_solicitante) AS nomcentrocosto, 
+	getCodArticuloAxiomaInterfaz(da.articulo, 'AXM') AS codmed, 
+	getdescripcionarticulo(da.articulo) AS nomarticulo, 
+	getunidadmedidaarticulo(da.articulo) AS unidadmedida, 
+	getarticuloporcentajeiva(da.articulo) AS porcentajeiva, 	
+	da.cantidad AS cantadmin, 
+	getnombreviaingreso(c.via_ingreso) AS viaingreso, 
+	getnombrepersona(c.codigo_paciente) AS paciente, 
+	getidpaciente(c.codigo_paciente) AS idpaciente, 
+	s.estado_historia_clinica AS estado, 
+	da.cantidad  AS cantidadart, 
+	s.numero_solicitud AS numsolicitud, 
+	( select coalesce(avg(dc.valor_unitario_cargado),0) FROM det_cargos dc WHERE dc.solicitud = s.numero_solicitud AND dc.articulo=da.articulo )*da.cantidad AS valortotal, 
+	( select getnombreconvenio(scu.convenio) FROM solicitudes_subcuenta ss INNER JOIN sub_cuentas scu USING (sub_cuenta) WHERE ss.solicitud = am.numero_solicitud AND ss.articulo = da.articulo AND ss.eliminado='N' ORDER BY scu.nro_prioridad ASC LIMIT 1) AS nombreconvenio 
+FROM 
+	det_cargos dc 
+	INNER JOIN admin_medicamentos am ON (am.numero_solicitud=dc.solicitud) 
+	INNER JOIN detalle_admin da ON (am.codigo = da.administracion) 
+	INNER JOIN solicitudes s ON (am.numero_solicitud = s.numero_solicitud) 
+	INNER JOIN cuentas c ON (s.cuenta = c.id) 
+	INNER JOIN ingresos i ON (c.id_ingreso = i.id) 
+WHERE  
+	1=2
+ORDER BY 
+	nomarticulo</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>numingreso</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>numingreso</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>numingreso</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>fechaingreso</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>fechaingreso</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>fechaingreso</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>idpaciente</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>idpaciente</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>idpaciente</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nompersona</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>nompersona</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nompersona</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>cama</design:name>
+            <design:position>5</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>cama</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>cama</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>valorconsumos</design:name>
+            <design:position>6</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>65531</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>valorconsumos</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valorconsumos</design:label>
+            <design:formattingHints>
+              <design:displaySize>131067</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>codconvenio</design:name>
+            <design:position>7</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>codconvenio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>codconvenio</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nomconvenio</design:name>
+            <design:position>8</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>nomconvenio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nomconvenio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="crosstab-cell" id="4">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">landscape</property>
+            <property name="topMargin">0.75cm</property>
+            <property name="leftMargin">0.5cm</property>
+            <property name="bottomMargin">0.75cm</property>
+            <property name="rightMargin">0.5cm</property>
+            <page-header>
+                <grid id="576">
+                    <property name="width">100%</property>
+                    <column id="577">
+                        <property name="width">3in</property>
+                    </column>
+                    <column id="578">
+                        <property name="width">4in</property>
+                    </column>
+                    <column id="579">
+                        <property name="width">3in</property>
+                    </column>
+                    <row id="580">
+                        <cell id="581"/>
+                        <cell id="582">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                        <cell id="583"/>
+                    </row>
+                    <row id="584">
+                        <cell id="585"/>
+                        <cell id="586">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                        <cell id="587"/>
+                    </row>
+                    <row id="588">
+                        <cell id="589">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="8">
+                    <property name="width">100%</property>
+                    <column id="9">
+                        <property name="width">2.5in</property>
+                    </column>
+                    <column id="10">
+                        <property name="width">2.5in</property>
+                    </column>
+                    <column id="11">
+                        <property name="width">5in</property>
+                    </column>
+                    <row id="12">
+                        <cell id="13">
+                            <property name="fontWeight">bold</property>
+                        </cell>
+                        <cell id="14">
+                            <text id="575">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">right</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="15">
+                            <grid id="368">
+                                <property name="fontWeight">bold</property>
+                                <property name="width">100%</property>
+                                <column id="369">
+                                    <property name="width">4.125in</property>
+                                </column>
+                                <column id="370">
+                                    <property name="width">0.4479166667in</property>
+                                </column>
+                                <column id="371">
+                                    <property name="width">0.4791666667in</property>
+                                </column>
+                                <row id="372">
+                                    <cell id="373">
+                                        <auto-text id="374">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="375">
+                                        <text id="376">
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[de]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="377">
+                                        <auto-text id="378">
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="590">
+            <property name="width">100%</property>
+            <property name="dataSet">MedicamentosControladosAdministrados</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">usuario</property>
+                    <expression name="expression">dataSetRow["usuario"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">numingreso</property>
+                    <expression name="expression">dataSetRow["numingreso"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaingresoadmin</property>
+                    <expression name="expression">dataSetRow["fechaingresoadmin"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">horaingresoadmin</property>
+                    <expression name="expression">dataSetRow["horaingresoadmin"]</expression>
+                    <property name="dataType">time</property>
+                </structure>
+                <structure>
+                    <property name="name">codcentrocosto</property>
+                    <expression name="expression">dataSetRow["codcentrocosto"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">nomcentrocosto</property>
+                    <expression name="expression">dataSetRow["nomcentrocosto"].substring(0,30)</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codmed</property>
+                    <expression name="expression">dataSetRow["codmed"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nomarticulo</property>
+                    <expression name="expression">dataSetRow["nomarticulo"].substring(0,30)</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">unidadmedida</property>
+                    <expression name="expression">dataSetRow["unidadmedida"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cantadmin</property>
+                    <expression name="expression">dataSetRow["cantadmin"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">viaingreso</property>
+                    <expression name="expression">dataSetRow["viaingreso"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">paciente</property>
+                    <expression name="expression">dataSetRow["paciente"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">idpaciente</property>
+                    <expression name="expression">dataSetRow["idpaciente"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">estado</property>
+                    <expression name="expression">dataSetRow["estado"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">cantidadart</property>
+                    <expression name="expression">dataSetRow["cantidadart"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">numsolicitud</property>
+                    <expression name="expression">dataSetRow["numsolicitud"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">valortotal</property>
+                    <expression name="expression">dataSetRow["valortotal"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">nombreconvenio</property>
+                    <expression name="expression">dataSetRow["nombreconvenio"].substring(0,30)</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">porcentajeiva</property>
+                    <property name="displayName">porcentajeiva</property>
+                    <expression name="expression">dataSetRow["porcentajeiva"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">0</property>
+            <column id="633"/>
+            <column id="634"/>
+            <column id="635"/>
+            <column id="636"/>
+            <column id="637">
+                <property name="width">0.3in</property>
+            </column>
+            <column id="638"/>
+            <column id="639">
+                <property name="width">0.6in</property>
+            </column>
+            <column id="640">
+                <property name="width">0.3in</property>
+            </column>
+            <column id="641"/>
+            <column id="642"/>
+            <column id="643"/>
+            <column id="644"/>
+            <column id="645"/>
+            <header>
+                <row id="648">
+                    <cell id="649">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                    </cell>
+                </row>
+                <row id="591">
+                    <property name="fontWeight">normal</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="textAlign">center</property>
+                    <cell id="592">
+                        <label id="646">
+                            <text-property name="text">Usuario</text-property>
+                        </label>
+                    </cell>
+                    <cell id="593">
+                        <label id="662">
+                            <text-property name="text">No. Ingreso</text-property>
+                        </label>
+                    </cell>
+                    <cell id="594">
+                        <label id="663">
+                            <text-property name="text">Fecha / Hora</text-property>
+                        </label>
+                    </cell>
+                    <cell id="595">
+                        <label id="664">
+                            <text-property name="text">Centro Costo</text-property>
+                        </label>
+                    </cell>
+                    <cell id="596">
+                        <label id="665">
+                            <text-property name="text">Cod. Med.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="597">
+                        <label id="666">
+                            <text-property name="text">Medicamento</text-property>
+                        </label>
+                    </cell>
+                    <cell id="598">
+                        <label id="667">
+                            <text-property name="text">U. Med.</text-property>
+                        </label>
+                    </cell>
+                    <cell id="599">
+                        <label id="668">
+                            <text-property name="text">Cant</text-property>
+                        </label>
+                    </cell>
+                    <cell id="600">
+                        <label id="669">
+                            <text-property name="text">Convenio</text-property>
+                        </label>
+                    </cell>
+                    <cell id="601">
+                        <label id="670">
+                            <text-property name="text">Vía Ingreso</text-property>
+                        </label>
+                    </cell>
+                    <cell id="602">
+                        <label id="671">
+                            <text-property name="text">Valor</text-property>
+                        </label>
+                    </cell>
+                    <cell id="603">
+                        <label id="672">
+                            <text-property name="text">Paciente</text-property>
+                        </label>
+                    </cell>
+                    <cell id="604">
+                        <label id="673">
+                            <text-property name="text">Tipo y # ID</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="605">
+                    <cell id="606">
+                        <data id="647">
+                            <property name="resultSetColumn">usuario</property>
+                        </data>
+                    </cell>
+                    <cell id="607">
+                        <data id="674">
+                            <property name="resultSetColumn">numingreso</property>
+                        </data>
+                    </cell>
+                    <cell id="608">
+                        <data id="675">
+                            <property name="resultSetColumn">fechaingresoadmin</property>
+                        </data>
+                    </cell>
+                    <cell id="609">
+                        <data id="676">
+                            <property name="resultSetColumn">nomcentrocosto</property>
+                        </data>
+                    </cell>
+                    <cell id="610">
+                        <data id="677">
+                            <property name="resultSetColumn">codmed</property>
+                        </data>
+                    </cell>
+                    <cell id="611">
+                        <grid id="686">
+                            <property name="width">100%</property>
+                            <column id="687">
+                                <property name="width">0.1in</property>
+                            </column>
+                            <column id="688">
+                                <property name="width">3.8in</property>
+                            </column>
+                            <row id="689">
+                                <cell id="690">
+                                    <label id="691">
+                                        <property name="fontSize">7pt</property>
+                                        <property name="color">red</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">center</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr">row["porcentajeiva"]==0</expression>
+                                            </structure>
+                                        </list-property>
+                                        <text-property name="text">*</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="692">
+                                    <data id="694">
+                                        <property name="resultSetColumn">nomarticulo</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                    <cell id="612">
+                        <data id="679">
+                            <property name="resultSetColumn">unidadmedida</property>
+                        </data>
+                    </cell>
+                    <cell id="613">
+                        <data id="680">
+                            <property name="resultSetColumn">cantadmin</property>
+                        </data>
+                    </cell>
+                    <cell id="614">
+                        <data id="681">
+                            <property name="resultSetColumn">nombreconvenio</property>
+                        </data>
+                    </cell>
+                    <cell id="615">
+                        <data id="682">
+                            <property name="resultSetColumn">viaingreso</property>
+                        </data>
+                    </cell>
+                    <cell id="616">
+                        <data id="683">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">valortotal</property>
+                        </data>
+                    </cell>
+                    <cell id="617">
+                        <data id="684">
+                            <property name="resultSetColumn">paciente</property>
+                        </data>
+                    </cell>
+                    <cell id="618">
+                        <data id="685">
+                            <property name="resultSetColumn">idpaciente</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="619">
+                    <cell id="620"/>
+                    <cell id="621"/>
+                    <cell id="622"/>
+                    <cell id="623"/>
+                    <cell id="624"/>
+                    <cell id="625"/>
+                    <cell id="626"/>
+                    <cell id="627"/>
+                    <cell id="628"/>
+                    <cell id="629"/>
+                    <cell id="630"/>
+                    <cell id="631"/>
+                    <cell id="632"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

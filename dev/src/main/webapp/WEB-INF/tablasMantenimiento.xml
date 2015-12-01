@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tablas-mantenimiento PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//SP" "tablasMantenimiento.dtd">
+
+<tablas-mantenimiento>
+
+  <tabla editable="true">
+    <nombre>consultorios</nombre>
+    <nombre-mostrar>Consultorios</nombre-mostrar>
+    <atributos>
+        <atributo editable="false" requerido="true">
+                <nombre-atributo>codigo</nombre-atributo>
+                <alias>Código</alias>
+        </atributo>
+        <atributo editable="true" requerido="true">
+                <nombre-atributo>descripcion</nombre-atributo>
+                <alias>Descripción</alias>
+        </atributo>
+         <atributo editable="true" requerido="true">
+    	        <nombre-atributo>centro_atencion</nombre-atributo>
+                <alias>Centro de Atención</alias>
+  				<depende tabla="centro_atencion" columna="consecutivo" columnaMostrar="descripcion" orden="descripcion"/>
+        </atributo>
+        <atributo editable="true" requerido="true" booleano="true">
+                <nombre-atributo>activo</nombre-atributo>
+                <alias>Es Activo?</alias>
+        </atributo>
+    </atributos>
+  </tabla>
+
+
+  <tabla editable="true" eliminable="true">
+    <nombre>origenes_pago</nombre>
+    <nombre-mostrar>Origenes de Pago</nombre-mostrar>
+    <atributos>
+        <atributo editable="false" requerido="true">
+                <nombre-atributo>codigo</nombre-atributo>
+                <alias>Código</alias>
+        </atributo>
+        <atributo editable="true" requerido="true">
+                <nombre-atributo>nombre</nombre-atributo>
+                <alias>Origen del pago</alias>
+        </atributo>
+    </atributos>
+  </tabla>
+
+
+  <tabla editable="true">
+    <nombre>camas</nombre>
+    <nombre-mostrar>Manejo de Camas</nombre-mostrar>
+    <atributos>
+        <atributo editable="false" requerido="true">
+                <nombre-atributo>codigo</nombre-atributo>
+                <alias>Código</alias>
+        </atributo>
+        <atributo editable="true" requerido="true">
+                <nombre-atributo>numero_cama</nombre-atributo>
+                <alias>Número</alias>
+        </atributo>
+        <atributo editable="true" requerido="true">
+                <nombre-atributo>estado</nombre-atributo>
+                <alias>Estado</alias>
+	  			<depende tabla="estados_cama" columna="codigo" columnaMostrar="nombre"/>
+        </atributo>
+        <atributo editable="true" requerido="true">
+    	        <nombre-atributo>centro_costo</nombre-atributo>
+                <alias>Centro de Costo</alias>
+  				<depende tabla="centros_costo" columna="codigo" columnaMostrar="nombre"/>
+        </atributo>
+        <atributo editable="true" requerido="true">
+                <nombre-atributo>tipo_usuario_cama</nombre-atributo>
+                <alias>Tipo de Usuario</alias>
+	  			<depende tabla="tipos_usuario_cama" columna="codigo"  columnaMostrar="nombre"/>
+        </atributo>
+        <atributo editable="true" requerido="true">
+                <nombre-atributo>descripcion</nombre-atributo>
+                <alias>Descripción</alias>
+        </atributo>
+        <atributo editable="true" requerido="true" booleano="true">
+                <nombre-atributo>es_uci</nombre-atributo>
+                <alias>UCI</alias>
+		</atributo>		
+    </atributos>
+  </tabla>
+
+
+  <tabla editable="true">
+    <nombre>tipos_regimen</nombre>
+    <nombre-mostrar>Tipos de Regimen</nombre-mostrar>
+    <atributos>
+        <atributo editable="false" requerido="true">
+                <nombre-atributo>acronimo</nombre-atributo>
+                <alias>Código</alias>
+        </atributo>
+        <atributo editable="true" requerido="true">
+                <nombre-atributo>nombre</nombre-atributo>
+                <alias>Nombre</alias>
+        </atributo>
+    </atributos>
+  </tabla>
+
+  
+  <tabla editable="true">
+  	<nombre>clase_inventario</nombre>
+  	<nombre-mostrar>Clases de Inventario</nombre-mostrar>
+  	<atributos>
+  		<atributo editable="false" requerido="true">
+  			<nombre-atributo>codigo</nombre-atributo>
+            <alias>Código</alias>
+  		</atributo>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>nombre</nombre-atributo>
+            <alias>Nombre</alias>
+  		</atributo>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>institucion</nombre-atributo>
+            <alias>Institución</alias>
+  			<depende tabla="instituciones" columna="codigo" columnaMostrar="razon_social"/>
+  		</atributo>
+  	</atributos>
+  </tabla>
+
+
+  <tabla editable="true">
+  	<nombre>grupo_inventario</nombre>
+  	<nombre-mostrar>Grupos de Inventario</nombre-mostrar>
+  	<atributos>
+  		<atributo editable="false" requerido="true">
+  			<nombre-atributo>codigo</nombre-atributo>
+            <alias>Código</alias>
+  		</atributo>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>clase</nombre-atributo>
+            <alias>Clase de Inventario</alias>
+  			<depende tabla="clase_inventario" columna="codigo" columnaMostrar="nombre"/>
+  		</atributo>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>nombre</nombre-atributo>
+            <alias>Nombre</alias>
+  		</atributo>
+  	</atributos>
+  </tabla>
+
+
+  <tabla editable="true">
+  	<nombre>subgrupo_inventario</nombre>
+  	<nombre-mostrar>Subgrupos de Inventario</nombre-mostrar>
+  	<atributos>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>subgrupo</nombre-atributo>
+            <alias>Subgrupo de Inventario</alias>
+  		</atributo>  		
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>grupo</nombre-atributo>
+            <alias>Grupo de Inventario</alias>
+  			<depende tabla="grupo_inventario" columna="codigo" columnaMostrar="nombre"/>
+  		</atributo>  		
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>clase</nombre-atributo>
+            <alias>Clase de Inventario</alias>
+  			<depende tabla="clase_inventario" columna="codigo" columnaMostrar="nombre"/>
+  		</atributo>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>nombre</nombre-atributo>
+            <alias>Nombre</alias>
+  		</atributo>
+  	</atributos>
+  </tabla>
+
+
+  <tabla editable="true" eliminable="true">
+  	<nombre>naturaleza_articulo</nombre>
+  	<nombre-mostrar>Naturaleza de Articulos</nombre-mostrar>
+  	<atributos>
+  		<atributo editable="false" requerido="true">
+  			<nombre-atributo>acronimo</nombre-atributo>
+            <alias>Código</alias>
+  		</atributo>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>nombre</nombre-atributo>
+            <alias>Nombre</alias>
+  		</atributo>
+  		<atributo editable="true" requerido="false" booleano="true">
+  			<nombre-atributo>es_pos</nombre-atributo>
+            <alias>Es Pos</alias>
+  		</atributo>
+  	</atributos>
+  </tabla>
+
+
+  <tabla editable="true">
+  	<nombre>forma_farmaceutica</nombre>
+  	<nombre-mostrar>Formas Farmaceuticas</nombre-mostrar>
+  	<atributos>
+  		<atributo editable="false" requerido="true">
+  			<nombre-atributo>acronimo</nombre-atributo>
+            <alias>Código</alias>
+  		</atributo>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>nombre</nombre-atributo>
+            <alias>Forma</alias>
+  		</atributo>
+  	</atributos>
+  </tabla>
+  
+
+ <!--  <tabla editable="true">
+  	<nombre>unidad_medida</nombre>
+  	<nombre-mostrar>Unidades de Medida</nombre-mostrar>
+  	<atributos>
+  		<atributo editable="false" requerido="true">
+  			<nombre-atributo>acronimo</nombre-atributo>
+            <alias>Código</alias>
+  		</atributo>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>nombre</nombre-atributo>
+            <alias>Unidad</alias>
+  		</atributo>
+  	</atributos>
+  </tabla> 
+  -->
+
+
+  <tabla editable="true">
+    <nombre>ocupaciones_medicas</nombre>
+    <nombre-mostrar>Ocupaciones Medicas</nombre-mostrar>
+    <atributos>
+        <atributo editable="true" requerido="true">
+                <nombre-atributo>nombre</nombre-atributo>
+                <alias>Nombre</alias>
+        </atributo>
+    </atributos>
+  </tabla>
+
+
+  <tabla editable="true">
+    <nombre>especialidades</nombre>
+    <nombre-mostrar>Especialidades</nombre-mostrar>
+    <atributos>
+        <atributo editable="true" requerido="true">
+                <nombre-atributo>nombre</nombre-atributo>
+                <alias>Nombre</alias>
+        </atributo>
+    </atributos>
+  </tabla>
+
+
+  <tabla editable="true" eliminable="true">
+  	<nombre>interconsu_perm</nombre>
+  	<nombre-mostrar>Interconsultas permitidas (Relacion ocupaciones/especialidades)</nombre-mostrar>
+  	<atributos>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>ocupacion_medica</nombre-atributo>
+            <alias>Ocupación Médica</alias>
+  			<depende tabla="ocupaciones_medicas" columna="codigo" columnaMostrar="nombre" orden="nombre"/>
+  		</atributo>
+  		<atributo editable="true" requerido="true">
+  			<nombre-atributo>especialidad</nombre-atributo>
+            <alias>Especialidad</alias>
+  			<depende tabla="especialidades" columna="codigo" columnaMostrar="nombre" orden="nombre"/>
+  		</atributo>
+  	</atributos>
+  </tabla>
+
+
+  <tabla eliminable="true" editable="true">
+  	<nombre>excepciones_agenda</nombre>
+	<nombre-mostrar>Excepciones Agenda</nombre-mostrar>
+	<atributos>
+	  	<atributo editable="true" requerido="true">
+	  		<nombre-atributo>fecha</nombre-atributo>
+            <alias>Fecha (aaaa-mm-dd)</alias>
+		</atributo>
+		<atributo editable="true" requerido="true">
+    	        <nombre-atributo>centro_atencion</nombre-atributo>
+                <alias>Centro de Atención</alias>
+  				<depende tabla="centro_atencion" columna="consecutivo" columnaMostrar="descripcion" orden="descripcion"/>
+        </atributo>
+	</atributos>
+  </tabla>
+
+  </tablas-mantenimiento>

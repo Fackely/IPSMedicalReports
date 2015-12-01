@@ -1,0 +1,1502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <parameters>
+        <scalar-parameter name="fechaCorte" id="1170">
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="26">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ReporteResumido" id="915">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">fechaCorte</property>
+                    <property name="paramName">fechaCorte</property>
+                    <property name="dataType">date</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">FechaCorte2</property>
+                    <property name="paramName">fechaCorte</property>
+                    <property name="dataType">date</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+tc.descripcion AS nombretipoconvenio, 
+c.nombre AS nombreconvenio, 
+getnumerocontrato(cargue.contrato) as codcontrato,
+getValorXRadicarCapitada(cc.convenio, 1, cc.institucion, cargue.contrato, ? )*1 as porRadicar, 
+getEdadCarteraConvCapitada(cc.convenio, 0, 0, 4, cc.institucion, cargue.contrato )*1 as column_0, 
+getEdadCarteraConvCapitada(cc.convenio, 1, 30, 4, cc.institucion, cargue.contrato )*1 as column_1_30, 
+getEdadCarteraConvCapitada(cc.convenio, 31, 60, 4, cc.institucion, cargue.contrato )*1 as column_31_60, 
+getEdadCarteraConvCapitada(cc.convenio, 61, 90, 4, cc.institucion, cargue.contrato )*1 as column_61_90, 
+getEdadCarteraConvCapitada(cc.convenio, 91, 120, 4, cc.institucion, cargue.contrato )*1 as column_91_120, 
+getEdadCarteraConvCapitada(cc.convenio, 121, 150, 4, cc.institucion, cargue.contrato )*1 as column_121_150, 
+getEdadCarteraConvCapitada(cc.convenio, 151, 180, 4, cc.institucion, cargue.contrato )*1 as column_151_180, 
+getEdadCarteraConvCapitada(cc.convenio, 181, 360, 4, cc.institucion, cargue.contrato )*1 as column_181_360, 
+getEdadCarteraConvCapitada(cc.convenio, 361, 361, 4, cc.institucion, cargue.contrato )*1 as column_mayor_360,
+(getEdadCarteraConvCapitada(cc.convenio, 0, 360, 4, cc.institucion, cargue.contrato ) + getEdadCarteraConvCapitada(cc.convenio, 361, 361, 4, cc.institucion, cargue.contrato ))*1  as totalRadicado,
+(getValorXRadicarCapitada(cc.convenio, 1, cc.institucion, cargue.contrato, ? ) + getEdadCarteraConvCapitada(cc.convenio, 0, 360, 4, cc.institucion, cargue.contrato ) + getEdadCarteraConvCapitada(cc.convenio, 361, 361, 4, cc.institucion, cargue.contrato ))*1 as totalCarteraVencida
+FROM 
+cuentas_cobro_capitacion cc 
+INNER JOIN contrato_cargue cargue ON (cargue.cuenta_cobro= cc.numero_cuenta_cobro and cargue.institucion=cc.institucion)
+INNER JOIN convenios c ON (c.codigo=cc.convenio) 
+left outer JOIN tipos_convenio tc ON (tc.codigo=c.tipo_convenio AND tc.institucion = c.institucion) 
+WHERE cc.estado in (1,4) and 1=1 
+GROUP BY tc.descripcion, c.nombre, cargue.contrato, cc.convenio, cc.institucion
+order by tc.descripcion, c.nombre</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nombretipoconvenio</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombretipoconvenio</design:label>
+            <design:formattingHints>
+              <design:displaySize>128</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nombreconvenio</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombreconvenio</design:label>
+            <design:formattingHints>
+              <design:displaySize>128</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>porradicar</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>porradicar</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>column_0</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>column_0</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>column_1_30</design:name>
+            <design:position>5</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>column_1_30</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>column_31_60</design:name>
+            <design:position>6</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>column_31_60</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>column_61_90</design:name>
+            <design:position>7</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>column_61_90</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>column_91_120</design:name>
+            <design:position>8</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>column_91_120</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>column_121_150</design:name>
+            <design:position>9</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>column_121_150</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>column_151_180</design:name>
+            <design:position>10</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>column_151_180</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>column_181_360</design:name>
+            <design:position>11</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>column_181_360</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>getedadcarteraconvenio</design:name>
+            <design:position>12</design:position>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>16</design:precision>
+            <design:scale>16</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>getedadcarteraconvenio</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <property name="showFooterOnLast">false</property>
+            <property name="headerHeight">4cm</property>
+            <property name="footerHeight">3cm</property>
+            <page-header>
+                <grid name="masterPageHeader" id="14">
+                    <property name="width">100%</property>
+                    <column id="15">
+                        <property name="width">4.3263157895in</property>
+                    </column>
+                    <column id="16">
+                        <property name="width">4.0631578947in</property>
+                    </column>
+                    <column id="25">
+                        <property name="width">2.1684210526in</property>
+                    </column>
+                    <row id="17">
+                        <property name="height">1.178in</property>
+                        <cell id="18"/>
+                        <cell id="19"/>
+                        <cell id="23">
+                            <grid name="footerStaticData" id="38">
+                                <property name="fontFamily">"SansSerif"</property>
+                                <property name="height">1.0105263158in</property>
+                                <property name="width">2.0842105263in</property>
+                                <column id="64">
+                                    <property name="width">2.0842105263in</property>
+                                </column>
+                                <row id="41">
+                                    <property name="height">0.3789473684in</property>
+                                    <cell id="63">
+                                        <text name="footerCreatedDate" id="44">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                                        </text>
+                                        <text name="footerNumberPage" id="1125">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginTop">0.3cm</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[Page: <value-of>pageNumber</value-of>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                                <row id="1126">
+                                    <property name="height">0.2421052632in</property>
+                                    <cell id="1127"/>
+                                </row>
+                                <row id="1128">
+                                    <property name="height">0.2421052632in</property>
+                                    <cell id="1129"/>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                    <row id="20">
+                        <property name="height">0.297in</property>
+                        <cell id="21"/>
+                        <cell id="22"/>
+                        <cell id="24"/>
+                    </row>
+                </grid>
+            </page-header>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="916">
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">100%</property>
+            <property name="dataSet">ReporteResumido</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">nombretipoconvenio</property>
+                    <expression name="expression">dataSetRow["nombretipoconvenio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombreconvenio</property>
+                    <expression name="expression">dataSetRow["nombreconvenio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">porradicar</property>
+                    <expression name="expression">dataSetRow["porradicar"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">column_0</property>
+                    <expression name="expression">dataSetRow["column_0"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">column_1_30</property>
+                    <expression name="expression">dataSetRow["column_1_30"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">column_31_60</property>
+                    <expression name="expression">dataSetRow["column_31_60"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">column_61_90</property>
+                    <expression name="expression">dataSetRow["column_61_90"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">column_91_120</property>
+                    <expression name="expression">dataSetRow["column_91_120"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">column_121_150</property>
+                    <expression name="expression">dataSetRow["column_121_150"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">column_151_180</property>
+                    <expression name="expression">dataSetRow["column_151_180"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">column_181_360</property>
+                    <expression name="expression">dataSetRow["column_181_360"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">column_mayor_360</property>
+                    <expression name="expression">dataSetRow["column_mayor_360"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">totalRadicadoXConvenio</property>
+                    <expression name="expression">dataSetRow["totalradicado"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">totalCarteraVencidaXConvenio</property>
+                    <expression name="expression">dataSetRow["totalcarteravencida"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">totalTipoConvenioCarteraVencida</property>
+                    <expression name="expression">Total.sum(row["totalCarteraVencidaXConvenio"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">totalTipoConvenioXRadicar</property>
+                    <expression name="expression">Total.sum(row["porradicar"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">total_tipo_convenio_0</property>
+                    <expression name="expression">Total.sum(row["column_0"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">total_tipo_convenio_1_30</property>
+                    <expression name="expression">Total.sum(row["column_1_30"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">total_tipo_convenio_31_60</property>
+                    <expression name="expression">Total.sum(row["column_31_60"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">total_tipo_convenio_91_120</property>
+                    <expression name="expression">Total.sum(row["column_91_120"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">total_tipo_convenio_121_150</property>
+                    <expression name="expression">Total.sum(row["column_121_150"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">total_tipo_convenio_151_180</property>
+                    <expression name="expression">Total.sum(row["column_151_180"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">total_tipo_convenio_61_90</property>
+                    <expression name="expression">Total.sum(row["column_61_90"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">total_tipo_convenio_181_360</property>
+                    <expression name="expression">Total.sum(row["column_181_360"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">total_tipo_convenio_mayor_360</property>
+                    <expression name="expression">Total.sum(row["column_mayor_360"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">totalTipoConvenioRadicado</property>
+                    <expression name="expression">Total.sum(row["totalRadicadoXConvenio"])</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>NewTableGroup1</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_POR_RADICAR</property>
+                    <expression name="expression">Total.sum(row["totalTipoConvenioXRadicar"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_0</property>
+                    <expression name="expression">Total.sum(row["total_tipo_convenio_0"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_1_30</property>
+                    <expression name="expression">Total.sum(row["total_tipo_convenio_1_30"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_31_60</property>
+                    <expression name="expression">Total.sum(row["total_tipo_convenio_31_60"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_61_90</property>
+                    <expression name="expression">Total.sum(row["total_tipo_convenio_61_90"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_91_120</property>
+                    <expression name="expression">Total.sum(row["total_tipo_convenio_91_120"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_121_150</property>
+                    <expression name="expression">Total.sum(row["total_tipo_convenio_121_150"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_151_180</property>
+                    <expression name="expression">Total.sum(row["total_tipo_convenio_151_180"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_181_360</property>
+                    <expression name="expression">Total.sum(row["total_tipo_convenio_181_360"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_MAYOR_360</property>
+                    <expression name="expression">Total.sum(row["total_tipo_convenio_mayor_360"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_RADICADO</property>
+                    <expression name="expression">Total.sum(row["totalTipoConvenioRadicado"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_CARTERA_VENCIDA</property>
+                    <expression name="expression">Total.sum(row["totalTipoConvenioCarteraVencida"])</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">codcontrato</property>
+                    <expression name="expression">dataSetRow["codcontrato"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="1088"/>
+            <column id="1155"/>
+            <column id="969"/>
+            <column id="970"/>
+            <column id="971"/>
+            <column id="972"/>
+            <column id="973"/>
+            <column id="974"/>
+            <column id="975"/>
+            <column id="976"/>
+            <column id="977"/>
+            <column id="978"/>
+            <column id="979"/>
+            <column id="980"/>
+            <header>
+                <row id="917">
+                    <cell id="1081">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1059">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">CONVENIO:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1150">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1156">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Contrato</text-property>
+                        </label>
+                    </cell>
+                    <cell id="918">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1060">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Por radicar</text-property>
+                        </label>
+                    </cell>
+                    <cell id="919">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1061">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">0</text-property>
+                        </label>
+                    </cell>
+                    <cell id="920">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1062">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">1 a 30</text-property>
+                        </label>
+                    </cell>
+                    <cell id="921">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1063">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">31 a 60</text-property>
+                        </label>
+                    </cell>
+                    <cell id="922">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1064">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">61 a 90</text-property>
+                        </label>
+                    </cell>
+                    <cell id="923">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1065">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">91 a 120</text-property>
+                        </label>
+                    </cell>
+                    <cell id="924">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1066">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">121 a 150</text-property>
+                        </label>
+                    </cell>
+                    <cell id="925">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1067">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">151 a 180</text-property>
+                        </label>
+                    </cell>
+                    <cell id="926">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1068">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">181 a 360</text-property>
+                        </label>
+                    </cell>
+                    <cell id="927">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1069">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">>360</text-property>
+                        </label>
+                    </cell>
+                    <cell id="928">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1070">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Total Radicado</text-property>
+                        </label>
+                    </cell>
+                    <cell id="929">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <label id="1071">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Total cartera vencida</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <group id="1001">
+                <property name="groupName">NewTableGroup1</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr">row["nombretipoconvenio"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue">row["nombretipoconvenio"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <header>
+                    <row id="1002">
+                        <cell id="1082">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="backgroundColor">#E5E5E5</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1030">
+                                <property name="fontWeight">bold</property>
+                                <property name="resultSetColumn">nombretipoconvenio</property>
+                            </data>
+                        </cell>
+                        <cell id="1157">
+                            <property name="colSpan">12</property>
+                            <property name="rowSpan">1</property>
+                            <property name="backgroundColor">#E5E5E5</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <label id="1143">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <text-property name="text">CARTERA VENCIDA EN DIAS</text-property>
+                            </label>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="1015">
+                        <property name="backgroundColor">#ADD8E6</property>
+                        <cell id="1086">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <label id="1090">
+                                <property name="fontWeight">bold</property>
+                                <text-property name="text">TOTAL</text-property>
+                            </label>
+                            <data id="1091">
+                                <property name="fontWeight">bold</property>
+                                <property name="resultSetColumn">nombretipoconvenio</property>
+                            </data>
+                        </cell>
+                        <cell id="1016">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1099">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">totalTipoConvenioXRadicar</property>
+                            </data>
+                        </cell>
+                        <cell id="1017">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1100">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">total_tipo_convenio_0</property>
+                            </data>
+                        </cell>
+                        <cell id="1018">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1101">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">total_tipo_convenio_1_30</property>
+                            </data>
+                        </cell>
+                        <cell id="1019">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1102">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">total_tipo_convenio_31_60</property>
+                            </data>
+                        </cell>
+                        <cell id="1020">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1103">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">total_tipo_convenio_61_90</property>
+                            </data>
+                        </cell>
+                        <cell id="1021">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1104">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">total_tipo_convenio_91_120</property>
+                            </data>
+                        </cell>
+                        <cell id="1022">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1106">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">total_tipo_convenio_121_150</property>
+                            </data>
+                        </cell>
+                        <cell id="1023">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1107">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">total_tipo_convenio_151_180</property>
+                            </data>
+                        </cell>
+                        <cell id="1024">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1108">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">total_tipo_convenio_181_360</property>
+                            </data>
+                        </cell>
+                        <cell id="1025">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1109">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">total_tipo_convenio_mayor_360</property>
+                            </data>
+                        </cell>
+                        <cell id="1026">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <data id="1110">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">totalTipoConvenioRadicado</property>
+                            </data>
+                        </cell>
+                        <cell id="1027">
+                            <property name="backgroundColor">#E6E6FA</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <data id="1098">
+                                <property name="fontWeight">bold</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">#,##0.00</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">totalTipoConvenioCarteraVencida</property>
+                            </data>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="930">
+                    <cell id="1084">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1089">
+                            <property name="resultSetColumn">nombreconvenio</property>
+                        </data>
+                    </cell>
+                    <cell id="1152">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1169">
+                            <property name="resultSetColumn">codcontrato</property>
+                        </data>
+                    </cell>
+                    <cell id="931">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="982">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">porradicar</property>
+                        </data>
+                    </cell>
+                    <cell id="932">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="984">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">column_0</property>
+                        </data>
+                    </cell>
+                    <cell id="933">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="986">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">column_1_30</property>
+                        </data>
+                    </cell>
+                    <cell id="934">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="988">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">column_31_60</property>
+                        </data>
+                    </cell>
+                    <cell id="935">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="990">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">column_61_90</property>
+                        </data>
+                    </cell>
+                    <cell id="936">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="992">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">column_91_120</property>
+                        </data>
+                    </cell>
+                    <cell id="937">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="994">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">column_121_150</property>
+                        </data>
+                    </cell>
+                    <cell id="938">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="996">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">column_151_180</property>
+                        </data>
+                    </cell>
+                    <cell id="939">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="998">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">column_181_360</property>
+                        </data>
+                    </cell>
+                    <cell id="940">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1000">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">column_mayor_360</property>
+                        </data>
+                    </cell>
+                    <cell id="941">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1094">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">totalRadicadoXConvenio</property>
+                        </data>
+                    </cell>
+                    <cell id="942">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <data id="1095">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">totalCarteraVencidaXConvenio</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="956">
+                    <cell id="1087">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="1111">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Total General</text-property>
+                        </label>
+                    </cell>
+                    <cell id="957">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1112">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_POR_RADICAR</property>
+                        </data>
+                    </cell>
+                    <cell id="958">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1113">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_0</property>
+                        </data>
+                    </cell>
+                    <cell id="959">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1115">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_1_30</property>
+                        </data>
+                    </cell>
+                    <cell id="960">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1116">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_31_60</property>
+                        </data>
+                    </cell>
+                    <cell id="961">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1117">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_61_90</property>
+                        </data>
+                    </cell>
+                    <cell id="962">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1118">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_91_120</property>
+                        </data>
+                    </cell>
+                    <cell id="963">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1119">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_121_150</property>
+                        </data>
+                    </cell>
+                    <cell id="964">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1120">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_151_180</property>
+                        </data>
+                    </cell>
+                    <cell id="965">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1121">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_181_360</property>
+                        </data>
+                    </cell>
+                    <cell id="966">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1122">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_MAYOR_360</property>
+                        </data>
+                    </cell>
+                    <cell id="967">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1123">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_RADICADO</property>
+                        </data>
+                    </cell>
+                    <cell id="968">
+                        <property name="backgroundColor">#BFBFBF</property>
+                        <data id="1124">
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">TOTAL_CARTERA_VENCIDA</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

@@ -1,0 +1,1519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="codigoFactura" id="827">
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="isRequired">true</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">214</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="usuarioReimprime" id="1287">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="reimpresion" id="1510">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="fechaReimpresion" id="1512">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="23">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma_desarrollo</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="seccionEncabezado" id="826">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigoFactura</property>
+                    <property name="paramName">codigoFactura</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">9</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+	CASE WHEN f.estado_facturacion=2 THEN 'ANULADO' ELSE '' END AS "anulado",
+	he.nombre_institucion AS "razonSocial",
+	'NIT '|| he.nit_institucion AS "nit",
+	'Sucursal: '|| he.sucursal AS "sucursal",
+	'No. '|| he.prefijo_factura ||' '||f.consecutivo_factura AS "factura",
+	'Fecha: '||TO_CHAR(f.fecha, 'DD/MM/YYYY') as "fechaFactura",
+	'Actividad Económica: '||he.actividad_economica AS "actividadEconomica",
+	'Resolución: '|| he.resolucion AS "resolucion",
+	'Rango Inicial: '|| he.prefijo_factura ||' - '|| he.rango_inicial  AS "rangoInicial",
+	'Rango Final: '|| he.prefijo_factura ||' - '|| he.rango_final AS "rangoFinal",
+	he.encabezado AS "encabezado",
+	he.pie_pagina AS "piePagina"
+
+FROM 
+	facturacion.facturas f
+INNER JOIN 
+	administracion.instituciones i ON (i.codigo=f.institucion)
+LEFT OUTER JOIN
+	facturacion.empresas_institucion ei ON (ei.codigo=f.empresa_institucion)
+LEFT OUTER JOIN facturacion.historico_encabezado he ON (he.codigo_pk = f.historico_encabezado)
+WHERE
+	f.codigo=?</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="seccionResponsable" id="828">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigoFactura</property>
+                    <property name="paramName">codigoFactura</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+	he.responsable AS "responsable",
+	he.nit_responsable AS "nit",
+	COALESCE(p.primer_apellido||' ','')||COALESCE(p.segundo_apellido||' ','')||COALESCE(p.primer_nombre||' ','')||COALESCE(p.segundo_nombre||' ','') as "paciente",
+	p.tipo_identificacion||'. '||p.numero_identificacion AS "idPaciente",
+	c.tipo_regimen AS "tipoRegimen"
+FROM 
+	facturacion.facturas f
+INNER JOIN 
+	facturacion.convenios c ON (c.codigo=f.convenio)
+INNER JOIN
+	administracion.personas p ON (p.codigo=f.cod_paciente)
+LEFT OUTER JOIN
+	empresas e ON (e.codigo=c.empresa)
+LEFT OUTER JOIN
+	facturacion.terceros t ON (t.codigo=e.tercero)
+LEFT OUTER JOIN facturacion.historico_encabezado he ON (he.codigo_pk = f.historico_encabezado)
+WHERE
+	f.codigo=?</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>responsable</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>responsable</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>responsable</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>nit</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>nit</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nit</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>paciente</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>paciente</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>paciente</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>idPaciente</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>idPaciente</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>idPaciente</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="seccionDetalleFactura" id="829">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigoFactura</property>
+                    <property name="paramName">codigoFactura</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">programa</property>
+                    <property name="nativeName">programa</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">servicio</property>
+                    <property name="nativeName">servicio</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">cantidad</property>
+                    <property name="nativeName">cantidad</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">valorUnitario</property>
+                    <property name="nativeName">valorUnitario</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">valorTotal</property>
+                    <property name="nativeName">valorTotal</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">valorDescuento</property>
+                    <property name="nativeName">valorDescuento</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+p.nombre  ||' '|| case when po.codigo is not null then ' ('||po.codigo ||')' else '' end  AS "programa",
+lower(getnombreservicio(dfs.servicio, 0)) AS "servicio",
+dfs.cantidad_cargo AS "cantidad",
+(dfs.valor_total/(dfs.cantidad_cargo)) AS "valorUnitario",
+dfs.valor_total AS "valorTotal",
+coalesce(dfs.valor_dcto_odo,0)+coalesce(dfs.valor_dcto_bono,0)+coalesce(dfs.valor_dcto_prom,0)+coalesce(dfs.valor_dcto_comercial,0) AS "valorDescuento"
+FROM 
+facturacion.facturas f
+INNER JOIN 
+facturacion.det_factura_solicitud dfs ON (dfs.factura=f.codigo)
+LEFT OUTER JOIN
+odontologia.programas p ON (p.codigo=dfs.programa)
+LEFT OUTER JOIN odontologia.det_paq_odont_convenio dpoc ON(dpoc.codigo_pk=dfs.det_paq_odon_convenio)
+LEFT OUTER JOIN odontologia.paquetes_odontologicos po ON(po.codigo_pk=dpoc.codigo_pk_paquete)
+WHERE
+f.codigo=?
+and dfs.valor_total>0
+</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="seccionFirmas" id="1288">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">usuarioElabora</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigoFactura</property>
+                    <property name="paramName">codigoFactura</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">usuarioElabora</property>
+                    <property name="nativeName">usuarioElabora</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+	'Elaborado por: '||getnombrepersona(u.codigo_persona) AS "usuarioElabora"
+FROM 
+	facturacion.facturas f
+INNER JOIN 
+	usuarios u ON (u.login=f.usuario)
+WHERE
+	f.codigo=?</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="seccionNotasFinales" id="1302">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">usuarioReimprime</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">usuarioReimprime</property>
+                    <property name="paramName">usuarioReimprime</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">usuarioReimprime</property>
+                    <property name="nativeName">usuarioReimprime</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">select
+	 'REIMPRESIÓN: '||getnombrepersona(codigo_persona)||' '||to_char(CURRENT_DATE, 'DD/MM/YYYY HH:MM') AS "usuarioReimprime"
+from
+	usuarios
+WHERE
+	login=? </property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="seccionValorLetras" id="1407">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">convertirletrasconcentavos</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigoFactura</property>
+                    <property name="paramName">codigoFactura</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">convertirletrasconcentavos</property>
+                    <property name="nativeName">convertirletrasconcentavos</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+	convertirLetrasConCentavos(to_number(t."valor"||'', '9999999999999999999.99'), 
+		(SELECT tm.descripcion 
+			from tipos_moneda_institucion tmi 
+			INNER JOIN tipos_moneda tm 
+				ON(tmi.tipo_moneda=tm.codigo) 
+			WHERE tmi.institucion=t."institucion")
+		, 'centavos')
+	
+	FROM
+( SELECT 
+	SUM(valor_total) AS "valor", 
+	institucion AS "institucion"
+FROM 
+	facturacion.facturas
+WHERE
+	codigo=? 
+GROUP BY institucion) t</property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">"Verdana"</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="axiomaTitulo" id="226">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">small</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="axiomaTexto" id="227">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="textAlign">left</property>
+        </style>
+        <style name="axiomaLabelCelda" id="228">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">7pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="paddingTop">0pt</property>
+            <property name="paddingLeft">0pt</property>
+            <property name="paddingBottom">0pt</property>
+            <property name="paddingRight">0pt</property>
+            <property name="textAlign">center</property>
+            <property name="letterSpacing">normal</property>
+        </style>
+        <style name="axiomaInfoCelda" id="229">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">7pt</property>
+            <property name="fontWeight">lighter</property>
+            <property name="paddingTop">0pt</property>
+            <property name="paddingLeft">0pt</property>
+            <property name="paddingBottom">0pt</property>
+            <property name="paddingRight">0pt</property>
+            <property name="textAlign">left</property>
+            <property name="letterSpacing">normal</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">custom</property>
+            <property name="height">20cm</property>
+            <property name="width">6.2cm</property>
+            <property name="orientation">portrait</property>
+            <property name="topMargin">0.03cm</property>
+            <property name="leftMargin">0.03cm</property>
+            <property name="bottomMargin">0.03cm</property>
+            <property name="rightMargin">0.03cm</property>
+            <property name="showHeaderOnFirst">true</property>
+            <property name="headerHeight">2mm</property>
+            <property name="footerHeight">0.8cm</property>
+            <page-header>
+                <grid id="8">
+                    <property name="fontSize">13pt</property>
+                    <property name="width">6.5cm</property>
+                    <column id="9"/>
+                    <column id="10"/>
+                    <column id="11"/>
+                    <row id="12">
+                        <cell id="13">
+                            <property name="fontSize">12pt</property>
+                        </cell>
+                        <cell id="14">
+                            <property name="style">axiomaTitulo</property>
+                            <property name="fontSize">9pt</property>
+                        </cell>
+                        <cell id="15">
+                            <property name="fontSize">12pt</property>
+                        </cell>
+                    </row>
+                    <row id="16">
+                        <cell id="17">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="style">axiomaTexto</property>
+                            <property name="fontSize">9pt</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="1147">
+            <property name="width">100%</property>
+            <column id="1148"/>
+            <column id="1149"/>
+            <row id="1153">
+                <cell id="1154">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1146">
+                        <property name="style">axiomaTitulo</property>
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">anulado</property>
+                                <property name="displayName">anulado</property>
+                                <expression name="expression">dataSetRow["anulado"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">anulado</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1156">
+                <cell id="1157">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1180">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">razonSocial</property>
+                                <property name="displayName">razonSocial</property>
+                                <expression name="expression">dataSetRow["razonSocial"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">razonSocial</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1159">
+                <cell id="1160">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1181">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="textAlign">center</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">nit</property>
+                                <property name="displayName">nit</property>
+                                <expression name="expression">dataSetRow["nit"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">nit</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1162">
+                <cell id="1163">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1183">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="textAlign">center</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">sucursal</property>
+                                <property name="displayName">sucursal</property>
+                                <expression name="expression">dataSetRow["sucursal"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">sucursal</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1165">
+                <property name="height">0.5cm</property>
+                <cell id="1166">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                </cell>
+            </row>
+            <row id="1168">
+                <cell id="1169">
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <label id="1184">
+                        <property name="style">axiomaLabelCelda</property>
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">FACTURA DE VENTA</text-property>
+                    </label>
+                </cell>
+                <cell id="1170">
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1427">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">factura</property>
+                                <property name="displayName">factura</property>
+                                <expression name="expression">dataSetRow["factura"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">factura</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1171">
+                <cell id="1172">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1186">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">fechaFactura</property>
+                                <property name="displayName">fechaFactura</property>
+                                <expression name="expression">dataSetRow["fechaFactura"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">fechaFactura</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1174">
+                <property name="height">0.3cm</property>
+                <cell id="1175">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                </cell>
+            </row>
+            <row id="1177">
+                <cell id="1178">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1196">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">actividadEconomica</property>
+                                <property name="displayName">actividadEconomica</property>
+                                <expression name="expression">dataSetRow["actividadEconomica"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">actividadEconomica</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1187">
+                <cell id="1188">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1197">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="textAlign">justify</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">resolucion</property>
+                                <property name="displayName">resolucion</property>
+                                <expression name="expression">dataSetRow["resolucion"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">resolucion</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1190">
+                <cell id="1191">
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1198">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">rangoInicial</property>
+                                <property name="displayName">rangoInicial</property>
+                                <expression name="expression">dataSetRow["rangoInicial"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">rangoInicial</property>
+                    </data>
+                </cell>
+                <cell id="1192">
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1199">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">rangoFinal</property>
+                                <property name="displayName">rangoFinal</property>
+                                <expression name="expression">dataSetRow["rangoFinal"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">rangoFinal</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1193">
+                <cell id="1194">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">5pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1200">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">encabezado</property>
+                                <property name="displayName">encabezado</property>
+                                <expression name="expression">dataSetRow["encabezado"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">encabezado</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <grid id="1272">
+            <property name="width">100%</property>
+            <column id="1273"/>
+            <row id="1274">
+                <cell id="1275">
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="paddingTop">5pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">5pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <table id="1224">
+                        <property name="width">100%</property>
+                        <property name="dataSet">seccionResponsable</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">responsable</property>
+                                <property name="displayName">responsable</property>
+                                <expression name="expression">dataSetRow["responsable"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">nit</property>
+                                <property name="displayName">nit</property>
+                                <expression name="expression">dataSetRow["nit"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">paciente</property>
+                                <property name="displayName">paciente</property>
+                                <expression name="expression">dataSetRow["paciente"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">idPaciente</property>
+                                <property name="displayName">idPaciente</property>
+                                <expression name="expression">dataSetRow["idPaciente"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">tipoRegimen</property>
+                                <property name="displayName">tipoRegimen</property>
+                                <expression name="expression">dataSetRow["tipoRegimen"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <column id="1271">
+                            <property name="width">2.7cm</property>
+                        </column>
+                        <column id="1248"/>
+                        <detail>
+                            <row id="1234">
+                                <property name="display">block</property>
+                                <property name="showIfBlank">false</property>
+                                <list-property name="visibility">
+                                    <structure>
+                                        <property name="format">all</property>
+                                    </structure>
+                                </list-property>
+                                <cell id="1267">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">true</property>
+                                    <label id="1216">
+                                        <property name="style">axiomaLabelCelda</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">Responsable:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1235">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <data id="1236">
+                                        <property name="style">axiomaInfoCelda</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="display">block</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="resultSetColumn">responsable</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1252">
+                                <property name="display">block</property>
+                                <property name="showIfBlank">false</property>
+                                <list-property name="visibility">
+                                    <structure>
+                                        <property name="format">all</property>
+                                    </structure>
+                                </list-property>
+                                <cell id="1268">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <label id="1217">
+                                        <property name="style">axiomaLabelCelda</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">NIT:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1253">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <data id="1238">
+                                        <property name="style">axiomaInfoCelda</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="resultSetColumn">nit</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1257">
+                                <property name="display">block</property>
+                                <property name="showIfBlank">false</property>
+                                <cell id="1269">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <label id="1218">
+                                        <property name="style">axiomaLabelCelda</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">Paciente/Adquiriente:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1258">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <data id="1240">
+                                        <property name="style">axiomaInfoCelda</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="resultSetColumn">paciente</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="1262">
+                                <property name="display">block</property>
+                                <property name="showIfBlank">false</property>
+                                <cell id="1270">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <label id="1219">
+                                        <property name="style">axiomaLabelCelda</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">Doc. Identificación:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1263">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <data id="1242">
+                                        <property name="style">axiomaInfoCelda</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="resultSetColumn">idPaciente</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+        <grid id="1338">
+            <property name="height">0.90625in</property>
+            <column id="1339"/>
+            <row id="1340">
+                <cell id="1341">
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="paddingTop">5pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">5pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <table id="1304">
+                        <property name="width">100%</property>
+                        <property name="dataSet">seccionDetalleFactura</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">programa</property>
+                                <property name="displayName">programa</property>
+                                <expression name="expression">dataSetRow["programa"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">servicio</property>
+                                <property name="displayName">servicio</property>
+                                <expression name="expression">dataSetRow["servicio"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">cantidad</property>
+                                <property name="displayName">cantidad</property>
+                                <expression name="expression">dataSetRow["cantidad"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">valorUnitario</property>
+                                <property name="displayName">valorUnitario</property>
+                                <expression name="expression">dataSetRow["valorUnitario"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">valorTotal</property>
+                                <property name="displayName">valorTotal</property>
+                                <expression name="expression">dataSetRow["valorTotal"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation</property>
+                                <property name="displayName">sumValorTotal</property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value">row["valorTotal"]</expression>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                            <structure>
+                                <property name="name">valorDescuento</property>
+                                <property name="displayName">valorDescuento</property>
+                                <expression name="expression">dataSetRow["valorDescuento"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">sumValorDescuento</property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value">dataSetRow["valorDescuento"]</expression>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation_1</property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value">dataSetRow["valorTotal"]-dataSetRow["valorDescuento"]</expression>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                        </list-property>
+                        <column id="1334"/>
+                        <column id="1335">
+                            <property name="width">0.8cm</property>
+                        </column>
+                        <column id="1336">
+                            <property name="width">1.8cm</property>
+                        </column>
+                        <column id="1337">
+                            <property name="width">1.8cm</property>
+                        </column>
+                        <header>
+                            <row id="1305">
+                                <cell id="1308">
+                                    <label id="1309">
+                                        <property name="style">axiomaLabelCelda</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">Servicio</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1310">
+                                    <label id="1311">
+                                        <property name="style">axiomaLabelCelda</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Cant.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1312">
+                                    <property name="textAlign">right</property>
+                                    <label id="1313">
+                                        <property name="style">axiomaLabelCelda</property>
+                                        <property name="textAlign">right</property>
+                                        <text-property name="text">Val. Unit.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1314">
+                                    <property name="textAlign">right</property>
+                                    <label id="1315">
+                                        <property name="style">axiomaLabelCelda</property>
+                                        <property name="textAlign">right</property>
+                                        <text-property name="text">Val. Total</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <group id="1353">
+                            <property name="groupName">NewTableGroup1</property>
+                            <property name="interval">none</property>
+                            <property name="sortDirection">asc</property>
+                            <expression name="keyExpr">row["programa"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue">row["programa"]</expression>
+                            </structure>
+                            <property name="repeatHeader">true</property>
+                            <property name="hideDetail">false</property>
+                            <property name="pageBreakAfter">auto</property>
+                            <property name="pageBreakBefore">auto</property>
+                            <property name="pageBreakInside">auto</property>
+                            <header>
+                                <row id="1354">
+                                    <cell id="1355">
+                                        <property name="colSpan">4</property>
+                                        <property name="rowSpan">1</property>
+                                        <data id="1364">
+                                            <property name="style">axiomaLabelCelda</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="resultSetColumn">programa</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </header>
+                        </group>
+                        <detail>
+                            <row id="1316">
+                                <cell id="1319">
+                                    <data id="1320">
+                                        <property name="style">axiomaInfoCelda</property>
+                                        <property name="resultSetColumn">servicio</property>
+                                    </data>
+                                </cell>
+                                <cell id="1321">
+                                    <data id="1322">
+                                        <property name="style">axiomaInfoCelda</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">cantidad</property>
+                                    </data>
+                                </cell>
+                                <cell id="1323">
+                                    <property name="textAlign">right</property>
+                                    <data id="1324">
+                                        <property name="style">axiomaInfoCelda</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">#,##0.00</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">valorUnitario</property>
+                                    </data>
+                                </cell>
+                                <cell id="1325">
+                                    <property name="textAlign">right</property>
+                                    <data id="1326">
+                                        <property name="style">axiomaInfoCelda</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">#,##0.00</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">valorTotal</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="1375">
+                                <cell id="1376">
+                                    <property name="colSpan">4</property>
+                                    <property name="rowSpan">1</property>
+                                    <grid id="1380">
+                                        <property name="width">100%</property>
+                                        <column id="1381"/>
+                                        <column id="1382">
+                                            <property name="width">2.2cm</property>
+                                        </column>
+                                        <row id="1383">
+                                            <cell id="1384">
+                                                <property name="borderTopColor">#000000</property>
+                                                <property name="borderTopStyle">solid</property>
+                                                <property name="borderTopWidth">thin</property>
+                                                <property name="paddingTop">5pt</property>
+                                                <label id="1392">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="textAlign">right</property>
+                                                    <text-property name="text">SubTotal Cargos</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1385">
+                                                <property name="borderTopColor">#000000</property>
+                                                <property name="borderTopStyle">solid</property>
+                                                <property name="borderTopWidth">thin</property>
+                                                <property name="paddingTop">5pt</property>
+                                                <data id="1395">
+                                                    <property name="style">axiomaInfoCelda</property>
+                                                    <structure name="numberFormat">
+                                                        <property name="category">Currency</property>
+                                                        <property name="pattern">$#,##0.00</property>
+                                                    </structure>
+                                                    <property name="textAlign">right</property>
+                                                    <property name="resultSetColumn">Aggregation</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                        <row id="1386">
+                                            <cell id="1387">
+                                                <label id="1393">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="textAlign">right</property>
+                                                    <text-property name="text">Devoluciones Rebajas y Descuentos</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1388">
+                                                <data id="1400">
+                                                    <property name="style">axiomaInfoCelda</property>
+                                                    <structure name="numberFormat">
+                                                        <property name="category">Currency</property>
+                                                        <property name="pattern">$#,##0.00</property>
+                                                    </structure>
+                                                    <property name="textAlign">right</property>
+                                                    <property name="resultSetColumn">sumValorDescuento</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                        <row id="1389">
+                                            <cell id="1390">
+                                                <label id="1394">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="textAlign">right</property>
+                                                    <text-property name="text">Total a Pagar</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1391">
+                                                <data id="1403">
+                                                    <property name="style">axiomaInfoCelda</property>
+                                                    <structure name="numberFormat">
+                                                        <property name="category">Currency</property>
+                                                        <property name="pattern">$#,##0.00</property>
+                                                    </structure>
+                                                    <property name="textAlign">right</property>
+                                                    <property name="resultSetColumn">Aggregation_1</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                        <row id="1404">
+                                            <cell id="1405">
+                                                <property name="colSpan">2</property>
+                                                <property name="rowSpan">1</property>
+                                                <grid id="1409">
+                                                    <property name="width">100%</property>
+                                                    <column id="1410">
+                                                        <property name="width">2cm</property>
+                                                    </column>
+                                                    <column id="1411"/>
+                                                    <row id="1412">
+                                                        <cell id="1413">
+                                                            <label id="1415">
+                                                                <property name="style">axiomaLabelCelda</property>
+                                                                <property name="textAlign">left</property>
+                                                                <text-property name="text">Total a Pagar:</text-property>
+                                                            </label>
+                                                        </cell>
+                                                        <cell id="1414">
+                                                            <table id="1416">
+                                                                <property name="width">100%</property>
+                                                                <property name="dataSet">seccionValorLetras</property>
+                                                                <list-property name="boundDataColumns">
+                                                                    <structure>
+                                                                        <property name="name">convertirletrasconcentavos</property>
+                                                                        <property name="displayName">convertirletrasconcentavos</property>
+                                                                        <expression name="expression">dataSetRow["convertirletrasconcentavos"]</expression>
+                                                                        <property name="dataType">string</property>
+                                                                    </structure>
+                                                                </list-property>
+                                                                <column id="1425"/>
+                                                                <detail>
+                                                                    <row id="1420">
+                                                                        <cell id="1421">
+                                                                            <data id="1422">
+                                                                                <property name="style">axiomaInfoCelda</property>
+                                                                                <property name="resultSetColumn">convertirletrasconcentavos</property>
+                                                                            </data>
+                                                                        </cell>
+                                                                    </row>
+                                                                </detail>
+                                                            </table>
+                                                        </cell>
+                                                    </row>
+                                                </grid>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+        <grid id="1277">
+            <property name="width">100%</property>
+            <column id="1278"/>
+            <row id="1279">
+                <property name="height">1cm</property>
+                <cell id="1280">
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="paddingTop">5pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <property name="verticalAlign">bottom</property>
+                    <label id="1291">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <text-property name="text">______________________</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="1281">
+                <cell id="1282">
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1289">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <property name="dataSet">seccionFirmas</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">usuarioElabora</property>
+                                <property name="displayName">usuarioElabora</property>
+                                <expression name="expression">dataSetRow["usuarioElabora"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">usuarioElabora</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1283">
+                <property name="height">1cm</property>
+                <cell id="1284">
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <property name="verticalAlign">bottom</property>
+                    <label id="1292">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <text-property name="text">______________________</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="1285">
+                <cell id="1286">
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">5pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <label id="1290">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <text-property name="text">Recibido por</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <grid id="1293">
+            <property name="width">100%</property>
+            <column id="1294"/>
+            <row id="1295">
+                <cell id="1296">
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="paddingTop">5pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">5pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <data id="1297">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="fontSize">7pt</property>
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <property name="textAlign">justify</property>
+                        <property name="dataSet">seccionEncabezado</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">piePagina</property>
+                                <property name="displayName">piePagina</property>
+                                <expression name="expression">dataSetRow["piePagina"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">piePagina</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <grid id="1298">
+            <property name="width">100%</property>
+            <column id="1299"/>
+            <row id="1300">
+                <cell id="1301">
+                    <property name="paddingTop">5pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">5pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <text-data id="1511">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="fontSize">7pt</property>
+                        <property name="color">#000000</property>
+                        <property name="textAlign">left</property>
+                        <property name="display">block</property>
+                        <property name="showIfBlank">false</property>
+                        <list-property name="visibility">
+                            <structure>
+                                <property name="format">all</property>
+                                <expression name="valueExpr">params["reimpresion"].value ==null || params["reimpresion"].value ==""</expression>
+                            </structure>
+                        </list-property>
+                        <property name="allowExport">true</property>
+                        <expression name="valueExpr">"Reimpresión: " + params["reimpresion"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                    <text-data id="1503">
+                        <property name="style">axiomaInfoCelda</property>
+                        <property name="fontSize">7pt</property>
+                        <property name="color">#000000</property>
+                        <property name="textAlign">left</property>
+                        <property name="display">block</property>
+                        <property name="showIfBlank">false</property>
+                        <list-property name="visibility">
+                            <structure>
+                                <property name="format">all</property>
+                                <expression name="valueExpr">params["reimpresion"].value ==null || params["reimpresion"].value ==""</expression>
+                            </structure>
+                        </list-property>
+                        <property name="allowExport">true</property>
+                        <expression name="valueExpr">"Fecha y Hora:  " +params["fechaReimpresion"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

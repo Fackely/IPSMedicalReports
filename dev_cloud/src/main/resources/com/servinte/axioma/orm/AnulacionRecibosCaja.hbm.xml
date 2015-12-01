@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2/09/2011 05:04:02 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AnulacionRecibosCaja" table="anulacion_recibos_caja" schema="tesoreria">
+        <composite-id name="id" class="com.servinte.axioma.orm.AnulacionRecibosCajaId">
+            <key-property name="numeroAnulacionRc" type="string">
+                <column name="numero_anulacion_rc" length="20" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" />
+        </many-to-one>
+        <many-to-one name="motivosAnulacionRc" class="com.servinte.axioma.orm.MotivosAnulacionRc" fetch="select">
+            <column name="motivo_anulacion" />
+        </many-to-one>
+        <many-to-one name="recibosCaja" class="com.servinte.axioma.orm.RecibosCaja" update="false" insert="false" fetch="select">
+            <column name="numero_recibo_caja" length="20" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+        <property name="tipoComprobante" type="string">
+            <column name="tipo_comprobante" length="4" />
+        </property>
+        <property name="nroComprobante" type="java.lang.Integer">
+            <column name="nro_comprobante" precision="8" scale="0" />
+        </property>
+        <property name="contabilizado" type="string">
+            <column name="contabilizado" length="1" not-null="true" />
+        </property>
+        <property name="consecutivoAnulacion" type="string">
+            <column name="consecutivo_anulacion" length="20" />
+        </property>
+        <set name="cierreCajaXAnulaReciboCs" table="cierre_caja_x_anula_recibo_c" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="anulacion_recibo_caja" length="20" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.anulacion_recibos_caja - llave compuesta</comment>
+                </column>
+                <column name="institucion" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.anulacion_recibos_caja - llave compuesta</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaXAnulaReciboC" />
+        </set>
+    </class>
+</hibernate-mapping>

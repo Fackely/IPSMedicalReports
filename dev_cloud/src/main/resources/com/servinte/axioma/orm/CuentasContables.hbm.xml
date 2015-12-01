@@ -1,0 +1,631 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 16, 2010 8:51:43 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CuentasContables" table="cuentas_contables" schema="interfaz">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" />
+        </many-to-one>
+        <property name="cuentaContable" type="string">
+            <column name="cuenta_contable" length="20" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="activo" />
+        </property>
+        <property name="manejoTerceros" type="java.lang.Boolean">
+            <column name="manejo_terceros" />
+        </property>
+        <property name="manejoCentrosCosto" type="java.lang.Boolean">
+            <column name="manejo_centros_costo" />
+        </property>
+        <property name="manejoBaseGravable" type="java.lang.Boolean">
+            <column name="manejo_base_gravable" />
+        </property>
+        <property name="naturalezaCuenta" type="java.lang.Character">
+            <column name="naturaleza_cuenta" length="1" />
+        </property>
+        <property name="anioVigencia" type="string">
+            <column name="anio_vigencia" length="4" />
+        </property>
+        <set name="unidadFunCuentaIngCcsForCuentaIngreso" inverse="true" lazy="true" table="unidad_fun_cuenta_ing_cc" fetch="select">
+            <key>
+                <column name="cuenta_ingreso" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIngCc" />
+        </set>
+        <set name="claseInventariosForCuentaInventario" inverse="true" lazy="true" table="clase_inventario" fetch="select">
+            <key>
+                <column name="cuenta_inventario" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClaseInventario" />
+        </set>
+        <set name="cuentasXEspOdontosForCuentaCostoHonorarios" inverse="true" lazy="true" table="cuentas_x_esp_odonto" fetch="select">
+            <key>
+                <column name="cuenta_costo_honorarios" precision="10" scale="0">
+                    <comment>Cuenta Contable relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasXEspOdonto" />
+        </set>
+        <set name="grupoServicioCueIngrsForCuentaIngresoVigAnterior" inverse="true" lazy="true" table="grupo_servicio_cue_ingr" fetch="select">
+            <key>
+                <column name="cuenta_ingreso_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GrupoServicioCueIngr" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaDescuentoBonos" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_descuento_bonos" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="logConceptosRetencionsForCuentaDbAutoretencion" inverse="true" lazy="true" table="log_conceptos_retencion" fetch="select">
+            <key>
+                <column name="cuenta_db_autoretencion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogConceptosRetencion" />
+        </set>
+        <set name="cuentasXEspOdontosForCuentaContable" inverse="true" lazy="true" table="cuentas_x_esp_odonto" fetch="select">
+            <key>
+                <column name="cuenta_contable" precision="10" scale="0">
+                    <comment>Cuenta Contable relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasXEspOdonto" />
+        </set>
+        <set name="tiposConveniosForCuentaDebitoGlsRecibida" inverse="true" lazy="true" table="tipos_convenio" fetch="select">
+            <key>
+                <column name="cuenta_debito_gls_recibida" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposConvenio" />
+        </set>
+        <set name="tiposConveniosForCuentaContableCxcCap" inverse="true" lazy="true" table="tipos_convenio" fetch="select">
+            <key>
+                <column name="cuenta_contable_cxc_cap" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposConvenio" />
+        </set>
+        <set name="agrupHonorariosPoolsForCueContInstVigAnterior" inverse="true" lazy="true" table="agrup_honorarios_pool" fetch="select">
+            <key>
+                <column name="cue_cont_inst_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupHonorariosPool" />
+        </set>
+        <set name="tiposConveniosForCuentaContableValConv" inverse="true" lazy="true" table="tipos_convenio" fetch="select">
+            <key>
+                <column name="cuenta_contable_val_conv" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposConvenio" />
+        </set>
+        <set name="agrupHonorariosPoolsForCuentaContableHonorario" inverse="true" lazy="true" table="agrup_honorarios_pool" fetch="select">
+            <key>
+                <column name="cuenta_contable_honorario" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupHonorariosPool" />
+        </set>
+        <set name="grupoInventariosForCuentaInventario" inverse="true" lazy="true" table="grupo_inventario" fetch="select">
+            <key>
+                <column name="cuenta_inventario" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GrupoInventario" />
+        </set>
+        <set name="conceptosFacturasVariasesForAjusteDebitoVigAnterior" inverse="true" lazy="true" table="conceptos_facturas_varias" fetch="select">
+            <key>
+                <column name="ajuste_debito_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosFacturasVarias" />
+        </set>
+        <set name="cuentaInterfazEmpresInstis" inverse="true" lazy="true" table="cuenta_interfaz_empres_insti" fetch="select">
+            <key>
+                <column name="cuenta_contable" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaInterfazEmpresInsti" />
+        </set>
+        <set name="especiServCueIngsForCuentaIngresoVigAnterior" inverse="true" lazy="true" table="especi_serv_cue_ing" fetch="select">
+            <key>
+                <column name="cuenta_ingreso_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EspeciServCueIng" />
+        </set>
+        <set name="tipoServicioCuentaIngsForCuentaContableCosto" inverse="true" lazy="true" table="tipo_servicio_cuenta_ing" fetch="select">
+            <key>
+                <column name="cuenta_contable_costo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TipoServicioCuentaIng" />
+        </set>
+        <set name="grupoServicioCueIngrsForCuentaIngreso" inverse="true" lazy="true" table="grupo_servicio_cue_ingr" fetch="select">
+            <key>
+                <column name="cuenta_ingreso" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GrupoServicioCueIngr" />
+        </set>
+        <set name="conceptosFacturasVariasesForCuentaContableCredito" inverse="true" lazy="true" table="conceptos_facturas_varias" fetch="select">
+            <key>
+                <column name="cuenta_contable_credito" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosFacturasVarias" />
+        </set>
+        <set name="logConceptosRetencionsForCuentaRetencion" inverse="true" lazy="true" table="log_conceptos_retencion" fetch="select">
+            <key>
+                <column name="cuenta_retencion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogConceptosRetencion" />
+        </set>
+        <set name="paquetesesForCuentaContMenVal" inverse="true" lazy="true" table="paquetes" fetch="select">
+            <key>
+                <column name="cuenta_cont_men_val" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Paquetes" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaDescuentoFacturas" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_descuento_facturas" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaDescDevolAbonosPacientes" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_desc_devol_abonos_pacientes" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaDevolAbonosPacientes" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_devol_abonos_pacientes" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="detServHonoraEspServsForCuentaIngresoInst" inverse="true" lazy="true" table="det_serv_honora_esp_serv" fetch="select">
+            <key>
+                <column name="cuenta_ingreso_inst" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetServHonoraEspServ" />
+        </set>
+        <set name="especiServCueIngsForCuentaIngreso" inverse="true" lazy="true" table="especi_serv_cue_ing" fetch="select">
+            <key>
+                <column name="cuenta_ingreso" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EspeciServCueIng" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaFaltantes" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_faltantes" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaAbonoPaciente" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_abono_paciente" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="entidadesSubcontratadases" inverse="true" lazy="true" table="entidades_subcontratadas" fetch="select">
+            <key>
+                <column name="cuenta_cxp" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntidadesSubcontratadas" />
+        </set>
+        <set name="agrupHonorariosPoolsForCuentaContableIns" inverse="true" lazy="true" table="agrup_honorarios_pool" fetch="select">
+            <key>
+                <column name="cuenta_contable_ins" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupHonorariosPool" />
+        </set>
+        <set name="tiposConveniosForCuentaContableValPac" inverse="true" lazy="true" table="tipos_convenio" fetch="select">
+            <key>
+                <column name="cuenta_contable_val_pac" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposConvenio" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaDescuentosOdontologicos" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_descuentos_odontologicos" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="conceptosFacturasVariasesForAjusteCreditoVigAnterior" inverse="true" lazy="true" table="conceptos_facturas_varias" fetch="select">
+            <key>
+                <column name="ajuste_credito_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosFacturasVarias" />
+        </set>
+        <set name="unidadFunCuentaIngCcsForCuentaMedVigAnterior" inverse="true" lazy="true" table="unidad_fun_cuenta_ing_cc" fetch="select">
+            <key>
+                <column name="cuenta_med_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIngCc" />
+        </set>
+        <set name="conceptosRetencionsForCuentaRetencion" inverse="true" lazy="true" table="conceptos_retencion" fetch="select">
+            <key>
+                <column name="cuenta_retencion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosRetencion" />
+        </set>
+        <set name="honorariosPoolServsForCueContInstVigAnterior" inverse="true" lazy="true" table="honorarios_pool_serv" fetch="select">
+            <key>
+                <column name="cue_cont_inst_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HonorariosPoolServ" />
+        </set>
+        <set name="conceptosFacturasVariasesForCuentaContableDebito" inverse="true" lazy="true" table="conceptos_facturas_varias" fetch="select">
+            <key>
+                <column name="cuenta_contable_debito" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosFacturasVarias" />
+        </set>
+        <set name="paquetesesForCuentaContMayVal" inverse="true" lazy="true" table="paquetes" fetch="select">
+            <key>
+                <column name="cuenta_cont_may_val" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Paquetes" />
+        </set>
+        <set name="grupoInventariosForCuentaCosto" inverse="true" lazy="true" table="grupo_inventario" fetch="select">
+            <key>
+                <column name="cuenta_costo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GrupoInventario" />
+        </set>
+        <set name="detAgruHonoraEspServsForCuentaVigAntInst" inverse="true" lazy="true" table="det_agru_honora_esp_serv" fetch="select">
+            <key>
+                <column name="cuenta_vig_ant_inst" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAgruHonoraEspServ" />
+        </set>
+        <set name="subgrupoInventariosForCuentaCosto" inverse="true" lazy="true" table="subgrupo_inventario" fetch="select">
+            <key>
+                <column name="cuenta_costo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SubgrupoInventario" />
+        </set>
+        <set name="grupoServicioCueIngrsForCuentaContableCosto" inverse="true" lazy="true" table="grupo_servicio_cue_ingr" fetch="select">
+            <key>
+                <column name="cuenta_contable_costo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.GrupoServicioCueIngr" />
+        </set>
+        <set name="tipoServicioCuentaIngsForCuentaIngreso" inverse="true" lazy="true" table="tipo_servicio_cuenta_ing" fetch="select">
+            <key>
+                <column name="cuenta_ingreso" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TipoServicioCuentaIng" />
+        </set>
+        <set name="tipoServicioCuentaIngsForCuentaIngresoVigAnterior" inverse="true" lazy="true" table="tipo_servicio_cuenta_ing" fetch="select">
+            <key>
+                <column name="cuenta_ingreso_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TipoServicioCuentaIng" />
+        </set>
+        <set name="honorariosPoolServsForCuentaContableIns" inverse="true" lazy="true" table="honorarios_pool_serv" fetch="select">
+            <key>
+                <column name="cuenta_contable_ins" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HonorariosPoolServ" />
+        </set>
+        <set name="unidadFunCuentaIngsForCuentaContableCosto" inverse="true" lazy="true" table="unidad_fun_cuenta_ing" fetch="select">
+            <key>
+                <column name="cuenta_contable_costo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIng" />
+        </set>
+        <set name="poolesConveniosForCuentaContablePool" inverse="true" lazy="true" table="pooles_convenio" fetch="select">
+            <key>
+                <column name="cuenta_contable_pool" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesConvenio" />
+        </set>
+        <set name="conceptPagPoolXConvs" inverse="true" lazy="true" table="concept_pag_pool_x_conv" fetch="select">
+            <key>
+                <column name="cuenta_contable" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptPagPoolXConv" />
+        </set>
+        <set name="especiServCueIngsForCuentaContableCosto" inverse="true" lazy="true" table="especi_serv_cue_ing" fetch="select">
+            <key>
+                <column name="cuenta_contable_costo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EspeciServCueIng" />
+        </set>
+        <set name="unidadFunCuentaIngsForCuentaMedicamento" inverse="true" lazy="true" table="unidad_fun_cuenta_ing" fetch="select">
+            <key>
+                <column name="cuenta_medicamento" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIng" />
+        </set>
+        <set name="subgrupoInventariosForCuentaInventario" inverse="true" lazy="true" table="subgrupo_inventario" fetch="select">
+            <key>
+                <column name="cuenta_inventario" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SubgrupoInventario" />
+        </set>
+        <set name="claseInventariosForCuentaCosto" inverse="true" lazy="true" table="clase_inventario" fetch="select">
+            <key>
+                <column name="cuenta_costo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClaseInventario" />
+        </set>
+        <set name="cuentasXEspOdontosForCuentaVigAnterior" inverse="true" lazy="true" table="cuentas_x_esp_odonto" fetch="select">
+            <key>
+                <column name="cuenta_vig_anterior" precision="10" scale="0">
+                    <comment>Cuenta Contable relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasXEspOdonto" />
+        </set>
+        <set name="unidadFunCuentaIngCcsForCuentaContableCosto" inverse="true" lazy="true" table="unidad_fun_cuenta_ing_cc" fetch="select">
+            <key>
+                <column name="cuenta_contable_costo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIngCc" />
+        </set>
+        <set name="poolesConveniosForCuentaContableIns" inverse="true" lazy="true" table="pooles_convenio" fetch="select">
+            <key>
+                <column name="cuenta_contable_ins" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesConvenio" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaAnticipoConvenio" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_anticipo_convenio" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="poolesEsquemaTarifariosForCuentaContablePool" inverse="true" lazy="true" table="pooles_esquema_tarifario" fetch="select">
+            <key>
+                <column name="cuenta_contable_pool" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesEsquemaTarifario" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaPorCobrarTraslados" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_por_cobrar_traslados" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="pooleses" inverse="true" lazy="true" table="pooles" fetch="select">
+            <key>
+                <column name="cuenta_x_pagar" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Pooles" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaDescuentoPromocion" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_descuento_promocion" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="poolesEsquemaTarifariosForCuentaContableIns" inverse="true" lazy="true" table="pooles_esquema_tarifario" fetch="select">
+            <key>
+                <column name="cuenta_contable_ins" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesEsquemaTarifario" />
+        </set>
+        <set name="servicioCuentaIngresosForCuentaIngreso" inverse="true" lazy="true" table="servicio_cuenta_ingreso" fetch="select">
+            <key>
+                <column name="cuenta_ingreso" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServicioCuentaIngreso" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaTraslado" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_traslado" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaXPagarHonorarios" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_x_pagar_honorarios" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="servicioCuentaIngresosForCuentaContableCosto" inverse="true" lazy="true" table="servicio_cuenta_ingreso" fetch="select">
+            <key>
+                <column name="cuenta_contable_costo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServicioCuentaIngreso" />
+        </set>
+        <set name="detServHonoraEspServsForCuentaVigAntInst" inverse="true" lazy="true" table="det_serv_honora_esp_serv" fetch="select">
+            <key>
+                <column name="cuenta_vig_ant_inst" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetServHonoraEspServ" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaSobrantes" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_sobrantes" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="cuentaConvenios" inverse="true" lazy="true" table="cuenta_convenio" fetch="select">
+            <key>
+                <column name="cuenta_contable_cxc_cap" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaConvenio" />
+        </set>
+        <set name="conceptosRetencionsForCuentaDbAutoretencion" inverse="true" lazy="true" table="conceptos_retencion" fetch="select">
+            <key>
+                <column name="cuenta_db_autoretencion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosRetencion" />
+        </set>
+        <set name="poolesConveniosForCueContInstVigAnterior" inverse="true" lazy="true" table="pooles_convenio" fetch="select">
+            <key>
+                <column name="cue_cont_inst_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesConvenio" />
+        </set>
+        <set name="tiposConveniosForCuentaContable" inverse="true" lazy="true" table="tipos_convenio" fetch="select">
+            <key>
+                <column name="cuenta_contable" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposConvenio" />
+        </set>
+        <set name="formasPagos" inverse="true" lazy="true" table="formas_pago" fetch="select">
+            <key>
+                <column name="cuenta_contable" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FormasPago" />
+        </set>
+        <set name="conceptosDeEgresos" inverse="true" lazy="true" table="conceptos_de_egreso" fetch="select">
+            <key>
+                <column name="cuenta_contable" precision="10" scale="0">
+                    <comment>Cuanta a la que referencia el Concepto de Egreso</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosDeEgreso" />
+        </set>
+        <set name="unidadFunCuentaIngsForCuentaIngresoVigAnterior" inverse="true" lazy="true" table="unidad_fun_cuenta_ing" fetch="select">
+            <key>
+                <column name="cuenta_ingreso_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIng" />
+        </set>
+        <set name="poolesEsquemaTarifariosForCueContInstVigAnterior" inverse="true" lazy="true" table="pooles_esquema_tarifario" fetch="select">
+            <key>
+                <column name="cue_cont_inst_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesEsquemaTarifario" />
+        </set>
+        <set name="detAgruHonoraEspServsForCuentaIngresoInst" inverse="true" lazy="true" table="det_agru_honora_esp_serv" fetch="select">
+            <key>
+                <column name="cuenta_ingreso_inst" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAgruHonoraEspServ" />
+        </set>
+        <set name="cuentaRegimens" inverse="true" lazy="true" table="cuenta_regimen" fetch="select">
+            <key>
+                <column name="cuenta_contable_cxc_cap" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaRegimen" />
+        </set>
+        <set name="unidadFunCuentaIngCcsForCuentaMedicamento" inverse="true" lazy="true" table="unidad_fun_cuenta_ing_cc" fetch="select">
+            <key>
+                <column name="cuenta_medicamento" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIngCc" />
+        </set>
+        <set name="conceptosIngTesorerias" inverse="true" lazy="true" table="conceptos_ing_tesoreria" fetch="select">
+            <key>
+                <column name="cuenta" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosIngTesoreria" />
+        </set>
+        <set name="detServHonoraEspServsForCuentaHonorarios" inverse="true" lazy="true" table="det_serv_honora_esp_serv" fetch="select">
+            <key>
+                <column name="cuenta_honorarios" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetServHonoraEspServ" />
+        </set>
+        <set name="detAgruHonoraEspServsForCuentaHonorarios" inverse="true" lazy="true" table="det_agru_honora_esp_serv" fetch="select">
+            <key>
+                <column name="cuenta_honorarios" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAgruHonoraEspServ" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaValCargoPaci" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_val_cargo_paci" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="cuentasBancariases" inverse="true" lazy="true" table="cuentas_bancarias" fetch="select">
+            <key>
+                <column name="cuenta_contable" precision="10" scale="0" not-null="true">
+                    <comment>Corresponde a la cuenta contable que se maneja para la cuenta bancaria. C&#195;&#179;digo axioma.</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasBancarias" />
+        </set>
+        <set name="tiposConveniosForCuentaContableDesPac" inverse="true" lazy="true" table="tipos_convenio" fetch="select">
+            <key>
+                <column name="cuenta_contable_des_pac" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposConvenio" />
+        </set>
+        <set name="unidadFunCuentaIngCcsForCuentaIngresoVigAnterior" inverse="true" lazy="true" table="unidad_fun_cuenta_ing_cc" fetch="select">
+            <key>
+                <column name="cuenta_ingreso_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIngCc" />
+        </set>
+        <set name="conceptosRetencionsForCuentaCrAutoretencion" inverse="true" lazy="true" table="conceptos_retencion" fetch="select">
+            <key>
+                <column name="cuenta_cr_autoretencion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosRetencion" />
+        </set>
+        <set name="servicioCuentaIngresosForCuentaIngresoVigAnterior" inverse="true" lazy="true" table="servicio_cuenta_ingreso" fetch="select">
+            <key>
+                <column name="cuenta_ingreso_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServicioCuentaIngreso" />
+        </set>
+        <set name="unidadFunCuentaIngsForCuentaIngreso" inverse="true" lazy="true" table="unidad_fun_cuenta_ing" fetch="select">
+            <key>
+                <column name="cuenta_ingreso" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIng" />
+        </set>
+        <set name="conceptosFacturasVariasesForCuentaIngrVigencia" inverse="true" lazy="true" table="conceptos_facturas_varias" fetch="select">
+            <key>
+                <column name="cuenta_ingr_vigencia" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosFacturasVarias" />
+        </set>
+        <set name="unidadFunCuentaIngsForCuentaMedVigAnterior" inverse="true" lazy="true" table="unidad_fun_cuenta_ing" fetch="select">
+            <key>
+                <column name="cuenta_med_vig_anterior" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIng" />
+        </set>
+        <set name="cuentaGeneralInterfazsForCuentaValCargoConv" inverse="true" lazy="true" table="cuenta_general_interfaz" fetch="select">
+            <key>
+                <column name="cuenta_val_cargo_conv" precision="10" scale="0">
+                    <comment>Cuenta relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaGeneralInterfaz" />
+        </set>
+        <set name="logConceptosRetencionsForCuentaCrAutoretencion" inverse="true" lazy="true" table="log_conceptos_retencion" fetch="select">
+            <key>
+                <column name="cuenta_cr_autoretencion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogConceptosRetencion" />
+        </set>
+    </class>
+</hibernate-mapping>

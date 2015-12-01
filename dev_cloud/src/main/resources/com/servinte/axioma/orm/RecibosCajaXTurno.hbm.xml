@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 30, 2010 3:31:16 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RecibosCajaXTurno" table="recibos_caja_x_turno" schema="tesoreria">
+        <comment>Relacionar los recibos de caja con los turnos de caja</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence">
+            	<param name="sequence">tesoreria.seq_recibos_caja_x_turno</param>
+            </generator>
+        </id>
+        <many-to-one name="recibosCaja" class="com.servinte.axioma.orm.RecibosCaja" fetch="select">
+            <column name="numero_rc" length="20" not-null="true">
+                <comment>Referencia a la tabla recibox_caja, almacena el n&#195;&#186;mero de recibo de caja</comment>
+            </column>
+            <column name="institucion" not-null="true">
+                <comment>Referencia a la tabla recibox_caja, almacena la instituci&#195;&#179;n en la que se gener&#195;&#179; el recibo de caja</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="turnoDeCaja" class="com.servinte.axioma.orm.TurnoDeCaja" fetch="select">
+            <column name="turno_caja" precision="12" scale="0" not-null="true">
+                <comment>Referencia a la tabla turno_de_caja, almacena el turno al cual se relacion&#195;&#179; la el recibo de caja</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

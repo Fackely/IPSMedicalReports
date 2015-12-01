@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 12, 2010 4:02:42 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MovimientosCaja" table="movimientos_caja" schema="tesoreria">
+        <comment>Registro de los movimientos de caja</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_movimientos_caja</param>
+			</generator>
+        </id>
+        <many-to-one name="tiposMovimientoCaja" class="com.servinte.axioma.orm.TiposMovimientoCaja" fetch="select">
+            <column name="tipo_movimiento" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true">
+                <comment>Usuario que ejecuta el movimiento</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="turnoDeCaja" class="com.servinte.axioma.orm.TurnoDeCaja" lazy="false" fetch="select" cascade="all">
+            <column name="turno" precision="12" scale="0" not-null="true">
+                <comment>Turno que hace el movimiento</comment>
+            </column>
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true">
+                <comment>Fecha del movimiento</comment>
+            </column>
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true">
+                <comment>Hora del movimiento</comment>
+            </column>
+        </property>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" not-null="true">
+                <comment>Consecutivo asignado</comment>
+            </column>
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones">
+                <comment>Observaciones</comment>
+            </column>
+        </property>
+        <property name="fechaMovimiento" type="date">
+            <column name="fecha_movimiento" length="13" not-null="true">
+                <comment>Fecha seleccionada para el movimiento</comment>
+            </column>
+        </property>
+        <property name="contabilizado" type="char">
+            <column name="contabilizado" length="1" not-null="true">
+                <comment>Indica si el movimiento ha sido contabilizado</comment>
+            </column>
+        </property>
+        <property name="tipoComprobante" type="string">
+            <column name="tipo_comprobante" length="4" />
+        </property>
+        <property name="numeroComprobante" type="java.lang.Integer">
+            <column name="numero_comprobante" precision="8" scale="0" />
+        </property>
+        <property name="ingresaFechaArqueo" type="char">
+            <column name="ingresa_fecha_arqueo" length="1" not-null="true" default="S">
+                <comment>Indica si en la consulta del movimiento se ha ingresado fecha</comment>
+            </column>
+        </property>
+        <set name="entregaTransportadorasForMovimientoCajaArqueo" inverse="true" lazy="true" table="entrega_transportadora" fetch="select">
+            <key>
+                <column name="movimiento_caja_arqueo" precision="10" scale="0" not-null="true">
+                    <comment>Movimiento de arqueo entrega parcial asociado a la entrega a transportadora</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntregaTransportadora" />
+        </set>
+        <set name="cierreCajaXReciboCajas" inverse="true" lazy="true" table="cierre_caja_x_recibo_caja" fetch="select">
+            <key>
+                <column name="movimiento_caja_cierre" precision="10" scale="0" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.movimientos_caja</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaXReciboCaja" />
+        </set>
+     	<one-to-one name="solicitudTrasladoCajaByCodigoPk" class="com.servinte.axioma.orm.SolicitudTrasladoCaja" cascade="all"></one-to-one>
+        <one-to-one name="entregaCajaMayorByCodigoPk" class="com.servinte.axioma.orm.EntregaCajaMayor" cascade="all"></one-to-one>
+        <set name="cierreCajaXDevolRecibos" inverse="true" lazy="true" table="cierre_caja_x_devol_recibo" fetch="select">
+            <key>
+                <column name="movimiento_caja_cierre" precision="10" scale="0" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.movimientos_caja</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaXDevolRecibo" />
+        </set>
+        <one-to-one name="detalleMovCajaCierre" class="com.servinte.axioma.orm.DetalleMovCajaCierre" cascade="all"></one-to-one>
+        <set name="cierreCajaTransportadoras" inverse="true" lazy="true" table="cierre_caja_transportadora" fetch="select" cascade="all">
+            <key>
+                <column name="movimiento_caja" precision="10" scale="0" not-null="true">
+                    <comment>Movimiento de Cierre de Turno de caja relacionado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaTransportadora" />
+        </set>
+        <set name="solicitudTrasladoCajasForMovimientoCajaCierre" inverse="true" lazy="true" table="solicitud_traslado_caja" fetch="select">
+            <key>
+                <column name="movimiento_caja_cierre" precision="10" scale="0" not-null="true">
+                    <comment>Movimiento de cierre de caja asociado a la solicitud de traslado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudTrasladoCaja" />
+        </set>
+        <set name="adjuntosMovimientosCajas" inverse="true" lazy="true" table="adjuntos_movimientos_caja" fetch="select">
+            <key>
+                <column name="movimiento_caja" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdjuntosMovimientosCaja" />
+        </set>
+        <set name="cuadreCajas" inverse="true" lazy="true" table="cuadre_caja" fetch="select" cascade="all-delete-orphan">
+            <key>
+                <column name="movimiento_caja" precision="10" scale="0" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.movimientos_caja</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuadreCaja" />
+        </set>
+        <set name="cierreCajaAcepTrasCajas" inverse="true" lazy="true" table="cierre_caja_acep_tras_caja" fetch="select">
+            <key>
+                <column name="movimiento_caja" precision="10" scale="0" not-null="true">
+                    <comment>Movimiento de caja relacionado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaAcepTrasCaja" />
+        </set>
+        <set name="entregaCajaMayorsForMovimientoCajaArqueo" inverse="true" lazy="true" table="entrega_caja_mayor" fetch="select">
+            <key>
+                <column name="movimiento_caja_arqueo" precision="10" scale="0" not-null="true">
+                    <comment>Movimiento de arqueo entrega parcial asociado a la entrega a caja mayor</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntregaCajaMayor" />
+        </set>
+        <set name="cierreCajaXEntregaCajas" inverse="true" lazy="true" table="cierre_caja_x_entrega_caja" fetch="select">
+            <key>
+                <column name="movimiento_caja" precision="10" scale="0" not-null="true">
+                    <comment>Movimiento de Cierre de Turno de caja relacionado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaXEntregaCaja" />
+        </set>
+        <set name="cierreCajaXAnulaReciboCs" inverse="true" lazy="true" table="cierre_caja_x_anula_recibo_c" fetch="select">
+            <key>
+                <column name="movimiento_caja_cierre" precision="10" scale="0" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.movimientos_caja</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCajaXAnulaReciboC" />
+        </set>
+        <one-to-one name="entregaTransportadoraByCodigoPk" class="com.servinte.axioma.orm.EntregaTransportadora" cascade="all"></one-to-one>
+        <one-to-one name="aceptacionTrasladoCaja" class="com.servinte.axioma.orm.AceptacionTrasladoCaja" cascade="all"></one-to-one>
+        <set name="docSopMovimCajases" inverse="true" lazy="true" table="doc_sop_movim_cajas" fetch="select" cascade="all-delete-orphan">
+            <key>
+                <column name="movimiento_caja" precision="10" scale="0" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.movimientos_caja</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DocSopMovimCajas" />
+        </set>
+    </class>
+</hibernate-mapping>

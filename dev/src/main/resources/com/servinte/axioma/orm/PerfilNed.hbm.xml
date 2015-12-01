@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PerfilNed" table="perfil_ned" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="escala" type="long">
+            <column name="escala" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="escalaFactorPrediccion" type="long">
+            <column name="escala_factor_prediccion" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="valorTotal" type="long">
+            <column name="valor_total" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="usuarioRegistro" type="string">
+            <column name="usuario_registro" length="30" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true" />
+        </property>
+        <set name="camposPerfilNeds" inverse="true" lazy="true" table="campos_perfil_ned" fetch="select">
+            <key>
+                <column name="perfil_ned" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CamposPerfilNed" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/04/2010 03:20:50 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposTarjetaFinanciera" table="tipos_tarjeta_financiera" schema="tesoreria">
+        <id name="codigo" type="char">
+            <column name="codigo" length="1" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="32" not-null="true" />
+        </property>
+        <set name="tarjetasFinancierases" inverse="true" lazy="true" table="tarjetas_financieras" fetch="select">
+            <key>
+                <column name="tipo_tarjeta_financiera" length="1" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarjetasFinancieras" />
+        </set>
+    </class>
+</hibernate-mapping>

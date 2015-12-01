@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="citaOdontologicaPOS" language="groovy" pageWidth="212" pageHeight="850" whenNoDataType="NoDataSection" columnWidth="196" leftMargin="8" rightMargin="8" topMargin="8" bottomMargin="8">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/odontologia/citaOdontologica/reporte/serviciosSubreporte.jasper"]]></defaultValueExpression>
+	</parameter>
+	<field name="razonSocial" class="java.lang.String"/>
+	<field name="nombreEspecialidad" class="java.lang.String"/>
+	<field name="nit" class="java.lang.String"/>
+	<field name="centroAtencion" class="java.lang.String"/>
+	<field name="codigoCita" class="java.lang.Integer"/>
+	<field name="fechaCita" class="java.lang.String"/>
+	<field name="horaCita" class="java.lang.String"/>
+	<field name="nombreProfesional" class="java.lang.String"/>
+	<field name="tarjeta" class="java.lang.String"/>
+	<field name="nombrePaciente" class="java.lang.String"/>
+	<field name="identificacionPaciente" class="java.lang.String"/>
+	<field name="tipoIdentificacion" class="java.lang.String"/>
+	<field name="imprimirColumHeader" class="java.lang.Boolean"/>
+	<field name="imprimirDetalle" class="java.lang.Boolean"/>
+	<field name="dsServicios" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="164" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="65" y="74" width="131" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreProfesional}.isEmpty()? "No asignado": $F{nombreProfesional}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="0" y="48" width="78" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cita Asignada:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTitulo" stretchType="RelativeToTallestObject" x="13" y="0" width="170" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="59" y="12" width="19" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="0" y="24" width="105" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Centro de Atención:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="0" y="60" width="35" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="0" y="74" width="65" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profesional:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="97" y="60" width="30" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="50" y="98" width="146" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrePaciente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="35" y="60" width="62" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaCita}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="78" y="48" width="85" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoCita}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="71" y="86" width="125" height="12"/>
+				<textElement markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreEspecialidad}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="127" y="60" width="63" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{horaCita}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="105" y="24" width="91" height="24"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{centroAtencion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="78" y="12" width="103" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="0" y="86" width="71" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especialidad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="0" y="98" width="50" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="axiomaItem" x="0" y="110" width="75" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Identificación:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="75" y="110" width="121" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoIdentificacion} + " " + $F{identificacionPaciente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="0" y="122" width="45" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tarjeta:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" stretchType="RelativeToTallestObject" x="45" y="122" width="151" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tarjeta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaItem" x="1" y="150" width="66" height="12" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SERVICIOS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="148" width="195" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="162" width="195" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Immediate">
+			<printWhenExpression><![CDATA[$F{imprimirDetalle}]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="2" width="196" height="10"/>
+				<dataSourceExpression><![CDATA[$F{dsServicios}]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

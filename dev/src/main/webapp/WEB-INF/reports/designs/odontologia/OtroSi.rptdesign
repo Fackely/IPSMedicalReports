@@ -1,0 +1,1365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <html-property name="description">contiene header and footer</html-property>
+    <text-property name="displayName">template axioma reports</text-property>
+    <parameters>
+        <scalar-parameter name="presupuesto" id="678">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="otroSi" id="943">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="94">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma_desarrollo</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="datosContrato" id="587">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">nropresupuesto</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">nrocontrato</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">fechacontrato</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">nrootrosi</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">nombresyapellidos</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">tipoid</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">numeroidentificacion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">direccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">telefono</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">otroSi</property>
+                    <property name="paramName">otroSi</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">presupuesto</property>
+                    <property name="paramName">presupuesto</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">nropresupuesto</property>
+                    <property name="nativeName">nropresupuesto</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">nrocontrato</property>
+                    <property name="nativeName">nrocontrato</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">fechacontrato</property>
+                    <property name="nativeName">fechacontrato</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">nrootrosi</property>
+                    <property name="nativeName">nrootrosi</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">nombresyapellidos</property>
+                    <property name="nativeName">nombresyapellidos</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">tipoid</property>
+                    <property name="nativeName">tipoid</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">numeroidentificacion</property>
+                    <property name="nativeName">numeroidentificacion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">direccion</property>
+                    <property name="nativeName">direccion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">telefono</property>
+                    <property name="nativeName">telefono</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">
+	       		SELECT
+					po.consecutivo AS nropresupuesto,
+					pc.consecutivo AS nrocontrato,
+					po.fecha_modifica AS fechacontrato,
+					? AS nroOtroSi,
+					getnombrepersona(po.codigo_paciente) AS nombresyapellidos,
+					COALESCE (p.tipo_identificacion,'') AS tipoid,
+					COALESCE (p.numero_identificacion,'') AS numeroidentificacion,
+					COALESCE(p.direccion, '') AS direccion,
+					COALESCE(p.telefono,'')
+						||''|| CASE WHEN p.telefono_celular IS NULL THEN '' ELSE '  '|| p.telefono_celular END
+						||''|| CASE WHEN p.telefono_fijo IS NULL THEN '' ELSE '  '|| p.telefono_fijo END
+						AS telefono
+				FROM
+					odontologia.presupuesto_odontologico po
+					LEFT JOIN personas p ON(p.codigo= po.codigo_paciente)
+					LEFT JOIN odontologia.presupuesto_contratado pc ON (po.codigo_pk = pc.codigo_pk_presupuesto) 
+				WHERE po.codigo_pk=?
+		</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="cuerpoInclusiones" id="677">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">otroSi</property>
+                    <property name="paramName">otroSi</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">presupuesto</property>
+                    <property name="paramName">presupuesto</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+	to_char(encabezado.fecha, 'DD/MM/YYYY') AS fechaautorizacion, 
+	p.codigo_programa AS codigo, 
+	p.nombre AS programa, 
+	c.nombre AS convenio, 
+	encabezado.usuario AS usuarioautoriza, 
+	poc.valor_unitario * pops.cantidad AS valortotal 
+FROM 
+	odontologia.presupuesto_odo_prog_serv pops 
+	INNER JOIN odontologia.inclusiones_presupuesto ip ON(ip.codigo_pk=pops.inclusion)
+	INNER JOIN odontologia.inclu_presu_encabezado encabezado ON (ip.inclu_presu_encabezado = encabezado.codigo_pk AND encabezado.estado = 'CTO' AND encabezado.otro_si = ?)
+	INNER JOIN odontologia.programas p ON(p.codigo=pops.programa) 
+	INNER JOIN odontologia.presupuesto_odo_convenio poc ON(poc.presupuesto_odo_prog_serv=pops.codigo_pk)  
+	INNER JOIN facturacion.convenios c ON(c.codigo=poc.convenio) 
+WHERE 
+	pops.presupuesto=? 
+	AND poc.contratado='S';</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="cuerpoExclusiones" id="738">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">presupuesto</property>
+                    <property name="paramName">presupuesto</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">params["presupuesto"].value</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">otroSi</property>
+                    <property name="paramName">otroSi</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+	to_char(encabezado.fecha, 'DD/MM/YYYY') AS fechaautorizacion, 
+	p.codigo_programa AS codigo, 
+	p.nombre AS programa, 
+	encabezado.usuario AS usuarioautoriza, 
+	ep.valor AS valortotal 
+FROM 
+	odontologia.exclusiones_presupuesto ep
+	INNER JOIN odontologia.programas p ON(p.codigo=ep.programa) 
+	INNER JOIN odontologia.exclu_presu_encabezado encabezado ON (ep.exclu_presu_encabezado = encabezado.codigo_pk)
+WHERE 
+	encabezado.presupuesto=? 
+	AND encabezado.otro_si = ?;</property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="axiomaTitulo" id="226">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">small</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="axiomaTexto" id="227">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="textAlign">left</property>
+        </style>
+        <style name="axiomaLabelCelda" id="228">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="fontWeight">bold</property>
+            <structure name="numberFormat">
+                <property name="category">Custom</property>
+                <property name="pattern">0.00</property>
+            </structure>
+            <property name="textAlign">center</property>
+        </style>
+        <style name="axiomaInfoCelda" id="229">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <structure name="numberFormat">
+                <property name="category">Custom</property>
+                <property name="pattern">0.00</property>
+            </structure>
+            <property name="textAlign">left</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <property name="headerHeight">2cm</property>
+            <property name="footerHeight">1cm</property>
+            <page-header>
+                <grid id="927">
+                    <property name="width">100%</property>
+                    <column id="928"/>
+                    <column id="929"/>
+                    <column id="930"/>
+                    <row id="931">
+                        <cell id="932"/>
+                        <cell id="933">
+                            <property name="style">axiomaTexto</property>
+                        </cell>
+                        <cell id="934"/>
+                    </row>
+                    <row id="935">
+                        <cell id="936"/>
+                        <cell id="937"/>
+                        <cell id="938"/>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="100">
+                    <property name="height">0.4583333333333333in</property>
+                    <property name="width">10.322916666666666in</property>
+                    <column id="101">
+                        <property name="width">2.5in</property>
+                    </column>
+                    <column id="102">
+                        <property name="width">2.5in</property>
+                    </column>
+                    <column id="103">
+                        <property name="width">5.072916666666667in</property>
+                    </column>
+                    <row id="104">
+                        <cell id="105">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                        </cell>
+                        <cell id="106"/>
+                        <cell id="107">
+                            <grid id="368">
+                                <property name="fontWeight">bold</property>
+                                <property name="width">100%</property>
+                                <column id="579">
+                                    <property name="width">4.020833333333333in</property>
+                                </column>
+                                <column id="369">
+                                    <property name="width">0.53125in</property>
+                                </column>
+                                <column id="370">
+                                    <property name="width">0.4479166667in</property>
+                                </column>
+                                <column id="371">
+                                    <property name="width">0.4791666667in</property>
+                                </column>
+                                <row id="372">
+                                    <cell id="578">
+                                        <text id="580">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontSize">small</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[Página]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="373">
+                                        <auto-text id="374">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontSize">small</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="375">
+                                        <text id="376">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontSize">small</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[de]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="377">
+                                        <auto-text id="378">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontSize">small</property>
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="588">
+            <property name="width">100%</property>
+            <property name="dataSet">datosContrato</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">nropresupuesto</property>
+                    <property name="displayName">nropresupuesto</property>
+                    <expression name="expression">dataSetRow["nropresupuesto"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">nrocontrato</property>
+                    <property name="displayName">nrocontrato</property>
+                    <expression name="expression">dataSetRow["nrocontrato"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fechacontrato</property>
+                    <property name="displayName">fechacontrato</property>
+                    <expression name="expression">dataSetRow["fechacontrato"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nrootrosi</property>
+                    <property name="displayName">nrootrosi</property>
+                    <expression name="expression">dataSetRow["nrootrosi"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombresyapellidos</property>
+                    <property name="displayName">nombresyapellidos</property>
+                    <expression name="expression">dataSetRow["nombresyapellidos"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tipoid</property>
+                    <property name="displayName">tipoid</property>
+                    <expression name="expression">dataSetRow["tipoid"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">numeroidentificacion</property>
+                    <property name="displayName">numeroidentificacion</property>
+                    <expression name="expression">dataSetRow["numeroidentificacion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">direccion</property>
+                    <property name="displayName">direccion</property>
+                    <expression name="expression">dataSetRow["direccion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">telefono</property>
+                    <property name="displayName">telefono</property>
+                    <expression name="expression">dataSetRow["telefono"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="637">
+                <property name="width">3cm</property>
+            </column>
+            <column id="638"/>
+            <column id="639">
+                <property name="width">3cm</property>
+            </column>
+            <column id="640"/>
+            <column id="641">
+                <property name="width">3cm</property>
+            </column>
+            <column id="642"/>
+            <column id="643">
+                <property name="width">3cm</property>
+            </column>
+            <column id="644"/>
+            <detail>
+                <row id="608">
+                    <cell id="609">
+                        <label id="656">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Nro.Presupuesto:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="611">
+                        <data id="610">
+                            <property name="style">axiomaInfoCelda</property>
+                            <structure name="numberFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">#</property>
+                            </structure>
+                            <property name="resultSetColumn">nropresupuesto</property>
+                        </data>
+                    </cell>
+                    <cell id="613">
+                        <label id="659">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Nro.Contrato:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="615">
+                        <data id="612">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">nrocontrato</property>
+                        </data>
+                    </cell>
+                    <cell id="617">
+                        <label id="660">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Fecha Contrato:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="619">
+                        <data id="614">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">fechacontrato</property>
+                        </data>
+                    </cell>
+                    <cell id="621">
+                        <label id="661">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Nro. Otro si:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="623">
+                        <data id="616">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">nrootrosi</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="646">
+                    <cell id="647">
+                        <label id="662">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Nombres y Apellidos:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="648">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <data id="618">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">nombresyapellidos</property>
+                        </data>
+                    </cell>
+                    <cell id="651">
+                        <label id="663">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Tipo Id:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="652">
+                        <data id="620">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">tipoid</property>
+                        </data>
+                    </cell>
+                    <cell id="653">
+                        <label id="674">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Nro. Id:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="654">
+                        <data id="622">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">numeroidentificacion</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="664">
+                    <cell id="665">
+                        <label id="675">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Dirección:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="666">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <data id="624">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">direccion</property>
+                        </data>
+                    </cell>
+                    <cell id="669">
+                        <label id="676">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Teléfono:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="670">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <data id="626">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">telefono</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <table id="817">
+            <property name="marginTop">0pt</property>
+            <property name="width">100%</property>
+            <property name="dataSet">cuerpoInclusiones</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">fechaautorizacion</property>
+                    <property name="displayName">fechaautorizacion</property>
+                    <expression name="expression">dataSetRow["fechaautorizacion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigo</property>
+                    <property name="displayName">codigo</property>
+                    <expression name="expression">dataSetRow["codigo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">programa</property>
+                    <property name="displayName">programa</property>
+                    <expression name="expression">dataSetRow["programa"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">convenio</property>
+                    <property name="displayName">convenio</property>
+                    <expression name="expression">dataSetRow["convenio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">usuarioautoriza</property>
+                    <property name="displayName">usuarioautoriza</property>
+                    <expression name="expression">dataSetRow["usuarioautoriza"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valortotal</property>
+                    <property name="displayName">valortotal</property>
+                    <expression name="expression">dataSetRow["valortotal"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">SumaValorTotal</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["valortotal"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <column id="852"/>
+            <column id="853"/>
+            <column id="854"/>
+            <column id="855"/>
+            <column id="856"/>
+            <column id="857"/>
+            <header>
+                <row id="818">
+                    <cell id="819">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="820">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Inclusiones</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="821">
+                    <cell id="822">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="823">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Fecha Autorizacion</text-property>
+                        </label>
+                    </cell>
+                    <cell id="824">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="825">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Código</text-property>
+                        </label>
+                    </cell>
+                    <cell id="826">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="827">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Programa</text-property>
+                        </label>
+                    </cell>
+                    <cell id="828">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="829">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Convenio</text-property>
+                        </label>
+                    </cell>
+                    <cell id="830">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="831">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Usuario Autoriza</text-property>
+                        </label>
+                    </cell>
+                    <cell id="832">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="833">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Valor Tarifa</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="834">
+                    <cell id="835">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="836">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">fechaautorizacion</property>
+                        </data>
+                    </cell>
+                    <cell id="837">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="838">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">codigo</property>
+                        </data>
+                    </cell>
+                    <cell id="839">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="840">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">programa</property>
+                        </data>
+                    </cell>
+                    <cell id="841">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="842">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">convenio</property>
+                        </data>
+                    </cell>
+                    <cell id="843">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="844">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">usuarioautoriza</property>
+                        </data>
+                    </cell>
+                    <cell id="845">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="846">
+                            <property name="style">axiomaInfoCelda</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">valortotal</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="847">
+                    <cell id="848">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="849">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="textAlign">right</property>
+                            <text-property name="text">Total Inclusiones</text-property>
+                        </label>
+                    </cell>
+                    <cell id="850">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="851">
+                            <property name="style">axiomaInfoCelda</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">SumaValorTotal</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <table id="858">
+            <property name="width">100%</property>
+            <property name="dataSet">cuerpoExclusiones</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">fechaautorizacion</property>
+                    <property name="displayName">fechaautorizacion</property>
+                    <expression name="expression">dataSetRow["fechaautorizacion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigo</property>
+                    <property name="displayName">codigo</property>
+                    <expression name="expression">dataSetRow["codigo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">programa</property>
+                    <property name="displayName">programa</property>
+                    <expression name="expression">dataSetRow["programa"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">usuarioautoriza</property>
+                    <property name="displayName">usuarioautoriza</property>
+                    <expression name="expression">dataSetRow["usuarioautoriza"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valortotal</property>
+                    <property name="displayName">valortotal</property>
+                    <expression name="expression">dataSetRow["valortotal"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["valortotal"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <column id="889"/>
+            <column id="890"/>
+            <column id="891"/>
+            <column id="892"/>
+            <column id="893"/>
+            <header>
+                <row id="859">
+                    <cell id="860">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="861">
+                            <property name="style">axiomaLabelCelda</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Exclusiones</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="862">
+                    <cell id="863">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="864">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Fecha Autorizacion</text-property>
+                        </label>
+                    </cell>
+                    <cell id="865">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="866">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Código</text-property>
+                        </label>
+                    </cell>
+                    <cell id="867">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="868">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Programa</text-property>
+                        </label>
+                    </cell>
+                    <cell id="869">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="870">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Usuario Autoriza</text-property>
+                        </label>
+                    </cell>
+                    <cell id="871">
+                        <property name="backgroundColor">#E5E5E5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="872">
+                            <property name="style">axiomaLabelCelda</property>
+                            <text-property name="text">Valor Tarifa</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="873">
+                    <cell id="874">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="875">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">fechaautorizacion</property>
+                        </data>
+                    </cell>
+                    <cell id="876">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="877">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">codigo</property>
+                        </data>
+                    </cell>
+                    <cell id="878">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="879">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">programa</property>
+                        </data>
+                    </cell>
+                    <cell id="880">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="881">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="resultSetColumn">usuarioautoriza</property>
+                        </data>
+                    </cell>
+                    <cell id="882">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="883">
+                            <property name="style">axiomaInfoCelda</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">valortotal</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="884">
+                    <cell id="885">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="886">
+                            <property name="style">axiomaInfoCelda</property>
+                            <property name="textAlign">right</property>
+                            <text-property name="text">Total Exclusiones</text-property>
+                        </label>
+                    </cell>
+                    <cell id="887">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="888">
+                            <property name="style">axiomaInfoCelda</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">Aggregation</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <grid id="939">
+            <property name="width">100%</property>
+            <column id="940"/>
+            <row id="941">
+                <property name="height">1cm</property>
+                <cell id="942"/>
+            </row>
+        </grid>
+        <grid name="firmas" id="894">
+            <property name="width">100%</property>
+            <column id="895"/>
+            <column id="896"/>
+            <row id="897">
+                <property name="height">1cm</property>
+                <cell id="898"/>
+                <cell id="899"/>
+            </row>
+            <row id="900">
+                <cell id="901"/>
+                <cell id="902"/>
+            </row>
+            <row id="903">
+                <cell id="904">
+                    <property name="style">axiomaTexto</property>
+                </cell>
+                <cell id="905">
+                    <property name="style">axiomaTexto</property>
+                </cell>
+            </row>
+            <row id="906">
+                <property name="height">1cm</property>
+                <cell id="907"/>
+                <cell id="908"/>
+            </row>
+            <row id="921">
+                <cell id="922"/>
+                <cell id="923"/>
+            </row>
+            <row id="924">
+                <cell id="925">
+                    <property name="style">axiomaTexto</property>
+                </cell>
+                <cell id="926">
+                    <property name="style">axiomaTexto</property>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

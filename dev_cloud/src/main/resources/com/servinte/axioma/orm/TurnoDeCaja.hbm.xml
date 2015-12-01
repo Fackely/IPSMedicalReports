@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/04/2011 06:04:04 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TurnoDeCaja" table="turno_de_caja" schema="tesoreria">
+        <comment>Registro de las aperturas de caja</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+             <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_turno_de_caja</param>
+			</generator>
+        </id>
+        <many-to-one name="cajas" class="com.servinte.axioma.orm.Cajas" lazy="false" fetch="select">
+            <column name="caja" not-null="true">
+                <comment>Caja que realizo la apertura</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true">
+                <comment>Centro de atenci&#243;n del caja/cajero</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="cajero" length="30" not-null="true">
+                <comment>Cajero que realizo la apertura</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaApertura" type="date">
+            <column name="fecha_apertura" length="13" not-null="true">
+                <comment>Fecha en la que se hizo la apertura de la caja</comment>
+            </column>
+        </property>
+        <property name="horaApertura" type="string">
+            <column name="hora_apertura" length="5" not-null="true">
+                <comment>Hora en la que se hizo la apertura de la caja</comment>
+            </column>
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="6" not-null="true">
+                <comment>Estado actual del turno de la caja</comment>
+            </column>
+        </property>
+        <property name="valorBase" type="big_decimal">
+            <column name="valor_base">
+                <comment>Valor base con el que se inicia la apertura de la caja</comment>
+            </column>
+        </property>
+        <set name="recibosCajaXTurnos" table="recibos_caja_x_turno" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="turno_caja" precision="12" scale="0" not-null="true">
+                    <comment>Referencia a la tabla turno_de_caja, almacena el turno al cual se relacion&#243; la el recibo de caja</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RecibosCajaXTurno" />
+        </set>
+        <set name="movimientosCajas" table="movimientos_caja" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="turno" precision="12" scale="0" not-null="true">
+                    <comment>Turno que hace el movimiento</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosCaja" />
+        </set>
+        <set name="devolRecibosCajas" table="devol_recibos_caja" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="turno_afecta" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DevolRecibosCaja" />
+        </set>
+    </class>
+</hibernate-mapping>

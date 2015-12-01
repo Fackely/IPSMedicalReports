@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 13, 2010 5:03:25 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.BeneficiarioTarjetaCliente" table="beneficiario_tarjeta_cliente" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence">
+            	<param name="sequence">odontologia.seq_benef_tar_client</param>
+            </generator>
+        </id>
+        <many-to-one name="parentezco" class="com.servinte.axioma.orm.Parentezco" fetch="select">
+            <column name="parentezco" />
+        </many-to-one>
+        <many-to-one name="ventaTarjetaCliente" class="com.servinte.axioma.orm.VentaTarjetaCliente" fetch="select">
+            <column name="venta_tarjeta_cliente" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="tiposTarjCliente" class="com.servinte.axioma.orm.TiposTarjCliente" fetch="select">
+            <column name="tipo_tarjeta_cliente" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="beneficiarioTarjetaCliente" class="com.servinte.axioma.orm.BeneficiarioTarjetaCliente" fetch="select">
+            <column name="beneficiario_principal" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="serial" type="long">
+            <column name="serial" precision="14" scale="0" not-null="true" />
+        </property>
+        <property name="indicativoPrincipal" type="string">
+            <column name="indicativo_principal" length="1" not-null="true" />
+        </property>
+        <property name="estadoTarjeta" type="string">
+            <column name="estado_tarjeta" length="4" />
+        </property>
+        <property name="indicadorAlidado" type="string">
+            <column name="indicador_alidado" length="1" not-null="true" />
+        </property>
+        <property name="alidadoOdontologico" type="java.lang.Long">
+            <column name="alidado_odontologico" precision="10" scale="0" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="consecutivo" type="java.lang.Integer">
+            <column name="consecutivo" />
+        </property>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+        <property name="serialMigracion" type="string">
+            <column name="serial_migracion" length="14" />
+        </property>
+        <property name="numTarjeta" type="java.lang.String">
+            <column name="num_tarjeta" length="14" />
+        </property>
+        <set name="beneficiarioTarjetaClientes" inverse="true" lazy="true" table="beneficiario_tarjeta_cliente" fetch="select">
+            <key>
+                <column name="beneficiario_principal" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.BeneficiarioTarjetaCliente" />
+        </set>
+        <one-to-one name="beneficiarioTcPaciente" class="com.servinte.axioma.orm.BeneficiarioTcPaciente"></one-to-one>
+    </class>
+</hibernate-mapping>

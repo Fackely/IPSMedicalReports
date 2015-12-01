@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/01/2012 02:40:59 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DocumentosGarantia" table="documentos_garantia" schema="carterapaciente">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioAnula" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_anula" length="30" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioGeneracion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_generacion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="consecutivo" type="string">
+            <column name="consecutivo" length="24" not-null="true" />
+        </property>
+        <property name="anioConsecutivo" type="string">
+            <column name="anio_consecutivo" length="4" not-null="true" />
+        </property>
+        <property name="tipoDocumento" type="string">
+            <column name="tipo_documento" length="4" not-null="true" />
+        </property>
+        <property name="fechaGeneracion" type="date">
+            <column name="fecha_generacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGeneracion" type="string">
+            <column name="hora_generacion" length="5" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="4" not-null="true" />
+        </property>
+        <property name="motivoAnulacion" type="string">
+            <column name="motivo_anulacion" length="256" />
+        </property>
+        <property name="entidadFinanciera" type="string">
+            <column name="entidad_financiera" length="256" />
+        </property>
+        <property name="numeroCuenta" type="string">
+            <column name="numero_cuenta" />
+        </property>
+        <property name="numeroDocumento" type="string">
+            <column name="numero_documento" />
+        </property>
+        <property name="fechaDocumento" type="date">
+            <column name="fecha_documento" length="13" />
+        </property>
+        <property name="giradorDocumento" type="string">
+            <column name="girador_documento" length="128" />
+        </property>
+        <property name="valor" type="big_decimal">
+            <column name="valor" precision="15" />
+        </property>
+        <property name="claveCovinoc" type="string">
+            <column name="clave_covinoc" length="60" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="6" />
+        </property>
+        <property name="fechaAnula" type="date">
+            <column name="fecha_anula" length="13" />
+        </property>
+        <property name="horaAnula" type="string">
+            <column name="hora_anula" length="6" />
+        </property>
+        <property name="garantiaIngreso" type="string">
+            <column name="garantia_ingreso" length="1" not-null="true" />
+        </property>
+        <property name="cartera" type="string">
+            <column name="cartera" length="1" not-null="true" />
+        </property>
+        <property name="saldosIniciales" type="char">
+            <column name="saldos_iniciales" length="1" not-null="true" />
+        </property>
+        <set name="datosFinanciacions" table="datos_financiacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_pk_docgarantia" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DatosFinanciacion" />
+        </set>
+    </class>
+</hibernate-mapping>

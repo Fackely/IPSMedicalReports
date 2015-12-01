@@ -1,0 +1,341 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RegistroAccidentesTransito" table="registro_accidentes_transito" schema="manejopaciente">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposIdentificacionByTipoIdConductor" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_id_conductor" length="3" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRatCiudTrans" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_transporta" length="10" />
+            <column name="departamento_transporta" length="10" />
+            <column name="pais_transporta" length="10" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="aseguradora" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRatCiudExpIdTrans" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_exp_id_transporta" length="10" />
+            <column name="depto_exp_id_transporta" length="10" />
+            <column name="pais_exp_id_transporta" length="10" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRatCiudProp" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_prop" length="10" />
+            <column name="departamento_prop" length="10" />
+            <column name="pais_prop" length="10" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRatCiu3" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciu_expedicion_id_conductor" length="10" />
+            <column name="dep_expedicion_id_conductor" length="10" />
+            <column name="pais_expedicion_id_conductor" length="10" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacionByTipoIdProp" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_id_prop" length="3" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacionByTipoIdDeclarante" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_id_declarante" length="3" />
+        </many-to-one>
+        <many-to-one name="tipoServVehiculos" class="com.servinte.axioma.orm.TipoServVehiculos" fetch="select">
+            <column name="tipo_serv_v" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRatCiudExpIdProp" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_exp_id_prop" length="10" />
+            <column name="depto_exp_id_prop" length="10" />
+            <column name="pais_exp_id_prop" length="10" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_grabacion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRatCiu5" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_conductor" length="10" />
+            <column name="departamento_conductor" length="10" />
+            <column name="pais_conductor" length="10" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRatCiu2" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_accidente" length="10" />
+            <column name="departamento_accidente" length="10" />
+            <column name="pais_accidente" length="10" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRatCiu1" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_empresa" length="10" />
+            <column name="departamento_empresa" length="10" />
+            <column name="pais_empresa" length="10" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacionByTipoIdTransporta" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_id_transporta" length="3" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRatCiu6" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciu_expedicion_id_declarante" length="10" />
+            <column name="dep_expedicion_id_declarante" length="10" />
+            <column name="pais_expedicion_id_declarante" length="10" />
+        </many-to-one>
+        <property name="empresaTrabaja" type="string">
+            <column name="empresa_trabaja" length="256" />
+        </property>
+        <property name="direccionEmpresa" type="string">
+            <column name="direccion_empresa" length="128" />
+        </property>
+        <property name="telefonoEmpresa" type="string">
+            <column name="telefono_empresa" length="20" />
+        </property>
+        <property name="ocupante" type="java.lang.Character">
+            <column name="ocupante" length="1" />
+        </property>
+        <property name="condicionAccidentado" type="string">
+            <column name="condicion_accidentado" length="5" />
+        </property>
+        <property name="resultaLesionadoAl" type="string">
+            <column name="resulta_lesionado_al" length="4" />
+        </property>
+        <property name="placaVehiculoOcasiona" type="string">
+            <column name="placa_vehiculo_ocasiona" length="10" />
+        </property>
+        <property name="lugarAccidente" type="string">
+            <column name="lugar_accidente" length="256" />
+        </property>
+        <property name="fechaAccidente" type="date">
+            <column name="fecha_accidente" length="13" />
+        </property>
+        <property name="horaAccidente" type="string">
+            <column name="hora_accidente" length="5" />
+        </property>
+        <property name="zonaAccidente" type="string">
+            <column name="zona_accidente" length="3" not-null="true" />
+        </property>
+        <property name="informacionAccidente" type="string">
+            <column name="informacion_accidente" length="256" not-null="true" />
+        </property>
+        <property name="marcaVehiculo" type="string">
+            <column name="marca_vehiculo" length="30" />
+        </property>
+        <property name="placa" type="string">
+            <column name="placa" length="10" />
+        </property>
+        <property name="otroTipoServV" type="string">
+            <column name="otro_tipo_serv_v" length="30" not-null="true" />
+        </property>
+        <property name="agencia" type="string">
+            <column name="agencia" length="60" />
+        </property>
+        <property name="asegurado" type="string">
+            <column name="asegurado" length="3" />
+        </property>
+        <property name="numeroPoliza" type="string">
+            <column name="numero_poliza" length="15" />
+        </property>
+        <property name="fechaInicialPoliza" type="date">
+            <column name="fecha_inicial_poliza" length="13" />
+        </property>
+        <property name="fechaFinalPoliza" type="date">
+            <column name="fecha_final_poliza" length="13" />
+        </property>
+        <property name="numeroIdConductor" type="string">
+            <column name="numero_id_conductor" length="20" />
+        </property>
+        <property name="direccionConductor" type="string">
+            <column name="direccion_conductor" length="128" not-null="true" />
+        </property>
+        <property name="telefonoConductor" type="string">
+            <column name="telefono_conductor" length="20" />
+        </property>
+        <property name="apellidoNombreDeclarante" type="string">
+            <column name="apellido_nombre_declarante" length="128" />
+        </property>
+        <property name="numeroIdDeclarante" type="string">
+            <column name="numero_id_declarante" length="20" />
+        </property>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="string">
+            <column name="hora_grabacion" length="5" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="fechaAnulacion" type="date">
+            <column name="fecha_anulacion" length="13" />
+        </property>
+        <property name="horaAnulacion" type="string">
+            <column name="hora_anulacion" length="5" />
+        </property>
+        <property name="usuarioAnulacion" type="string">
+            <column name="usuario_anulacion" length="30" />
+        </property>
+        <property name="poliza" type="string">
+            <column name="poliza" length="4" />
+        </property>
+        <property name="primerApellidoProp" type="string">
+            <column name="primer_apellido_prop" length="30" />
+        </property>
+        <property name="segundoApellidoProp" type="string">
+            <column name="segundo_apellido_prop" length="30" />
+        </property>
+        <property name="primerNombreProp" type="string">
+            <column name="primer_nombre_prop" length="30" />
+        </property>
+        <property name="segundoNombreProp" type="string">
+            <column name="segundo_nombre_prop" length="30" />
+        </property>
+        <property name="numeroIdProp" type="string">
+            <column name="numero_id_prop" length="20" />
+        </property>
+        <property name="direccionProp" type="string">
+            <column name="direccion_prop" length="128" />
+        </property>
+        <property name="telefonoProp" type="string">
+            <column name="telefono_prop" length="20" />
+        </property>
+        <property name="primerApellidoConductor" type="string">
+            <column name="primer_apellido_conductor" length="30" />
+        </property>
+        <property name="segundoApellidoConductor" type="string">
+            <column name="segundo_apellido_conductor" length="30" />
+        </property>
+        <property name="primerNombreConductor" type="string">
+            <column name="primer_nombre_conductor" length="30" />
+        </property>
+        <property name="segundoNombreConductor" type="string">
+            <column name="segundo_nombre_conductor" length="30" />
+        </property>
+        <property name="apellidoNombreTransporta" type="string">
+            <column name="apellido_nombre_transporta" length="128" />
+        </property>
+        <property name="numeroIdTransporta" type="string">
+            <column name="numero_id_transporta" length="20" />
+        </property>
+        <property name="telefonoTransporta" type="string">
+            <column name="telefono_transporta" length="20" />
+        </property>
+        <property name="direccionTransporta" type="string">
+            <column name="direccion_transporta" length="128" />
+        </property>
+        <property name="transportaVictimaDesde" type="string">
+            <column name="transporta_victima_desde" length="125" />
+        </property>
+        <property name="transportaVictimaHasta" type="string">
+            <column name="transporta_victima_hasta" length="125" />
+        </property>
+        <property name="tipoTransporte" type="string">
+            <column name="tipo_transporte" length="5" />
+        </property>
+        <property name="placaVehiculoTranporta" type="string">
+            <column name="placa_vehiculo_tranporta" length="15" />
+        </property>
+        <property name="descripcionOcurrencia" type="string">
+            <column name="descripcion_ocurrencia" />
+        </property>
+        <property name="intervencionAutoridad" type="string">
+            <column name="intervencion_autoridad" length="1" />
+        </property>
+        <property name="cobroExcedentePoliza" type="string">
+            <column name="cobro_excedente_poliza" length="1" />
+        </property>
+        <property name="cantidadOtrosVehiAcc" type="java.lang.Integer">
+            <column name="cantidad_otros_vehi_acc" />
+        </property>
+        <property name="placa2Vehiculo" type="string">
+            <column name="placa_2_vehiculo" length="10" />
+        </property>
+        <property name="tipoId2Vehiculo" type="string">
+            <column name="tipo_id_2_vehiculo" length="2" />
+        </property>
+        <property name="nroId2Vehiculo" type="string">
+            <column name="nro_id_2_vehiculo" length="20" />
+        </property>
+        <property name="placa3Vehiculo" type="string">
+            <column name="placa_3_vehiculo" length="10" />
+        </property>
+        <property name="tipoId3Vehiculo" type="string">
+            <column name="tipo_id_3_vehiculo" length="2" />
+        </property>
+        <property name="nroId3Vehiculo" type="string">
+            <column name="nro_id_3_vehiculo" length="20" />
+        </property>
+        <property name="tipoReferencia" type="string">
+            <column name="tipo_referencia" length="3" />
+        </property>
+        <property name="fechaRemision" type="date">
+            <column name="fecha_remision" length="13" />
+        </property>
+        <property name="horaRemision" type="string">
+            <column name="hora_remision" length="5" />
+        </property>
+        <property name="codInscripRemitente" type="string">
+            <column name="cod_inscrip_remitente" length="10" />
+        </property>
+        <property name="profesionalRemite" type="string">
+            <column name="profesional_remite" length="128" />
+        </property>
+        <property name="cargoProfesionalRemitente" type="string">
+            <column name="cargo_profesional_remitente" length="64" />
+        </property>
+        <property name="fechaAceptacion" type="date">
+            <column name="fecha_aceptacion" length="13" />
+        </property>
+        <property name="horaAceptacion" type="string">
+            <column name="hora_aceptacion" length="5" />
+        </property>
+        <property name="codInscripReceptor" type="string">
+            <column name="cod_inscrip_receptor" length="10" />
+        </property>
+        <property name="profesionalRecibe" type="string">
+            <column name="profesional_recibe" length="128" />
+        </property>
+        <property name="cargoProfesionalRecibe" type="string">
+            <column name="cargo_profesional_recibe" length="64" />
+        </property>
+        <property name="otroTipoTrans" type="string">
+            <column name="otro_tipo_trans" length="20" />
+        </property>
+        <property name="zonaTransporte" type="java.lang.Character">
+            <column name="zona_transporte" length="1" />
+        </property>
+        <property name="totalFacAmpQx" type="big_decimal">
+            <column name="total_fac_amp_qx" precision="12" />
+        </property>
+        <property name="totalReclamoAmpQx" type="big_decimal">
+            <column name="total_reclamo_amp_qx" precision="12" />
+        </property>
+        <property name="totalFacAmpTx" type="big_decimal">
+            <column name="total_fac_amp_tx" precision="12" />
+        </property>
+        <property name="totalReclamoAmpTx" type="big_decimal">
+            <column name="total_reclamo_amp_tx" precision="12" />
+        </property>
+        <property name="esReclamacion" type="java.lang.Character">
+            <column name="es_reclamacion" length="1" />
+        </property>
+        <property name="furips" type="java.lang.Character">
+            <column name="furips" length="1" />
+        </property>
+        <property name="furtran" type="java.lang.Character">
+            <column name="furtran" length="1" />
+        </property>
+        <property name="respGlosa" type="string">
+            <column name="resp_glosa" length="6" />
+        </property>
+        <property name="nroRadicadoAnterior" type="string">
+            <column name="nro_radicado_anterior" length="10" />
+        </property>
+        <property name="nroConsReclamacion" type="java.lang.Long">
+            <column name="nro_cons_reclamacion" precision="12" scale="0" />
+        </property>
+        <set name="ingresoses" inverse="false" lazy="true" table="ingresos_registro_accidentes" fetch="select">
+            <key>
+                <column name="codigo_registro" precision="10" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Ingresos">
+                <column name="ingreso" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposRetencion" table="tipos_retencion" schema="administracion">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioInactivacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_inactivacion" length="30" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="10" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="128" not-null="true" />
+        </property>
+        <property name="sigla" type="string">
+            <column name="sigla" length="10" not-null="true" />
+        </property>
+        <property name="codigoInterfaz" type="string">
+            <column name="codigo_interfaz" length="10" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="fechaInactivacion" type="date">
+            <column name="fecha_inactivacion" length="13" />
+        </property>
+        <property name="horaInactivacion" type="string">
+            <column name="hora_inactivacion" length="5" />
+        </property>
+        <set name="tiposRetencionConcFvs" inverse="true" lazy="true" table="tipos_retencion_conc_fv" fetch="select">
+            <key>
+                <column name="tipo_retencion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionConcFv" />
+        </set>
+        <set name="tiposRetencionClaseInvs" inverse="true" lazy="true" table="tipos_retencion_clase_inv" fetch="select">
+            <key>
+                <column name="tipo_retencion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionClaseInv" />
+        </set>
+        <set name="logsTiposRetencions" inverse="true" lazy="true" table="logs_tipos_retencion" fetch="select">
+            <key>
+                <column name="tipo_retencion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogsTiposRetencion" />
+        </set>
+        <set name="logConceptosRetencions" inverse="true" lazy="true" table="log_conceptos_retencion" fetch="select">
+            <key>
+                <column name="tipo_retencion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogConceptosRetencion" />
+        </set>
+        <set name="detConceptosRetencions" inverse="true" lazy="true" table="det_conceptos_retencion" fetch="select">
+            <key>
+                <column name="tipo_retencion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetConceptosRetencion" />
+        </set>
+        <set name="conceptosRetencions" inverse="true" lazy="true" table="conceptos_retencion" fetch="select">
+            <key>
+                <column name="tipo_retencion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosRetencion" />
+        </set>
+        <set name="tiposRetencionGrupoSers" inverse="true" lazy="true" table="tipos_retencion_grupo_ser" fetch="select">
+            <key>
+                <column name="tipo_retencion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionGrupoSer" />
+        </set>
+    </class>
+</hibernate-mapping>

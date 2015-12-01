@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 30, 2010 9:31:50 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EntidadesFinancieras" table="entidades_financieras" schema="tesoreria">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposEntFinancieras" class="com.servinte.axioma.orm.TiposEntFinancieras" fetch="select">
+            <column name="tipo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="tercero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="4" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <set name="movimientosChequeses" inverse="true" lazy="true" table="movimientos_cheques" fetch="select">
+            <key>
+                <column name="entidad_financiera" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosCheques" />
+        </set>
+        <set name="cuentasBancariases" inverse="true" lazy="true" table="cuentas_bancarias" fetch="select">
+            <key>
+                <column name="entidad_financiera" not-null="true">
+                    <comment>Corresponde al c&#195;&#179;digo de la entidad financiera asociada a la cuenta bancaria.</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasBancarias" />
+        </set>
+        <set name="tarjetaFinancieraComisions" inverse="true" lazy="true" table="tarjeta_financiera_comision" fetch="select">
+            <key>
+                <column name="entidad_financiera" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarjetaFinancieraComision" />
+        </set>
+        <set name="movimientosTarjetases" inverse="true" lazy="true" table="movimientos_tarjetas" fetch="select">
+            <key>
+                <column name="entidad_financiera" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosTarjetas" />
+        </set>
+    </class>
+</hibernate-mapping>

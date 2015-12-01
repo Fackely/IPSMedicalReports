@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/07/2011 02:22:25 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConceptoNotaPaciente" table="concepto_nota_paciente" schema="tesoreria">
+        <id name="codigopk" type="long">
+            <column name="codigopk" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_concepto_nota_paciente</param>
+			</generator>	
+        </id>
+        <property name="codigo" type="string">
+            <column name="codigo" length="3" not-null="true" unique="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="naturaleza" type="string">
+            <column name="naturaleza" length="3" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <set name="concNotaPacCuentaConts" table="conc_nota_pac_cuenta_cont" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="concepto_nota_paciente" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConcNotaPacCuentaCont" />
+        </set>
+        <set name="notaPacientes" table="nota_paciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="concepto_nota_paciente" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NotaPaciente" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 24, 2010 5:55:45 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PrioridadUsuEsp" table="prioridad_usu_esp" schema="capitacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence">
+				<param name="sequence">capitacion.seq_prioridad_usu_esp</param>
+			 </generator>
+        </id>
+        <many-to-one name="nivelAutorUsuEspec" class="com.servinte.axioma.orm.NivelAutorUsuEspec" fetch="select">
+            <column name="nivel_autor_usu_espec" not-null="true">
+                <comment>Nivel de autorizaci&#195;&#179;n de usuario espec&#195;&#173;fico relacionado</comment>
+            </column>
+        </many-to-one>
+       <property name="nroPrioridad" type="int">
+            <column name="nro_prioridad" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EspeciServCueIng" table="especi_serv_cue_ing" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.EspeciServCueIngId">
+            <key-property name="grupoServicio" type="int">
+                <column name="grupo_servicio" />
+            </key-property>
+            <key-property name="tipoServicio" type="string">
+                <column name="tipo_servicio" length="1" />
+            </key-property>
+            <key-property name="especialidadServicio" type="int">
+                <column name="especialidad_servicio" />
+            </key-property>
+            <key-property name="centroCosto" type="int">
+                <column name="centro_costo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cuentasContablesByCuentaContableCosto" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable_costo" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaIngreso" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_ingreso" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaIngresoVigAnterior" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_ingreso_vig_anterior" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="tiposServicio" class="com.servinte.axioma.orm.TiposServicio" update="false" insert="false" fetch="select">
+            <column name="tipo_servicio" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" update="false" insert="false" fetch="select">
+            <column name="especialidad_servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="gruposServicios" class="com.servinte.axioma.orm.GruposServicios" update="false" insert="false" fetch="select">
+            <column name="grupo_servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" update="false" insert="false" fetch="select">
+            <column name="centro_costo" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

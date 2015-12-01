@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2/10/2012 12:17:18 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ServiciosCita" table="servicios_cita" schema="consultaexterna">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuariosByUsuarioCreacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_creacion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="solCirugiaPorServicio" class="com.servinte.axioma.orm.SolCirugiaPorServicio" fetch="select">
+            <column name="control_post_operatorio_cx" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioAnulacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_anulacion" length="30" />
+        </many-to-one>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="numero_solicitud" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModificacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modificacion" length="30" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cita" class="com.servinte.axioma.orm.Cita" fetch="select">
+            <column name="codigo_cita" not-null="true" />
+        </many-to-one>
+        <many-to-one name="agenda" class="com.servinte.axioma.orm.Agenda" fetch="select">
+            <column name="codigo_agenda" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="13" not-null="true" />
+        </property>
+        <property name="horaCreacion" type="string">
+            <column name="hora_creacion" length="5" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="fecha_modificacion" length="13" />
+        </property>
+        <property name="horaModificacion" type="string">
+            <column name="hora_modificacion" length="5" />
+        </property>
+        <property name="fechaAnulacion" type="date">
+            <column name="fecha_anulacion" length="13" />
+        </property>
+        <property name="horaAnulacion" type="string">
+            <column name="hora_anulacion" length="5" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+        <property name="fechaCita" type="date">
+            <column name="fecha_cita" length="13" />
+        </property>
+        <property name="horaInicioCita" type="string">
+            <column name="hora_inicio_cita" length="5" />
+        </property>
+        <property name="horaFinCita" type="string">
+            <column name="hora_fin_cita" length="5" />
+        </property>
+        <property name="estadoCita" type="java.lang.Integer">
+            <column name="estado_cita" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/02/2010 10:17:47 AM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresupuestoIntervencion" table="presupuesto_intervencion" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.PresupuestoIntervencionId">
+            <key-property name="presupuesto" type="int">
+                <column name="presupuesto" />
+            </key-property>
+            <key-property name="servicioIntervencion" type="int">
+                <column name="servicio_intervencion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="presupuestoPaciente" class="com.servinte.axioma.orm.PresupuestoPaciente" update="false" insert="false" fetch="select">
+            <column name="presupuesto" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

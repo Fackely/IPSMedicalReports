@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2010 9:11:47 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Pedido" table="pedido" schema="inventarios">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="sequence" >
+				<param name="sequence">inventarios.seq_pedido</param>
+			</generator>
+        </id>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="centrosCostoByCentroCostoSolicitado" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_solicitado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estadosPedido" class="com.servinte.axioma.orm.EstadosPedido" fetch="select">
+            <column name="estado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCostoByCentroCostoSolicitante" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_solicitante" not-null="true" />
+        </many-to-one>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="string">
+            <column name="hora_grabacion" length="5" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+        <property name="urgente" type="boolean">
+            <column name="urgente" not-null="true" />
+        </property>
+        <property name="observacionesGenerales" type="string">
+            <column name="observaciones_generales" length="4000" />
+        </property>
+        <property name="tipoComprobante" type="string">
+            <column name="tipo_comprobante" length="4" />
+        </property>
+        <property name="nroComprobante" type="java.lang.Integer">
+            <column name="nro_comprobante" precision="8" scale="0" />
+        </property>
+        <property name="contabilizado" type="java.lang.Integer">
+            <column name="contabilizado" />
+        </property>
+        <property name="esQx" type="string">
+            <column name="es_qx" length="1" not-null="true" />
+        </property>
+        <property name="autoPorSubcontratacion" type="java.lang.Character">
+            <column name="auto_por_subcontratacion" length="1" />
+        </property>
+        <one-to-one name="despachoPedido" class="com.servinte.axioma.orm.DespachoPedido"></one-to-one>
+        <set name="registroEntregaEntsubPedidos" inverse="true" lazy="true" table="registro_entrega_entsub_pedido" fetch="select">
+            <key>
+                <column name="pedido" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEntregaEntsubPedido" />
+        </set>
+        <set name="detallePedidoses" inverse="true" lazy="true" table="detalle_pedidos" fetch="select">
+            <key>
+                <column name="pedido" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetallePedidos" />
+        </set>
+        <set name="tarifasEntidadSubs" inverse="true" lazy="true" table="tarifas_entidad_sub" fetch="select">
+            <key>
+                <column name="pedido" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasEntidadSub" />
+        </set>
+    </class>
+</hibernate-mapping>

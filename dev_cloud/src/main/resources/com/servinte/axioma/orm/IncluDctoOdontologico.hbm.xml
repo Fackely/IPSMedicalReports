@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 14, 2011 8:41:40 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.IncluDctoOdontologico" table="inclu_dcto_odontologico" schema="odontologia">
+        <comment>Registro de la solicitud de descuento que esta asociada a una inclusi&#195;&#179;n</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence">
+            	<param name="sequence">odontologia.seq_inclu_dcto_odontologico</param>
+            </generator>
+        </id>
+        <many-to-one name="presupuestoDctoOdon" class="com.servinte.axioma.orm.PresupuestoDctoOdon" fetch="select">
+            <column name="presupuesto_dcto_odon" precision="12" scale="0" not-null="true">
+                <comment>Registro de la solicitud de descuento</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="incluPresuEncabezado" class="com.servinte.axioma.orm.IncluPresuEncabezado" fetch="select">
+            <column name="inclu_presu_encabezado" precision="12" scale="0" not-null="true">
+                <comment>Registro del encabezado asociado al proceso de contrataci&#195;&#179;n de las inclusiones</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

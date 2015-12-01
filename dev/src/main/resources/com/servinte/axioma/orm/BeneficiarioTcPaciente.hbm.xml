@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 13, 2010 5:03:25 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.BeneficiarioTcPaciente" table="beneficiario_tc_paciente" schema="odontologia">
+        <id name="codigoBeneficiario" type="long">
+            <column name="codigo_beneficiario" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">beneficiarioTarjetaCliente</param>
+            </generator>
+        </id>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <one-to-one name="beneficiarioTarjetaCliente" class="com.servinte.axioma.orm.BeneficiarioTarjetaCliente" constrained="true"></one-to-one>
+    </class>
+</hibernate-mapping>

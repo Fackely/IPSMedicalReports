@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/09/2012 02:29:56 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Cita" table="cita" schema="consultaexterna">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="naturalezaPacientes" class="com.servinte.axioma.orm.NaturalezaPacientes" fetch="select">
+            <column name="naturaleza_paciente" />
+        </many-to-one>
+        <many-to-one name="estratosSociales" class="com.servinte.axioma.orm.EstratosSociales" fetch="select">
+            <column name="estrato_social" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="unidadesConsulta" class="com.servinte.axioma.orm.UnidadesConsulta" fetch="select">
+            <column name="unidad_consulta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioCancela" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_cancela" length="30" />
+        </many-to-one>
+        <many-to-one name="tiposAfiliado" class="com.servinte.axioma.orm.TiposAfiliado" fetch="select">
+            <column name="tipo_afiliado" length="1" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuario" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" />
+        </many-to-one>
+        <many-to-one name="agenda" class="com.servinte.axioma.orm.Agenda" fetch="select">
+            <column name="codigo_agenda"/>
+        </many-to-one>
+        <property name="estadoCita" type="int">
+            <column name="estado_cita" not-null="true" />
+        </property>
+        <property name="estadoLiquidacion" type="char">
+            <column name="estado_liquidacion" length="1" not-null="true" />
+        </property>
+        
+        <property name="observacionesCancelacion" type="string">
+            <column name="observaciones_cancelacion" />
+        </property>
+        <property name="fechaGen" type="date">
+            <column name="fecha_gen" length="13" not-null="true" />
+        </property>
+        <property name="horaGen" type="time">
+            <column name="hora_gen" length="15" not-null="true" />
+        </property>
+        <property name="webservice" type="java.lang.Character">
+            <column name="webservice" length="1" />
+        </property>
+        <property name="motivoNoatencion" type="string">
+            <column name="motivo_noatencion" length="256" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="512" />
+        </property>
+        <property name="fechaSolicitada" type="date">
+            <column name="fecha_solicitada" length="13" />
+        </property>
+        <property name="motivoCancelacion" type="java.lang.Integer">
+            <column name="motivo_cancelacion" />
+        </property>
+        <property name="prioritaria" type="string">
+            <column name="prioritaria" length="1" not-null="true" />
+        </property>
+        <property name="fechaCancela" type="date">
+            <column name="fecha_cancela" length="13" />
+        </property>
+        <property name="horaCancela" type="string">
+            <column name="hora_cancela" length="5" />
+        </property>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica_estado" length="30" />
+        </many-to-one>
+        <set name="multasCitases" table="multas_citas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cita" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MultasCitas" />
+        </set>
+        <set name="ordenesAmbulatoriases" table="ordenes_ambulatorias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cita_asociada" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdenesAmbulatorias" />
+        </set>
+         <set name="serviciosCitas" table="servicios_cita" schema="consultaexterna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_cita" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosCita" />
+        </set>
+    </class>
+</hibernate-mapping>

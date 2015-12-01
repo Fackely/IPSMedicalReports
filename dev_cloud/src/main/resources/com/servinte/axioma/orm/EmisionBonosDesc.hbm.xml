@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 1, 2010 2:25:27 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EmisionBonosDesc" table="emision_bonos_desc" schema="odontologia">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio_patrocinador" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa" precision="12" scale="0" />
+        </many-to-one>
+        <property name="id" type="string">
+            <column name="id" length="4" not-null="true" />
+        </property>
+        <property name="serialInicial" type="long">
+            <column name="serial_inicial" precision="14" scale="0" not-null="true" />
+        </property>
+        <property name="serialFinal" type="long">
+            <column name="serial_final" precision="14" scale="0" not-null="true" />
+        </property>
+        <property name="fechaVigenciaInicial" type="date">
+            <column name="fecha_vigencia_inicial" length="13" not-null="true" />
+        </property>
+        <property name="fechaVigenciaFinal" type="date">
+            <column name="fecha_vigencia_final" length="13" not-null="true" />
+        </property>
+        <property name="valorDescuento" type="big_decimal">
+            <column name="valor_descuento" precision="14" />
+        </property>
+        <property name="porcentajeDescuentos" type="big_decimal">
+            <column name="porcentaje_descuentos" precision="5" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="bonosConvIngPacs" inverse="true" lazy="true" table="bonos_conv_ing_pac" fetch="select">
+            <key>
+                <column name="emision" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.BonosConvIngPac" />
+        </set>
+    </class>
+</hibernate-mapping>

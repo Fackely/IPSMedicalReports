@@ -1,0 +1,590 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 3/06/2011 09:54:54 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Convenios" table="convenios" schema="facturacion">
+        <comment>Registro de convenios parametrizados en el sistema</comment>
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="formatoImpresionFactura" class="com.servinte.axioma.orm.FormatoImpresionFactura" fetch="select">
+            <column name="formato_factura" />
+        </many-to-one>
+        <many-to-one name="tiposRegimen" class="com.servinte.axioma.orm.TiposRegimen" fetch="select">
+            <column name="tipo_regimen" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_contable" />
+        </many-to-one>
+        <many-to-one name="empresasInstitucion" class="com.servinte.axioma.orm.EmpresasInstitucion" fetch="select">
+            <column name="empresa_institucion" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="tarifariosOficiales" class="com.servinte.axioma.orm.TarifariosOficiales" fetch="select">
+            <column name="tipo_codigo" />
+        </many-to-one>
+        <many-to-one name="tiposConvenio" class="com.servinte.axioma.orm.TiposConvenio" fetch="select">
+            <column name="tipo_convenio" length="8" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresas" class="com.servinte.axioma.orm.Empresas" fetch="select">
+            <column name="empresa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposContrato" class="com.servinte.axioma.orm.TiposContrato" fetch="select">
+            <column name="tipo_contrato" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="128" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="64" />
+        </property>
+        <property name="planBeneficios" type="string">
+            <column name="plan_beneficios" length="80" not-null="true" />
+        </property>
+        <property name="codigoMinSalud" type="string">
+            <column name="codigo_min_salud" length="6" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="infoAdicIngresoConvenios" type="java.lang.Boolean">
+            <column name="info_adic_ingreso_convenios" />
+        </property>
+        <property name="pyp" type="boolean">
+            <column name="pyp" not-null="true" />
+        </property>
+        <property name="unificarPyp" type="boolean">
+            <column name="unificar_pyp" not-null="true" />
+        </property>
+        <property name="numDiasVencimiento" type="java.lang.Short">
+            <column name="num_dias_vencimiento" precision="4" scale="0" />
+        </property>
+        <property name="requiereJustificacionServ" type="char">
+            <column name="requiere_justificacion_serv" length="1" not-null="true" />
+        </property>
+        <property name="manejaComplejidad" type="char">
+            <column name="maneja_complejidad" length="1" not-null="true" />
+        </property>
+        <property name="semanasMinCotizacion" type="java.lang.Short">
+            <column name="semanas_min_cotizacion" precision="4" scale="0" />
+        </property>
+        <property name="requiereIngresoNumCarnet" type="char">
+            <column name="requiere_ingreso_num_carnet" length="1" not-null="true" />
+        </property>
+        <property name="requiereJustificacionArt" type="char">
+            <column name="requiere_justificacion_art" length="1" not-null="true" />
+        </property>
+        <property name="ajusteServicios" type="string">
+            <column name="ajuste_servicios" length="5" />
+        </property>
+        <property name="ajusteArticulos" type="string">
+            <column name="ajuste_articulos" length="5" />
+        </property>
+        <property name="interfaz" type="string">
+            <column name="interfaz" length="10" />
+        </property>
+        <property name="encabezadoFactura" type="string">
+            <column name="encabezado_factura" length="1000" />
+        </property>
+        <property name="pieFactura" type="string">
+            <column name="pie_factura" length="1000" />
+        </property>
+        <property name="cantidadMaxCirugia" type="java.lang.Short">
+            <column name="cantidad_max_cirugia" precision="4" scale="0" />
+        </property>
+        <property name="cantidadMaxAyudpag" type="java.lang.Short">
+            <column name="cantidad_max_ayudpag" precision="4" scale="0" />
+        </property>
+        <property name="tipoLiquidacionScx" type="string">
+            <column name="tipo_liquidacion_scx" length="5" />
+        </property>
+        <property name="tipoLiquidacionDyt" type="string">
+            <column name="tipo_liquidacion_dyt" length="5" />
+        </property>
+        <property name="tipoLiquidacionGcx" type="string">
+            <column name="tipo_liquidacion_gcx" length="5" />
+        </property>
+        <property name="tipoLiquidacionGdyt" type="string">
+            <column name="tipo_liquidacion_gdyt" length="5" />
+        </property>
+        <property name="tipoTarifaLiqmatecx" type="string">
+            <column name="tipo_tarifa_liqmatecx" length="6" not-null="true" />
+        </property>
+        <property name="tipoTarifaLiqmatedyt" type="string">
+            <column name="tipo_tarifa_liqmatedyt" length="6" not-null="true" />
+        </property>
+        <property name="liquidacionTmpFracAdd" type="char">
+            <column name="liquidacion_tmp_frac_add" length="1" not-null="true" />
+        </property>
+        <property name="tipoFechaLiqtiempcx" type="string">
+            <column name="tipo_fecha_liqtiempcx" length="3" />
+        </property>
+        <property name="tipoFechaLiqtiempdyt" type="string">
+            <column name="tipo_fecha_liqtiempdyt" length="3" />
+        </property>
+        <property name="reqJustArtNoposDifMed" type="string">
+            <column name="req_just_art_nopos_dif_med" length="1" />
+        </property>
+        <property name="centroCostoPlanEspecial" type="java.lang.Integer">
+            <column name="centro_costo_plan_especial" />
+        </property>
+        <property name="excentoDeudor" type="char">
+            <column name="excento_deudor" length="1" not-null="true" />
+        </property>
+        <property name="excentoDocGarantia" type="char">
+            <column name="excento_doc_garantia" length="1" not-null="true" />
+        </property>
+        <property name="vip" type="char">
+            <column name="vip" length="1" not-null="true" />
+        </property>
+        <property name="diasControlPost" type="int">
+            <column name="dias_control_post" not-null="true" />
+        </property>
+        <property name="citasMaxControl" type="int">
+            <column name="citas_max_control" not-null="true" />
+        </property>
+        <property name="radicarCuentasNegativas" type="char">
+            <column name="radicar_cuentas_negativas" length="1" not-null="true" />
+        </property>
+        <property name="asignarfacValorpacValorabo" type="char">
+            <column name="asignarfac_valorpac_valorabo" length="1" not-null="true" />
+        </property>
+        <property name="aseguradora" type="char">
+            <column name="aseguradora" length="1" not-null="true" />
+        </property>
+        <property name="codAseguradora" type="string">
+            <column name="cod_aseguradora" length="10" />
+        </property>
+        <property name="valorLetrasFactura" type="string">
+            <column name="valor_letras_factura" length="4" />
+        </property>
+        <property name="reporteInconBd" type="string">
+            <column name="reporte_incon_bd" length="1" not-null="true" />
+        </property>
+        <property name="reporteAtencionIniUrg" type="string">
+            <column name="reporte_atencion_ini_urg" length="1" not-null="true" />
+        </property>
+        <property name="genAutoValAteIniUrg" type="string">
+            <column name="gen_auto_val_ate_ini_urg" length="1" not-null="true" />
+        </property>
+        <property name="reqAutoServAdd" type="string">
+            <column name="req_auto_serv_add" length="1" not-null="true" />
+        </property>
+        <property name="formatoAutorizacion" type="string">
+            <column name="formato_autorizacion" length="3" />
+        </property>
+        <property name="valMulIncCitas" type="big_decimal">
+            <column name="val_mul_inc_citas" precision="14" />
+        </property>
+        <property name="manMulIncCitas" type="string">
+            <column name="man_mul_inc_citas" length="1" />
+        </property>
+        <property name="manejaBonos" type="java.lang.Character">
+            <column name="maneja_bonos" length="1">
+                <comment>Convenio maneja bonos odontol&#243;gicos</comment>
+            </column>
+        </property>
+        <property name="reqBonoIngPac" type="java.lang.Character">
+            <column name="req_bono_ing_pac" length="1">
+                <comment>Requiere bono para el ingreso del paciente</comment>
+            </column>
+        </property>
+        <property name="manejaPromociones" type="java.lang.Character">
+            <column name="maneja_promociones" length="1">
+                <comment>Maneja promociones odontol&#243;gicas</comment>
+            </column>
+        </property>
+        <property name="esConvTarCli" type="java.lang.Character">
+            <column name="es_conv_tar_cli" length="1">
+                <comment>El convenio pertenece a una tarjeta (Es convenio tarjeta cliente)</comment>
+            </column>
+        </property>
+        <property name="ingPacValBd" type="java.lang.Character">
+            <column name="ing_pac_val_bd" length="1">
+                <comment>Ingreso del paciente requiere validaci&#243;n en base de datos (Se valida con la tabla pacientes_conv_odo)</comment>
+            </column>
+        </property>
+        <property name="ingPacReqAut" type="java.lang.Character">
+            <column name="ing_pac_req_aut" length="1">
+                <comment>Ingreso paciente requiere autorizaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="reqIngValAuto" type="java.lang.Character">
+            <column name="req_ing_val_auto" length="1">
+                <comment>Ingreso del paciente requiere valor de autorizaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="tipoAtencion" type="string">
+            <column name="tipo_atencion" length="13" not-null="true" />
+        </property>
+        <property name="manejaDesOdo" type="java.lang.Character">
+            <column name="maneja_des_odo" length="1" />
+        </property>
+        <property name="tipoLiquidacionPool" type="string">
+            <column name="tipo_liquidacion_pool" length="6" />
+        </property>
+        <property name="manejaMontos" type="string">
+            <column name="maneja_montos" length="1" not-null="true" />
+        </property>
+        <property name="capitacionSubcontratada" type="java.lang.Character">
+            <column name="capitacion_subcontratada" length="1" />
+        </property>
+        <property name="manejaPresupCapitacion" type="java.lang.Character">
+            <column name="maneja_presup_capitacion" length="1" />
+        </property>
+        <set name="conveniosPacienteses" table="convenios_pacientes" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConveniosPacientes" />
+        </set>
+        <set name="autorizacionesCapitacionSubs" table="autorizaciones_capitacion_sub" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio_recobro">
+                    <comment>C&#243;digo del convenio de recobro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesCapitacionSub" />
+        </set>
+        <set name="informeAtencionIniUrgs" table="informe_atencion_ini_urg" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeAtencionIniUrg" />
+        </set>
+        <set name="hisRequisitosPacSubcuentas" table="his_requisitos_pac_subcuenta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisRequisitosPacSubcuenta" />
+        </set>
+        <set name="pacEntidadesSubcontratadases" table="pac_entidades_subcontratadas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PacEntidadesSubcontratadas" />
+        </set>
+        <set name="histoAutorizacionCapitaSubs" table="histo_autorizacion_capita_sub" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio_recobro">
+                    <comment>C&#243;digo del convenio de recobro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoAutorizacionCapitaSub" />
+        </set>
+        <set name="logSubirPacienteses" table="log_subir_pacientes" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogSubirPacientes" />
+        </set>
+        <set name="presupuestoOdoConvenios" table="presupuesto_odo_convenio" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoOdoConvenio" />
+        </set>
+        <set name="historicoDistribucions" table="historico_distribucion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoDistribucion" />
+        </set>
+        <set name="mediosEnvioConvenios" table="medios_envio_convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MediosEnvioConvenio" />
+        </set>
+        <set name="poolesConvenios" table="pooles_convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesConvenio" />
+        </set>
+        <set name="logCierrePresuCapitas" table="log_cierre_presu_capita" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCierrePresuCapita" />
+        </set>
+        <set name="viasIngresos" table="vias_ingreso" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ViasIngreso" />
+        </set>
+        <set name="subCuentases" table="sub_cuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SubCuentas" />
+        </set>
+        <one-to-one name="cenAtenContableConv" class="com.servinte.axioma.orm.CenAtenContableConv"></one-to-one>
+        <set name="conceptPagPoolXConvs" table="concept_pag_pool_x_conv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptPagPoolXConv" />
+        </set>
+        <set name="archivosConvenios" table="archivos_convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArchivosConvenio" />
+        </set>
+        <set name="paqOdontConvenios" table="paq_odont_convenio" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaqOdontConvenio" />
+        </set>
+        <set name="requisitosRadicacions" table="requisitos_rad_convenio" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.RequisitosRadicacion">
+                <column name="requisito_radicacion" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="ripsConsultorioses" table="rips_consultorios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RipsConsultorios" />
+        </set>
+        <set name="pacienteses" table="pacientes" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio_reserva" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Pacientes" />
+        </set>
+        <set name="ventaEmpresarials" table="venta_empresarial" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio_empresarial" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.VentaEmpresarial" />
+        </set>
+        <set name="detConvPromocionesOdos" table="det_conv_promociones_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetConvPromocionesOdo" />
+        </set>
+        <set name="cuentaConvenios" table="cuenta_convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cod_convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaConvenio" />
+        </set>
+        <set name="contratoses" table="contratos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Contratos" />
+        </set>
+        <set name="paquetesConvenios" table="paquetes_convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetesConvenio" />
+        </set>
+        <set name="historialBusqArchivoplanos" table="historial_busq_archivoplano" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistorialBusqArchivoplano" />
+        </set>
+        <set name="soporteFacturases" table="soporte_facturas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SoporteFacturas" />
+        </set>
+        <set name="detCargoses" table="det_cargos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+        <set name="mediosAutConvOdos" table="medios_aut_conv_odo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MediosAutConvOdo" />
+        </set>
+        <set name="archivoPlanoColsanitases" table="archivo_plano_colsanitas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArchivoPlanoColsanitas" />
+        </set>
+        <set name="detParamEntidSubcontratadas" table="det_param_entid_subcontratada" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetParamEntidSubcontratada" />
+        </set>
+        <set name="logParamPresupuestoCaps" table="log_param_presupuesto_cap" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogParamPresupuestoCap" />
+        </set>
+        <set name="registroAccidentesTransitos" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="aseguradora" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="logFacturadosXConvenios" table="log_facturados_x_convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogFacturadosXConvenio" />
+        </set>
+        <set name="inactivacionesCargoses" table="inactivaciones_cargos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InactivacionesCargos" />
+        </set>
+        <set name="logConsolidadoFacturacions" table="log_consolidado_facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogConsolidadoFacturacion" />
+        </set>
+        <set name="envioInfoInconsistenciases" table="envio_info_inconsistencias" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio_envio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioInfoInconsistencias" />
+        </set>
+        <set name="montosCobros" table="montos_cobro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MontosCobro" />
+        </set>
+        <set name="tiposTarjClientes" table="tipos_tarj_cliente" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposTarjCliente" />
+        </set>
+        <set name="autorizacionesIngreEstancias" table="autorizaciones_ingre_estancia" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio_recobro" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesIngreEstancia" />
+        </set>
+        <set name="presupuestoPacientes" table="presupuesto_paciente" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoPaciente" />
+        </set>
+        <set name="envioInfoAtenIniUrgs" table="envio_info_aten_ini_urg" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio_envio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioInfoAtenIniUrg" />
+        </set>
+        <set name="correosConvenios" table="correos_convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CorreosConvenio" />
+        </set>
+        <set name="facturases" table="facturas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Facturas" />
+        </set>
+        <set name="emisionBonosDescs" table="emision_bonos_desc" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio_patrocinador" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EmisionBonosDesc" />
+        </set>
+        <set name="conveniosPresupuestoOdos" table="convenios_presupuesto_odo" schema="administracion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConveniosPresupuestoOdo" />
+        </set>
+        <set name="pacientesConvOdos" table="pacientes_conv_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PacientesConvOdo" />
+        </set>
+        <set name="informeInconsistenciases" table="informe_inconsistencias" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeInconsistencias" />
+        </set>
+        <set name="honorariosPools" table="honorarios_pool" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HonorariosPool" />
+        </set>
+        <set name="envioAutorizacioneses" table="envio_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio_envio" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioAutorizaciones" />
+        </set>
+        <set name="verificacionesDerechoses" table="verificaciones_derechos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.VerificacionesDerechos" />
+        </set>
+        <set name="cuentases" table="cuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio_arp_afiliado" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Cuentas" />
+        </set>
+        <set name="historicoSubcuentases" table="historico_subcuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoSubcuentas" />
+        </set>
+        <set name="trasladoCamas" table="traslado_cama" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladoCama" />
+        </set>
+        <set name="requisitosPacConvenios" table="requisitos_pac_convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RequisitosPacConvenio" />
+        </set>
+        <set name="autorizacioneses" table="autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Autorizaciones" />
+        </set>
+        <set name="autorizacionesEntidadesSubs" table="autorizaciones_entidades_sub" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="convenio" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" />
+        </set>
+    </class>
+</hibernate-mapping>

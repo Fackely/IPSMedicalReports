@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogProcAutoServCita" table="log_proc_auto_serv_cita" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="logProcAutoCitas" class="com.servinte.axioma.orm.LogProcAutoCitas" fetch="select">
+            <column name="log_proc_auto_cita" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="servicioCitaOdo" type="long">
+            <column name="servicio_cita_odo" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="estadoInicialHc" type="int">
+            <column name="estado_inicial_hc" not-null="true" />
+        </property>
+        <property name="estadoInicialFact" type="int">
+            <column name="estado_inicial_fact" not-null="true" />
+        </property>
+        <set name="logProcAutoFacts" inverse="true" lazy="true" table="log_proc_auto_fact" fetch="select">
+            <key>
+                <column name="log_proc_auto_serv_cita" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogProcAutoFact" />
+        </set>
+    </class>
+</hibernate-mapping>

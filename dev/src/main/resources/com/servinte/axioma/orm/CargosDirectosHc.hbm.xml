@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CargosDirectosHc" table="cargos_directos_hc" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="codigo_servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="finalidadesServicio" class="com.servinte.axioma.orm.FinalidadesServicio" fetch="select">
+            <column name="finalidad_procedimiento" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposServicio" class="com.servinte.axioma.orm.TiposServicio" fetch="select">
+            <column name="tipo_servicio" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="fechaSolicitud" type="date">
+            <column name="fecha_solicitud" length="13" not-null="true" />
+        </property>
+        <property name="horaSolicitud" type="string">
+            <column name="hora_solicitud" length="5" not-null="true" />
+        </property>
+        <property name="causaExterna" type="java.lang.Integer">
+            <column name="causa_externa" />
+        </property>
+        <property name="manejaRips" type="char">
+            <column name="maneja_rips" length="1" not-null="true" />
+        </property>
+        <property name="finalidadConsulta" type="string">
+            <column name="finalidad_consulta" length="2" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="5" not-null="true" />
+        </property>
+        <property name="personalAtiende" type="java.lang.Integer">
+            <column name="personal_atiende" />
+        </property>
+        <property name="formaRealizacion" type="java.lang.Integer">
+            <column name="forma_realizacion" />
+        </property>
+        <set name="cargosDirectoses" inverse="true" lazy="true" table="cargos_directos" fetch="select">
+            <key>
+                <column name="codigo_datos_hc" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CargosDirectos" />
+        </set>
+        <set name="diagCargosDirectosHcs" inverse="true" lazy="true" table="diag_cargos_directos_hc" fetch="select">
+            <key>
+                <column name="codigo_cargo_directo" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DiagCargosDirectosHc" />
+        </set>
+    </class>
+</hibernate-mapping>

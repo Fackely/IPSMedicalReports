@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CamposInterfazInfoGral" table="campos_interfaz_info_gral" schema="interfaz">
+        <id name="institucion" type="int">
+            <column name="institucion" />
+            <generator class="foreign">
+                <param name="property">instituciones</param>
+            </generator>
+        </id>
+        <one-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" constrained="true"></one-to-one>
+        <property name="nombreArchivoSalida" type="string">
+            <column name="nombre_archivo_salida" length="256" not-null="true" />
+        </property>
+        <property name="pathArchivoSalida" type="string">
+            <column name="path_archivo_salida" length="256" not-null="true" />
+        </property>
+        <property name="nombreArchivoIncons" type="string">
+            <column name="nombre_archivo_incons" length="256" not-null="true" />
+        </property>
+        <property name="pathArchivoIncons" type="string">
+            <column name="path_archivo_incons" length="256" not-null="true" />
+        </property>
+        <property name="separadorCampos" type="string">
+            <column name="separador_campos" length="8" not-null="true" />
+        </property>
+        <property name="separadorDecimales" type="int">
+            <column name="separador_decimales" not-null="true" />
+        </property>
+        <property name="identificadorFinArchivo" type="string">
+            <column name="identificador_fin_archivo" length="8" />
+        </property>
+        <property name="presDevolucionPaciente" type="boolean">
+            <column name="pres_devolucion_paciente" not-null="true" />
+        </property>
+        <property name="valorNegativoDevolPac" type="boolean">
+            <column name="valor_negativo_devol_pac" not-null="true" />
+        </property>
+        <property name="descripcionDebito" type="string">
+            <column name="descripcion_debito" length="256" not-null="true" />
+        </property>
+        <property name="descripcionCredito" type="string">
+            <column name="descripcion_credito" length="256" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

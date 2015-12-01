@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 21, 2010 11:07:50 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogPresupuestoOdont" table="log_presupuesto_odont" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="planTratamiento" class="com.servinte.axioma.orm.PlanTratamiento" fetch="select">
+            <column name="plant_tratamiento" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="presupuestoOdontologico" class="com.servinte.axioma.orm.PresupuestoOdontologico" fetch="select">
+            <column name="presupuesto" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="logPlanTratamiento" class="com.servinte.axioma.orm.LogPlanTratamiento" fetch="select">
+            <column name="log_plan_tratamiento" precision="12" scale="0" />
+        </many-to-one>
+        <property name="consecutivo" type="java.lang.Long">
+            <column name="consecutivo" precision="12" scale="0" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="4" />
+        </property>
+        <property name="fechaGeneracion" type="date">
+            <column name="fecha_generacion" length="13" />
+        </property>
+        <property name="horaGeneracion" type="string">
+            <column name="hora_generacion" length="5" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 14, 2011 5:52:39 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoAutorizacionCapitaSub" table="histo_autorizacion_capita_sub" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+             <generator class="sequence">
+				<param name="sequence">manejopaciente.seq_histo_autor_capi_sub</param>
+			 </generator>
+        </id>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio_recobro">
+                <comment>C&#195;&#179;digo del convenio de recobro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Campo en el que se guarda el login del usuario que realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo de la autorizaci&#195;&#179;n de entidad subcontratada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="autorizacionesCapitacionSub" class="com.servinte.axioma.orm.AutorizacionesCapitacionSub" fetch="select">
+            <column name="autorizaciones_capitacion_sub" precision="12" scale="0" not-null="true">
+                <comment>Llave primaria de la tabla, for&#195;&#161;nea a la autorizaci&#195;&#179;n de capitaci&#195;&#179;n subcontratada</comment>
+            </column>
+        </many-to-one>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" not-null="true">
+                <comment>Consecutivo de la autorizaci&#195;&#179;n de capitaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="tipoAutorizacion" type="string">
+            <column name="tipo_autorizacion" length="4" not-null="true">
+                <comment>Tipo de generaci&#195;&#179;n de la autorizaci&#195;&#179;n: autom&#195;&#161;tica o manual</comment>
+            </column>
+        </property>
+        <property name="otroConvenioRecobro" type="string">
+            <column name="otro_convenio_recobro" length="128">
+                <comment>Descripci&#195;&#179;n del convenio de recobro, en caso de que este no exista como convenio en el sistema</comment>
+            </column>
+        </property>
+        <property name="indicativoTemporal" type="char">
+            <column name="indicativo_temporal" length="1" not-null="true">
+                <comment>Campo que indica si se debe crear la entidad subcontratada</comment>
+            </column>
+        </property>
+        <property name="descripcionEntidad" type="string">
+            <column name="descripcion_entidad">
+                <comment>Campo en el que se guarda la descripci&#195;&#179;n de la entidad subcontratada en caso de que esta no exista en el sistema</comment>
+            </column>
+        </property>
+        <property name="direccionEntidad" type="string">
+            <column name="direccion_entidad" length="256">
+                <comment>Campo en el que se guarda la direcci&#195;&#179;n de la entidad subcontratada en caso de que esta no exista en el sistema</comment>
+            </column>
+        </property>
+        <property name="telefonoEntidad" type="string">
+            <column name="telefono_entidad" length="60">
+                <comment>Campo en el que se guarda el tel&#195;&#169;fono de la entidad subcontratada en caso de que esta no exista en el sistema</comment>
+            </column>
+        </property>
+        <property name="indicadorPrioridad" type="int">
+            <column name="indicador_prioridad" not-null="true">
+                <comment>Campo en el que se guarda la prioridad de la autorizaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Campo en el que se guarda la fecha en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Campo en el que se guarda la hora en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="accionRealizada" type="string">
+            <column name="accion_realizada" length="3" not-null="true">
+                <comment>Campo en el que se guarda la acci&#195;&#179;n realizada en el registro: Insercion &#226;&#128;&#147; Modificaci&#195;&#179;n &#226;&#128;&#147;
+                Eliminaci&#195;&#179;n &#226;&#128;&#147; No Definido</comment>
+            </column>
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="250">
+                <comment>Campo para guardar el motivo por el cual se anula la autorizaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="fechaVencimiento" type="date">
+            <column name="fecha_vencimiento" length="13" not-null="true">
+                <comment>Fecha de vencimiento de la autorizaci&#195;&#179;n</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

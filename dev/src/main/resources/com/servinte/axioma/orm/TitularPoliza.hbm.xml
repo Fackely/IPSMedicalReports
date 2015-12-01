@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TitularPoliza" table="titular_poliza" schema="manejopaciente">
+        <id name="subCuenta" type="int">
+            <column name="sub_cuenta" />
+            <generator class="foreign">
+                <param name="property">subCuentas</param>
+            </generator>
+        </id>
+        <many-to-one name="tiposIdentificacion" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipoid_titular" length="3" not-null="true" />
+        </many-to-one>
+        <one-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" constrained="true"></one-to-one>
+        <property name="nombresTitular" type="string">
+            <column name="nombres_titular" length="100" not-null="true" />
+        </property>
+        <property name="apellidosTitular" type="string">
+            <column name="apellidos_titular" length="100" not-null="true" />
+        </property>
+        <property name="numeroidTitular" type="string">
+            <column name="numeroid_titular" length="25" not-null="true" />
+        </property>
+        <property name="direccionTitular" type="string">
+            <column name="direccion_titular" length="100" not-null="true" />
+        </property>
+        <property name="telefonoTitular" type="string">
+            <column name="telefono_titular" length="512" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

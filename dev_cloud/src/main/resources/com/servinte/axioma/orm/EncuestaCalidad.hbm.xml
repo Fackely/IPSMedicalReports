@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EncuestaCalidad" table="encuesta_calidad" schema="manejopaciente">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="motSatisfaccionPac" class="com.servinte.axioma.orm.MotSatisfaccionPac" fetch="select">
+            <column name="motivo_calificacion" not-null="true" />
+        </many-to-one>
+        <property name="area" type="java.lang.Integer">
+            <column name="area" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="calificacion" type="string">
+            <column name="calificacion" length="4" not-null="true" />
+        </property>
+        <set name="encuestaCalidadObservs" inverse="true" lazy="true" table="encuesta_calidad_observ" fetch="select">
+            <key>
+                <column name="encuesta_calidad" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EncuestaCalidadObserv" />
+        </set>
+    </class>
+</hibernate-mapping>

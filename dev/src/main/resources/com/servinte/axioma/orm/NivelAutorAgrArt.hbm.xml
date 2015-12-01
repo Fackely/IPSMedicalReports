@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 25, 2011 12:25:30 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NivelAutorAgrArt" table="nivel_autor_agr_art" schema="capitacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="grupoInventario" class="com.servinte.axioma.orm.GrupoInventario" fetch="select">
+            <column name="grupo_inventario">
+                <comment>Grupo inventario relacionado</comment>
+            </column>
+            <column name="clase_inventario">
+                <comment>Clase inventario relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="naturalezaArticulo" class="com.servinte.axioma.orm.NaturalezaArticulo" fetch="select">
+            <column name="naturaleza_articulo" length="2">
+                <comment>Naturaleza de art&#195;&#173;culos parametrizada en el nivel de autorizaci&#195;&#179;n</comment>
+            </column>
+            <column name="institucion">
+                <comment>Instituci&#195;&#179;n relacionada a la naturaleza de art&#195;&#173;culos parametrizada en el nivel de autorizaci&#195;&#179;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="nivelAutorServMedic" class="com.servinte.axioma.orm.NivelAutorServMedic" fetch="select">
+            <column name="nivel_autor_serv_medic" not-null="true">
+                <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="claseInventario" class="com.servinte.axioma.orm.ClaseInventario" update="false" insert="false" fetch="select">
+            <column name="clase_inventario">
+                <comment>Clase inventario relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="subgrupoInventario" type="java.lang.Integer">
+            <column name="subgrupo_inventario">
+                <comment>Subgrupo parametrizado en el nivel de autorizaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

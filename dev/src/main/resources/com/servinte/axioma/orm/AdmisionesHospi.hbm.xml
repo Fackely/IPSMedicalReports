@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AdmisionesHospi" table="admisiones_hospi" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="codigo_medico" />
+        </many-to-one>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="camas1" class="com.servinte.axioma.orm.Camas1" fetch="select">
+            <column name="cama" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="login_usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="oriAdmisionHospi" class="com.servinte.axioma.orm.OriAdmisionHospi" fetch="select">
+            <column name="origen_admision_hospitalaria" />
+        </many-to-one>
+        <many-to-one name="estadosAdmision" class="com.servinte.axioma.orm.EstadosAdmision" fetch="select">
+            <column name="estado_admision" not-null="true" />
+        </many-to-one>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="diagnostico_admision" length="10" not-null="true" />
+            <column name="diagnostico_cie_admision" not-null="true" />
+        </many-to-one>
+        <property name="fechaAdmision" type="date">
+            <column name="fecha_admision" length="13" not-null="true" />
+        </property>
+        <property name="horaAdmision" type="string">
+            <column name="hora_admision" length="5" not-null="true" />
+        </property>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="string">
+            <column name="hora_grabacion" length="5" not-null="true" />
+        </property>
+        <property name="causaExterna" type="int">
+            <column name="causa_externa" not-null="true" />
+        </property>
+        <property name="numeroAutorizacion" type="string">
+            <column name="numero_autorizacion" length="15" />
+        </property>
+        <set name="hisCamaPacs" inverse="true" lazy="true" table="his_cama_pac" fetch="select">
+            <key>
+                <column name="codigo_admision" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisCamaPac" />
+        </set>
+    </class>
+</hibernate-mapping>

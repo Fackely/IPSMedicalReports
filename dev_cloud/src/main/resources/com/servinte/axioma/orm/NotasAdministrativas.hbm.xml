@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 5, 2010 9:53:31 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NotasAdministrativas" table="notas_administrativas" schema="manejopaciente">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence" >
+				<param name="sequence">manejopaciente.seq_notas_administrativas</param>
+			</generator>
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="descripcionNota" type="string">
+            <column name="descripcion_nota" length="3000" not-null="true" />
+        </property>
+        <set name="detNotasAdministrativases" inverse="true" lazy="true" table="det_notas_administrativas" fetch="select">
+            <key>
+                <column name="codigo_nota" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetNotasAdministrativas" />
+        </set>
+    </class>
+</hibernate-mapping>

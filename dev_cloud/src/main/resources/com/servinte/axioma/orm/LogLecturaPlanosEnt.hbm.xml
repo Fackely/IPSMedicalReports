@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogLecturaPlanosEnt" table="log_lectura_planos_ent" schema="manejopaciente">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_ejecucion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tarifariosOficiales" class="com.servinte.axioma.orm.TarifariosOficiales" fetch="select">
+            <column name="codigo_manual" not-null="true" />
+        </many-to-one>
+        <property name="fechaEjecucion" type="date">
+            <column name="fecha_ejecucion" length="13" not-null="true" />
+        </property>
+        <property name="horaEjecucion" type="string">
+            <column name="hora_ejecucion" length="5" not-null="true" />
+        </property>
+        <property name="numeroFactura" type="string">
+            <column name="numero_factura" length="20" />
+        </property>
+        <property name="validarArchivosCarnet" type="string">
+            <column name="validar_archivos_carnet" length="1" />
+        </property>
+        <property name="ubicacionPlanos" type="string">
+            <column name="ubicacion_planos" length="3" not-null="true" />
+        </property>
+        <property name="archivoInconsistencias" type="string">
+            <column name="archivo_inconsistencias" length="64" />
+        </property>
+        <property name="directorioArchivos" type="string">
+            <column name="directorio_archivos" length="500" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

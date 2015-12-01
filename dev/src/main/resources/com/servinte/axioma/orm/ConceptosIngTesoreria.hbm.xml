@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConceptosIngTesoreria" table="conceptos_ing_tesoreria" schema="tesoreria">
+        <composite-id name="id" class="com.servinte.axioma.orm.ConceptosIngTesoreriaId">
+            <key-property name="codigo" type="string">
+                <column name="codigo" length="6" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tipoDocContabilidadByTipoDocumIngreso" class="com.servinte.axioma.orm.TipoDocContabilidad" fetch="select">
+            <column name="tipo_docum_ingreso" />
+        </many-to-one>
+        <many-to-one name="cuentasContables" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="tipoDocContabilidadByTipoDocumAnulacion" class="com.servinte.axioma.orm.TipoDocContabilidad" fetch="select">
+            <column name="tipo_docum_anulacion" />
+        </many-to-one>
+        <many-to-one name="tipoIngTesoreria" class="com.servinte.axioma.orm.TipoIngTesoreria" fetch="select">
+            <column name="codigo_tipo_ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="nit_homologacion" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="codigo_centro_costo" />
+        </many-to-one>
+        <many-to-one name="rubroPresupuestal" class="com.servinte.axioma.orm.RubroPresupuestal" fetch="select">
+            <column name="rubro_presupuestal" precision="10" scale="0" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" not-null="true" />
+        </property>
+        <property name="valor" type="string">
+            <column name="valor" length="10" />
+        </property>
+        <property name="esActivo" type="java.lang.Boolean">
+            <column name="es_activo" />
+        </property>
+        <set name="conceptosTiposRegimens" inverse="true" lazy="true" table="conceptos_tipos_regimen" fetch="select">
+            <key>
+                <column name="concepto" length="6" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosTiposRegimen" />
+        </set>
+        <set name="detalleConceptosRcs" inverse="true" lazy="true" table="detalle_conceptos_rc" fetch="select">
+            <key>
+                <column name="concepto" length="6" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleConceptosRc" />
+        </set>
+        <set name="devolRecibosCajas" inverse="true" lazy="true" table="devol_recibos_caja" fetch="select">
+            <key>
+                <column name="concepto" length="6" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DevolRecibosCaja" />
+        </set>
+    </class>
+</hibernate-mapping>

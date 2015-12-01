@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "struts-config_1_1.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="IngresarTurnoForm" type="com.sies.actionform.IngresarTurnoForm"/>
+		<form-bean name="CubrirTurnoForm" type="com.sies.actionform.CubrirTurnoForm"/>
+		<form-bean name="IngresarTipoObservacionForm" type="com.sies.actionform.IngresarTipoObservacionForm"/>
+		<form-bean name="AsociarEnfermeraCategoriaForm" type="com.sies.actionform.AsociarEnfermeraCategoriaForm"/>
+		<form-bean name="BusquedaPersonaForm" type="com.sies.actionform.BusquedaPersonaForm"/>
+		<form-bean name="CategoriaForm" type="com.sies.actionform.CategoriaForm"/>
+		<form-bean name="NovedadForm" type="com.sies.actionform.NovedadForm"/>
+		<form-bean name="OcupacionForm" type="com.sies.actionform.OcupacionForm"/>
+		<form-bean name="GenerarCuadroTurnosForm" type="com.sies.actionform.GenerarCuadroTurnosForm"/>
+		<form-bean name="CargarCuadroTurnoForm" type="com.sies.actionform.CargarCuadroTurnoForm"/>
+		<form-bean name="VacacionesForm" type="com.sies.actionform.VacacionesForm"/>
+		<form-bean name="AsignarRestriccionesCategoriaForm" type="com.sies.actionform.AsignarRestriccionesCategoriaForm"/>
+		<form-bean name="AsignarRestriccionesEnfermerasForm" type="com.sies.actionform.AsignarRestriccionesEnfermerasForm"/>
+		<form-bean name="AsignarNovedadEnfermeraForm" type="com.sies.actionform.AsignarNovedadEnfermeraForm"/>
+		<form-bean name="GenerarReporteNominaForm" type="com.sies.actionform.GenerarReporteNominaForm"/>
+		<form-bean name="GenerarReporteObservacionesForm" type="com.sies.actionform.GenerarReporteObservacionesForm"/>
+		<form-bean name="GenerarReporteNovedadesForm" type="com.sies.actionform.GenerarReporteNovedadesForm"/>
+		<form-bean name="IngresarPersonaCuadroForm" type="com.sies.actionform.IngresarPersonaCuadroForm"/>
+		<form-bean name="ImprimirHojaVidaForm" type="com.sies.actionform.ImprimirHojaVidaForm"/>
+	</form-beans>
+
+	<global-forwards>
+		<forward name="cerrarVentana" path="/sies/cerrarVentana.jsp"/>
+	</global-forwards>
+
+	<action-mappings>
+	<!-- Ocupaciones (Crear,Modificar,Consultar) MONO -->
+		<action path="/ingresarModificarOcupacion/ingresarOcupacion"
+					type="com.sies.action.OcupacionAction" 
+					name="OcupacionForm"
+					validate="true"
+					input="/ingresarModificarOcupacion/ingresarOcupacion.jsp">
+			<forward name="ingresar" path="/ingresarModificarOcupacion/ingresarOcupacion.jsp"/>
+			<forward name="modificar" path="/ingresarModificarOcupacion/ingresarOcupacion.jsp"/>
+			<forward name="consultar" path="/ingresarModificarOcupacion/consultarOcupacion.jsp"/>	
+		</action>
+		<action path="/consultarImprimirOcupacion/consultarOcupacion"
+					type="com.sies.action.OcupacionAction"
+					name="OcupacionForm"
+					validate="true"
+					input="/consultarOcupacion/consultarOcupacion.jsp">
+			<forward name="consultar" path="/consultarImprimirOcupacion/consultarOcupacion.jsp"/>
+		</action>
+	
+	<!--Categorias (ingresar,modificar,consultar,eliminar)  MONO (Se movio de struts-config.xml aki)-->
+		<action path="/ingresarModificarCategoria/ingresarCategoria"
+					type="com.sies.action.CategoriaAction"
+					name="CategoriaForm"
+					validate="true"
+					input="/ingresarModificarCategoria/ingresarCategoria.jsp">
+			<forward name="ingresar" path="/ingresarModificarCategoria/ingresarCategoria.jsp"/>
+			<forward name="consultar" path="/ingresarModificarCategoria/consultarCategoria.jsp"/>		
+			<forward name="modificar" path="/ingresarModificarCategoria/ingresarCategoria.jsp"/>
+			<forward name="eliminar" path="/ingresarModificarCategoria/ingresarCategoria.jsp"/>	
+		</action>
+		<action path="/consultarImprimirCategoria/consultarCategoria"
+					type="com.sies.action.CategoriaAction"
+					name="CategoriaForm"
+					validate="true"
+					input="/consultarCategoria/consultarCategoria.jsp">
+			<forward name="consultar" path="/consultarImprimirCategoria/consultarCategoria.jsp"/>
+		</action>
+		
+		<!-- Novedades   MONO(fue movido a sies-config.xml de struts-config.xml) -->
+		<action path="/ingresarModificarNovedades/ingresarNovedades"
+					type="com.sies.action.NovedadAction"
+					name="NovedadForm"
+					validate="true"
+					input="/ingresarModificarNovedades/ingresarNovedades.jsp">
+			<forward name="ingresar" path="/ingresarModificarNovedades/ingresarNovedades.jsp"/>
+			<forward name="consultar" path="/ingresarModificarNovedades/consultarNovedades.jsp"/>
+			<forward name="modificar" path="/ingresarModificarNovedades/ingresarNovedades.jsp"/>
+			<forward name="eliminar" path="/ingresarModificarNovedades/eliminarNovedades.jsp"/>
+		</action>
+		<action path="/consultarImprimirNovedades/consultarNovedades"
+					type="com.sies.action.NovedadAction"
+					name="NovedadForm"
+					validate="true"
+					input="/consultarNovedades/consultarNovedades.jsp">
+			<forward name="consultar" path="/consultarImprimirNovedades/consultarNovedades.jsp"/>
+		</action>
+		
+		<!--  Búsqueda Genérica de Persona -->
+		<action path="/buscarPersona"
+				type="com.sies.action.BusquedaPersonaAction"
+				name="BusquedaPersonaForm"
+				scope="request"
+				validate="true"
+				input="/sies/busquedaPersona.jsp">
+				
+			<forward name="busquedaPersona" path="/sies/busquedaPersona.jsp"/>
+		</action>
+		<!--  Parametrización de turnos -->
+		<action path="/parametrizarTurnos/ingreso"
+				type="com.sies.action.IngresarTurnoAction"
+				name="IngresarTurnoForm"
+				scope="session"
+				validate="true"
+				input="/parametrizarTurnos/ingreso.jsp">
+				
+				<forward name="ingreso" path="/parametrizarTurnos/ingreso.jsp"/>
+				<forward name="consulta" path="/parametrizarTurnos/listado.jsp"/>
+		</action>
+		<action path="/consultarTurnos/consulta"
+				type="com.sies.action.IngresarTurnoAction"
+				name="IngresarTurnoForm"
+				scope="session"
+				validate="true"
+				input="/consultarTurnos/consulta.jsp">
+				
+				<forward name="consulta" path="/consultarTurnos/consulta.jsp"/>
+		</action>
+		<action path="/modificarTurnos/modificar"
+				type="com.sies.action.IngresarTurnoAction"
+				name="IngresarTurnoForm"
+				scope="session"
+				validate="true"
+				input="/modificarTurnos/modificar.jsp">
+				
+				<forward name="consulta" path="/modificarTurnos/listado.jsp"/>
+				<forward name="modificar" path="/modificarTurnos/modificar.jsp"/>
+		</action>
+		<!--  Fin Parametrización de turnos -->
+		
+		<action path="/cargarCuadroTurno/cargarCuadro"
+					type="com.sies.action.CargarCuadroTurnoAction"
+					name="CargarCuadroTurnoForm"
+					validate="true"
+					input="/cargarCuadroTurno/cargarCuadro.jsp">
+			<forward name="principal" path="/cargarCuadroTurno/cargarCuadro.jsp"/>
+			<forward name="mostrarCuadro" path="/cargarCuadroTurno/mostrarCuadro.jsp"/>
+			<forward name="consultarPorCategoria" path="/cargarCuadroTurno/consultarCuadroCategoria.jsp"/>
+			<forward name="consultarPorEnfermera" path="/cargarCuadroTurno/consultarCuadroEnfermera.jsp"/>
+			<forward name="ingresoObservacion" path="/cargarCuadroTurno/observacion.jsp"/>
+			<forward name="verificacion" path="/cargarCuadroTurno/verificacion.jsp"/>
+		</action>
+
+		<action path="/ingresarTipoObservacion/ingreso"
+					type="com.sies.action.IngresarTipoObservacionAction"
+					name="IngresarTipoObservacionForm"
+					validate="true"
+					input="/ingresarTipoObservacion/ingresarTipoObservacion.jsp">
+			<forward name="principal" path="/ingresarTipoObservacion/listadoTiposObservacion.jsp"/>
+			<forward name="ingreso" path="/ingresarTipoObservacion/ingresarPopUp.jsp"/>
+		</action>
+
+		<action path="/modificarTipoObservacion/ingreso"
+					type="com.sies.action.IngresarTipoObservacionAction"
+					name="IngresarTipoObservacionForm"
+					validate="true"
+					input="/modificarTipoObservacion/ingresarTipoObservacion.jsp">
+			<forward name="principal" path="/modificarTipoObservacion/listadoTiposObservacion.jsp"/>
+			<forward name="ingreso" path="/modificarTipoObservacion/modificarPopUp.jsp"/>
+		</action>
+
+		<action path="/consultarTipoObservacion/ingreso"
+					type="com.sies.action.IngresarTipoObservacionAction"
+					name="IngresarTipoObservacionForm"
+					validate="true"
+					input="/consultarTipoObservacion/ingresarTipoObservacion.jsp">
+			<forward name="principal" path="/consultarTipoObservacion/listadoTiposObservacion.jsp"/>
+		</action>
+		
+		<action path="/consultarEnfermeraCategoria/consultarEnfermeraCategoria"
+					type="com.sies.action.AsociarEnfermeraCategoriaAction"
+					name="AsociarEnfermeraCategoriaForm"
+					validate="true"
+					input="/consultarEnfermeraCategoria/consultarEnfermeraCategoria.jsp">
+			<forward name="principal" path="/consultarEnfermeraCategoria/consultarEnfermeraCategoria.jsp"/>
+			<forward name="volver" path="/sies/menuManejoParametrizacion.jsp?tipoServicio=categoria_enfermera"/>
+		</action>
+
+		<action path="/ingresarModificarVacaciones/ingresarVacaciones"
+					type="com.sies.action.VacacionesAction"
+					name="VacacionesForm"
+					validate="true"
+					input="/ingresarModificarVacaciones/ingresarVacaciones.jsp">
+			<forward name="modificar" path="/ingresarModificarVacaciones/ingresarVacaciones.jsp"/>
+			<forward name="consultar" path="/ingresarModificarVacaciones/consultarVacaciones.jsp"/>
+		</action>
+		
+
+		<action path="/ingresarModificarVacaciones/consultarModificarVacaciones"
+					type="com.sies.action.VacacionesAction"
+					name="VacacionesForm"
+					validate="true"
+					input="/ingresarModificarVacaciones/consultarVacaciones.jsp">
+			<forward name="modificar" path="/ingresarModificarVacaciones/ingresarVacaciones.jsp"/>
+			<forward name="consultar" path="/ingresarModificarVacaciones/consultarVacaciones.jsp"/>
+		</action>
+		
+		
+		<action path="/ingresarModificarVacaciones/modificarVacaciones"
+					type="com.sies.action.VacacionesAction"
+					name="VacacionesForm"
+					validate="true"
+					input="/ingresarModificarVacaciones/modificarVacaciones.jsp">
+			<forward name="modificacion" path="/ingresarModificarVacaciones/consultarVacaciones.jsp"/>
+			<forward name="modificarEleccion" path="/ingresarModificarVacaciones/modificarVacaciones.jsp"/>	
+		</action>
+		
+		
+
+		
+		
+		<action path="/consultarImprimirVacaciones/consultarVacaciones"
+					type="com.sies.action.VacacionesAction"
+					name="VacacionesForm"
+					validate="true"
+					input="/consultarImprimirVacaciones/consultarVacaciones.jsp">
+			<forward name="empezar" path="/ingresarModificarVacaciones/ingresarVacaciones.jsp"/>
+			<forward name="principal" path="/ingresarModificarVacaciones/ingresarVacaciones.jsp"/>
+			<forward name="consultar" path="/consultarImprimirVacaciones/consultarVacaciones.jsp"/>
+			<forward name="modificacion" path="/ingresarModificarVacaciones/consultarVacaciones.jsp"/>
+		</action>
+		
+		
+		<action path="/asignarEnfermeraCategoria/asignarEnfermeraCategoria"
+					type="com.sies.action.AsociarEnfermeraCategoriaAction"
+					name="AsociarEnfermeraCategoriaForm"
+					validate="true"
+					input="/asignarEnfermeraCategoria/asignarEnfermeraCategoria.jsp">
+			<forward name="empezar" path="/asignarEnfermeraCategoria/asignarEnfermeraCategoria.jsp"/>
+			<forward name="principal" path="/asignarEnfermeraCategoria/asignarEnfermeraCategoria.jsp"/>
+			<forward name="guardado" path="/asignarEnfermeraCategoria/guardado.jsp"/>
+		</action>
+		
+		<action path="/cancelarAsociacionCategoriaEnfermera/cancelarAsociacion"
+					type="com.sies.action.AsociarEnfermeraCategoriaAction"
+					name="AsociarEnfermeraCategoriaForm"
+					validate="true"
+					input="/cancelarAsociacionCategoriaEnfermera/cancelarAsociacion.jsp">
+			<forward name="cancelar" path="/cancelarAsociacionCategoriaEnfermera/cancelarAsociacion.jsp"/>		
+		</action>
+		
+		
+		
+		<action path="/asignarRestriccionesCategoria/asignarRestricciones"
+					type="com.sies.action.AsignarRestriccionesCategoriaAction"
+					name="AsignarRestriccionesCategoriaForm"
+					validate="true"
+					input="/asignarRestriccionesCategoria/asignarRestricciones.jsp">
+			<forward name="principal" path="/asignarRestriccionesCategoria/asignarRestricciones.jsp"/>
+		</action>
+		
+		
+		<action path="/asignarRestriccionesEnfermera/asignarRestricciones"
+					type="com.sies.action.AsignarRestriccionesEnfermerasAction"
+					name="AsignarRestriccionesEnfermerasForm"
+					validate="true"
+					input="/asignarRestriccionesEnfermera/asignarRestricciones.jsp">
+			<forward name="principal" path="/asignarRestriccionesEnfermera/asignarRestricciones.jsp"/>
+		</action>
+		
+		
+		
+		<action path="/asignarNovedadEnfermera/asignarNovedad"
+					type="com.sies.action.AsignarNovedadEnfermeraAction"
+					name="AsignarNovedadEnfermeraForm"
+					validate="true"
+					input="/asignarNovedadEnfermera/asignarNovedad.jsp">
+			<forward name="empezar" path="/asignarNovedadEnfermera/asignarNovedad.jsp"/>
+			<forward name="principal" path="/asignarNovedadEnfermera/asignarNovedad.jsp"/>
+			<forward name="modificar" path="/asignarNovedadEnfermera/consultarNovedad.jsp"/>
+			<forward name="modificarEleccion" path="/asignarNovedadEnfermera/asignarNovedad.jsp"/>
+			<forward name="guardado" path="/asignarRestriccionesEnfermera/guardado.jsp"/>
+		</action>
+		
+		<action path="/consultarNovedadEnfermera/consultarNovedad"
+					type="com.sies.action.AsignarNovedadEnfermeraAction"
+					name="AsignarNovedadEnfermeraForm"
+					validate="true"
+					input="/asignarNovedadEnfermera/asignarNovedad.jsp">
+			<forward name="consultar" path="/consultarNovedadEnfermera/consultarNovedad.jsp"/>
+			<forward name="principal" path="/asignarNovedadEnfermera/asignarNovedad.jsp"/>
+			<forward name="guardado" path="/asignarRestriccionesEnfermera/guardado.jsp"/>
+		</action>
+						
+		<action path="/generarCuadroTurnos/generarCuadro"
+					type="com.sies.action.GenerarCuadroTurnosAction"
+					name="GenerarCuadroTurnosForm"
+					validate="true"
+					input="/generarCuadroTurnos/generarCuadro.jsp">
+			<forward name="empezar" path="/generarCuadroTurnos/generarCuadro.jsp"/>
+			<forward name="principal" path="/generarCuadroTurnos/generarCuadro.jsp"/>
+			<forward name="mostrarCuadro" path="/generarCuadroTurnos/mostrarCuadro.jsp"/>
+			<forward name="imprimirResumen" path="/generarCuadroTurnos/impresionCuadro.jsp"/>
+			<forward name="guardarCuadro" path="/generarCuadroTurnos/confirmacionGuardado.jsp"/>
+		</action>
+		
+		<action path="/generarReporteNomina/generarReporte"
+					type="com.sies.action.GenerarReporteNominaAction"
+					name="GenerarReporteNominaForm"
+					validate="true"
+					input="/generarReporteNomina/generarReporte.jsp">
+			<forward name="empezar" path="/generarReporteNomina/generarReporte.jsp"/>
+			<forward name="principal" path="/generarReporteNomina/generarReporte.jsp"/>
+			<forward name="mostrarReporte" path="/generarReporteNomina/generarReporte.jsp"/>
+		</action>		
+		
+		<action path="/generarReporteObservaciones/generarReporte"
+					type="com.sies.action.GenerarReporteObservacionesAction"
+					name="GenerarReporteObservacionesForm"
+					validate="true"
+					input="/generarReporteObservaciones/generarReporte.jsp">
+			<forward name="empezar" path="/generarReporteObservaciones/generarReporte.jsp"/>
+			<forward name="principal" path="/generarReporteObservaciones/generarReporte.jsp"/>
+			<forward name="generarReporte" path="/generarReporteObservaciones/generarReporte.jsp"/>
+		</action>		
+		
+		<action path="/generarReporteNovedades/generarReporte"
+					type="com.sies.action.GenerarReporteNovedadesAction"
+					name="GenerarReporteNovedadesForm"
+					validate="true"
+					input="/generarReporteNovedades/generarReporte.jsp">
+			<forward name="principal" path="/generarReporteNovedades/generarReporte.jsp"/>
+		</action>
+		
+		<action path="/eliminarCuadro/eliminar"
+					type="com.sies.action.GenerarCuadroTurnosAction"
+					name="GenerarCuadroTurnosForm"
+					validate="true"
+					input="/eliminarCuadro/eliminar.jsp">
+			<forward name="eliminar" path="/eliminarCuadro/eliminar.jsp"/>
+			<forward name="confirmar" path="/eliminarCuadro/confirmar.jsp"/>
+		</action>
+		
+		<action path="/ingresarPersonaCuadro/ingresar"
+					type="com.sies.action.IngresarPersonaCuadroAction"
+					name="IngresarPersonaCuadroForm"
+					validate="true"
+					input="/ingresarPersonaCuadro/ingresarPersonaCuadro.jsp">
+			<forward name="inicio" path="/ingresarPersonaCuadro/ingresarPersonaCuadro.jsp"/>
+			<forward name="resumen" path="/ingresarPersonaCuadro/resumenIngreso.jsp"/>
+			<forward name="listadoPersonas" path="/ingresarPersonaCuadro/listadoPersonas.jsp"/>
+		</action>
+
+		<action path="/imprimirHojaVida/imprimir"
+					type="com.sies.action.ImprimirHojaVidaAction"
+					name="ImprimirHojaVidaForm"
+					validate="true"
+					input="/imprimirHojaVida/imprimir.jsp">
+			<forward name="principal" path="/imprimirHojaVida/imprimir.jsp"/>
+		</action>
+		
+	</action-mappings>
+
+</struts-config>

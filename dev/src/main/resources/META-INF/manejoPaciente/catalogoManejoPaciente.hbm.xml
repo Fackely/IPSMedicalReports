@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<query name="catalogoManejoPaciente.consultarViasIngreso">
+		SELECT NEW com.servinte.axioma.dto.manejoPaciente.ViaIngresoDto(vi.codigo, vi.nombre)
+			FROM 	ViasIngreso AS vi
+
+	</query>
+	
+	<sql-query name="catalogoManejoPaciente.consultarViasIngresoSQL">
+		SELECT vi.codigo AS codigo, vi.nombre AS nombre
+			FROM manejopaciente.vias_ingreso vi
+			WHERE vi.codigo in (:codigos)
+ 	</sql-query>
+ 	
+ 	<sql-query name="catalogoManejoPaciente.consultarViasIngresoSQL2">
+		<return-scalar column="codigo" type="integer" />
+		<return-scalar column="nombre" type="string" />
+ 		SELECT vi.codigo AS codigo, vi.nombre AS nombre
+			FROM manejopaciente.vias_ingreso vi
+ 	</sql-query>
+ 	
+ 	<sql-query name="catalogoManejoPaciente.consultarViasIngresoSQL3">
+		<![CDATA[
+			SELECT vi.codigo AS codigo, vi.nombre AS nombre
+				FROM manejopaciente.vias_ingreso vi
+			WHERE vi.codigo > 20
+		]]>
+ 	</sql-query>
+ 
+	<query name="catalogoManejoPaciente.consultarEstadoOrdenAmbulatoria">
+		SELECT new com.servinte.axioma.dto.ordenes.OrdenAmbulatoriaDto (eo.codigo, eo.descripcion)
+			FROM OrdenesAmbulatorias oa
+			INNER JOIN oa.estadosOrdAmbulatorias eo
+			WHERE oa.codigo=:codigoOrden
+	</query>
+ 	
+	<query name="catalogoManejoPaciente.consultarEstadoPeticion">
+		SELECT new com.servinte.axioma.dto.salascirugia.PeticionQxDto (ep.codigo, ep.nombre)
+			FROM PeticionQx pet
+			INNER JOIN pet.estadosPeticion ep
+			WHERE pet.codigo=:codigoPeticion
+	</query>
+	
+	<query name="catalogoManejoPaciente.existeCentroCostoParametrizadoPorUnidadConsulta">
+		SELECT serv.codigo
+			FROM Servicios serv
+				INNER JOIN serv.unidadesConsultas uc
+				INNER JOIN uc.centrosCostos cc
+			WHERE serv.codigo=:codigoServicio
+				AND cc.codigo=:codigoCentroCosto
+	</query>
+	
+	<query name="catalogoManejoPaciente.existeCentroCostoParametrizadoPorGrupoServicio">
+		SELECT grups.codigo
+			FROM GruposServicios grups
+				INNER JOIN grups.centroCostoGrupoSers ccgs
+				INNER JOIN ccgs.centrosCosto cc
+			WHERE grups.codigo=:codigoGrupoServicio
+				AND cc.codigo=:codigoCentroCosto
+	</query>
+	
+	<query name="catalogoManejoPaciente.listaCentrosAtencionPorEstado">
+		SELECT new com.princetonsa.dto.manejoPaciente.DtoCentrosAtencion(centroAtencion.consecutivo, centroAtencion.descripcion,ciudades.descripcion,regionesCobertura.descripcion,centroAtencion.activo)
+			FROM CentroAtencion centroAtencion
+				INNER JOIN centroAtencion.ciudades ciudades
+				INNER JOIN centroAtencion.instituciones instituciones
+				LEFT JOIN centroAtencion.regionesCobertura regionesCobertura
+			WHERE instituciones.codigo=:codigoInstitucion AND centroAtencion.activo=:activo
+	</query>		
+
+	<query name="catalogoManejoPaciente.listaTodosLosCentrosAtencion">
+		SELECT new com.princetonsa.dto.manejoPaciente.DtoCentrosAtencion(centroAtencion.consecutivo, centroAtencion.descripcion,ciudades.descripcion,regionesCobertura.descripcion,centroAtencion.activo)
+			FROM CentroAtencion centroAtencion
+				INNER JOIN centroAtencion.ciudades ciudades
+				INNER JOIN centroAtencion.instituciones instituciones
+				LEFT JOIN centroAtencion.regionesCobertura regionesCobertura
+			WHERE instituciones.codigo=:codigoInstitucion				
+	</query>
+		
+</hibernate-mapping>

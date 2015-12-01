@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReporteCambioServCitaOdonto" pageWidth="752" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.1000000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subReporteProfesional2" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<field name="descripcionEmpresaInstitucion" class="java.lang.String"/>
+	<field name="centroAtencionCompleto" class="java.lang.String"/>
+	<field name="descripcionRegionCobertura" class="java.lang.String"/>
+	<field name="dsResultadoProfesional" class="java.lang.Object"/>
+	<field name="consecutivoCentroAtencion" class="java.lang.Integer"/>
+	<field name="codigoEmpresaInstitucion" class="java.lang.Long"/>
+	<group name="Institucion">
+		<groupExpression><![CDATA[$F{descripcionEmpresaInstitucion}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<frame>
+					<reportElement style="colorEncabezado" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="752" height="21" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<line>
+						<reportElement x="0" y="19" width="752" height="1"/>
+					</line>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionEmpresaInstitucion" style="axiomaTexto" x="69" y="0" width="472" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+						<textElement>
+							<font isBold="false"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionEmpresaInstitucion}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="2" y="0" width="67" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true">
+							<printWhenExpression><![CDATA[$F{descripcionEmpresaInstitucion} != null]]></printWhenExpression>
+						</reportElement>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ Institucion:]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="CentroAtencion">
+		<groupExpression><![CDATA[$F{consecutivoCentroAtencion}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<frame>
+					<reportElement style="colorEncabezado" mode="Opaque" x="0" y="0" width="752" height="20" backcolor="#CCCCCC"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionRegionCobertura" style="axiomaTexto" x="494" y="0" width="173" height="20"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionRegionCobertura}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="0" y="0" width="89" height="20"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ Centro atencion:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="centroAtencionCompleto" style="axiomaTexto" x="89" y="0" width="320" height="20"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{centroAtencionCompleto}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="451" y="0" width="43" height="20"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ Region:]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="38" splitType="Stretch">
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="752" height="38"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<subreport isUsingCache="true">
+					<reportElement key="subReporteProfesional2" stretchType="RelativeToBandHeight" x="0" y="0" width="752" height="38" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="subReporteProfesional1">
+						<subreportParameterExpression><![CDATA[$P{subReporteProfesional2}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$F{dsResultadoProfesional}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteProfesional2}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

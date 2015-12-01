@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.OrdenTipoMonitoreo" table="orden_tipo_monitoreo" schema="manejopaciente">
+        <id name="codigoHistoEncabezado" type="int">
+            <column name="codigo_histo_encabezado" />
+            <generator class="foreign">
+                <param name="property">encabezadoHistoOrdenM</param>
+            </generator>
+        </id>
+        <one-to-one name="encabezadoHistoOrdenM" class="com.servinte.axioma.orm.EncabezadoHistoOrdenM" constrained="true"></one-to-one>
+        <many-to-one name="tipoMonitoreo" class="com.servinte.axioma.orm.TipoMonitoreo" fetch="select">
+            <column name="tipo_monitoreo" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

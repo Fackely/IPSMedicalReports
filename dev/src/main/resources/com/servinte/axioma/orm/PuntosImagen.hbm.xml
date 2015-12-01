@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 9/10/2012 02:52:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PuntosImagen" table="puntos_imagen" schema="historiaclinica">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="sequence" >
+				<param name="sequence">historiaclinica.seq_puntos_imagen</param>
+			</generator>
+        </id>
+        <many-to-one name="historicoImagenPlantilla" class="com.servinte.axioma.orm.HistoricoImagenPlantilla" fetch="select">
+            <column name="id_historico_imagen_plantilla" />
+        </many-to-one>
+        <property name="coordenadaX" type="java.lang.Integer">
+            <column name="coordenada_x" />
+        </property>
+        <property name="coordenadaY" type="java.lang.Integer">
+            <column name="coordenada_y" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

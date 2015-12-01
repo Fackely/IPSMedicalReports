@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 19, 2010 5:10:54 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.VentaEmpresarial" table="venta_empresarial" schema="odontologia">
+        <id name="codigoVenta" type="long">
+            <column name="codigo_venta" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">ventaTarjetaCliente</param>
+            </generator>
+        </id>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio_empresarial" />
+        </many-to-one>
+        <one-to-one name="ventaTarjetaCliente" class="com.servinte.axioma.orm.VentaTarjetaCliente" constrained="true"></one-to-one>
+        <property name="serialInicial" type="long">
+            <column name="serial_inicial" precision="14" scale="0" not-null="true" />
+        </property>
+        <property name="serialFinal" type="long">
+            <column name="serial_final" precision="14" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

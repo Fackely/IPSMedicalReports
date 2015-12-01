@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NaturalezasServicio" table="naturalezas_servicio" schema="facturacion">
+        <id name="acronimo" type="string">
+            <column name="acronimo" length="2" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="64" not-null="true" />
+        </property>
+        <set name="tiposSerNaturalezas" inverse="true" lazy="true" table="tipos_ser_naturaleza" fetch="select">
+            <key>
+                <column name="naturaleza_servicio" length="2" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposSerNaturaleza" />
+        </set>
+        <set name="finServNaturalezas" inverse="true" lazy="true" table="fin_serv_naturaleza" fetch="select">
+            <key>
+                <column name="naturaleza" length="2" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FinServNaturaleza" />
+        </set>
+    </class>
+</hibernate-mapping>

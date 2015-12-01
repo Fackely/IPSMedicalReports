@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EstanciaAutomatica" table="estancia_automatica" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposEstancia" class="com.servinte.axioma.orm.TiposEstancia" fetch="select">
+            <column name="tipo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="area" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="paciente" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="fechaInicialEstancia" type="date">
+            <column name="fecha_inicial_estancia" length="13" not-null="true" />
+        </property>
+        <property name="fechaFinalEstancia" type="date">
+            <column name="fecha_final_estancia" length="13" not-null="true" />
+        </property>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="time">
+            <column name="hora_grabacion" length="15" not-null="true" />
+        </property>
+        <property name="inconsistencia" type="boolean">
+            <column name="inconsistencia" not-null="true" />
+        </property>
+        <property name="reporte" type="string">
+            <column name="reporte" length="256" />
+        </property>
+        <property name="indGenEst" type="string">
+            <column name="ind_gen_est" length="4" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

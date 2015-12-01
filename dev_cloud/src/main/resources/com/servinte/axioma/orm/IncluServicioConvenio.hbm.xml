@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 25, 2011 9:01:49 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.IncluServicioConvenio" table="inclu_servicio_convenio" schema="odontologia">
+        <comment>Relaci&#195;&#179;n de los servicios de la inclusi&#195;&#179;n seleccionados para un convenio</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.seq_inclu_servicio_convenio</param>
+			</generator>
+        </id>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true">
+                <comment>Servicio seleccionado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="esquemasTarifarios" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tarifario" not-null="true">
+                <comment>Relaci&#195;&#179;n al esquema tarifario con el cual se calculan las tarifas</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="incluPresuConvenio" class="com.servinte.axioma.orm.IncluPresuConvenio" fetch="select">
+            <column name="inclu_presu_convenio" precision="12" scale="0" not-null="true">
+                <comment>Relaci&#195;&#179;n al convenio con el cual se realiza la contrataci&#195;&#179;n de las inclusiones</comment>
+            </column>
+        </many-to-one>
+        <property name="valorUnitario" type="big_decimal">
+            <column name="valor_unitario" precision="12" not-null="true">
+                <comment>Valor unitario del servicio</comment>
+            </column>
+        </property>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true">
+                <comment>Cantidad de los servicios a contratar</comment>
+            </column>
+        </property>
+        <property name="seleccionadoPromocion" type="char">
+            <column name="seleccionado_promocion" length="1" not-null="true">
+                <comment>Indica si para el servicio se ha seleccionado promocion</comment>
+            </column>
+        </property>
+        <property name="seleccionadoBono" type="char">
+            <column name="seleccionado_bono" length="1" not-null="true">
+                <comment>Indica si para el servicio se ha seleccionado bono</comment>
+            </column>
+        </property>
+        <property name="porcentajeDctoPromocion" type="big_decimal">
+            <column name="porcentaje_dcto_promocion" precision="5">
+                <comment>Porcentaje de descuento aplicado al valor del servicio</comment>
+            </column>
+        </property>
+        <property name="valorDescuentoPromocion" type="big_decimal">
+            <column name="valor_descuento_promocion" precision="14">
+                <comment>Valor del descuento de la promoci&#195;&#179;n aplicado al valor del servicio</comment>
+            </column>
+        </property>
+        <property name="porcentajeDctoBono" type="big_decimal">
+            <column name="porcentaje_dcto_bono" precision="5">
+                <comment>Porcentaje de descuento del bono aplicado al valor del servicio</comment>
+            </column>
+        </property>
+        <property name="valorDescuentoBono" type="big_decimal">
+            <column name="valor_descuento_bono" precision="14">
+                <comment>Valor del descuento del bono aplicado al valor del servicio</comment>
+            </column>
+        </property>
+        <property name="dctoComercialUnitario" type="big_decimal">
+            <column name="dcto_comercial_unitario" precision="12">
+                <comment>Valor del descuento comercial unitario aplicado al valor del servicio</comment>
+            </column>
+        </property>
+        <property name="valorHonorarioPromocion" type="big_decimal">
+            <column name="valor_honorario_promocion" precision="14">
+                <comment>Valor honorario de la promoci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="porcHonorarioPromocion" type="big_decimal">
+            <column name="porc_honorario_promocion" precision="5">
+                <comment>Porcentaje de Honorario promoci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="contratado" type="char">
+            <column name="contratado" length="1" not-null="true">
+                <comment>Indica si para el convenio espec&#195;&#173;fico se ha contratado o no los programas / servicios asociados</comment>
+            </column>
+        </property>
+        <property name="porcentajeDctoOdontologico" type="big_decimal">
+            <column name="porcentaje_dcto_odontologico" precision="5">
+                <comment>Porcentaje de descuento autorizado por solicitud de Descuento para el programa / servicio asociado</comment>
+            </column>
+        </property>
+        <set name="incluProgramaConvenios" inverse="false" lazy="true" table="inclu_programa_servicio" fetch="select">
+            <key>
+                <column name="inclu_servicio_convenio" precision="12" scale="0" not-null="true">
+                    <comment>Relaci&#195;&#179;n al servicio asociado a la inclusi&#195;&#179;n</comment>
+                </column>
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.IncluProgramaConvenio">
+                <column name="inclu_programa_convenio" precision="12" scale="0" not-null="true">
+                    <comment>Relaci&#195;&#179;n al programa asociado a la inclusi&#195;&#179;n</comment>
+                </column>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

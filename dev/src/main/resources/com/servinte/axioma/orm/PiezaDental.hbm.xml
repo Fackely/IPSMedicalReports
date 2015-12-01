@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PiezaDental" table="pieza_dental" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="128" not-null="true" />
+        </property>
+        <property name="edadAplica" type="string">
+            <column name="edad_aplica" length="4" not-null="true" />
+        </property>
+        <set name="detPlanTratamientos" inverse="true" lazy="true" table="det_plan_tratamiento" fetch="select">
+            <key>
+                <column name="pieza_dental" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetPlanTratamiento" />
+        </set>
+        <set name="hisConfDetPlanTs" inverse="true" lazy="true" table="his_conf_det_plan_t" fetch="select">
+            <key>
+                <column name="pieza_dental" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfDetPlanT" />
+        </set>
+        <set name="programasHallazgoPiezas" inverse="true" lazy="true" table="programas_hallazgo_pieza" fetch="select">
+            <key>
+                <column name="pieza_dental">
+                    <comment>Pieza Dental a la cual estan asociado los n hallazgos</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgramasHallazgoPieza" />
+        </set>
+        <set name="presupuestoPiezases" inverse="true" lazy="true" table="presupuesto_piezas" fetch="select">
+            <key>
+                <column name="pieza" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoPiezas" />
+        </set>
+        <set name="logDetPlanTratamientos" inverse="true" lazy="true" table="log_det_plan_tratamiento" fetch="select">
+            <key>
+                <column name="pieza_dental" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetPlanTratamiento" />
+        </set>
+        <set name="sectorSuperficieCuadrantes" inverse="true" lazy="true" table="sector_superficie_cuadrante" fetch="select">
+            <key>
+                <column name="pieza" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SectorSuperficieCuadrante" />
+        </set>
+        <set name="presuPlanTtoNumSupers" inverse="true" lazy="true" table="presu_plan_tto_num_super" fetch="select">
+            <key>
+                <column name="pieza_dental" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuPlanTtoNumSuper" />
+        </set>
+        <set name="superficieDentals" inverse="false" lazy="true" table="pieza_superficie_dental" fetch="select">
+            <key>
+                <column name="pieza" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.SuperficieDental">
+                <column name="superficie" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

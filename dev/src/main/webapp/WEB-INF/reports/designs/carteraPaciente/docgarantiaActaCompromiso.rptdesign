@@ -1,0 +1,2595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <parameters>
+        <scalar-parameter name="ingreso" id="215">
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="isRequired">true</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="consecutivo" id="1912">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="anioConsecutivo" id="1913">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="tipoDocumento" id="1968">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="isRequired">false</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="213">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">postgres</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cG9zdGdyZXM=</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="actaCompromiso" id="214">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">nombredeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">tipoidentificaciondeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">identificaciondeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">nombrecidudaddeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">parentescodeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">nombrepacientepc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">tipoidentificacionpac</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">identificacionpaciente</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">nombrecidudadpac</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">acronimoidentpac</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">direccionresidepac</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">barriopac</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">detocupacionempl</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">detocupacioninde</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">detocupacionotro</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">empresa</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">cargo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">antiguedad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">direccionoficina</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">telefono</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">nombresreferencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">direccionreferencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">telefonoreferencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">detocupacionempldeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">detocupacionindedeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">detocupacionotrodeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">acronimoidentdeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">direccionredidedeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">barriodeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">ocupaciondeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">empresadeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">cargodeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">antiguedaddeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">direccionoficinadeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">telefonooficinadeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">telefonoresidedeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">37</property>
+                        <property name="name">nombresreferenciadeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">38</property>
+                        <property name="name">direccionreferenciadeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">39</property>
+                        <property name="name">telefonoreferenciadeu</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">nombredeu</property>
+                    <property name="nativeName">nombredeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">tipoidentificaciondeu</property>
+                    <property name="nativeName">tipoidentificaciondeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">identificaciondeu</property>
+                    <property name="nativeName">identificaciondeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">nombrecidudaddeu</property>
+                    <property name="nativeName">nombrecidudaddeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">parentescodeu</property>
+                    <property name="nativeName">parentescodeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">nombrepacientepc</property>
+                    <property name="nativeName">nombrepacientepc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">tipoidentificacionpac</property>
+                    <property name="nativeName">tipoidentificacionpac</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">identificacionpaciente</property>
+                    <property name="nativeName">identificacionpaciente</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">nombrecidudadpac</property>
+                    <property name="nativeName">nombrecidudadpac</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">acronimoidentpac</property>
+                    <property name="nativeName">acronimoidentpac</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">direccionresidepac</property>
+                    <property name="nativeName">direccionresidepac</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">barriopac</property>
+                    <property name="nativeName">barriopac</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">detocupacionempl</property>
+                    <property name="nativeName">detocupacionempl</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">detocupacioninde</property>
+                    <property name="nativeName">detocupacioninde</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">detocupacionotro</property>
+                    <property name="nativeName">detocupacionotro</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">empresa</property>
+                    <property name="nativeName">empresa</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">cargo</property>
+                    <property name="nativeName">cargo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">antiguedad</property>
+                    <property name="nativeName">antiguedad</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">direccionoficina</property>
+                    <property name="nativeName">direccionoficina</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">telefono</property>
+                    <property name="nativeName">telefono</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">nombresreferencia</property>
+                    <property name="nativeName">nombresreferencia</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">direccionreferencia</property>
+                    <property name="nativeName">direccionreferencia</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">telefonoreferencia</property>
+                    <property name="nativeName">telefonoreferencia</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">detocupacionempldeu</property>
+                    <property name="nativeName">detocupacionempldeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">detocupacionindedeu</property>
+                    <property name="nativeName">detocupacionindedeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">detocupacionotrodeu</property>
+                    <property name="nativeName">detocupacionotrodeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">acronimoidentdeu</property>
+                    <property name="nativeName">acronimoidentdeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">direccionredidedeu</property>
+                    <property name="nativeName">direccionredidedeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">barriodeu</property>
+                    <property name="nativeName">barriodeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">ocupaciondeu</property>
+                    <property name="nativeName">ocupaciondeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">empresadeu</property>
+                    <property name="nativeName">empresadeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">cargodeu</property>
+                    <property name="nativeName">cargodeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">33</property>
+                    <property name="name">antiguedaddeu</property>
+                    <property name="nativeName">antiguedaddeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">34</property>
+                    <property name="name">direccionoficinadeu</property>
+                    <property name="nativeName">direccionoficinadeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">35</property>
+                    <property name="name">telefonooficinadeu</property>
+                    <property name="nativeName">telefonooficinadeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">36</property>
+                    <property name="name">telefonoresidedeu</property>
+                    <property name="nativeName">telefonoresidedeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">37</property>
+                    <property name="name">nombresreferenciadeu</property>
+                    <property name="nativeName">nombresreferenciadeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">38</property>
+                    <property name="name">direccionreferenciadeu</property>
+                    <property name="nativeName">direccionreferenciadeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">39</property>
+                    <property name="name">telefonoreferenciadeu</property>
+                    <property name="nativeName">telefonoreferenciadeu</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 	
+--***************DATOS DEUDOR****************************************************************************************
+	deu.primer_nombre || ' ' ||deu.segundo_nombre ||' '
+	||deu.primer_apellido|| ' ' ||deu.segundo_apellido AS nombreDeu,
+	getnombretipoidentificacion(deu.tipo_identificacion) AS tipoIdentificacionDeu,
+	deu.numero_identificacion AS identificacionDeu,
+	getnombreciudad(deu.codigo_pais,deu.codigo_departamento,deu.codigo_ciudad) AS nombreCidudadDeu,
+	
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+then ' ' ELSE deu.relacion_paciente END AS parentescoDeu,	
+--****************END DATOS DEUDOR************************************************************************************
+
+--****************DATOS PACIENTE**************************************************************************************
+	getnombremedico (p.codigo) AS nombrePacientepc,
+	getnombretipoidentificacion(p.tipo_identificacion) AS tipoIdentificacionPac,
+	p.numero_identificacion AS identificacionPaciente,
+	getnombreciudad(p.codigo_pais_id,p.codigo_depto_id,p.codigo_ciudad_id) AS nombreCidudadPac,
+	p.tipo_identificacion AS acronimoIdentPac,
+	p.direccion AS direccionresidePac,
+	getdescripcionbarrio (p.codigo_barrio_vivienda) As barrioPac,
+--***************END DATOS PACIENTE**********************************************************************************
+
+--***************DATOS DEUDOR SI ES EL MISMO PACIENTE****************************************************************
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+AND deu.tipo_ocupacion='EMPL' then '&lt;b>Empleado:&lt;/b> '||deu.ocupacion  ELSE 
+CASE WHEN deu.tipo_ocupacion='INDE' then '&lt;b>Independiente:&lt;/b> '||deu.ocupacion  ELSE 
+CASE WHEN deu.tipo_ocupacion='AOTR' then '&lt;b>Otro:&lt;/b> '|| deu.ocupacion  ELSE '      ' END END END AS  detocupacionempl,
+
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+AND deu.tipo_ocupacion='INDE' then deu.ocupacion  ELSE '      ' END AS detocupacioninde,
+
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+AND deu.tipo_ocupacion='AOTR' then deu.ocupacion  ELSE '      ' END AS detocupacionotro,
+
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+then coalesce(deu.empresa, '') ELSE ' ' END AS empresa,
+
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+then coalesce(deu.cargo, '') ELSE ' ' END AS cargo,
+
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+then coalesce(deu.antiguedad, '') ELSE ' ' END AS antiguedad,
+
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+then deu.direccion_oficina ELSE ' ' END AS direccionOficina,
+
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+then p.telefono ELSE ' ' END AS telefono,
+--*********************END DATOS DEUDOR SI ES EL MISMO PACIENTE******************************************************
+
+--******************DATOS REFERENCIA PERSONAL***********************************************************************
+CASE WHEN  p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+THEN deu.nombres_referencia ELSE ' ' END  AS nombresReferencia,
+
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+then deu.direccion_referencia ELSE ' ' END AS direccionreferencia,
+
+CASE WHEN     p.tipo_identificacion = deu.tipo_identificacion  AND p.numero_identificacion = deu.numero_identificacion
+then deu.telefono_referencia ELSE ' ' END AS telefonoReferencia,
+--****************END DATOS REFERENCIA PERSONAL**********************************************************************
+
+--****************DATOS PERSONALES DEL RESPONSABLE (DATOS DEUDOR)*******************************************************************
+CASE WHEN  deu.tipo_ocupacion='EMPL' then '&lt;b>Empleado:&lt;/b> '||deu.ocupacion  ELSE 
+CASE WHEN  deu.tipo_ocupacion='INDE' then '&lt;b>Independiente:&lt;/b> '||deu.ocupacion  ELSE 
+CASE WHEN   deu.tipo_ocupacion='AOTR' then '&lt;b>Otro:&lt;/b> '||deu.ocupacion  ELSE 
+' ' END END END AS detocupacionempldeu,
+
+CASE WHEN  deu.tipo_ocupacion='INDE' then deu.ocupacion  ELSE ' ' END AS detocupacionindedeu,
+
+CASE WHEN   deu.tipo_ocupacion='AOTR' then deu.ocupacion  ELSE ' ' END AS detocupacionotrodeu,
+	
+	deu.tipo_identificacion AS acronimoIdentdeu,
+	deu.direccion_reside AS direccionRedideDeu,
+	getdescripcionbarrio (deu.codigo_barrio_reside) AS barrioDeu,
+	getintegridaddominio(deu.tipo_ocupacion) || deu.ocupacion AS ocupacionDeu,
+	coalesce(deu.empresa,'') As empresaDeu,
+	coalesce(deu.cargo,'') AS cargoDeu,
+	coalesce(deu.antiguedad,'') AS antiguedadDeu,
+	coalesce(deu.direccion_oficina,'') AS direccionOficinaDeu,
+	coalesce(deu.telefono_oficina,'') AS telefonoOficinaDeu,
+	coalesce(deu.telefono_reside,'') AS telefonoResideDeu,
+	coalesce(deu.nombres_referencia,'') AS nombresReferenciaDeu,
+	coalesce(deu.direccion_referencia,'') AS direccionReferenciaDeu,
+	coalesce(deu.telefono_referencia,'') AS telefonoReferenciaDeu 
+--**************** END DATOS PERSONALES DEL RESPONSABLE ****************************************************************************
+
+FROM ingresos i INNER JOIN deudorco deu ON (deu.ingreso = i.id AND deu.clase_deudorco='DEU')
+		INNER JOIN personas p 	ON (p.codigo = i.codigo_paciente)
+		
+
+
+
+WHERE i.id=?</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:DataSetParameters>
+    <design:parameterDefinitions>
+      <design:inOutMode>In</design:inOutMode>
+      <design:attributes>
+        <design:name></design:name>
+        <design:position>1</design:position>
+        <design:nullability>Unknown</design:nullability>
+        <design:uiHints/>
+      </design:attributes>
+      <design:inputAttributes>
+        <design:elementAttributes>
+          <design:defaultScalarValue>0</design:defaultScalarValue>
+          <design:optional>true</design:optional>
+          <design:masksValue>false</design:masksValue>
+          <design:uiHints>
+            <design:promptStyle>TextField</design:promptStyle>
+          </design:uiHints>
+        </design:elementAttributes>
+      </design:inputAttributes>
+    </design:parameterDefinitions>
+  </design:DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="convenios" id="1457">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">nombreconvenioic</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">clasificacionconvenioic</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">regimenic</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">afiliacionic</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">polizaic</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">estratoic</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">planescomplementariosic</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">nombreconvenioic</property>
+                    <property name="nativeName">nombreconvenioic</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">clasificacionconvenioic</property>
+                    <property name="nativeName">clasificacionconvenioic</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">regimenic</property>
+                    <property name="nativeName">regimenic</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">afiliacionic</property>
+                    <property name="nativeName">afiliacionic</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">polizaic</property>
+                    <property name="nativeName">polizaic</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">estratoic</property>
+                    <property name="nativeName">estratoic</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">planescomplementariosic</property>
+                    <property name="nativeName">planescomplementariosic</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT
+--**********************INFORMACION CONVENIOS*********************************************************
+	getnombreconvenio (hci.convenio) AS nombreConvenioIc,
+	getNombClasificacTipoConvenio (hci.clasificacion_convenio) AS clasificacionConvenioIc,
+	getnomtiporegimen (hci.tipo_regimen) AS regimenIc,
+
+CASE WHEN hci.clasificacion_convenio=9 then ' ' ELSE hci.nro_carnet END AS afiliacionIc,
+CASE WHEN hci.clasificacion_convenio=7 then hci.nro_poliza ELSE ' ' END AS polizaIc,
+CASE WHEN hci.clasificacion_convenio=9 then ' ' ELSE getnombreestrato(hci.clasificacion_socioeconomica) END AS estratoIc,
+	
+	hci.plan_beneficios AS planesComplementariosIc
+
+--***********************END INFORMACION CONVENIOS***************************************************
+
+FROM ingresos i 
+		INNER JOIN historial_conveniosxingreso hci On (hci.ingreso = i.id) 
+WHERE i.id = ? AND hci.tipo_documento = ? AND hci.tipo_regimen!='P'</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="fechaGeneracion" id="1914">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">dia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">mes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">anio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">dia</property>
+                    <property name="nativeName">dia</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">mes</property>
+                    <property name="nativeName">mes</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">anio</property>
+                    <property name="nativeName">anio</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT 
+	to_char(dg.fecha_generacion,'DD') AS dia,
+	getnombremes(to_char(dg.fecha_generacion,'MM')) AS mes , 
+	to_char(dg.fecha_generacion,'YYYY') as anio
+
+
+FROM ingresos i 
+		INNER JOIN documentos_garantia dg On (dg.ingreso = i.id)
+
+WHERE i.id = ? AND dg.consecutivo = ?  AND dg.anio_consecutivo = ? AND dg.tipo_documento = ? </property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="topMargin">0.8cm</property>
+            <property name="leftMargin">1cm</property>
+            <property name="bottomMargin">0.8cm</property>
+            <property name="rightMargin">1cm</property>
+            <property name="borderBottomWidth">0cm</property>
+            <property name="borderLeftWidth">0cm</property>
+            <property name="borderRightWidth">0cm</property>
+            <property name="borderTopWidth">0cm</property>
+            <property name="paddingTop">0cm</property>
+            <property name="paddingLeft">0cm</property>
+            <property name="paddingBottom">0cm</property>
+            <property name="paddingRight">0cm</property>
+            <property name="footerHeight">1.5cm</property>
+            <page-header>
+                <grid id="1846">
+                    <property name="width">100%</property>
+                    <column id="1847"/>
+                    <column id="1848"/>
+                    <column id="1849"/>
+                    <row id="1850">
+                        <cell id="1851">
+                            <property name="textAlign">left</property>
+                        </cell>
+                        <cell id="1852"/>
+                        <cell id="1853">
+                            <property name="textAlign">right</property>
+                        </cell>
+                    </row>
+                    <row id="1854">
+                        <cell id="1855"/>
+                        <cell id="1856"/>
+                        <cell id="1857"/>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="1811">
+                    <property name="fontSize">small</property>
+                    <property name="borderBottomStyle">none</property>
+                    <property name="borderBottomWidth">thick</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderLeftWidth">thick</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <property name="width">100%</property>
+                    <column id="1812">
+                        <property name="width">24%</property>
+                    </column>
+                    <column id="1813"/>
+                    <column id="1814">
+                        <property name="width">25%</property>
+                    </column>
+                    <row id="1815">
+                        <cell id="1816">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <data id="1833">
+                                <property name="textAlign">center</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">texto</property>
+                                        <expression name="expression">"--- "+params["texto"].value+" ---"</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                </list-property>
+                                <property name="resultSetColumn">texto</property>
+                            </data>
+                        </cell>
+                    </row>
+                    <row id="1819">
+                        <property name="fontWeight">bold</property>
+                        <cell id="1820"/>
+                        <cell id="1821">
+                            <text id="1831">
+                                <property name="textAlign">center</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="1822">
+                            <grid id="1823">
+                                <property name="borderBottomWidth">0pt</property>
+                                <property name="borderLeftWidth">0pt</property>
+                                <property name="borderRightWidth">0pt</property>
+                                <property name="borderTopWidth">0pt</property>
+                                <property name="marginTop">0pt</property>
+                                <property name="paddingTop">0pt</property>
+                                <property name="paddingLeft">0pt</property>
+                                <property name="paddingBottom">0pt</property>
+                                <property name="paddingRight">0pt</property>
+                                <property name="width">100%</property>
+                                <column id="1824"/>
+                                <column id="1825"/>
+                                <column id="1826"/>
+                                <row id="1827">
+                                    <cell id="1828">
+                                        <auto-text id="1859">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="1829">
+                                        <label id="1858">
+                                            <property name="textAlign">center</property>
+                                            <text-property name="text">de</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="1830">
+                                        <auto-text id="1860">
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="72">
+            <property name="width">100%</property>
+            <property name="dataSet">actaCompromiso</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ingreso</property>
+                    <expression name="expression">params["ingreso"]</expression>
+                    <property name="dataType">any</property>
+                </structure>
+                <structure>
+                    <property name="name">nombredeu</property>
+                    <expression name="expression">dataSetRow["nombredeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tipoidentificaciondeu</property>
+                    <expression name="expression">dataSetRow["tipoidentificaciondeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">identificaciondeu</property>
+                    <expression name="expression">dataSetRow["identificaciondeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombrecidudaddeu</property>
+                    <expression name="expression">dataSetRow["nombrecidudaddeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">parentescodeu</property>
+                    <expression name="expression">dataSetRow["parentescodeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombrepacientepc</property>
+                    <expression name="expression">dataSetRow["nombrepacientepc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tipoidentificacionpac</property>
+                    <expression name="expression">dataSetRow["tipoidentificacionpac"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">identificacionpaciente</property>
+                    <expression name="expression">dataSetRow["identificacionpaciente"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombrecidudadpac</property>
+                    <expression name="expression">dataSetRow["nombrecidudadpac"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">acronimoidentpac</property>
+                    <expression name="expression">dataSetRow["acronimoidentpac"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">direccionresidepac</property>
+                    <expression name="expression">dataSetRow["direccionresidepac"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">barriopac</property>
+                    <expression name="expression">dataSetRow["barriopac"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">detocupacionempl</property>
+                    <expression name="expression">dataSetRow["detocupacionempl"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">detocupacioninde</property>
+                    <expression name="expression">dataSetRow["detocupacioninde"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">detocupacionotro</property>
+                    <expression name="expression">dataSetRow["detocupacionotro"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">empresa</property>
+                    <expression name="expression">dataSetRow["empresa"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cargo</property>
+                    <expression name="expression">dataSetRow["cargo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">antiguedad</property>
+                    <expression name="expression">dataSetRow["antiguedad"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">direccionoficina</property>
+                    <expression name="expression">dataSetRow["direccionoficina"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">telefono</property>
+                    <expression name="expression">dataSetRow["telefono"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombresreferencia</property>
+                    <expression name="expression">dataSetRow["nombresreferencia"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">direccionreferencia</property>
+                    <expression name="expression">dataSetRow["direccionreferencia"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">telefonoreferencia</property>
+                    <expression name="expression">dataSetRow["telefonoreferencia"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">detocupacionempldeu</property>
+                    <expression name="expression">dataSetRow["detocupacionempldeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">detocupacionindedeu</property>
+                    <expression name="expression">dataSetRow["detocupacionindedeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">detocupacionotrodeu</property>
+                    <expression name="expression">dataSetRow["detocupacionotrodeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">acronimoidentdeu</property>
+                    <expression name="expression">dataSetRow["acronimoidentdeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">direccionredidedeu</property>
+                    <expression name="expression">dataSetRow["direccionredidedeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">barriodeu</property>
+                    <expression name="expression">dataSetRow["barriodeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ocupaciondeu</property>
+                    <expression name="expression">dataSetRow["ocupaciondeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">empresadeu</property>
+                    <expression name="expression">dataSetRow["empresadeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cargodeu</property>
+                    <expression name="expression">dataSetRow["cargodeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">antiguedaddeu</property>
+                    <expression name="expression">dataSetRow["antiguedaddeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">direccionoficinadeu</property>
+                    <expression name="expression">dataSetRow["direccionoficinadeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">telefonooficinadeu</property>
+                    <expression name="expression">dataSetRow["telefonooficinadeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombresreferenciadeu</property>
+                    <expression name="expression">dataSetRow["nombresreferenciadeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">direccionreferenciadeu</property>
+                    <expression name="expression">dataSetRow["direccionreferenciadeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">telefonoreferenciadeu</property>
+                    <expression name="expression">dataSetRow["telefonoreferenciadeu"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="185">
+                <property name="width">0.3157894737in</property>
+            </column>
+            <column id="97">
+                <property name="width">0.3684210526in</property>
+            </column>
+            <column id="258">
+                <property name="width">0.9052631579in</property>
+            </column>
+            <column id="267">
+                <property name="width">0.2947368421in</property>
+            </column>
+            <column id="275">
+                <property name="width">1in</property>
+            </column>
+            <column id="283">
+                <property name="width">1in</property>
+            </column>
+            <column id="230">
+                <property name="width">0.2105263158in</property>
+            </column>
+            <column id="239">
+                <property name="width">1in</property>
+            </column>
+            <column id="300">
+                <property name="width">0.3368421053in</property>
+            </column>
+            <column id="117">
+                <property name="width">0.3684210526in</property>
+            </column>
+            <column id="126">
+                <property name="width">0.2105263158in</property>
+            </column>
+            <column id="98">
+                <property name="width">0.8in</property>
+            </column>
+            <column id="196">
+                <property name="width">0.316in</property>
+            </column>
+            <detail>
+                <row id="187">
+                    <cell id="176"/>
+                    <cell id="188">
+                        <property name="colSpan">11</property>
+                        <property name="rowSpan">1</property>
+                        <label id="99">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">ACTA DE COMPROMISO DEL REPRESENTANTE LEGAL O ACUDIENTE DEL PACIENTE Y CONDICIONES DE INGRESO HOSPITALARIO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="189"/>
+                </row>
+                <row id="73">
+                    <cell id="177"/>
+                    <cell id="74">
+                        <property name="colSpan">11</property>
+                        <property name="rowSpan">1</property>
+                        <label id="2800"/>
+                    </cell>
+                    <cell id="190"/>
+                </row>
+                <row id="76">
+                    <cell id="178">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <text-data id="2505">
+                            <property name="fontFamily">sans-serif</property>
+                            <expression name="valueExpr">"Yo, &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["nombredeu"].toLocaleUpperCase()+"&amp;nbsp;&amp;nbsp;&amp;nbsp; Identificado(a) con"+
+"&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b>"+row["tipoidentificaciondeu"]+"&lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp; No. &amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b>"+
+row["identificaciondeu"]+"&lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp; de &amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b>"+row["nombrecidudaddeu"]+"&lt;/b>"+
+"&amp;nbsp;&amp;nbsp;&amp;nbsp;en calidad de: &lt;br>"+
+"Acudiente &amp;nbsp;____________&amp;nbsp;&amp;nbsp;&amp;nbsp;Representante Legal &amp;nbsp;____________ &amp;nbsp; &amp;nbsp; &amp;nbsp;Parentesco:"+
+"&amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;b>"+row["parentescodeu"]+"&lt;/b> &lt;br> Del paciente  &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;b>"+
+row["nombrepacientepc"].toLocaleUpperCase()+"&lt;/b> &amp;nbsp; &amp;nbsp; &amp;nbsp;Identificado con  &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;b>"+
+row["tipoidentificacionpac"]+"&lt;/b> &amp;nbsp; &amp;nbsp; &amp;nbsp; No.  &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;b>"+row["identificacionpaciente"]+"&lt;/b>"+
+" &amp;nbsp; &amp;nbsp; &amp;nbsp;de &amp;nbsp; &amp;nbsp; &amp;nbsp;"+row["nombrecidudadpac"]+" &amp;nbsp;, quien en el día de hoy ingreso "+
+"a la &lt;b>Fundación Abood  Shaio&lt;/b>, manifiesto bajo la gravedad de juramento que es cierta toda la información que "+
+"a continuación procedo a suministrar así: "</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
+                    </cell>
+                </row>
+                <row id="526">
+                    <cell id="527"/>
+                    <cell id="528">
+                        <property name="colSpan">11</property>
+                        <property name="rowSpan">1</property>
+                        <label id="2801"/>
+                    </cell>
+                    <cell id="539"/>
+                </row>
+                <row id="2810">
+                    <cell id="2811">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <table id="2824">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="width">100%</property>
+                            <property name="dataSet">actaCompromiso</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">nombredeu</property>
+                                    <expression name="expression">dataSetRow["nombredeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">tipoidentificaciondeu</property>
+                                    <expression name="expression">dataSetRow["tipoidentificaciondeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">identificaciondeu</property>
+                                    <expression name="expression">dataSetRow["identificaciondeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">nombrecidudaddeu</property>
+                                    <expression name="expression">dataSetRow["nombrecidudaddeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">parentescodeu</property>
+                                    <expression name="expression">dataSetRow["parentescodeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">nombrepacientepc</property>
+                                    <expression name="expression">dataSetRow["nombrepacientepc"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">tipoidentificacionpac</property>
+                                    <expression name="expression">dataSetRow["tipoidentificacionpac"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">identificacionpaciente</property>
+                                    <expression name="expression">dataSetRow["identificacionpaciente"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">nombrecidudadpac</property>
+                                    <expression name="expression">dataSetRow["nombrecidudadpac"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">acronimoidentpac</property>
+                                    <expression name="expression">dataSetRow["acronimoidentpac"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionresidepac</property>
+                                    <expression name="expression">dataSetRow["direccionresidepac"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">barriopac</property>
+                                    <expression name="expression">dataSetRow["barriopac"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacionempl</property>
+                                    <expression name="expression">dataSetRow["detocupacionempl"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacioninde</property>
+                                    <expression name="expression">dataSetRow["detocupacioninde"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacionotro</property>
+                                    <expression name="expression">dataSetRow["detocupacionotro"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">empresa</property>
+                                    <expression name="expression">dataSetRow["empresa"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">cargo</property>
+                                    <expression name="expression">dataSetRow["cargo"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">antiguedad</property>
+                                    <expression name="expression">dataSetRow["antiguedad"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionoficina</property>
+                                    <expression name="expression">dataSetRow["direccionoficina"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">telefono</property>
+                                    <expression name="expression">dataSetRow["telefono"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">nombresreferencia</property>
+                                    <expression name="expression">dataSetRow["nombresreferencia"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionreferencia</property>
+                                    <expression name="expression">dataSetRow["direccionreferencia"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">telefonoreferencia</property>
+                                    <expression name="expression">dataSetRow["telefonoreferencia"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacionempldeu</property>
+                                    <expression name="expression">dataSetRow["detocupacionempldeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacionindedeu</property>
+                                    <expression name="expression">dataSetRow["detocupacionindedeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacionotrodeu</property>
+                                    <expression name="expression">dataSetRow["detocupacionotrodeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">acronimoidentdeu</property>
+                                    <expression name="expression">dataSetRow["acronimoidentdeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionredidedeu</property>
+                                    <expression name="expression">dataSetRow["direccionredidedeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">barriodeu</property>
+                                    <expression name="expression">dataSetRow["barriodeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ocupaciondeu</property>
+                                    <expression name="expression">dataSetRow["ocupaciondeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">empresadeu</property>
+                                    <expression name="expression">dataSetRow["empresadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">cargodeu</property>
+                                    <expression name="expression">dataSetRow["cargodeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">antiguedaddeu</property>
+                                    <expression name="expression">dataSetRow["antiguedaddeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionoficinadeu</property>
+                                    <expression name="expression">dataSetRow["direccionoficinadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">telefonooficinadeu</property>
+                                    <expression name="expression">dataSetRow["telefonooficinadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">nombresreferenciadeu</property>
+                                    <expression name="expression">dataSetRow["nombresreferenciadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionreferenciadeu</property>
+                                    <expression name="expression">dataSetRow["direccionreferenciadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">telefonoreferenciadeu</property>
+                                    <expression name="expression">dataSetRow["telefonoreferenciadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <column id="2837"/>
+                            <column id="2838"/>
+                            <column id="2839"/>
+                            <header>
+                                <row id="2840">
+                                    <cell id="2841">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="backgroundColor">silver</property>
+                                        <label id="2852">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="textAlign">center</property>
+                                            <text-property name="text">DATOS PERSONALES PACIENTE</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                                <row id="2844">
+                                    <cell id="2845">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2853">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <expression name="valueExpr">"&lt;b>Nombre y Apellidos Completos: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["nombrepacientepc"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2848">
+                                    <cell id="2849">
+                                        <text-data id="2854">
+                                            <expression name="valueExpr">"&lt;b>"+row["acronimoidentpac"]+"&lt;/b>"+" &amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b>No. &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["identificacionpaciente"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2850">
+                                        <text-data id="2855">
+                                            <expression name="valueExpr">" &lt;b>De:  &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["nombrecidudadpac"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2851">
+                                        <text-data id="2856">
+                                            <expression name="valueExpr">"&lt;b>Teléfono: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["telefono"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2857">
+                                    <cell id="2858">
+                                        <property name="colSpan">2</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2869">
+                                            <expression name="valueExpr">"&lt;b>Dirección Residencia: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["direccionresidepac"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2860">
+                                        <text-data id="2870">
+                                            <expression name="valueExpr">"&lt;b>Barrio:&lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["barriopac"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2861">
+                                    <cell id="2862">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2871">
+                                            <expression name="valueExpr">"&lt;b>Ocupación. &amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b>"+row["detocupacionempl"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2825">
+                                    <cell id="2826">
+                                        <text-data id="2872">
+                                            <expression name="valueExpr">"&lt;b>Empresa: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["empresa"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2827">
+                                        <text-data id="2873">
+                                            <expression name="valueExpr">"&lt;b>Cargo: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["cargo"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2828">
+                                        <text-data id="2874">
+                                            <expression name="valueExpr">"&lt;b> Antiguedad:&lt;/b>  &amp;nbsp; &amp;nbsp; &amp;nbsp;"+row["antiguedad"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2865">
+                                    <cell id="2866">
+                                        <property name="colSpan">2</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2875">
+                                            <expression name="valueExpr">"&lt;b>Dirección Oficina: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["direccionoficina"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2868">
+                                        <text-data id="2876">
+                                            <expression name="valueExpr">"&lt;b> Teléfono: &lt;/b>"</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2877">
+                                    <cell id="2878">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="backgroundColor">silver</property>
+                                        <label id="2897">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">REFERENCIA FAMILIAR</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                                <row id="2881">
+                                    <cell id="2882">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2898">
+                                            <expression name="valueExpr">"&lt;b>Nombre y Apellidos Completos: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["nombresreferencia"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2893">
+                                    <cell id="2894">
+                                        <property name="colSpan">2</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2899">
+                                            <expression name="valueExpr">"&lt;b>Dirección: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["direccionreferencia"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2896">
+                                        <text-data id="2900">
+                                            <expression name="valueExpr">"&lt;b>Teléfono:&lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["telefonoreferencia"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                            </header>
+                        </table>
+                    </cell>
+                </row>
+                <row id="2901">
+                    <property name="height">3in</property>
+                    <cell id="2902">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <table id="2915">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="width">100%</property>
+                            <property name="dataSet">actaCompromiso</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">nombredeu</property>
+                                    <expression name="expression">dataSetRow["nombredeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">tipoidentificaciondeu</property>
+                                    <expression name="expression">dataSetRow["tipoidentificaciondeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">identificaciondeu</property>
+                                    <expression name="expression">dataSetRow["identificaciondeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">nombrecidudaddeu</property>
+                                    <expression name="expression">dataSetRow["nombrecidudaddeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">parentescodeu</property>
+                                    <expression name="expression">dataSetRow["parentescodeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">nombrepacientepc</property>
+                                    <expression name="expression">dataSetRow["nombrepacientepc"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">tipoidentificacionpac</property>
+                                    <expression name="expression">dataSetRow["tipoidentificacionpac"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">identificacionpaciente</property>
+                                    <expression name="expression">dataSetRow["identificacionpaciente"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">nombrecidudadpac</property>
+                                    <expression name="expression">dataSetRow["nombrecidudadpac"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">acronimoidentpac</property>
+                                    <expression name="expression">dataSetRow["acronimoidentpac"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionresidepac</property>
+                                    <expression name="expression">dataSetRow["direccionresidepac"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">barriopac</property>
+                                    <expression name="expression">dataSetRow["barriopac"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacionempl</property>
+                                    <expression name="expression">dataSetRow["detocupacionempl"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacioninde</property>
+                                    <expression name="expression">dataSetRow["detocupacioninde"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacionotro</property>
+                                    <expression name="expression">dataSetRow["detocupacionotro"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">empresa</property>
+                                    <expression name="expression">dataSetRow["empresa"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">cargo</property>
+                                    <expression name="expression">dataSetRow["cargo"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">antiguedad</property>
+                                    <expression name="expression">dataSetRow["antiguedad"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionoficina</property>
+                                    <expression name="expression">dataSetRow["direccionoficina"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">telefono</property>
+                                    <expression name="expression">dataSetRow["telefono"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">nombresreferencia</property>
+                                    <expression name="expression">dataSetRow["nombresreferencia"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionreferencia</property>
+                                    <expression name="expression">dataSetRow["direccionreferencia"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">telefonoreferencia</property>
+                                    <expression name="expression">dataSetRow["telefonoreferencia"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacionempldeu</property>
+                                    <expression name="expression">dataSetRow["detocupacionempldeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacionindedeu</property>
+                                    <expression name="expression">dataSetRow["detocupacionindedeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">detocupacionotrodeu</property>
+                                    <expression name="expression">dataSetRow["detocupacionotrodeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">acronimoidentdeu</property>
+                                    <expression name="expression">dataSetRow["acronimoidentdeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionredidedeu</property>
+                                    <expression name="expression">dataSetRow["direccionredidedeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">barriodeu</property>
+                                    <expression name="expression">dataSetRow["barriodeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ocupaciondeu</property>
+                                    <expression name="expression">dataSetRow["ocupaciondeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">empresadeu</property>
+                                    <expression name="expression">dataSetRow["empresadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">cargodeu</property>
+                                    <expression name="expression">dataSetRow["cargodeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">antiguedaddeu</property>
+                                    <expression name="expression">dataSetRow["antiguedaddeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionoficinadeu</property>
+                                    <expression name="expression">dataSetRow["direccionoficinadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">telefonooficinadeu</property>
+                                    <expression name="expression">dataSetRow["telefonooficinadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">nombresreferenciadeu</property>
+                                    <expression name="expression">dataSetRow["nombresreferenciadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">direccionreferenciadeu</property>
+                                    <expression name="expression">dataSetRow["direccionreferenciadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">telefonoreferenciadeu</property>
+                                    <expression name="expression">dataSetRow["telefonoreferenciadeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">telefonoresidedeu</property>
+                                    <property name="displayName">telefonoresidedeu</property>
+                                    <expression name="expression">dataSetRow["telefonoresidedeu"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <column id="2928"/>
+                            <column id="2929"/>
+                            <column id="2930"/>
+                            <header>
+                                <row id="2916">
+                                    <cell id="2917">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="backgroundColor">silver</property>
+                                        <label id="2955">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="textAlign">center</property>
+                                            <text-property name="text">DATOS PERSONALES DEL RESPONSABLE (Mayor de 18 años)</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                                <row id="2935">
+                                    <cell id="2936">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2956">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <expression name="valueExpr">"&lt;b>Nombre y Apellidos Completos: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["nombredeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2931">
+                                    <property name="height">0.6875in</property>
+                                    <cell id="2932">
+                                        <text-data id="2957">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <expression name="valueExpr">"&lt;b>"+row["acronimoidentdeu"]+"&lt;/b>"+"&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b>No. &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["identificaciondeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2933">
+                                        <text-data id="2958">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <expression name="valueExpr">"&lt;b> De: &lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["nombrecidudaddeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2934">
+                                        <text-data id="2959">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <expression name="valueExpr">"&lt;b>Teléfono:&lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["telefonoresidedeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2939">
+                                    <cell id="2940">
+                                        <property name="colSpan">2</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2961">
+                                            <expression name="valueExpr">"&lt;b>Dirección Residencia: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["direccionredidedeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2942">
+                                        <text-data id="2962">
+                                            <expression name="valueExpr">"&lt;b>Barrio: &lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["barriodeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2943">
+                                    <cell id="2944">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2963">
+                                            <expression name="valueExpr">"&lt;b>Ocupación.&lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["detocupacionempldeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2947">
+                                    <cell id="2948">
+                                        <text-data id="2964">
+                                            <expression name="valueExpr">"&lt;b>Empresa: &lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["empresadeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2949">
+                                        <text-data id="2965">
+                                            <expression name="valueExpr">"&lt;b>Cargo: &lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["cargodeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2950">
+                                        <text-data id="2966">
+                                            <expression name="valueExpr">"&lt;b>Antiguedad: &lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["antiguedaddeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2951">
+                                    <cell id="2952">
+                                        <property name="colSpan">2</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2967">
+                                            <expression name="valueExpr">"&lt;b>Dirección Oficina: &lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["direccionoficina"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2954">
+                                        <text-data id="2968">
+                                            <expression name="valueExpr">"&lt;b>Teléfonos &lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["telefonooficinadeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2969">
+                                    <cell id="2970">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="backgroundColor">silver</property>
+                                        <label id="2981">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">REFERENCIA FAMILIAR</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                                <row id="2977">
+                                    <cell id="2978">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2994">
+                                            <expression name="valueExpr">"&lt;b>Nombre y Apellidos Completos: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["nombresreferenciadeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2973">
+                                    <cell id="2974">
+                                        <property name="colSpan">2</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2995">
+                                            <expression name="valueExpr">"&lt;b>Dirección: &lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["direccionreferenciadeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="2976">
+                                        <text-data id="2996">
+                                            <expression name="valueExpr">"&lt;b>Teléfonos:&lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["telefonoreferenciadeu"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2986">
+                                    <cell id="2987">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2998">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="textAlign">left</property>
+                                            <expression name="valueExpr">"Referencia Bancaria: &amp;nbsp;&amp;nbsp;&amp;nbsp;_______________________________________________________________________________________"+
+"&lt;br>__________________________________________________________________________________________________________"+
+"&lt;br>__________________________________________________________________________________________________________"+
+"&lt;br> Además manifiesto: &lt;br>"+
+"1.Que el paciente ha ingresado voluntariamente a la Clinica Versalles con el fin de recibir atención medica asistencial y  hospitalaria.&lt;br>"+
+"2.Que a la fecha el paciente se encuentra afiliado  a la (s) Institución (es) que mas adelante indico, y que esta (s) afiliación (es) se encuentra (n) vigente (s)."</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                            </header>
+                        </table>
+                    </cell>
+                </row>
+                <row id="2678">
+                    <cell id="2679">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <table id="2755">
+                            <property name="width">100%</property>
+                            <property name="dataSet">convenios</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">nombreconvenioic</property>
+                                    <expression name="expression">dataSetRow["nombreconvenioic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">clasificacionconvenioic</property>
+                                    <expression name="expression">dataSetRow["clasificacionconvenioic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">regimenic</property>
+                                    <expression name="expression">dataSetRow["regimenic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">afiliacionic</property>
+                                    <expression name="expression">dataSetRow["afiliacionic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">polizaic</property>
+                                    <expression name="expression">dataSetRow["polizaic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">estratoic</property>
+                                    <expression name="expression">dataSetRow["estratoic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">planescomplementariosic</property>
+                                    <expression name="expression">dataSetRow["planescomplementariosic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <column id="2762"/>
+                            <detail>
+                                <row id="2758">
+                                    <cell id="2759">
+                                        <text-data id="2779">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="textAlign">justify</property>
+                                            <expression name="valueExpr">"&lt;b>Nombre de la Entidad:&lt;/b> "+row["nombreconvenioic"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2791">
+                                    <cell id="2792">
+                                        <text-data id="2795">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="textAlign">justify</property>
+                                            <expression name="valueExpr">"&lt;b>Régimen: &lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["regimenic"]+"&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;b>Afiliación No. &lt;/b>&amp;nbsp;"+
+"&amp;nbsp;&amp;nbsp;"+row["afiliacionic"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2797">
+                                    <cell id="2798">
+                                        <text-data id="2799">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="textAlign">justify</property>
+                                            <expression name="valueExpr">"&lt;b>Planes complementarios:&lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["planescomplementariosic"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                        <table id="2771">
+                            <property name="width">100%</property>
+                            <property name="dataSet">convenios</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">nombreconvenioic</property>
+                                    <expression name="expression">dataSetRow["nombreconvenioic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">clasificacionconvenioic</property>
+                                    <expression name="expression">dataSetRow["clasificacionconvenioic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">regimenic</property>
+                                    <expression name="expression">dataSetRow["regimenic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">afiliacionic</property>
+                                    <expression name="expression">dataSetRow["afiliacionic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">polizaic</property>
+                                    <expression name="expression">dataSetRow["polizaic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">estratoic</property>
+                                    <expression name="expression">dataSetRow["estratoic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">planescomplementariosic</property>
+                                    <expression name="expression">dataSetRow["planescomplementariosic"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <column id="2778"/>
+                            <detail>
+                                <row id="2774">
+                                    <cell id="2775">
+                                        <text-data id="2780">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="textAlign">justify</property>
+                                            <expression name="valueExpr">"&lt;b>Clasificación: &lt;/b>"+row["clasificacionconvenioic"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="2793">
+                                    <cell id="2794">
+                                        <text-data id="2796">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="textAlign">justify</property>
+                                            <expression name="valueExpr">"&lt;b>Poliza No.&lt;/b> &amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["polizaic"]+"&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b>Estrato: &lt;/b>&amp;nbsp;&amp;nbsp;&amp;nbsp;"+row["estratoic"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                </row>
+                <row id="2525">
+                    <cell id="2526">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="2539">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">3. Que el paciente no tiene vigente otro seguro con Entidad con la cual la Clinica Versalles tenga actualmente contrato vigente, que cubra los gastos que ocasione su estancia en la Clinica Versalles, diferente a los antes mencionados.</text-property>
+                        </label>
+                        <label id="2540">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">De igual manera, me comprometo a que:</text-property>
+                        </label>
+                        <label id="2542">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">1. En el caso de no ser responsable del paciente, daré aviso al Representante Legal del ingreso de aquel a la Clinica Versalles, sin perjuicio de la responsabilidad asumida en el presente documento.</text-property>
+                        </label>
+                        <label id="2543">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">2. El paciente durante toda su estancia mantendrá su calidad de afiliado a la (s) entidad (es) antes declarada (s). En el evento de no mantener vigente (s) tal (es) afiliación (es) o presentarse como afiliado de otra entidad que no haya sido declarada por medio de este documento, responderé personalmente por los gastos en que incurra la Clinica Versalles en la prestación del servicio a que haya lugar.</text-property>
+                        </label>
+                        <label id="2544">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">3. En el evento en que la Clinica Versalles no tenga contrato vigente con la (s) entidad (es) a la (s) cual (es) se encuentra afiliado el paciente, asumiré todos los gastos y costos en que incurra la Clinica Versalles para la prestación del servicio; el paciente en tal caso será considerado como particular y se efectuará el cobro según la tarifa prevista para estos efectos por la Clinica Versalles. Si no estoy de acuerdo con el pago como particular aceptaré que el paciente sea remitido a una institución en donde se tenga convenio con mi entidad aseguradora. (Este numeral es aplicable solo a personas afiliadas a Entidad de Salud o amparada por Aseguradoras).</text-property>
+                        </label>
+                        <label id="2545">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">4. En cumplimiento del artículo 2 del decreto 1725 de 1999, asumiré personalmente los gastos en que incurra la Clinica Versalles, para la prestación de los servicios de salud, que no sean cubiertos por el entidad a la que se encuentre afilado el paciente con quien la Clinica Versalles mantiene contrato vigente o, por la Aseguradora con quien el paciente haya tomado póliza de seguro, cuando dichos gastos se encuentren establecidos como exclusiones del respectivo plan o excedan el monto cubierto por el mismo, caso en el cual pagare el valor del excedente a mas tardar al momento de la salida del paciente de la institucion.</text-property>
+                        </label>
+                        <label id="2546">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">5. En caso de que el paciente no se encuentre afiliado a ninguna Entidad Promotora de salud (EPS), administradora de
+Régimen subsidiado (ARS), Administradora de Riesgos Profesionales (ARP), Entidad de Medicina Prepagada, Planes Complementarios, o amparado por Compañía de Seguros; asumiré personalmente todos los gastos en que incurra la Clinica Versalles por concepto de la prestación de los servicios de salud a que haya lugar. En caso de no tener capacidad de pago acepto la remisión de mi familiar a una entidad del estado donde se le proporcione el cubrimiento como paciente vinculado en salud.</text-property>
+                        </label>
+                        <label id="2547">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">6. La presente Acta de Compromiso, junto con las facturas que la Clinica Versalles expida por los servicios médicos y hospitalarios efectuados, presta mérito ejecutivo de conformidad con lo establecido por el artículo 488 del
+Código de Procedimiento Civil.</text-property>
+                        </label>
+                        <label id="2548">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">7. Me obligo con la Clinica Versalles a realizar los tramites respectivos de las autorizaciones solicitadas, cuando el
+procedimiento con la entidad aseguradora así lo establezca. En caso de no presentar las autorizaciones dentro de los 3 días hábiles siguientes a la salida del paciente la cuenta será facturada como particular.</text-property>
+                        </label>
+                        <label id="2549">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">8. Expresamente autorizo a la Clinica Versalles para que directa o indirectamente consulte y reporte a cualquier
+central de riesgo financiero o base de datos, lo relacionado con mi historial y comportamiento crediticio, así como cualquier mora o incumplimiento en el pago de las cuentas médicas.</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="1560">
+                    <cell id="1561"/>
+                    <cell id="1562">
+                        <property name="colSpan">11</property>
+                        <property name="rowSpan">1</property>
+                        <label id="2802"/>
+                    </cell>
+                    <cell id="1573"/>
+                </row>
+                <row id="1579">
+                    <cell id="1580">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1611">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">CONDICIONES PARA INGRESO </text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="1612">
+                    <cell id="1613">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="2806"/>
+                    </cell>
+                </row>
+                <row id="1593">
+                    <cell id="1594">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1644">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">De igual manera manifiesto que cumpliré a cabalidad con el reglamento de la misma y con las siguientes condiciones de ingreso hospitalario: </text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="1626">
+                    <cell id="1627">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="2805"/>
+                    </cell>
+                </row>
+                <row id="1649">
+                    <cell id="1650">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1695">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">1. Horario de visitas para el público.</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="1677">
+                    <cell id="1678">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <text-data id="2999">
+                            <property name="fontFamily">sans-serif</property>
+                            <expression name="valueExpr">"Habitaciones &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;lunes a viernes 8:00 a.m. a 7:30 p.m. &lt;br>"+
+"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;Sabados Domingos y Festivos 8:00 a.m. a 6:00 p.m. &lt;br>"+
+"UCI&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 11:45 a.m. a 12:45 m y de 3:30 p.m a 4:30 p.m.&lt;br>"+
+"UCC&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 10:30 a.m. a 11:30 m y de 4:45 p.m a 5:45 p.m. "</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
+                    </cell>
+                </row>
+                <row id="1701">
+                    <cell id="1702">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="2807"/>
+                    </cell>
+                </row>
+                <row id="1715">
+                    <cell id="1716">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1748">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">2. 	Alimentos</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="1749">
+                    <cell id="1750">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1781">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">justify</property>
+                            <text-property name="text">Está prohibido salvo autorización médica expresa, la entrada a la Clinica Versalles de cualquier clase de alimento con destino a los pacientes.</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="1763">
+                    <cell id="1764">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="2808"/>
+                    </cell>
+                </row>
+                <row id="1834">
+                    <cell id="1835">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1866">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">3.	Servicio médico, de Enfermería y de hospedaje</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="1867">
+                    <cell id="1868">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <text id="1906">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+
+</head>
+<body>
+<div>
+<meta http-equiv="CONTENT-TYPE"
+ content="text/html; charset=utf-8">
+
+
+<style type="text/css">
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2cm }
+		P { margin-bottom: 0.21cm }
+	-->
+	</style></div>
+<ol style="font-family: sans-serif; text-align: justify;">
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">Los
+servicios de enfermer&amp;iacute;a que presta la Fundaci&amp;oacute;n
+Abood Shaio son de car&amp;aacute;cter general,
+entendi&amp;eacute;ndose por tales aquellos destinados al cumplimiento
+de las prescripciones m&amp;eacute;dicas y al cuidado general del
+paciente, sin que ello implique funciones de vigilancia continua en la
+habitaci&amp;oacute;n del enfermo.</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">Los
+pacientes que por sus condiciones de salud requieran apoyo para su
+movilizaci&amp;oacute;n, deber&amp;aacute;n solicitarlo directamente o
+por medio de sus responsables, a trav&amp;eacute;s de los mecanismos
+establecidos para tal fin (timbre, llamado directo al personal de
+enfermer&amp;iacute;a).</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">Los
+servicios de la Fundaci&amp;oacute;n Abood Shaio se prestan con los
+recursos humanos y t&amp;eacute;cnicos - cient&amp;iacute;ficos que se
+encuentran a su disposici&amp;oacute;n, esto es en condiciones de
+normal actividad o funcionamiento.</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">La
+atenci&amp;oacute;n de pacientes en la Unidad de Cuidado Intensivo,
+Cuidado Coronario y cualesquiera otra de car&amp;aacute;cter especial,
+se prestara de acuerdo a la disponibilidad de los servicios requeridos.</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">En
+el evento de solicitar el servicio de cama de acompa&amp;ntilde;ante,
+este deber&amp;aacute; ser cancelado seg&amp;uacute;n tarifa
+establecida por la Fundaci&amp;oacute;n. En caso de que este servicio
+sea cubierto por la entidad aseguradora el familiar realizara los
+tr&amp;aacute;mites respectivos para obtener la autorizaci&amp;oacute;n
+del servicio.</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">En
+el evento de requerir servicio de enfermera permanente por orden
+medica, el responsable del paciente lo solicitar&amp;aacute;
+directamente a la Empresa de Enfermer&amp;iacute;a aceptada por la
+instituci&amp;oacute;n y cancelara los gastos correspondientes.</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">En
+el evento de utilizar habitaci&amp;oacute;n unipersonal cuando su plan
+no de la cobertura para tal fin, deber&amp;aacute; pagar a la
+Fundaci&amp;oacute;n Abood Shaio, el excedente determinado por la
+misma, como m&amp;iacute;nimo por tres d&amp;iacute;as anticipados.
+Este servicio debe ser solicitado en el servicio de Admisiones y
+estar&amp;aacute; sujeto a la disponibilidad de habitaciones.</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">La
+Fundaci&amp;oacute;n Abood Shaio no asume el cuidado de bienes u
+objetos personales en la habitaci&amp;oacute;n del paciente o cualquier
+otra dependencia de &amp;eacute;sta, que no sean puestos expresamente
+bajo su custodia, por lo tanto no se hace responsable por su
+p&amp;eacute;rdida.</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">Para
+los pacientes del Plan Obligatorio de Salud, ARP y ARS el
+n&amp;uacute;mero de visitas permitidas por cada paciente
+ser&amp;aacute; como m&amp;aacute;ximo de una persona; para pacientes
+cuya entidad aseguradora sea Medicna Prepagada, P&amp;oacute;liza en
+Salud, Planes especiales &amp;oacute; Particulares. sera de dos
+personas.</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">Se
+prohibe fumar, ingerir bebidas alcoh&amp;oacute;licas o sustancias
+alucin&amp;oacute;genas dentro de las instalaciones de la
+Fundaci&amp;oacute;n Abood Shaio.</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">Al
+ingreso a la Fundaci&amp;oacute;n Abood Shaio el paciente o la persona
+responsable de este, mediante acta de entrega recibir&amp;aacute;
+elementos para ser utilizados por el paciente, durante la estancia, los
+cuales deber&amp;aacute;n ser devueltos en su totalidad a la
+Fundaci&amp;oacute;n Abood Shaio al momento de su retiro, en caso
+contrario, deber&amp;aacute; pagarse su valor. </span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">Las
+&amp;oacute;rdenes de salida de la Fundaci&amp;oacute;n Abood Shaio
+ser&amp;aacute;n efectivas durante las primeras horas de la
+ma&amp;ntilde;ana. Una vez el paciente reciba la
+notificaci&amp;oacute;n de salida ( boleta de salida) deber&amp;aacute;
+retirarse de la habitaci&amp;oacute;n, antes de la una de la tarde,
+momento en el cual si no se ha retirado asumir&amp;aacute; todos los
+costos que implica cada estancia en la Fundaci&amp;oacute;n Abood Shaio.</span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">Se
+prohibe retirar de la Fundaci&amp;oacute;n Abood Shaio: objetos,
+equipos y cualquier otro elemento que sea de pertenencia de la
+instituci&amp;oacute;n. En tal caso el paciente o su acudiente,
+deber&amp;aacute; pagar el valor de los faltantes antes de su salida de
+la Fundaci&amp;oacute;n </span></font></font></div>
+  </li>
+  <li>
+    <div><font color="#000000"><font size="2"><span
+ style="background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;">El
+paciente se obliga a cumplir las condiciones de car&amp;aacute;cter
+especial que se relacionan con las prescripciones y ordenes
+m&amp;eacute;dicas y las relativas a la organizaci&amp;oacute;n de los
+servicios asistenciales.</span></font></font></div>
+  </li>
+</ol>
+</body>
+</html>
+]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="1915">
+                    <cell id="1916"/>
+                    <cell id="1917">
+                        <property name="colSpan">11</property>
+                        <property name="rowSpan">1</property>
+                        <label id="2803"/>
+                    </cell>
+                    <cell id="1928"/>
+                </row>
+                <row id="1933">
+                    <cell id="1934">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <table id="1972">
+                            <property name="width">100%</property>
+                            <property name="dataSet">fechaGeneracion</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">dia</property>
+                                    <expression name="expression">dataSetRow["dia"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">mes</property>
+                                    <expression name="expression">dataSetRow["mes"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">anio</property>
+                                    <expression name="expression">dataSetRow["anio"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="pageBreakInterval">50</property>
+                            <column id="1994">
+                                <property name="width">2.6421052632in</property>
+                            </column>
+                            <column id="1995">
+                                <property name="width">0.2105263158in</property>
+                            </column>
+                            <column id="1996">
+                                <property name="width">0.9473684211in</property>
+                            </column>
+                            <column id="1997">
+                                <property name="width">0.3157894737in</property>
+                            </column>
+                            <column id="1998">
+                                <property name="width">0.4421052632in</property>
+                            </column>
+                            <column id="1999">
+                                <property name="width">0.3263157895in</property>
+                            </column>
+                            <column id="2022">
+                                <property name="width">2.0315789474in</property>
+                            </column>
+                            <detail>
+                                <row id="1980">
+                                    <cell id="1981">
+                                        <property name="colSpan">7</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data id="2575">
+                                            <expression name="valueExpr">"En constancia se firma en Bogotá D.C., a los "+row["dia"]+" días del mes de "+row["mes"]+" del año "+row["anio"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                </row>
+                <row id="2006">
+                    <cell id="2007">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <label id="2809"/>
+                    </cell>
+                </row>
+                <row id="2024">
+                    <cell id="2025">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <table id="2058">
+                            <property name="width">100%</property>
+                            <property name="pageBreakInterval">50</property>
+                            <column id="2071">
+                                <property name="width">2.6315789474in</property>
+                            </column>
+                            <column id="2072">
+                                <property name="width">1.2105263158in</property>
+                            </column>
+                            <column id="2073">
+                                <property name="width">3.0631578947in</property>
+                            </column>
+                            <detail>
+                                <row id="2063">
+                                    <cell id="2064">
+                                        <label id="2074">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">PACIENTE, REPRESENTANTE LEGAL 
+DEL PACIENTE Y/O ACUDIENTE</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="2065"/>
+                                    <cell id="2066"/>
+                                </row>
+                            </detail>
+                        </table>
+                    </cell>
+                </row>
+                <row id="2076">
+                    <cell id="2077"/>
+                    <cell id="2078">
+                        <property name="colSpan">11</property>
+                        <property name="rowSpan">1</property>
+                        <grid id="2104">
+                            <property name="height">0.2421052632in</property>
+                            <property name="width">6.8947368421in</property>
+                            <column id="2105"/>
+                            <row id="2106">
+                                <property name="height">0.2421052632in</property>
+                                <cell id="2107"/>
+                            </row>
+                        </grid>
+                    </cell>
+                    <cell id="2089"/>
+                </row>
+                <row id="3000">
+                    <cell id="3001">
+                        <property name="colSpan">13</property>
+                        <property name="rowSpan">1</property>
+                        <table id="3014">
+                            <property name="width">100%</property>
+                            <column id="3024"/>
+                            <column id="3025"/>
+                            <header>
+                                <row id="3015">
+                                    <cell id="3016">
+                                        <text-data id="3026">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <expression name="valueExpr">"NOMBRE ______________________________________________&lt;br>&lt;br>"+
+"IDENTIFICACIÓN _______________________________________&lt;br> &lt;br>&lt;br>"+
+"______________________________________________________&lt;br>"+
+"FIRMA"</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                    <cell id="3017">
+                                        <property name="textAlign">center</property>
+                                        <grid id="3027">
+                                            <property name="height">0.9684210526in</property>
+                                            <property name="width">0.8210526316in</property>
+                                            <column id="3028">
+                                                <property name="width">0.8210526316in</property>
+                                            </column>
+                                            <row id="3029">
+                                                <property name="height">0.9684210526in</property>
+                                                <cell id="3030">
+                                                    <property name="borderBottomColor">#000000</property>
+                                                    <property name="borderBottomStyle">solid</property>
+                                                    <property name="borderBottomWidth">thin</property>
+                                                    <property name="borderLeftColor">#000000</property>
+                                                    <property name="borderLeftStyle">solid</property>
+                                                    <property name="borderLeftWidth">thin</property>
+                                                    <property name="borderRightColor">#000000</property>
+                                                    <property name="borderRightStyle">solid</property>
+                                                    <property name="borderRightWidth">thin</property>
+                                                    <property name="borderTopColor">#000000</property>
+                                                    <property name="borderTopStyle">solid</property>
+                                                    <property name="borderTopWidth">thin</property>
+                                                    <property name="textAlign">center</property>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                    </cell>
+                                </row>
+                                <row id="3031">
+                                    <cell id="3032"/>
+                                    <cell id="3033">
+                                        <property name="textAlign">center</property>
+                                        <label id="1570">
+                                            <property name="fontFamily">sans-serif</property>
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text">Índice Derecho</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                            </header>
+                        </table>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresupuestoDetCuotasEsp" table="presupuesto_det_cuotas_esp" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="presupuestoCuotasEsp" class="com.servinte.axioma.orm.PresupuestoCuotasEsp" fetch="select">
+            <column name="presupuesto_cuotas_esp" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="tipoCuota" type="string">
+            <column name="tipo_cuota" length="5" not-null="true" />
+        </property>
+        <property name="nroCuotas" type="int">
+            <column name="nro_cuotas" not-null="true" />
+        </property>
+        <property name="porcentaje" type="big_decimal">
+            <column name="porcentaje" precision="5" />
+        </property>
+        <property name="valor" type="big_decimal">
+            <column name="valor" precision="14" />
+        </property>
+    </class>
+</hibernate-mapping>

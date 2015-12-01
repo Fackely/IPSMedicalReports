@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FunSecParametrizadas" table="fun_sec_parametrizadas" schema="administracion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="funcionalParametrizables" class="com.servinte.axioma.orm.FuncionalParametrizables" fetch="select">
+            <column name="codigo_fun" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" />
+        </many-to-one>
+        <property name="codigoSeccion" type="int">
+            <column name="codigo_seccion" not-null="true" />
+        </property>
+        <property name="codigoCampo" type="int">
+            <column name="codigo_campo" not-null="true" />
+        </property>
+        <property name="tipoCampo" type="string">
+            <column name="tipo_campo" length="4" />
+        </property>
+        <property name="orden" type="java.lang.Integer">
+            <column name="orden" />
+        </property>
+        <property name="requerido" type="java.lang.Character">
+            <column name="requerido" length="1" />
+        </property>
+        <property name="horizontal" type="java.lang.Character">
+            <column name="horizontal" length="1" />
+        </property>
+        <property name="numeroFilas" type="java.lang.Integer">
+            <column name="numero_filas" />
+        </property>
+        <property name="numeroColumnas" type="java.lang.Integer">
+            <column name="numero_columnas" />
+        </property>
+        <property name="tamanioCampo" type="java.lang.Integer">
+            <column name="tamanio_campo" />
+        </property>
+        <property name="numeroCaracteres" type="java.lang.Integer">
+            <column name="numero_caracteres" />
+        </property>
+        <set name="infoParametrizableVals" inverse="true" lazy="true" table="info_parametrizable_val" fetch="select">
+            <key>
+                <column name="codigo_funsecpar" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InfoParametrizableVal" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LecturaPlanosAc" table="lectura_planos_ac" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.LecturaPlanosAcId">
+            <key-property name="tipoIdentificacion" type="string">
+                <column name="tipo_identificacion" length="2" />
+            </key-property>
+            <key-property name="numeroIdentificacion" type="string">
+                <column name="numero_identificacion" length="20" />
+            </key-property>
+            <key-property name="numeroFactura" type="string">
+                <column name="numero_factura" length="20" />
+            </key-property>
+            <key-property name="codigoPrestador" type="string">
+                <column name="codigo_prestador" length="10" />
+            </key-property>
+            <key-property name="fechaConsulta" type="string">
+                <column name="fecha_consulta" length="10" />
+            </key-property>
+            <key-property name="numeroAutorizacion" type="string">
+                <column name="numero_autorizacion" length="15" />
+            </key-property>
+            <key-property name="codigoConsulta" type="string">
+                <column name="codigo_consulta" length="8" />
+            </key-property>
+            <key-property name="finalidadConsulta" type="string">
+                <column name="finalidad_consulta" length="2" />
+            </key-property>
+            <key-property name="causaExterna" type="string">
+                <column name="causa_externa" length="2" />
+            </key-property>
+            <key-property name="codigoDiagPpal" type="string">
+                <column name="codigo_diag_ppal" length="4" />
+            </key-property>
+            <key-property name="codigoDiagRel1" type="string">
+                <column name="codigo_diag_rel_1" length="4" />
+            </key-property>
+            <key-property name="codigoDiagRel2" type="string">
+                <column name="codigo_diag_rel_2" length="4" />
+            </key-property>
+            <key-property name="codigoDiagRel3" type="string">
+                <column name="codigo_diag_rel_3" length="4" />
+            </key-property>
+            <key-property name="tipoDiagnostico" type="string">
+                <column name="tipo_diagnostico" length="1" />
+            </key-property>
+            <key-property name="valorConsulta" type="string">
+                <column name="valor_consulta" length="15" />
+            </key-property>
+            <key-property name="valorCuota" type="string">
+                <column name="valor_cuota" length="15" />
+            </key-property>
+            <key-property name="valorNeto" type="string">
+                <column name="valor_neto" length="15" />
+            </key-property>
+            <key-property name="usuario" type="string">
+                <column name="usuario" length="30" />
+            </key-property>
+            <key-property name="centroAtencion" type="int">
+                <column name="centro_atencion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" update="false" insert="false" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

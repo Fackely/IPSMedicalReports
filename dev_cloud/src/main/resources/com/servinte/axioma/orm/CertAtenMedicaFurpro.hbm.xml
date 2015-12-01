@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 15, 2011 5:27:23 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CertAtenMedicaFurpro" table="cert_aten_medica_furpro" schema="manejopaciente">
+        <id name="codigoReclamacion" type="long">
+            <column name="codigo_reclamacion" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">reclamacionesAccEveFact</param>
+            </generator>
+        </id>
+        <one-to-one name="reclamacionesAccEveFact" class="com.servinte.axioma.orm.ReclamacionesAccEveFact" constrained="true"></one-to-one>
+        <many-to-one name="diagnosticosByPkCeratemedfurproRelegr2" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_dx_rel2_egreso" length="10" />
+            <column name="tipo_cie_dx_rel1_egreso" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByPkCeratemedfurproRelegr3" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_dx_rel3_egreso" length="10" />
+            <column name="tipo_cie_dx_rel3_egreso" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByPkCeratemedfurproRelegr1" class="com.servinte.axioma.orm.Diagnosticos" update="false" insert="false" fetch="select">
+            <column name="acronimo_dx_rel1_egreso" length="10" />
+            <column name="tipo_cie_dx_rel1_egreso" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByPkCeratemedfurproDxegr" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_dx_egreso" length="10" />
+            <column name="tipo_cie_dx_egreso" />
+        </many-to-one>
+        <many-to-one name="diagnosticosByPkCeratemedfurproRelegr4" class="com.servinte.axioma.orm.Diagnosticos" fetch="select">
+            <column name="acronimo_dx_rel4_egreso" length="10" />
+            <column name="tipo_cie_dx_rel4_egreso" />
+        </many-to-one>
+        <property name="tipoCieDxRel2Egreso" type="java.lang.Integer">
+            <column name="tipo_cie_dx_rel2_egreso" />
+        </property>
+    </class>
+</hibernate-mapping>

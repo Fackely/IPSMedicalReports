@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 12, 2010 4:39:10 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FormasPago" table="formas_pago" schema="tesoreria">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentasContables" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="tiposDetalleFormaPago" class="com.servinte.axioma.orm.TiposDetalleFormaPago" fetch="select">
+            <column name="tipo_detalle" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="4" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" not-null="true" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="activo" />
+        </property>
+        <property name="indConsignacion" type="java.lang.Character">
+            <column name="ind_consignacion" length="1" />
+        </property>
+        <property name="trasladoCajaRecaudo" type="java.lang.Character">
+            <column name="traslado_caja_recaudo" length="1" />
+        </property>
+        <property name="reqTrasladoCajaRecaudo" type="java.lang.Character">
+            <column name="req_traslado_caja_recaudo" length="1" />
+        </property>
+        <set name="empresases" inverse="true" lazy="true" table="empresas" fetch="select">
+            <key>
+                <column name="forma_pago" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Empresas" />
+        </set>
+        <set name="devolRecibosCajas" inverse="true" lazy="true" table="devol_recibos_caja" fetch="select">
+            <key>
+                <column name="forma_pago" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DevolRecibosCaja" />
+        </set>
+        <set name="docSopMovimCajases" inverse="true" lazy="true" table="doc_sop_movim_cajas" fetch="select">
+            <key>
+                <column name="forma_pago" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.formas_pago</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DocSopMovimCajas" />
+        </set>
+        <set name="cuadreCajas" inverse="true" lazy="true" table="cuadre_caja" fetch="select">
+            <key>
+                <column name="forma_pago" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.formas_pago</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuadreCaja" />
+        </set>
+        <set name="detallePagosRcs" inverse="true" lazy="true" table="detalle_pagos_rc" fetch="select">
+            <key>
+                <column name="forma_pago" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetallePagosRc" />
+        </set>
+        <set name="detTrasladosCajas" inverse="true" lazy="true" table="det_traslados_caja" fetch="select">
+            <key>
+                <column name="forma_pago" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetTrasladosCaja" />
+        </set>
+    </class>
+</hibernate-mapping>

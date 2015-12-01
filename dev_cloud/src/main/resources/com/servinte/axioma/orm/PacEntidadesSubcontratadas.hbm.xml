@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PacEntidadesSubcontratadas" table="pac_entidades_subcontratadas" schema="manejopaciente">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" />
+        </many-to-one>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_subcontratada" not-null="true" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <property name="anioConsecutivo" type="string">
+            <column name="anio_consecutivo" length="4" />
+        </property>
+        <property name="nroCarnet" type="string">
+            <column name="nro_carnet" length="20" />
+        </property>
+        <property name="autorizacionIngreso" type="string">
+            <column name="autorizacion_ingreso" length="15" />
+        </property>
+        <property name="fechaAutorizacion" type="date">
+            <column name="fecha_autorizacion" length="13" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="obserAnulacion" type="string">
+            <column name="obser_anulacion" length="4000" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="horaAutorizacion" type="string">
+            <column name="hora_autorizacion" length="5" not-null="true" />
+        </property>
+        <set name="detServAutorizadoses" inverse="true" lazy="true" table="det_serv_autorizados" fetch="select">
+            <key>
+                <column name="consecutivo_pac_entidades_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetServAutorizados" />
+        </set>
+        <set name="ingresoses" inverse="true" lazy="true" table="ingresos" fetch="select">
+            <key>
+                <column name="pac_entidades_subcontratadas" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Ingresos" />
+        </set>
+        <set name="facturases" inverse="true" lazy="true" table="facturas" fetch="select">
+            <key>
+                <column name="pac_entidad_subcontratada" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Facturas" />
+        </set>
+    </class>
+</hibernate-mapping>

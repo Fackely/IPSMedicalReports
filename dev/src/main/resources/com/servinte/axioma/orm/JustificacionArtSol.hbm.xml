@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/12/2012 12:05:03 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.JustificacionArtSol" table="justificacion_art_sol" schema="inventarios">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="numero_solicitud" />
+        </many-to-one>
+        <many-to-one name="ordenesAmbulatorias" class="com.servinte.axioma.orm.OrdenesAmbulatorias" fetch="select">
+            <column name="orden_ambulatoria" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="articulo" type="int">
+            <column name="articulo" not-null="true" />
+        </property>
+        <property name="frecuencia" type="java.lang.Integer">
+            <column name="frecuencia" />
+        </property>
+        <property name="tipoFrecuencia" type="string">
+            <column name="tipo_frecuencia" length="128" />
+        </property>
+        <property name="concentracion" type="string">
+            <column name="concentracion" length="20" />
+        </property>
+        <property name="tiempoTratamiento" type="java.lang.Long">
+            <column name="tiempo_tratamiento" precision="10" scale="0" />
+        </property>
+        <property name="grupoTerapeutico" type="int">
+            <column name="grupo_terapeutico" not-null="true" />
+        </property>
+        <property name="tiempoRespuesta" type="string">
+            <column name="tiempo_respuesta" length="128" />
+        </property>
+        <property name="registroInvima" type="string">
+            <column name="registro_invima" length="100" />
+        </property>
+        <property name="efectoDeseado" type="string">
+            <column name="efecto_deseado" length="256" />
+        </property>
+        <property name="efectosSecundarios" type="string">
+            <column name="efectos_secundarios" length="256" />
+        </property>
+        <property name="bibliografia" type="string">
+            <column name="bibliografia" length="256" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="consecutivo" type="string">
+            <column name="consecutivo" length="20" not-null="true" unique="true" />
+        </property>
+        <property name="dosis" type="java.lang.Double">
+            <column name="dosis" precision="17" scale="17" />
+        </property>
+        <property name="unidosis" type="string">
+            <column name="unidosis" length="10" />
+        </property>
+        <property name="formaFarmaceutica" type="string">
+            <column name="forma_farmaceutica" length="128" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="dosificacion" type="string">
+            <column name="dosificacion" length="50" />
+        </property>
+        <property name="documentosadj" type="string">
+            <column name="documentosadj" length="256" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="tipoJus" type="string">
+            <column name="tipo_jus" length="4" />
+        </property>
+        <set name="solicitudeses" table="sol_x_just_art_sol" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_justificacion" precision="12" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Solicitudes">
+                <column name="numero_solicitud" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="ordAmbJustArtSols" table="ord_amb_just_art_sol" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_justificacion" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdAmbJustArtSol" />
+        </set>
+    </class>
+</hibernate-mapping>

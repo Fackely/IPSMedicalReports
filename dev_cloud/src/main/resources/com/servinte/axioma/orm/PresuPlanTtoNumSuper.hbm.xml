@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresuPlanTtoNumSuper" table="presu_plan_tto_num_super" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="piezaDental" class="com.servinte.axioma.orm.PiezaDental" fetch="select">
+            <column name="pieza_dental" not-null="true" />
+        </many-to-one>
+        <many-to-one name="presupuestoOdontologico" class="com.servinte.axioma.orm.PresupuestoOdontologico" fetch="select">
+            <column name="presupuesto" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hallazgosOdontologicos" class="com.servinte.axioma.orm.HallazgosOdontologicos" fetch="select">
+            <column name="hallazgo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa" not-null="true" />
+        </many-to-one>
+        <property name="seccion" type="string">
+            <column name="seccion" length="4" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="colorLetra" type="string">
+            <column name="color_letra" length="7" not-null="true" />
+        </property>
+        <set name="presuDetPttoNumSupers" inverse="true" lazy="true" table="presu_det_ptto_num_super" fetch="select">
+            <key>
+                <column name="presu_plan_tto_num_super" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuDetPttoNumSuper" />
+        </set>
+    </class>
+</hibernate-mapping>

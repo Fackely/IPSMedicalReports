@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/06/2011 12:41:12 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetFacturaSolicitud" table="det_factura_solicitud" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="solicitud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="detPaqOdontConvenio" class="com.servinte.axioma.orm.DetPaqOdontConvenio" fetch="select">
+            <column name="det_paq_odon_convenio" />
+        </many-to-one>
+        <many-to-one name="facturas" class="com.servinte.axioma.orm.Facturas" fetch="select">
+            <column name="factura" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifarios" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tarifario" />
+        </many-to-one>
+        <many-to-one name="articulo" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="articulo" />
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa" precision="12" scale="0" />
+        </many-to-one>
+        <property name="ajusteCreditoMedico" type="double">
+            <column name="ajuste_credito_medico" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="ajusteDebitoMedico" type="double">
+            <column name="ajuste_debito_medico" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="porcentajePool" type="java.lang.Integer">
+            <column name="porcentaje_pool" />
+        </property>
+        <property name="porcentajeMedico" type="java.lang.Double">
+            <column name="porcentaje_medico" precision="17" scale="17" />
+        </property>
+        <property name="valorMedico" type="double">
+            <column name="valor_medico" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="fechaCargo" type="date">
+            <column name="fecha_cargo" length="13" not-null="true" />
+        </property>
+        <property name="cantidadCargo" type="int">
+            <column name="cantidad_cargo" not-null="true" />
+        </property>
+        <property name="valorCargo" type="double">
+            <column name="valor_cargo" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorIva" type="double">
+            <column name="valor_iva" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorRecargo" type="double">
+            <column name="valor_recargo" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorTotal" type="double">
+            <column name="valor_total" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="soliPago" type="java.lang.Integer">
+            <column name="soli_pago" />
+        </property>
+        <property name="tipoCargo" type="int">
+            <column name="tipo_cargo" not-null="true" />
+        </property>
+        <property name="ajustesCredito" type="double">
+            <column name="ajustes_credito" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="ajustesDebito" type="double">
+            <column name="ajustes_debito" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorPool" type="double">
+            <column name="valor_pool" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="pool" type="java.lang.Integer">
+            <column name="pool" />
+        </property>
+        <property name="codigoMedico" type="java.lang.Integer">
+            <column name="codigo_medico" />
+        </property>
+        <property name="valorDctoComercial" type="big_decimal">
+            <column name="valor_dcto_comercial" precision="14" />
+        </property>
+        <property name="valorConsumoPaquete" type="big_decimal">
+            <column name="valor_consumo_paquete" precision="14" />
+        </property>
+        <property name="tipoSolicitud" type="int">
+            <column name="tipo_solicitud" not-null="true" />
+        </property>
+        <property name="valorDctoOdo" type="java.lang.Double">
+            <column name="valor_dcto_odo" precision="17" scale="17" />
+        </property>
+        <property name="valorDctoBono" type="java.lang.Double">
+            <column name="valor_dcto_bono" precision="17" scale="17" />
+        </property>
+        <property name="valorDctoProm" type="java.lang.Double">
+            <column name="valor_dcto_prom" precision="17" scale="17" />
+        </property>
+        <set name="paquetizacionDetFacturas" table="paquetizacion_det_factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_det_fact" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetizacionDetFactura" />
+        </set>
+        <set name="asociosDetFacturas" table="asocios_det_factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AsociosDetFactura" />
+        </set>
+    </class>
+</hibernate-mapping>

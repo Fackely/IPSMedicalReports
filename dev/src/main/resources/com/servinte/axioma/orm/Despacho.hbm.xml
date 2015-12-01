@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2010 4:52:29 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Despacho" table="despacho" schema="inventarios">
+        <id name="orden" type="int">
+            <column name="orden" />
+            <generator class="sequence" >
+				<param name="sequence">inventarios.seq_despacho</param>
+			</generator>	
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+        <property name="esDirecto" type="boolean">
+            <column name="es_directo" not-null="true" />
+        </property>
+        <property name="numeroSolicitud" type="java.lang.Integer">
+            <column name="numero_solicitud" />
+        </property>
+        <property name="personaRecibeMed" type="string">
+            <column name="persona_recibe_med" length="128" />
+        </property>
+        <property name="contabilizado" type="string">
+            <column name="contabilizado" length="1" not-null="true" />
+        </property>
+        <set name="registroEntregaEntSubs" inverse="true" lazy="true" table="registro_entrega_ent_sub" fetch="select">
+            <key>
+                <column name="despacho" not-null="true">
+                    <comment>Despacho de articulos de la autorizacion</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEntregaEntSub" />
+        </set>
+        <set name="detalleDespachoses" inverse="true" lazy="true" table="detalle_despachos" fetch="select">
+            <key>
+                <column name="despacho" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleDespachos" />
+        </set>
+        <set name="solDespachoSinAutos" inverse="true" lazy="true" table="sol_despacho_sin_auto" fetch="select">
+            <key>
+                <column name="despacho" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolDespachoSinAuto" />
+        </set>
+    </class>
+</hibernate-mapping>

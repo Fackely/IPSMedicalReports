@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="valorHonorariosMedicoPlano" pageWidth="592" pageHeight="772" columnWidth="592" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subReporteFacturasHonorarios" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteValorFacturasHonorarios" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteValorFacturasAnuladas" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteResumenPool" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/david/contextos/ipsm_dev/src/main/resources/com/servinte/axioma/generadorReporte/facturacion/valorHonorariosMedicos/"]]></defaultValueExpression>
+	</parameter>
+	<field name="fechaInicial" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.lang.String"/>
+	<field name="JRDListaProfesionales" class="java.lang.Object"/>
+	<field name="JRDListaResumenPool" class="java.lang.Object"/>
+	<field name="esResumen" class="java.lang.Integer"/>
+	<field name="esAnulado" class="java.lang.Integer"/>
+	<field name="esFacturado" class="java.lang.Integer"/>
+	<field name="tituloResumen" class="java.lang.String"/>
+	<field name="totalesResumen" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="15">
+			<textField isBlankWhenNull="true">
+				<reportElement key="fechaInicial" style="axiomaTitulo" stretchType="RelativeToTallestObject" x="0" y="0" width="578" height="13" isPrintInFirstWholeBand="true"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Fecha Generacion Inicial | " + $F{fechaInicial} + " | Fecha Generacion Final | " + $F{fechaFinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="12">
+			<subreport isUsingCache="true" runToBottom="false">
+				<reportElement key="subReporteFacturasHonorarios" stretchType="RelativeToBandHeight" x="0" y="0" width="592" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReporteFacturasHonorarios">
+					<subreportParameterExpression><![CDATA[$P{subReporteFacturasHonorarios}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteResumenPool">
+					<subreportParameterExpression><![CDATA[$P{subReporteResumenPool}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteValorFacturasAnuladas">
+					<subreportParameterExpression><![CDATA[$P{subReporteValorFacturasAnuladas}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReporteValorFacturasHonorarios">
+					<subreportParameterExpression><![CDATA[$P{subReporteValorFacturasHonorarios}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{JRDListaProfesionales}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteFacturasHonorarios}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="32">
+			<printWhenExpression><![CDATA[$F{esResumen}==1]]></printWhenExpression>
+			<staticText>
+				<reportElement x="0" y="0" width="134" height="13"/>
+				<textElement/>
+				<text><![CDATA[Resumen Honorarios Medicos]]></text>
+			</staticText>
+			<textField>
+				<reportElement key="tituloResumen" x="0" y="13" width="592" height="19"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tituloResumen}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14">
+			<printWhenExpression><![CDATA[$F{esResumen}==1]]></printWhenExpression>
+			<subreport>
+				<reportElement key="subReporteResumenPool" x="0" y="0" width="592" height="11" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReporteResumenPool">
+					<subreportParameterExpression><![CDATA[$P{subReporteResumenPool}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{JRDListaResumenPool}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteResumenPool}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="18">
+			<printWhenExpression><![CDATA[$F{esResumen}==1]]></printWhenExpression>
+			<textField>
+				<reportElement key="totalResumen" x="0" y="0" width="592" height="18"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{totalesResumen}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 12, 2011 11:28:00 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoAutorizacionIngEstan" table="histo_autorizacion_ing_estan" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">manejopaciente.seq_histo_autor_ing_estan</param>
+			</generator>
+        </id>
+        <many-to-one name="autorizacionesIngreEstancia" class="com.servinte.axioma.orm.AutorizacionesIngreEstancia" fetch="select">
+            <column name="autorizacion_ing_estan" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fechaInicioAutorizacion" type="date">
+            <column name="fecha_inicio_autorizacion" length="13" not-null="true">
+                <comment>Fecha de inicio de la autorizaci&#195;&#179;n de ingreso estancia</comment>
+            </column>
+        </property>
+        <property name="consecutivoAdmision" type="long">
+            <column name="consecutivo_admision" precision="12" scale="0" not-null="true">
+                <comment>Consecutivo de autorizaci&#195;&#179;n para la solicitud de ingreso/estancia</comment>
+            </column>
+        </property>
+        <property name="diasEstanciaAutorizados" type="int">
+            <column name="dias_estancia_autorizados" not-null="true">
+                <comment>N&#195;&#186;mero de D&#195;&#173;as de estancia autorizados</comment>
+            </column>
+        </property>
+        <property name="usuarioContacta" type="string">
+            <column name="usuario_contacta" length="30">
+                <comment>Nombres y apellidos del usuario de una entidad que necesita una autorizaci&#195;&#179;n de ingreso/estancia</comment>
+            </column>
+        </property>
+        <property name="cargoUsuarioContacta" type="string">
+            <column name="cargo_usuario_contacta" length="30"/>
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones">
+                <comment>Observaciones de la autorizaci&#195;&#179;n de ingreso/estancia</comment>
+            </column>
+        </property>
+        <property name="convenioRecobro" type="java.lang.Integer">
+            <column name="convenio_recobro">
+                <comment>C&#195;&#179;digo del convenio de recobro</comment>
+            </column>
+        </property>
+        <property name="otroConvenioRecobro" type="string">
+            <column name="otro_convenio_recobro" length="128" />
+        </property>
+        <property name="indicativoTemporal" type="char">
+            <column name="indicativo_temporal" length="1" not-null="true" />
+        </property>
+        <property name="centroCostoSolicitante" type="int">
+            <column name="centro_costo_solicitante" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="5" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="accionRealizada" type="string">
+            <column name="accion_realizada" length="3" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

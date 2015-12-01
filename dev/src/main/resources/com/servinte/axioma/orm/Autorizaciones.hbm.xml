@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Autorizaciones" table="autorizaciones" schema="manejopaciente">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" fetch="select">
+            <column name="sub_cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" fetch="select">
+            <column name="persona_solicita" />
+        </many-to-one>
+        <many-to-one name="camas1" class="com.servinte.axioma.orm.Camas1" fetch="select">
+            <column name="cama" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_solicitud" length="30" />
+        </many-to-one>
+        <many-to-one name="coberturasSalud" class="com.servinte.axioma.orm.CoberturasSalud" fetch="select">
+            <column name="tipo_cobertura" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposSerSol" class="com.servinte.axioma.orm.TiposSerSol" fetch="select">
+            <column name="tipo_servicio_solicitado" />
+        </many-to-one>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="origenAtencion" type="java.lang.Integer">
+            <column name="origen_atencion" />
+        </property>
+        <property name="fechaSolicitud" type="date">
+            <column name="fecha_solicitud" length="13" />
+        </property>
+        <property name="horaSolicitud" type="string">
+            <column name="hora_solicitud" length="5" />
+        </property>
+        <property name="tipoTramite" type="string">
+            <column name="tipo_tramite" length="3" />
+        </property>
+        <property name="prioridadAtencion" type="string">
+            <column name="prioridad_atencion" length="1" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+        <property name="consecutivo" type="string">
+            <column name="consecutivo" length="20" />
+        </property>
+        <property name="anioConsecutivo" type="string">
+            <column name="anio_consecutivo" length="4" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

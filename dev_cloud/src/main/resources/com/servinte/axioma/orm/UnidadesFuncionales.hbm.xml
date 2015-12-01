@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UnidadesFuncionales" table="unidades_funcionales" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.UnidadesFuncionalesId">
+            <key-property name="acronimo" type="string">
+                <column name="acronimo" length="16" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <set name="unidadFunCuentaIngs" inverse="true" lazy="true" table="unidad_fun_cuenta_ing" fetch="select">
+            <key>
+                <column name="unidad_funcional" length="16" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIng" />
+        </set>
+        <set name="centrosCostos" inverse="true" lazy="true" table="centros_costo" fetch="select">
+            <key>
+                <column name="unidad_funcional" length="16" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentrosCosto" />
+        </set>
+        <set name="unidadFunCuentaIngCcs" inverse="true" lazy="true" table="unidad_fun_cuenta_ing_cc" fetch="select">
+            <key>
+                <column name="unidad_funcional" length="16" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadFunCuentaIngCc" />
+        </set>
+    </class>
+</hibernate-mapping>

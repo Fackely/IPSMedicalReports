@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Paquetizacion" table="paquetizacion" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="paquetesConvenio" class="com.servinte.axioma.orm.PaquetesConvenio" fetch="select">
+            <column name="codigo_paquete_convenio" />
+        </many-to-one>
+        <many-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" fetch="select">
+            <column name="sub_cuenta" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="numeroSolicitudPaquete" type="int">
+            <column name="numero_solicitud_paquete" not-null="true" unique="true" />
+        </property>
+        <property name="centroCosto" type="int">
+            <column name="centro_costo" not-null="true" />
+        </property>
+        <property name="centroCostoSolicitaFiltro" type="java.lang.Integer">
+            <column name="centro_costo_solicita_filtro" />
+        </property>
+        <property name="centroCostoEjecutaFiltro" type="java.lang.Integer">
+            <column name="centro_costo_ejecuta_filtro" />
+        </property>
+        <property name="fechaIncialSolFiltro" type="date">
+            <column name="fecha_incial_sol_filtro" length="13" />
+        </property>
+        <property name="fechaFinalSolFiltro" type="date">
+            <column name="fecha_final_sol_filtro" length="13" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <set name="detallePaquetizacions" inverse="true" lazy="true" table="detalle_paquetizacion" fetch="select">
+            <key>
+                <column name="codigo_paquetizacion" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetallePaquetizacion" />
+        </set>
+    </class>
+</hibernate-mapping>

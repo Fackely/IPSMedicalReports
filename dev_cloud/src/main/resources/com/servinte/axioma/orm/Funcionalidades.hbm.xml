@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:51:42 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Funcionalidades" table="funcionalidades" schema="administracion">
+        <id name="codigoFunc" type="int">
+            <column name="codigo_func" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombreFunc" type="string">
+            <column name="nombre_func" length="64" not-null="true" unique="true" />
+        </property>
+        <property name="archivoFunc" type="string">
+            <column name="archivo_func" length="128" not-null="true" />
+        </property>
+        <property name="etiquetaFunc" type="string">
+            <column name="etiqueta_func" length="256" not-null="true" />
+        </property>
+        <property name="deboImprimir" type="boolean">
+            <column name="debo_imprimir" not-null="true" />
+        </property>
+        <property name="esParametrizable" type="boolean">
+            <column name="es_parametrizable" not-null="true" />
+        </property>
+        <set name="funcionalidadesesForFuncionalidadHija" inverse="false" lazy="true" table="dependencias_func" fetch="select">
+            <key>
+                <column name="funcionalidad_padre" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Funcionalidades">
+                <column name="funcionalidad_hija" not-null="true" />
+            </many-to-many>
+        </set>
+        <one-to-one name="funcionalidadesRestriccion" class="com.servinte.axioma.orm.FuncionalidadesRestriccion"></one-to-one>
+        <set name="funcionalidadesesForFuncionalidadPadre" inverse="false" lazy="true" table="dependencias_func" fetch="select">
+            <key>
+                <column name="funcionalidad_hija" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Funcionalidades">
+                <column name="funcionalidad_padre" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="moduloses" inverse="false" lazy="true" table="dep_modulo_func" fetch="select">
+            <key>
+                <column name="funcionalidad" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Modulos">
+                <column name="modulo" not-null="true" />
+            </many-to-many>
+        </set>
+        <one-to-one name="funcionalidadSinPac" class="com.servinte.axioma.orm.FuncionalidadSinPac"></one-to-one>
+        <set name="rolesFuncionalidadeses" inverse="true" lazy="true" table="roles_funcionalidades" fetch="select">
+            <key>
+                <column name="codigo_func" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RolesFuncionalidades" />
+        </set>
+        <set name="logAutorizacionIngEvens" inverse="true" lazy="true" table="log_autorizacion_ing_even" fetch="select">
+            <key>
+                <column name="funcionalidad" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogAutorizacionIngEven" />
+        </set>
+        <set name="clasOdoSecRestFuncs" inverse="true" lazy="true" table="clas_odo_sec_rest_func" fetch="select">
+            <key>
+                <column name="funcionalidad" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasOdoSecRestFunc" />
+        </set>
+    </class>
+</hibernate-mapping>

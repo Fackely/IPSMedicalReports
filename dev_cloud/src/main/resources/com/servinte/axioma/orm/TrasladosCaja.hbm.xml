@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TrasladosCaja" table="traslados_caja" schema="tesoreria">
+        <composite-id name="id" class="com.servinte.axioma.orm.TrasladosCajaId">
+            <key-property name="consecutivo" type="long">
+                <column name="consecutivo" precision="10" scale="0" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cajasByCajaPpal" class="com.servinte.axioma.orm.Cajas" fetch="select">
+            <column name="caja_ppal" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" update="false" insert="false" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cajasByCajaMayor" class="com.servinte.axioma.orm.Cajas" fetch="select">
+            <column name="caja_mayor" not-null="true" />
+        </many-to-one>
+        <property name="fechaTraslado" type="date">
+            <column name="fecha_traslado" length="13" not-null="true" />
+        </property>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="string">
+            <column name="hora_grabacion" length="5" not-null="true" />
+        </property>
+        <set name="cierresCajases" inverse="true" lazy="true" table="cierres_cajas" fetch="select">
+            <key>
+                <column name="traslado_caja" precision="10" scale="0" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierresCajas" />
+        </set>
+        <set name="detTrasladosCajas" inverse="true" lazy="true" table="det_traslados_caja" fetch="select">
+            <key>
+                <column name="traslado_caja" precision="10" scale="0" not-null="true" />
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetTrasladosCaja" />
+        </set>
+    </class>
+</hibernate-mapping>

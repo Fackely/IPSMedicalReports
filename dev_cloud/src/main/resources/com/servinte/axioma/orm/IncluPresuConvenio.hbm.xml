@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 13, 2011 7:20:42 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.IncluPresuConvenio" table="inclu_presu_convenio" schema="odontologia">
+        <comment>Registro del convenio y los programas / servicios asociados a este en el proceso de contrataci&#195;&#179;n de las inclusiones</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.seq_inclu_presu_convenio</param>
+			</generator>
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true">
+                <comment>Contrato asociado al convenio</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="incluPresuEncabezado" class="com.servinte.axioma.orm.IncluPresuEncabezado" fetch="select">
+            <column name="inclu_presu_encabezado" precision="12" scale="0" not-null="true">
+                <comment>Registro del encabezado asociado al proceso de contrataci&#195;&#179;n de las inclusiones</comment>
+            </column>
+        </many-to-one>
+        <set name="incluServicioConvenios" inverse="true" lazy="true" table="inclu_servicio_convenio" fetch="select">
+            <key>
+                <column name="inclu_presu_convenio" precision="12" scale="0" not-null="true">
+                    <comment>Relaci&#195;&#179;n al convenio con el cual se realiza la contrataci&#195;&#179;n de las inclusiones</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluServicioConvenio" />
+        </set>
+        <set name="incluProgramaConvenios" inverse="true" lazy="true" table="inclu_programa_convenio" fetch="select" cascade="all">
+            <key>
+                <column name="inclu_presu_convenio" precision="12" scale="0" not-null="true">
+                    <comment>Relaci&#195;&#179;n al convenio con el cual se realiza la contrataci&#195;&#179;n de las inclusiones</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluProgramaConvenio" />
+        </set>
+    </class>
+</hibernate-mapping>

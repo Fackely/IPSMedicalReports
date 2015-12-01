@@ -1,0 +1,27 @@
+<?xml version="1.0"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ZonasDomicilio" table="zonas_domicilio" schema="administracion">
+        <id name="acronimo" type="char">
+            <column name="acronimo" length="1" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" not-null="true" />
+        </property>
+        <set name="registroEventoCatastroficos" inverse="true" lazy="true" table="registro_evento_catastrofico" fetch="select">
+            <key>
+                <column name="zona_urbana_evento" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEventoCatastrofico" />
+        </set>
+        <set name="pacienteses" inverse="true" lazy="true" table="pacientes" fetch="select">
+            <key>
+                <column name="zona_domicilio" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Pacientes" />
+        </set>
+    </class>
+</hibernate-mapping>

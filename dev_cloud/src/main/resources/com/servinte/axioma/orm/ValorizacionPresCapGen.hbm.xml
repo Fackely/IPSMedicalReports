@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/05/2011 11:32:31 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ValorizacionPresCapGen" table="valorizacion_pres_cap_gen" schema="capitacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_val_pres_cap_gen</param>
+			</generator>
+        </id>
+        <many-to-one name="paramPresupuestosCap" class="com.servinte.axioma.orm.ParamPresupuestosCap" fetch="select">
+            <column name="param_presup_cap" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="nivelAtencion" class="com.servinte.axioma.orm.NivelAtencion" fetch="select">
+            <column name="nivel_atencion" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="mes" type="int">
+            <column name="mes" precision="2" scale="0" not-null="true" />
+        </property>
+        <property name="subSeccion" type="string">
+            <column name="sub_seccion" length="20" not-null="true" />
+        </property>
+        <property name="porcentajeGastoSubSeccion" type="big_decimal">
+            <column name="porcentaje_gasto_sub_seccion" precision="5" not-null="true" />
+        </property>
+        <property name="valorGastoSubSeccion" type="big_decimal">
+            <column name="valor_gasto_sub_seccion" precision="15" not-null="true" />
+        </property>
+        <property name="activo" type="char">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

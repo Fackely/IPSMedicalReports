@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 5, 2010 3:51:42 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConcEgrXusuXcatencion" table="conc_egr_xusu_xcatencion" schema="tesoreria">
+        <comment>Conceptos Egreso para los diferentes Centros de Atenci&#195;&#179;n y Tipos de usuario. Ver: hist_conc_egr_xusu_xcatencion</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true">
+                <comment>Centro de atenci&#195;&#179;n al que esta relacionado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="conceptosDeEgreso" class="com.servinte.axioma.orm.ConceptosDeEgreso" fetch="select">
+            <column name="concepto_de_egreso" precision="10" scale="0" not-null="true">
+                <comment>Conceptos de egreso de caja que se encuentran parametrizados en la funcionalidad -Conceptos Egresos de Caja-</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tiposUsuarios" class="com.servinte.axioma.orm.TiposUsuarios" fetch="select">
+            <column name="tipo_usuario_autoriza" precision="10" scale="0" not-null="true">
+                <comment>Estas opciones corresponden a las definidas a nivel de base de datos en la tabla -tiposUsuario- seg&#195;&#186;n el campo -actividad-</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaInicialVigencia" type="date">
+            <column name="fecha_inicial_vigencia" length="13" not-null="true">
+                <comment>Rango de fechas para el cual aplica el valor m&#195;&#161;ximo y tipo de usuario para el concepto seleccionado</comment>
+            </column>
+        </property>
+        <property name="fechaFinalVigencia" type="date">
+            <column name="fecha_final_vigencia" length="13" not-null="true">
+                <comment>Rango de fechas para el cual aplica el valor m&#195;&#161;ximo y tipo de usuario para el concepto seleccionado</comment>
+            </column>
+        </property>
+        <property name="valorMaximoAutorizado" type="big_decimal">
+            <column name="valor_maximo_autorizado" not-null="true">
+                <comment>Valor de egreso permitido para el centro de atenci&#195;&#179;, concepto de egreso seleccionado y seg&#195;&#186;n la periodicidad seleccionada</comment>
+            </column>
+        </property>
+        <property name="periodicidadDias" type="java.lang.Integer">
+            <column name="periodicidad_dias">
+                <comment>Rango de tiempo en dias para controlar el valor m&#195;&#161;ximo a Autorizar.</comment>
+            </column>
+        </property>
+        <property name="activo" type="char">
+            <column name="activo" length="1" not-null="true">
+                <comment>Campo tipo check, que permite chequear o deschequear si se encuentra activo o no dentro del sistema</comment>
+            </column>
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </property>
+        <set name="registroEgresosDeCajas" inverse="true" lazy="true" table="registro_egresos_de_caja" fetch="select">
+            <key>
+                <column name="conc_egr_xusu_xcate" precision="10" scale="0" not-null="true">
+                    <comment>Concepto de Egreso por Usuario por Centro de Atenci&#195;&#179;n con el que ser&#195;&#161; registrado el Egreso de Caja</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEgresosDeCaja" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EstadosCiviles" table="estados_civiles" schema="administracion">
+        <id name="acronimo" type="char">
+            <column name="acronimo" length="1" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" not-null="true" />
+        </property>
+        <property name="codigoInterfaz" type="string">
+            <column name="codigo_interfaz" length="2" />
+        </property>
+        <set name="personases" inverse="true" lazy="true" table="personas" fetch="select">
+            <key>
+                <column name="estado_civil" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Personas" />
+        </set>
+        <set name="detPromocionesOdos" inverse="true" lazy="true" table="det_promociones_odo" fetch="select">
+            <key>
+                <column name="estado_civil" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetPromocionesOdo" />
+        </set>
+        <set name="logDetPromocionesOdos" inverse="true" lazy="true" table="log_det_promociones_odo" fetch="select">
+            <key>
+                <column name="estado_civil" length="1" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetPromocionesOdo" />
+        </set>
+    </class>
+</hibernate-mapping>

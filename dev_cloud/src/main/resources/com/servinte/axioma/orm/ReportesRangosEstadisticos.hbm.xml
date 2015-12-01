@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ReportesRangosEstadisticos" table="reportes_rangos_estadisticos" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="funRangosEstadisticos" class="com.servinte.axioma.orm.FunRangosEstadisticos" fetch="select">
+            <column name="funcionalidad" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="256" not-null="true" />
+        </property>
+        <property name="tipoRango" type="string">
+            <column name="tipo_rango" length="4" />
+        </property>
+        <property name="unidadMedida" type="string">
+            <column name="unidad_medida" length="4" />
+        </property>
+        <property name="posicion" type="string">
+            <column name="posicion" length="4" />
+        </property>
+        <property name="parametrizable" type="string">
+            <column name="parametrizable" length="1" not-null="true" />
+        </property>
+        <set name="logReporteses" inverse="true" lazy="true" table="log_reportes" fetch="select">
+            <key>
+                <column name="reporte" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogReportes" />
+        </set>
+        <set name="rangosEstadisticoses" inverse="true" lazy="true" table="rangos_estadisticos" fetch="select">
+            <key>
+                <column name="reporte" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RangosEstadisticos" />
+        </set>
+    </class>
+</hibernate-mapping>

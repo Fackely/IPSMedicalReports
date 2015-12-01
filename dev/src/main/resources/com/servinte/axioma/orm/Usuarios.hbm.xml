@@ -1,0 +1,3101 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/06/2011 12:41:12 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Usuarios" table="usuarios" schema="administracion">
+        <id name="login" type="string">
+            <column name="login" length="30" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuariosByUsuarioCreacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_creacion" length="30" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" fetch="select" cascade="all">
+            <column name="codigo_persona" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cargosUsuarios" class="com.servinte.axioma.orm.CargosUsuarios" fetch="select">
+            <column name="cargo" />
+        </many-to-one>
+        <property name="password" type="string">
+            <column name="password" length="32" not-null="true" />
+        </property>
+        <property name="contratoInterfaz" type="java.lang.Long">
+            <column name="contrato_interfaz" precision="14" scale="0" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="13" />
+        </property>
+        <property name="horaCreacion" type="string">
+            <column name="hora_creacion" length="5" />
+        </property>
+        <property name="fechaUltimaActivaUsu" type="date">
+            <column name="fecha_ultima_activa_usu" length="13" />
+        </property>
+        <property name="fechaUltimaActivaPasswd" type="date">
+            <column name="fecha_ultima_activa_passwd" length="13" />
+        </property>
+        <property name="diasCaducidadPassword" type="java.lang.Integer">
+            <column name="dias_caducidad_password" />
+        </property>
+        <property name="diasInactivarUsuario" type="java.lang.Integer">
+            <column name="dias_inactivar_usuario" />
+        </property>
+        <property name="fechaUltimaInactUsu" type="date">
+            <column name="fecha_ultima_inact_usu" length="13" />
+        </property>
+        <property name="fechaUltimaCaducidadPasswd" type="date">
+            <column name="fecha_ultima_caducidad_passwd" length="13" />
+        </property>
+        <property name="activo" type="java.lang.Character">
+            <column name="activo" length="1" />
+        </property>
+        <property name="passwordActivo" type="java.lang.Character">
+            <column name="password_activo" length="1" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" />
+        </property>
+        <set name="presupuestoLogImpresions" table="presupuesto_log_impresion" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoLogImpresion" />
+        </set>
+        <set name="histoMontosCobros" table="histo_montos_cobro" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoMontosCobro" />
+        </set>
+        <set name="nivelAutorOcupMedicas" table="nivel_autor_ocup_medica" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorOcupMedica" />
+        </set>
+        <set name="multasCitasesForUsuarioAnuCond" table="multas_citas" schema="consultaexterna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anu_cond" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MultasCitas" />
+        </set>
+        <set name="respAutorizacionesesForPersonaRegistro" table="resp_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="persona_registro" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RespAutorizaciones" />
+        </set>
+        <set name="logCitasOdontologicasesForUsuarioRegistra" table="log_citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCitasOdontologicas" />
+        </set>
+        <set name="serviciosGruposEsteticoses" table="servicios_grupos_esteticos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosGruposEsteticos" />
+        </set>
+        <set name="solicitudesCirugiasForUsuarioDeseleccionSalida" table="solicitudes_cirugia" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_deseleccion_salida" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesCirugia" />
+        </set>
+        <set name="solicitudesCirugiasForUsuarioGrabacionSalida" table="solicitudes_cirugia" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_grabacion_salida" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesCirugia" />
+        </set>
+        <set name="tiposUsuarioCamas" table="tipos_usuario_cama" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposUsuarioCama" />
+        </set>
+        <set name="coberturasEntidadSubsForUsuarioModifica" table="coberturas_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturasEntidadSub" />
+        </set>
+        <set name="articulos" table="articulo" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Articulo" />
+        </set>
+        <set name="cuentases" table="cuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Cuentas" />
+        </set>
+        <set name="evolucionesOdos" table="evoluciones_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EvolucionesOdo" />
+        </set>
+        <set name="exCoberAgruArtEntSubsForUsuarioInactivacion" table="ex_cober_agru_art_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberAgruArtEntSub" />
+        </set>
+        <set name="conceptosRetencionsForUsuarioInactivacion" table="conceptos_retencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosRetencion" />
+        </set>
+        <set name="cierreIngresosesForUsuarioApertura" table="cierre_ingresos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_apertura" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreIngresos" />
+        </set>
+        <set name="conceptosPagosPooleses" table="conceptos_pagos_pooles" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosPagosPooles" />
+        </set>
+        <set name="motSatisfaccionPacs" table="mot_satisfaccion_pac" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotSatisfaccionPac" />
+        </set>
+        <set name="anulacionOrdenAmbulatoriases" table="anulacion_orden_ambulatorias" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionOrdenAmbulatorias" />
+        </set>
+        <set name="agruArtIncluexcluEconts" table="agru_art_incluexclu_econt" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtIncluexcluEcont" />
+        </set>
+        <set name="detEmiTarjetaClientesForUsuarioResponsable" table="det_emi_tarjeta_cliente" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_responsable" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetEmiTarjetaCliente" />
+        </set>
+        <set name="respAutorizacionesesForUsuarioAnulacion" table="resp_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anulacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RespAutorizaciones" />
+        </set>
+        <set name="envioAutorizacioneses" table="envio_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioAutorizaciones" />
+        </set>
+        <set name="usuariosEntidadSubsForUsuario" table="usuarios_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuariosEntidadSub" />
+        </set>
+        <set name="motivoCitaPacientes" table="motivo_cita_paciente" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modificacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotivoCitaPaciente" />
+        </set>
+        <set name="reclamacionesAccEveFactsForUsuarioRadicacion" table="reclamaciones_acc_eve_fact" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_radicacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReclamacionesAccEveFact" />
+        </set>
+        <set name="conceptosRetencionsForUsuarioModifica" table="conceptos_retencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosRetencion" />
+        </set>
+        <set name="excepcionesNaturalezas" table="excepciones_naturaleza" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true">
+                    <comment>Usuario quien registra la excepci&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcepcionesNaturaleza" />
+        </set>
+        <set name="exCoberArtEntSubsForUsuarioInactivacion" table="ex_cober_art_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberArtEntSub" />
+        </set>
+        <set name="reclamacionesAccEveFactsForUsuarioModifica" table="reclamaciones_acc_eve_fact" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReclamacionesAccEveFact" />
+        </set>
+        <set name="reingresoSalidaHospiDiasForUsuarioSalida" table="reingreso_salida_hospi_dia" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_salida" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReingresoSalidaHospiDia" />
+        </set>
+        <set name="tarjetaFinancieraReteicas" table="tarjeta_financiera_reteica" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarjetaFinancieraReteica" />
+        </set>
+        <set name="historicoSubcuentases" table="historico_subcuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoSubcuentas" />
+        </set>
+        <set name="cuentasXEspOdontos" table="cuentas_x_esp_odonto" schema="interfaz" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditor&#237;a</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasXEspOdonto" />
+        </set>
+        <set name="anulacionCargosFarmacias" table="anulacion_cargos_farmacia" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionCargosFarmacia" />
+        </set>
+        <set name="logCitasOdontologicasesForUsuarioConfirmacion" table="log_citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_confirmacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCitasOdontologicas" />
+        </set>
+        <set name="registroEgresosDeCajas" table="registro_egresos_de_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditor&#237;a</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEgresosDeCaja" />
+        </set>
+        <set name="pisoses" table="pisos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Pisos" />
+        </set>
+        <set name="notasAdministrativases" table="notas_administrativas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NotasAdministrativas" />
+        </set>
+        <set name="descuentosOdonAtens" table="descuentos_odon_aten" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DescuentosOdonAten" />
+        </set>
+        <set name="solicitudCambioServiciosForUsuarioConfirma" table="solicitud_cambio_servicio" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_confirma" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudCambioServicio" />
+        </set>
+        <set name="logsActivarCamasReservadases" table="logs_activar_camas_reservadas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_cancela" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogsActivarCamasReservadas" />
+        </set>
+        <set name="tiposAmbulancias" table="tipos_ambulancia" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposAmbulancia" />
+        </set>
+        <set name="presupuestoCuotasEsps" table="presupuesto_cuotas_esp" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoCuotasEsp" />
+        </set>
+        <set name="detParamEntidSubcontratadas" table="det_param_entid_subcontratada" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetParamEntidSubcontratada" />
+        </set>
+        <set name="aprobAnulFacturasVariasesForUsuarioAprueba" table="aprob_anul_facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_aprueba" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AprobAnulFacturasVarias" />
+        </set>
+        <set name="lecturaPlanosAhs" table="lectura_planos_ah" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LecturaPlanosAh" />
+        </set>
+        <set name="anulacionRecibosCajas" table="anulacion_recibos_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionRecibosCaja" />
+        </set>
+        <set name="paqAgrupacionServicioses" table="paq_agrupacion_servicios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaqAgrupacionServicios" />
+        </set>
+        <set name="hisConfPlanTratamientosForUsuarioModifica" table="his_conf_plan_tratamiento" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfPlanTratamiento" />
+        </set>
+        <set name="logPresupuestoOdos" table="log_presupuesto_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoOdo" />
+        </set>
+        <set name="adjRespAutorizacioneses" table="adj_resp_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdjRespAutorizaciones" />
+        </set>
+        <set name="nivelAutorServMedics" table="nivel_autor_serv_medic" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorServMedic" />
+        </set>
+        <set name="cancelacionAgendaOdos" table="cancelacion_agenda_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CancelacionAgendaOdo" />
+        </set>
+        <set name="paquetesOdontologicoses" table="paquetes_odontologicos" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetesOdontologicos" />
+        </set>
+        <set name="logDetPromocionesOdos" table="log_det_promociones_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetPromocionesOdo" />
+        </set>
+        <set name="artIncluexcluEconts" table="art_incluexclu_econt" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtIncluexcluEcont" />
+        </set>
+        <set name="envioInfoAtenIniUrgs" table="envio_info_aten_ini_urg" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_envio" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioInfoAtenIniUrg" />
+        </set>
+        <set name="detalleCoberturas" table="detalle_cobertura" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleCobertura" />
+        </set>
+        <set name="tarifasProcConEntSubs" table="tarifas_proc_con_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasProcConEntSub" />
+        </set>
+        <set name="detVigConRetCfvsForUsuarioModifica" table="det_vig_con_ret_cfv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetCfv" />
+        </set>
+        <set name="logDetVigConRetencions" table="log_det_vig_con_retencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetVigConRetencion" />
+        </set>
+        <set name="usuariosesForUsuarioCreacion" table="usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_creacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Usuarios" />
+        </set>
+        <set name="logCoberturasEntSubs" table="log_coberturas_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCoberturasEntSub" />
+        </set>
+        <set name="detTrasSolTransplantes" table="det_tras_sol_transplante" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_traslado" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetTrasSolTransplante" />
+        </set>
+        <set name="encabezadoHistoOrdenMs" table="encabezado_histo_orden_m" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EncabezadoHistoOrdenM" />
+        </set>
+        <set name="agendaOdontologicas" table="agenda_odontologica" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgendaOdontologica" />
+        </set>
+        <set name="artIncluexcluCcs" table="art_incluexclu_cc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtIncluexcluCc" />
+        </set>
+        <set name="logLecturaPlanosEnts" table="log_lectura_planos_ent" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_ejecucion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogLecturaPlanosEnt" />
+        </set>
+        <set name="cuposAgendaOdos" table="cupos_agenda_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuposAgendaOdo" />
+        </set>
+        <set name="honorariosEspServs" table="honorarios_esp_serv" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HonorariosEspServ" />
+        </set>
+        <set name="concEgrXusuXcatencions" table="conc_egr_xusu_xcatencion" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditor&#237;a</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConcEgrXusuXcatencion" />
+        </set>
+        <set name="detCaPromocionesOdos" table="det_ca_promociones_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCaPromocionesOdo" />
+        </set>
+        <set name="logEsqTarInvContratos" table="log_esq_tar_inv_contrato" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEsqTarInvContrato" />
+        </set>
+        <set name="aprobAnulFacturasVariasesForUsuarioAnula" table="aprob_anul_facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anula" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AprobAnulFacturasVarias" />
+        </set>
+        <set name="incluExcluCcs" table="inclu_exclu_cc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluExcluCc" />
+        </set>
+        <set name="movimientoses" table="movimientos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Movimientos" />
+        </set>
+        <set name="localidadeses" table="localidades" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Localidades" />
+        </set>
+        <set name="historialBusqArchivoplanos" table="historial_busq_archivoplano" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistorialBusqArchivoplano" />
+        </set>
+        <set name="nivelAutorizacions" table="nivel_autorizacion" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorizacion" />
+        </set>
+        <set name="habitacioneses" table="habitaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Habitaciones" />
+        </set>
+        <set name="peticionesPosponers" table="peticiones_posponer" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PeticionesPosponer" />
+        </set>
+        <set name="reclamacionesAccEveFactsForUsuarioRegistra" table="reclamaciones_acc_eve_fact" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReclamacionesAccEveFact" />
+        </set>
+        <set name="presuPlanTtoProgSers" table="presu_plan_tto_prog_ser" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuPlanTtoProgSer" />
+        </set>
+        <set name="naturalezaArticulos" table="naturaleza_articulo" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NaturalezaArticulo" />
+        </set>
+        <set name="conveniosPresupuestoOdos" table="convenios_presupuesto_odo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConveniosPresupuestoOdo" />
+        </set>
+        <set name="pacEntidadesSubcontratadases" table="pac_entidades_subcontratadas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PacEntidadesSubcontratadas" />
+        </set>
+        <set name="ajusFacturasVariasesForUsuarioAprobAnul" table="ajus_facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_aprob_anul" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AjusFacturasVarias" />
+        </set>
+        <set name="detCaPromocionesOdos_1" table="det_ca_promociones_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCaPromocionesOdo" />
+        </set>
+        <set name="autorizacionConvIngPacs" table="autorizacion_conv_ing_pac" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditoria</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionConvIngPac" />
+        </set>
+        <set name="descuentosOdons" table="descuentos_odon" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DescuentosOdon" />
+        </set>
+        <set name="logCadupwdUsuariosesForLoginUsuario" table="log_cadupwd_usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login_usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCadupwdUsuarios" />
+        </set>
+        <set name="tarifasInventarios" table="tarifas_inventario" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasInventario" />
+        </set>
+        <set name="logControlAnticiposContratos" table="log_control_anticipos_contrato" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogControlAnticiposContrato" />
+        </set>
+        <set name="cuotasOdontEspecialidads" table="cuotas_odont_especialidad" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuotasOdontEspecialidad" />
+        </set>
+        <set name="logConsulReporPromos" table="log_consul_repor_promo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogConsulReporPromo" />
+        </set>
+        <set name="roleses" table="roles_usuarios" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="login" length="30" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Roles">
+                <column name="nombre_rol" length="64" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="tarifasRevCuentas" table="tarifas_rev_cuenta" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasRevCuenta" />
+        </set>
+        <set name="esqTarInventariosContratos" table="esq_tar_inventarios_contrato" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarInventariosContrato" />
+        </set>
+        <set name="ordenesAmbulatoriasesForUsuarioConfirma" table="ordenes_ambulatorias" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_confirma" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdenesAmbulatorias" />
+        </set>
+        <set name="porcentajeArtExces" table="porcentaje_art_exce" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PorcentajeArtExce" />
+        </set>
+        <set name="otrosSis" table="otros_si" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Usuario que genera el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OtrosSi" />
+        </set>
+        <set name="centrosCostos" table="centros_costo_usuario" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.CentrosCosto">
+                <column name="centro_costo" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="lecturaPlanosAcs" table="lectura_planos_ac" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LecturaPlanosAc" />
+        </set>
+        <set name="detVigConRetencionsForUsuarioInactivacion" table="det_vig_con_retencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetencion" />
+        </set>
+        <set name="detCargoses" table="det_cargos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+        <set name="agruSerDescComConvxconts" table="agru_ser_desc_com_convxcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerDescComConvxcont" />
+        </set>
+        <set name="agrupArtDescComConvconts" table="agrup_art_desc_com_convcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupArtDescComConvcont" />
+        </set>
+        <set name="agruArtIncluexcluCcs" table="agru_art_incluexclu_cc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtIncluexcluCc" />
+        </set>
+        <set name="tiposTarjClientes" table="tipos_tarj_cliente" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposTarjCliente" />
+        </set>
+        <set name="inclusionesExclusioneses" table="inclusiones_exclusiones" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InclusionesExclusiones" />
+        </set>
+        <set name="detConvPromocionesOdos" table="det_conv_promociones_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetConvPromocionesOdo" />
+        </set>
+        <set name="egresoses" table="egresos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_responsable" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Egresos" />
+        </set>
+        <set name="trasladoCentroAtencions" table="traslado_centro_atencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_responsable" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladoCentroAtencion" />
+        </set>
+        <set name="multasCitasesForUsuarioGeneracion" table="multas_citas" schema="consultaexterna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_generacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MultasCitas" />
+        </set>
+        <set name="ajusFacturasVariasesForUsuarioModifica" table="ajus_facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AjusFacturasVarias" />
+        </set>
+        <set name="controlAnticiposContratos" table="control_anticipos_contrato" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ControlAnticiposContrato" />
+        </set>
+        <set name="regionesCoberturas" table="regiones_cobertura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegionesCobertura" />
+        </set>
+        <set name="cargosDirectoses" table="cargos_directos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CargosDirectos" />
+        </set>
+        <set name="facturasVariasesForUsuarioAnulacion" table="facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anulacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FacturasVarias" />
+        </set>
+        <set name="aplicacionPagosFvariasesForUsuarioAnula" table="aplicacion_pagos_fvarias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anula" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AplicacionPagosFvarias" />
+        </set>
+        <set name="plantillasPacienteses" table="plantillas_pacientes" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modificacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PlantillasPacientes" />
+        </set>
+        <set name="detAsociosDetFacturas" table="det_asocios_det_factura" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAsociosDetFactura" />
+        </set>
+        <set name="tarifasIsses" table="tarifas_iss" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasIss" />
+        </set>
+        <set name="turnoDeCajas" table="turno_de_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cajero" length="30" not-null="true">
+                    <comment>Cajero que realizo la apertura</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TurnoDeCaja" />
+        </set>
+        <set name="coberturasXContratos" table="coberturas_x_contrato" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturasXContrato" />
+        </set>
+        <set name="ordenesAmbulatoriasesForUsuarioSolicita" table="ordenes_ambulatorias" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_solicita" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdenesAmbulatorias" />
+        </set>
+        <set name="lecturaPlanosAns" table="lectura_planos_an" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LecturaPlanosAn" />
+        </set>
+        <set name="citasOdontologicasesForUsuarioConfirmacion" table="citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_confirmacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CitasOdontologicas" />
+        </set>
+        <set name="lecturaPlanosAus" table="lectura_planos_au" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LecturaPlanosAu" />
+        </set>
+        <set name="motivosNoConsentimientoInfos" table="motivos_no_consentimiento_info" schema="historiaclinica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotivosNoConsentimientoInfo" />
+        </set>
+        <set name="logProgramasServiciosPlanTs" table="log_programas_servicios_plan_t" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogProgramasServiciosPlanT" />
+        </set>
+        <set name="componenteses" table="componentes" schema="historiaclinica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Componentes" />
+        </set>
+        <set name="servExeCobConvxconts" table="serv_exe_cob_convxcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServExeCobConvxcont" />
+        </set>
+        <set name="ventaTarjetaClientesForUsuarioModifica" table="venta_tarjeta_cliente" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.VentaTarjetaCliente" />
+        </set>
+        <set name="devolRecibosCajasForUsuarioAprobacion" table="devol_recibos_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_aprobacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DevolRecibosCaja" />
+        </set>
+        <set name="recomendacionesContOdontos" table="recomendaciones_cont_odonto" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RecomendacionesContOdonto" />
+        </set>
+        <set name="artExceTariConts" table="art_exce_tari_cont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtExceTariCont" />
+        </set>
+        <set name="ripsConsultorioses" table="rips_consultorios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RipsConsultorios" />
+        </set>
+        <set name="tiposRetencionConcFvsForUsuarioInactivacion" table="tipos_retencion_conc_fv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionConcFv" />
+        </set>
+        <set name="logCuposAgendaOdos" table="log_cupos_agenda_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCuposAgendaOdo" />
+        </set>
+        <set name="logPromocionesOdontologicases" table="log_promociones_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPromocionesOdontologicas" />
+        </set>
+        <set name="presupuestoPiezases" table="presupuesto_piezas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoPiezas" />
+        </set>
+        <set name="consecutivosCentroAtens" table="consecutivos_centro_aten" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConsecutivosCentroAten" />
+        </set>
+        <set name="hisDetDescuentosOdons" table="his_det_descuentos_odon" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisDetDescuentosOdon" />
+        </set>
+        <set name="concEgrXusuXcatencions_1" table="conc_egr_xusu_xcatencion" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditor&#237;a</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConcEgrXusuXcatencion" />
+        </set>
+        <set name="logExCoberturasEntSubs" table="log_ex_coberturas_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogExCoberturasEntSub" />
+        </set>
+        <set name="indCalidadEspecialidads" table="ind_calidad_especialidad" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IndCalidadEspecialidad" />
+        </set>
+        <set name="solicitudCambioServiciosForUsuarioAnulacion" table="solicitud_cambio_servicio" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anulacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudCambioServicio" />
+        </set>
+        <set name="detFaltanteSobrantes" table="det_faltante_sobrante" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="responsable" length="30" not-null="true">
+                    <comment>Responsable de la genenracion del faltante / sobrante</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFaltanteSobrante" />
+        </set>
+        <set name="programases" table="programas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Programas" />
+        </set>
+        <set name="usuariosInactivoses" table="usuarios_inactivos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuariosInactivos" />
+        </set>
+        <set name="histoMontoServEsps" table="histo_monto_serv_esp" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoMontoServEsp" />
+        </set>
+        <set name="conocimientoServPacs" table="conocimiento_serv_pac" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modificacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConocimientoServPac" />
+        </set>
+        <set name="excCcInterconsultas" table="exc_cc_interconsulta" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcCcInterconsulta" />
+        </set>
+        <set name="validacionesBdConvIngPacs" table="validaciones_bd_conv_ing_pac" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditoria</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValidacionesBdConvIngPac" />
+        </set>
+        <set name="porcentajeSerExces" table="porcentaje_ser_exce" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PorcentajeSerExce" />
+        </set>
+        <set name="usuariosContratosNominas" table="usuarios_contratos_nomina" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuariosContratosNomina" />
+        </set>
+        <set name="pacientesConvOdos" table="pacientes_conv_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PacientesConvOdo" />
+        </set>
+        <set name="agrupArtExepCobConvxconts" table="agrup_art_exep_cob_convxcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupArtExepCobConvxcont" />
+        </set>
+        <set name="citasOdontologicasesForUsuarioReserva" table="citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_reserva" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CitasOdontologicas" />
+        </set>
+        <set name="barrioses" table="barrios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Barrios" />
+        </set>
+        <set name="despachos" table="despacho" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Despacho" />
+        </set>
+        <set name="paqCompArticuloses" table="paq_comp_articulos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaqCompArticulos" />
+        </set>
+        <set name="correosConvenios" table="correos_convenio" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CorreosConvenio" />
+        </set>
+        <set name="citasOdontologicasesForUsuarioConfirma" table="citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_confirma" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CitasOdontologicas" />
+        </set>
+        <set name="aceptacionTrasladoCajas" table="aceptacion_traslado_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="testigo" length="30">
+                    <comment>Testigo de la aceptacion registrado en el sistema</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AceptacionTrasladoCaja" />
+        </set>
+        <set name="informeInconsistenciases" table="informe_inconsistencias" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modificacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeInconsistencias" />
+        </set>
+        <set name="unidadAgendaServCitaOdontos" table="unidad_agenda_serv_cita_odonto" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true">
+                    <comment>Usuario que realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UnidadAgendaServCitaOdonto" />
+        </set>
+        <set name="detPromocionesOdos" table="det_promociones_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetPromocionesOdo" />
+        </set>
+        <set name="tarifasSoats" table="tarifas_soat" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasSoat" />
+        </set>
+        <set name="incluPresuEncabezados" table="inclu_presu_encabezado" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true">
+                    <comment>Usuario que registra o modifica la contrataci&#243;n de las inclusiones</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluPresuEncabezado" />
+        </set>
+        <set name="bonosConvIngPacs" table="bonos_conv_ing_pac" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditoria</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.BonosConvIngPac" />
+        </set>
+        <set name="contratoOdontologicos" table="contrato_odontologico" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ContratoOdontologico" />
+        </set>
+        <set name="registroEventoCatastroficos" table="registro_evento_catastrofico" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEventoCatastrofico" />
+        </set>
+        <set name="movimientosCajas" table="movimientos_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true">
+                    <comment>Usuario que ejecuta el movimiento</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MovimientosCaja" />
+        </set>
+        <set name="logAliadoOdontologicos" table="log_aliado_odontologico" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogAliadoOdontologico" />
+        </set>
+        <set name="histoCambioResponsablesForResponsable" table="histo_cambio_responsable" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="responsable" length="30" not-null="true">
+                    <comment>Nuevo responsable</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoCambioResponsable" />
+        </set>
+        <set name="odontogramas" table="odontograma" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Odontograma" />
+        </set>
+        <set name="porcentajeAgruSerExces" table="porcentaje_agru_ser_exce" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PorcentajeAgruSerExce" />
+        </set>
+        <set name="autorizacionesEntidadesSubs" table="autorizaciones_entidades_sub" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anulacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" />
+        </set>
+        <set name="conveniosIngresoPacientes" table="convenios_ingreso_paciente" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditoria</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConveniosIngresoPaciente" />
+        </set>
+        <set name="transportadoraValoreses" table="transportadora_valores" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TransportadoraValores" />
+        </set>
+        <set name="logDetEmiTarjetaClientes" table="log_det_emi_tarjeta_cliente" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetEmiTarjetaCliente" />
+        </set>
+        <set name="serviciosCitaOdontologicas" table="servicios_cita_odontologica" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosCitaOdontologica" />
+        </set>
+        <set name="beneficiariosPacientes" table="beneficiarios_paciente" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modificacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.BeneficiariosPaciente" />
+        </set>
+        <set name="presupuestoPaqueteses" table="presupuesto_paquetes" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoPaquetes" />
+        </set>
+        <set name="firmasContOtrsiemprs" table="firmas_cont_otrsiempr" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FirmasContOtrsiempr" />
+        </set>
+        <set name="presuOdoConvDetServProgs" table="presu_odo_conv_det_serv_prog" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuOdoConvDetServProg" />
+        </set>
+        <set name="indCalidadCcs" table="ind_calidad_cc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IndCalidadCc" />
+        </set>
+        <set name="anulacionPeticionQxes" table="anulacion_peticion_qx" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionPeticionQx" />
+        </set>
+        <set name="planTratamientosForUsuarioGrabacion" table="plan_tratamiento" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_grabacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PlanTratamiento" />
+        </set>
+        <set name="logEncaEmiTarjetaClientes" table="log_enca_emi_tarjeta_cliente" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEncaEmiTarjetaCliente" />
+        </set>
+        <set name="motivosDescuentosOdons" table="motivos_descuentos_odon" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotivosDescuentosOdon" />
+        </set>
+        <set name="cobAgrupArticuloses" table="cob_agrup_articulos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CobAgrupArticulos" />
+        </set>
+        <set name="servAdicionalesProfesionaleses" table="serv_adicionales_profesionales" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServAdicionalesProfesionales" />
+        </set>
+        <set name="reservarCamas" table="reservar_cama" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReservarCama" />
+        </set>
+        <set name="detPlanTratamientos" table="det_plan_tratamiento" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetPlanTratamiento" />
+        </set>
+        <set name="logReasignarProfOdos" table="log_reasignar_prof_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_proceso" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogReasignarProfOdo" />
+        </set>
+        <set name="tarifasEntidadSubs" table="tarifas_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasEntidadSub" />
+        </set>
+        <set name="estadisticasServicioses" table="estadisticas_servicios" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EstadisticasServicios" />
+        </set>
+        <set name="histoDetMontoGens" table="histo_det_monto_gen" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoDetMontoGen" />
+        </set>
+        <set name="histoMontoAgrupServs" table="histo_monto_agrup_serv" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoMontoAgrupServ" />
+        </set>
+        <set name="artDescComConvxconts" table="art_desc_com_convxcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtDescComConvxcont" />
+        </set>
+        <set name="logEsqTarProcContratos" table="log_esq_tar_proc_contrato" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEsqTarProcContrato" />
+        </set>
+        <set name="emisionBonosDescs" table="emision_bonos_desc" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EmisionBonosDesc" />
+        </set>
+        <set name="detConvPromocionesOdos_1" table="det_conv_promociones_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetConvPromocionesOdo" />
+        </set>
+        <set name="envioAutomaticoEmailsForUsuarioModifica" table="envio_automatico_email" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioAutomaticoEmail" />
+        </set>
+        <set name="logActiinactiUsuariosesForLoginUsuario" table="log_actiinacti_usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login_usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogActiinactiUsuarios" />
+        </set>
+        <set name="detNotasAdministrativases" table="det_notas_administrativas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetNotasAdministrativas" />
+        </set>
+        <set name="hisDescuentosOdonAtens" table="his_descuentos_odon_aten" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisDescuentosOdonAten" />
+        </set>
+        <set name="motivosModifiPresupuestos" table="motivos_modifi_presupuesto" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotivosModifiPresupuesto" />
+        </set>
+        <set name="paiseses" table="paises" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Paises" />
+        </set>
+        <set name="rangosEstadisticoses" table="rangos_estadisticos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RangosEstadisticos" />
+        </set>
+        <set name="coberturasEntidadSubsForUsuarioInactivacion" table="coberturas_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturasEntidadSub" />
+        </set>
+        <set name="tiposRetencionClaseInvsForUsuarioInactivacion" table="tipos_retencion_clase_inv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionClaseInv" />
+        </set>
+        <set name="presupuestoDctoOdonsForUsuarioModifica" table="presupuesto_dcto_odon" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoDctoOdon" />
+        </set>
+        <set name="presuContratoOdoImps" table="presu_contrato_odo_imp" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuContratoOdoImp" />
+        </set>
+        <set name="informeAtencionIniUrgs" table="informe_atencion_ini_urg" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_generacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeAtencionIniUrg" />
+        </set>
+        <set name="conceptosRetencionTercerosForUsuarioModifica" table="conceptos_retencion_tercero" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosRetencionTercero" />
+        </set>
+        <set name="detVigConRetGruposForUsuarioModifica" table="det_vig_con_ret_grupo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetGrupo" />
+        </set>
+        <set name="cargosDirectosHcs" table="cargos_directos_hc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CargosDirectosHc" />
+        </set>
+        <set name="paquetesConvenios" table="paquetes_convenio" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetesConvenio" />
+        </set>
+        <set name="tarjetaFinancieraComisions" table="tarjeta_financiera_comision" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarjetaFinancieraComision" />
+        </set>
+        <set name="tipoHabitacions" table="tipo_habitacion" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TipoHabitacion" />
+        </set>
+		<set name="datosFinanciacions" table="datos_financiacion" schema="carterapaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DatosFinanciacion" />
+        </set>
+        <set name="clasificaPacientesOdos" table="clasifica_pacientes_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasificaPacientesOdo" />
+        </set>
+        <set name="responsablesPacienteses" table="responsables_pacientes" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ResponsablesPacientes" />
+        </set>
+        <set name="detAutorizacioneses" table="det_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAutorizaciones" />
+        </set>
+        <set name="reingresoSalidaHospiDiasForUsuarioIngreso" table="reingreso_salida_hospi_dia" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_ingreso" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReingresoSalidaHospiDia" />
+        </set>
+        <set name="logEstadCargoRevisCuentas" table="log_estad_cargo_revis_cuenta" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEstadCargoRevisCuenta" />
+        </set>
+        <set name="solicitudesSubcuentas" table="solicitudes_subcuenta" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesSubcuenta" />
+        </set>
+        <set name="esqTarProcedimientoContratos" table="esq_tar_procedimiento_contrato" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarProcedimientoContrato" />
+        </set>
+        <set name="poolesConvenios" table="pooles_convenio" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesConvenio" />
+        </set>
+        <set name="detalleMontos" table="detalle_monto" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleMonto" />
+        </set>
+        <set name="envioAutomaticoEmailsForUsuario" table="envio_automatico_email" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioAutomaticoEmail" />
+        </set>
+        <set name="aplicacionPagosFvariasesForUsuario" table="aplicacion_pagos_fvarias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AplicacionPagosFvarias" />
+        </set>
+        <set name="honorariosPoolServs" table="honorarios_pool_serv" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HonorariosPoolServ" />
+        </set>
+        <set name="cierresCajasesForCajero" table="cierres_cajas" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cajero" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierresCajas" />
+        </set>
+        <set name="cuentasProcesoDists" table="cuentas_proceso_dist" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasProcesoDist" />
+        </set>
+        <set name="registroAccidentesTransitos" table="registro_accidentes_transito" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_grabacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroAccidentesTransito" />
+        </set>
+        <set name="naturalezaPacienteses" table="naturaleza_pacientes" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true">
+                    <comment>Usuario que realiza el registro de la naturaleza paciente</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NaturalezaPacientes" />
+        </set>
+        <set name="departamentoses" table="departamentos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Departamentos" />
+        </set>
+        <set name="tiposConvenios" table="tipos_convenio" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposConvenio" />
+        </set>
+        <set name="ingresosesForUsuarioPreingresoPen" table="ingresos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_preingreso_pen" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Ingresos" />
+        </set>
+        <set name="nivelAutorAgrServs" table="nivel_autor_agr_serv" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorAgrServ" />
+        </set>
+        <set name="artExpCobConvxconts" table="art_exp_cob_convxcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtExpCobConvxcont" />
+        </set>
+        <set name="detEntidadesSubcontratadases" table="det_entidades_subcontratadas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetEntidadesSubcontratadas" />
+        </set>
+        <set name="descComConvconts" table="desc_com_convcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DescComConvcont" />
+        </set>
+        <set name="logConceptosRetencions" table="log_conceptos_retencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogConceptosRetencion" />
+        </set>
+        <set name="recibosCajas" table="recibos_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RecibosCaja" />
+        </set>
+        <set name="logRipsEntidadesSubs" table="log_rips_entidades_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_proceso" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogRipsEntidadesSub" />
+        </set>
+        <set name="detServAutorizadosesForResponsable" table="det_serv_autorizados" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="responsable" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetServAutorizados" />
+        </set>
+        <set name="detServAutorizadosesForUsuarioModifica" table="det_serv_autorizados" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetServAutorizados" />
+        </set>
+        <set name="exCoberAgruSerEntSubsForUsuarioInactivacion" table="ex_cober_agru_ser_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberAgruSerEntSub" />
+        </set>
+        <set name="indGeneraleses" table="ind_generales" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IndGenerales" />
+        </set>
+        <set name="perfilNeds" table="perfil_ned" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PerfilNed" />
+        </set>
+        <set name="tiposRetencionGrupoSersForUsuarioInactivacion" table="tipos_retencion_grupo_ser" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionGrupoSer" />
+        </set>
+        <set name="detAgruHonoraEspServs" table="det_agru_honora_esp_serv" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAgruHonoraEspServ" />
+        </set>
+        <set name="coberturaServicioses" table="cobertura_servicios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturaServicios" />
+        </set>
+        <set name="paqueteses" table="paquetes" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Paquetes" />
+        </set>
+        <set name="usuAutorizanAnulFacsForUsuario" table="usu_autorizan_anul_fac" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuAutorizanAnulFac" />
+        </set>
+        <set name="logReporteses" table="log_reportes" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogReportes" />
+        </set>
+        <set name="logPresupuestoOdontosForUsuarioGeneracion" table="log_presupuesto_odonto" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_generacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoOdonto" />
+        </set>
+        <set name="detalleProgramases" table="detalle_programas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleProgramas" />
+        </set>
+        <set name="devolRecibosCajasForUsuarioDevolucion" table="devol_recibos_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_devolucion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DevolRecibosCaja" />
+        </set>
+        <set name="hisConfProgServPlanTs" table="his_conf_prog_serv_plan_t" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfProgServPlanT" />
+        </set>
+        <set name="arqueosDefinitivosesForUsuario" table="arqueos_definitivos" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArqueosDefinitivos" />
+        </set>
+        <set name="detalleMontoGenerals" table="detalle_monto_general" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleMontoGeneral" />
+        </set>
+        <set name="ordenesAmbulatoriasPosponers" table="ordenes_ambulatorias_posponer" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdenesAmbulatoriasPosponer" />
+        </set>
+        <set name="motivosCitas" table="motivos_cita" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotivosCita" />
+        </set>
+        <set name="tiposRetencionsForUsuarioInactivacion" table="tipos_retencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencion" />
+        </set>
+        <set name="logCitasOdontologicasesForUsuarioReserva" table="log_citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_reserva" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCitasOdontologicas" />
+        </set>
+        <set name="faltanteSobrantes" table="faltante_sobrante" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Usuario que ingresa el cambio de responsable</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FaltanteSobrante" />
+        </set>
+        <set name="honorariosPools" table="honorarios_pool" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HonorariosPool" />
+        </set>
+        <set name="excepIncluexcluContrs" table="excep_incluexclu_contr" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcepIncluexcluContr" />
+        </set>
+        <set name="reclamacionesAccEveFactsForUsuarioAnulacion" table="reclamaciones_acc_eve_fact" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anulacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReclamacionesAccEveFact" />
+        </set>
+        <set name="citasOdontologicasesForUsuarioRegistra" table="citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CitasOdontologicas" />
+        </set>
+        <set name="antecedentesVarioses" table="antecedentes_varios" schema="historiaclinica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login_usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AntecedentesVarios" />
+        </set>
+        <set name="detVigConRetGruposForUsuarioInactivacion" table="det_vig_con_ret_grupo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetGrupo" />
+        </set>
+        <set name="hisConfPlanTratamientosForUsuarioGrabacion" table="his_conf_plan_tratamiento" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_grabacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfPlanTratamiento" />
+        </set>
+        <set name="logMotivosCitas" table="log_motivos_cita" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogMotivosCita" />
+        </set>
+        <set name="exCoberAgruArtEntSubsForUsuarioModifica" table="ex_cober_agru_art_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberAgruArtEntSub" />
+        </set>
+        <set name="agrupHonorariosPools" table="agrup_honorarios_pool" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupHonorariosPool" />
+        </set>
+        <set name="admisionesHospis" table="admisiones_hospi" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login_usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdmisionesHospi" />
+        </set>
+        <set name="logPresupuestoOdontosForUsuarioModifica" table="log_presupuesto_odonto" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoOdonto" />
+        </set>
+        <set name="promocionesOdontologicases" table="promociones_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PromocionesOdontologicas" />
+        </set>
+        <set name="facturasVariasesForUsuarioAnulacion_1" table="facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anulacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FacturasVarias" />
+        </set>
+        <set name="aliadoOdontologicos" table="aliado_odontologico" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AliadoOdontologico" />
+        </set>
+        <set name="detServHonoraEspServs" table="det_serv_honora_esp_serv" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetServHonoraEspServ" />
+        </set>
+        <set name="incluexcluContratos" table="incluexclu_contrato" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluexcluContrato" />
+        </set>
+        <set name="nivelAutorArticulos" table="nivel_autor_articulo" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorArticulo" />
+        </set>
+        <set name="histoAutorizacionIngEstans" table="histo_autorizacion_ing_estan" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoAutorizacionIngEstan" />
+        </set>
+        <set name="excepTarifasContratos" table="excep_tarifas_contrato" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcepTarifasContrato" />
+        </set>
+        <set name="solicitudAnulFactsForUsuarioAnulAutoriza" table="solicitud_anul_fact" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anul_autoriza" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudAnulFact" />
+        </set>
+        <set name="cobAgrupServicioses" table="cob_agrup_servicios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CobAgrupServicios" />
+        </set>
+        <set name="histoAutorizacionCapitaSubs" table="histo_autorizacion_capita_sub" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo en el que se guarda el login del usuario que realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoAutorizacionCapitaSub" />
+        </set>
+        <set name="contactosEmpresas" table="contactos_empresa" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ContactosEmpresa" />
+        </set>
+        <set name="logAprobAnulAjusFvariases" table="log_aprob_anul_ajus_fvarias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogAprobAnulAjusFvarias" />
+        </set>
+        <set name="nivelAutorUsuEspecsForUsuarioRegistra" table="nivel_autor_usu_espec" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorUsuEspec" />
+        </set>
+        <set name="valoracionesOdontos" table="valoraciones_odonto" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValoracionesOdonto" />
+        </set>
+        <set name="pedidos" table="pedido" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Pedido" />
+        </set>
+        <set name="agruSerIncluexcluEconts" table="agru_ser_incluexclu_econt" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerIncluexcluEcont" />
+        </set>
+        <set name="logActualizAutorizacioneses" table="log_actualiz_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogActualizAutorizaciones" />
+        </set>
+        <set name="nivelAutorUsuarios" table="nivel_autor_usuario" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorUsuario" />
+        </set>
+        <set name="lecturaPlanosAfs" table="lectura_planos_af" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LecturaPlanosAf" />
+        </set>
+        <set name="parametrizacionSemaforizacions" table="parametrizacion_semaforizacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ParametrizacionSemaforizacion" />
+        </set>
+        <set name="subCuentases" table="sub_cuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SubCuentas" />
+        </set>
+        <set name="agruSerExceTariConts" table="agru_ser_exce_tari_cont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerExceTariCont" />
+        </set>
+        <set name="plantillasPacCamposes" table="plantillas_pac_campos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modificacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PlantillasPacCampos" />
+        </set>
+        <set name="logActiinactiUsuariosesForUsuarioProcesa" table="log_actiinacti_usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_procesa" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogActiinactiUsuarios" />
+        </set>
+        <set name="procesoDevolucionRcs" table="proceso_devolucion_rc" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProcesoDevolucionRc" />
+        </set>
+        <set name="presupuestoPacientes" table="presupuesto_paciente" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login_usuario" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoPaciente" />
+        </set>
+        <set name="usuAutorizanAnulFacsForUsuarioModifica" table="usu_autorizan_anul_fac" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuAutorizanAnulFac" />
+        </set>
+        <set name="conceptosFacturasVariases" table="conceptos_facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosFacturasVarias" />
+        </set>
+        <set name="motivosCambiosServicioses" table="motivos_cambios_servicios" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotivosCambiosServicios" />
+        </set>
+        <set name="loginUsuarioses" table="login_usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LoginUsuarios" />
+        </set>
+        <set name="estadisticasCalidads" table="estadisticas_calidad" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EstadisticasCalidad" />
+        </set>
+        <set name="exCoberSerEntSubsForUsuarioModifica" table="ex_cober_ser_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberSerEntSub" />
+        </set>
+        <set name="agruSerExepCobConvxconts" table="agru_ser_exep_cob_convxcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerExepCobConvxcont" />
+        </set>
+        <set name="usuariosEntidadSubsForUsuarioModifica" table="usuarios_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuariosEntidadSub" />
+        </set>
+        <set name="usuariosesForUsuarioModifica" table="usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Usuarios" />
+        </set>
+        <set name="logNivelesContratoses" table="log_niveles_contratos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogNivelesContratos" />
+        </set>
+        <set name="inicioAtencionCitas" table="inicio_atencion_cita" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modificacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InicioAtencionCita" />
+        </set>
+        <set name="hallazgosVsProgSers" table="hallazgos_vs_prog_ser" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HallazgosVsProgSer" />
+        </set>
+        <set name="multasFacturasVariases" table="multas_facturas_varias" schema="consultaexterna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MultasFacturasVarias" />
+        </set>
+        <set name="logCitasOdontologicasesForUsuarioConfirma" table="log_citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_confirma" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCitasOdontologicas" />
+        </set>
+        <set name="conceptPagPoolXConvs" table="concept_pag_pool_x_conv" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptPagPoolXConv" />
+        </set>
+        <set name="ingresosesForUsuarioPreingresoGen" table="ingresos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_preingreso_gen" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Ingresos" />
+        </set>
+        <set name="logTarifasServicioses" table="log_tarifas_servicios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogTarifasServicios" />
+        </set>
+        <set name="otrosDiagnosticoses" table="otros_diagnosticos" schema="historiaclinica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditoria</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OtrosDiagnosticos" />
+        </set>
+        <set name="camposPerfilNeds" table="campos_perfil_ned" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CamposPerfilNed" />
+        </set>
+        <set name="inactivacionesCargoses" table="inactivaciones_cargos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InactivacionesCargos" />
+        </set>
+        <set name="tiposRetencionConcFvsForUsuarioModifica" table="tipos_retencion_conc_fv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionConcFv" />
+        </set>
+        <set name="examenConditomas" table="examen_conditoma" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExamenConditoma" />
+        </set>
+        <set name="logProgramases" table="log_programas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogProgramas" />
+        </set>
+        <set name="diagAutorizacioneses" table="diag_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DiagAutorizaciones" />
+        </set>
+        <set name="paramPresupuestosCaps" table="param_presupuestos_cap" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ParamPresupuestosCap" />
+        </set>
+        <set name="histoDetalleMontos" table="histo_detalle_monto" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoDetalleMonto" />
+        </set>
+        <set name="superficiesXProgramas" table="superficies_x_programa" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditor&#237;a</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SuperficiesXPrograma" />
+        </set>
+        <set name="logDetPlanTratamientos" table="log_det_plan_tratamiento" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetPlanTratamiento" />
+        </set>
+        <set name="motivosDevolucionRcs" table="motivos_devolucion_rc" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotivosDevolucionRc" />
+        </set>
+        <set name="exCoberturasEntidadSubsForUsuarioInactivacion" table="ex_coberturas_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberturasEntidadSub" />
+        </set>
+        <set name="especialidadeses" table="especialidades" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_grabacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Especialidades" />
+        </set>
+        <set name="despachoPedidos" table="despacho_pedido" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DespachoPedido" />
+        </set>
+        <set name="conceptosDeEgresos" table="conceptos_de_egreso" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditor&#237;a</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosDeEgreso" />
+        </set>
+        <set name="cajasCajeroses" table="cajas_cajeros" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CajasCajeros" />
+        </set>
+        <set name="ventaTarjetaClientesForUsuarioVendedor" table="venta_tarjeta_cliente" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_vendedor" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.VentaTarjetaCliente" />
+        </set>
+        <set name="presuDetPttoNumSupers" table="presu_det_ptto_num_super" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuDetPttoNumSuper" />
+        </set>
+        <set name="tarifasInvConEntSubs" table="tarifas_inv_con_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasInvConEntSub" />
+        </set>
+        <set name="serIncluexcluCcs" table="ser_incluexclu_cc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SerIncluexcluCc" />
+        </set>
+        <set name="arqueosDefinitivosesForCajero" table="arqueos_definitivos" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cajero" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArqueosDefinitivos" />
+        </set>
+        <set name="adjuntosMovimientosCajas" table="adjuntos_movimientos_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdjuntosMovimientosCaja" />
+        </set>
+        <set name="presupuestoOdoConvenios" table="presupuesto_odo_convenio" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoOdoConvenio" />
+        </set>
+        <set name="logServiciosCitaOdos" table="log_servicios_cita_odo" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogServiciosCitaOdo" />
+        </set>
+        <set name="factorConversionMonedases" table="factor_conversion_monedas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modificacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FactorConversionMonedas" />
+        </set>
+        <set name="logPresupuestoDctoOdonsForUsuarioSolicitad" table="log_presupuesto_dcto_odon" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_solicitad" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoDctoOdon" />
+        </set>
+        <set name="programasServiciosPlanTs" table="programas_servicios_plan_t" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgramasServiciosPlanT" />
+        </set>
+        <set name="excluPresuEncabezados" table="exclu_presu_encabezado" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true">
+                    <comment>Usuario que registra o modifica la aprobaci&#243;n de las exclusiones</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcluPresuEncabezado" />
+        </set>
+        <set name="planTratamientosForUsuarioModifica" table="plan_tratamiento" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PlanTratamiento" />
+        </set>
+        <set name="serIncluexcluEconts" table="ser_incluexclu_econt" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SerIncluexcluEcont" />
+        </set>
+        <set name="coberturas" table="cobertura" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Cobertura" />
+        </set>
+        <set name="logAdconstas" table="log_adconsta" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogAdconsta" />
+        </set>
+        <set name="citasOdontologicasesForUsuarioModifica" table="citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CitasOdontologicas" />
+        </set>
+        <set name="ctTurnoObservacions" table="ct_turno_observacion" schema="public" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CtTurnoObservacion" />
+        </set>
+        <set name="comisionXCentroAtencions" table="comision_x_centro_atencion" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true">
+                    <comment>Usuario que realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ComisionXCentroAtencion" />
+        </set>
+        <set name="deudoreses" table="deudores" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Deudores" />
+        </set>
+        <set name="logSubirPacienteses" table="log_subir_pacientes" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogSubirPacientes" />
+        </set>
+        <set name="distribucionIngresos" table="distribucion_ingreso" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DistribucionIngreso" />
+        </set>
+        <set name="histoCambioResponsablesForUsuarioModifica" table="histo_cambio_responsable" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Usuario que registra el cambio</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoCambioResponsable" />
+        </set>
+        <set name="encuestaCalidadObservs" table="encuesta_calidad_observ" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EncuestaCalidadObserv" />
+        </set>
+        <set name="presupuestoDctoOdonsForUsuarioSolicitad" table="presupuesto_dcto_odon" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_solicitad" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoDctoOdon" />
+        </set>
+        <set name="detallePaquetizacions" table="detalle_paquetizacion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetallePaquetizacion" />
+        </set>
+        <set name="cuentasProcesoFacts" table="cuentas_proceso_fact" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasProcesoFact" />
+        </set>
+        <set name="logEstadosCamas" table="log_estados_cama" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEstadosCama" />
+        </set>
+        <set name="facturasVariasesForUsuarioModifica" table="facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FacturasVarias" />
+        </set>
+        <set name="registroEntregaEntSubs" table="registro_entrega_ent_sub" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Usuario que genera el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEntregaEntSub" />
+        </set>
+        <set name="nivelAutorUsuEspecsForUsuario" table="nivel_autor_usu_espec" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true">
+                    <comment>Usuario al que se le est&#225; registrando el nivel de autorizaci&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorUsuEspec" />
+        </set>
+        <set name="estanciaAutomaticas" table="estancia_automatica" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EstanciaAutomatica" />
+        </set>
+        <set name="serExceTariConts" table="ser_exce_tari_cont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SerExceTariCont" />
+        </set>
+        <set name="logFacturadosXConvenios" table="log_facturados_x_convenio" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogFacturadosXConvenio" />
+        </set>
+        <set name="programasHallazgoPiezas" table="programas_hallazgo_pieza" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditor&#237;a</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgramasHallazgoPieza" />
+        </set>
+        <set name="servDescComConvxconts" table="serv_desc_com_convxcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServDescComConvxcont" />
+        </set>
+        <set name="nivelesIngresos" table="niveles_ingreso" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelesIngreso" />
+        </set>
+        <set name="indCalidadDxes" table="ind_calidad_dx" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IndCalidadDx" />
+        </set>
+        <set name="presupuestoOdoProgServs" table="presupuesto_odo_prog_serv" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoOdoProgServ" />
+        </set>
+        <set name="motivosAtencions" table="motivos_atencion" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotivosAtencion" />
+        </set>
+        <set name="detVigConRetClasesForUsuarioModifica" table="det_vig_con_ret_clase" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetClase" />
+        </set>
+        <set name="hisCamaPacs" table="his_cama_pac" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login_usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisCamaPac" />
+        </set>
+        <set name="mediosEnvioConvenios" table="medios_envio_convenio" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MediosEnvioConvenio" />
+        </set>
+        <set name="solicitudesPosponers" table="solicitudes_posponer" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditor&#237;a</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesPosponer" />
+        </set>
+        <set name="aprobAnulFacturasVariasesForUsuarioModifica" table="aprob_anul_facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AprobAnulFacturasVarias" />
+        </set>
+        <set name="solicitudAnulFactsForUsuarioSolicita" table="solicitud_anul_fact" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_solicita" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudAnulFact" />
+        </set>
+	<set name="documentosGarantiasForUsuarioGeneracion" table="documentos_garantia" schema="carterapaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_generacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DocumentosGarantia" />
+        </set>
+        <set name="empresasInstitucions" table="empresas_institucion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EmpresasInstitucion" />
+        </set>
+        <set name="logAutorizacionIngEvens" table="log_autorizacion_ing_even" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogAutorizacionIngEven" />
+        </set>
+        <set name="cierreCuentases" table="cierre_cuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreCuentas" />
+        </set>
+        <set name="logsTiposRetencions" table="logs_tipos_retencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogsTiposRetencion" />
+        </set>
+        <set name="agruArtExceTariConts" table="agru_art_exce_tari_cont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruArtExceTariCont" />
+        </set>
+        <set name="entidadesSubcontratadases" table="entidades_subcontratadas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntidadesSubcontratadas" />
+        </set>
+        <set name="categoriasAtencions" table="categorias_atencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CategoriasAtencion" />
+        </set>
+        <set name="cierreIngresosesForUsuarioCierre" table="cierre_ingresos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_cierre" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreIngresos" />
+        </set>
+        <set name="cierresCajasesForUsuario" table="cierres_cajas" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierresCajas" />
+        </set>
+        <set name="logDetalleProgramases" table="log_detalle_programas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetalleProgramas" />
+        </set>
+        <set name="lecturaPlanosAts" table="lectura_planos_at" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LecturaPlanosAt" />
+        </set>
+        <set name="detVigConRetClasesForUsuarioInactivacion" table="det_vig_con_ret_clase" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetClase" />
+        </set>
+        <set name="detVigConRetencionsForUsuarioModifica" table="det_vig_con_retencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetencion" />
+        </set>
+        <set name="tiposRetencionGrupoSersForUsuarioModifica" table="tipos_retencion_grupo_ser" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionGrupoSer" />
+        </set>
+        <set name="adjAutorizacioneses" table="adj_autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdjAutorizaciones" />
+        </set>
+        <set name="ciudadeses" table="ciudades" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Ciudades" />
+        </set>
+        <set name="encaEmiTarjetaClientes" table="enca_emi_tarjeta_cliente" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EncaEmiTarjetaCliente" />
+        </set>
+        <set name="exCoberturasEntidadSubsForUsuarioModifica" table="ex_coberturas_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberturasEntidadSub" />
+        </set>
+        <set name="cuentasProcesoPresupuestos" table="cuentas_proceso_presupuesto" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasProcesoPresupuesto" />
+        </set>
+		<set name="documentosGarantiasForUsuarioModifica" table="documentos_garantia" schema="carterapaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DocumentosGarantia" />
+        </set>
+        <set name="firmasContratoOtrosiInsts" table="firmas_contrato_otrosi_inst" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FirmasContratoOtrosiInst" />
+        </set>
+        <set name="logCadupwdUsuariosesForUsuarioProcesa" table="log_cadupwd_usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_procesa" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCadupwdUsuarios" />
+        </set>
+		<set name="documentosGarantiasForUsuarioAnula" table="documentos_garantia" schema="carterapaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anula" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DocumentosGarantia" />
+        </set>
+        <set name="detCargosArtConsumos" table="det_cargos_art_consumo" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargosArtConsumo" />
+        </set>
+        <set name="autorizacionesesForUsuarioSolicitud" table="autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_solicitud" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Autorizaciones" />
+        </set>
+        <set name="hisConfDetPlanTs" table="his_conf_det_plan_t" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisConfDetPlanT" />
+        </set>
+        <set name="recomendacionesServProgs" table="recomendaciones_serv_prog" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RecomendacionesServProg" />
+        </set>
+        <set name="detHallProgSers" table="det_hall_prog_ser" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetHallProgSer" />
+        </set>
+        <set name="autorizacionesesForUsuarioModifica" table="autorizaciones" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Autorizaciones" />
+        </set>
+        <set name="detConceptosRetencions" table="det_conceptos_retencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetConceptosRetencion" />
+        </set>
+        <set name="trasladosAbonoses" table="traslados_abonos" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true">
+                    <comment>Usuario relacionado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladosAbonos" />
+        </set>
+        <set name="paqCompServicioses" table="paq_comp_servicios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaqCompServicios" />
+        </set>
+        <set name="coberturaArticuloses" table="cobertura_articulos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CoberturaArticulos" />
+        </set>
+        <set name="reliquidacionTarifases" table="reliquidacion_tarifas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_generacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReliquidacionTarifas" />
+        </set>
+        <set name="logPresupuestoDctoOdonsForUsuarioModifica" table="log_presupuesto_dcto_odon" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoDctoOdon" />
+        </set>
+        <set name="porcentajeAgruArtExces" table="porcentaje_agru_art_exce" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PorcentajeAgruArtExce" />
+        </set>
+        <set name="tiposRetencionsForUsuarioModifica" table="tipos_retencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencion" />
+        </set>
+        <set name="ingresosesForUsuarioModifica" table="ingresos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Ingresos" />
+        </set>
+        <set name="logParamPresupuestoCaps" table="log_param_presupuesto_cap" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogParamPresupuestoCap" />
+        </set>
+        <set name="hisDescuentosOdons" table="his_descuentos_odon" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HisDescuentosOdon" />
+        </set>
+        <set name="detDescuentosOdons" table="det_descuentos_odon" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetDescuentosOdon" />
+        </set>
+        <set name="equivalentesHallProgSers" table="equivalentes_hall_prog_ser" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EquivalentesHallProgSer" />
+        </set>
+        <set name="lecturaPlanosAps" table="lectura_planos_ap" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LecturaPlanosAp" />
+        </set>
+        <set name="lecturaPlanosAms" table="lectura_planos_am" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LecturaPlanosAm" />
+        </set>
+        <set name="exepParaCobXConvconts" table="exep_para_cob_x_convcont" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExepParaCobXConvcont" />
+        </set>
+        <set name="peticionQxes" table="peticion_qx" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PeticionQx" />
+        </set>
+        <set name="serviPpalincluidoses" table="servi_ppalincluidos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiPpalincluidos" />
+        </set>
+        <set name="firmasValoresPorDefectos" table="firmas_valores_por_defecto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FirmasValoresPorDefecto" />
+        </set>
+        <set name="facturasVariasesForUsuarioAprobacion" table="facturas_varias" schema="facturasvarias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_aprobacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FacturasVarias" />
+        </set>
+        <set name="histObserGenerPacientes" table="hist_obser_gener_paciente" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistObserGenerPaciente" />
+        </set>
+        <set name="presupuestoOdontologicosForUsuarioModifica" table="presupuesto_odontologico" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoOdontologico" />
+        </set>
+        <set name="trasladosCajas" table="traslados_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladosCaja" />
+        </set>
+        <set name="consentimientoInfoOdontos" table="consentimiento_info_odonto" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConsentimientoInfoOdonto" />
+        </set>
+        <set name="logFuripses" table="log_furips" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogFurips" />
+        </set>
+        <set name="paqOdontConvenios" table="paq_odont_convenio" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaqOdontConvenio" />
+        </set>
+        <set name="paquetizacions" table="paquetizacion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Paquetizacion" />
+        </set>
+        <set name="exCoberAgruSerEntSubsForUsuarioModifica" table="ex_cober_agru_ser_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberAgruSerEntSub" />
+        </set>
+        <set name="autorizacionesEntSubRipses" table="autorizaciones_ent_sub_rips" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubRips" />
+        </set>
+        <set name="verificacionesDerechoses" table="verificaciones_derechos" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.VerificacionesDerechos" />
+        </set>
+        <set name="conceptosRetencionTercerosForUsuarioInactivacion" table="conceptos_retencion_tercero" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConceptosRetencionTercero" />
+        </set>
+        <set name="admisionesUrgenciases" table="admisiones_urgencias" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login_usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdmisionesUrgencias" />
+        </set>
+        <set name="trasladoCamas" table="traslado_cama" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_asigna" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladoCama" />
+        </set>
+        <set name="tiposUsuarioses" table="tipos_usuarios" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposUsuarios" />
+        </set>
+        <set name="logCitasOdontologicasesForUsuarioModifica" table="log_citas_odontologicas" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCitasOdontologicas" />
+        </set>
+        <set name="exCoberSerEntSubsForUsuarioInactivacion" table="ex_cober_ser_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberSerEntSub" />
+        </set>
+        <set name="detEmiTarjetaClientesForUsuarioModifica" table="det_emi_tarjeta_cliente" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetEmiTarjetaCliente" />
+        </set>
+        <set name="lecturaPlanosUses" table="lectura_planos_us" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LecturaPlanosUs" />
+        </set>
+        <set name="encuestaCalidads" table="encuesta_calidad" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EncuestaCalidad" />
+        </set>
+        <set name="tiposMonedas" table="tipos_moneda" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modificacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposMoneda" />
+        </set>
+        <set name="solicitudTrasladoCajas" table="solicitud_traslado_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="testigo" length="30">
+                    <comment>Testigo de la solicitud registrado en el sistema</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudTrasladoCaja" />
+        </set>
+        <set name="histConcEgrXusuXcatencions" table="hist_conc_egr_xusu_xcatencion" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true">
+                    <comment>Campo de auditor&#237;a</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistConcEgrXusuXcatencion" />
+        </set>
+        <set name="envioInfoInconsistenciases" table="envio_info_inconsistencias" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_envio" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioInfoInconsistencias" />
+        </set>
+        <set name="solicitudAnulFactsForUsuarioAnula" table="solicitud_anul_fact" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anula" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudAnulFact" />
+        </set>
+        <set name="asociosCuentasForUsuario" table="asocios_cuenta" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AsociosCuenta" />
+        </set>
+        <set name="exCoberArtEntSubsForUsuarioModifica" table="ex_cober_art_ent_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExCoberArtEntSub" />
+        </set>
+        <set name="loginUsuariosActivoses" table="login_usuarios_activos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LoginUsuariosActivos" />
+        </set>
+        <set name="asociosCuentasForUsuarioDesasocio" table="asocios_cuenta" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_desasocio" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AsociosCuenta" />
+        </set>
+        <set name="anulacionesFacturases" table="anulaciones_facturas" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionesFacturas" />
+        </set>
+        <set name="logCierrePresuCapitas" table="log_cierre_presu_capita" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30"/>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCierrePresuCapita" />
+        </set>
+        <set name="presupuestoOdontologicosForUsuarioGeneracion" table="presupuesto_odontologico" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_generacion" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoOdontologico" />
+        </set>
+        <set name="presuPlanTtoNumSupers" table="presu_plan_tto_num_super" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuPlanTtoNumSuper" />
+        </set>
+        <set name="nivelAutorServicios" table="nivel_autor_servicio" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorServicio" />
+        </set>
+        <set name="solicitudCambioServiciosForUsuarioSolicita" table="solicitud_cambio_servicio" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_solicita" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudCambioServicio" />
+        </set>
+        <set name="histoMontoArticuloEsps" table="histo_monto_articulo_esp" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_registra" length="30" not-null="true">
+                    <comment>Usuario quien realiza el registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoMontoArticuloEsp" />
+        </set>
+        <set name="devolRecibosCajasForUsuarioAnulacion" table="devol_recibos_caja" schema="tesoreria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anulacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DevolRecibosCaja" />
+        </set>
+        <set name="tiposRetencionClaseInvsForUsuarioModifica" table="tipos_retencion_clase_inv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TiposRetencionClaseInv" />
+        </set>
+        <set name="detVigConRetCfvsForUsuarioInactivacion" table="det_vig_con_ret_cfv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_inactivacion" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetVigConRetCfv" />
+        </set>
+        <set name="agruSerIncluexcluCcs" table="agru_ser_incluexclu_cc" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgruSerIncluexcluCc" />
+        </set>
+        <set name="autorizacionesCapitacionSubs" table="autorizaciones_capitacion_sub" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_autoriza" length="30">
+                    <comment>Campo en el que se guarda el usuario que se genero la autorizaci&#195;&#179;n de capitaci&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesCapitacionSub" />
+        </set>
+        <set name="agendas" table="agenda" schema="consultaexterna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" length="30" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Agenda" />
+        </set>
+        <set name="logDistribucionCuentas" table="log_distribucion_cuenta" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_modifica" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDistribucionCuenta" />
+        </set>
+        <set name="entregaAutorizacions" table="entrega_autorizacion" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_entrega" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntregaAutorizacion" />
+        </set>
+        <set name="anulacionSolCxes" table="anulacion_sol_cx" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_anula" length="30" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AnulacionSolCx" />
+        </set>
+    </class>
+</hibernate-mapping>

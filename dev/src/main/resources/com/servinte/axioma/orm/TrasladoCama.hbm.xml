@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TrasladoCama" table="traslado_cama" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentas" class="com.servinte.axioma.orm.Cuentas" fetch="select">
+            <column name="cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_asigna" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="camas1ByCodigoNuevaCama" class="com.servinte.axioma.orm.Camas1" fetch="select">
+            <column name="codigo_nueva_cama" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="camas1ByCodigoCamaAntigua" class="com.servinte.axioma.orm.Camas1" fetch="select">
+            <column name="codigo_cama_antigua" />
+        </many-to-one>
+        <property name="fechaAsignacion" type="date">
+            <column name="fecha_asignacion" length="13" not-null="true" />
+        </property>
+        <property name="horaAsignacion" type="time">
+            <column name="hora_asignacion" length="15" not-null="true" />
+        </property>
+        <property name="fechaGrabacion" type="date">
+            <column name="fecha_grabacion" length="13" not-null="true" />
+        </property>
+        <property name="horaGrabacion" type="time">
+            <column name="hora_grabacion" length="15" not-null="true" />
+        </property>
+        <property name="fechaFinalizacion" type="date">
+            <column name="fecha_finalizacion" length="13" />
+        </property>
+        <property name="horaFinalizacion" type="time">
+            <column name="hora_finalizacion" length="15" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+        <set name="trasladoCentroAtencions" inverse="true" lazy="true" table="traslado_centro_atencion" fetch="select">
+            <key>
+                <column name="traslado_cama" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladoCentroAtencion" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <parameters>
+        <scalar-parameter name="ingreso" id="782">
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="isRequired">true</property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">0</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="5">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DatosPaciente" id="780">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">numeroid</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">nombresapellidos</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">edad</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">viaingreso</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">cama</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">codigoPersona</property>
+                    <property name="paramName">ingreso</property>
+                    <property name="dataType">any</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue">params["ingreso"]</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">numeroid</property>
+                    <property name="nativeName">numeroid</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">nombresapellidos</property>
+                    <property name="nativeName">nombresapellidos</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">edad</property>
+                    <property name="nativeName">edad</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">viaingreso</property>
+                    <property name="nativeName">viaingreso</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">area</property>
+                    <property name="nativeName">area</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">cama</property>
+                    <property name="nativeName">cama</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT  
+	getidpaciente(p.codigo) AS numeroid,   
+	getnombrepersona(p.codigo) AS nombresapellidos,
+	getedad(p.fecha_nacimiento) as edad,
+	getnombreviaingresotipopac(c.id) as viaingreso,
+	getnomcentrocosto(c.area) as area,
+	getcamacuenta(c.id,c.via_ingreso) as cama
+FROM 
+	personas p 
+	INNER JOIN sexo s ON(s.codigo=p.sexo) 
+	INNER JOIN ingresos i ON (i.codigo_paciente=p.codigo)
+	INNER JOIN cuentas c ON (c.codigo_paciente=p.codigo)
+	
+WHERE i.id=?;</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="SolicitudesGeneradas" id="781">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">solicitud</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">servicio</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">nombreservicio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">responsable</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">cantidad</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">valorunitario</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">valortotal</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">solicitud</property>
+                    <property name="nativeName">solicitud</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">servicio</property>
+                    <property name="nativeName">servicio</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">nombreservicio</property>
+                    <property name="nativeName">nombreservicio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">responsable</property>
+                    <property name="nativeName">responsable</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">cantidad</property>
+                    <property name="nativeName">cantidad</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">valorunitario</property>
+                    <property name="nativeName">valorunitario</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">valortotal</property>
+                    <property name="nativeName">valortotal</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <property name="queryText">select 
+	solicitud as solicitud,
+	servicio as servicio,
+	getnombreservicio(servicio,0) as nombreservicio,
+	getnombreconvenio(convenio) as responsable,
+	cantidad_cargada as cantidad,
+	valor_unitario_cargado as valorunitario,
+	valor_total_cargado as valortotal
+from det_cargos 
+
+where codigo_detalle_cargo in(-1);</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-header>
+                <grid id="852">
+                    <property name="width">100%</property>
+                    <column id="853">
+                        <property name="width">1.9368421053in</property>
+                    </column>
+                    <column id="854">
+                        <property name="width">3.9578947368in</property>
+                    </column>
+                    <row id="855">
+                        <cell id="856"/>
+                        <cell id="857"/>
+                    </row>
+                    <row id="858">
+                        <cell id="859">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                        </cell>
+                    </row>
+                    <row id="861">
+                        <cell id="862"/>
+                        <cell id="863"/>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <auto-text id="864">
+                    <property name="textAlign">right</property>
+                    <property name="type">page-number</property>
+                </auto-text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="106">
+            <property name="marginTop">20pt</property>
+            <property name="width">100%</property>
+            <property name="dataSet">DatosPaciente</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">numeroid</property>
+                    <expression name="expression">dataSetRow["numeroid"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombresapellidos</property>
+                    <expression name="expression">dataSetRow["nombresapellidos"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">edad</property>
+                    <expression name="expression">dataSetRow["edad"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">viaingreso</property>
+                    <expression name="expression">dataSetRow["viaingreso"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">area</property>
+                    <expression name="expression">dataSetRow["area"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cama</property>
+                    <expression name="expression">dataSetRow["cama"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="128">
+                <property name="width">0.7052631579in</property>
+            </column>
+            <column id="129">
+                <property name="width">0.9368421053in</property>
+            </column>
+            <column id="130">
+                <property name="width">1.2631578947in</property>
+            </column>
+            <column id="131">
+                <property name="width">0.8210526316in</property>
+            </column>
+            <column id="132">
+                <property name="width">2.2631578947in</property>
+            </column>
+            <header>
+                <row id="877">
+                    <cell id="878">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <label id="883">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Datos Paciente</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="107">
+                    <cell id="108">
+                        <label id="134">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Paciente:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="109">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <data id="876">
+                            <property name="resultSetColumn">nombresapellidos</property>
+                        </data>
+                    </cell>
+                    <cell id="872">
+                        <label id="874">
+                            <property name="textAlign">center</property>
+                            <text-property name="text">ID:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="787">
+                        <data id="796">
+                            <property name="resultSetColumn">numeroid</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="114">
+                    <cell id="115">
+                        <label id="250">
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Edad:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="116">
+                        <data id="797">
+                            <property name="resultSetColumn">edad</property>
+                        </data>
+                    </cell>
+                    <cell id="117">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">1</property>
+                        <label id="793">
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Via Ingreso:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="783">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <data id="798">
+                            <property name="resultSetColumn">viaingreso</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="121">
+                    <cell id="122">
+                        <label id="794">
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Area:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="123">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <data id="799">
+                            <property name="resultSetColumn">area</property>
+                        </data>
+                    </cell>
+                    <cell id="889">
+                        <label id="891">
+                            <text-property name="text">Cama:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="890">
+                        <data id="892">
+                            <property name="resultSetColumn">cama</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <label id="140">
+            <property name="paddingTop">1cm</property>
+        </label>
+        <label id="141">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">Detalle Solicitudes Generadas</text-property>
+        </label>
+        <table id="739">
+            <property name="width">100%</property>
+            <property name="dataSet">SolicitudesGeneradas</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">solicitud</property>
+                    <expression name="expression">dataSetRow["solicitud"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">servicio</property>
+                    <expression name="expression">dataSetRow["servicio"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">nombreservicio</property>
+                    <expression name="expression">dataSetRow["nombreservicio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">responsable</property>
+                    <expression name="expression">dataSetRow["responsable"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cantidad</property>
+                    <expression name="expression">dataSetRow["cantidad"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">valorunitario</property>
+                    <expression name="expression">dataSetRow["valorunitario"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">valortotal</property>
+                    <expression name="expression">dataSetRow["valortotal"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="761">
+                <property name="width">0.6315789474in</property>
+            </column>
+            <column id="762">
+                <property name="width">1.8210526316in</property>
+            </column>
+            <column id="763">
+                <property name="width">1.3473684211in</property>
+            </column>
+            <column id="764">
+                <property name="width">0.6315789474in</property>
+            </column>
+            <column id="765">
+                <property name="width">0.8736842105in</property>
+            </column>
+            <column id="766">
+                <property name="width">0.6842105263in</property>
+            </column>
+            <header>
+                <row id="740">
+                    <cell id="741">
+                        <label id="774">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <label id="768">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">No. Orden</text-property>
+                        </label>
+                    </cell>
+                    <cell id="742">
+                        <label id="775">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <label id="769">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Servicio</text-property>
+                        </label>
+                    </cell>
+                    <cell id="743">
+                        <label id="776">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <label id="770">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Responsable</text-property>
+                        </label>
+                    </cell>
+                    <cell id="744">
+                        <label id="777">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <label id="771">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Cantidad</text-property>
+                        </label>
+                    </cell>
+                    <cell id="745">
+                        <label id="778">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <label id="772">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Valor Unitario</text-property>
+                        </label>
+                    </cell>
+                    <cell id="746">
+                        <label id="779">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <label id="773">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Valor Total</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="747">
+                    <cell id="748">
+                        <label id="865">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <data id="801">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">solicitud</property>
+                        </data>
+                    </cell>
+                    <cell id="749">
+                        <label id="866">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <data id="802">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">servicio</property>
+                        </data>
+                        <data id="803">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">nombreservicio</property>
+                        </data>
+                    </cell>
+                    <cell id="750">
+                        <label id="867">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <data id="804">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">responsable</property>
+                        </data>
+                    </cell>
+                    <cell id="751">
+                        <label id="868">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <data id="805">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">cantidad</property>
+                        </data>
+                    </cell>
+                    <cell id="752">
+                        <label id="869">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <data id="806">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">valorunitario</property>
+                        </data>
+                    </cell>
+                    <cell id="753">
+                        <label id="870">
+                            <property name="paddingTop">0.5cm</property>
+                        </label>
+                        <data id="807">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">valortotal</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="754">
+                    <cell id="755"/>
+                    <cell id="756"/>
+                    <cell id="757"/>
+                    <cell id="758"/>
+                    <cell id="759"/>
+                    <cell id="760"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

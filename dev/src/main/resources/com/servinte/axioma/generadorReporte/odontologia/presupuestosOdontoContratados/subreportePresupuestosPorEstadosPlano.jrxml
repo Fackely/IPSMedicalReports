@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreportePresupuestosPorEstados" language="groovy" pageWidth="1800" pageHeight="300" orientation="Landscape" columnWidth="1800" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.4793388429752268"/>
+	<property name="ireport.x" value="3436"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<field name="descCentroAtencionDuenio" class="java.lang.String">
+		<fieldDescription><![CDATA[descCentroAtencionDuenio]]></fieldDescription>
+	</field>
+	<field name="fechaContrato" class="java.util.Date"/>
+	<field name="numeroContrato" class="java.lang.Long"/>
+	<field name="valorPresupuesto" class="java.lang.Double"/>
+	<field name="codigoPrograma" class="java.lang.String"/>
+	<field name="ayudanteEstadoPresupuesto" class="java.lang.String"/>
+	<field name="codigoPkPresupuesto" class="java.lang.Long"/>
+	<field name="descripcionEmpresaInstitucion" class="java.lang.String"/>
+	<field name="descCentroAtencionContrato" class="java.lang.String"/>
+	<field name="tipoId" class="java.lang.String"/>
+	<field name="numeroId" class="java.lang.String"/>
+	<field name="primerApellido" class="java.lang.String"/>
+	<field name="segundoApellido" class="java.lang.String"/>
+	<field name="primerNombre" class="java.lang.String"/>
+	<field name="segundoNombre" class="java.lang.String"/>
+	<field name="primerApellidoProfesionalContrato" class="java.lang.String"/>
+	<field name="primerNombreProfesionalContrato" class="java.lang.String"/>
+	<field name="primerApellidoProfesionalValoro" class="java.lang.String"/>
+	<field name="primerNombreProfesionalValoro" class="java.lang.String"/>
+	<field name="codigoPaquete" class="java.lang.String"/>
+	<field name="nombreInstitucion" class="java.lang.String"/>
+	<field name="totalEstadoContratado" class="java.lang.Integer"/>
+	<field name="descripcionCiudad" class="java.lang.String"/>
+	<field name="descripcionPais" class="java.lang.String"/>
+	<field name="descripcionRegionCobertura" class="java.lang.String"/>
+	<field name="descPaisOriginalPlano" class="java.lang.String"/>
+	<variable name="Total" class="java.lang.Integer" resetType="Group" resetGroup="estadosPresupuesto" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{numeroContrato}]]></variableExpression>
+	</variable>
+	<group name="estadosPresupuesto">
+		<groupExpression><![CDATA[$F{ayudanteEstadoPresupuesto}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="12">
+				<textField>
+					<reportElement style="axiomaTexto" x="1693" y="-1" width="75" height="13" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{Total}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="axiomaTexto" x="1619" y="-1" width="75" height="13" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteEstadoPresupuesto}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="axiomaTexto" x="1525" y="-1" width="95" height="13"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cantidad Presupuestos]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="12" splitType="Prevent">
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="1800" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+					<topPen lineWidth="1.0" lineStyle="Dotted"/>
+					<leftPen lineWidth="1.0" lineStyle="Dotted"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+					<rightPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textField>
+					<reportElement key="descripcionRegionCobertura" style="axiomaTexto" x="392" y="0" width="90" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionRegionCobertura}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="codigoPrograma" style="axiomaTexto" x="1525" y="0" width="95" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoPrograma}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="valorPresupuesto" style="axiomaTexto" stretchType="RelativeToBandHeight" x="1619" y="0" width="75" height="12" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[$F{valorPresupuesto} != 0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{valorPresupuesto}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="segundoNombre" style="axiomaTexto" stretchType="RelativeToBandHeight" x="1039" y="0" width="86" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{segundoNombre}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="primerNombre" style="axiomaTexto" stretchType="RelativeToBandHeight" x="954" y="0" width="86" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Left">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{primerNombre}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="numeroContrato" style="axiomaTexto" stretchType="RelativeToBandHeight" x="637" y="0" width="50" height="12" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[$F{numeroContrato} != -1]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{numeroContrato}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="fechaContrato" style="axiomaTexto" stretchType="RelativeToBandHeight" x="588" y="0" width="50" height="12" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[$F{fechaContrato} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaContrato}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="descCentroAtencionDuenio" style="axiomaTexto" stretchType="RelativeToBandHeight" x="481" y="0" width="108" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{descCentroAtencionDuenio}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="primerNombreProfesionalContrato" style="axiomaTexto" stretchType="RelativeToBandHeight" x="1209" y="0" width="86" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{primerNombreProfesionalContrato}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="primerNombreProfesionalValoro" style="axiomaTexto" stretchType="RelativeToBandHeight" x="1379" y="0" width="86" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{primerNombreProfesionalValoro}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="nombreInstitucion" style="axiomaTexto" stretchType="RelativeToBandHeight" x="0" y="0" width="108" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreInstitucion}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="descCentroAtencionContrato" style="axiomaTexto" x="107" y="0" width="108" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{descCentroAtencionContrato}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="tipoId" style="axiomaTexto" x="686" y="0" width="50" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoId}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="numeroId" style="axiomaTexto" x="735" y="0" width="50" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Left">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{numeroId}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="primerApellido" style="axiomaTexto" x="784" y="0" width="86" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Left">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{primerApellido}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="segundoApellido" style="axiomaTexto" x="869" y="0" width="86" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{segundoApellido}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="primerApellidoProfesionalContrato" style="axiomaTexto" x="1124" y="0" width="86" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{primerApellidoProfesionalContrato}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="primerApellidoProfesionalValoro" style="axiomaTexto" x="1294" y="0" width="86" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{primerApellidoProfesionalValoro}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="codigoPaquete" style="axiomaTexto" x="1464" y="0" width="62" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoPaquete}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="ayudanteEstadoPresupuesto" style="axiomaTexto" x="1693" y="0" width="75" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteEstadoPresupuesto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="descripcionCiudad" style="axiomaTexto" x="214" y="0" width="90" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionCiudad}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="descripcionPais" style="axiomaTexto" x="303" y="0" width="90" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionPais}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Written by Eclipse BIRT 2.0 -->
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.6" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.1.2.v20070205-1728 Build &lt;20070205-1728></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="4">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="boletaProgramacionCirugia" id="5">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">servicio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">profesional</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">especialidad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">servicio</property>
+                    <property name="nativeName">servicio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">profesional</property>
+                    <property name="nativeName">profesional</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">especialidad</property>
+                    <property name="nativeName">especialidad</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tipo</property>
+                    <property name="nativeName">tipo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT
+	getobtenercodigocupsserv(ps.servicio, 0)||' '||getnombreservicio(ps.servicio, 0) AS servicio,
+	getnombrepersona(pppq.codigo_medico) AS profesional,
+	e.nombre AS especialidad,
+	tpq.nombre AS tipo
+FROM
+	peticion_qx pq
+INNER JOIN
+	programacion_salas_qx psq ON (psq.peticion = pq.codigo)
+INNER JOIN
+	peticiones_servicio ps ON (ps.peticion_qx = pq.codigo)
+LEFT OUTER JOIN
+	prof_partici_peticion_qx pppq ON (pppq.peticion_qx = pq.codigo)
+LEFT OUTER JOIN
+	tipos_participantes_qx tpq ON (tpq.codigo = pppq.tipo_participante)
+LEFT OUTER JOIN
+	especialidades e ON (e.codigo = pppq.especialidad)
+WHERE
+	1=1</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-header>
+                <grid id="34">
+                    <property name="width">100%</property>
+                    <column id="35">
+                        <property name="width">2.0729166667in</property>
+                    </column>
+                    <column id="36">
+                        <property name="width">1.5520833333in</property>
+                    </column>
+                    <column id="578">
+                        <property name="width">1.21875in</property>
+                    </column>
+                    <column id="586">
+                        <property name="width">1.0416666667in</property>
+                    </column>
+                    <row id="37">
+                        <cell id="38">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                        </cell>
+                        <cell id="571">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                        </cell>
+                    </row>
+                    <row id="40">
+                        <cell id="41">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                        </cell>
+                        <cell id="572">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                        </cell>
+                    </row>
+                    <row id="567">
+                        <cell id="568">
+                            <property name="colSpan">4</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">9pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="43">
+                        <cell id="44">
+                            <property name="colSpan">4</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">8pt</property>
+                            <property name="textAlign">center</property>
+                            <text id="114">
+                                <property name="fontSize">8pt</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="46">
+                        <cell id="47">
+                            <property name="colSpan">4</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">8pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="551">
+                        <cell id="552">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                        </cell>
+                        <cell id="553">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                        </cell>
+                        <cell id="576">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                        </cell>
+                        <cell id="584">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                        </cell>
+                    </row>
+                    <row id="49">
+                        <cell id="50">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                        </cell>
+                        <cell id="51">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                        </cell>
+                        <cell id="577">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="170">
+                    <property name="width">100%</property>
+                    <column id="171"/>
+                    <column id="570"/>
+                    <column id="172"/>
+                    <row id="173">
+                        <cell id="174"/>
+                        <cell id="569"/>
+                        <cell id="175">
+                            <grid id="176">
+                                <property name="width">100%</property>
+                                <column id="177">
+                                    <property name="width">0.7604166667in</property>
+                                </column>
+                                <column id="178">
+                                    <property name="width">0.3229166667in</property>
+                                </column>
+                                <column id="179">
+                                    <property name="width">0.3333333333in</property>
+                                </column>
+                                <column id="180"/>
+                                <row id="181">
+                                    <cell id="182">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <label id="211">
+                                            <property name="textAlign">right</property>
+                                            <text-property name="text">Página</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="183">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <auto-text id="188">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="184">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <text id="212">
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[de]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="185">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <auto-text id="213">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="350">
+            <property name="width">100%</property>
+            <property name="dataSet">boletaProgramacionCirugia</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">descripcion</property>
+                    <expression name="expression">dataSetRow["descripcion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigo</property>
+                    <expression name="expression">dataSetRow["codigo"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">unidad_medida</property>
+                    <expression name="expression">dataSetRow["unidad_medida"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigo_interfaz</property>
+                    <expression name="expression">dataSetRow["codigo_interfaz"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">lote</property>
+                    <expression name="expression">dataSetRow["lote"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigo_lote</property>
+                    <expression name="expression">dataSetRow["codigo_lote"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha_vencimiento</property>
+                    <expression name="expression">dataSetRow["fecha_vencimiento"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">existencias</property>
+                    <expression name="expression">dataSetRow["existencias"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">concentracion</property>
+                    <expression name="expression">dataSetRow["concentracion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">forma_farmaceutica</property>
+                    <expression name="expression">dataSetRow["forma_farmaceutica"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">naturaleza</property>
+                    <expression name="expression">dataSetRow["naturaleza"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">subgrupocon</property>
+                    <expression name="expression">dataSetRow["subgrupocon"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">seccion_subseccion</property>
+                    <expression name="expression">dataSetRow["seccion_subseccion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">seccion</property>
+                    <expression name="expression">dataSetRow["seccion"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">subseccion</property>
+                    <expression name="expression">dataSetRow["subseccion"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">subgrupo</property>
+                    <expression name="expression">dataSetRow["subgrupo"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">grupo</property>
+                    <expression name="expression">dataSetRow["grupo"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">clase</property>
+                    <expression name="expression">dataSetRow["clase"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">codigo_det_pk</property>
+                    <expression name="expression">dataSetRow["codigo_det_pk"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">codigo_preparacion</property>
+                    <expression name="expression">dataSetRow["codigo_preparacion"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ubicacion</property>
+                    <expression name="expression">dataSetRow["ubicacion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigo_dapa</property>
+                    <expression name="expression">dataSetRow["codigo_dapa"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">conteo</property>
+                    <expression name="expression">dataSetRow["conteo"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">cantidad</property>
+                    <expression name="expression">dataSetRow["cantidad"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">servicio</property>
+                    <expression name="expression">dataSetRow["servicio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cirujano</property>
+                    <expression name="expression">dataSetRow["cirujano"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">especialidad</property>
+                    <expression name="expression">dataSetRow["especialidad"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tipo</property>
+                    <expression name="expression">dataSetRow["tipo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">profesional</property>
+                    <expression name="expression">dataSetRow["profesional"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="474">
+                <property name="width">3.09375in</property>
+            </column>
+            <column id="475">
+                <property name="width">1.4166666667in</property>
+            </column>
+            <column id="476">
+                <property name="width">1.4583333333in</property>
+            </column>
+            <header>
+                <row id="595">
+                    <cell id="596">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">8pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">2pt</property>
+                    </cell>
+                </row>
+            </header>
+            <group id="649">
+                <property name="groupName">NewTableGroup1</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr">row["servicio"]</expression>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <header>
+                    <row id="650">
+                        <cell id="651">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="backgroundColor">#CCCCCC</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">8pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <data id="658">
+                                <property name="resultSetColumn">servicio</property>
+                            </data>
+                        </cell>
+                    </row>
+                    <row id="659">
+                        <cell id="660">
+                            <property name="backgroundColor">#E1E1E1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">8pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text id="587">
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[Profesional]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="661">
+                            <property name="backgroundColor">#E1E1E1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">8pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text id="588">
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[Tipo]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="662">
+                            <property name="backgroundColor">#E1E1E1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">8pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="paddingTop">2pt</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingBottom">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <text id="589">
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[Especialidad]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="654">
+                        <cell id="655"/>
+                        <cell id="656"/>
+                        <cell id="657"/>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="400">
+                    <cell id="401">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">8pt</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">2pt</property>
+                        <data id="605">
+                            <property name="resultSetColumn">profesional</property>
+                        </data>
+                    </cell>
+                    <cell id="403">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">8pt</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">2pt</property>
+                        <data id="602">
+                            <property name="resultSetColumn">tipo</property>
+                        </data>
+                    </cell>
+                    <cell id="405">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">8pt</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">2pt</property>
+                        <data id="603">
+                            <property name="resultSetColumn">especialidad</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="449">
+                    <cell id="450"/>
+                    <cell id="451"/>
+                    <cell id="452"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2010 5:06:26 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolDespachoSinAuto" table="sol_despacho_sin_auto" schema="ordenes">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">ordenes.seq_sol_despacho_sin_auto</param>
+			</generator>
+        </id>
+        <many-to-one name="despacho" class="com.servinte.axioma.orm.Despacho" fetch="select">
+            <column name="despacho" not-null="true" />
+        </many-to-one>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="solicitud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="articulo" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="articulo" not-null="true" />
+        </many-to-one>
+        <property name="observacion" type="string">
+            <column name="observacion" length="1000" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

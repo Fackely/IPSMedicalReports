@@ -1,0 +1,1303 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN" "../webapps/ipsm_mainqa/WEB-INF/dtds/validator_1_1.dtd">
+<form-validation>
+	<formset>
+		<form name="ValoracionInterconsultaForm">
+			<field property="numeroAutorizacion" depends="mask,maxlength">
+				<msg name="mask" key="prompt.numeroAutorizacion.maskmsg"/>
+				<arg0 key="prompt.numeroAutorizacion"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[0-9A-Za-z\-]*$</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>15</var-value>
+				</var>
+			</field>		
+		</form>
+		<form name="ValoracionInterconsultaPediatricaForm">
+			<field property="numeroAutorizacion" depends="mask,maxlength">
+				<msg name="mask" key="prompt.numeroAutorizacion.maskmsg"/>
+				<arg0 key="prompt.numeroAutorizacion"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[0-9A-Za-z\-]*$</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>15</var-value>
+				</var>
+			</field>		
+		</form>
+		<form name="ValoracionPediatricaHospitalariaForm">
+			<field property="diagnosticoIngreso" depends="required">
+				<arg0 key="${var:diagnosticoDeIngreso}" resource="false"/>
+				<var>
+					<var-name>diagnosticoDeIngreso</var-name>
+					<var-value>El Diagnóstico de ingreso</var-value>
+				</var>
+			</field>
+			<field property="fechaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:fechaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>fechaValoracion</var-name>
+					<var-value>Fecha de valoracion</var-value>
+				</var>
+			</field>
+			<field property="horaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaValoracion</var-name>
+					<var-value>Hora de valoracion</var-value>
+				</var>
+			</field>
+			<field property="enfermedadActual" depends="maxlength">
+				<arg0 key="${var:enfermedadActual}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+				<var>
+					<var-name>enfermedadActual</var-name>
+					<var-value>Enfermedad Actual</var-value>
+				</var>
+			</field>
+		</form>
+		<form name="ValoracionPediatricaUrgenciasForm">
+			<field property="conductaASeguir_cn" depends="required">
+				<arg0 key="${var:conductaASeguir}" resource="false"/>
+				<var>
+					<var-name>conductaASeguir</var-name>
+					<var-value>Conducta a Seguir</var-value>
+				</var>
+			</field>
+			<!-- <field property="testSilverman" depends="requiredif">
+				<arg0 key="${var:testDeSilverman}" resource="false"/>
+				<var>
+					<var-name>testDeSilverman</var-name>
+					<var-value>Valor o Descripción del Test de Silverman</var-value>
+				</var>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>normalTestSilverman</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>EQUAL</var-value>
+				</var>
+				<var>
+					<var-name>field-value[0]</var-name>
+					<var-value>false</var-value>
+				</var>
+				<var>
+					<var-name>field[1]</var-name>
+					<var-value>descTestSilverman</var-value>
+				</var>
+				<var>
+					<var-name>field-test[1]</var-name>
+					<var-value>NULL</var-value>
+				</var>
+				<var>
+					<var-name>field[2]</var-name>
+					<var-value>testSilverman</var-value>
+				</var>
+				<var>
+					<var-name>field-test[2]</var-name>
+					<var-value>NULL</var-value>
+				</var>
+				<var>
+					<var-name>field-join</var-name>
+					<var-value>AND</var-value>
+				</var>
+			</field> -->
+			<field property="fechaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:fechaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>fechaValoracion</var-name>
+					<var-value>Fecha de valoracion</var-value>
+				</var>
+			</field>
+			<field property="horaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaValoracion</var-name>
+					<var-value>Hora de valoracion</var-value>
+				</var>
+			</field>
+			<field property="enfermedadActual" depends="maxlength">
+				<arg0 key="${var:enfermedadActual}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+				<var>
+					<var-name>enfermedadActual</var-name>
+					<var-value>Enfermedad Actual</var-value>
+				</var>
+			</field>
+		</form>
+		<form name="ValoracionPediatricaForm">
+			<field property="fechaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:fechaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>fechaValoracion</var-name>
+					<var-value>Fecha de valoracion</var-value>
+				</var>
+			</field>
+			<field property="horaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaValoracion</var-name>
+					<var-value>Hora de valoración</var-value>
+				</var>
+			</field>
+			<field property="enfermedadActual" depends="maxlength">
+				<arg0 key="${var:enfermedadActual}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+				<var>
+					<var-name>enfermedadActual</var-name>
+					<var-value>Enfermedad Actual</var-value>
+				</var>
+			</field>
+		</form>
+		<form name="ValoracionHospitalariaForm">
+			<field property="diagnosticoIngreso" depends="required">
+				<arg0 key="${var:diagnosticoDeIngreso}" resource="false"/>
+				<var>
+					<var-name>diagnosticoDeIngreso</var-name>
+					<var-value>El Diagnóstico de ingreso</var-value>
+				</var>
+			</field>
+			<field property="fechaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:fechaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>fechaValoracion</var-name>
+					<var-value>Fecha de valoracion</var-value>
+				</var>
+			</field>
+			<field property="horaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaValoracion</var-name>
+					<var-value>Hora de valoración</var-value>
+				</var>
+			</field>
+			<field property="enfermedadActual" depends="maxlength">
+				<arg0 key="${var:enfermedadActual}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+				<var>
+					<var-name>enfermedadActual</var-name>
+					<var-value>Enfermedad Actual</var-value>
+				</var>
+			</field>
+		</form>
+		<form name="ValoracionUrgenciasForm">
+			<field property="conductaASeguir_cn" depends="required">
+				<arg0 key="${var:conductaASeguir}" resource="false"/>
+				<var>
+					<var-name>conductaASeguir</var-name>
+					<var-value>Conducta a Seguir</var-value>
+				</var>
+			</field>
+			<!-- <field property="testSilverman" depends="requiredif">
+				<arg0 key="${var:testDeSilverman}" resource="false"/>
+				<var>
+					<var-name>testDeSilverman</var-name>
+					<var-value>Valor o Descripción del Test de Silverman</var-value>
+				</var>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>normalTestSilverman</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>EQUAL</var-value>
+				</var>
+				<var>
+					<var-name>field-value[0]</var-name>
+					<var-value>false</var-value>
+				</var>
+				<var>
+					<var-name>field[1]</var-name>
+					<var-value>descTestSilverman</var-value>
+				</var>
+				<var>
+					<var-name>field-test[1]</var-name>
+					<var-value>NULL</var-value>
+				</var>
+				<var>
+					<var-name>field[2]</var-name>
+					<var-value>testSilverman</var-value>
+				</var>
+				<var>
+					<var-name>field-test[2]</var-name>
+					<var-value>NULL</var-value>
+				</var>
+				<var>
+					<var-name>field-join</var-name>
+					<var-value>AND</var-value>
+				</var>
+			</field> -->
+			<field property="fechaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:fechaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>fechaValoracion</var-name>
+					<var-value>Fecha de valoracion</var-value>
+				</var>
+			</field>
+			<field property="horaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaValoracion</var-name>
+					<var-value>Hora de valoración</var-value>
+				</var>
+			</field>
+			<field property="enfermedadActual" depends="maxlength">
+				<arg0 key="${var:enfermedadActual}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+				<var>
+					<var-name>enfermedadActual</var-name>
+					<var-value>Enfermedad Actual</var-value>
+				</var>
+			</field>
+		</form>
+		<form name="ValoracionForm">
+			<field property="fechaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:fechaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>fechaValoracion</var-name>
+					<var-value>Fecha de valoracion</var-value>
+				</var>
+			</field>
+			<field property="horaValoracion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaValoracion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaValoracion</var-name>
+					<var-value>Hora de valoración</var-value>
+				</var>
+			</field>
+			<field property="enfermedadActual" depends="maxlength">
+				<arg0 key="${var:enfermedadActual}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+				<var>
+					<var-name>enfermedadActual</var-name>
+					<var-value>Enfermedad Actual</var-value>
+				</var>
+			</field>
+		</form>
+		<form name="EvolucionForm">
+		<!--	<field property="fechaEvolucion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:fechaEvolucion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>fechaEvolucion</var-name>
+					<var-value>La fecha de evolucion dd</var-value>
+				</var>
+			</field>
+			<field property="horaEvolucion" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaEvolucion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaEvolucion</var-name>
+					<var-value>La hora de evolución</var-value>
+				</var>
+			</field>
+			-->
+			<field property="signoVital(1)" depends="float,floatRange">
+				<arg0 key="${var:pulso}" resource="false"/>
+				<arg1 name="floatRange" key="${var:min}" resource="false"/>
+				<arg2 name="floatRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0.0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>400.0</var-value>
+				</var>
+				<var>
+					<var-name>pulso</var-name>
+					<var-value>Pulso</var-value>
+				</var>
+			</field>
+			<field property="signoVital(desc_1)" depends="maxlength">
+				<arg0 key="${var:descripcion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+				<var>
+					<var-name>descripcion</var-name>
+					<var-value>Descripción Pulso</var-value>
+				</var>
+			</field>
+			<field property="signoVital(2)" depends="float,floatRange">
+				<arg0 key="${var:respiracion}" resource="false"/>
+				<arg1 name="floatRange" key="${var:min}" resource="false"/>
+				<arg2 name="floatRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0.0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>200.0</var-value>
+				</var>
+				<var>
+					<var-name>respiracion</var-name>
+					<var-value>Respiración</var-value>
+				</var>
+			</field>
+			<field property="signoVital(desc_2)" depends="maxlength">
+				<arg0 key="${var:descripcion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+				<var>
+					<var-name>descripcion</var-name>
+					<var-value>Descripción Respiración</var-value>
+				</var>
+			</field>
+			<field property="signoVital(3)" depends="float,floatRange">
+				<arg0 key="${var:temperatura}" resource="false"/>
+				<arg1 name="floatRange" key="${var:min}" resource="false"/>
+				<arg2 name="floatRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0.0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>50.0</var-value>
+				</var>
+				<var>
+					<var-name>temperatura</var-name>
+					<var-value>Temperatura</var-value>
+				</var>
+			</field>
+			<field property="signoVital(desc_3)" depends="maxlength">
+				<arg0 key="${var:descripcion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+				<var>
+					<var-name>descripcion</var-name>
+					<var-value>Descripción Temperatura</var-value>
+				</var>
+			</field>
+			<field property="signoVital(4)" depends="maxlength">
+				<arg0 key="${var:presionArterial}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>32</var-value>
+				</var>
+				<var>
+					<var-name>presionArterial</var-name>
+					<var-value>Presión Arterial</var-value>
+				</var>
+			</field>
+			<field property="signoVital(desc_4)" depends="maxlength">
+				<arg0 key="${var:descripcion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+				<var>
+					<var-name>descripcion</var-name>
+					<var-value>Descripción Presión Arterial</var-value>
+				</var>
+			</field>
+		</form>
+		<form name="AntecedentePediatricoForm">
+			<field property="edadMadre" depends="integer,maxlength,intRange">
+				<arg0 key="${var:edadMadre}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>edadMadre</var-name>
+					<var-value>Edad de la madre</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>99</var-value>
+				</var>
+			</field>
+			<field property="furMadre" depends="date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:furMadre}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>furMadre</var-name>
+					<var-value>de Ultima Regla (F.U.R.)</var-value>
+				</var>
+			</field>
+			<field property="fppMadre" depends="date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:fppMadre}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>fppMadre</var-name>
+					<var-value>Probable de Parto (F.P.P.)</var-value>
+				</var>
+			</field>
+			<field property="duracionExpulsivoHoras" depends="integer,maxlength,intRange">
+				<arg0 key="prompt.pediatricos.duracionExpulsivoHoras"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>99</var-value>
+				</var>
+			</field>
+			<field property="duracionExpulsivoMinutos" depends="integer,maxlength,intRange">
+				<arg0 key="prompt.pediatricos.duracionExpulsivoMinutos"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>59</var-value>
+				</var>
+			</field>
+			<field property="intrauterinoAnormalidad" depends="integer,maxlength,intRange">
+				<arg0 key="prompt.pediatricos.intrauterinoAnormalidad"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>3</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>100</var-value>
+				</var>
+			</field>
+			<field property="semanasGestacion" depends="float,maxlength,floatRange">
+				<arg0 key="${var:semanasGestacion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="floatRange" key="${var:min}" resource="false"/>
+				<arg2 name="floatRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>4</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>50</var-value>
+				</var>
+				<var>
+					<var-name>semanasGestacion</var-name>
+					<var-value>Semanas Gestación</var-value>
+				</var>
+			</field>
+			<field property="edadGestacional" depends="integer,maxlength,floatRange">
+				<arg0 key="${var:edadGestacional}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>50</var-value>
+				</var>
+				<var>
+					<var-name>edadGestacional</var-name>
+					<var-value>Edad Gestacional</var-value>
+				</var>
+			</field>
+			<field property="duracionPartoHoras" depends="integer,maxlength,intRange">
+				<arg0 key="prompt.pediatricos.duracionPartoHoras"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>99</var-value>
+				</var>
+			</field>
+			<field property="duracionPartoMinutos" depends="integer,maxlength,intRange">
+				<arg0 key="prompt.pediatricos.duracionPartoMinutos"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>59</var-value>
+				</var>
+			</field>
+			<field property="comentarioTipoTrabajoParto" depends="maxlength">
+				<arg0 key="prompt.pediatricos.comentarioTipoTrabajoParto"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+			</field>
+			<field property="rupturaMembranasHoras" depends="integer,maxlength,intRange">
+				<arg0 key="prompt.pediatricos.rupturaMembranasHoras"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>99</var-value>
+				</var>
+			</field>
+			<field property="rupturaMembranasMinutos" depends="integer,intRange,maxlength">
+				<arg0 key="prompt.pediatricos.rupturaMembranasMinutos"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>59</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+			</field>
+			<field property="horaNacimiento" depends="date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaNacimiento}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaNacimiento</var-name>
+					<var-value>de nacimiento</var-value>
+				</var>
+			</field>
+			<field property="talla" depends="integer,intRange,maxlength">
+				<arg0 key="prompt.pediatricos.talla"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<arg3 name="maxlength" key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>80</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+			</field>
+			<field property="peso" depends="integer,intRange,maxlength">
+				<arg0 key="prompt.pediatricos.peso"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<arg3 name="maxlength" key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>300</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>6000</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>4</var-value>
+				</var>
+			</field>
+			<field property="perimetroCefalico" depends="float,floatRange,maxlength">
+				<arg0 key="${var:perimetroCefalico}" resource="false"/>
+				<arg1 name="floatRange" key="${var:min}" resource="false"/>
+				<arg2 name="floatRange" key="${var:max}" resource="false"/>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>perimetroCefalico</var-name>
+					<var-value>Perímetro Cefálico</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>100</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+			</field>
+			<field property="perimetroToracico" depends="float,floatRange,maxlength">
+				<arg0 key="${var:perimetroToracico}" resource="false"/>
+				<arg1 name="floatRange" key="${var:min}" resource="false"/>
+				<arg2 name="floatRange" key="${var:max}" resource="false"/>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>perimetroToracico</var-name>
+					<var-value>Perímetro Torácico</var-value>
+				</var>
+				<var>
+					<var-name>min</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>100</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+			</field>
+			<!-- <field property="otraPresentacionNacimiento" depends="requiredif,maxlength">
+				<arg0 key="prompt.pediatricos.otraPresentacionNacimiento"/>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>presentacionNacimiento_cn</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>EQUAL</var-value>
+				</var>
+				<var>
+					<var-name>field-value[0]</var-name>
+					<var-value>0-Otra</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>32</var-value>
+				</var>
+			</field>
+			<field property="otraUbicacionFeto" depends="requiredif,maxlength">
+				<arg0 key="${var:ubicacionFeto}" resource="false"/>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>ubicacionFeto</var-name>
+					<var-value>El campo ¿Cuál? de Situación del feto 'Otra'</var-value>
+				</var>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>ubicacionFeto_cn</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>EQUAL</var-value>
+				</var>
+				<var>
+					<var-name>field-value[0]</var-name>
+					<var-value>0-Otra</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>32</var-value>
+				</var>
+			</field>
+			<field property="otroTipoParto" depends="requiredif,maxlength">
+				<arg0 key="prompt.pediatricos.otroTipoParto"/>
+				<arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>tiposParto(0)</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>EQUAL</var-value>
+				</var>
+				<var>
+					<var-name>field-value[0]</var-name>
+					<var-value>0-Otro</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>32</var-value>
+				</var>
+			</field>
+			<field property="riesgoApgarMinuto1_cn" depends="requiredif">
+				<arg0 key="prompt.pediatricos.riesgoApgarMinuto1"/>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>apgarMinuto1</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				</var>
+			</field>
+			<field property="riesgoApgarMinuto5_cn" depends="requiredif">
+				<arg0 key="prompt.pediatricos.riesgoApgarMinuto5"/>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>apgarMinuto5</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				</var>
+			</field>
+			<field property="riesgoApgarMinuto10_cn" depends="requiredif">
+				<arg0 key="prompt.pediatricos.riesgoApgarMinuto10"/>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>apgarMinuto10</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				</var>
+			</field>
+			<field property="apgarMinuto1" depends="integer,intRange,requiredif,maxlength">
+				<arg0 key="prompt.pediatricos.apgarMinuto1"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>riesgoApgarMinuto1_cn</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+			</field>
+			<field property="apgarMinuto5" depends="integer,intRange,requiredif,maxlength">
+				<arg0 key="prompt.pediatricos.apgarMinuto5"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>riesgoApgarMinuto5_cn</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+			</field>
+			<field property="apgarMinuto10" depends="integer,intRange,requiredif,maxlength">
+				<arg0 key="prompt.pediatricos.apgarMinuto10"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<arg1 name="intRange" key="${var:min}" resource="false"/>
+				<arg2 name="intRange" key="${var:max}" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>field[0]</var-name>
+					<var-value>riesgoApgarMinuto10_cn</var-value>
+				</var>
+				<var>
+					<var-name>field-test[0]</var-name>
+					<var-value>NOTNULL</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+			</field>-->
+			<field property="caracteristicasLiquidoAmniotico" depends="maxlength">
+				<arg0 key="prompt.pediatricos.caracteristicasLiquidoAmniotico"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+			</field>
+			<field property="causasSufrimientoFetal" depends="maxlength">
+				<arg0 key="prompt.pediatricos.causasSufrimientoFetal"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+			</field>
+			<field property="anestesiaMedicamentos" depends="maxlength">
+				<arg0 key="prompt.pediatricos.anestesiaMedicamentos"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+			</field>
+			<field property="caracteristicasPlacenta" depends="maxlength">
+				<arg0 key="prompt.pediatricos.caracteristicasPlacenta"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+			</field>
+			<field property="textareaMotivosParto" depends="maxlength">
+				<arg0 key="prompt.pediatricos.textareaMotivosParto"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+			</field>
+			<field property="textareaObservacionesInmunizacion" depends="maxlength">
+				<arg0 key="prompt.pediatricos.textareaObservacionesInmunizacion"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>256</var-value>
+				</var>
+			</field>
+		</form>
+		<form name="AntecedentesGinecoObstetricosForm">
+			<field property="fechaUltimaRegla" depends="maxlength">
+				<arg0 key="prompt.ginecoobstetricos.fechaultimaregla"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>				
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+			</field>
+			<field property="duracionMenstruacion" depends="integer,intRange">
+				<arg0 key="prompt.ginecoobstetricos.duracionMenstruacion"/>
+				<arg1 key="${var:min}" name="intRange" resource="false"/>
+				<arg2 key="${var:max}" name="intRange" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>100</var-value>
+				</var>
+			</field>
+			<field property="cicloMenstrual" depends="integer,intRange">
+				<arg0 key="prompt.ginecoobstetricos.cicloMenstrual"/>
+				<arg1 key="${var:min}" name="intRange" resource="false"/>
+				<arg2 key="${var:max}" name="intRange" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>0</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>100</var-value>
+				</var>
+			</field>
+		</form>
+		<form name="AntecedentesVariosForm">
+			<field property="tipoAntecedente" depends="required">
+				<arg0 key="prompt.varios.tipoAntecedente"/>
+			</field>
+			<field property="descripcionAntecedente" depends="required">
+				<arg0 key="prompt.varios.descripcionAntecedente"/>
+			</field>
+		</form>
+		
+		
+		<form name="HorarioAtencionForm">
+			<field property="horaInicio" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaInicio}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaInicio</var-name>
+					<var-value>Hora de Inicio</var-value>
+				</var>
+			</field>
+			<field property="pacientesSesion" depends="integer,maxlength">
+				<arg0 key="${var:pacientesSesion}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+				<var>
+					<var-name>pacientesSesion</var-name>
+					<var-value>Paciente por Consulta</var-value>
+				</var>
+			</field>
+			<field property="totalSesiones" depends="integer,maxlength,intRange">
+				<arg0 key="${var:totalSesiones}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>3</var-value>
+				</var>
+				<var>
+					<var-name>totalSesiones</var-name>
+					<var-value>Total Sesiones de Consulta</var-value>
+				</var>
+				<arg1 key="${var:min}" name="intRange" resource="false"/>
+				<arg2 key="${var:max}" name="intRange" resource="false"/>
+				<var>
+					<var-name>min</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>999</var-value>
+				</var>
+			</field>
+		</form>
+		<form name="AgendaForm">
+			<field property="fechaInicio" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:fechaInicio}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>fechaInicio</var-name>
+					<var-value>Fecha Inicial</var-value>
+				</var>
+			</field>
+			<field property="fechaFin" depends="required,date,maxlength">
+				<msg name="date" key="errors.formatoFechaInvalido"/>
+				<arg0 key="${var:fechaFin}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<var>
+					<var-name>fechaFin</var-name>
+					<var-value>Fecha Final</var-value>
+				</var>
+			</field>
+			<field property="horaInicio" depends="date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaInicio}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaInicio</var-name>
+					<var-value>de inicio</var-value>
+				</var>
+			</field>
+			<field property="horaFin" depends="date,maxlength">
+				<msg name="date" key="errors.formatoHoraInvalido"/>
+				<arg0 key="${var:horaFin}" resource="false"/>
+				<arg1 key="${var:maxlength}" name="maxlength" resource="false"/>
+				<var>
+					<var-name>datePatternStrict</var-name>
+					<var-value>HH:mm</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>5</var-value>
+				</var>
+				<var>
+					<var-name>horaFin</var-name>
+					<var-value>de finalización</var-value>
+				</var>
+			</field>
+		</form>
+	</formset>
+</form-validation>

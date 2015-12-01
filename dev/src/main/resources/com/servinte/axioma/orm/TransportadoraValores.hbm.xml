@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 8, 2010 2:12:13 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TransportadoraValores" table="transportadora_valores" schema="tesoreria">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" /> 
+            	<generator class="sequence" >
+					<param name="sequence">tesoreria.seq_transportadora_valores</param>
+				</generator>
+         </id>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="razon_social" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="6" not-null="true" />
+        </property>
+        <property name="activo" type="char">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="256" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="64" />
+        </property>
+        <property name="personaContacto" type="string">
+            <column name="persona_contacto" length="256" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="512" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true" />
+        </property>
+        <set name="centrosAtenTransportadoras" inverse="true" lazy="true" table="centros_aten_transportadora" fetch="select">
+            <key>
+                <column name="transportadora" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentrosAtenTransportadora" />
+        </set>
+        <set name="entregaTransportadoras" inverse="true" lazy="true" table="entrega_transportadora" fetch="select">
+            <key>
+                <column name="transportadora" not-null="true">
+                    <comment>Referencia hacia la tabla tesoreria.transportadora_valores</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntregaTransportadora" />
+        </set>
+    </class>
+</hibernate-mapping>

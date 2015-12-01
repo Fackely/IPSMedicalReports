@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="576">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="MovimientoFactura" id="577">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <property name="queryText">SELECT 
+	fv.consecutivo AS consecutivofactura, 
+	to_char(fv.fecha, 'DD/MM/YYYY') AS fechaelaboracion, 
+	fv.deudor AS deudor, 
+	getdescripciontercero(fv.deudor) AS desdeudor, 
+	getnumeroidentificaciontercero(fv.deudor) AS idtercero, 
+	d.tipo AS tipodeudor, 
+	coalesce(sum(fv.valor_factura), 0) AS valorinicial, 
+	coalesce(sum(fv.ajustes_debito), 0) AS ajustesdebito, 
+	coalesce(sum(fv.ajustes_credito), 0) AS ajustescredito, 
+	coalesce(sum(fv.valor_pagos), 0) AS pagosaplicados, 
+	(
+		coalesce(sum(fv.valor_factura), 0) 
+		+ coalesce(sum(fv.ajustes_debito), 0) 
+		- coalesce(sum(fv.ajustes_credito), 0) 
+		- coalesce(sum(fv.valor_pagos), 0)
+	) AS saldo 
+FROM 
+	facturas_varias fv 
+	INNER JOIN deudores d ON (d.codigo = fv.deudor)
+WHERE 
+	1=2
+GROUP BY 
+	fv.consecutivo, fv.fecha, fv.deudor, d.tipo 
+ORDER BY 
+	fv.consecutivo, fv.fecha, getdescripciontercero(fv.deudor)</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>1.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>consecutivofactura</design:name>
+            <design:position>1</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>12</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>consecutivofactura</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>consecutivofactura</design:label>
+            <design:formattingHints>
+              <design:displaySize>13</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>fechaelaboracion</design:name>
+            <design:position>2</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>fechaelaboracion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>fechaelaboracion</design:label>
+            <design:formattingHints>
+              <design:displaySize>65535</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>deudor</design:name>
+            <design:position>3</design:position>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>deudor</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>deudor</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>desdeudor</design:name>
+            <design:position>4</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>desdeudor</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>desdeudor</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>idtercero</design:name>
+            <design:position>5</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>idtercero</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>idtercero</design:label>
+            <design:formattingHints>
+              <design:displaySize>-5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>tipodeudor</design:name>
+            <design:position>6</design:position>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>tipodeudor</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tipodeudor</design:label>
+            <design:formattingHints>
+              <design:displaySize>8</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>valorinicial</design:name>
+            <design:position>7</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>65531</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>valorinicial</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valorinicial</design:label>
+            <design:formattingHints>
+              <design:displaySize>131067</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>ajustesdebito</design:name>
+            <design:position>8</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>65531</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>ajustesdebito</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ajustesdebito</design:label>
+            <design:formattingHints>
+              <design:displaySize>131067</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>ajustescredito</design:name>
+            <design:position>9</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>65531</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>ajustescredito</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ajustescredito</design:label>
+            <design:formattingHints>
+              <design:displaySize>131067</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>pagosaplicados</design:name>
+            <design:position>10</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>65531</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>pagosaplicados</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>pagosaplicados</design:label>
+            <design:formattingHints>
+              <design:displaySize>131067</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:name>saldo</design:name>
+            <design:position>11</design:position>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>65531</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>saldo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>saldo</design:label>
+            <design:formattingHints>
+              <design:displaySize>131067</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="crosstab-cell" id="4">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1cm</property>
+            <page-header>
+                <grid id="6">
+                    <property name="width">100%</property>
+                    <column id="7">
+                        <property name="width">3in</property>
+                    </column>
+                    <column id="8">
+                        <property name="width">5in</property>
+                    </column>
+                    <column id="9">
+                        <property name="width">2in</property>
+                    </column>
+                    <row id="10">
+                        <cell id="11"/>
+                        <cell id="12">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                        <cell id="13"/>
+                    </row>
+                    <row id="14">
+                        <cell id="15"/>
+                        <cell id="16">
+                            <grid id="81">
+                                <property name="fontSize">medium</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="marginTop">0pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="width">100%</property>
+                                <column id="82"/>
+                                <row id="83">
+                                    <cell id="84"/>
+                                </row>
+                                <row id="85">
+                                    <cell id="86"/>
+                                </row>
+                            </grid>
+                        </cell>
+                        <cell id="17"/>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="87">
+                    <property name="width">100%</property>
+                    <column id="88">
+                        <property name="width">2.5in</property>
+                    </column>
+                    <column id="89">
+                        <property name="width">2.5in</property>
+                    </column>
+                    <column id="90">
+                        <property name="width">5in</property>
+                    </column>
+                    <row id="91">
+                        <cell id="92">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                        </cell>
+                        <cell id="93">
+                            <text id="575">
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">right</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="94">
+                            <grid id="368">
+                                <property name="fontWeight">bold</property>
+                                <property name="width">100%</property>
+                                <column id="369">
+                                    <property name="width">4.125in</property>
+                                </column>
+                                <column id="370">
+                                    <property name="width">0.4479166667in</property>
+                                </column>
+                                <column id="371">
+                                    <property name="width">0.4791666667in</property>
+                                </column>
+                                <row id="372">
+                                    <cell id="373">
+                                        <auto-text id="374">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="375">
+                                        <text id="376">
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[de]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="377">
+                                        <auto-text id="378">
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="578">
+            <property name="width">100%</property>
+            <property name="dataSet">MovimientoFactura</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">consecutivofactura</property>
+                    <expression name="expression">dataSetRow["consecutivofactura"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">fechaelaboracion</property>
+                    <expression name="expression">dataSetRow["fechaelaboracion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">deudor</property>
+                    <expression name="expression">dataSetRow["deudor"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">desdeudor</property>
+                    <expression name="expression">dataSetRow["desdeudor"]+" - "+row["idtercero"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">idtercero</property>
+                    <expression name="expression">dataSetRow["idtercero"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tipodeudor</property>
+                    <expression name="expression">dataSetRow["tipodeudor"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valorinicial</property>
+                    <expression name="expression">dataSetRow["valorinicial"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ajustesdebito</property>
+                    <expression name="expression">dataSetRow["ajustesdebito"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ajustescredito</property>
+                    <expression name="expression">dataSetRow["ajustescredito"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">pagosaplicados</property>
+                    <expression name="expression">dataSetRow["pagosaplicados"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">saldo</property>
+                    <expression name="expression">dataSetRow["saldo"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["valorinicial"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["ajustesdebito"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_2</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["ajustescredito"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_3</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["pagosaplicados"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_4</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["saldo"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <column id="606">
+                <property name="width">0.7in</property>
+            </column>
+            <column id="607">
+                <property name="width">0.8in</property>
+            </column>
+            <column id="608">
+                <property name="width">3.5in</property>
+            </column>
+            <column id="609">
+                <property name="width">1in</property>
+            </column>
+            <column id="610">
+                <property name="width">1in</property>
+            </column>
+            <column id="611">
+                <property name="width">1in</property>
+            </column>
+            <column id="612">
+                <property name="width">1in</property>
+            </column>
+            <column id="613">
+                <property name="width">1in</property>
+            </column>
+            <header>
+                <row id="616">
+                    <cell id="617">
+                        <property name="colSpan">8</property>
+                        <property name="rowSpan">1</property>
+                    </cell>
+                </row>
+                <row id="579">
+                    <property name="backgroundColor">silver</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <cell id="580">
+                        <label id="68">
+                            <property name="fontSize">6pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">FACTURA</text-property>
+                        </label>
+                    </cell>
+                    <cell id="581">
+                        <label id="615">
+                            <property name="fontSize">6pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">FECHA ELABORACIÓN</text-property>
+                        </label>
+                    </cell>
+                    <cell id="582">
+                        <label id="614">
+                            <property name="fontSize">6pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">DEUDOR - NIT</text-property>
+                        </label>
+                    </cell>
+                    <cell id="583">
+                        <label id="69">
+                            <property name="fontSize">6pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">VALOR INICIAL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="584">
+                        <label id="70">
+                            <property name="fontSize">6pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">AJUSTES DÉBITO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="585">
+                        <label id="71">
+                            <property name="fontSize">6pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">AJUSTES CRÉDITO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="586">
+                        <label id="72">
+                            <property name="fontSize">6pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">PAGOS APLICADOS</text-property>
+                        </label>
+                    </cell>
+                    <cell id="587">
+                        <label id="73">
+                            <property name="fontSize">6pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="paddingLeft">2pt</property>
+                            <property name="paddingRight">2pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">SALDO</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="588">
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <cell id="589">
+                        <data id="626">
+                            <property name="fontSize">7pt</property>
+                            <property name="marginTop">1pt</property>
+                            <property name="marginLeft">1pt</property>
+                            <property name="marginBottom">1pt</property>
+                            <property name="marginRight">1pt</property>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">consecutivofactura</property>
+                        </data>
+                    </cell>
+                    <cell id="590">
+                        <data id="627">
+                            <property name="fontSize">7pt</property>
+                            <property name="marginTop">1pt</property>
+                            <property name="marginLeft">1pt</property>
+                            <property name="marginBottom">1pt</property>
+                            <property name="marginRight">1pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">fechaelaboracion</property>
+                        </data>
+                    </cell>
+                    <cell id="591">
+                        <data id="643">
+                            <property name="fontSize">7pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">desdeudor</property>
+                        </data>
+                    </cell>
+                    <cell id="592">
+                        <data id="629">
+                            <property name="fontSize">7pt</property>
+                            <property name="marginTop">1pt</property>
+                            <property name="marginLeft">1pt</property>
+                            <property name="marginBottom">1pt</property>
+                            <property name="marginRight">1pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">valorinicial</property>
+                        </data>
+                    </cell>
+                    <cell id="593">
+                        <data id="630">
+                            <property name="fontSize">7pt</property>
+                            <property name="marginTop">1pt</property>
+                            <property name="marginLeft">1pt</property>
+                            <property name="marginBottom">1pt</property>
+                            <property name="marginRight">1pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">ajustesdebito</property>
+                        </data>
+                    </cell>
+                    <cell id="594">
+                        <data id="631">
+                            <property name="fontSize">7pt</property>
+                            <property name="marginTop">1pt</property>
+                            <property name="marginLeft">1pt</property>
+                            <property name="marginBottom">1pt</property>
+                            <property name="marginRight">1pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">ajustescredito</property>
+                        </data>
+                    </cell>
+                    <cell id="595">
+                        <data id="632">
+                            <property name="fontSize">7pt</property>
+                            <property name="marginTop">1pt</property>
+                            <property name="marginLeft">1pt</property>
+                            <property name="marginBottom">1pt</property>
+                            <property name="marginRight">1pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">pagosaplicados</property>
+                        </data>
+                    </cell>
+                    <cell id="596">
+                        <data id="633">
+                            <property name="fontSize">7pt</property>
+                            <property name="marginTop">1pt</property>
+                            <property name="marginLeft">1pt</property>
+                            <property name="marginBottom">1pt</property>
+                            <property name="marginRight">1pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">saldo</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="597">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <cell id="598">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <label id="637">
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Total Facturas:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="601">
+                        <data id="638">
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">Aggregation</property>
+                        </data>
+                    </cell>
+                    <cell id="602">
+                        <data id="639">
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">Aggregation_1</property>
+                        </data>
+                    </cell>
+                    <cell id="603">
+                        <data id="640">
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">Aggregation_2</property>
+                        </data>
+                    </cell>
+                    <cell id="604">
+                        <data id="641">
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">Aggregation_3</property>
+                        </data>
+                    </cell>
+                    <cell id="605">
+                        <data id="642">
+                            <property name="fontSize">7pt</property>
+                            <property name="fontWeight">bold</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">Aggregation_4</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

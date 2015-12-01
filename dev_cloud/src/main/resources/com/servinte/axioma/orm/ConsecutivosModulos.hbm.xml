@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 18, 2011 11:29:30 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConsecutivosModulos" table="consecutivos_modulos" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.ConsecutivosModulosId">
+            <key-property name="nombre" type="string">
+                <column name="nombre" length="256" />
+            </key-property>
+            <key-property name="modulo" type="int">
+                <column name="modulo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="modulos" class="com.servinte.axioma.orm.Modulos" update="false" insert="false" fetch="select">
+            <column name="modulo" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<query name="catalogoHistoriaClinica.consultarCurvasParametrizadas">
+		SELECT NEW com.servinte.axioma.dto.historiaClinica.CurvaCrecimientoParametrizabDto(
+			ccp.id, ccp.sexo.codigo, ccp.curvaCrecimientoParametrizab.id, ccp.tituloGrafica, ccp.colorTitulo,
+			ccp.descripcion, ccp.colorDescripcion, ccp.edadInicial, ccp.edadFinal, ccp.activo, ccp.indicadorError,
+			ccp.fechaCreacion)
+		FROM CurvaCrecimientoParametrizab ccp
+	</query>
+	
+	<query name="catalogoHistoriaClinica.consultarCurvaParametrizada">
+		SELECT NEW com.servinte.axioma.dto.historiaClinica.CurvaCrecimientoParametrizabDto(
+			ccp.id, ccp.sexo.codigo, ccp.curvaCrecimientoParametrizab.id, ccp.tituloGrafica, ccp.colorTitulo,
+			ccp.descripcion, ccp.colorDescripcion, ccp.edadInicial, ccp.edadFinal, ccp.activo, ccp.indicadorError,
+			ccp.fechaCreacion, ip.id, ip.imagenIzquierda, ip.imagenDerecha, ip.imagenCurva, ip.activo, ip.fechaCreacion)
+		FROM CurvaCrecimientoParametrizab ccp 
+		INNER JOIN ccp.imagenParametrizadas ip
+		WHERE ccp.id = :idCurva AND ip.activo = true
+	</query>
+	
+	<query name="catalogoHistoriaClinica.consultarImagenesParametrizadas">
+		SELECT NEW com.servinte.axioma.dto.historiaClinica.ImagenParametrizadaDto
+				(
+					ip.id, ip.imagenIzquierda, ip.imagenDerecha, ip.imagenCurva, ip.activo,	ip.fechaCreacion
+				)
+		FROM ImagenParametrizada ip
+		WHERE ip.curvaCrecimientoParametrizab.id = :idCurva
+	</query>
+</hibernate-mapping>

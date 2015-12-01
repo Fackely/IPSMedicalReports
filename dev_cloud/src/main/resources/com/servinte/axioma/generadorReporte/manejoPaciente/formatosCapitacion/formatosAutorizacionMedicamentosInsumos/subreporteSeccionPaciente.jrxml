@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreporteSeccionPaciente" language="groovy" pageWidth="592" pageHeight="60" orientation="Landscape" columnWidth="592" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6105100000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<field name="nombrePaciente" class="java.lang.String"/>
+	<field name="tipoDocPaciente" class="java.lang.String"/>
+	<field name="numeroDocPaciente" class="java.lang.String"/>
+	<field name="edadPaciente" class="java.lang.String"/>
+	<field name="convenioPaciente" class="java.lang.String"/>
+	<field name="tipoContratoPaciente" class="java.lang.String"/>
+	<field name="categoriaSocioEconomica" class="java.lang.String"/>
+	<field name="tipoAfiliado" class="java.lang.String"/>
+	<field name="entidadRecobro" class="java.lang.String"/>
+	<field name="recobro" class="java.lang.String"/>
+	<field name="montoCobro" class="java.lang.String"/>
+	<detail>
+		<band height="60" splitType="Prevent">
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="592" height="60"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="0" width="592" height="14"/>
+					<box>
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<staticText>
+						<reportElement key="DatosPaciente" mode="Opaque" x="0" y="0" width="592" height="14" backcolor="#CCCCCC"/>
+						<box>
+							<pen lineWidth="0.0"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font fontName="SansSerif" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[ Datos Paciente]]></text>
+					</staticText>
+				</frame>
+				<staticText>
+					<reportElement key="edad" x="421" y="16" width="27" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Edad:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement key="recobro" x="460" y="37" width="109" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{recobro}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="nombreConvenio" x="3" y="27" width="39" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Convenio:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement key="nombreTipoContrato" x="297" y="27" width="113" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoContratoPaciente}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="categoria" x="421" y="26" width="39" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Categoría:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement key="nombrePaciente" x="42" y="16" width="170" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrePaciente}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="descripcionTipoAfiliado" x="267" y="37" width="143" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoAfiliado}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="entidadRecobrar" stretchType="RelativeToTallestObject" x="78" y="48" width="134" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{entidadRecobro}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="nombrePaciente" x="3" y="16" width="39" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Paciente:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement key="edadPaciente" x="460" y="16" width="109" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{edadPaciente}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="recobro" x="421" y="37" width="39" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Recobro:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="tipoNroID" x="214" y="16" width="53" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Identificación:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="entidadRecobrar" x="3" y="48" width="75" height="10">
+						<printWhenExpression><![CDATA[$F{recobro}=="S"]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Entidad a Recobrar:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement key="descripcionConvenio" x="42" y="27" width="170" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{convenioPaciente}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="tipoAfiliado" x="214" y="37" width="53" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo Afiliado:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement key="descripcionClasificacionSocioEconomica" x="460" y="26" width="109" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{categoriaSocioEconomica}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="tipoContratoPaciente" x="214" y="27" width="83" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo Contrato Paciente:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="montoCobro" x="3" y="37" width="75" height="10" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Monto Cobro:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement key="tipoNroIdPaciente" x="267" y="16" width="143" height="10"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoDocPaciente}+" "+$F{numeroDocPaciente}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="descripcionTipoAfiliado" x="78" y="37" width="134" height="10" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{montoCobro}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

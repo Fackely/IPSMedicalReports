@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreporteAnticiposPorConvenios" language="groovy" pageWidth="732" pageHeight="61" orientation="Landscape" columnWidth="732" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subreporteFormasPago" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="nombreConvenio" class="java.lang.String"/>
+	<field name="fechaRC" class="java.util.Date"/>
+	<field name="descripcionConcepto" class="java.lang.String"/>
+	<field name="numeroRC" class="java.lang.String"/>
+	<field name="estadoRC" class="java.lang.String"/>
+	<field name="loginUsuario" class="java.lang.String"/>
+	<field name="valorTotalFormateado" class="java.lang.String"/>
+	<field name="dsListaFormaPago" class="java.lang.Object"/>
+	<field name="valorTotal" class="java.lang.Double"/>
+	<variable name="Total" class="java.lang.Integer" resetType="Group" resetGroup="conveniosAnticipos" calculation="Sum">
+		<variableExpression><![CDATA[( !$F{estadoRC}.trim().equalsIgnoreCase("anulado") ? $F{valorTotal} : 0)]]></variableExpression>
+	</variable>
+	<group name="conveniosAnticipos" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{nombreConvenio}]]></groupExpression>
+		<groupHeader>
+			<band height="24">
+				<frame>
+					<reportElement x="0" y="0" width="732" height="24"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Dotted"/>
+						<topPen lineWidth="1.0" lineStyle="Dotted"/>
+						<leftPen lineWidth="1.0" lineStyle="Dotted"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+						<rightPen lineWidth="1.0" lineStyle="Dotted"/>
+					</box>
+					<rectangle radius="2">
+						<reportElement mode="Opaque" x="0" y="0" width="732" height="12" backcolor="#DBD8D8"/>
+						<graphicElement>
+							<pen lineWidth="1.0"/>
+						</graphicElement>
+					</rectangle>
+					<staticText>
+						<reportElement key="valorTotal" style="axiomaTexto" positionType="Float" x="610" y="12" width="122" height="12"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font size="7" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Valor Total]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement key="nombreConvenio" style="axiomaTexto" x="110" y="0" width="120" height="12"/>
+						<textElement verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreConvenio}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="0" y="0" width="110" height="12"/>
+						<box topPadding="0" leftPadding="5"/>
+						<textElement>
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Convenio]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="loginUsuario" style="axiomaTexto" positionType="Float" x="260" y="12" width="120" height="12"/>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Usuario]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="numeroRC" style="axiomaTexto" positionType="Float" mode="Transparent" x="100" y="12" width="80" height="12"/>
+						<box topPadding="0" leftPadding="0">
+							<pen lineWidth="1.0" lineStyle="Solid"/>
+							<topPen lineWidth="1.0" lineStyle="Solid"/>
+							<leftPen lineWidth="1.0" lineStyle="Solid"/>
+							<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+							<rightPen lineWidth="1.0" lineStyle="Solid"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7" isBold="true" pdfFontName="Helvetica"/>
+						</textElement>
+						<text><![CDATA[Nro RC]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="estadoRC" style="axiomaTexto" positionType="Float" mode="Transparent" x="180" y="12" width="80" height="12"/>
+						<box leftPadding="0">
+							<pen lineWidth="1.0" lineStyle="Solid"/>
+							<topPen lineWidth="1.0" lineStyle="Solid"/>
+							<leftPen lineWidth="1.0" lineStyle="Solid"/>
+							<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+							<rightPen lineWidth="1.0" lineStyle="Solid"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7" isBold="true" pdfFontName="Helvetica"/>
+						</textElement>
+						<text><![CDATA[Estado]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="nombreCompletoProfesionalValoro" style="axiomaTexto" positionType="Float" mode="Transparent" x="490" y="12" width="120" height="12"/>
+						<box topPadding="0">
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7" isBold="true" pdfFontName="Helvetica" pdfEncoding="LATIN1"/>
+						</textElement>
+						<text><![CDATA[Valor]]></text>
+					</staticText>
+					<staticText>
+						<reportElement key="nombreCompletoProfesionalContrato" style="axiomaTexto" positionType="Float" mode="Transparent" x="380" y="12" width="110" height="12"/>
+						<box topPadding="0">
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7" isBold="true" pdfFontName="Helvetica" pdfEncoding="LATIN1"/>
+						</textElement>
+						<text><![CDATA[Forma Pago]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="0" y="12" width="100" height="12"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Fecha]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="12">
+				<rectangle>
+					<reportElement x="0" y="0" width="732" height="12" backcolor="#DBD8D8"/>
+				</rectangle>
+				<staticText>
+					<reportElement style="axiomaTexto" x="380" y="0" width="110" height="12"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Ancipo Convenio]]></text>
+				</staticText>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement key="Total" style="axiomaTexto" x="610" y="0" width="122" height="12"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{Total}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="nombreConvenio" style="axiomaTexto" x="490" y="0" width="120" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreConvenio}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="12" splitType="Immediate">
+			<subreport isUsingCache="true" runToBottom="false">
+				<reportElement key="subreporteFormasPago" stretchType="RelativeToBandHeight" x="380" y="0" width="230" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{dsListaFormaPago}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreporteFormasPago}]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+					<topPen lineWidth="1.0" lineStyle="Dotted"/>
+					<leftPen lineWidth="1.0" lineStyle="Dotted"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+					<rightPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="valorTotal" style="axiomaTexto" stretchType="RelativeToBandHeight" x="610" y="0" width="122" height="12" isRemoveLineWhenBlank="true"/>
+					<box topPadding="0">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{valorTotalFormateado}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="loginUsuario" style="axiomaTexto" stretchType="RelativeToBandHeight" x="260" y="0" width="120" height="12" isRemoveLineWhenBlank="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{loginUsuario}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="estadoRC" style="axiomaTexto" stretchType="RelativeToBandHeight" x="180" y="0" width="80" height="12" isRemoveLineWhenBlank="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{estadoRC}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="numeroRC" style="axiomaTexto" stretchType="RelativeToBandHeight" x="100" y="0" width="80" height="12" isRemoveLineWhenBlank="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{numeroRC}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="fechaRC" style="axiomaTexto" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="12" isRemoveLineWhenBlank="true"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaRC}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

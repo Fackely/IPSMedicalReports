@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 23, 2010 11:36:00 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SolicitudTrasladoCaja" table="solicitud_traslado_caja" schema="tesoreria">
+        <comment>Registro de las solicitudes de traslado de caja</comment>
+        <id name="movimientoCaja" type="long">
+            <column name="movimiento_caja" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">movimientosCajaByCodigoPk</param>
+            </generator>
+        </id>
+        <many-to-one name="movimientosCajaByMovimientoCajaCierre" class="com.servinte.axioma.orm.MovimientosCaja" fetch="select">
+            <column name="movimiento_caja_cierre" precision="10" scale="0" not-null="true">
+                <comment>Movimiento de cierre de caja asociado a la solicitud de traslado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cajas" class="com.servinte.axioma.orm.Cajas" fetch="select">
+            <column name="caja_seleccionada" not-null="true">
+                <comment>Caja solicitado para el traslado</comment>
+            </column>
+        </many-to-one>
+        <one-to-one name="movimientosCajaByCodigoPk" class="com.servinte.axioma.orm.MovimientosCaja" constrained="true"></one-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="testigo" length="30">
+                <comment>Testigo de la solicitud registrado en el sistema</comment>
+            </column>
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="6" not-null="true">
+                <comment>Estado de la solicitud de traslado de caja</comment>
+            </column>
+        </property>
+        <set name="aceptacionTrasladoCajas" inverse="true" lazy="true" table="aceptacion_traslado_caja" fetch="select">
+            <key>
+                <column name="solicitud_traslado_caja" precision="10" scale="0" not-null="true">
+                    <comment>Solicitud que es aceptada o rechazada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AceptacionTrasladoCaja" />
+        </set>
+    </class>
+</hibernate-mapping>

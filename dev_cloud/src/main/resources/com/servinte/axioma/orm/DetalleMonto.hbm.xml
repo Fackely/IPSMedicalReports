@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 13, 2010 1:53:04 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetalleMonto" table="detalle_monto" schema="facturacion">
+        <id name="detalleCodigo" type="int">
+            <column name="detalle_codigo" />
+            <generator class="sequence">
+				<param name="sequence">facturacion.seq_detalle_monto</param>
+			</generator>
+        </id>
+        <many-to-one name="tiposAfiliado" class="com.servinte.axioma.orm.TiposAfiliado" fetch="select">
+            <column name="tipo_afiliado_codigo" length="1" not-null="true">
+                <comment>C&#195;&#179;digo PK del tipo de afiliado del paciente</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK de la v&#195;&#173;a de Ingreso del paciente</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="estratosSociales" class="com.servinte.axioma.orm.EstratosSociales" fetch="select">
+            <column name="estrato_social_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK del estrato social del paciente</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="montosCobro" class="com.servinte.axioma.orm.MontosCobro" fetch="select">
+            <column name="monto_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK del monto de cobro relaciona</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tiposPaciente" class="com.servinte.axioma.orm.TiposPaciente" fetch="select">
+            <column name="tipo_paciente_codigo" length="1" not-null="true">
+                <comment>C&#195;&#179;digo PK del tipo de paciente</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tiposMonto" class="com.servinte.axioma.orm.TiposMonto" fetch="select">
+            <column name="tipo_monto_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK del tipo de monto del registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="naturalezaPacientes" class="com.servinte.axioma.orm.NaturalezaPacientes" fetch="select">
+            <column name="naturaleza_codigo">
+                <comment>C&#195;&#179;digo PK de la naturaleza de paciente</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="tipoDetalle" type="string">
+            <column name="tipo_detalle" length="6" not-null="true" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="activo" />
+        </property>
+        <set name="montoAgrupacionServicioses" inverse="true" lazy="true" table="monto_agrupacion_servicios" fetch="select" cascade="all">
+            <key>
+                <column name="detalle_codigo" not-null="true">
+                    <comment>C&#195;&#179;digo PK del detalle del registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MontoAgrupacionServicios" />
+        </set>
+        <set name="subCuentases" inverse="true" lazy="true" table="sub_cuentas" fetch="select">
+            <key>
+                <column name="monto_cobro" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SubCuentas" />
+        </set>
+        <set name="montoArticuloEspecificos" inverse="true" lazy="true" table="monto_articulo_especifico" fetch="select"  cascade="all">
+            <key>
+                <column name="detalle_codigo" not-null="true">
+                    <comment>C&#195;&#179;digo PK del detalle del registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MontoArticuloEspecifico" />
+        </set>
+        <set name="histoDetalleMontos" inverse="true" lazy="true" table="histo_detalle_monto" fetch="select"  cascade="all">
+            <key>
+                <column name="detalle_codigo" not-null="true">
+                    <comment>C&#195;&#179;digo PK del registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoDetalleMonto" />
+        </set>
+        <set name="montoServicioEspecificos" inverse="true" lazy="true" table="monto_servicio_especifico" fetch="select"  cascade="all">
+            <key>
+                <column name="detalle_codigo" not-null="true">
+                    <comment>C&#195;&#179;digo PK del detalle del registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MontoServicioEspecifico" />
+        </set>
+        <set name="autorizacionesEntSubMontoses" inverse="true" lazy="true" table="autorizaciones_ent_sub_montos" fetch="select">
+            <key>
+                <column name="cod_detalle_monto" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubMontos" />
+        </set>
+        <one-to-one name="detalleMontoGeneral" class="com.servinte.axioma.orm.DetalleMontoGeneral"  cascade="all"></one-to-one>
+    </class>
+</hibernate-mapping>

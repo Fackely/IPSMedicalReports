@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LecturaPlanosAh" table="lectura_planos_ah" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.LecturaPlanosAhId">
+            <key-property name="tipoIdentificacion" type="string">
+                <column name="tipo_identificacion" length="2" />
+            </key-property>
+            <key-property name="numeroIdentificacion" type="string">
+                <column name="numero_identificacion" length="20" />
+            </key-property>
+            <key-property name="numeroFactura" type="string">
+                <column name="numero_factura" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <property name="codigoPrestador" type="string">
+            <column name="codigo_prestador" length="10" not-null="true" />
+        </property>
+        <property name="viaIngreso" type="string">
+            <column name="via_ingreso" length="1" not-null="true" />
+        </property>
+        <property name="fechaIngreso" type="string">
+            <column name="fecha_ingreso" length="10" not-null="true" />
+        </property>
+        <property name="horaIngreso" type="string">
+            <column name="hora_ingreso" length="5" not-null="true" />
+        </property>
+        <property name="numeroAutorizacion" type="string">
+            <column name="numero_autorizacion" length="15" />
+        </property>
+        <property name="causaExterna" type="string">
+            <column name="causa_externa" length="2" not-null="true" />
+        </property>
+        <property name="diagPpalIngreso" type="string">
+            <column name="diag_ppal_ingreso" length="4" not-null="true" />
+        </property>
+        <property name="diagPpalEgreso" type="string">
+            <column name="diag_ppal_egreso" length="4" not-null="true" />
+        </property>
+        <property name="diagRelEgreso1" type="string">
+            <column name="diag_rel_egreso_1" length="4" />
+        </property>
+        <property name="diagRelEgreso2" type="string">
+            <column name="diag_rel_egreso_2" length="4" />
+        </property>
+        <property name="diagRelEgreso3" type="string">
+            <column name="diag_rel_egreso_3" length="4" />
+        </property>
+        <property name="diagComplicacion" type="string">
+            <column name="diag_complicacion" length="4" />
+        </property>
+        <property name="estadoSalida" type="string">
+            <column name="estado_salida" length="1" not-null="true" />
+        </property>
+        <property name="diagMuerte" type="string">
+            <column name="diag_muerte" length="4" />
+        </property>
+        <property name="fechaEgreso" type="string">
+            <column name="fecha_egreso" length="10" not-null="true" />
+        </property>
+        <property name="horaEgreso" type="string">
+            <column name="hora_egreso" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

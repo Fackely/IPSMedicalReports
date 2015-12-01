@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogPresupuestoDctoOdon" table="log_presupuesto_dcto_odon" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="detDescuentosOdon" class="com.servinte.axioma.orm.DetDescuentosOdon" fetch="select">
+            <column name="det_dcto_odo" precision="12" scale="0" />
+        </many-to-one>
+        <many-to-one name="presupuestoOdontologico" class="com.servinte.axioma.orm.PresupuestoOdontologico" fetch="select">
+            <column name="presupuesto" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="presupuestoDctoOdon" class="com.servinte.axioma.orm.PresupuestoDctoOdon" fetch="select">
+            <column name="presupuesto_dcto_odon" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioSolicitad" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_solicitad" length="30" not-null="true" />
+        </many-to-one>
+        <property name="fechaSolicitad" type="date">
+            <column name="fecha_solicitad" length="13" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="horaSolicita" type="string">
+            <column name="hora_solicita" length="5" not-null="true" />
+        </property>
+        <property name="valorDescuento" type="big_decimal">
+            <column name="valor_descuento" precision="14" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="5" not-null="true" />
+        </property>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="14" scale="0" not-null="true" />
+        </property>
+        <property name="porcentajeDcto" type="big_decimal">
+            <column name="porcentaje_dcto" precision="5" />
+        </property>
+        <property name="motivo" type="java.lang.Long">
+            <column name="motivo" precision="12" scale="0" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="512" />
+        </property>
+        <property name="detDctoOdoAten" type="java.lang.Long">
+            <column name="det_dcto_odo_aten" precision="12" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

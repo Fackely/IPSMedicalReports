@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2011 05:03:03 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutorizacionesEntidadesSub" table="autorizaciones_entidades_sub" schema="manejopaciente">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">manejopaciente.seq_autor_ent_sub_contr</param>
+			</generator>
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_anulacion" length="30" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="entidadesSubcontratadas" class="com.servinte.axioma.orm.EntidadesSubcontratadas" fetch="select">
+            <column name="entidad_autorizada_sub" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion_autoriza" />
+        </many-to-one>
+        <property name="fechaAutorizacion" type="date">
+            <column name="fecha_autorizacion" length="13" not-null="true">
+                <comment>Cuando se tiene asociada una autorizaci&#243;n de capitaci&#243;n, si ese registro tiene indicativo temporal, esta fecha de autorizaci&#243;n de entidad
+                subcontratada se modificar&#225; cuando el indicativo de ese otro registro cambie</comment>
+            </column>
+        </property>
+        <property name="horaAutorizacion" type="string">
+            <column name="hora_autorizacion" length="5" not-null="true">
+                <comment>Cuando se tiene asociada una autorizaci&#243;n de capitaci&#243;n, si ese registro tiene indicativo temporal, esta hora de autorizaci&#243;n de entidad
+                subcontratada se modificar&#225; cuando el indicativo de ese otro registro cambie</comment>
+            </column>
+        </property>
+        <property name="consecutivoAutorizacion" type="string">
+            <column name="consecutivo_autorizacion" length="20" />
+        </property>
+        <property name="anioConsecutivo" type="string">
+            <column name="anio_consecutivo" length="4" />
+        </property>
+        <property name="fechaVencimiento" type="date">
+            <column name="fecha_vencimiento" length="13" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="1000" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="3" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="5" not-null="true" />
+        </property>
+        <property name="contabilizado" type="string">
+            <column name="contabilizado" length="1" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="fecha_modificacion" length="13" not-null="true" />
+        </property>
+        <property name="horaModificacion" type="string">
+            <column name="hora_modificacion" length="5" not-null="true" />
+        </property>
+        <property name="usuarioModificacion" type="string">
+            <column name="usuario_modificacion" length="30" not-null="true" />
+        </property>
+        <property name="fechaAnulacion" type="date">
+            <column name="fecha_anulacion" length="13" />
+        </property>
+        <property name="horaAnulacion" type="string">
+            <column name="hora_anulacion" length="5" />
+        </property>
+        <property name="motivoAnulacion" type="string">
+            <column name="motivo_anulacion" length="1000" />
+        </property>
+        <property name="contabilizadoAnulacion" type="string">
+            <column name="contabilizado_anulacion" length="1" not-null="true" />
+        </property>
+        <property name="personaRecibe" type="string">
+            <column name="persona_recibe" length="30" />
+        </property>
+        <one-to-one name="autorizacionesEntSubRips" class="com.servinte.axioma.orm.AutorizacionesEntSubRips"></one-to-one>
+        <set name="prorrogaAutEntidadSubs" table="prorroga_aut_entidad_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autorizacion" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProrrogaAutEntidadSub" />
+        </set>
+        <set name="histoAutorizacionCapitaSubs" table="histo_autorizacion_capita_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true">
+                    <comment>C&#243;digo de la autorizaci&#243;n de entidad subcontratada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoAutorizacionCapitaSub" />
+        </set>
+        <set name="autoEntsubSolicitudeses" table="auto_entsub_solicitudes" schema="ordenes" inverse="true" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutoEntsubSolicitudes" />
+        </set>
+        <set name="autoEntsubOrdenambulas" table="auto_entsub_ordenambula" schema="ordenes" inverse="true" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutoEntsubOrdenambula" />
+        </set>
+        <set name="tarifasEntidadSubs" table="tarifas_entidad_sub" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autorizacion" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasEntidadSub" />
+        </set>
+        <set name="autorizacionesEntSubMontoses" table="autorizaciones_ent_sub_montos" inverse="true" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubMontos" />
+        </set>
+        <set name="autorizacionesCapitacionSubs" table="autorizaciones_capitacion_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true">
+                    <comment>C&#243;digo de la autorizaci&#243;n de entidad subcontratada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesCapitacionSub" />
+        </set>
+        <set name="autorizacionesEntSubServis" table="autorizaciones_ent_sub_servi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true">
+                    <comment>C&#243;digo de la autorizaci&#243;n de entidad subcontratada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubServi" />
+        </set>
+        <set name="registroEntregaEntSubs" table="registro_entrega_ent_sub" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autorizacion_ent_sub" precision="12" scale="0">
+                    <comment>Autorizacion que es despachada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEntregaEntSub" />
+        </set>
+        <set name="autoEntsubPeticioneses" table="auto_entsub_peticiones" schema="ordenes" inverse="true" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutoEntsubPeticiones" />
+        </set>
+        <set name="autorizacionesEntSubArticus" table="autorizaciones_ent_sub_articu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true">
+                    <comment>C&#243;digo de la autorizaci&#243;n de entidad subcontratada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubArticu" />
+        </set>
+         <set name="detOrdenAmbServicios" table="det_orden_amb_servicio" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="auto_ent_sub" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetOrdenAmbServicio" />
+        </set>
+        <set name="peticionesServicios" table="peticiones_servicio" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="auto_ent_sub" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PeticionesServicio" />
+        </set>
+        <set name="detOrdenAmbArticulos" table="det_orden_amb_articulo" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="auto_ent_sub" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetOrdenAmbArticulo" />
+        </set>
+        <set name="detalleSolicitudeses" table="detalle_solicitudes" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="auto_ent_sub" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleSolicitudes" />
+        </set>
+        <set name="solCirugiaPorServicios" table="sol_cirugia_por_servicio" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="auto_ent_sub" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolCirugiaPorServicio" />
+        </set>
+        <set name="solProcedimientoses" table="sol_procedimientos" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="auto_ent_sub" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolProcedimientos" />
+        </set>
+        <set name="solicitudesInters" table="solicitudes_inter" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="auto_ent_sub" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesInter" />
+        </set>
+        <set name="detCargoses" table="det_cargos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="auto_ent_sub" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+        <set name="solicitudesConsultas" table="solicitudes_consulta" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="auto_ent_sub" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesConsulta" />
+        </set>
+         <set name="autoCapiXCentroCostos" table="auto_capi_x_centro_costo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="auto_ent_sub" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutoCapiXCentroCosto" />
+        </set>
+        <set name="entregaAutorizacions" table="entrega_autorizacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autorizacion_ent_sub" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EntregaAutorizacion" />
+        </set>
+    </class>
+</hibernate-mapping>

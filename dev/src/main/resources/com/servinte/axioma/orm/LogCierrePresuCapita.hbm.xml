@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7/06/2011 07:51:50 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogCierrePresuCapita" table="log_cierre_presu_capita" schema="capitacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_log_cierre_presu_capita</param>
+			</generator>
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30"/>
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" />
+        </many-to-one>
+        <property name="proceso" type="string">
+            <column name="proceso" length="5" not-null="true" />
+        </property>
+        <property name="serviArti" type="string">
+            <column name="servi_arti" length="1000" not-null="true" />
+        </property>
+        <property name="tipoInconsistencia" type="string">
+            <column name="tipo_inconsistencia" length="4" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="1000" not-null="true" />
+        </property>
+        <property name="fechaGeneracion" type="date">
+            <column name="fecha_generacion" length="13" not-null="true" />
+        </property>
+        <property name="fechaCierre" type="date">
+            <column name="fecha_cierre" length="13" not-null="true" />
+        </property>
+        <property name="horaGeneracion" type="string">
+            <column name="hora_generacion" length="5" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="4" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" />
+        </property>
+        <property name="noInformacion" type="java.lang.Boolean">
+            <column name="no_informacion" />
+        </property>
+    </class>
+</hibernate-mapping>

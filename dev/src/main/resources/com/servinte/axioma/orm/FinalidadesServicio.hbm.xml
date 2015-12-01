@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2/06/2011 08:10:33 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FinalidadesServicio" table="finalidades_servicio" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="64" />
+        </property>
+        <set name="detOrdenAmbServicios" table="det_orden_amb_servicio" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="finalidad" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetOrdenAmbServicio" />
+        </set>
+        <set name="solCirugiaPorServicios" table="sol_cirugia_por_servicio" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="finalidad" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolCirugiaPorServicio" />
+        </set>
+        <set name="cargosDirectosHcs" table="cargos_directos_hc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="finalidad_procedimiento" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CargosDirectosHc" />
+        </set>
+        <set name="autorizacionesEntSubServis" table="autorizaciones_ent_sub_servi" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="finalidad">
+                    <comment>Determina la finalidad del servicio relacionado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubServi" />
+        </set>
+        <set name="solProcedimientoses" table="sol_procedimientos" schema="ordenes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="finalidad" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolProcedimientos" />
+        </set>
+        <set name="finServNaturalezas" table="fin_serv_naturaleza" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="finalidad" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FinServNaturaleza" />
+        </set>
+    </class>
+</hibernate-mapping>

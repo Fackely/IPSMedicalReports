@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AsociosDetFactura" table="asocios_det_factura" schema="facturacion">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio_asocio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="detFacturaSolicitud" class="com.servinte.axioma.orm.DetFacturaSolicitud" fetch="select">
+            <column name="codigo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="medico_asocio" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad" />
+        </many-to-one>
+        <property name="valorAsocio" type="double">
+            <column name="valor_asocio" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="tipoAsocio" type="int">
+            <column name="tipo_asocio" not-null="true" />
+        </property>
+        <property name="ajusteCreditoMedico" type="double">
+            <column name="ajuste_credito_medico" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="ajusteDebitoMedico" type="double">
+            <column name="ajuste_debito_medico" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="porcentajePool" type="int">
+            <column name="porcentaje_pool" not-null="true" />
+        </property>
+        <property name="porcentajeMedico" type="double">
+            <column name="porcentaje_medico" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorMedico" type="double">
+            <column name="valor_medico" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorCargo" type="double">
+            <column name="valor_cargo" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorIva" type="double">
+            <column name="valor_iva" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorRecargo" type="double">
+            <column name="valor_recargo" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="valorTotal" type="double">
+            <column name="valor_total" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="ajustesCredito" type="double">
+            <column name="ajustes_credito" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="ajustesDebito" type="double">
+            <column name="ajustes_debito" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="esquemaTarifario" type="java.lang.Integer">
+            <column name="esquema_tarifario" />
+        </property>
+        <property name="valorPool" type="double">
+            <column name="valor_pool" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="pool" type="java.lang.Integer">
+            <column name="pool" />
+        </property>
+        <property name="codigoMedico" type="java.lang.Integer">
+            <column name="codigo_medico" />
+        </property>
+        <set name="detAsociosDetFacturas" inverse="true" lazy="true" table="det_asocios_det_factura" fetch="select">
+            <key>
+                <column name="asocio_det_factura" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAsociosDetFactura" />
+        </set>
+    </class>
+</hibernate-mapping>

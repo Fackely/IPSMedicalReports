@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 17, 2010 9:37:45 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogActiinactiUsuarios" table="log_actiinacti_usuarios" schema="administracion">
+        <id name="codigo" type="int">
+           <column name="codigo" />
+           <generator class="sequence" >
+            	<param name="sequence">seq_logprocactiinacusu</param>
+            </generator>
+        </id>
+        <many-to-one name="usuariosByLoginUsuario" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="login_usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioProcesa" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_procesa" length="30" />
+        </many-to-one>
+        <property name="fechaProceso" type="date">
+            <column name="fecha_proceso" length="13" not-null="true" />
+        </property>
+        <property name="horaProceso" type="string">
+            <column name="hora_proceso" length="5" not-null="true" />
+        </property>
+        <property name="tipoInactivacion" type="string">
+            <column name="tipo_inactivacion" length="4" not-null="true" />
+        </property>
+        <property name="estadoUsuario" type="string">
+            <column name="estado_usuario" length="4" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

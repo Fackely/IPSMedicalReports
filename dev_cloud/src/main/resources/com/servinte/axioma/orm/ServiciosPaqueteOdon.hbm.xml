@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 22, 2010 10:35:48 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ServiciosPaqueteOdon" table="servicios_paquete_odon" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+             <generator class="sequence" >
+				<param name="sequence">odontologia.seq_serpaqodonto</param>
+			</generator>
+        </id>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="paquetesOdontologicos" class="com.servinte.axioma.orm.PaquetesOdontologicos" fetch="select">
+            <column name="codigo_pk_paquete" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,493 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<query name="curvasCrecimiento.consultarCurvasComponente">
+		SELECT NEW com.servinte.axioma.dto.historiaClinica.PlantillaComponenteDto(
+			pc.id, ccp.id, ccp.sexo.codigo, ccp.curvaCrecimientoParametrizab.id, ccp.tituloGrafica, 
+			ccp.colorTitulo, ccp.descripcion, ccp.colorDescripcion, ccp.edadInicial, ccp.edadFinal, 
+			ccp.activo, ccp.indicadorError, ccp.fechaCreacion, pc.activo, pc.fechaCreacion)
+		FROM PlantillaComponente pc
+			INNER JOIN pc.curvaCrecimientoParametrizab ccp
+			INNER JOIN pc.componentes c
+		WHERE c.codigo= :codigoComponente	
+		ORDER BY pc.id ASC
+	</query>
+	
+	<query name="curvasCrecimiento.consultarCurvasDisponiblesComponente">
+		SELECT NEW com.servinte.axioma.dto.historiaClinica.CurvaCrecimientoParametrizabDto(
+			ccp.id, ccp.sexo.codigo, ccp.curvaCrecimientoParametrizab.id, ccp.tituloGrafica, ccp.colorTitulo,
+			ccp.descripcion, ccp.colorDescripcion, ccp.edadInicial, ccp.edadFinal, ccp.activo, ccp.indicadorError,
+			ccp.fechaCreacion)
+		FROM CurvaCrecimientoParametrizab ccp 
+		WHERE ccp.id NOT IN (:idsCurvasSeleccionadas) 
+			AND ccp.activo = true
+		ORDER BY ccp.tituloGrafica ASC, ccp.edadInicial ASC, ccp.edadFinal ASC 
+	</query>
+	
+	<query name="curvasCrecimiento.eliminarPlantillaComponente">
+		DELETE FROM PlantillaComponente pc
+		WHERE pc.id= :idPlantillaComponente
+	</query>
+	
+	<query name="curvasCrecimiento.consultarCurvasActivasPaciente">
+		SELECT NEW com.servinte.axioma.dto.historiaClinica.CurvaCrecimientoParametrizabDto(
+			ccp.id, ccp.sexo.codigo, ccp.curvaCrecimientoParametrizab.id, ccp.tituloGrafica, ccp.colorTitulo,
+			ccp.descripcion, ccp.colorDescripcion, ccp.edadInicial, ccp.edadFinal, ccp.activo, ccp.indicadorError,
+			ccp.fechaCreacion, ip.id, ip.imagenIzquierda, ip.imagenDerecha, ip.imagenCurva, ip.activo, ip.fechaCreacion)
+		FROM PlantillaComponente pc
+			INNER JOIN pc.curvaCrecimientoParametrizab ccp
+			INNER JOIN ccp.imagenParametrizadas ip
+			INNER JOIN pc.componentes c
+		WHERE pc.activo = true AND c.codigo = 4
+			AND (ccp.sexo.codigo = :codigoSexo OR ccp.sexo.codigo = null)
+			AND ccp.edadInicial &lt;= :edadPaciente AND ccp.edadFinal >= :edadPaciente AND ip.activo=TRUE
+		ORDER BY ccp.tituloGrafica ASC, ccp.edadInicial ASC, ccp.edadFinal ASC	
+	</query>
+	
+	<query name="curvasCrecimiento.consultarImagenesCurvaParametrizada">
+		SELECT NEW com.servinte.axioma.dto.historiaClinica.ImagenParametrizadaDto(
+			ip.id, ip.imagenIzquierda, ip.imagenDerecha, ip.imagenCurva, ip.activo, ip.fechaCreacion)
+		FROM ImagenParametrizada ip
+		WHERE ip.curvaCrecimientoParametrizab.id =:codigoCurvaParametrizada
+		AND ip.activo = true
+	</query>
+	
+	<sql-query name="curvasCrecimiento.consultarInfoCurvasPaciente">
+		<return-scalar column="idHistorico" type="integer" />
+		<return-scalar column="urlImagen" type="string" />
+		<return-scalar column="idImagenParametrizada" type="integer" />
+		<![CDATA[
+			SELECT t.idHistorico idHistorico, t.urlImagen urlImagen, t.idImagenParametrizada idImagenParametrizada FROM (
+				SELECT hip.id idHistorico, hip.url_imagen urlImagen, hip.id_imagen_parametrizada idImagenParametrizada, hip.fecha_creacion fechaCreacion 
+				FROM pacientes p
+					INNER JOIN cuentas c ON (c.codigo_paciente=p.codigo_paciente)
+					INNER JOIN solicitudes s ON (s.cuenta=c.id)
+					INNER JOIN valoraciones v ON (v.numero_solicitud=s.numero_solicitud)
+					INNER JOIN valoracion_curva vc ON (vc.numero_solicitud_valoracion=v.numero_solicitud)
+					INNER JOIN historico_imagen_plantilla hip ON (hip.id_valoracion_curva=vc.id)
+				WHERE p.codigo_paciente =:codigoPaciente AND vc.id_curva_crecimiento_paramet =:codigoCurvaParametrizada     
+			UNION
+				SELECT hip.id idHistorico, hip.url_imagen urlImagen, hip.id_imagen_parametrizada idImagenParametrizada, hip.fecha_creacion fechaCreacion
+				FROM pacientes p
+					INNER JOIN cuentas c ON (c.codigo_paciente=p.codigo_paciente)
+					INNER JOIN solicitudes s ON (s.cuenta=c.id)
+					INNER JOIN valoraciones v ON (v.numero_solicitud=s.numero_solicitud)
+					INNER JOIN evoluciones e ON (e.valoracion=v.numero_solicitud)
+					INNER JOIN evolucion_curva ec ON (ec.codigo_evolucion=e.codigo)
+					INNER JOIN historico_imagen_plantilla hip ON (hip.id_evolucion_curva=ec.id)
+				WHERE p.codigo_paciente =:codigoPaciente AND ec.id_curva_crecimiento_paramet =:codigoCurvaParametrizada   
+			) t ORDER BY t.fechaCreacion DESC, t.idHistorico DESC
+		]]>
+	</sql-query>
+	
+	<sql-query name="curvasCrecimiento.consultarCoordenadasCurvaCrecimiento">
+		<return-scalar column="id" type="integer" />
+		<return-scalar column="coorX" type="integer" />
+		<return-scalar column="coorY" type="integer" />
+		<![CDATA[
+ 			SELECT t.id id, t.coorX coorX, t.coorY coorY FROM ( 
+ 				SELECT pi.id id, pi.coordenada_x coorX, pi.coordenada_y coorY 
+ 				FROM pacientes p 
+ 					INNER JOIN cuentas c ON (c.codigo_paciente=p.codigo_paciente) 
+ 					INNER JOIN solicitudes s ON (s.cuenta=c.id) 
+ 					INNER JOIN valoraciones v ON (v.numero_solicitud=s.numero_solicitud) 
+ 					INNER JOIN valoracion_curva vc ON (vc.numero_solicitud_valoracion=v.numero_solicitud) 
+ 					INNER JOIN historico_imagen_plantilla hip ON (hip.id_valoracion_curva=vc.id) 
+ 					INNER JOIN puntos_imagen pi ON (pi.id_historico_imagen_plantilla=hip.id) 
+ 				WHERE p.codigo_paciente =:codigoPaciente AND hip.id_imagen_parametrizada =:codigoImagenParametrizada 
+ 			UNION 
+ 				SELECT pi.id id, pi.coordenada_x coorX, pi.coordenada_y coorY 
+ 				FROM pacientes p 
+ 					INNER JOIN cuentas c ON (c.codigo_paciente=p.codigo_paciente) 
+ 					INNER JOIN solicitudes s ON (s.cuenta=c.id) 
+ 					INNER JOIN valoraciones v ON (v.numero_solicitud=s.numero_solicitud) 
+ 					INNER JOIN evoluciones e ON (e.valoracion=v.numero_solicitud) 
+ 					INNER JOIN evolucion_curva ec ON (ec.codigo_evolucion=e.codigo) 
+ 					INNER JOIN historico_imagen_plantilla hip ON (hip.id_evolucion_curva=ec.id) 
+ 					INNER JOIN puntos_imagen pi ON (pi.id_historico_imagen_plantilla=hip.id) 
+ 				WHERE p.codigo_paciente =:codigoPaciente AND hip.id_imagen_parametrizada =:codigoImagenParametrizada    
+ 			) t	 
+ 		]]> 
+	</sql-query>
+	
+	<query name="curvasCrecimiento.consultarEvolucionXSolicitud">
+		SELECT evolucion
+	 	FROM Evoluciones evolucion
+	 		INNER JOIN evolucion.valoraciones valoracion
+		WHERE valoracion.numeroSolicitud = :numeroSolicitud 
+		ORDER BY evolucion.fechaEvolucion DESC, evolucion.horaEvolucion DESC
+	</query>
+	
+	<sql-query name="curvasCrecimiento.consultarDatosAcompanante">
+		<return-scalar column="nombreAcompanante" type="string" />
+		<return-scalar column="telefonoAcompanante" type="string" />
+		<return-scalar column="parentescoAcompanante" type="string" />
+		<![CDATA[
+			SELECT rp.primer_apellido ||' '|| rp.primer_nombre AS nombreAcompanante, 
+				rp.telefono AS telefonoAcompanante, 
+				rp.relacion_paciente AS parentescoAcompanante 
+			FROM responsables_pacientes rp 
+				INNER JOIN cuentas c ON(c.codigo_responsable_paciente=rp.codigo) 
+			WHERE c.id_ingreso =:codigoIngreso
+		]]> 
+	</sql-query>
+	
+	<sql-query name="curvasCrecimiento.consultarDatosPacienteCurvasCrecimiento">
+		<return-scalar column="estadoCivil" type="string" />
+		<return-scalar column="ocupacion" type="string" />
+		<return-scalar column="tipoAfiliado" type="string" />
+		<![CDATA[
+			SELECT e.nombre AS estadoCivil,  
+				o.nombre AS ocupacion, 
+				getnombretipoafiliado(sc.tipo_afiliado) AS tipoAfiliado  
+			FROM cuentas c 
+				INNER JOIN sub_cuentas sc ON(sc.ingreso = c.id_ingreso AND sc.nro_prioridad =1)
+				INNER JOIN personas p ON (p.codigo=c.codigo_paciente)
+				INNER JOIN pacientes pac ON (p.codigo=pac.codigo_paciente)
+				INNER JOIN estados_civiles e on (e.acronimo=p.estado_civil)
+				INNER JOIN ocupaciones o ON (o.codigo=pac.ocupacion) 
+			WHERE c.id_ingreso =:codigoIngreso
+		]]> 
+	</sql-query>
+	
+	
+	
+	
+	
+	
+	<query name="curvasCrecimiento.EliminarCurva">
+		DELETE FROM CurvaCrecimientoParametrizab ccp
+		WHERE ccp.id = :idCurva
+	</query>
+	<query name="curvasCrecimiento.EliminarImagenCurva">
+		DELETE FROM ImagenParametrizada ip
+		WHERE ip.curvaCrecimientoParametrizab.id = :idCurva
+	</query>
+	
+	<sql-query name="curvasCrecimiento.validacionEliminarCurva">
+		<![CDATA[
+			SELECT 
+			  curva_crecimiento_parametrizab.id
+			FROM 
+			  historiaclinica.curva_crecimiento_parametrizab, 
+			  historiaclinica.evolucion_curva
+			WHERE 
+			  evolucion_curva.id_curva_crecimiento_paramet = curva_crecimiento_parametrizab.id
+			AND curva_crecimiento_parametrizab.id = :idCurva
+			
+			UNION ALL
+			
+			SELECT 
+			  curva_crecimiento_parametrizab.id
+			FROM 
+			  historiaclinica.curva_crecimiento_parametrizab, 
+			  historiaclinica.valoracion_curva
+			WHERE 
+			  valoracion_curva.id_curva_crecimiento_paramet = curva_crecimiento_parametrizab.id
+			AND curva_crecimiento_parametrizab.id = :idCurva
+			
+			UNION ALL
+			
+			SELECT 
+			  curva_crecimiento_parametrizab.id
+			FROM 
+			  historiaclinica.curva_crecimiento_parametrizab, 
+			  historiaclinica.plantilla_componente
+			WHERE 
+			  plantilla_componente.id_curva_crecimiento = curva_crecimiento_parametrizab.id
+			AND curva_crecimiento_parametrizab.id = :idCurva
+		]]>
+  </sql-query>
+  
+  <sql-query name="curvasCrecimiento.valoracionesYevolucionesPorpacienteConCurva">
+	<![CDATA[
+		(
+			SELECT
+			  imagen_parametrizada.imagen_izquierda,
+			  curva_crecimiento_parametrizab.titulo_grafica,
+			  curva_crecimiento_parametrizab.color_titulo,
+			  curva_crecimiento_parametrizab.edad_inicial,
+			  curva_crecimiento_parametrizab.edad_final,
+			  curva_crecimiento_parametrizab.descripcion,
+			  curva_crecimiento_parametrizab.color_descripcion,
+			  imagen_parametrizada.imagen_derecha,
+			  historico_imagen_plantilla.url_imagen, 
+			  valoraciones.numero_solicitud,
+			  TO_DATE(TO_CHAR(valoraciones.fecha_valoracion, 'YYYY-MM-DD') || ' ' || valoraciones.hora_valoracion, 'YYYY-MM-DD HH24:MI') as fecha,
+			  1 AS tipo
+			FROM 
+			  historiaclinica.historico_imagen_plantilla, 
+			  historiaclinica.valoracion_curva, 
+			  historiaclinica.valoraciones, 
+			  historiaclinica.curva_crecimiento_parametrizab, 
+			  historiaclinica.imagen_parametrizada, 
+			  ordenes.solicitudes, 
+			  manejopaciente.cuentas, 
+			  manejopaciente.pacientes, 
+			  administracion.personas
+			WHERE 
+			  historico_imagen_plantilla.id_valoracion_curva = valoracion_curva.id AND
+			  valoracion_curva.numero_solicitud_valoracion = valoraciones.numero_solicitud AND
+			  valoracion_curva.id_curva_crecimiento_paramet = curva_crecimiento_parametrizab.id AND
+			  valoraciones.numero_solicitud = solicitudes.numero_solicitud AND
+			  imagen_parametrizada.id_curva_crecimiento = curva_crecimiento_parametrizab.id AND
+			  solicitudes.cuenta = cuentas.id AND
+			  cuentas.codigo_paciente = pacientes.codigo_paciente AND
+			  pacientes.codigo_paciente = personas.codigo AND
+			  personas.codigo = :codigoPaciente
+		)
+			
+		UNION ALL
+			
+		(
+			SELECT
+			  imagen_parametrizada.imagen_izquierda, 
+			  curva_crecimiento_parametrizab.titulo_grafica, 
+			  curva_crecimiento_parametrizab.color_titulo,
+			  curva_crecimiento_parametrizab.edad_inicial,
+			  curva_crecimiento_parametrizab.edad_final,
+			  curva_crecimiento_parametrizab.descripcion, 
+			  curva_crecimiento_parametrizab.color_descripcion, 
+			  imagen_parametrizada.imagen_derecha, 
+			  historico_imagen_plantilla.url_imagen, 
+			  evoluciones.codigo, 
+			  TO_DATE(TO_CHAR(evoluciones.fecha_evolucion, 'YYYY-MM-DD') || ' ' || evoluciones.hora_evolucion, 'YYYY-MM-DD HH24:MI') as fecha,
+			  2 AS tipo
+			FROM 
+			  historiaclinica.historico_imagen_plantilla, 
+			  historiaclinica.evolucion_curva, 
+			  historiaclinica.evoluciones, 
+			  historiaclinica.curva_crecimiento_parametrizab, 
+			  historiaclinica.imagen_parametrizada, 
+			  ordenes.solicitudes, 
+			  manejopaciente.cuentas, 
+			  manejopaciente.pacientes, 
+			  administracion.personas
+			WHERE 
+			  historico_imagen_plantilla.id_evolucion_curva = evolucion_curva.id AND
+			  historico_imagen_plantilla.id_imagen_parametrizada = curva_crecimiento_parametrizab.id AND
+			  evolucion_curva.id_curva_crecimiento_paramet = curva_crecimiento_parametrizab.id AND
+			  evolucion_curva.codigo_evolucion = evoluciones.codigo AND
+			  evoluciones.valoracion = solicitudes.numero_solicitud AND
+			  imagen_parametrizada.id_curva_crecimiento = curva_crecimiento_parametrizab.id AND
+			  solicitudes.cuenta = cuentas.id AND
+			  cuentas.codigo_paciente = pacientes.codigo_paciente AND
+			  pacientes.codigo_paciente = personas.codigo AND
+			  personas.codigo = :codigoPaciente
+		)
+		ORDER BY fecha desc
+	]]>
+  </sql-query>
+  
+  <sql-query name="curvasCrecimiento.singnosVitalesPorValoracion">
+	<![CDATA[
+		SELECT sv.nombre,
+		(
+		  SELECT vasv.valor
+		  FROM historiaclinica.valoraciones val
+		  INNER JOIN historiaclinica.val_signos_vitales vasv ON (vasv.valoracion = val.numero_solicitud)
+		  WHERE vasv.signo_vital = sv.codigo
+		  AND val.numero_solicitud = :codigoValoracion
+		) AS valor
+		,sv.unidad_medida
+		FROM historiaclinica.signos_vitales sv
+		WHERE sv.codigo IN (9,10,11,23)
+	]]>
+  </sql-query>
+  <sql-query name="curvasCrecimiento.singnosVitalesPorEvolucion">
+	<![CDATA[
+		SELECT sv.nombre,
+		(
+		  SELECT evsv.valor
+		  FROM historiaclinica.evoluciones ev
+		  INNER JOIN historiaclinica.evol_signos_vitales evsv ON (evsv.evolucion=ev.codigo)
+		  WHERE evsv.signo_vital=sv.codigo
+		  AND ev.codigo = :codigoEvolucion
+		) AS valor
+		,sv.unidad_medida
+		FROM historiaclinica.signos_vitales sv
+		WHERE sv.codigo IN (9,10,11,23)
+	]]>
+  </sql-query>
+  
+  <sql-query name="curvasCrecimiento.valoracionesYevolucionesPorpacienteYporIngresoConCurva">
+	<![CDATA[
+		(
+		SELECT
+		  imagen_parametrizada.imagen_izquierda,
+		  curva_crecimiento_parametrizab.titulo_grafica,
+		  curva_crecimiento_parametrizab.color_titulo,
+		  curva_crecimiento_parametrizab.edad_inicial,
+		  curva_crecimiento_parametrizab.edad_final,
+		  curva_crecimiento_parametrizab.descripcion,
+		  curva_crecimiento_parametrizab.color_descripcion,
+		  imagen_parametrizada.imagen_derecha,
+		  historico_imagen_plantilla.url_imagen, 
+		  valoraciones.numero_solicitud,
+		  valoraciones.fecha_valoracion,
+		  1 AS tipo
+		FROM 
+		  historiaclinica.historico_imagen_plantilla, 
+		  historiaclinica.valoracion_curva, 
+		  historiaclinica.valoraciones, 
+		  historiaclinica.curva_crecimiento_parametrizab, 
+		  historiaclinica.imagen_parametrizada, 
+		  ordenes.solicitudes, 
+		  manejopaciente.cuentas, 
+		  manejopaciente.pacientes, 
+		  administracion.personas
+		WHERE 
+		  historico_imagen_plantilla.id_valoracion_curva = valoracion_curva.id AND
+		  valoracion_curva.numero_solicitud_valoracion = valoraciones.numero_solicitud AND
+		  valoracion_curva.id_curva_crecimiento_paramet = curva_crecimiento_parametrizab.id AND
+		  valoraciones.numero_solicitud = solicitudes.numero_solicitud AND
+		  imagen_parametrizada.id_curva_crecimiento = curva_crecimiento_parametrizab.id AND
+		  solicitudes.cuenta = cuentas.id AND
+		  cuentas.codigo_paciente = pacientes.codigo_paciente AND
+		  pacientes.codigo_paciente = personas.codigo AND
+		  imagen_parametrizada.activo = :estado AND
+		  cuentas.id = :idCuenta AND
+		  personas.codigo = :codigoPaciente
+		)
+		
+		UNION ALL
+		
+		(
+		SELECT
+		  imagen_parametrizada.imagen_izquierda, 
+		  curva_crecimiento_parametrizab.titulo_grafica, 
+		  curva_crecimiento_parametrizab.color_titulo,
+		  curva_crecimiento_parametrizab.edad_inicial,
+		  curva_crecimiento_parametrizab.edad_final,
+		  curva_crecimiento_parametrizab.descripcion, 
+		  curva_crecimiento_parametrizab.color_descripcion, 
+		  imagen_parametrizada.imagen_derecha, 
+		  historico_imagen_plantilla.url_imagen, 
+		  evoluciones.codigo, 
+		  evoluciones.fecha_evolucion,
+		  2 AS tipo
+		FROM 
+		  historiaclinica.historico_imagen_plantilla, 
+		  historiaclinica.evolucion_curva, 
+		  historiaclinica.evoluciones, 
+		  historiaclinica.curva_crecimiento_parametrizab, 
+		  historiaclinica.imagen_parametrizada, 
+		  ordenes.solicitudes, 
+		  manejopaciente.cuentas, 
+		  manejopaciente.pacientes, 
+		  administracion.personas
+		WHERE 
+		  historico_imagen_plantilla.id_evolucion_curva = evolucion_curva.id AND
+		  historico_imagen_plantilla.id_imagen_parametrizada = curva_crecimiento_parametrizab.id AND
+		  evolucion_curva.id_curva_crecimiento_paramet = curva_crecimiento_parametrizab.id AND
+		  evolucion_curva.codigo_evolucion = evoluciones.codigo AND
+		  evoluciones.valoracion = solicitudes.numero_solicitud AND
+		  imagen_parametrizada.id_curva_crecimiento = curva_crecimiento_parametrizab.id AND
+		  solicitudes.cuenta = cuentas.id AND
+		  cuentas.codigo_paciente = pacientes.codigo_paciente AND
+		  pacientes.codigo_paciente = personas.codigo AND
+		  imagen_parametrizada.activo = :estado AND
+		  cuentas.id = :idCuenta AND
+		  personas.codigo = :codigoPaciente
+		)
+		ORDER BY titulo_grafica , edad_inicial
+	]]>
+  </sql-query>
+  
+  <sql-query name="curvasCrecimiento.valoracionesPorpacienteConCurva">
+	<![CDATA[
+		SELECT
+		  imagen_parametrizada.imagen_izquierda,
+		  curva_crecimiento_parametrizab.titulo_grafica,
+		  curva_crecimiento_parametrizab.color_titulo,
+		  curva_crecimiento_parametrizab.edad_inicial,
+		  curva_crecimiento_parametrizab.edad_final,
+		  curva_crecimiento_parametrizab.descripcion,
+		  curva_crecimiento_parametrizab.color_descripcion,
+		  imagen_parametrizada.imagen_derecha,
+		  historico_imagen_plantilla.url_imagen, 
+		  valoraciones.numero_solicitud,
+		  valoraciones.fecha_valoracion,
+		  1 AS tipo
+		FROM 
+		  historiaclinica.historico_imagen_plantilla, 
+		  historiaclinica.valoracion_curva, 
+		  historiaclinica.valoraciones, 
+		  historiaclinica.curva_crecimiento_parametrizab, 
+		  historiaclinica.imagen_parametrizada, 
+		  ordenes.solicitudes, 
+		  manejopaciente.cuentas, 
+		  manejopaciente.pacientes, 
+		  administracion.personas
+		WHERE 
+		  historico_imagen_plantilla.id_valoracion_curva = valoracion_curva.id AND
+		  valoracion_curva.numero_solicitud_valoracion = valoraciones.numero_solicitud AND
+		  valoracion_curva.id_curva_crecimiento_paramet = curva_crecimiento_parametrizab.id AND
+		  valoraciones.numero_solicitud = solicitudes.numero_solicitud AND
+		  imagen_parametrizada.id_curva_crecimiento = curva_crecimiento_parametrizab.id AND
+		  solicitudes.cuenta = cuentas.id AND
+		  cuentas.codigo_paciente = pacientes.codigo_paciente AND
+		  pacientes.codigo_paciente = personas.codigo AND
+		  imagen_parametrizada.activo = :estado AND
+		  valoraciones.numero_solicitud = :idValoracion
+	]]>
+  </sql-query>
+  
+  <sql-query name="curvasCrecimiento.evolucionesPorpacienteConCurva">
+	<![CDATA[
+		SELECT
+		  imagen_parametrizada.imagen_izquierda, 
+		  curva_crecimiento_parametrizab.titulo_grafica, 
+		  curva_crecimiento_parametrizab.color_titulo,
+		  curva_crecimiento_parametrizab.edad_inicial,
+		  curva_crecimiento_parametrizab.edad_final,
+		  curva_crecimiento_parametrizab.descripcion, 
+		  curva_crecimiento_parametrizab.color_descripcion, 
+		  imagen_parametrizada.imagen_derecha, 
+		  historico_imagen_plantilla.url_imagen, 
+		  evoluciones.codigo, 
+		  evoluciones.fecha_evolucion,
+		  2 AS tipo
+		FROM 
+		  historiaclinica.historico_imagen_plantilla, 
+		  historiaclinica.evolucion_curva, 
+		  historiaclinica.evoluciones, 
+		  historiaclinica.curva_crecimiento_parametrizab, 
+		  historiaclinica.imagen_parametrizada, 
+		  ordenes.solicitudes, 
+		  manejopaciente.cuentas, 
+		  manejopaciente.pacientes, 
+		  administracion.personas
+		WHERE 
+		  historico_imagen_plantilla.id_evolucion_curva = evolucion_curva.id AND
+		  historico_imagen_plantilla.id_imagen_parametrizada = curva_crecimiento_parametrizab.id AND
+		  evolucion_curva.id_curva_crecimiento_paramet = curva_crecimiento_parametrizab.id AND
+		  evolucion_curva.codigo_evolucion = evoluciones.codigo AND
+		  evoluciones.valoracion = solicitudes.numero_solicitud AND
+		  imagen_parametrizada.id_curva_crecimiento = curva_crecimiento_parametrizab.id AND
+		  solicitudes.cuenta = cuentas.id AND
+		  cuentas.codigo_paciente = pacientes.codigo_paciente AND
+		  pacientes.codigo_paciente = personas.codigo AND
+		  imagen_parametrizada.activo = :estado AND
+		  evoluciones.codigo = :idEvolucion
+	]]>
+  </sql-query>
+  
+  	<sql-query name="curvasCrecimiento.existeCurvasAnteriores">
+		<return-scalar column="contador" type="integer" />
+		<![CDATA[
+			SELECT 
+				1 AS contador
+			FROM personas p  
+				INNER JOIN cuentas c ON ( c.codigo_paciente = p.codigo  ) 
+				INNER JOIN centros_costo cc ON (cc.codigo = c.area) 
+				INNER JOIN solicitudes s ON ( s.cuenta = c.id )  
+				INNER JOIN valoraciones v ON ( v.numero_solicitud = s.numero_solicitud ) 
+				INNER JOIN val_signos_vitales vs ON(vs.valoracion = v.numero_solicitud) 
+				INNER JOIN signos_vitales sv ON ( sv.codigo = vs.signo_vital) 
+				WHERE p.codigo = :codigoPaciente AND cc.institucion = :codigoInstitucion
+				AND TO_DATE(TO_CHAR(v.fecha_valoracion, 'YYYY-MM-DD') || ' ' || v.hora_valoracion, 'YYYY-MM-DD HH24:MI') <= :fechaCorteCurvas
+			]]>
+  </sql-query>
+</hibernate-mapping>

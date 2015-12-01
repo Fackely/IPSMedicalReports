@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<query name="solicitudes.obtenerSolCirugiaPorServicioPorId">
+	 	SELECT scps
+	 		FROM SolCirugiaPorServicio scps
+	 			INNER JOIN scps.solicitudesCirugia solcir
+	 			INNER JOIN scps.servicios ser
+	 		WHERE solcir.numeroSolicitud = :numeroSolicitud
+	 			AND ser.codigo = :servicio
+	</query>
+	
+	<sql-query name="solicitudes.obtenerSolicitudesAutorizadasRelacionadasOrdenAmb">
+	 	<return-scalar column="num_solicitud" type="long" />
+		<return-scalar column="codigo" type="long" />
+		<return-scalar column="fecha_generacion" type="date" />
+		<return-scalar column="tipo_solicitud" type="integer" />
+		<![CDATA[
+			SELECT resultado.num_solicitud,
+				resultado.codigo,
+				resultado.fecha_generacion,
+				resultado.tipo_solicitud 
+			FROM (
+			 	SELECT sol.consecutivo_ordenes_medicas as num_solicitud,
+				ord_amb.consecutivo_orden as codigo,
+				ord_amb.FECHA as fecha_generacion,
+				1 as tipo_solicitud
+				
+				FROM autorizaciones_entidades_sub auto_ent
+				inner join auto_entsub_solicitudes auto_entsub_sol 
+				on (auto_entsub_sol.AUTORIZACION_ENT_SUB = auto_ent.consecutivo)
+				
+				inner join solicitudes sol on (sol.numero_solicitud=auto_entsub_sol.numero_solicitud)
+				inner join ordenes_amb_solicitudes amb_sol on (amb_sol.numero_solicitud=sol.numero_solicitud)
+				inner join ordenes_ambulatorias ord_amb on (ord_amb.codigo = amb_sol.orden)
+				
+				
+				where auto_ent.consecutivo=:consecutivoAutoEntSub
+				
+				union 
+				
+				SELECT sol.consecutivo_ordenes_medicas as num_solicitud,
+				pet_qx.codigo||'' as codigo,
+				pet_qx.fecha_peticion as fecha_generacion,
+				2 as tipo_solicitud
+				
+				FROM autorizaciones_entidades_sub auto_ent
+				inner join auto_entsub_solicitudes auto_entsub_sol 
+				on auto_entsub_sol.AUTORIZACION_ENT_SUB = auto_ent.consecutivo
+				
+				inner join solicitudes sol on sol.numero_solicitud=auto_entsub_sol.numero_solicitud
+				inner join solicitudes_cirugia sol_cir on sol_cir.numero_solicitud = sol.numero_solicitud
+				inner join peticion_qx pet_qx on pet_qx.codigo = sol_cir.codigo_peticion
+				
+				
+				where auto_ent.consecutivo=:consecutivoAutoEntSub) resultado
+			ORDER BY resultado.num_solicitud asc
+			
+	 	]]>
+	 	
+	</sql-query>
+	
+	<query name="solicitudes.obtenerDetCargosPorSolicitud">
+	 	SELECT detCargo
+	 		FROM DetCargos detCargo
+	 			INNER JOIN detCargo.solicitudes sol
+			WHERE sol.numeroSolicitud = :numeroSolicitud
+ 	</query>
+	
+	<query name="solicitudes.obtenerIngresoPorNumeroSolicitud">
+	 	SELECT ingreso
+	 		FROM Solicitudes solicitud
+	 			INNER JOIN solicitud.cuentas cuenta
+	 			INNER JOIN cuenta.ingresos ingreso
+			WHERE solicitud.numeroSolicitud = :numeroSolicitud
+ 	</query>
+	
+</hibernate-mapping>

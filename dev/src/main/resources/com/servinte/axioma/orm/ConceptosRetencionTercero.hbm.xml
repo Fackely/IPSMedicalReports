@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConceptosRetencionTercero" table="conceptos_retencion_tercero" schema="administracion">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="tercero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" />
+        </many-to-one>
+        <many-to-one name="conceptosRetencion" class="com.servinte.axioma.orm.ConceptosRetencion" fetch="select">
+            <column name="concepto_retencion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposAplicacionRet" class="com.servinte.axioma.orm.TiposAplicacionRet" fetch="select">
+            <column name="tipo_aplicacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioInactivacion" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_inactivacion" length="30" />
+        </many-to-one>
+        <property name="indAgenteRetenedor" type="string">
+            <column name="ind_agente_retenedor" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="fechaInactivacion" type="date">
+            <column name="fecha_inactivacion" length="13" />
+        </property>
+        <property name="horaInactivacion" type="string">
+            <column name="hora_inactivacion" length="5" />
+        </property>
+    </class>
+</hibernate-mapping>

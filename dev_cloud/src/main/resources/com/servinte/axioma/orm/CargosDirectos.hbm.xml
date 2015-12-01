@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CargosDirectos" table="cargos_directos" schema="facturacion">
+        <id name="numeroSolicitud" type="int">
+            <column name="numero_solicitud" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio_solicitado" />
+        </many-to-one>
+        <many-to-one name="tiposRecargo" class="com.servinte.axioma.orm.TiposRecargo" fetch="select">
+            <column name="tipo_recargo" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cargosDirectosHc" class="com.servinte.axioma.orm.CargosDirectosHc" fetch="select">
+            <column name="codigo_datos_hc" precision="10" scale="0" />
+        </many-to-one>
+        <property name="afectaInventarios" type="string">
+            <column name="afecta_inventarios" length="1" />
+        </property>
+        <property name="fechaEjecucion" type="date">
+            <column name="fecha_ejecucion" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

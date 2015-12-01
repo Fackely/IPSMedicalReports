@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UnidadFunCuentaIngCc" table="unidad_fun_cuenta_ing_cc" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.UnidadFunCuentaIngCcId">
+            <key-property name="unidadFuncional" type="string">
+                <column name="unidad_funcional" length="16" />
+            </key-property>
+            <key-property name="institucion" type="int">
+                <column name="institucion" />
+            </key-property>
+            <key-property name="centroCosto" type="int">
+                <column name="centro_costo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cuentasContablesByCuentaContableCosto" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable_costo" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaMedicamento" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_medicamento" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaMedVigAnterior" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_med_vig_anterior" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaIngreso" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_ingreso" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaIngresoVigAnterior" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_ingreso_vig_anterior" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="unidadesFuncionales" class="com.servinte.axioma.orm.UnidadesFuncionales" update="false" insert="false" fetch="select">
+            <column name="unidad_funcional" length="16" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" update="false" insert="false" fetch="select">
+            <column name="centro_costo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="rubroPresupuestal" class="com.servinte.axioma.orm.RubroPresupuestal" fetch="select">
+            <column name="rubro_presupuestal" precision="10" scale="0" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/05/2011 05:49:12 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NivelAtencion" table="nivel_atencion" schema="capitacion">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" />
+        </many-to-one>
+        <property name="codigo" type="java.lang.Long">
+            <column name="codigo" precision="10" scale="0" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="65" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="activo" />
+        </property>
+        <set name="cierreTempNivelAteGruServs" table="cierre_temp_nivel_ate_gru_serv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_atencion" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempNivelAteGruServ" />
+        </set>
+        <set name="logDetalleParamPresups" table="log_detalle_param_presup" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_atencion" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetalleParamPresup" />
+        </set>
+        <set name="contratoses" table="niveles_contratos" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_servicio" precision="10" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Contratos">
+                <column name="contrato" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="articulos" table="articulo" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_atencion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Articulo" />
+        </set>
+        <set name="servicioses" table="servicios" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Servicios" />
+        </set>
+        <set name="detalleValorizacionServs" table="detalle_valorizacion_serv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_atencion" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleValorizacionServ" />
+        </set>
+        <set name="cierreTempNivelAteNatArts" table="cierre_temp_nivel_ate_nat_art" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_atencion" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempNivelAteNatArt" />
+        </set>
+        <set name="valorizacionPresCapGens" table="valorizacion_pres_cap_gen" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_atencion" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValorizacionPresCapGen" />
+        </set>
+        <set name="cierreTempNivelAtenServs" table="cierre_temp_nivel_aten_serv" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_atencion" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempNivelAtenServ" />
+        </set>
+        <set name="cierreTempNivelAtenArts" table="cierre_temp_nivel_aten_art" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_atencion" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempNivelAtenArt" />
+        </set>
+        <set name="detalleValorizacionArts" table="detalle_valorizacion_art" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_atencion" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleValorizacionArt" />
+        </set>
+        <set name="cierreTempNivAteClInvArts" table="cierre_temp_niv_ate_cl_inv_art" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nivel_atencion" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CierreTempNivAteClInvArt" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSolicitudMedicamentos" pageWidth="612" pageHeight="396" columnWidth="592" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="1.6105100000000059"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\hermorhu\\Documents\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subReporteMedicamentosSolicitados" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subReporteInsumosSolicitados" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<field name="logoIzquierda" class="java.lang.String"/>
+	<field name="logoDerecha" class="java.lang.String"/>
+	<field name="razonSocial" class="java.lang.String"/>
+	<field name="nit" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="fechaEntrega" class="java.lang.String"/>
+	<field name="horaEntrega" class="java.lang.String"/>
+	<field name="paciente" class="java.lang.String"/>
+	<field name="documentoIdentificacion" class="java.lang.String"/>
+	<field name="edad" class="java.lang.String"/>
+	<field name="responsable" class="java.lang.String"/>
+	<field name="centroSolicitante" class="java.lang.String"/>
+	<field name="farmacia" class="java.lang.String"/>
+	<field name="fechaHoraOrden" class="java.lang.String"/>
+	<field name="orden" class="java.lang.String"/>
+	<field name="viaIngreso" class="java.lang.String"/>
+	<field name="cama" class="java.lang.String"/>
+	<field name="area" class="java.lang.String"/>
+	<field name="JRDMedicamentosSolicitados" class="java.lang.Object"/>
+	<field name="firmaDigital" class="java.lang.String"/>
+	<field name="datosMedico" class="java.lang.String"/>
+	<field name="usuario" class="java.lang.String"/>
+	<field name="esAnulada" class="java.lang.Boolean"/>
+	<field name="motivoAnulacion" class="java.lang.String"/>
+	<field name="telefonoPaciente" class="java.lang.String"/>
+	<field name="ingreso" class="java.lang.String"/>
+	<field name="JRDInsumosSolicitados" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="592" height="60"/>
+				<image hAlign="Center" vAlign="Top">
+					<reportElement key="logoIzquierda" x="0" y="0" width="120" height="60">
+						<printWhenExpression><![CDATA[$F{logoIzquierda} != null]]></printWhenExpression>
+					</reportElement>
+					<imageExpression class="java.lang.String"><![CDATA[$F{logoIzquierda}]]></imageExpression>
+				</image>
+				<image hAlign="Center" vAlign="Top">
+					<reportElement key="logoDerecha" x="472" y="0" width="120" height="60">
+						<printWhenExpression><![CDATA[$F{logoDerecha} != null]]></printWhenExpression>
+					</reportElement>
+					<imageExpression class="java.lang.String"><![CDATA[$F{logoDerecha}]]></imageExpression>
+				</image>
+				<textField isBlankWhenNull="true">
+					<reportElement key="razonSocial" positionType="Float" stretchType="RelativeToTallestObject" x="120" y="0" width="352" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{razonSocial}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="nit" positionType="Float" stretchType="RelativeToTallestObject" x="120" y="15" width="352" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["NIT " + $F{nit}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="direccion" positionType="Float" stretchType="RelativeToTallestObject" x="120" y="27" width="352" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="telefono" positionType="Float" stretchType="RelativeToTallestObject" x="120" y="39" width="352" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Tels. " + $F{telefono}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement key="paciente" x="0" y="23" width="49" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PACIENTE: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="ingreso" x="0" y="53" width="49" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INGRESO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="centroAtencion" x="153" y="38" width="85" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CENTRO ATENCION: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="fechaHoraOrden" x="442" y="23" width="73" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA Y HORA: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="orden" x="365" y="23" width="40" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORDEN: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="responsable" x="0" y="38" width="72" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESPONSABLE: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="farmacia" x="153" y="53" width="55" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FARMACIA: ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="pacienteField" x="49" y="23" width="316" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{paciente} +",  "+ $F{documentoIdentificacion} +",  Edad: "+ $F{edad} +", Tel: "+ $F{telefonoPaciente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="ordenField" x="395" y="23" width="37" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{orden}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="ingresoField" x="49" y="53" width="99" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ingreso}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="centroAtencionField" x="238" y="38" width="354" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{centroSolicitante} +", "+ $F{viaIngreso} +", "+$F{area}+""+ $F{cama}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="fechaHoraOrdenField" x="515" y="23" width="77" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaHoraOrden}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="responsableField" x="72" y="38" width="76" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{responsable}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="farmaciaField" x="238" y="53" width="225" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{farmacia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="titulo" x="0" y="0" width="592" height="16" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["SOLICITUD DE MEDICAMENTOS" + ($F{esAnulada} == true ? " - ANULADA" : "")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="motivo" x="97" y="68" width="495" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{esAnulada} == true ? $F{motivoAnulacion} : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="motivo" x="0" y="68" width="97" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{esAnulada} == true ? "MOTIVO ANULACIÓN: " : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subReporteMedicamentos" stretchType="RelativeToBandHeight" x="0" y="0" width="592" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{JRDMedicamentosSolicitados}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteMedicamentosSolicitados}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="24">
+			<subreport>
+				<reportElement key="subReporteInsumos" stretchType="RelativeToBandHeight" x="0" y="9" width="592" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{JRDInsumosSolicitados}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteInsumosSolicitados}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="65">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="datosMedico" stretchType="RelativeToTallestObject" x="0" y="54" width="297" height="11" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{datosMedico}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="52" width="295" height="1"/>
+			</line>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement key="firmaDigital" x="28" y="9" width="233" height="42"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{firmaDigital}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement key="pagina" x="380" y="0" width="167" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de " + $V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="impresion" x="210" y="0" width="71" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaEntrega} + " " + $F{horaEntrega}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="usuario" x="281" y="0" width="99" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="entregaLbl" x="161" y="0" width="49" height="12" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Impresión: ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

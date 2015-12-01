@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 13, 2010 11:42:36 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EmpresasInstitucion" table="empresas_institucion" schema="facturacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ciudades" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad" length="10" not-null="true" />
+            <column name="departamento" length="10" not-null="true" />
+            <column name="pais" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacion" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_identificacion" length="3" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="razonSocial" type="string">
+            <column name="razon_social" length="64" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="200" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="20" not-null="true" />
+        </property>
+        <property name="codMinSalud" type="string">
+            <column name="cod_min_salud" length="20" />
+        </property>
+        <property name="actividadEco" type="string">
+            <column name="actividad_eco" length="64" />
+        </property>
+        <property name="resolucion" type="string">
+            <column name="resolucion" />
+        </property>
+        <property name="prefFactura" type="string">
+            <column name="pref_factura" length="10" />
+        </property>
+        <property name="rgoInicFact" type="java.lang.Long">
+            <column name="rgo_inic_fact" precision="12" scale="0" />
+        </property>
+        <property name="rgoFinFact" type="java.lang.Long">
+            <column name="rgo_fin_fact" precision="12" scale="0" />
+        </property>
+        <property name="encabezado" type="string">
+            <column name="encabezado" length="1000" />
+        </property>
+        <property name="pie" type="string">
+            <column name="pie" length="2000" />
+        </property>
+        <property name="logo" type="string">
+            <column name="logo" length="512" not-null="true" />
+        </property>
+        <property name="vigente" type="char">
+            <column name="vigente" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="nit" type="string">
+            <column name="nit" length="20" not-null="true" />
+        </property>
+        <property name="valorConsecutivoFact" type="big_decimal">
+            <column name="valor_consecutivo_fact" precision="20" scale="0" />
+        </property>
+        <property name="anioVigencia" type="string">
+            <column name="anio_vigencia" length="5" />
+        </property>
+        <property name="digitoVerificacion" type="java.lang.Integer">
+            <column name="digito_verificacion" />
+        </property>
+        <property name="institucionPublica" type="string">
+            <column name="institucion_publica" length="1" />
+        </property>
+        <property name="codEmpTransEsp" type="string">
+            <column name="cod_emp_trans_esp" length="12" />
+        </property>
+        <property name="ubicacionLogoReportes" type="string">
+            <column name="ubicacion_logo_reportes" length="3" />
+        </property>
+        <property name="pieHisCli" type="string">
+            <column name="pie_his_cli" length="2000" />
+        </property>
+        <property name="codigoInterfaz" type="java.lang.Integer">
+            <column name="codigo_interfaz" />
+        </property>
+        <property name="imprimirFirmasEmp" type="string">
+            <column name="imprimir_firmas_emp" length="1" />
+        </property>
+        <property name="representante" type="string">
+            <column name="representante" length="128" />
+        </property>
+        <property name="resolucionFacturaVaria" type="string">
+            <column name="resolucion_factura_varia" length="64" />
+        </property>
+        <property name="prefFacturaVaria" type="string">
+            <column name="pref_factura_varia" length="64" />
+        </property>
+        <property name="rgoInicFactVaria" type="java.lang.Long">
+            <column name="rgo_inic_fact_varia" precision="14" scale="0" />
+        </property>
+        <property name="rgoFinFactVaria" type="java.lang.Long">
+            <column name="rgo_fin_fact_varia" precision="14" scale="0" />
+        </property>
+        <property name="encabezadoFacturaVaria" type="string">
+            <column name="encabezado_factura_varia" length="1000" />
+        </property>
+        <property name="pieFacturaVaria" type="string">
+            <column name="pie_factura_varia" length="2000" />
+        </property>
+        <set name="facturases" inverse="true" lazy="true" table="facturas" fetch="select">
+            <key>
+                <column name="empresa_institucion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Facturas" />
+        </set>
+        <set name="montosCobros" inverse="true" lazy="true" table="montos_cobro" fetch="select">
+            <key>
+                <column name="institucion" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MontosCobro" />
+        </set>
+        <set name="cuentaInterfazEmpresInstis" inverse="true" lazy="true" table="cuenta_interfaz_empres_insti" fetch="select">
+            <key>
+                <column name="empresa_institucion" precision="10" scale="0">
+                    <comment>Empresa Instituci&#195;&#179;n que tiene parametrizada su propia cuenta</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentaInterfazEmpresInsti" />
+        </set>
+        <set name="cuentasBancariases" inverse="true" lazy="true" table="cuentas_bancarias" fetch="select">
+            <key>
+                <column name="cod_emp_inst" precision="10" scale="0">
+                    <comment>C&#195;&#179;digo de la empresa instituci&#195;&#179;n asociado a la cuenta bancaria, c&#195;&#179;digo axioma.</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CuentasBancarias" />
+        </set>
+        <set name="firmasContOtrsiemprs" inverse="true" lazy="true" table="firmas_cont_otrsiempr" fetch="select">
+            <key>
+                <column name="empresa_inst" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FirmasContOtrsiempr" />
+        </set>
+        <set name="subCuentases" inverse="true" lazy="true" table="sub_cuentas" fetch="select">
+            <key>
+                <column name="empresas_institucion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SubCuentas" />
+        </set>
+        <set name="centroAtencions" inverse="true" lazy="true" table="centro_atencion" fetch="select">
+            <key>
+                <column name="empresa_institucion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CentroAtencion" />
+        </set>
+        <set name="convenioses" inverse="true" lazy="true" table="convenios" fetch="select">
+            <key>
+                <column name="empresa_institucion" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Convenios" />
+        </set>
+    </class>
+</hibernate-mapping>

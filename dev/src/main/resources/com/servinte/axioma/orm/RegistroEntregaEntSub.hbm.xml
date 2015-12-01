@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 1, 2011 12:26:42 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RegistroEntregaEntSub" table="registro_entrega_ent_sub" schema="ordenes">
+        <comment>Relacione el despacho realizado a una autorizacion de entidad subcontratada</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">ordenes.seq_registro_entrega_ent_sub</param>
+			</generator>
+        </id>
+        <many-to-one name="despacho" class="com.servinte.axioma.orm.Despacho" fetch="select">
+            <column name="despacho" not-null="true">
+                <comment>Despacho de articulos de la autorizacion</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Usuario que genera el registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="autorizacion_ent_sub" precision="12" scale="0">
+                <comment>Autorizacion que es despachada</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Fecha de generacion del registro</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Hora de generacion del registro</comment>
+            </column>
+        </property>
+        <set name="registroEntregaEntsubSolicis" inverse="true" lazy="true" table="registro_entrega_entsub_solici" fetch="select" cascade="all" >
+            <key>
+                <column name="registro_entrega" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEntregaEntsubSolici" />
+        </set>
+        <set name="registroEntregaEntsubPedidos" inverse="true" lazy="true" table="registro_entrega_entsub_pedido" fetch="select" cascade="all">
+            <key>
+                <column name="registro_entrega" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEntregaEntsubPedido" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 19, 2010 12:09:31 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RegistroEgresosDeCaja" table="registro_egresos_de_caja" schema="tesoreria">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+            <generator class="sequence" >
+	 			<param name="sequence">tesoreria.seq_registro_egresos_de_caja</param>
+   	 		</generator>
+        </id>
+        <many-to-one name="cajas" class="com.servinte.axioma.orm.Cajas" fetch="select">
+            <column name="caja" not-null="true" />
+        </many-to-one>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="tercero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="concEgrXusuXcatencion" class="com.servinte.axioma.orm.ConcEgrXusuXcatencion" fetch="select">
+            <column name="conc_egr_xusu_xcate" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <property name="consecutivo" type="string">
+            <column name="consecutivo" length="32" not-null="true" />
+        </property>
+        <property name="factura" type="string">
+            <column name="factura" length="25" not-null="true" />
+        </property>
+        <property name="valorEgreso" type="big_decimal">
+            <column name="valor_egreso" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="10" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

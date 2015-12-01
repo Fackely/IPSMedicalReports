@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/03/2012 10:54:25 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposSolicitud" table="tipos_solicitud" schema="ordenes">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="64" not-null="true" />
+        </property>
+        <set name="detCargoses" table="det_cargos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_solicitud" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+        <set name="inactivacionesCargoses" table="inactivaciones_cargos" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InactivacionesCargos" />
+        </set>
+        <set name="paquetizacionDetFacturas" table="paquetizacion_det_factura" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetizacionDetFactura" />
+        </set>
+        <set name="solicitudesSubcuentas" table="solicitudes_subcuenta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolicitudesSubcuenta" />
+        </set>
+        <set name="detFacturaSolicituds" table="det_factura_solicitud" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_solicitud" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFacturaSolicitud" />
+        </set>
+<!--         <set name="detFacturaSolicitudExcentas" table="det_factura_solicitud_excenta" schema="facturacion" inverse="true" lazy="true" fetch="select"> -->
+<!--             <key> -->
+<!--                 <column name="tipo_solicitud" /> -->
+<!--             </key> -->
+<!--             <one-to-many class="com.servinte.axioma.orm.DetFacturaSolicitudExcenta" /> -->
+<!--         </set> -->
+        <set name="solicitudeses" table="solicitudes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Solicitudes" />
+        </set>
+    </class>
+</hibernate-mapping>

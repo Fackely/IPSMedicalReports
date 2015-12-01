@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 12, 2011 9:11:29 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.OtrosSi" table="otros_si" schema="odontologia">
+        <comment>Registro de otros si por presupuesto</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.seq_otros_si</param>
+			</generator>
+        </id>
+        <many-to-one name="presupuestoOdontologico" class="com.servinte.axioma.orm.PresupuestoOdontologico" fetch="select">
+            <column name="presupuesto_odontologico" precision="12" scale="0" not-null="true">
+                <comment>Presupuesto odontologico asociado al otro si</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" not-null="true">
+                <comment>Centro de atencion donde se genera el registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Usuario que genera el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" not-null="true">
+                <comment>Consecutivo (contador) de registros individuales por cada presupuesto</comment>
+            </column>
+        </property>
+        <property name="fechaGeneracion" type="date">
+            <column name="fecha_generacion" length="13" not-null="true">
+                <comment>Fecha de generacion del registro</comment>
+            </column>
+        </property>
+        <property name="horaGeneracion" type="string">
+            <column name="hora_generacion" length="5" not-null="true">
+                <comment>Hora de generacion del registro</comment>
+            </column>
+        </property>
+        <set name="incluPresuEncabezados" inverse="true" lazy="true" table="inclu_presu_encabezado" fetch="select">
+            <key>
+                <column name="otro_si" precision="12" scale="0">
+                    <comment>Registro de Otro si asociado a las inclusiones contratadas</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluPresuEncabezado" />
+        </set>
+        <set name="otrosSiInclusioneses" inverse="true" lazy="true" table="otros_si_inclusiones" fetch="select">
+            <key>
+                <column name="otro_si" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OtrosSiInclusiones" />
+        </set>
+        <set name="excluPresuEncabezados" inverse="true" lazy="true" table="exclu_presu_encabezado" fetch="select">
+            <key>
+                <column name="otro_si" precision="12" scale="0">
+                    <comment>Registro de Otro si asociado a las exclusiones</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ExcluPresuEncabezado" />
+        </set>
+        <set name="otrosSiExclusioneses" inverse="true" lazy="true" table="otros_si_exclusiones" fetch="select">
+            <key>
+                <column name="otro_si" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OtrosSiExclusiones" />
+        </set>
+    </class>
+</hibernate-mapping>

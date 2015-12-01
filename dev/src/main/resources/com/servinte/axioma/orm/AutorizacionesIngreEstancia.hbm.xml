@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 30, 2011 8:31:36 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutorizacionesIngreEstancia" table="autorizaciones_ingre_estancia" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence">
+			    <param name="sequence">manejopaciente.seq_auto_ingresos_estancia</param>
+			</generator>
+        </id>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio_recobro" />       
+		</many-to-one>
+		 <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_autoriza" length="30" />
+        </many-to-one>
+        <many-to-one name="ingresosEstancia" class="com.servinte.axioma.orm.IngresosEstancia" fetch="select" cascade="all">
+            <column name="ingreso_estancia" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_solicitante" />
+        </many-to-one>
+        <property name="fechaInicioAutorizacion" type="date">
+            <column name="fecha_inicio_autorizacion" length="13" not-null="true" />
+        </property>
+        <property name="consecutivoAdmision" type="long">
+            <column name="consecutivo_admision" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="diasEstanciaAutorizados" type="int">
+            <column name="dias_estancia_autorizados" not-null="true" />
+        </property>
+        <property name="usuarioContacta" type="string">
+            <column name="usuario_contacta" length="30" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" />
+        </property>
+        <property name="otroConvenioRecobro" type="string">
+            <column name="otro_convenio_recobro" length="128" />
+        </property>
+        <property name="indicativoTemporal" type="char">
+            <column name="indicativo_temporal" length="1" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="5" not-null="true" />
+        </property>
+        <property name="cargoUsuContacta" type="string">
+            <column name="cargo_usu_contacta" length="128" />
+        </property>
+        <property name="fechaAutorizacion" type="date">
+            <column name="fecha_autorizacion" length="13" />
+        </property>
+        <property name="horaAutorizacion" type="string">
+            <column name="hora_autorizacion" length="5" />
+        </property>
+        <set name="autorizacionesEstanciaCapitas" table="autorizaciones_estancia_capita" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autorizacion_ingre_estancia" precision="12" scale="0" not-null="true">
+                    <comment>Llave primaria que hace relaci&#195;&#179;n a la tabla de manejopaciente.autorizaciones_ingre_estancia</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEstanciaCapita" />
+        </set>
+        <set name="histoAutorizacionIngEstans" inverse="true" lazy="true" table="histo_autorizacion_ing_estan" fetch="select" cascade="all">
+            <key>
+                <column name="autorizacion_ing_estan" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoAutorizacionIngEstan" />
+        </set>
+    </class>
+</hibernate-mapping>

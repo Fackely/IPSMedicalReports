@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 3, 2010 4:30:55 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetAutorizaciones" table="det_autorizaciones" schema="manejopaciente">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="serviciosByServicioCx" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio_cx" />
+        </many-to-one>
+        <many-to-one name="autorizaciones" class="com.servinte.axioma.orm.Autorizaciones" fetch="select">
+            <column name="autorizacion" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="serviciosByServicio" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" />
+        </many-to-one>
+        <many-to-one name="detCargos" class="com.servinte.axioma.orm.DetCargos" fetch="select">
+            <column name="det_cargo" precision="10" scale="0" />
+        </many-to-one>
+        <property name="numeroSolicitud" type="java.lang.Integer">
+            <column name="numero_solicitud" />
+        </property>
+        <property name="ordenAmbulatoria" type="java.lang.Long">
+            <column name="orden_ambulatoria" precision="10" scale="0" />
+        </property>
+        <property name="articulo" type="java.lang.Integer">
+            <column name="articulo" />
+        </property>
+        <property name="cantidad" type="java.lang.Integer">
+            <column name="cantidad" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="5" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="justificacionSolicitud" type="string">
+            <column name="justificacion_solicitud" length="4000" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="tipoAsocio" type="java.lang.Integer">
+            <column name="tipo_asocio" />
+        </property>
+        <property name="cantidadAutorizacion" type="java.lang.Integer">
+            <column name="cantidad_autorizacion" />
+        </property>
+        <one-to-one name="respAutorizaciones" class="com.servinte.axioma.orm.RespAutorizaciones"></one-to-one>
+        <set name="detAutorizacionesEstancias" inverse="true" lazy="true" table="det_autorizaciones_estancia" fetch="select">
+            <key>
+                <column name="det_autorizacion" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetAutorizacionesEstancia" />
+        </set>
+        <set name="envioAutorizacioneses" inverse="true" lazy="true" table="envio_autorizaciones" fetch="select">
+            <key>
+                <column name="det_autorizacion" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EnvioAutorizaciones" />
+        </set>
+    </class>
+</hibernate-mapping>

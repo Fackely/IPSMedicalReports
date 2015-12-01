@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 8/06/2011 04:18:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UsuarioXConvenio" table="usuario_x_convenio" schema="capitacion">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_usuario_x_convenio</param>
+			</generator>
+        </id>
+        <many-to-one name="tiposParentesco" class="com.servinte.axioma.orm.TiposParentesco" fetch="select">
+            <column name="parentesco" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centroAtencion" class="com.servinte.axioma.orm.CentroAtencion" fetch="select">
+            <column name="centro_atencion" />
+        </many-to-one>
+        <many-to-one name="tiposCargue" class="com.servinte.axioma.orm.TiposCargue" fetch="select">
+            <column name="tipo_cargue" precision="1" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" fetch="select">
+            <column name="persona" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposAfiliado" class="com.servinte.axioma.orm.TiposAfiliado" fetch="select">
+            <column name="tipo_afiliado" length="1" />
+        </many-to-one>
+        <many-to-one name="naturalezaPacientes" class="com.servinte.axioma.orm.NaturalezaPacientes" fetch="select">
+            <column name="naturaleza_pacientes" />
+        </many-to-one>
+        <many-to-one name="estratosSociales" class="com.servinte.axioma.orm.EstratosSociales" fetch="select">
+            <column name="clasificacion_socio_economica" />
+        </many-to-one>
+        <property name="fechaInicial" type="date">
+            <column name="fecha_inicial" length="13" not-null="true" />
+        </property>
+        <property name="fechaFinal" type="date">
+            <column name="fecha_final" length="13" not-null="true" />
+        </property>
+        <property name="fechaCargue" type="date">
+            <column name="fecha_cargue" length="13" not-null="true" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="usuario" length="30" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" />
+        </property>
+        <property name="tipoIdEmpleador" type="string">
+            <column name="tipo_id_empleador" length="2" />
+        </property>
+        <property name="numeroIdEmpleador" type="string">
+            <column name="numero_id_empleador" length="20" />
+        </property>
+        <property name="razonSociEmpleador" type="string">
+            <column name="razon_soci_empleador" length="40" />
+        </property>
+        <property name="tipoIdCotizante" type="string">
+            <column name="tipo_id_cotizante" length="2" />
+        </property>
+        <property name="numeroIdCotizante" type="string">
+            <column name="numero_id_cotizante" length="20" />
+        </property>
+        <property name="nombresCotizante" type="string">
+            <column name="nombres_cotizante" length="40" />
+        </property>
+        <property name="apellidosCotizante" type="string">
+            <column name="apellidos_cotizante" length="40" />
+        </property>
+        <property name="numeroFicha" type="string">
+            <column name="numero_ficha" length="15" />
+        </property>
+    </class>
+</hibernate-mapping>

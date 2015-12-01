@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReporteProfesionales" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="0.8264462809917485"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subReporteUnidadesConsulta" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subReporteOrdenadoresConsultaExterna" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="grupoUnidadesConsulta" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="nombreCompleto" class="java.lang.String"/>
+	<field name="cantidadCitasAtendidas" class="java.lang.Integer"/>
+	<field name="totalCostoPromedio" class="java.lang.Double"/>
+	<field name="especializaciones" class="java.lang.String"/>
+	<field name="totalCostoPromedioString" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="axiomaTitulo" mode="Transparent" x="0" y="0" width="413" height="20" forecolor="#000000" backcolor="#FEFEFE"/>
+				<box leftPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Profesional de la Salud: "+$F{nombreCompleto} + ($F{especializaciones}!=null?(" - "+$F{especializaciones}):"")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="axiomaTitulo" x="413" y="0" width="159" height="20" backcolor="#868686"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Cantidad Citas Atendidas: "+$F{cantidadCitasAtendidas}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<subreport isUsingCache="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="572" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReporteOrdenadoresConsultaExterna">
+					<subreportParameterExpression><![CDATA[$P{subReporteOrdenadoresConsultaExterna}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{grupoUnidadesConsulta}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReporteUnidadesConsulta}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="507" height="20" forecolor="#000000" backcolor="#FEFEFE"/>
+				<box leftPadding="0" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL COSTO PROMEDIO PROFESIONAL DE LA SALUD]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="507" y="0" width="65" height="20" forecolor="#000000" backcolor="#868686"/>
+				<box rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{totalCostoPromedio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

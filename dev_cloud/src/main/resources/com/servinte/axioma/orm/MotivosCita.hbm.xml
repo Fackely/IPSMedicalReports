@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 3, 2010 4:30:55 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.MotivosCita" table="motivos_cita" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="6" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" not-null="true" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" />
+        </property>
+        <property name="tipoMotivo" type="string">
+            <column name="tipo_motivo" length="4" not-null="true" />
+        </property>
+        <set name="clasOdoMotivosNoConfirs" inverse="true" lazy="true" table="clas_odo_motivos_no_confir" fetch="select">
+            <key>
+                <column name="motivo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ClasOdoMotivosNoConfir" />
+        </set>
+        <set name="motivoCitaPacientes" inverse="true" lazy="true" table="motivo_cita_paciente" fetch="select">
+            <key>
+                <column name="motivo" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.MotivoCitaPaciente" />
+        </set>
+        <set name="logCitasOdontologicases" inverse="true" lazy="true" table="log_citas_odontologicas" fetch="select">
+            <key>
+                <column name="motivo_no_confirmacion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogCitasOdontologicas" />
+        </set>
+        <set name="citasOdontologicases" inverse="true" lazy="true" table="citas_odontologicas" fetch="select">
+            <key>
+                <column name="motivo_no_confirmacion" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CitasOdontologicas" />
+        </set>
+    </class>
+</hibernate-mapping>

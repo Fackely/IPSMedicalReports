@@ -1,0 +1,377 @@
+package com.sysmedica.dao.oracle;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.HashMap;
+
+import com.sysmedica.dao.FichaParalisisDao;
+import com.sysmedica.dao.sqlbase.SqlBaseFichaParalisisDao;
+
+public class OracleFichaParalisisDao implements FichaParalisisDao {
+
+	private String secuenciaStr = "SELECT seq_fichas.nextval FROM dual";
+	private String secuenciaExtremidadStr = "SELECT seq_extremidad.nextval FROM dual";
+	private String secuenciaGrupoStr = "SELECT seq_grupoedad.nextval FROM dual";
+	
+	public int insertarFicha(Connection con,
+								boolean notificar,
+							    String loginUsuario,
+							    int codigoFichaParalisis,
+							    int codigoPaciente,
+							    String codigoDiagnostico,
+							    int codigoNotificacion,
+							    int numeroSolicitud,
+							    int codigoAseguradora,
+								String nombreProfesional,
+							    int estado
+							    )
+	{
+		return SqlBaseFichaParalisisDao.insertarFicha(con,
+										numeroSolicitud,
+										loginUsuario,
+										codigoPaciente,
+										codigoDiagnostico,
+										estado,
+										codigoAseguradora,
+										nombreProfesional,
+									    secuenciaStr);
+	}
+
+
+
+	public int modificarFicha(Connection con,
+								String sire,
+								String loginUsuario,
+							    int codigoFichaParalisis,
+							    int estado,
+								String nombreMadre,
+							    String nombrePadre,
+							    String fechaInicioInvestigacion,
+							    int numeroDosis,
+							    String fechaUltimaDosis,
+							    int tieneCarnet,
+							    int fiebre,
+							    int respiratorios,
+							    int digestivos,
+							    int instalacion,
+							    int dolorMuscular,
+							    int signosMeningeos1,
+							    int fiebreInicioParalisis,
+							    int progresion,
+							    String fechaInicioParalisis,
+							    int musculosRespiratorios,
+							    int signosMeningeos2,
+							    int babinsky,
+							    int brudzinsky,
+							    int paresCraneanos,
+							    int liquidoCefalo,
+							    String fechaTomaLiquido,
+							    int celulas,
+							    int globulosRojos,
+							    int leucocitos,
+							    int proteinas,
+							    int glucosa,
+							    int electromiografia,
+							    String fechaTomaElectro,
+							    int velocidadConduccion,
+							    int resultadoConduccion,
+							    String fechaTomaVelocidad,
+							    String impresionDiagnostica,
+							    int muestraMateriaFecal,
+							    String fechaTomaFecal,
+							    String fechaEnvioFecal,
+							    String fechaRecepcionFecal,
+							    String fechaResultadoFecal,
+							    int virusAislado,
+							    String fechaVacunacionBloqueo,
+							    String fechaCulminacionVacunacion,
+							    String municipiosVacunados,
+							    int codigoExtremidad1,
+							    int codigoExtremidad2,
+							    int codigoExtremidad3,
+							    int codigoExtremidad4,
+							    int codigoGrupoEdad1,
+							    int codigoGrupoEdad2,
+							    int codigoGrupoEdad3,
+							    
+							    HashMap datosExtremidades,
+							    HashMap datosGrupoEdad,
+							    
+							    String lugarProcedencia,
+							    String fechaConsultaGeneral,
+							    String fechaInicioSintomasGeneral,
+							    int tipoCaso,
+							    boolean hospitalizadoGeneral,
+							    String fechaHospitalizacionGeneral,
+							    boolean estaVivoGeneral,
+							    String fechaDefuncion,
+							    String lugarNoti,
+							    int unidadGeneradora,
+							    String pais,
+							    int areaProcedencia
+							    ) 
+	{
+		return SqlBaseFichaParalisisDao.modificarFicha(con,
+														sire,
+														loginUsuario,
+													    codigoFichaParalisis,
+													    estado,
+													    
+													    nombreMadre,
+													    nombrePadre,
+													    fechaInicioInvestigacion,
+													    numeroDosis,
+													    fechaUltimaDosis,
+													    tieneCarnet,
+													    fiebre,
+													    respiratorios,
+													    digestivos,
+													    instalacion,
+													    dolorMuscular,
+													    signosMeningeos1,
+													    fiebreInicioParalisis,
+													    progresion,
+													    fechaInicioParalisis,
+													    musculosRespiratorios,
+													    signosMeningeos2,
+													    babinsky,
+													    brudzinsky,
+													    paresCraneanos,
+													    liquidoCefalo,
+													    fechaTomaLiquido,
+													    celulas,
+													    globulosRojos,
+													    leucocitos,
+													    proteinas,
+													    glucosa,
+													    electromiografia,
+													    fechaTomaElectro,
+													    velocidadConduccion,
+													    resultadoConduccion,
+													    fechaTomaVelocidad,
+													    impresionDiagnostica,
+													    muestraMateriaFecal,
+													    fechaTomaFecal,
+													    fechaEnvioFecal,
+													    fechaRecepcionFecal,
+													    fechaResultadoFecal,
+													    virusAislado,
+													    fechaVacunacionBloqueo,
+													    fechaCulminacionVacunacion,
+													    municipiosVacunados,
+													    codigoExtremidad1,
+													    codigoExtremidad2,
+													    codigoExtremidad3,
+													    codigoExtremidad4,
+													    codigoGrupoEdad1,
+													    codigoGrupoEdad2,
+													    codigoGrupoEdad3,
+													    
+													    datosExtremidades,
+													    datosGrupoEdad,
+													    
+													    lugarProcedencia,
+													    fechaConsultaGeneral,
+													    fechaInicioSintomasGeneral,
+													    tipoCaso,
+													    hospitalizadoGeneral,
+													    fechaHospitalizacionGeneral,
+													    estaVivoGeneral,
+													    fechaDefuncion,
+													    lugarNoti,
+													    unidadGeneradora,
+													    pais,
+													    areaProcedencia
+													    );
+	}
+
+
+
+
+	public ResultSet consultaTodoFicha(Connection con, int codigo)
+	{
+		return SqlBaseFichaParalisisDao.consultarTodoFichaParalisis(con,codigo);
+	}
+	
+	
+	
+	public ResultSet consultarDatosExtremidades(Connection con, int codigo)
+	{
+		return SqlBaseFichaParalisisDao.consultarDatosExtremidades(con,codigo);
+	}
+	
+	
+	public ResultSet consultarDatosGrupoEdad(Connection con, int codigo)
+	{
+		return SqlBaseFichaParalisisDao.consultarDatosGrupoEdad(con,codigo);
+	}
+	
+	
+	
+	public ResultSet consultaDatosPaciente(Connection con, int codigo,boolean empezarnuevo)
+    {
+    	return SqlBaseFichaParalisisDao.consultarDatosPaciente(con,codigo,empezarnuevo);
+    }
+	
+	
+	public int insertarFichaCompleta(Connection con,
+										int numeroSolicitud,
+										String login,
+										int codigoPaciente,
+										String codigoDiagnostico,
+										int estado,
+										int codigoAseguradora,
+										String nombreProfesional,
+									    
+									    String sire,
+									    String nombreMadre,
+									    String nombrePadre,
+									    String fechaInicioInvestigacion,
+									    int numeroDosis,
+									    String fechaUltimaDosis,
+									    int tieneCarnet,
+									    int fiebre,
+									    int respiratorios,
+									    int digestivos,
+									    int instalacion,
+									    int dolorMuscular,
+									    int signosMeningeos1,
+									    int fiebreInicioParalisis,
+									    int progresion,
+									    String fechaInicioParalisis,
+									    int musculosRespiratorios,
+									    int signosMeningeos2,
+									    int babinsky,
+									    int brudzinsky,
+									    int paresCraneanos,
+									    int liquidoCefalo,
+									    String fechaTomaLiquido,
+									    int celulas,
+									    int globulosRojos,
+									    int leucocitos,
+									    int proteinas,
+									    int glucosa,
+									    int electromiografia,
+									    String fechaTomaElectro,
+									    int velocidadConduccion,
+									    int resultadoConduccion,
+									    String fechaTomaVelocidad,
+									    String impresionDiagnostica,
+									    int muestraMateriaFecal,
+									    String fechaTomaFecal,
+									    String fechaEnvioFecal,
+									    String fechaRecepcionFecal,
+									    String fechaResultadoFecal,
+									    int virusAislado,
+									    String fechaVacunacionBloqueo,
+									    String fechaCulminacionVacunacion,
+									    String municipiosVacunados,
+									    int codigoExtremidad1,
+									    int codigoExtremidad2,
+									    int codigoExtremidad3,
+									    int codigoExtremidad4,
+									    int codigoGrupoEdad1,
+									    int codigoGrupoEdad2,
+									    int codigoGrupoEdad3,
+									    
+									    HashMap datosExtremidades,
+									    HashMap datosGrupoEdad,
+									    
+									    String lugarProcedencia,
+									    String fechaConsultaGeneral,
+									    String fechaInicioSintomasGeneral,
+									    int tipoCaso,
+									    boolean hospitalizadoGeneral,
+									    String fechaHospitalizacionGeneral,
+									    boolean estaVivoGeneral,
+									    String fechaDefuncion,
+									    String lugarNoti,
+									    int unidadGeneradora,
+									    String telefonoContacto,
+									    boolean activa,
+									    String pais,
+									    int areaProcedencia
+									   )
+	{
+		return SqlBaseFichaParalisisDao.insertarFichaCompleta(con,
+																numeroSolicitud,
+																login,
+																codigoPaciente,
+																codigoDiagnostico,
+																estado,
+																codigoAseguradora,
+																nombreProfesional,
+															    secuenciaStr,
+															    
+															    sire,
+															    nombreMadre,
+															    nombrePadre,
+															    fechaInicioInvestigacion,
+															    numeroDosis,
+															    fechaUltimaDosis,
+															    tieneCarnet,
+															    fiebre,
+															    respiratorios,
+															    digestivos,
+															    instalacion,
+															    dolorMuscular,
+															    signosMeningeos1,
+															    fiebreInicioParalisis,
+															    progresion,
+															    fechaInicioParalisis,
+															    musculosRespiratorios,
+															    signosMeningeos2,
+															    babinsky,
+															    brudzinsky,
+															    paresCraneanos,
+															    liquidoCefalo,
+															    fechaTomaLiquido,
+															    celulas,
+															    globulosRojos,
+															    leucocitos,
+															    proteinas,
+															    glucosa,
+															    electromiografia,
+															    fechaTomaElectro,
+															    velocidadConduccion,
+															    resultadoConduccion,
+															    fechaTomaVelocidad,
+															    impresionDiagnostica,
+															    muestraMateriaFecal,
+															    fechaTomaFecal,
+															    fechaEnvioFecal,
+															    fechaRecepcionFecal,
+															    fechaResultadoFecal,
+															    virusAislado,
+															    fechaVacunacionBloqueo,
+															    fechaCulminacionVacunacion,
+															    municipiosVacunados,
+															    codigoExtremidad1,
+															    codigoExtremidad2,
+															    codigoExtremidad3,
+															    codigoExtremidad4,
+															    codigoGrupoEdad1,
+															    codigoGrupoEdad2,
+															    codigoGrupoEdad3,
+															    
+															    datosExtremidades,
+															    datosGrupoEdad,
+															    
+															    lugarProcedencia,
+															    fechaConsultaGeneral,
+															    fechaInicioSintomasGeneral,
+															    tipoCaso,
+															    hospitalizadoGeneral,
+															    fechaHospitalizacionGeneral,
+															    estaVivoGeneral,
+															    fechaDefuncion,
+															    lugarNoti,
+															    unidadGeneradora,
+															    telefonoContacto,
+															    activa,
+															    secuenciaExtremidadStr,
+															    secuenciaGrupoStr,
+															    pais,
+															    areaProcedencia);
+	}
+}

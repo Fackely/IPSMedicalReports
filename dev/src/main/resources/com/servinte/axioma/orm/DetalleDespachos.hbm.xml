@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 25, 2010 5:24:06 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetalleDespachos" table="detalle_despachos" schema="inventarios">
+        <composite-id name="id" class="com.servinte.axioma.orm.DetalleDespachosId">
+            <key-property name="articulo" type="int">
+                <column name="articulo" />
+            </key-property>
+            <key-property name="despacho" type="int">
+                <column name="despacho" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="despacho" class="com.servinte.axioma.orm.Despacho" update="false" insert="false" fetch="select">
+            <column name="despacho" not-null="true" />
+        </many-to-one>
+        <many-to-one name="articuloByArtPrincipal" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="art_principal" />
+        </many-to-one>
+        <many-to-one name="tercerosByProveedorCompra" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="proveedor_compra" />
+        </many-to-one>
+        <many-to-one name="articuloByArticulo" class="com.servinte.axioma.orm.Articulo" update="false" insert="false" fetch="select">
+            <column name="articulo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="almacen_consignacion" />
+        </many-to-one>
+        <many-to-one name="tercerosByProveedorCatalogo" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="proveedor_catalogo" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="costoUnitario" type="big_decimal">
+            <column name="costo_unitario" precision="20" scale="6" />
+        </property>
+        <property name="lote" type="string">
+            <column name="lote" length="20" />
+        </property>
+        <property name="fechaVencimiento" type="date">
+            <column name="fecha_vencimiento" length="13" />
+        </property>
+        <property name="tipoDespacho" type="string">
+            <column name="tipo_despacho" length="5" />
+        </property>
+        <property name="saldosDosis" type="java.lang.Long">
+            <column name="saldos_dosis" precision="10" scale="0" />
+        </property>
+        <property name="costoDonacion" type="big_decimal">
+            <column name="costo_donacion" precision="5" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="1000" />
+        </property>
+    </class>
+</hibernate-mapping>

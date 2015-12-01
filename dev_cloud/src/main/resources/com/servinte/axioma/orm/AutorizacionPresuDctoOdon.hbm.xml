@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 17, 2011 3:52:29 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutorizacionPresuDctoOdon" table="autorizacion_presu_dcto_odon" schema="odontologia">
+        <comment>Registro del detalle de la autorizaci&#195;&#179;n de la solicitud de descuento asociada</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.seq_autorizacion_presu_dcto</param>
+			</generator>
+        </id>
+        <many-to-one name="presupuestoDctoOdon" class="com.servinte.axioma.orm.PresupuestoDctoOdon" fetch="select" >
+            <column name="presupuesto_dcto_odon" precision="12" scale="0" not-null="true">
+                <comment>Registro de la solicitud de descuento</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaAutorizacion" type="date">
+            <column name="fecha_autorizacion" length="13" not-null="true">
+                <comment>Fecha en la que se autoriza la Solicitud de descuento</comment>
+            </column>
+        </property>
+        <property name="hora" type="string">
+            <column name="hora" length="5" not-null="true">
+                <comment>Hora en la que se autoriza la Solicitud descuento</comment>
+            </column>
+        </property>
+        <property name="diasVigencia" type="int">
+            <column name="dias_vigencia" not-null="true">
+                <comment>Dias de vigencia para la autorizaci&#195;&#179;n de descuento</comment>
+            </column>
+        </property>
+        <set name="presupuestoDctoOdons" inverse="true" lazy="true" table="presupuesto_dcto_odon" fetch="select">
+            <key>
+                <column name="autorizacion_presu_dcto_odon" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoDctoOdon" />
+        </set>
+    </class>
+</hibernate-mapping>

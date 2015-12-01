@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Written by Eclipse BIRT 2.0 -->
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.6" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.1.2.v20070205-1728 Build &lt;20070205-1728></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2006 &lt;&lt;Your Company Name here>></property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="4">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axioma</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword">YXhpb21h</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Data Set" id="243">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">codigo</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">descripcion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">codigo</property>
+                    <property name="nativeName">codigo</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">descripcion</property>
+                    <property name="nativeName">descripcion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">tipo</property>
+                    <property name="nativeName">tipo</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="queryText">SELECT
+	axif.codigo,
+	tti.descripcion,
+	tci.descripcion as tipo
+FROM
+	ajustes_x_inv_fisico axif
+INNER JOIN
+	tipos_trans_inventarios tti ON (axif.cod_transaccion=tti.consecutivo)
+INNER JOIN
+	tipos_conceptos_inv tci ON (tti.tipos_conceptos_inv=tci.codigo)
+WHERE
+	1=1</property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1.25cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1.25cm</property>
+            <page-header>
+                <grid id="266">
+                    <property name="width">100%</property>
+                    <column id="267"/>
+                    <column id="268"/>
+                    <row id="269">
+                        <cell id="270">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">9pt</property>
+                        </cell>
+                        <cell id="271">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">9pt</property>
+                        </cell>
+                    </row>
+                    <row id="272">
+                        <cell id="273">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">9pt</property>
+                        </cell>
+                        <cell id="274">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">9pt</property>
+                        </cell>
+                    </row>
+                    <row id="275">
+                        <cell id="276">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">9pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="278">
+                        <cell id="279">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">9pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="281">
+                        <cell id="282">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">9pt</property>
+                            <text id="114">
+                                <property name="fontFamily">sans-serif</property>
+                                <property name="fontSize">9pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="284">
+                        <cell id="285">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">9pt</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="288">
+                    <property name="width">100%</property>
+                    <column id="289">
+                        <property name="width">4.3229166667in</property>
+                    </column>
+                    <column id="290">
+                        <property name="width">1.5625in</property>
+                    </column>
+                    <row id="291">
+                        <cell id="292"/>
+                        <cell id="293">
+                            <grid id="294">
+                                <property name="width">100%</property>
+                                <column id="295"/>
+                                <column id="296"/>
+                                <column id="297"/>
+                                <column id="298"/>
+                                <row id="299">
+                                    <cell id="300">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <label id="240">
+                                            <property name="textAlign">right</property>
+                                            <text-property name="text">Página</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="301">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <auto-text id="91">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="302">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <text id="93">
+                                            <property name="textAlign">center</property>
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[de]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="303">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <auto-text id="95">
+                                            <property name="textAlign">right</property>
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="244">
+            <property name="width">100%</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">codigo</property>
+                    <expression name="expression">dataSetRow["codigo"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">descripcion</property>
+                    <expression name="expression">dataSetRow["descripcion"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tipo</property>
+                    <expression name="expression">dataSetRow["tipo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="263">
+                <property name="width">12%</property>
+            </column>
+            <column id="264">
+                <property name="width">80%</property>
+            </column>
+            <column id="265">
+                <property name="width">12%</property>
+            </column>
+            <header>
+                <row id="245">
+                    <property name="textAlign">center</property>
+                    <property name="verticalAlign">middle</property>
+                    <cell id="246">
+                        <property name="backgroundColor">#D0D0D0</property>
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">9pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">2pt</property>
+                        <label id="247">
+                            <property name="fontSize">7pt</property>
+                            <text-property name="text">Tipo Ajuste</text-property>
+                        </label>
+                    </cell>
+                    <cell id="248">
+                        <property name="backgroundColor">#D0D0D0</property>
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">9pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">2pt</property>
+                        <label id="249">
+                            <property name="fontSize">7pt</property>
+                            <text-property name="text">Concepto Ajuste</text-property>
+                        </label>
+                    </cell>
+                    <cell id="250">
+                        <property name="backgroundColor">#D0D0D0</property>
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">9pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">2pt</property>
+                        <label id="251">
+                            <property name="fontSize">7pt</property>
+                            <text-property name="text">Número Ajuste</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="252">
+                    <property name="verticalAlign">middle</property>
+                    <cell id="253">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">9pt</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">2pt</property>
+                        <property name="textAlign">center</property>
+                        <data id="258">
+                            <property name="fontSize">7pt</property>
+                            <property name="resultSetColumn">tipo</property>
+                        </data>
+                    </cell>
+                    <cell id="255">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">9pt</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">2pt</property>
+                        <data id="256">
+                            <property name="fontSize">7pt</property>
+                            <property name="resultSetColumn">descripcion</property>
+                        </data>
+                    </cell>
+                    <cell id="257">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">9pt</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="paddingTop">2pt</property>
+                        <property name="paddingLeft">2pt</property>
+                        <property name="paddingBottom">2pt</property>
+                        <property name="paddingRight">2pt</property>
+                        <property name="textAlign">right</property>
+                        <data id="254">
+                            <property name="fontSize">7pt</property>
+                            <property name="resultSetColumn">codigo</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="259">
+                    <cell id="260">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">9pt</property>
+                    </cell>
+                    <cell id="261">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">9pt</property>
+                    </cell>
+                    <cell id="262">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">9pt</property>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

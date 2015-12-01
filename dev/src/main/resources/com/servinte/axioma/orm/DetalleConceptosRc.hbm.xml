@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetalleConceptosRc" table="detalle_conceptos_rc" schema="tesoreria">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="sequence">
+            	<param name="sequence">tesoreria.seq_detalle_conceptos_rc</param>
+            </generator>
+        </id>
+        <many-to-one name="conceptosIngTesoreria" class="com.servinte.axioma.orm.ConceptosIngTesoreria" fetch="select">
+            <column name="concepto" length="6" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacion" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_id_beneficiario" length="3" />
+        </many-to-one>
+        <many-to-one name="recibosCaja" class="com.servinte.axioma.orm.RecibosCaja" update="false" insert="false" fetch="select">
+            <column name="numero_recibo_caja" length="20" not-null="true" />
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="docSoporte" type="string">
+            <column name="doc_soporte" length="30" />
+        </property>
+        <property name="valor" type="java.lang.Double">
+            <column name="valor" precision="17" scale="17" />
+        </property>
+        <property name="numeroIdBeneficiario" type="string">
+            <column name="numero_id_beneficiario" length="30" />
+        </property>
+        <property name="nombreBeneficiario" type="string">
+            <column name="nombre_beneficiario" length="256" />
+        </property>
+        <property name="deudor" type="java.lang.Integer">
+            <column name="deudor" />
+        </property>
+        <property name="claseDeudorco" type="string">
+            <column name="clase_deudorco" length="4" />
+        </property>
+        <property name="numIdDeudorco" type="string">
+            <column name="num_id_deudorco" length="20" />
+        </property>
+        <property name="instDeudor" type="java.lang.Integer">
+            <column name="inst_deudor" />
+        </property>
+        <property name="ingreso" type="java.lang.Integer">
+            <column name="ingreso" />
+        </property>
+        <property name="codigoPkDeudor" type="java.lang.Integer">
+            <column name="codigo_pk_deudor" />
+        </property>
+ 		<set name="datosFinanciacions" table="datos_financiacion" schema="carterapaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="detalle_concepto_rc" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DatosFinanciacion" />
+        </set>
+    </class>
+</hibernate-mapping>

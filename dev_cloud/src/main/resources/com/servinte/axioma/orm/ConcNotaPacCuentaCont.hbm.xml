@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 9/07/2011 10:50:40 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ConcNotaPacCuentaCont" table="conc_nota_pac_cuenta_cont" schema="tesoreria">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_conc_nota_pac_cue_cont</param>
+			</generator>
+        </id>
+        <many-to-one name="cuentasContables" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="conceptoNotaPaciente" class="com.servinte.axioma.orm.ConceptoNotaPaciente" fetch="select">
+            <column name="concepto_nota_paciente" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresasInstitucion" class="com.servinte.axioma.orm.EmpresasInstitucion" fetch="select">
+            <column name="empresas_institucion" precision="10" scale="0" not-null="false" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

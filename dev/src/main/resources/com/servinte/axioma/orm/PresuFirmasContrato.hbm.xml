@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresuFirmasContrato" table="presu_firmas_contrato" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="presuContratoOdoImp" class="com.servinte.axioma.orm.PresuContratoOdoImp" fetch="select">
+            <column name="cpresu_contrato_odo" precision="12" scale="0" />
+        </many-to-one>
+        <property name="numero" type="int">
+            <column name="numero" not-null="true" />
+        </property>
+        <property name="labelDebajaFirma" type="string">
+            <column name="label_debaja_firma" length="35" />
+        </property>
+        <property name="firmaDigital" type="java.lang.Character">
+            <column name="firma_digital" length="1" />
+        </property>
+        <property name="adjuntoFirma" type="string">
+            <column name="adjunto_firma" length="256" />
+        </property>
+        <property name="empresaInstitucion" type="string">
+            <column name="empresa_institucion" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

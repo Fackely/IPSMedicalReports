@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/06/2011 03:09:16 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutoEntsubSolicitudes" table="auto_entsub_solicitudes" schema="ordenes">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">ordenes.seq_auto_entsub_solicitudes</param>
+			</generator>
+        </id>
+        <many-to-one name="solicitudes" class="com.servinte.axioma.orm.Solicitudes" fetch="select">
+            <column name="numero_solicitud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="migrado" type="char">
+            <column name="migrado" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ParticipacionesPooles" table="participaciones_pooles" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="medicos" class="com.servinte.axioma.orm.Medicos" fetch="select">
+            <column name="medico" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pooles" class="com.servinte.axioma.orm.Pooles" fetch="select">
+            <column name="pool" not-null="true" />
+        </many-to-one>
+        <property name="fechaIngreso" type="date">
+            <column name="fecha_ingreso" length="13" not-null="true" />
+        </property>
+        <property name="horaIngreso" type="time">
+            <column name="hora_ingreso" length="15" not-null="true" />
+        </property>
+        <property name="fechaRetiro" type="date">
+            <column name="fecha_retiro" length="13" />
+        </property>
+        <property name="horaRetiro" type="time">
+            <column name="hora_retiro" length="15" />
+        </property>
+        <property name="porcentajeParticipacion" type="double">
+            <column name="porcentaje_participacion" precision="17" scale="17" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 19, 2010 5:10:54 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Deudores" table="deudores" schema="facturasvarias">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="sequence">
+            	<param name="sequence">facturasvarias.seq_deudores</param>
+            </generator>
+        </id>
+        <many-to-one name="terceros" class="com.servinte.axioma.orm.Terceros" fetch="select">
+            <column name="codigo_tercero" />
+        </many-to-one>
+        <many-to-one name="empresas" class="com.servinte.axioma.orm.Empresas" fetch="select">
+            <column name="codigo_empresa" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacion" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_identificacion" length="3" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="activo" type="java.lang.Character">
+            <column name="activo" length="1" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="256" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="128" />
+        </property>
+        <property name="EMail" type="string">
+            <column name="e_mail" length="128" />
+        </property>
+        <property name="representanteLegal" type="string">
+            <column name="representante_legal" length="128" />
+        </property>
+        <property name="nombreContacto" type="string">
+            <column name="nombre_contacto" length="128" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="6" not-null="true" />
+        </property>
+        <property name="diasVencimientoFac" type="java.lang.Integer">
+            <column name="dias_vencimiento_fac" />
+        </property>
+        <property name="numeroIdentificacion" type="string">
+            <column name="numero_identificacion" length="20" />
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="primer_apellido" length="30" />
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="segundo_apellido" length="30" />
+        </property>
+        <property name="primerNombre" type="string">
+            <column name="primer_nombre" length="30" />
+        </property>
+        <property name="segundoNombre" type="string">
+            <column name="segundo_nombre" length="30" />
+        </property>
+        <property name="esEmpresa" type="string">
+            <column name="es_empresa" length="1" />
+        </property>
+        <set name="detalleConceptosRcs" inverse="true" lazy="true" table="detalle_conceptos_rc" fetch="select">
+            <key>
+                <column name="deudor" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleConceptosRc" />
+        </set>
+        <set name="ventaTarjetaClientes" inverse="true" lazy="true" table="venta_tarjeta_cliente" fetch="select">
+            <key>
+                <column name="deudor" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.VentaTarjetaCliente" />
+        </set>
+        <set name="facturasVariases" inverse="true" lazy="true" table="facturas_varias" fetch="select">
+            <key>
+                <column name="deudor" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.FacturasVarias" />
+        </set>
+    </class>
+</hibernate-mapping>

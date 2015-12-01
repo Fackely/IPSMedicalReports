@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 30, 2010 11:44:22 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ParamResultadosLab" table="param_resultados_lab" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo" not-null="true" />
+        </many-to-one>
+        <property name="etiquetaCampo" type="string">
+            <column name="etiqueta_campo" length="30" not-null="true" />
+        </property>
+        <property name="orden" type="int">
+            <column name="orden" precision="5" scale="0" not-null="true" />
+        </property>
+        <set name="resultadoLaboratorioOrdens" inverse="true" lazy="true" table="resultado_laboratorio_orden" fetch="select">
+            <key>
+                <column name="codigo_campo" precision="5" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ResultadoLaboratorioOrden" />
+        </set>
+        <set name="resultadoLaboratorioRegenfs" inverse="true" lazy="true" table="resultado_laboratorio_regenf" fetch="select">
+            <key>
+                <column name="codigo_campo" precision="5" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ResultadoLaboratorioRegenf" />
+        </set>
+    </class>
+</hibernate-mapping>

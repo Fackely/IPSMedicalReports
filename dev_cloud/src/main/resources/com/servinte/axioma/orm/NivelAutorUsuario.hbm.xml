@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 23, 2010 2:39:34 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NivelAutorUsuario" table="nivel_autor_usuario" schema="capitacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+             <generator class="sequence">
+				<param name="sequence">capitacion.seq_nivel_autor_usuario</param>
+			</generator>
+        </id>
+        <many-to-one name="nivelAutorizacion" class="com.servinte.axioma.orm.NivelAutorizacion" fetch="select">
+            <column name="nivel_autorizacion" not-null="true">
+                <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora de actualizaci&#195;&#179;n o creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <set name="nivelAutorUsuEspecs" inverse="true" lazy="true" table="nivel_autor_usu_espec" fetch="select" cascade="all">
+            <key>
+                <column name="nivel_autor_usuario" not-null="true">
+                    <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorUsuEspec"/>
+        </set>
+        <set name="nivelAutorOcupMedicas" inverse="true" lazy="true" table="nivel_autor_ocup_medica" fetch="select" cascade="all">
+            <key>
+                <column name="nivel_autor_usuario" not-null="true">
+                    <comment>Nivel de autorizaci&#195;&#179;n relacionada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.NivelAutorOcupMedica" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<!--
+El elemento tablas-mantenimiento es la raiz del descriptor de las tablas de mantenimiento
+-->
+<!ELEMENT tablas-mantenimiento (tabla*)>
+<!ELEMENT tabla (nombre,nombre-mostrar,atributos)>
+<!ATTLIST tabla editable (true|false) #IMPLIED >
+<!ATTLIST tabla eliminable (true|false) #IMPLIED >
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT nombre-mostrar (#PCDATA)>
+<!ELEMENT atributos (atributo+)>
+<!ELEMENT atributo (nombre-atributo, alias, depende*)>
+<!ATTLIST atributo editable (true|false) #REQUIRED >
+<!ATTLIST atributo requerido (true|false) #REQUIRED >
+<!ATTLIST atributo booleano (true|false) #IMPLIED >
+<!ELEMENT nombre-atributo (#PCDATA)>
+<!ELEMENT alias (#PCDATA)>
+<!ELEMENT depende EMPTY>
+<!ATTLIST depende tabla CDATA #REQUIRED>
+<!ATTLIST depende columna CDATA #REQUIRED>
+<!ATTLIST depende orden CDATA #IMPLIED>
+<!ATTLIST depende columnaMostrar CDATA #IMPLIED>

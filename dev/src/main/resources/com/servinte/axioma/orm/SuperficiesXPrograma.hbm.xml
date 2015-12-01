@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 10, 2010 11:37:03 AM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.SuperficiesXPrograma" table="superficies_x_programa" schema="odontologia">
+        <comment>Superficies asociadas a un programa de n superficies por hallazgo</comment>
+        <id name="detPlanTratamiento" type="long">
+            <column name="det_plan_tratamiento" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="superficieDental" class="com.servinte.axioma.orm.SuperficieDental" fetch="select">
+            <column name="superficie_dental" precision="131089" scale="0" not-null="true">
+                <comment>Superficie para la cual aplica el programa</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="programasHallazgoPieza" class="com.servinte.axioma.orm.ProgramasHallazgoPieza" fetch="select">
+            <column name="prog_hallazgo_pieza" precision="12" scale="0" not-null="true">
+                <comment>Relaci&#195;&#179;n con el programa por hallazgo seleccionado (encabezado)</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

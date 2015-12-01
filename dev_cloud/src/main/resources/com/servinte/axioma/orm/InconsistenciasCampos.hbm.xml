@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/06/2011 05:10:02 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.InconsistenciasCampos" table="inconsistencias_campos" schema="capitacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_inconsistencias_campos</param>
+			</generator>
+        </id>
+        <many-to-one name="inconsistenSubirPaciente" class="com.servinte.axioma.orm.InconsistenSubirPaciente" fetch="select">
+            <column name="inconsisten_subir_paciente" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="nombreCampo" type="string">
+            <column name="nombre_campo" length="30" />
+        </property>
+        <property name="tipoInconsistencia" type="string">
+            <column name="tipo_inconsistencia" length="5" />
+        </property>
+        <property name="linea" type="java.lang.Integer">
+            <column name="linea" />
+        </property>
+    </class>
+</hibernate-mapping>

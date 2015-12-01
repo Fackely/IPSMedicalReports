@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetServAutorizados" table="det_serv_autorizados" schema="manejopaciente">
+        <id name="consecutivo" type="int">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="pacEntidadesSubcontratadas" class="com.servinte.axioma.orm.PacEntidadesSubcontratadas" fetch="select">
+            <column name="consecutivo_pac_entidades_sub" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByResponsable" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="responsable" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuariosByUsuarioModifica" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="anioConsecutivoPacEntidades" type="string">
+            <column name="anio_consecutivo_pac_entidades" length="4" />
+        </property>
+        <property name="solicitud" type="java.lang.Integer">
+            <column name="solicitud" />
+        </property>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="autorizacion" type="string">
+            <column name="autorizacion" length="15" not-null="true" />
+        </property>
+        <property name="fechaAutorizacion" type="date">
+            <column name="fecha_autorizacion" length="13" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="4000" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" />
+        </property>
+    </class>
+</hibernate-mapping>

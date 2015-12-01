@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+	<!--
+		Document : dwr.xml Created on : May 10, 2010, 9:58 PM Author :
+		Fernando Ocampo Description: Documento configuracion de DWR.
+	-->
+
+<!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN"
+    "http://getahead.org/dwr/dwr20.dtd">
+
+<dwr>
+	<allow>
+		<create creator="new" javascript="Autenticador">
+			<param name="class"
+				value="com.servinte.axioma.vista.autenticacion.AutenticadorView" />
+		</create>
+		<create creator="new" javascript="MotivosCambioServicio">
+			<param name="class"
+				value="com.servinte.axioma.vista.odontologia.MotivosCambioServicioView" />
+		</create>
+		<create creator="new" javascript="BusquedaMontosCobroServicio">
+			<param name="class"
+				value="com.servinte.axioma.servicio.impl.facturacion.BusquedaMontosCobroServicio" />
+		</create>
+		
+		<create creator="new" javascript="ValidacionTipoCobroPacienteServicio">
+			<param name="class"
+				value="com.servinte.axioma.servicio.impl.facturacion.ValidacionTipoCobroPacienteServicio" />
+		</create>
+		<create creator="new" javascript="UtilidadesDWR">
+			<param name="class"
+				value="util.UtilidadesDWR" />
+		</create>
+		
+
+		<convert match="java.lang.Exception" converter="exception">
+			<param name='include' value='message,lineNumber' />
+		</convert>
+		<convert converter="bean" match="com.princetonsa.dto.odontologia.DtoMotivosCambioServicio"/>
+		
+		<convert converter="bean" match="com.princetonsa.dto.facturacion.DtoBusquedaMontosCobro"/>
+		
+		<convert converter="bean" match="com.princetonsa.dto.facturacion.DTOResultadoBusquedaDetalleMontos"/>
+		
+		<convert converter="bean" match="com.servinte.axioma.dto.facturacion.BusquedaMontosCobroDto"/>
+		
+		<convert converter="bean" match="com.princetonsa.dto.facturacion.DtoValidacionTipoCobroPaciente"/>
+		
+		<convert converter="bean" match="util.ResultadoBoolean"/>
+		
+		<convert converter="collection" match="java.util.Collection"/>
+	</allow>
+</dwr>
+

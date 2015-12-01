@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ErroresTarifasEntSub" table="errores_tarifas_ent_sub" schema="facturacion">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tarifasEntidadSub" class="com.servinte.axioma.orm.TarifasEntidadSub" fetch="select">
+            <column name="tarifa_entidad_sub" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="error" type="string">
+            <column name="error" length="512" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

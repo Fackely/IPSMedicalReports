@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 3/06/2011 09:54:54 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EstratosSociales" table="estratos_sociales" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tiposRegimen" class="com.servinte.axioma.orm.TiposRegimen" fetch="select">
+            <column name="tipo_regimen" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="40" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <set name="historicoSubcuentases" table="historico_subcuentas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clasificacion_socioeconomica" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoSubcuentas" />
+        </set>
+        <set name="topesFacturacions" table="topes_facturacion" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="estrato_social" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TopesFacturacion" />
+        </set>
+        <set name="conveniosPacienteses" table="convenios_pacientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="estrato_social" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConveniosPacientes" />
+        </set>
+        <set name="detalleMontos" table="detalle_monto" schema="facturacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="estrato_social_codigo" not-null="true">
+                    <comment>C&#243;digo PK del estrato social del paciente</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleMonto" />
+        </set>
+        <set name="usuarioXConvenios" table="usuario_x_convenio" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clasificacion_socio_economica" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuarioXConvenio" />
+        </set>
+        <set name="usuarioXConvenios_1" table="usuario_x_convenio" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clasificacion_socio_economica" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuarioXConvenio" />
+        </set>
+        <set name="subCuentases" table="sub_cuentas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clasificacion_socioeconomica" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SubCuentas" />
+        </set>
+        <set name="autorizacionesCapitacionSubs" table="autorizaciones_capitacion_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clasificacion_socio_economica" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesCapitacionSub" />
+        </set>
+        <set name="convUsuariosCapitadoses" table="conv_usuarios_capitados" schema="capitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clasificacion_socio_economica" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConvUsuariosCapitados" />
+        </set>
+    </class>
+</hibernate-mapping>

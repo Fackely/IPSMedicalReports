@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 13, 2011 5:41:24 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ProgramasHallazgoPieza" table="programas_hallazgo_pieza" schema="odontologia">
+        <comment>Agrupaci&#195;&#179;n de programas por hallazgo en una misma pieza dental</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="planTratamiento" class="com.servinte.axioma.orm.PlanTratamiento" fetch="select">
+            <column name="plan_tratamiento" precision="12" scale="0" not-null="true">
+                <comment>Plan de tratamiento al cual esta asociado el programa/hallazgo</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="piezaDental" class="com.servinte.axioma.orm.PiezaDental" fetch="select">
+            <column name="pieza_dental">
+                <comment>Pieza Dental a la cual estan asociado los n hallazgos</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="hallazgosOdontologicos" class="com.servinte.axioma.orm.HallazgosOdontologicos" fetch="select">
+            <column name="hallazgo" not-null="true">
+                <comment>Hallazgo Odontol&#195;&#179;gico para el cual se selecciono un Programa</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa" precision="12" scale="0" not-null="true">
+                <comment>Programa Odontol&#195;&#179;gico que aplica para una o varias superficies</comment>
+            </column>
+        </many-to-one>
+        <property name="seccion" type="string">
+            <column name="seccion" length="5" not-null="true">
+                <comment>Seccion para la que aplican los hallazgos seleccionados</comment>
+            </column>
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a</comment>
+            </column>
+        </property>
+        <property name="colorLetra" type="string">
+            <column name="color_letra" length="7" not-null="true">
+                <comment>Color de la letra para diferenciarlo de los dem&#195;&#161;s programas cuando cumplen el mismo hallazgo en la misma pieza</comment>
+            </column>
+        </property>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+        <set name="logServiciosCitaOdos" inverse="true" lazy="true" table="log_servicios_cita_odo" fetch="select">
+            <key>
+                <column name="programa_hallazgo_pieza" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogServiciosCitaOdo" />
+        </set>
+        <one-to-one name="progrContratoEstadoMigrado" class="com.servinte.axioma.orm.ProgrContratoEstadoMigrado"></one-to-one>
+        <set name="serviciosCitaOdontologicas" inverse="true" lazy="true" table="servicios_cita_odontologica" fetch="select">
+            <key>
+                <column name="programa_hallazgo_pieza" precision="12" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ServiciosCitaOdontologica" />
+        </set>
+        <set name="consentimientoInfoOdontos" inverse="true" lazy="true" table="consentimiento_info_odonto" fetch="select">
+            <key>
+                <column name="programa_hallazgo_pieza" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConsentimientoInfoOdonto" />
+        </set>
+        <set name="progServNuevosCitas" inverse="true" lazy="true" table="prog_serv_nuevos_cita" fetch="select">
+            <key>
+                <column name="programa_hallazgo_pieza" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgServNuevosCita" />
+        </set>
+        <set name="superficiesXProgramas" inverse="true" lazy="true" table="superficies_x_programa" fetch="select">
+            <key>
+                <column name="prog_hallazgo_pieza" precision="12" scale="0" not-null="true">
+                    <comment>Relaci&#195;&#179;n con el programa por hallazgo seleccionado (encabezado)</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SuperficiesXPrograma" />
+        </set>
+        <set name="inclusionesPresupuestos" inverse="true" lazy="true" table="inclusiones_presupuesto" fetch="select">
+            <key>
+                <column name="programa_hallazgo_pieza" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InclusionesPresupuesto" />
+        </set>
+        <set name="progServAnterioresCitas" inverse="true" lazy="true" table="prog_serv_anteriores_cita" fetch="select">
+            <key>
+                <column name="programa_hallazgo_pieza" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ProgServAnterioresCita" />
+        </set>
+        <set name="incluProgramaConvenios" inverse="true" lazy="true" table="inclu_programa_convenio" fetch="select">
+            <key>
+                <column name="programa_hallazgo_pieza" precision="12" scale="0" not-null="true">
+                    <comment>Relaci&#195;&#179;n con el registro Programa Hallazgo Pieza</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluProgramaConvenio" />
+        </set>
+    </class>
+</hibernate-mapping>

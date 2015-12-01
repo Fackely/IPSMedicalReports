@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="peticionCirugia" pageWidth="612" pageHeight="792" columnWidth="592" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="1.0000000000000024"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subInformacionPeticion" class="java.lang.String"/>
+	<parameter name="subServicios" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subProfesionales" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subMateriales" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="nit" class="java.lang.String"/>
+	<field name="nombreInstitucion" class="java.lang.String"/>
+	<field name="logoIzquierda" class="java.lang.String"/>
+	<field name="actividadEconomica" class="java.lang.String"/>
+	<field name="centroAtencion" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="paciente" class="java.lang.String"/>
+	<field name="ingreso" class="java.lang.String"/>
+	<field name="cuenta" class="java.lang.String"/>
+	<field name="tipoAfiliado" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="convenio" class="java.lang.String"/>
+	<field name="diagnostico" class="java.lang.String"/>
+	<field name="nroPeticion" class="java.lang.String"/>
+	<field name="fechaHoraPeticion" class="java.lang.String"/>
+	<field name="estadoPeticion" class="java.lang.String"/>
+	<field name="fechaEstimadaCirugia" class="java.lang.String"/>
+	<field name="duracion" class="java.lang.String"/>
+	<field name="urgente" class="java.lang.String"/>
+	<field name="tipoPaciente" class="java.lang.String"/>
+	<field name="tipoAnestecia" class="java.lang.String"/>
+	<field name="requiereUCI" class="java.lang.String"/>
+	<field name="centroAtencionSolicitante" class="java.lang.String"/>
+	<field name="profesionalSolicitante" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="dsServiciosAsociados" class="java.lang.Object"/>
+	<field name="dsProfesionales" class="java.lang.Object"/>
+	<field name="dsMateriales" class="java.lang.Object"/>
+	<field name="usuario" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="266">
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="592" height="117" isPrintInFirstWholeBand="true"/>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="179" y="33" width="413" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box leftPadding="0"/>
+					<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["NIT: ".concat( $F{nit} )]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="179" y="13" width="413" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreInstitucion}]]></textFieldExpression>
+				</textField>
+				<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+					<reportElement key="logoDerecha" x="2" y="17" width="177" height="80">
+						<printWhenExpression><![CDATA[$F{logoIzquierda} != null]]></printWhenExpression>
+					</reportElement>
+					<imageExpression class="java.lang.String"><![CDATA[$F{logoIzquierda}]]></imageExpression>
+				</image>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="179" y="53" width="413" height="16" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$F{actividadEconomica}!=null]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{actividadEconomica}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="179" y="73" width="413" height="16" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$F{centroAtencion}!=null]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{centroAtencion}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="179" y="93" width="413" height="16" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$F{direccion}!=null||$F{telefono}!=null]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[( $F{direccion}!= null && $F{telefono} != null?
+    "Dirección: ".concat($F{direccion}).concat( ", Teléfono: " ).concat( $F{telefono} )
+    :
+    ( $F{direccion} != null && $F{telefono} == null?
+        "Dirección: ".concat($F{direccion})
+        :
+        ( $F{telefono} != null?
+            "Teléfono: ".concat($F{telefono})
+            :
+            ""
+        )
+    )
+)]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="2" y="117" width="590" height="149"/>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="53" y="15" width="537" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{paciente}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="53" y="30" width="84" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ingreso}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="190" y="30" width="100" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{cuenta}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="360" y="30" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoAfiliado}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="493" y="30" width="97" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{categoria}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="53" y="45" width="237" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{convenio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="343" y="45" width="247" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{diagnostico}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="axiomaTexto" x="0" y="15" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Impresión: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaItem" mode="Opaque" x="0" y="0" width="590" height="15" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Información del Paciente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="0" y="30" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ingreso:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="290" y="30" width="70" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo de Afiliado:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="137" y="30" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cuenta:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="440" y="30" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Categoría:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="0" y="45" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Convenio:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="290" y="45" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Diagnóstico:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaItem" mode="Opaque" x="0" y="60" width="588" height="15" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Información de la Cirugía]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="53" y="75" width="137" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nroPeticion}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="53" y="90" width="137" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaEstimadaCirugia}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="290" y="89" width="134" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{duracion}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="477" y="90" width="113" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{urgente}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="78" y="104" width="112" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoPaciente}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="290" y="104" width="134" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoAnestecia}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="477" y="105" width="113" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{requiereUCI}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="190" y="119" width="400" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{centroAtencionSolicitante}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="190" y="134" width="400" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{profesionalSolicitante}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="axiomaTexto" x="0" y="89" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha Estimada Cirugía:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="0" y="104" width="78" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo de Paciente:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="0" y="74" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nro. Petición: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="190" y="89" width="100" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Duración Aproximada:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="190" y="104" width="100" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo de Anestesia:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="190" y="74" width="100" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha y Hora Petición:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="424" y="75" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Estado Petición:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="424" y="105" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Requiere UCI:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="424" y="90" width="53" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Urgente:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="0" y="134" width="190" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Profesional que solicita la cirugía:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="axiomaTexto" x="0" y="119" width="190" height="15"/>
+					<box rightPadding="3"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Centro de Atención Solicitante:]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="290" y="75" width="134" height="14" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaHoraPeticion}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="479" y="192" width="113" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estadoPeticion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="21" splitType="Immediate">
+			<subreport isUsingCache="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="592" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{dsServiciosAsociados}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subServicios}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="22">
+			<subreport isUsingCache="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="592" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{dsProfesionales}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subProfesionales}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="23">
+			<subreport isUsingCache="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="592" height="23" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="observaciones">
+					<subreportParameterExpression><![CDATA[$F{observaciones}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{dsMateriales}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subMateriales}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="26">
+			<textField>
+				<reportElement style="axiomaTexto" x="468" y="10" width="77" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="axiomaTexto" x="545" y="10" width="26" height="15"/>
+				<box leftPadding="1"/>
+				<textElement textAlignment="Left">
+					<font size="7" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="axiomaTexto" mode="Transparent" x="11" y="10" width="53" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Left" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Impresión: ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="usuario" style="axiomaTexto" x="179" y="10" width="218" height="16" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuario}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+				<reportElement style="axiomaTexto" mode="Transparent" x="64" y="10" width="87" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

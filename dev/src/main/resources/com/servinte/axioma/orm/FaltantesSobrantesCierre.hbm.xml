@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 21, 2010 11:07:50 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FaltantesSobrantesCierre" table="faltantes_sobrantes_cierre" schema="tesoreria">
+        <composite-id name="id" class="com.servinte.axioma.orm.FaltantesSobrantesCierreId">
+            <key-property name="movimientoCaja" type="java.lang.Long">
+                <column name="movimiento_caja" precision="10" scale="0" />
+            </key-property>
+            <key-property name="faltanteSobrante" type="java.lang.Long">
+                <column name="faltante_sobrante" precision="10" scale="0" />
+            </key-property>
+            <key-property name="cierre" type="java.lang.Long">
+                <column name="cierre" precision="10" scale="0" />
+            </key-property>
+            <key-property name="valorDiferencia" type="big_decimal">
+                <column name="valor_diferencia" precision="14" />
+            </key-property>
+            <key-property name="tipoDiferencia" type="string">
+                <column name="tipo_diferencia" length="2" />
+            </key-property>
+            <key-property name="codigoFormaPago" type="java.lang.Integer">
+                <column name="codigo_forma_pago" />
+            </key-property>
+            <key-property name="formaPago" type="string">
+                <column name="forma_pago" length="256" />
+            </key-property>
+            <key-property name="tipoDetalleFormaPago" type="java.lang.Integer">
+                <column name="tipo_detalle_forma_pago" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

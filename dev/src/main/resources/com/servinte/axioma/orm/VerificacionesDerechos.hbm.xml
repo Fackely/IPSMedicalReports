@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.VerificacionesDerechos" table="verificaciones_derechos" schema="manejopaciente">
+        <composite-id name="id" class="com.servinte.axioma.orm.VerificacionesDerechosId">
+            <key-property name="ingreso" type="int">
+                <column name="ingreso" />
+            </key-property>
+            <key-property name="convenio" type="int">
+                <column name="convenio" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" update="false" insert="false" fetch="select">
+            <column name="ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="subCuentas" class="com.servinte.axioma.orm.SubCuentas" fetch="select">
+            <column name="sub_cuenta" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" update="false" insert="false" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="tipoVerificacion" type="string">
+            <column name="tipo_verificacion" length="4" not-null="true" />
+        </property>
+        <property name="numeroVerificacion" type="string">
+            <column name="numero_verificacion" length="64" />
+        </property>
+        <property name="personaSolicita" type="string">
+            <column name="persona_solicita" length="130" not-null="true" />
+        </property>
+        <property name="fechaSolicitud" type="date">
+            <column name="fecha_solicitud" length="13" not-null="true" />
+        </property>
+        <property name="horaSolicitud" type="string">
+            <column name="hora_solicitud" length="5" not-null="true" />
+        </property>
+        <property name="personaContactada" type="string">
+            <column name="persona_contactada" length="128" />
+        </property>
+        <property name="fechaVerificacion" type="date">
+            <column name="fecha_verificacion" length="13" not-null="true" />
+        </property>
+        <property name="horaVerificacion" type="string">
+            <column name="hora_verificacion" length="5" not-null="true" />
+        </property>
+        <property name="porcentajeCobertura" type="big_decimal">
+            <column name="porcentaje_cobertura" precision="5" />
+        </property>
+        <property name="cuotaVerificacion" type="big_decimal">
+            <column name="cuota_verificacion" precision="14" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

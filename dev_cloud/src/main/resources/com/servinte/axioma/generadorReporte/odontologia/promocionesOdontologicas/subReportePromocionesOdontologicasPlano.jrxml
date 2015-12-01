@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReportePromocionesOdontologicasPlano" language="groovy" pageWidth="2422" pageHeight="612" orientation="Landscape" columnWidth="2422" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<field name="nombrePromocion" class="java.lang.String"/>
+	<field name="fechaModificaCadena" class="java.lang.String"/>
+	<field name="horaModifica" class="java.lang.String"/>
+	<field name="loginUsuario" class="java.lang.String"/>
+	<field name="estadoPromocion" class="java.lang.String"/>
+	<field name="fechaIniVigencia" class="java.util.Date"/>
+	<field name="fechaFinVigencia" class="java.util.Date"/>
+	<field name="horaIniVigencia" class="java.lang.String"/>
+	<field name="horaFinVigencia" class="java.lang.String"/>
+	<field name="ayudantePorcentajeDescuento" class="java.lang.String"/>
+	<field name="ayudanteValorDescuento" class="java.lang.String"/>
+	<field name="ayudantePorcentajeHonorario" class="java.lang.String"/>
+	<field name="ayudanteValorHonorario" class="java.lang.String"/>
+	<field name="region" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<field name="categoriaAtencion" class="java.lang.String"/>
+	<field name="centroAtencion" class="java.lang.String"/>
+	<field name="nombreConvenio" class="java.lang.String"/>
+	<field name="codigoPrograma" class="java.lang.String"/>
+	<field name="edadInicial" class="java.lang.Integer"/>
+	<field name="edadFinal" class="java.lang.Integer"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="estadoCivil" class="java.lang.String"/>
+	<field name="nroHijos" class="java.lang.Integer"/>
+	<field name="ocupacion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement key="descripcionCentroAtencion" style="axiomaTexto" mode="Transparent" x="107" y="0" width="106" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fechaModificaCadena}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement key="nombreEspecialidad" style="axiomaTexto" positionType="Float" mode="Transparent" x="533" y="0" width="98" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaIniVigencia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement key="nombreUnidadAgenda" style="axiomaTexto" positionType="Float" mode="Transparent" x="630" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaFinVigencia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="descripcionEmpresaInstitucion" style="axiomaTexto" mode="Transparent" x="0" y="0" width="108" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrePromocion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="descripcionCiudad" style="axiomaTexto" mode="Transparent" x="212" y="0" width="108" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{horaModifica}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="descripcionRegionCobertura" style="axiomaTexto" mode="Transparent" x="426" y="0" width="108" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estadoPromocion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="acronimoIdentificacion" style="axiomaTexto" positionType="Float" mode="Transparent" x="1034" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteValorDescuento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="identificacionPaciente" style="axiomaTexto" positionType="Float" mode="Transparent" x="1135" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudantePorcentajeHonorario}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="primerApellidoPaciente" style="axiomaTexto" positionType="Float" mode="Transparent" x="1236" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudanteValorHonorario}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="segundoApellidoPaciente" style="axiomaTexto" positionType="Float" mode="Transparent" x="1337" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{region}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="primerNombrePaciente" style="axiomaTexto" positionType="Float" mode="Transparent" x="1438" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ciudad}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="segundoNombrePaciente" style="axiomaTexto" positionType="Float" mode="Transparent" x="1539" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{categoriaAtencion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="fechaAsignacionPlano" style="axiomaTexto" positionType="Float" mode="Transparent" x="1640" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{centroAtencion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="horaAsignacion" style="axiomaTexto" positionType="Float" mode="Transparent" x="1741" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreConvenio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" positionType="Float" mode="Transparent" x="1916" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{edadFinal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="loginUsuarioAsigno" style="axiomaTexto" positionType="Float" mode="Transparent" x="1842" y="0" width="38" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoPrograma}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" positionType="Float" mode="Transparent" x="1879" y="0" width="38" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{edadInicial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="fechaCitaPlano" style="axiomaTexto" positionType="Float" mode="Transparent" x="731" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{horaIniVigencia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="horaCita" style="axiomaTexto" positionType="Float" mode="Transparent" x="832" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{horaFinVigencia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="tipoCita" style="axiomaTexto" positionType="Float" mode="Transparent" x="933" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ayudantePorcentajeDescuento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="fechaConfirmacionPlano" style="axiomaTexto" positionType="Float" mode="Transparent" x="2017" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="horaConfirmacion" style="axiomaTexto" positionType="Float" mode="Transparent" x="2118" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estadoCivil}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" positionType="Float" mode="Transparent" x="2219" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{nroHijos}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="axiomaTexto" positionType="Float" mode="Transparent" x="2320" y="0" width="102" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ocupacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="descripcionCiudad" style="axiomaTexto" mode="Transparent" x="319" y="0" width="108" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{loginUsuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

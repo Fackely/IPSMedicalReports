@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/02/2013 04:42:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EntregaAutorizacion" table="entrega_autorizacion" schema="manejopaciente">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="sequence" >
+				<param name="sequence">manejopaciente.seq_entrega_autorizacion</param>
+			</generator>
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_entrega" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="autorizacion_ent_sub" not-null="true" />
+        </many-to-one>
+        <property name="fechaEntrega" type="date">
+            <column name="fecha_entrega" length="13" not-null="true" />
+        </property>
+        <property name="horaEntrega" type="string">
+            <column name="hora_entrega" length="5" not-null="true" />
+        </property>
+        <property name="personaRecibe" type="string">
+            <column name="persona_recibe" length="200" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="500" />
+        </property>
+    </class>
+</hibernate-mapping>

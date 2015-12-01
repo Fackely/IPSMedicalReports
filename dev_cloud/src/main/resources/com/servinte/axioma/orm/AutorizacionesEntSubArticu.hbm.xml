@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 25, 2011 12:12:09 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutorizacionesEntSubArticu" table="autorizaciones_ent_sub_articu" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">manejopaciente.seq_auto_ent_sub_articulo</param>
+			</generator>
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato_convenio" />
+        </many-to-one>
+        <many-to-one name="unidosisXArticulo" class="com.servinte.axioma.orm.UnidosisXArticulo" fetch="select" cascade="all" >
+            <column name="unidosis_articulo" precision="10" scale="0"/>
+        </many-to-one>
+        <many-to-one name="nivelAutorizacion" class="com.servinte.axioma.orm.NivelAutorizacion" fetch="select">
+            <column name="nivel_autorizacion" />
+        </many-to-one>
+        <many-to-one name="articulo" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="articulo" not-null="true">
+                <comment>C&#195;&#179;digo del medicamento o insumo relacionado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo de la autorizaci&#195;&#179;n de entidad subcontratada</comment>
+            </column>
+        </many-to-one>
+        <property name="dosis" type="string">
+            <column name="dosis" length="4000">
+                <comment>Dosis de la fornulaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="frecuencia" type="java.lang.Integer">
+            <column name="frecuencia">
+                <comment>Frecuencia del medicamento o insumo relacionado</comment>
+            </column>
+        </property>
+        <property name="diasTratamiento" type="java.lang.Long">
+            <column name="dias_tratamiento" precision="10" scale="0">
+                <comment>D&#195;&#173;as de tratamiento del medicamento o insumo relacionado</comment>
+            </column>
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="via" type="string">
+            <column name="via" length="4000" />
+        </property>
+        <property name="nroDosisTotal" type="java.lang.Integer">
+            <column name="nro_dosis_total" precision="8" scale="0">
+                <comment>Cantidad solicitada del medicamento o insumo relacionado</comment>
+            </column>
+        </property>
+        <property name="valorTarifa" type="big_decimal">
+            <column name="valor_tarifa" />
+        </property>
+        <property name="tipoFrecuencia" type="string">
+            <column name="tipo_frecuencia" length="256">
+                <comment>Tipo de Frecuencia del medicamento o insumo relacionado</comment>
+            </column>
+        </property>
+        <set name="autorizacionArticuloDespachos" inverse="true" lazy="true" table="autorizacion_articulo_despacho" fetch="select">
+            <key>
+                <column name="autorizacion_ent_sub_articu" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionArticuloDespacho" />
+        </set>
+    </class>
+</hibernate-mapping>

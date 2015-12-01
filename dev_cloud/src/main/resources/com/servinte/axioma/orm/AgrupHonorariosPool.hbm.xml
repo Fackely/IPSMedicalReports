@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AgrupHonorariosPool" table="agrup_honorarios_pool" schema="facturacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuentasContablesByCuentaContableHonorario" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable_honorario" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="honorariosPool" class="com.servinte.axioma.orm.HonorariosPool" fetch="select">
+            <column name="honorario_pool" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposServicio" class="com.servinte.axioma.orm.TiposServicio" fetch="select">
+            <column name="tipo_servicio" length="1" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCueContInstVigAnterior" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cue_cont_inst_vig_anterior" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuentasContablesByCuentaContableIns" class="com.servinte.axioma.orm.CuentasContables" fetch="select">
+            <column name="cuenta_contable_ins" precision="10" scale="0" />
+        </many-to-one>
+        <property name="grupoServicio" type="java.lang.Integer">
+            <column name="grupo_servicio" />
+        </property>
+        <property name="porcentajeParticipacion" type="java.lang.Double">
+            <column name="porcentaje_participacion" precision="17" scale="17" />
+        </property>
+        <property name="valorParticipacion" type="big_decimal">
+            <column name="valor_participacion" precision="14" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

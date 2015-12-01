@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/07/2011 03:06:44 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EvolDiagnosticos" table="evol_diagnosticos" schema="historiaclinica">
+        <composite-id name="id" class="com.servinte.axioma.orm.EvolDiagnosticosId">
+            <key-property name="evolucion" type="int">
+                <column name="evolucion" />
+            </key-property>
+            <key-property name="acronimoDiagnostico" type="string">
+                <column name="acronimo_diagnostico" length="10" />
+            </key-property>
+            <key-property name="tipoCieDiagnostico" type="int">
+                <column name="tipo_cie_diagnostico" />
+            </key-property>
+            <key-property name="principal" type="boolean" >
+                <column name="principal" not-null="true" />
+            </key-property>
+            <key-property name="definitivo" type="boolean">
+                <column name="definitivo" not-null="true" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="diagnosticos" class="com.servinte.axioma.orm.Diagnosticos" update="false" insert="false" fetch="select">
+            <column name="acronimo_diagnostico" length="10" not-null="true" />
+            <column name="tipo_cie_diagnostico" not-null="true" />
+        </many-to-one>
+        <many-to-one name="evoluciones" class="com.servinte.axioma.orm.Evoluciones" update="false" insert="false" fetch="select">
+            <column name="evolucion" not-null="true" />
+        </many-to-one>
+        <property name="numero" type="int">
+            <column name="numero" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

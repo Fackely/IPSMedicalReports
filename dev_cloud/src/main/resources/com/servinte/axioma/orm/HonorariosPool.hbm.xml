@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HonorariosPool" table="honorarios_pool" schema="facturacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="esquemasTarifarios" class="com.servinte.axioma.orm.EsquemasTarifarios" fetch="select">
+            <column name="esquema_tarifario" />
+        </many-to-one>
+        <many-to-one name="pooles" class="com.servinte.axioma.orm.Pooles" fetch="select">
+            <column name="pool" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" />
+        </many-to-one>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="centroAtencion" type="java.lang.Integer">
+            <column name="centro_atencion" />
+        </property>
+        <property name="esConvenio" type="string">
+            <column name="es_convenio" length="1" />
+        </property>
+        <set name="agrupHonorariosPools" inverse="true" lazy="true" table="agrup_honorarios_pool" fetch="select">
+            <key>
+                <column name="honorario_pool" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AgrupHonorariosPool" />
+        </set>
+        <set name="honorariosPoolServs" inverse="true" lazy="true" table="honorarios_pool_serv" fetch="select">
+            <key>
+                <column name="honorario_pool" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HonorariosPoolServ" />
+        </set>
+    </class>
+</hibernate-mapping>

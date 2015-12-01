@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ViewTarifasInv" table="view_tarifas_inv" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.ViewTarifasInvId">
+            <key-property name="valorTarifa" type="java.lang.Double">
+                <column name="valor_tarifa" precision="17" scale="17" />
+            </key-property>
+            <key-property name="articulo" type="java.lang.Integer">
+                <column name="articulo" />
+            </key-property>
+            <key-property name="esquemaTarifario" type="java.lang.Integer">
+                <column name="esquema_tarifario" />
+            </key-property>
+            <key-property name="fechaVigencia" type="date">
+                <column name="fecha_vigencia" length="13" />
+            </key-property>
+            <key-property name="tipoTarifa" type="string">
+                <column name="tipo_tarifa" length="6" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

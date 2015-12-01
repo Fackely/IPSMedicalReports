@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subrptCentrosAtencion" pageWidth="732" pageHeight="62" orientation="Landscape" columnWidth="732" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["/home/axioma/contextos/axioma/src/com/servinte/axioma/generadorReporte/estilos/estiloReportes.jrtx"]]></template>
+	<parameter name="subrptEspecialidades" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptCitasConCancelacion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptServicios" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptCitasSinCancelacion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subrptCitasOdontoResumido" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="descripcionCentroAtencion" class="java.lang.String"/>
+	<field name="descripcionCiudadCA" class="java.lang.String"/>
+	<field name="descripcionPais" class="java.lang.String"/>
+	<field name="descripcionRegionCA" class="java.lang.String"/>
+	<field name="consecutivoCentroAtencion" class="java.lang.Integer"/>
+	<field name="dsEspecialidades" class="java.lang.Object"/>
+	<group name="CentroAtencion" minHeightToStartNewPage="25">
+		<groupExpression><![CDATA[$F{consecutivoCentroAtencion}]]></groupExpression>
+		<groupHeader>
+			<band height="15" splitType="Stretch">
+				<frame>
+					<reportElement style="colorEncabezado" mode="Transparent" x="0" y="0" width="732" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+						<topPen lineWidth="1.0" lineStyle="Solid"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<rectangle radius="2">
+						<reportElement mode="Opaque" x="0" y="0" width="732" height="15" backcolor="#CCCCCC"/>
+						<graphicElement>
+							<pen lineWidth="1.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionCentroAtencion" style="axiomaTexto" x="110" y="3" width="100" height="12"/>
+						<box topPadding="1"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionCentroAtencion} + " - "]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionCiudad" style="axiomaTexto" x="210" y="3" width="100" height="12"/>
+						<box topPadding="1"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionCiudadCA}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionPais" style="axiomaTexto" x="310" y="3" width="100" height="12"/>
+						<box topPadding="1"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA["( "+$F{descripcionPais}+" )   -  "]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="descripcionRegionCA" style="axiomaTexto" x="450" y="3" width="120" height="12"/>
+						<box topPadding="1"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionRegionCA}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="axiomaItem" x="0" y="3" width="110" height="12"/>
+						<box topPadding="1" leftPadding="5"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Centro de Atención:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="axiomaItem" x="410" y="3" width="40" height="12" isRemoveLineWhenBlank="true"/>
+						<box topPadding="1"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Región:]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="10">
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<subreport isUsingCache="true" runToBottom="false">
+					<reportElement key="subrptEspecialidades" stretchType="RelativeToBandHeight" x="0" y="0" width="732" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="subrptCitasOdontoResumido">
+						<subreportParameterExpression><![CDATA[$P{subrptCitasOdontoResumido}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subrptServicios">
+						<subreportParameterExpression><![CDATA[$P{subrptServicios}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subrptCitasConCancelacion">
+						<subreportParameterExpression><![CDATA[$P{subrptCitasConCancelacion}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subrptCitasSinCancelacion">
+						<subreportParameterExpression><![CDATA[$P{subrptCitasSinCancelacion}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$F{dsEspecialidades}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subrptEspecialidades}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportePacientesPoliconsultadoresPlano" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="7.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1547"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/axioma/contextos/ipsm_main_qa/src/main/java/com/servinte/axioma/generadorReporte/manejoPaciente/pacientesPoliconsultadores/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subReportePaciente" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="fechaInicial" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.lang.String"/>
+	<field name="convenio" class="java.lang.String"/>
+	<field name="paciente" class="java.lang.String"/>
+	<field name="cantidadIngresos" class="java.lang.String"/>
+	<field name="nombreViasIngreso" class="java.lang.String"/>
+	<field name="tipoServicio" class="java.lang.String"/>
+	<field name="nombreUnidadAgenda" class="java.lang.String"/>
+	<field name="nombreEspecialidad" class="java.lang.String"/>
+	<field name="cantidadServicios" class="java.lang.String"/>
+	<field name="JRDPacientes" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="212" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="165" width="64" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Convenio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="165" width="51" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="115" y="165" width="65" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Identificacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="165" width="53" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad de Ingresos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="233" y="165" width="55" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Via de ingreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="165" width="57" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="165" width="80" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especialidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="165" width="77" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad Agenda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="502" y="165" width="53" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad Servicios Facturados]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" stretchType="RelativeToTallestObject" x="0" y="150" width="555" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true">
+					<printWhenExpression><![CDATA[$F{fechaInicial}!=null && $F{fechaFinal}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[!$F{cantidadServicios}.equals("") ? ("Rangos de fechas: " + $F{fechaInicial} + " - " + $F{fechaFinal}):""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" stretchType="RelativeToTallestObject" x="0" y="14" width="555" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Reporte: Identificar Pacientes Policonsultadores"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="0" y="30" width="555" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Número de Identificación: " + ($F{paciente}==null ||$F{paciente}.equals("")  ?"Todos":$F{paciente})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="0" y="50" width="555" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Cantidad Mínima de Servicios Facturados: " +($F{cantidadServicios}==null ||$F{cantidadServicios}.equals("") ?"Todos":$F{cantidadServicios})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="0" y="70" width="555" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Convenio: " + ($F{convenio}==null ||$F{convenio}.equals("")?"Todos":$F{convenio})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="0" y="90" width="555" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Vía de Ingreso: " + ($F{nombreViasIngreso}==null  ||$F{nombreViasIngreso}.equals("") ?"Todos":$F{nombreViasIngreso})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="0" y="110" width="555" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Tipo de Servicio: " +($F{tipoServicio}==null ||$F{tipoServicio}.equals("") ?"Todos":$F{tipoServicio})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="0" y="130" width="555" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Especialidad: " +($F{nombreEspecialidad}==null ||$F{nombreEspecialidad}.equals("") ?"Todos":$F{nombreEspecialidad})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="38" splitType="Stretch">
+			<subreport>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="37" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="subReportePaciente">
+					<subreportParameterExpression><![CDATA[$P{subReportePaciente}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{JRDPacientes}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReportePaciente}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

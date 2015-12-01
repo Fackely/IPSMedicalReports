@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 29, 2010 6:07:08 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.AutorizacionesEntSubServi" table="autorizaciones_ent_sub_servi" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence">
+				<param name="sequence">manejopaciente.seq_auto_ent_sub_servi</param>
+			</generator>
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato_convenio" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true">
+                <comment>C&#195;&#179;digo del servicio relacionado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="finalidadesServicio" class="com.servinte.axioma.orm.FinalidadesServicio" fetch="select">
+            <column name="finalidad">
+                <comment>Determina la finalidad del servicio relacionado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="nivelAutorizacion" class="com.servinte.axioma.orm.NivelAutorizacion" fetch="select">
+            <column name="nivel_autorizacion" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo de la autorizaci&#195;&#179;n de entidad subcontratada</comment>
+            </column>
+        </many-to-one>
+        <property name="urgente" type="java.lang.Character">
+            <column name="urgente" length="1">
+                <comment>Determina si la autorizaci&#195;&#179;n es de caracter urgente</comment>
+            </column>
+        </property>
+        <property name="valorTarifa" type="big_decimal">
+            <column name="valor_tarifa" />
+        </property>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

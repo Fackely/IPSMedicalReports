@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/06/2011 05:10:02 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogSubirPacientes" table="log_subir_pacientes" schema="capitacion">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_log_subir_pacientes</param>
+			</generator>
+        </id>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposCargue" class="com.servinte.axioma.orm.TiposCargue" fetch="select">
+            <column name="tipo_cargue" precision="1" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <property name="fechaCargue" type="date">
+            <column name="fecha_cargue" length="13" not-null="true" />
+        </property>
+        <property name="totalLeidos" type="long">
+            <column name="total_leidos" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="totalGrabados" type="long">
+            <column name="total_grabados" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="fechaInicio" type="date">
+            <column name="fecha_inicio" length="13" />
+        </property>
+        <property name="fechaFin" type="date">
+            <column name="fecha_fin" length="13" />
+        </property>
+        <property name="horaCargue" type="string">
+            <column name="hora_cargue" length="5" />
+        </property>
+        <set name="inconsistenSubirPacientes" table="inconsisten_subir_paciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="log_subir_paciente" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InconsistenSubirPaciente" />
+        </set>
+    </class>
+</hibernate-mapping>

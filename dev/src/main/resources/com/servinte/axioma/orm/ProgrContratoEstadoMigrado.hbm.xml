@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 13, 2011 5:41:24 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ProgrContratoEstadoMigrado" table="progr_contrato_estado_migrado" schema="odontologia">
+        <comment>N&#195;&#186;mero de Contrato y Convenio para programas migrados</comment>
+        <id name="programaHallazgoPieza" type="long">
+            <column name="programa_hallazgo_pieza" precision="12" scale="0" />
+            <generator class="foreign">
+                <param name="property">programasHallazgoPieza</param>
+            </generator>
+        </id>
+        <one-to-one name="programasHallazgoPieza" class="com.servinte.axioma.orm.ProgramasHallazgoPieza" constrained="true"></one-to-one>
+        <property name="contrato" type="string">
+            <column name="contrato" length="10" not-null="true">
+                <comment>N&#195;&#186;mero de contrato con el que se ten&#195;&#173;a contratado el programa</comment>
+            </column>
+        </property>
+        <property name="estadoContrato" type="string">
+            <column name="estado_contrato" length="12" not-null="true">
+                <comment>Estado del contrato en el sistema migrado</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

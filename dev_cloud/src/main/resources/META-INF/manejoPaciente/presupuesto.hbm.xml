@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<query name="presupuesto.consultarGrupoServicioAut">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.ValorGruposServicioPacienteDto(
+		gserv.descripcion,  COALESCE(sum(auess.cantidad),0) , sum(COALESCE(auess.valorTarifa,0)*auess.cantidad)
+		)
+			FROM 	AutorizacionesCapitacionSub aucs
+			INNER JOIN aucs.autorizacionesEntidadesSub aues
+			INNER JOIN aues.pacientes pac
+			INNER JOIN aues.autorizacionesEntSubServis auess	
+			INNER JOIN pac.personas pe
+			INNER JOIN auess.servicios serv
+			INNER JOIN serv.gruposServicios gserv
+			
+			WHERE pe.codigo =:codigoPaciente
+			AND aues.estado LIKE 'AUTOR'
+			AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal		
+			GROUP BY gserv.descripcion
+
+
+	</query>
+		<query name="presupuesto.consultarGrupoServicioFac">
+	    SELECT NEW  com.servinte.axioma.dto.manejoPaciente.ValorGruposServicioPacienteDto(
+		gserv.descripcion, COALESCE(sum(detc.cantidadCargada),0), COALESCE(sum(detc.valorTotalCargado),0)
+		)
+			FROM 	AutorizacionesCapitacionSub aucs
+			INNER JOIN aucs.autorizacionesEntidadesSub aues
+			INNER JOIN aues.pacientes pac
+			INNER JOIN aues.autorizacionesEntSubServis auess	
+			INNER JOIN pac.personas pe
+			INNER JOIN auess.servicios serv
+			INNER JOIN serv.gruposServicios gserv
+			INNER JOIN aues.autoEntsubSolicitudeses ausol
+			INNER JOIN ausol.solicitudes sol
+			INNER JOIN sol.detCargoses detc
+			
+			WHERE pe.codigo =:codigoPaciente
+			     AND aues.estado LIKE 'AUTOR'
+			     AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal
+			     AND detc.facturado LIKE 'S'
+				GROUP BY gserv.descripcion
+	</query>
+
+		<query name="presupuesto.consultarCantidadAutorizaciones">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.CantidadAutorizacionesPacienteDto(
+		count(DISTINCT aues.consecutivo)	)
+			FROM  AutorizacionesCapitacionSub aucs
+			INNER JOIN aucs.autorizacionesEntidadesSub aues
+			INNER jOIN aues.pacientes pac			
+			
+			WHERE pac.codigoPaciente =:codigoPaciente
+			AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal
+			     AND aues.estado LIKE 'AUTOR'
+			     			
+		 
+
+	</query>
+		<query name="presupuesto.consultarCantidadIngresos">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.CantidadAutorizacionesPacienteDto(
+		count(ing.consecutivo))
+			FROM Ingresos ing
+		    INNER JOIN ing.subCuentases sub
+		    INNER jOIN sub.pacientes pac
+							
+			WHERE pac.codigoPaciente =:codigoPaciente
+			AND ing.fechaIngreso BETWEEN :fechaInicial AND :fechaFinal
+	</query>
+	
+	<query name="presupuesto.consultarCantidadIngresosXAut">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.CantidadAutorizacionesPacienteDto(
+		count(DISTINCT ing.consecutivo))
+			FROM  AutorizacionesCapitacionSub aucs
+			INNER JOIN aucs.autorizacionesEntidadesSub aues
+			INNER jOIN aues.pacientes pac		
+		    INNER JOIN pac.subCuentases sub
+		    INNER jOIN sub.ingresos ing
+		   							
+			WHERE pac.codigoPaciente =:codigoPaciente
+			AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal
+			AND aues.estado LIKE 'AUTOR'
+	</query>
+	
+	
+		<query name="presupuesto.consultarCantidadIngresosConAut">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.CantidadAutorizacionesPacienteDto(
+		count(DISTINCT ing.consecutivo))
+			FROM  AutorizacionesCapitacionSub aucs
+			INNER JOIN aucs.autorizacionesEntidadesSub aues
+			INNER jOIN aues.pacientes pac		
+		    INNER JOIN pac.subCuentases sub
+		    INNER jOIN sub.ingresos ing
+		   							
+			WHERE pac.codigoPaciente =:codigoPaciente
+			AND ing.fechaIngreso BETWEEN :fechaInicial AND :fechaFinal
+			AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal
+			AND aues.estado LIKE 'AUTOR'
+				
+	</query>
+	
+	<query name="presupuesto.consultarCantidadIngresosEst">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.CantidadAutorizacionesPacienteDto(
+		count(ing.id))
+			FROM IngresosEstancia ing
+		    INNER JOIN ing.pacientes pac
+							
+			WHERE pac.codigoPaciente =:codigoPaciente
+			AND ing.fechaAdmision BETWEEN :fechaInicial AND :fechaFinal
+	</query>
+		
+		<query name="presupuesto.consultarValoresAutServ">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.AutorizacionsSubServDto(
+		aues.consecutivo, gserv.descripcion, COALESCE(auess.cantidad,0), COALESCE(auess.valorTarifa,0)*auess.cantidad, gserv.codigo)
+		    FROM 	AutorizacionesCapitacionSub aucs
+			INNER JOIN aucs.autorizacionesEntidadesSub aues
+			INNER JOIN aues.pacientes pac
+			INNER JOIN aues.autorizacionesEntSubServis auess	
+			INNER JOIN pac.personas pe
+			INNER JOIN auess.servicios serv
+			INNER JOIN serv.gruposServicios gserv
+
+			
+			
+		    WHERE pe.codigo =:codigoPaciente
+			AND aues.estado LIKE 'AUTOR'
+			AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal	
+			ORDER BY gserv.descripcion
+		
+	</query>
+	
+	<query name="presupuesto.consultarValoresAutServF">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.AutorizacionsSubServDto(
+		aues.consecutivo, gserv.descripcion, COALESCE(auess.cantidad,0), COALESCE(auess.valorTarifa,0)*auess.cantidad, gserv.codigo)
+		    FROM 	AutorizacionesCapitacionSub aucs
+			INNER JOIN aucs.autorizacionesEntidadesSub aues
+			INNER JOIN aues.pacientes pac
+			INNER JOIN aues.autorizacionesEntSubServis auess	
+			INNER JOIN pac.personas pe
+			INNER JOIN auess.servicios serv
+			INNER JOIN serv.gruposServicios gserv
+			INNER JOIN aues.autoEntsubSolicitudeses ausol
+			INNER JOIN ausol.solicitudes sol
+			INNER JOIN sol.detCargoses detc
+
+			
+			
+			WHERE pe.codigo =:codigoPaciente
+			AND aues.estado LIKE 'AUTOR'
+			AND detc.facturado LIKE 'S'
+			AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal	
+			ORDER BY gserv.descripcion
+	</query>
+	
+		<query name="presupuesto.consultarAutorizacionesDiagnosticoSol">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.AutorizacionsSubServDto(
+		aues.consecutivo, diag.id.acronimo, diag.id.tipoCie, diag.nombre)
+	    FROM 	AutorizacionesCapitacionSub aucs
+	    INNER JOIN aucs.autorizacionesEntidadesSub aues
+	    INNER JOIN aues.autoEntsubSolicitudeses ausol
+	    INNER JOIN ausol.solicitudes sol
+	    INNER JOIN sol.diagnosticos diag
+	    INNER JOIN aues.pacientes pac
+	    INNER JOIN pac.personas pe
+	    
+	    WHERE pe.codigo =:codigoPaciente
+	    AND aues.estado LIKE 'AUTOR'
+	    AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal	
+	     
+		</query>
+		<query name="presupuesto.consultarAutorizacionesDiagnosticoOrd">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.AutorizacionsSubServDto(
+		aues.consecutivo, diag.id.acronimo, diag.id.tipoCie, diag.nombre)
+	    FROM 	AutorizacionesCapitacionSub aucs
+	    INNER JOIN aucs.autorizacionesEntidadesSub aues
+	    INNER JOIN aues.autoEntsubOrdenambulas auoa
+	    INNER JOIN auoa.ordenesAmbulatorias oa
+	    INNER JOIN oa.diagnosticos diag
+	    INNER JOIN aues.pacientes pac
+	    INNER JOIN pac.personas pe
+	    
+	    WHERE pe.codigo =:codigoPaciente
+	    AND aues.estado LIKE 'AUTOR'
+	    AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal	
+	    </query>
+	    <query name="presupuesto.consultarAutorizacionesViaIngresoSol">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.AutorizacionsSubServDto(
+		aues.consecutivo, via.codigo)
+	    FROM 	AutorizacionesCapitacionSub aucs
+	    INNER JOIN aucs.autorizacionesEntidadesSub aues
+	    INNER JOIN aues.autoEntsubSolicitudeses ausol
+	    INNER JOIN ausol.solicitudes sol
+	    INNER JOIN sol.cuentas cu
+	    INNER JOIN cu.viasIngreso via
+	    INNER JOIN aues.pacientes pac
+	    INNER JOIN pac.personas pe
+	    
+	    WHERE pe.codigo =:codigoPaciente
+	    AND aues.estado LIKE 'AUTOR'
+	    AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal	
+	    </query>
+	    <query name="presupuesto.consultarAutorizacionesViaIngresoOrd">
+		SELECT NEW  com.servinte.axioma.dto.manejoPaciente.AutorizacionsSubServDto(
+		aues.consecutivo, via.codigo)
+	    FROM 	AutorizacionesCapitacionSub aucs
+	    INNER JOIN aucs.autorizacionesEntidadesSub aues
+	    INNER JOIN aues.autoEntsubOrdenambulas auoa
+	    INNER JOIN auoa.ordenesAmbulatorias oa
+	    INNER JOIN oa.cuentas cu
+	    INNER JOIN cu.viasIngreso via
+	    INNER JOIN aues.pacientes pac
+	    INNER JOIN pac.personas pe
+	    
+	    WHERE pe.codigo =:codigoPaciente
+	    AND aues.estado LIKE 'AUTOR'
+	    AND aues.fechaAutorizacion BETWEEN :fechaInicial AND :fechaFinal	
+	    </query>
+	
+		<sql-query name="presupuesto.consultarValoresAutArt">
+		    <return-scalar column="codigo" type="integer" />
+			<return-scalar column="nombre" type="string" />
+			<return-scalar column="cantidad_cargada" type="integer" />
+			<return-scalar column="valor" type="double" />
+			<return-scalar column="cod" type="integer" />
+
+		<![CDATA[
+		SELECT aes.consecutivo AS codigo, cinv.nombre AS nombre, COALESCE(auesa.nro_dosis_total,0) AS cantidad_cargada, COALESCE(auesa.valor_tarifa,0) AS valor, cinv.codigo AS cod
+		
+		FROM manejopaciente.autorizaciones_ent_sub_articu auesa
+		INNER JOIN inventarios.articulo art ON (art.codigo=auesa.articulo)
+		INNER JOIN inventarios.subgrupo_inventario sinv ON (sinv.codigo= art.subgrupo)
+		INNER JOIN inventarios.clase_inventario cinv ON (sinv.clase=cinv.codigo)
+		INNER JOIN manejopaciente.autorizaciones_entidades_sub aes ON (auesa.autorizacion_ent_sub=aes.consecutivo)
+		INNER JOIN manejopaciente.autorizaciones_capitacion_sub acs ON (acs.autorizacion_ent_sub=aes.consecutivo)
+		INNER JOIN manejopaciente.pacientes pac ON (aes.codigo_paciente= pac.codigo_paciente)
+		INNER JOIN administracion.personas per ON (pac.codigo_paciente= per.codigo)
+
+		  
+		
+		WHERE per.codigo =:codigoPaciente
+		AND aes.estado LIKE 'AUTOR'
+		AND aes.fecha_autorizacion BETWEEN :fechaInicial AND :fechaFinal
+		ORDER BY  cinv.nombre
+		]]>
+		
+		</sql-query>
+			<sql-query name="presupuesto.consultarValoresAutArtF">
+		    <return-scalar column="codigo" type="integer" />
+			<return-scalar column="nombre" type="string" />
+			<return-scalar column="cantidad_cargada" type="integer" />
+			<return-scalar column="valor" type="double" />
+			<return-scalar column="cod" type="integer" />
+
+		<![CDATA[
+		SELECT aes.consecutivo AS codigo, cinv.nombre AS nombre, COALESCE(auesa.nro_dosis_total,0) AS cantidad_cargada, COALESCE(detc.valor_total_cargado,0) AS valor, cinv.codigo AS cod
+		
+		FROM manejopaciente.autorizaciones_ent_sub_articu auesa
+		INNER JOIN inventarios.articulo art ON (art.codigo=auesa.articulo)
+		INNER JOIN inventarios.subgrupo_inventario sinv ON (sinv.codigo= art.subgrupo)
+		INNER JOIN inventarios.clase_inventario cinv ON (sinv.clase=cinv.codigo)
+		INNER JOIN manejopaciente.autorizaciones_entidades_sub aes ON (auesa.autorizacion_ent_sub=aes.consecutivo)
+		INNER JOIN manejopaciente.autorizaciones_capitacion_sub acs ON (acs.autorizacion_ent_sub=aes.consecutivo)
+		INNER JOIN manejopaciente.pacientes pac ON (aes.codigo_paciente= pac.codigo_paciente)
+		INNER JOIN administracion.personas per ON (pac.codigo_paciente= per.codigo)
+		INNER JOIN ordenes.auto_entsub_solicitudes ausol ON (ausol.autorizacion_ent_sub=aes.consecutivo)
+		INNER JOIN ordenes.solicitudes sol ON (ausol.numero_solicitud= sol.numero_solicitud)
+		INNER JOIN facturacion.det_cargos detc ON (detc.solicitud= sol.numero_solicitud)
+	
+	
+		WHERE per.codigo =:codigoPaciente
+		AND aes.estado LIKE  'AUTOR'
+		AND aes.fecha_autorizacion BETWEEN :fechaInicial AND :fechaFinal
+		AND detc.facturado LIKE 'S'
+		ORDER BY  cinv.nombre
+		]]>
+		</sql-query>
+		
+		<sql-query name="presupuesto.consultarClaseInventarioAut">
+			<return-scalar column="nombre" type="string" />
+			<return-scalar column="cantidad_cargada" type="double" />
+			<return-scalar column="valor" type="double" />
+			<return-scalar column="valorFacturado" type="double" />
+		<![CDATA[
+		SELECT cinv.nombre ,COALESCE(sum(auesa.nro_dosis_total),0) AS cantidad_cargada , sum(COALESCE(auesa.valor_tarifa,0)*auesa.nro_dosis_total) AS valor
+		,sum(COALESCE(auesa.valor_tarifa,0)*auesa.nro_dosis_total) AS valorFacturado
+		FROM manejopaciente.autorizaciones_ent_sub_articu auesa
+		INNER JOIN inventarios.articulo art ON (art.codigo=auesa.articulo)
+		INNER JOIN inventarios.subgrupo_inventario sinv ON (sinv.codigo= art.subgrupo)
+		INNER JOIN inventarios.clase_inventario cinv ON (sinv.clase=cinv.codigo)
+		INNER JOIN manejopaciente.autorizaciones_entidades_sub aes ON (auesa.autorizacion_ent_sub=aes.consecutivo)
+		INNER JOIN manejopaciente.autorizaciones_capitacion_sub acs ON (acs.autorizacion_ent_sub=aes.consecutivo)
+		INNER JOIN manejopaciente.pacientes pac ON (aes.codigo_paciente= pac.codigo_paciente)
+		INNER JOIN administracion.personas per ON (pac.codigo_paciente= per.codigo)
+		
+		 
+		WHERE per.codigo =:codigoPaciente
+		AND aes.estado LIKE 'AUTOR'
+		AND aes.fecha_autorizacion BETWEEN :fechaInicial AND :fechaFinal
+		GROUP BY  cinv.nombre
+		]]>
+		</sql-query>
+		
+	       <sql-query name="presupuesto.consultarClaseInventarioFac">
+			<return-scalar column="nombre" type="string" />
+			<return-scalar column="cantidad_cargada" type="double" />
+			<return-scalar column="valor" type="double" />
+			<return-scalar column="valorFacturado" type="double" />
+	<![CDATA[
+		SELECT cinv.nombre ,COALESCE(sum(detc.cantidad_cargada),0) AS cantidad_cargada , COALESCE(sum(detc.valor_total_cargado),0) AS valor
+		, COALESCE(sum(detc.valor_total_cargado),0) AS valorFacturado
+		FROM manejopaciente.autorizaciones_ent_sub_articu auesa
+		INNER JOIN inventarios.articulo art ON (art.codigo=auesa.articulo)
+		INNER JOIN inventarios.subgrupo_inventario sinv ON (sinv.codigo= art.subgrupo)
+		INNER JOIN inventarios.clase_inventario cinv ON (sinv.clase=cinv.codigo)
+		INNER JOIN manejopaciente.autorizaciones_entidades_sub aes ON (auesa.autorizacion_ent_sub=aes.consecutivo)
+		INNER JOIN manejopaciente.autorizaciones_capitacion_sub acs ON (acs.autorizacion_ent_sub=aes.consecutivo)
+		INNER JOIN manejopaciente.pacientes pac ON (aes.codigo_paciente= pac.codigo_paciente)
+		INNER JOIN administracion.personas per ON (pac.codigo_paciente= per.codigo)
+		INNER JOIN ordenes.auto_entsub_solicitudes ausol ON (ausol.autorizacion_ent_sub=aes.consecutivo)
+		INNER JOIN ordenes.solicitudes sol ON (ausol.numero_solicitud= sol.numero_solicitud)
+		INNER JOIN facturacion.det_cargos detc ON (detc.solicitud= sol.numero_solicitud)
+	
+		WHERE per.codigo =:codigoPaciente
+		AND aes.estado LIKE  'AUTOR'
+		AND aes.fecha_autorizacion BETWEEN :fechaInicial AND :fechaFinal
+		AND detc.facturado LIKE 'S'
+		GROUP BY  cinv.nombre
+		]]>
+			</sql-query>
+	
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogPromocionesOdontologicas" table="log_promociones_odontologicas" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" not-null="true" />
+        </property>
+        <property name="fechaInicialVigencia" type="date">
+            <column name="fecha_inicial_vigencia" length="13" not-null="true" />
+        </property>
+        <property name="fechaFinalVigencia" type="date">
+            <column name="fecha_final_vigencia" length="13" not-null="true" />
+        </property>
+        <property name="horaInicialVigencia" type="string">
+            <column name="hora_inicial_vigencia" length="5" />
+        </property>
+        <property name="horaFinalVigencia" type="string">
+            <column name="hora_final_vigencia" length="5" />
+        </property>
+        <property name="activo" type="string">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <property name="promocionOdontologica" type="java.lang.Integer">
+            <column name="promocion_odontologica" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

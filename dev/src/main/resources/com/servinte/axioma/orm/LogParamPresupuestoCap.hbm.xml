@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/05/2011 04:42:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.LogParamPresupuestoCap" table="log_param_presupuesto_cap" schema="capitacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">capitacion.seq_log_param_presupuesto_cap</param>
+			</generator>
+        </id>
+        <many-to-one name="motivosModifiPresupuesto" class="com.servinte.axioma.orm.MotivosModifiPresupuesto" fetch="select">
+            <column name="motivos_modifi_presupuesto" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato" not-null="true" />
+        </many-to-one>
+        <many-to-one name="paramPresupuestosCap" class="com.servinte.axioma.orm.ParamPresupuestosCap" fetch="select">
+            <column name="param_presup_cap" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+        <property name="anioVigencia" type="string">
+            <column name="anio_vigencia" length="4" not-null="true" />
+        </property>
+        <property name="valorContrato" type="big_decimal">
+            <column name="valor_contrato" precision="20" not-null="true" />
+        </property>
+        <property name="porcentajeGastoGeneral" type="big_decimal">
+            <column name="porcentaje_gasto_general" precision="5" not-null="true" />
+        </property>
+        <property name="valorGastoGeneral" type="big_decimal">
+            <column name="valor_gasto_general" precision="20" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="fecha_modificacion" length="13" not-null="true" />
+        </property>
+        <property name="horaModificacion" type="string">
+            <column name="hora_modificacion" length="5" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" />
+        </property>
+        <property name="mesesModificados" type="string">
+            <column name="meses_modificados" />
+        </property>
+        <set name="logDetalleParamPresups" table="log_detalle_param_presup" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="log_param_presupuesto_cap" precision="12" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogDetalleParamPresup" />
+        </set>
+    </class>
+</hibernate-mapping>

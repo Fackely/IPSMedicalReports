@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 25, 2011 12:12:09 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UnidosisXArticulo" table="unidosis_x_articulo" schema="inventarios">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="unidadMedida" class="com.servinte.axioma.orm.UnidadMedida" fetch="select">
+            <column name="unidad_medida" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="articulo" class="com.servinte.axioma.orm.Articulo" fetch="select">
+            <column name="articulo" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="big_decimal">
+            <column name="cantidad" precision="11" />
+        </property>
+        <property name="activo" type="char">
+            <column name="activo" length="1" not-null="true" />
+        </property>
+        <set name="autorizacionesEntSubArticus" inverse="true" lazy="true" table="autorizaciones_ent_sub_articu" fetch="select">
+            <key>
+                <column name="unidosis_articulo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubArticu" />
+        </set>
+        <set name="detalleSolicitudeses" inverse="true" lazy="true" table="detalle_solicitudes" fetch="select">
+            <key>
+                <column name="unidosis_articulo" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetalleSolicitudes" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 19, 2010 5:10:54 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Parentezco" table="parentezco" schema="odontologia">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="22" not-null="true" />
+        </property>
+        <set name="beneficiariosPacientes" inverse="true" lazy="true" table="beneficiarios_paciente" fetch="select">
+            <key>
+                <column name="parentezco" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.BeneficiariosPaciente" />
+        </set>
+        <set name="beneficiarioTarjetaClientes" inverse="true" lazy="true" table="beneficiario_tarjeta_cliente" fetch="select">
+            <key>
+                <column name="parentezco" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.BeneficiarioTarjetaCliente" />
+        </set>
+    </class>
+</hibernate-mapping>

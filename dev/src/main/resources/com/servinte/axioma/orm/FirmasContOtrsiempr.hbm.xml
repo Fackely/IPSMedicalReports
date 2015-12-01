@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 6, 2010 9:27:03 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.FirmasContOtrsiempr" table="firmas_cont_otrsiempr" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            
+            <generator class="sequence" >
+            	<param name="sequence">odontologia.seq_firmas_cont_otr_empr</param>
+            </generator>
+        </id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresasInstitucion" class="com.servinte.axioma.orm.EmpresasInstitucion" fetch="select">
+            <column name="empresa_inst" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="numero" type="int">
+            <column name="numero" not-null="true" />
+        </property>
+        <property name="labelDebajoFirma" type="string">
+            <column name="label_debajo_firma" length="64" />
+        </property>
+        <property name="firmaDigital" type="string">
+            <column name="firma_digital" length="1" />
+        </property>
+        <property name="adjuntoFirma" type="string">
+            <column name="adjunto_firma" length="256" />
+        </property>
+        <property name="fechaModificar" type="date">
+            <column name="fecha_modificar" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" />
+        </property>
+    </class>
+</hibernate-mapping>

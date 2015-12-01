@@ -1,0 +1,204 @@
+<!-- Se habilitan las operaciones en cascada para los siguientes atributos -->
+
+MovimientosCaja.hbm.xml
+
+	<!-- Cuadre Cajas -->
+	 <set name="cuadreCajas" inverse="true" lazy="true" table="cuadre_caja" fetch="select" cascade="all-delete-orphan">
+	
+	<!-- Entrega a Caja Mayor Principal -->
+	<one-to-one name="entregaCajaMayorByCodigoPk" class="com.servinte.axioma.orm.EntregaCajaMayor" cascade="all"></one-to-one>
+	
+	<!-- Entrega a Transportadora de Valores -->
+	<one-to-one name="entregaTransportadora" class="com.servinte.axioma.orm.EntregaTransportadora" cascade="all"></one-to-one>
+	        
+	<!-- Aceptacion traslado caja -->
+	<one-to-one name="aceptacionTrasladoCaja" class="com.servinte.axioma.orm.AceptacionTrasladoCaja" cascade="all"></one-to-one>
+
+	<!-- Solicitud de Traslado a Caja -->
+ 	<one-to-one name="solicitudTrasladoCajaByCodigoPk" class="com.servinte.axioma.orm.SolicitudTrasladoCaja" cascade="all"></one-to-one>
+
+	<!-- Turno de Caja -->
+ 	<many-to-one name="turnoDeCaja" class="com.servinte.axioma.orm.TurnoDeCaja" fetch="select" cascade="all">
+
+DocSopMovimCajas.hbm.xml
+
+	<!-- Detalle pagos rc -->
+	<set name="detallePagosRcs" inverse="false" lazy="true" table="det_pagos_x_doc_sop_mov" fetch="select" cascade="all-delete-orphan">
+	
+	<!-- Detalle faltantes sobrantes -->
+	<set name="detFaltanteSobrantes" inverse="true" lazy="true" table="det_faltante_sobrante" fetch="select" cascade="all">
+
+Pacientes.hbm.xml
+    <set name="institucioneses" inverse="false" lazy="true" table="pacientes_instituciones" fetch="select">
+
+
+	
+DetFaltanteSobrante.hbm.xml
+	 <many-to-one name="faltanteSobrante" class="com.servinte.axioma.orm.FaltanteSobrante" fetch="select"  cascade="all">
+	 
+
+	 
+AceptacionTrasladoCaja.hbm.xml
+	<many-to-one name="solicitudTrasladoCaja" class="com.servinte.axioma.orm.SolicitudTrasladoCaja" fetch="select" update="true">
+	<one-to-one name="movimientosCaja" class="com.servinte.axioma.orm.MovimientosCaja" constrained="true"></one-to-one>
+	
+	
+TrasladosAbonos.hbm.xml
+	<set name="destinoTrasladosAbonosPacs" inverse="true" lazy="true" table="destino_traslados_abonos_pac" fetch="select" cascade="all">
+	<set name="origenTrasladosAbonosPacs" inverse="true" lazy="true" table="origen_traslados_abonos_pac" fetch="select" cascade="all">
+	
+	
+DestinoTrasladosAbonosPac.hbm.xml
+	<many-to-one name="movimientosAbonos" class="com.servinte.axioma.orm.MovimientosAbonos" fetch="select" cascade="all">
+	 
+	 
+OrigenTrasladosAbonosPac.hbm.xml
+	<many-to-one name="movimientosAbonos" class="com.servinte.axioma.orm.MovimientosAbonos" fetch="select" cascade="all">
+	
+	
+AutorizacionConvIngPac.hbm.xml
+	<set name="detAutorizacionConvIngPacs" inverse="true" lazy="true" table="det_autorizacion_conv_ing_pac" fetch="select" cascade="all">
+	
+	
+ConveniosIngresoPaciente.hbm.xml
+	<set name="bonosConvIngPacs" inverse="true" lazy="true" table="bonos_conv_ing_pac" fetch="select" cascade="all" >
+	<set name="autorizacionConvIngPacs" inverse="true" lazy="true" table="autorizacion_conv_ing_pac" fetch="select" cascade="all" >
+	<set name="validacionesBdConvIngPacs" inverse="true" lazy="true" table="validaciones_bd_conv_ing_pac" fetch="select" cascade="all" >
+
+
+
+TarjetaFinancieraComision.hbm.xml
+	 <set name="comisionXCentroAtencions" inverse="true" lazy="true" table="comision_x_centro_atencion" fetch="select" cascade="delete">
+
+
+
+CitasOdontologicas.hbm.xml
+	 <set name="logDetPlanTratamientos" inverse="true" lazy="true" table="log_det_plan_tratamiento" fetch="select" cascade="all">
+	 <set name="serviciosCitaOdontologicas" inverse="true" lazy="true" table="servicios_cita_odontologica" fetch="select" cascade="all">
+	 <set name="logCitasOdontologicases" inverse="true" lazy="true" table="log_citas_odontologicas" fetch="select" cascade="delete">
+	 <set name="logProgramasServiciosPlanTs" inverse="true" lazy="true" table="log_programas_servicios_plan_t" fetch="select" cascade="delete">
+
+ 
+DespachoPedido.hbm.xml
+ NOTA: del .java se documenta la relación con Pedidos y se deja solo en entero
+ 	<id name="pedido" type="int">
+        <column name="pedido" />
+        <generator class="assigned" />
+    </id>
+    <!-- <one-to-one name="pedido" class="com.servinte.axioma.orm.Pedido" constrained="true"></one-to-one> -->
+    
+    
+RegistroEntregaEntSub.hbm.xml
+	<set name="registroEntregaEntsubSolicis" inverse="true" lazy="true" table="registro_entrega_entsub_solici" fetch="select" cascade="all" >
+	<set name="registroEntregaEntsubPedidos" inverse="true" lazy="true" table="registro_entrega_entsub_pedido" fetch="select" cascade="all">
+    
+   
+IncluPresuEncabezado.hbm.xml 
+Nota: se agrega el cascade "all" para realizar los insert
+	<set name="incluPresuConvenios" inverse="true" lazy="true" table="inclu_presu_convenio" fetch="select" cascade="all">
+	    <key>
+	        <column name="inclu_presu_encabezado" precision="12" scale="0" not-null="true">
+	            <comment>Registro del encabezado asociado al proceso de contrataci&#195;&#179;n de las inclusiones</comment>
+	        </column>
+	    </key>
+	    <one-to-many class="com.servinte.axioma.orm.IncluPresuConvenio" />
+	</set>
+	<many-to-one name="otrosSi" class="com.servinte.axioma.orm.OtrosSi" fetch="select" cascade="all">
+		<column name="otro_si" precision="12" scale="0">
+	        <comment>Registro de Otro si asociado a las inclusiones contratadas</comment>
+	    </column>
+	</many-to-one>
+	<set name="inclusionesPresupuestos" inverse="true" lazy="true" table="inclusiones_presupuesto" fetch="select" cascade="all">
+	    <key>
+	        <column name="inclu_presu_encabezado" precision="12" scale="0" not-null="true" />
+	    </key>
+	    <one-to-many class="com.servinte.axioma.orm.InclusionesPresupuesto" />
+	</set>
+
+
+IncluPresuConvenio.hbm.xml
+Nota: se agrega el cascade "all" para realizar los insert
+	 <set name="incluServicioConvenios" inverse="true" lazy="true" table="inclu_servicio_convenio" fetch="select" cascade="all">
+	    <key>
+	        <column name="inclu_presu_convenio" precision="12" scale="0" not-null="true">
+	            <comment>Relaci&#195;&#179;n al convenio con el cual se realiza la contrataci&#195;&#179;n de las inclusiones</comment>
+	        </column>
+	    </key>
+	    <one-to-many class="com.servinte.axioma.orm.IncluServicioConvenio" />
+	</set>
+	<set name="incluProgramaConvenios" inverse="true" lazy="true" table="inclu_programa_convenio" fetch="select" cascade="all">
+	    <key>
+	        <column name="inclu_presu_convenio" precision="12" scale="0" not-null="true">
+	            <comment>Relaci&#195;&#179;n al convenio con el cual se realiza la contrataci&#195;&#179;n de las inclusiones</comment>
+	        </column>
+	    </key>
+	    <one-to-many class="com.servinte.axioma.orm.IncluProgramaConvenio" />
+	</set>
+    
+
+IncluProgramaConvenio.hbm.xml
+Nota: se agrega el cascade "all" para realizar los insert
+	<set name="incluServicioConvenios" inverse="false" lazy="true" table="inclu_programa_servicio" fetch="select" cascade="all">
+	    <key>
+	        <column name="inclu_programa_convenio" precision="12" scale="0" not-null="true">
+	            <comment>Relaci&#195;&#179;n al programa asociado a la inclusi&#195;&#179;n</comment>
+	        </column>
+	    </key>
+	    <many-to-many entity-name="com.servinte.axioma.orm.IncluServicioConvenio">
+	        <column name="inclu_servicio_convenio" precision="12" scale="0" not-null="true">
+	            <comment>Relaci&#195;&#179;n al servicio asociado a la inclusi&#195;&#179;n</comment>
+	        </column>
+	    </many-to-many>
+	</set>
+
+
+UsuariosCapitados.hbm.xml
+	<set name="convUsuariosCapitadoses" inverse="true" lazy="true" table="conv_usuarios_capitados" fetch="select" cascade="delete">
+		<key>
+			<column name="usuario_capitado" precision="10" scale="0" not-null="true" />
+		</key>
+		<one-to-many class="com.servinte.axioma.orm.ConvUsuariosCapitados" />
+	</set>
+	
+	
+	
+AutorizacionesEntidadesSub.hbm.xml
+ 	<set name="autoEntsubSolicitudeses" table="auto_entsub_solicitudes" schema="ordenes" inverse="true" lazy="true" fetch="select" cascade="all">
+        <key>
+            <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true" />
+        </key>
+        <one-to-many class="com.servinte.axioma.orm.AutoEntsubSolicitudes" />
+    </set>	
+	
+	<set name="autoEntsubOrdenambulas" table="auto_entsub_ordenambula" schema="ordenes" inverse="true" lazy="true" fetch="select" cascade="all">
+        <key>
+            <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true" />
+        </key>
+        <one-to-many class="com.servinte.axioma.orm.AutoEntsubOrdenambula" />
+    </set>
+    
+    <set name="autoEntsubPeticioneses" table="auto_entsub_peticiones" schema="ordenes" inverse="true" lazy="true" fetch="select" cascade="all">
+        <key>
+            <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true" />
+        </key>
+        <one-to-many class="com.servinte.axioma.orm.AutoEntsubPeticiones" />
+    </set>
+    
+    <set name="autorizacionesEntSubMontoses" table="autorizaciones_ent_sub_montos" inverse="true" lazy="true" fetch="select" cascade="all" >
+        <key>
+            <column name="autorizacion_ent_sub" precision="12" scale="0" not-null="true" />
+        </key>
+        <one-to-many class="com.servinte.axioma.orm.AutorizacionesEntSubMontos" />
+    </set>
+    
+
+AutorizacionesEntSubMontos.hbm.xml
+	<set name="autoEntSubMontosFarmaciases" table="auto_ent_sub_montos_farmacias" inverse="true" lazy="true" fetch="select" cascade="all">
+        <key>
+            <column name="auto_ent_sub_monto" precision="12" scale="0" not-null="true" />
+        </key>
+        <one-to-many class="com.servinte.axioma.orm.AutoEntSubMontosFarmacias" />
+    </set>
+	
+	
+	

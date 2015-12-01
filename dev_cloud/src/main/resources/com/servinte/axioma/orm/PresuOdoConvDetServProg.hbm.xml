@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PresuOdoConvDetServProg" table="presu_odo_conv_det_serv_prog" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="presupuestoOdoConvenio" class="com.servinte.axioma.orm.PresupuestoOdoConvenio" fetch="select">
+            <column name="presupuesto_odo_convenio" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="programas" class="com.servinte.axioma.orm.Programas" fetch="select">
+            <column name="programa" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="valorUnitarioServicio" type="big_decimal">
+            <column name="valor_unitario_servicio" precision="12" not-null="true" />
+        </property>
+        <property name="porcentajeDctoPromServ" type="big_decimal">
+            <column name="porcentaje_dcto_prom_serv" precision="5" />
+        </property>
+        <property name="valorDescuentoPromServ" type="big_decimal">
+            <column name="valor_descuento_prom_serv" precision="14" />
+        </property>
+        <property name="porcentajeDctoBonoServ" type="big_decimal">
+            <column name="porcentaje_dcto_bono_serv" precision="5" />
+        </property>
+        <property name="valorDescuentoBonoServ" type="big_decimal">
+            <column name="valor_descuento_bono_serv" precision="14" />
+        </property>
+        <property name="dctoComercialUnitario" type="big_decimal">
+            <column name="dcto_comercial_unitario" precision="12" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="errorCalculoTarifa" type="string">
+            <column name="error_calculo_tarifa" length="512" />
+        </property>
+        <property name="valorHonorarioPromServ" type="big_decimal">
+            <column name="valor_honorario_prom_serv" precision="14" />
+        </property>
+        <property name="porcHonorarioPromServ" type="big_decimal">
+            <column name="porc_honorario_prom_serv" precision="5" />
+        </property>
+    </class>
+</hibernate-mapping>

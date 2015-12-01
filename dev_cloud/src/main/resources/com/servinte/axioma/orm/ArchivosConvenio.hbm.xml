@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ArchivosConvenio" table="archivos_convenio" schema="facturacion">
+        <composite-id name="id" class="com.servinte.axioma.orm.ArchivosConvenioId">
+            <key-property name="codigo" type="long">
+                <column name="codigo" precision="12" scale="0" />
+            </key-property>
+            <key-property name="convenio" type="int">
+                <column name="convenio" />
+            </key-property>
+            <key-property name="nombreOriginal" type="string">
+                <column name="nombre_original" length="128" />
+            </key-property>
+            <key-property name="nombreArchivo" type="string">
+                <column name="nombre_archivo" length="128" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" update="false" insert="false" fetch="select">
+            <column name="convenio" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

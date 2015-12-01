@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2012 12:52:37 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ParametricaValorEstandar" table="parametrica_valor_estandar" schema="consultaexterna">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="sequence">
+				<param name="sequence">consultaexterna.seq_parametrica_valor_estandar</param>
+			</generator>
+        </id>
+        <many-to-one name="unidadesConsulta" class="com.servinte.axioma.orm.UnidadesConsulta" fetch="select">
+            <column name="unidad_agenda" not-null="true" />
+        </many-to-one>
+        <many-to-one name="claseInventario" class="com.servinte.axioma.orm.ClaseInventario" fetch="select">
+            <column name="clase_inventarios" />
+        </many-to-one>
+        <many-to-one name="gruposServicios" class="com.servinte.axioma.orm.GruposServicios" fetch="select">
+            <column name="grupos_servicio" />
+        </many-to-one>
+        <property name="valorEstOrdCita" type="big_decimal">
+            <column name="valor_est_ord_cita" precision="3" not-null="true" />
+        </property>
+        <property name="valorEstSermedOrden" type="big_decimal">
+            <column name="valor_est_sermed_orden" precision="3" not-null="true" />
+        </property>
+        <property name="valorEstSermedCita" type="big_decimal">
+            <column name="valor_est_sermed_cita" precision="3" not-null="true" />
+        </property>
+        <property name="esServicio" type="boolean">
+            <column name="esservicio" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

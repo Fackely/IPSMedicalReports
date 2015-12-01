@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 7:02:43 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.OtrosSiExclusiones" table="otros_si_exclusiones" schema="odontologia">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="sequence" >
+				<param name="sequence">odontologia.seq_otros_si_exclusiones</param>
+			</generator>
+        </id>
+        <many-to-one name="exclusionesPresupuesto" class="com.servinte.axioma.orm.ExclusionesPresupuesto" fetch="select">
+            <column name="exclusion" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="otrosSi" class="com.servinte.axioma.orm.OtrosSi" fetch="select">
+            <column name="otro_si" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 4, 2011 9:13:40 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.UsuariosContratosNomina" table="usuarios_contratos_nomina" schema="administracion">
+        <composite-id name="id" class="com.servinte.axioma.orm.UsuariosContratosNominaId">
+            <key-property name="login" type="string">
+                <column name="login" length="30" />
+            </key-property>
+            <key-property name="contratoNomina" type="long">
+                <column name="contrato_nomina" precision="14" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" update="false" insert="false" fetch="select">
+            <column name="login" length="30" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

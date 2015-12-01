@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ProrrogaAutEntidadSub" table="prorroga_aut_entidad_sub" schema="manejopaciente">
+        <id name="consecutivo" type="long">
+            <column name="consecutivo" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="autorizacion" precision="12" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="fechaVencimientoInicial" type="date">
+            <column name="fecha_vencimiento_inicial" length="13" />
+        </property>
+        <property name="fechaProrroga" type="date">
+            <column name="fecha_prorroga" length="13" />
+        </property>
+        <property name="horaProrroga" type="string">
+            <column name="hora_prorroga" length="5" />
+        </property>
+        <property name="usuarioProrroga" type="string">
+            <column name="usuario_prorroga" length="30" />
+        </property>
+        <property name="fechaVencimientoNueva" type="date">
+            <column name="fecha_vencimiento_nueva" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

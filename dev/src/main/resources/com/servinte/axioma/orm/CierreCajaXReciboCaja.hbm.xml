@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2010 11:58:53 AM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CierreCajaXReciboCaja" table="cierre_caja_x_recibo_caja" schema="tesoreria">
+        <comment>Asociaci&#195;&#179;n de los cierres de caja con los recibos de caja</comment>
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="10" scale="0" />
+           <generator class="sequence" >
+				<param name="sequence">tesoreria.seq_cierre_caja_x_recibo_caja</param>
+			</generator>
+        </id>
+        <many-to-one name="recibosCaja" class="com.servinte.axioma.orm.RecibosCaja" fetch="select">
+            <column name="recibo_caja" length="20" not-null="true">
+                <comment>Referencia hacia la tabla tesoreria.recibo_caja - llave compuesta</comment>
+            </column>
+            <column name="institucion" not-null="true">
+                <comment>Referencia hacia la tabla tesoreria.recibo_caja - llave compuesta</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="movimientosCaja" class="com.servinte.axioma.orm.MovimientosCaja" fetch="select">
+            <column name="movimiento_caja_cierre" precision="10" scale="0" not-null="true">
+                <comment>Referencia hacia la tabla tesoreria.movimientos_caja</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

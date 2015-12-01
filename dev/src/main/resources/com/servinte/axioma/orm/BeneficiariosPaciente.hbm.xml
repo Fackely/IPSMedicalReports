@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.BeneficiariosPaciente" table="beneficiarios_paciente" schema="manejopaciente">
+        <id name="codigoPk" type="long">
+            <column name="codigo_pk" precision="12" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="parentezco" class="com.servinte.axioma.orm.Parentezco" fetch="select">
+            <column name="parentezco" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modificacion" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estudio" class="com.servinte.axioma.orm.Estudio" fetch="select">
+            <column name="estudio" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.servinte.axioma.orm.Personas" fetch="select">
+            <column name="persona_beneficiario" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ocupaciones" class="com.servinte.axioma.orm.Ocupaciones" fetch="select">
+            <column name="ocupacion" />
+        </many-to-one>
+        <property name="tipoOcupacion" type="string">
+            <column name="tipo_ocupacion" length="4" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="fecha_modificacion" length="13" not-null="true" />
+        </property>
+        <property name="horaModificacion" type="string">
+            <column name="hora_modificacion" length="5" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

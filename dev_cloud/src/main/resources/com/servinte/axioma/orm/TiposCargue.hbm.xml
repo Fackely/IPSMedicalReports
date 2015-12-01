@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/06/2011 05:10:02 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.TiposCargue" table="tipos_cargue" schema="capitacion">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="15" />
+        </property>
+        <set name="logSubirPacienteses" table="log_subir_pacientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_cargue" precision="1" scale="0" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogSubirPacientes" />
+        </set>
+        <set name="usuarioXConvenios" table="usuario_x_convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_cargue" precision="1" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.UsuarioXConvenio" />
+        </set>
+        <set name="convUsuariosCapitadoses" table="conv_usuarios_capitados" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_cargue" precision="1" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConvUsuariosCapitados" />
+        </set>
+    </class>
+</hibernate-mapping>

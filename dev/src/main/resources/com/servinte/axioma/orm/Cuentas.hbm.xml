@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 29, 2011 5:59:59 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.Cuentas" table="cuentas" schema="manejopaciente">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="sequence" >
+				<param name="sequence">manejoPaciente.seq_cuentas</param>
+			</generator>
+        </id>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="area" />
+        </many-to-one>
+        <many-to-one name="tiposPaciente" class="com.servinte.axioma.orm.TiposPaciente" fetch="select">
+            <column name="tipo_paciente" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="convenios" class="com.servinte.axioma.orm.Convenios" fetch="select">
+            <column name="convenio_arp_afiliado" />
+        </many-to-one>
+        <many-to-one name="pacientes" class="com.servinte.axioma.orm.Pacientes" fetch="select">
+            <column name="codigo_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="oriAdmisionHospi" class="com.servinte.axioma.orm.OriAdmisionHospi" fetch="select">
+            <column name="origen_admision" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="viasIngreso" class="com.servinte.axioma.orm.ViasIngreso" fetch="select">
+            <column name="via_ingreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="responsablesPacientes" class="com.servinte.axioma.orm.ResponsablesPacientes" fetch="select">
+            <column name="codigo_responsable_paciente" precision="10" scale="0" />
+        </many-to-one>
+        <many-to-one name="ingresos" class="com.servinte.axioma.orm.Ingresos" fetch="select">
+            <column name="id_ingreso" />
+        </many-to-one>
+        <many-to-one name="tiposComplejidad" class="com.servinte.axioma.orm.TiposComplejidad" fetch="select">
+            <column name="tipo_complejidad" />
+        </many-to-one>
+        <many-to-one name="estadosCuenta" class="com.servinte.axioma.orm.EstadosCuenta" fetch="select">
+            <column name="estado_cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="especialidades" class="com.servinte.axioma.orm.Especialidades" fetch="select">
+            <column name="especialidad_refiere" />
+        </many-to-one>
+        <property name="fechaApertura" type="date">
+            <column name="fecha_apertura" length="13" not-null="true" />
+        </property>
+        <property name="horaApertura" type="string">
+            <column name="hora_apertura" length="5" not-null="true" />
+        </property>
+        <property name="indicativoAccTransito" type="boolean">
+            <column name="indicativo_acc_transito" not-null="true" />
+        </property>
+        <property name="pacienteReferido" type="boolean">
+            <column name="paciente_referido" not-null="true" />
+        </property>
+        <property name="institucionRefiere" type="string">
+            <column name="institucion_refiere" length="128" />
+        </property>
+        <property name="profesionalRefiere" type="string">
+            <column name="profesional_refiere" length="128" />
+        </property>
+        <property name="tipoEvento" type="string">
+            <column name="tipo_evento" length="4" not-null="true" />
+        </property>
+        <property name="desplazado" type="string">
+            <column name="desplazado" length="1" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="hospitalDia" type="char">
+            <column name="hospital_dia" length="1" not-null="true" />
+        </property>
+        <property name="antesAmbCir" type="string">
+            <column name="antes_amb_cir" length="1" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="15" />
+        </property>
+        <property name="migrado" type="string">
+            <column name="migrado" length="1" />
+        </property>
+        <one-to-one name="cuentasProcesoDist" class="com.servinte.axioma.orm.CuentasProcesoDist"></one-to-one>
+        <set name="ordenesAmbulatoriases" inverse="true" lazy="true" table="ordenes_ambulatorias" fetch="select">
+            <key>
+                <column name="cuenta_solicitante" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.OrdenesAmbulatorias" />
+        </set>
+        <set name="logEstadosCamas" inverse="true" lazy="true" table="log_estados_cama" fetch="select">
+            <key>
+                <column name="cuenta" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEstadosCama" />
+        </set>
+        <one-to-one name="egresos" class="com.servinte.axioma.orm.Egresos"></one-to-one>
+        <set name="solicitudeses" inverse="true" lazy="true" table="solicitudes" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Solicitudes" />
+        </set>
+        <set name="adjuntosCuentas" inverse="true" lazy="true" table="adjuntos_cuenta" fetch="select">
+            <key>
+                <column name="cuenta" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdjuntosCuenta" />
+        </set>
+        <set name="autorizacioneses" inverse="true" lazy="true" table="autorizaciones" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Autorizaciones" />
+        </set>
+        <set name="admisionesUrgenciases" inverse="true" lazy="true" table="admisiones_urgencias" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdmisionesUrgencias" />
+        </set>
+        <set name="presupuestoOdontologicos" inverse="true" lazy="true" table="presupuesto_odontologico" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresupuestoOdontologico" />
+        </set>
+        <set name="adjuntosHistoriaAtencioneses" inverse="true" lazy="true" table="adjuntos_historia_atenciones" fetch="select">
+            <key>
+                <column name="cuenta" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdjuntosHistoriaAtenciones" />
+        </set>
+        <set name="trasladoCamas" inverse="true" lazy="true" table="traslado_cama" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladoCama" />
+        </set>
+        <set name="reingresoSalidaHospiDias" inverse="true" lazy="true" table="reingreso_salida_hospi_dia" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReingresoSalidaHospiDia" />
+        </set>
+        <set name="ripsConsultorioses" inverse="true" lazy="true" table="rips_consultorios" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RipsConsultorios" />
+        </set>
+        <one-to-one name="cuentasProcesoFact" class="com.servinte.axioma.orm.CuentasProcesoFact"></one-to-one>
+        <set name="informeAtencionIniUrgs" inverse="true" lazy="true" table="informe_atencion_ini_urg" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeAtencionIniUrg" />
+        </set>
+        <set name="trasladoCentroAtencions" inverse="true" lazy="true" table="traslado_centro_atencion" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TrasladoCentroAtencion" />
+        </set>
+        <set name="asociosCuentasForCuentaFinal" inverse="true" lazy="true" table="asocios_cuenta" fetch="select">
+            <key>
+                <column name="cuenta_final" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AsociosCuenta" />
+        </set>
+        <set name="asociosCuentasForCuentaInicial" inverse="true" lazy="true" table="asocios_cuenta" fetch="select">
+            <key>
+                <column name="cuenta_inicial" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AsociosCuenta" />
+        </set>
+        <set name="admisionesHospis" inverse="true" lazy="true" table="admisiones_hospi" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.AdmisionesHospi" />
+        </set>
+        <one-to-one name="cuentasProcesoPresupuesto" class="com.servinte.axioma.orm.CuentasProcesoPresupuesto"></one-to-one>
+        <set name="facturases" inverse="true" lazy="true" table="facturas" fetch="select">
+            <key>
+                <column name="cuenta" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Facturas" />
+        </set>
+        <one-to-one name="cierreCuentas" class="com.servinte.axioma.orm.CierreCuentas"></one-to-one>
+        <set name="tarifasRevCuentas" inverse="true" lazy="true" table="tarifas_rev_cuenta" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasRevCuenta" />
+        </set>
+        <set name="logPresupuestoOdontos" inverse="true" lazy="true" table="log_presupuesto_odonto" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogPresupuestoOdonto" />
+        </set>
+        <set name="informeInconsistenciases" inverse="true" lazy="true" table="informe_inconsistencias" fetch="select">
+            <key>
+                <column name="cuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.InformeInconsistencias" />
+        </set>
+    </class>
+</hibernate-mapping>

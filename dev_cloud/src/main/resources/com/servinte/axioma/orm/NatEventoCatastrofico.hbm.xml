@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.NatEventoCatastrofico" table="nat_evento_catastrofico" schema="manejopaciente">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="32" not-null="true" />
+        </property>
+        <property name="tipoEvento" type="string">
+            <column name="tipo_evento" length="4" not-null="true" />
+        </property>
+        <set name="registroEventoCatastroficos" inverse="true" lazy="true" table="registro_evento_catastrofico" fetch="select">
+            <key>
+                <column name="naturaleza_evento" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.RegistroEventoCatastrofico" />
+        </set>
+    </class>
+</hibernate-mapping>

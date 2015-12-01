@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 9/10/2012 02:52:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.CurvaCrecimientoParametrizab" table="curva_crecimiento_parametrizab" schema="historiaclinica">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="sequence" >
+				<param name="sequence">historiaclinica.seq_curva_crecimiento_paramet</param>
+			</generator>
+        </id>
+        <many-to-one name="sexo" class="com.servinte.axioma.orm.Sexo" fetch="select">
+            <column name="codigo_sexo" />
+        </many-to-one>
+        <many-to-one name="curvaCrecimientoParametrizab" class="com.servinte.axioma.orm.CurvaCrecimientoParametrizab" fetch="select">
+            <column name="id_predecesora" />
+        </many-to-one>
+        <property name="tituloGrafica" type="string">
+            <column name="titulo_grafica" length="30" />
+        </property>
+        <property name="colorTitulo" type="string">
+            <column name="color_titulo" length="10" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="30" />
+        </property>
+        <property name="colorDescripcion" type="string">
+            <column name="color_descripcion" length="10" />
+        </property>
+        <property name="edadInicial" type="java.lang.Integer">
+            <column name="edad_inicial" />
+        </property>
+        <property name="edadFinal" type="java.lang.Integer">
+            <column name="edad_final" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="activo" />
+        </property>
+        <property name="indicadorError" type="java.lang.Boolean">
+            <column name="indicador_error" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="13" />
+        </property>
+        <set name="plantillaComponentes" table="plantilla_componente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_curva_crecimiento" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PlantillaComponente" />
+        </set>
+        <set name="imagenParametrizadas" table="imagen_parametrizada" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_curva_crecimiento" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ImagenParametrizada" />
+        </set>
+        <set name="curvaCrecimientoParametrizabs" table="curva_crecimiento_parametrizab" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_predecesora" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.CurvaCrecimientoParametrizab" />
+        </set>
+        <set name="valoracionCurvas" table="valoracion_curva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_curva_crecimiento_paramet" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ValoracionCurva" />
+        </set>
+        <set name="evolucionCurvas" table="evolucion_curva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_curva_crecimiento_paramet" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EvolucionCurva" />
+        </set>
+    </class>
+</hibernate-mapping>

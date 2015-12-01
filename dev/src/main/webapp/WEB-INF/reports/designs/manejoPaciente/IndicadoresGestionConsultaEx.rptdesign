@@ -1,0 +1,2208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">CubeEspecialidades.especialidades.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">CubeEspecialidades.especialidades.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">true</property>
+        </structure>
+    </list-property>
+    <property name="CubeEspecialidades.especialidades.x">135</property>
+    <property name="CubeEspecialidades.especialidades.y">80</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="axioma" id="45">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://100.0.0.201:5432/axioma_integracion</property>
+            <property name="odaUser">axioma</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YXhpb21hcHJpbmNldG9u</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="especialidades" id="46">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">grupo</property>
+                    <property name="displayName">grupo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">orden</property>
+                    <property name="displayName">orden</property>
+                </structure>
+                <structure>
+                    <property name="columnName">codigocita</property>
+                    <property name="displayName">codigocita</property>
+                </structure>
+                <structure>
+                    <property name="columnName">indicador</property>
+                    <property name="displayName">indicador</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fechacita</property>
+                    <property name="displayName">fechacita</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numeromes</property>
+                    <property name="displayName">numeromes</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">grupo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">orden</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">codigocita</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">indicador</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">fechacita</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">numeromes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">grupo</property>
+                    <property name="nativeName">grupo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">orden</property>
+                    <property name="nativeName">orden</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">codigocita</property>
+                    <property name="nativeName">codigocita</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">indicador</property>
+                    <property name="nativeName">indicador</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">fechacita</property>
+                    <property name="nativeName">fechacita</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">numeromes</property>
+                    <property name="nativeName">numeromes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">select 
+'0' as grupo,
+'1' as orden,
+sc.codigo_cita AS codigocita,
+e.nombre AS indicador,
+getnombremes(to_char(sc.fecha_cita,'MM')) || ' ' || to_char(sc.fecha_cita,'YYYY')  as fechacita,
+to_char(sc.fecha_cita,'MM') as numeromes
+from 
+servicios_cita sc 
+inner join cita c ON(c.codigo = sc.codigo_cita)
+inner join especialidades e ON(e.codigo = sc.especialidad)
+inner join valoraciones_consulta vc ON (vc.numero_solicitud = sc.numero_solicitud)
+where 
+ 1=2 
+order by 6 ASC </property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="porcentajes" id="1365">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">axioma</property>
+            <property name="queryText">select 
+orden, 
+count(codigocita) AS codigocita,
+count(codigocita)/(diasdelmes(numeromes,anomes)-getDiasHabilesMesAno(anomes)) AS promedio,
+fechacita,
+numeromes,
+indicador 
+from   
+(select 
+'1' as orden,
+sc.codigo_cita AS codigocita,
+getnombremes(to_char(sc.fecha_cita,'MM')) || ' ' || to_char(sc.fecha_cita,'YYYY')  as fechacita,
+to_char(sc.fecha_cita,'YYYY') || '-' || to_char(sc.fecha_cita,'MM')   as anomes,
+to_char(sc.fecha_cita,'MM') as numeromes,
+'PROMEDIO ATENCION DIA' as indicador  
+from 
+servicios_cita sc 
+inner join cita c ON(c.codigo = sc.codigo_cita)
+inner join especialidades e ON(e.codigo = sc.especialidad)
+where 
+to_char(sc.fecha_cita, 'YYYY-MM-DD') BETWEEN '2008-02-28' AND '2008-08-29'
+
+UNION 
+
+select 
+'1' as orden,
+sc.codigo_cita as codigocita,
+getnombremes(to_char(sc.fecha_cita,'MM')) || ' ' || to_char(sc.fecha_cita,'YYYY')  as fechacita,
+to_char(sc.fecha_cita,'YYYY') || '-' || to_char(sc.fecha_cita,'MM')   as anomes,
+to_char(sc.fecha_cita,'MM') as numeromes,
+'PROMEDIO ATENCION DIA' as indicador  
+from 
+servicios_cita sc
+inner join cita c ON (c.codigo = sc.codigo_cita)
+inner join valoraciones_consulta vc ON (vc.numero_solicitud = sc.numero_solicitud AND vc.primera_vez IS NOT NULL)
+inner join especialidades e ON(e.codigo = sc.especialidad)
+where 
+to_char(sc.fecha_cita, 'YYYY-MM-DD') BETWEEN '2008-02-28' AND '2008-08-29'
+
+UNION
+
+select 
+'1' as orden,
+sc.codigo_cita as codigocita,
+getnombremes(to_char(sc.fecha_cita,'MM')) || ' ' || to_char(sc.fecha_cita,'YYYY')  as fechacita,
+to_char(sc.fecha_cita,'YYYY') || '-' || to_char(sc.fecha_cita,'MM')   as anomes,
+to_char(sc.fecha_cita,'MM') as numeromes,
+'PROMEDIO ATENCION DIA' as indicador   
+from 
+servicios_cita sc
+inner join cita c ON (c.codigo = sc.codigo_cita)
+inner join valoraciones_consulta vc ON (vc.numero_solicitud = sc.numero_solicitud AND vc.primera_vez IS NOT NULL)
+inner join especialidades e ON(e.codigo = sc.especialidad)
+where 
+to_char(sc.fecha_cita, 'YYYY-MM-DD') BETWEEN '2008-02-28' AND '2008-08-29'
+) a 
+group by a.indicador,a.orden,a.fechacita,a.numeromes,anomes   
+order by 5 ASC</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="1vez" id="1651">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">grupo</property>
+                    <property name="displayName">grupo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">orden</property>
+                    <property name="displayName">orden</property>
+                </structure>
+                <structure>
+                    <property name="columnName">codigocita</property>
+                    <property name="displayName">codigocita</property>
+                </structure>
+                <structure>
+                    <property name="columnName">indicador</property>
+                    <property name="displayName">indicador</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fechacita</property>
+                    <property name="displayName">fechacita</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numeromes</property>
+                    <property name="displayName">numeromes</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">grupo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">orden</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">codigocita</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">indicador</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">fechacita</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">numeromes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">grupo</property>
+                    <property name="nativeName">grupo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">orden</property>
+                    <property name="nativeName">orden</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">codigocita</property>
+                    <property name="nativeName">codigocita</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">indicador</property>
+                    <property name="nativeName">indicador</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">fechacita</property>
+                    <property name="nativeName">fechacita</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">numeromes</property>
+                    <property name="nativeName">numeromes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">(select 
+'0' as grupo,
+'1' as orden,
+sc.codigo_cita AS codigocita,
+'1 VEZ' AS indicador,
+getnombremes(to_char(sc.fecha_cita,'MM')) || ' ' || to_char(sc.fecha_cita,'YYYY')  as fechacita,
+to_char(sc.fecha_cita,'MM') as numeromes
+from 
+servicios_cita sc 
+inner join cita c ON(c.codigo = sc.codigo_cita)
+inner join especialidades e ON(e.codigo = sc.especialidad)
+inner join valoraciones_consulta vc ON (vc.numero_solicitud = sc.numero_solicitud)
+where 
+ 1=2
+
+UNION 
+
+select 
+'0' as grupo,
+'1' as orden,
+sc.codigo_cita AS codigocita,
+'CONTROL' AS indicador,
+getnombremes(to_char(sc.fecha_cita,'MM')) || ' ' || to_char(sc.fecha_cita,'YYYY')  as fechacita,
+to_char(sc.fecha_cita,'MM') as numeromes
+from 
+servicios_cita sc 
+inner join cita c ON(c.codigo = sc.codigo_cita)
+inner join especialidades e ON(e.codigo = sc.especialidad)
+inner join valoraciones_consulta vc ON (vc.numero_solicitud = sc.numero_solicitud)
+where 
+ 1=3
+ )
+order by 6 ASC 
+
+</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="particulares" id="1671">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">grupo</property>
+                    <property name="displayName">grupo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">orden</property>
+                    <property name="displayName">orden</property>
+                </structure>
+                <structure>
+                    <property name="columnName">codigocita</property>
+                    <property name="displayName">codigocita</property>
+                </structure>
+                <structure>
+                    <property name="columnName">indicador</property>
+                    <property name="displayName">indicador</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fechacita</property>
+                    <property name="displayName">fechacita</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numeromes</property>
+                    <property name="displayName">numeromes</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">grupo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">orden</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">codigocita</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">indicador</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">fechacita</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">numeromes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">axioma</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">grupo</property>
+                    <property name="nativeName">grupo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">orden</property>
+                    <property name="nativeName">orden</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">codigocita</property>
+                    <property name="nativeName">codigocita</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">indicador</property>
+                    <property name="nativeName">indicador</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">fechacita</property>
+                    <property name="nativeName">fechacita</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">numeromes</property>
+                    <property name="nativeName">numeromes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <property name="queryText">(select 
+'0' as grupo,
+'1' as orden,
+sc.codigo_cita AS codigocita,
+'PARTICULARES' AS indicador,
+getnombremes(to_char(sc.fecha_cita,'MM')) || ' ' || to_char(sc.fecha_cita,'YYYY')  as fechacita,
+to_char(sc.fecha_cita,'MM') as numeromes
+from 
+servicios_cita sc 
+inner join cita c ON(c.codigo = sc.codigo_cita)
+inner join especialidades e ON(e.codigo = sc.especialidad)
+where 
+ to_char(sc.fecha_cita, 'YYYY-MM-DD') BETWEEN '2008-02-28' AND '2008-08-29'
+
+UNION 
+
+select 
+'0' as grupo,
+'1' as orden,
+sc.codigo_cita AS codigocita,
+'OTRAS ENTIDADES' AS indicador,
+getnombremes(to_char(sc.fecha_cita,'MM')) || ' ' || to_char(sc.fecha_cita,'YYYY')  as fechacita,
+to_char(sc.fecha_cita,'MM') as numeromes
+from 
+servicios_cita sc 
+inner join cita c ON(c.codigo = sc.codigo_cita)
+inner join especialidades e ON(e.codigo = sc.especialidad)
+where 
+ to_char(sc.fecha_cita, 'YYYY-MM-DD') BETWEEN '2008-02-28' AND '2008-08-29'
+ )
+order by 6 ASC 
+
+</property>
+        </oda-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="CubeEspecialidades" id="66">
+            <property name="dimensions">
+                <tabular-dimension name="GindicadorEspec" id="69">
+                    <property name="isTimeType">false</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="70">
+                            <property name="levels">
+                                <tabular-level name="orden" id="702">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">orden</property>
+                                </tabular-level>
+                                <tabular-level name="indicador" id="785">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">indicador</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="GfechaEspec" id="80">
+                    <property name="isTimeType">false</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy1</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy1" id="81">
+                            <property name="levels">
+                                <tabular-level name="numeromes" id="687">
+                                    <property name="dataType">decimal</property>
+                                    <property name="columnName">numeromes</property>
+                                </tabular-level>
+                                <tabular-level name="fechacita" id="688">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">fechacita</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field" id="72">
+                    <property name="measures">
+                        <tabular-measure name="codigocita" id="83">
+                            <property name="function">count</property>
+                            <expression name="measureExpression">dataSetRow["codigocita"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="Summary Field1" id="1083">
+                    <property name="measures">
+                        <tabular-measure name="tmp" id="1084">
+                            <property name="function">count</property>
+                            <expression name="measureExpression">dataSetRow["codigocita"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">especialidades</property>
+        </tabular-cube>
+        <tabular-cube name="CubePorcentajes" id="1416">
+            <property name="dimensions">
+                <tabular-dimension name="Group2" id="1417">
+                    <property name="defaultHierarchy">NewTabularHierarchy2</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy2" id="1418">
+                            <property name="levels">
+                                <tabular-level name="numeromes" id="1419">
+                                    <property name="dataType">decimal</property>
+                                    <property name="columnName">numeromes</property>
+                                </tabular-level>
+                                <tabular-level name="fechacita" id="1420">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">fechacita</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Group3" id="1421">
+                    <property name="defaultHierarchy">NewTabularHierarchy3</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy3" id="1422">
+                            <property name="levels">
+                                <tabular-level name="indicador" id="1423">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">indicador</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Group" id="1821">
+                    <property name="defaultHierarchy">NewTabularHierarchy5</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy5" id="1822">
+                            <property name="levels">
+                                <tabular-level name="orden" id="1823">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">orden</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field4" id="1467">
+                    <property name="measures">
+                        <tabular-measure name="promedio" id="1468">
+                            <property name="function">max</property>
+                            <expression name="measureExpression">dataSetRow["promedio"]</expression>
+                            <property name="dataType">float</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="Summary Field3" id="1819">
+                    <property name="measures">
+                        <tabular-measure name="orden" id="1820">
+                            <property name="function">sum</property>
+                            <expression name="measureExpression">dataSetRow["orden"]</expression>
+                            <property name="dataType">float</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">porcentajes</property>
+        </tabular-cube>
+        <tabular-cube name="Cube1Vez" id="1595">
+            <property name="defaultMeasureGroup">Summary Field2</property>
+            <property name="dimensions">
+                <tabular-dimension name="GindicadorVez" id="1596">
+                    <property name="isTimeType">false</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy4</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy4" id="1597">
+                            <property name="levels">
+                                <tabular-level name="orden" id="1598">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">orden</property>
+                                </tabular-level>
+                                <tabular-level name="indicador" id="1599">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">indicador</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="GfechaVez" id="1600">
+                    <property name="isTimeType">false</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy11</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy11" id="1601">
+                            <property name="levels">
+                                <tabular-level name="numeromes" id="1602">
+                                    <property name="dataType">decimal</property>
+                                    <property name="columnName">numeromes</property>
+                                </tabular-level>
+                                <tabular-level name="fechacita" id="1603">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">fechacita</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field2" id="1604">
+                    <property name="measures">
+                        <tabular-measure name="codigocita1" id="1605">
+                            <property name="function">count</property>
+                            <expression name="measureExpression">dataSetRow["codigocita"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="Summary Field11" id="1606">
+                    <property name="measures">
+                        <tabular-measure name="tmp1" id="1607">
+                            <property name="function">count</property>
+                            <expression name="measureExpression">dataSetRow["codigocita"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">1vez</property>
+        </tabular-cube>
+        <tabular-cube name="CubeParticulares" id="1678">
+            <property name="defaultMeasureGroup">Summary Field21</property>
+            <property name="dimensions">
+                <tabular-dimension name="GindicadorPar" id="1679">
+                    <property name="isTimeType">false</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy41</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy41" id="1680">
+                            <property name="levels">
+                                <tabular-level name="orden" id="1681">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">orden</property>
+                                </tabular-level>
+                                <tabular-level name="indicador" id="1682">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">indicador</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="GfechaPar" id="1683">
+                    <property name="isTimeType">false</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy111</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy111" id="1684">
+                            <property name="levels">
+                                <tabular-level name="numeromes" id="1685">
+                                    <property name="dataType">decimal</property>
+                                    <property name="columnName">numeromes</property>
+                                </tabular-level>
+                                <tabular-level name="fechacita" id="1686">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">fechacita</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field21" id="1687">
+                    <property name="measures">
+                        <tabular-measure name="codigocita11" id="1688">
+                            <property name="function">count</property>
+                            <expression name="measureExpression">dataSetRow["codigocita"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="Summary Field111" id="1689">
+                    <property name="measures">
+                        <tabular-measure name="tmp11" id="1690">
+                            <property name="function">count</property>
+                            <expression name="measureExpression">dataSetRow["codigocita"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">particulares</property>
+        </tabular-cube>
+    </cubes>
+    <styles>
+        <style name="crosstab-cell" id="4">
+            <property name="borderBottomColor">#FFFFFF</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#FFFFFF</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#FFFFFF</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#FFFFFF</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="paddingTop">2pt</property>
+            <property name="paddingLeft">2pt</property>
+            <property name="paddingBottom">2pt</property>
+            <property name="paddingRight">2pt</property>
+        </style>
+        <style name="crosstab" id="5">
+            <property name="borderBottomColor">#FFFFFF</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#FFFFFF</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#FFFFFF</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#FFFFFF</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+        </style>
+        <style name="axiomaTitulo" id="226">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">small</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="axiomaTexto" id="227">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="textAlign">left</property>
+        </style>
+        <style name="axiomaLabelCelda" id="228">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+        </style>
+        <style name="axiomaInfoCelda" id="229">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-small</property>
+            <property name="textAlign">left</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1cm</property>
+            <page-header>
+                <grid id="6">
+                    <property name="width">100%</property>
+                    <column id="7">
+                        <property name="width">3.2916666666666665in</property>
+                    </column>
+                    <column id="8"/>
+                    <column id="9"/>
+                    <row id="10">
+                        <cell id="11"/>
+                        <cell id="12">
+                            <property name="fontWeight">bold</property>
+                        </cell>
+                        <cell id="13"/>
+                    </row>
+                    <row id="18">
+                        <cell id="19">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="style">axiomaTitulo</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                    </row>
+                    <row id="14">
+                        <cell id="15">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="style">axiomaTexto</property>
+                        </cell>
+                    </row>
+                    <row id="831">
+                        <property name="fontSize">medium</property>
+                        <property name="fontWeight">bold</property>
+                        <cell id="832">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="style">axiomaTexto</property>
+                            <property name="fontSize">8pt</property>
+                            <property name="fontWeight">normal</property>
+                            <property name="textAlign">justify</property>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="22">
+                    <property name="width">100%</property>
+                    <column id="23">
+                        <property name="width">2.1979166666666665in</property>
+                    </column>
+                    <column id="24">
+                        <property name="width">4.510416666666667in</property>
+                    </column>
+                    <column id="25"/>
+                    <row id="26">
+                        <cell id="27">
+                            <property name="textAlign">center</property>
+                            <text id="30">
+                                <property name="style">axiomaTexto</property>
+                                <property name="fontSize">8pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="28">
+                            <property name="fontSize">8pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                        <cell id="29">
+                            <grid id="837">
+                                <property name="fontSize">8pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="width">100%</property>
+                                <column id="838">
+                                    <property name="width">2.7291666666666665in</property>
+                                    <property name="textAlign">right</property>
+                                </column>
+                                <column id="839">
+                                    <property name="width">0.23958333333333334in</property>
+                                    <property name="textAlign">center</property>
+                                </column>
+                                <column id="840"/>
+                                <row id="841">
+                                    <cell id="842">
+                                        <auto-text id="843">
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                    <cell id="844">
+                                        <text id="845">
+                                            <property name="contentType">plain</property>
+                                            <text-property name="content"><![CDATA[de]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="846">
+                                        <auto-text id="847">
+                                            <property name="type">total-page</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <extended-item extensionName="Crosstab" extensionVersion="2.3.0" id="2044">
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="2056">
+                    <property name="measure">codigocita</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="2057">
+                            <property name="aggregationOnRow">GindicadorEspec/indicador</property>
+                            <property name="aggregationOnColumn">GfechaEspec/fechacita</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="content">
+                                <data id="2058">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">codigocita_GindicadorEspec/indicador_GfechaEspec/fechacita</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="2074">
+                            <property name="aggregationOnRow">GindicadorEspec/indicador</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="content">
+                                <data id="2075">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">codigocita_GindicadorEspec/indicador</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="2059">
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+                <extended-item extensionName="MeasureView" id="2068">
+                    <property name="measure">tmp</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="2069">
+                            <property name="aggregationOnRow">GindicadorEspec/indicador</property>
+                            <property name="aggregationOnColumn">GfechaEspec/fechacita</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="width">24px</property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="2076">
+                            <property name="aggregationOnRow">GindicadorEspec/indicador</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="content">
+                                <data id="2081">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">Fixed</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr">data["indicador"]=='noaplica'</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">Column Binding</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="2071">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="2046">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="2047">
+                            <property name="dimension">GindicadorEspec</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View10" id="2048">
+                                    <property name="level">GindicadorEspec/indicador</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="2049">
+                                            <property name="content">
+                                                <data name="indicador" id="2050">
+                                                    <property name="style">axiomaInfoCelda</property>
+                                                    <property name="resultSetColumn">indicador</property>
+                                                </data>
+                                            </property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="width">253px</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="2051">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="2073">
+                            <property name="content">
+                                <grid id="2100">
+                                    <property name="width">100%</property>
+                                    <column id="2101"/>
+                                    <column id="2102"/>
+                                    <row id="2103">
+                                        <cell id="2104">
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <label id="2105">
+                                                <property name="style">axiomaLabelCelda</property>
+                                                <text-property name="text">TOTAL</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="2106">
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <label id="2107">
+                                                <property name="style">axiomaLabelCelda</property>
+                                                <property name="textAlign">center</property>
+                                                <text-property name="text">%</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="2052">
+                            <property name="dimension">GfechaEspec</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View12" id="2061">
+                                    <property name="level">GfechaEspec/numeromes</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="2062">
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View11" id="2053">
+                                    <property name="level">GfechaEspec/fechacita</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="2054">
+                                            <property name="content">
+                                                <data name="fechacita1" id="2055">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="textAlign">center</property>
+                                                    <property name="resultSetColumn">fechacita</property>
+                                                </data>
+                                            </property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="2045">
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                </extended-item>
+            </property>
+            <property name="cube">CubeEspecialidades</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">indicador</property>
+                    <expression name="expression">dimension["GindicadorEspec"]["indicador"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fechacita</property>
+                    <expression name="expression">dimension["GfechaEspec"]["fechacita"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigocita_GindicadorEspec/indicador_GfechaEspec/fechacita</property>
+                    <expression name="expression">measure["codigocita"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GindicadorEspec/indicador</value>
+                        <value>GfechaEspec/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">numeromes</property>
+                    <expression name="expression">dimension["GfechaEspec"]["numeromes"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">codigocita_GindicadorEspec/indicador</property>
+                    <expression name="expression">measure["codigocita"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GindicadorEspec/indicador</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">tmp_GindicadorEspec/indicador_GfechaEspec/fechacita</property>
+                    <expression name="expression">measure["tmp"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GindicadorEspec/indicador</value>
+                        <value>GfechaEspec/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">tmp_GindicadorEspec/indicador</property>
+                    <expression name="expression">measure["tmp"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GindicadorEspec/indicador</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">codigocita_GfechaEspec/fechacita</property>
+                    <expression name="expression">measure["codigocita"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GfechaEspec/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">tmp_GfechaEspec/fechacita</property>
+                    <expression name="expression">measure["tmp"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GfechaEspec/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">codigocita</property>
+                    <expression name="expression">measure["codigocita"]</expression>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">tmp</property>
+                    <expression name="expression">measure["tmp"]</expression>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression">(data["codigocita_GindicadorEspec/indicador"]/data["codigocita"])*100</expression>
+                    <property name="dataType">any</property>
+                </structure>
+            </list-property>
+        </extended-item>
+        <table id="2213">
+            <property name="width">100%</property>
+            <column id="2220"/>
+            <header>
+                <row id="2214">
+                    <cell id="2215"/>
+                </row>
+            </header>
+            <detail>
+                <row id="2216">
+                    <cell id="2217"/>
+                </row>
+            </detail>
+            <footer>
+                <row id="2218">
+                    <cell id="2219"/>
+                </row>
+            </footer>
+        </table>
+        <extended-item extensionName="Crosstab" extensionVersion="2.3.0" id="1922">
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="1937">
+                    <property name="measure">codigocita1</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="1938">
+                            <property name="aggregationOnRow">GindicadorVez/indicador</property>
+                            <property name="aggregationOnColumn">GfechaVez/fechacita</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="content">
+                                <data id="1939">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">codigocita1_GindicadorVez/indicador_GfechaVez/fechacita</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="1943">
+                            <property name="aggregationOnRow">GindicadorVez/indicador</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="content">
+                                <data id="1944">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">codigocita1_GindicadorVez/indicador</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="1940">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="1924">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="1925">
+                            <property name="dimension">GindicadorVez</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View3" id="1926">
+                                    <property name="level">GindicadorVez/indicador</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="1927">
+                                            <property name="content">
+                                                <data name="indicador1" id="1928">
+                                                    <property name="style">axiomaInfoCelda</property>
+                                                    <property name="resultSetColumn">indicador</property>
+                                                </data>
+                                            </property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="width">157px</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="1929">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="1942">
+                            <property name="content">
+                                <label id="1945">
+                                    <property name="style">axiomaLabelCelda</property>
+                                    <text-property name="text">TOTAL</text-property>
+                                </label>
+                            </property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="1930">
+                            <property name="dimension">GfechaVez</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View" id="2030">
+                                    <property name="level">GfechaVez/numeromes</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="2031">
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View6" id="1934">
+                                    <property name="level">GfechaVez/fechacita</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="1935">
+                                            <property name="content">
+                                                <data name="fechacita" id="1936">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="resultSetColumn">fechacita</property>
+                                                </data>
+                                            </property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="1923">
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                </extended-item>
+            </property>
+            <property name="cube">Cube1Vez</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">indicador</property>
+                    <expression name="expression">dimension["GindicadorVez"]["indicador"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fechacita</property>
+                    <expression name="expression">dimension["GfechaVez"]["fechacita"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigocita1_GindicadorVez/indicador_GfechaVez/fechacita</property>
+                    <expression name="expression">measure["codigocita1"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GindicadorVez/indicador</value>
+                        <value>GfechaVez/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">codigocita1_GindicadorVez/indicador</property>
+                    <expression name="expression">measure["codigocita1"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GindicadorVez/indicador</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">numeromes</property>
+                    <expression name="expression">dimension["GfechaVez"]["numeromes"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+        </extended-item>
+        <table id="2205">
+            <property name="width">100%</property>
+            <column id="2212"/>
+            <header>
+                <row id="2206">
+                    <cell id="2207"/>
+                </row>
+            </header>
+            <detail>
+                <row id="2208">
+                    <cell id="2209"/>
+                </row>
+            </detail>
+            <footer>
+                <row id="2210">
+                    <cell id="2211"/>
+                </row>
+            </footer>
+        </table>
+        <extended-item extensionName="Crosstab" extensionVersion="2.3.0" id="1974">
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="1989">
+                    <property name="measure">codigocita11</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="1990">
+                            <property name="aggregationOnRow">GindicadorPar/indicador</property>
+                            <property name="aggregationOnColumn">GfechaPar/fechacita</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="content">
+                                <data id="1991">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">codigocita11_GindicadorPar/indicador_GfechaPar/fechacita</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="1995">
+                            <property name="aggregationOnRow">GindicadorPar/indicador</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="content">
+                                <data id="1996">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">codigocita11_GindicadorPar/indicador</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="1999">
+                            <property name="aggregationOnColumn">GfechaPar/fechacita</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="content">
+                                <data id="2000">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">codigocita11_GfechaPar/fechacita</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="2001">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="content">
+                                <data id="2002">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">codigocita11</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="1992">
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="1976">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="1998">
+                            <property name="content">
+                                <label id="2003">
+                                    <property name="style">axiomaLabelCelda</property>
+                                    <property name="textAlign">right</property>
+                                    <text-property name="text">TOTAL GENERAL</text-property>
+                                </label>
+                            </property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="1977">
+                            <property name="dimension">GindicadorPar</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View4" id="1978">
+                                    <property name="level">GindicadorPar/indicador</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="1979">
+                                            <property name="content">
+                                                <data name="indicador2" id="1980">
+                                                    <property name="style">axiomaInfoCelda</property>
+                                                    <property name="resultSetColumn">indicador</property>
+                                                </data>
+                                            </property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="width">159px</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="1981">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="1994">
+                            <property name="content">
+                                <label id="1997">
+                                    <property name="style">axiomaLabelCelda</property>
+                                    <text-property name="text">TOTAL</text-property>
+                                </label>
+                            </property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="1982">
+                            <property name="dimension">GfechaPar</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View1" id="2033">
+                                    <property name="level">GfechaPar/numeromes</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="2034">
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View5" id="1986">
+                                    <property name="level">GfechaPar/fechacita</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="1987">
+                                            <property name="content">
+                                                <data name="fechacita2" id="1988">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="resultSetColumn">fechacita</property>
+                                                </data>
+                                            </property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="1975">
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                </extended-item>
+            </property>
+            <property name="cube">CubeParticulares</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">indicador</property>
+                    <expression name="expression">dimension["GindicadorPar"]["indicador"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fechacita</property>
+                    <expression name="expression">dimension["GfechaPar"]["fechacita"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">codigocita11_GindicadorPar/indicador_GfechaPar/fechacita</property>
+                    <expression name="expression">measure["codigocita11"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GindicadorPar/indicador</value>
+                        <value>GfechaPar/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">codigocita11_GindicadorPar/indicador</property>
+                    <expression name="expression">measure["codigocita11"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GindicadorPar/indicador</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">codigocita11_GfechaPar/fechacita</property>
+                    <expression name="expression">measure["codigocita11"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GfechaPar/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">codigocita11</property>
+                    <expression name="expression">measure["codigocita11"]</expression>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">numeromes</property>
+                    <expression name="expression">dimension["GfechaPar"]["numeromes"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+        </extended-item>
+        <table id="2221">
+            <property name="width">100%</property>
+            <column id="2228"/>
+            <header>
+                <row id="2222">
+                    <cell id="2223"/>
+                </row>
+            </header>
+            <detail>
+                <row id="2224">
+                    <cell id="2225"/>
+                </row>
+            </detail>
+            <footer>
+                <row id="2226">
+                    <cell id="2227"/>
+                </row>
+            </footer>
+        </table>
+        <extended-item extensionName="Crosstab" extensionVersion="2.3.0" id="2175">
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="2176">
+                    <property name="measure">orden</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="2177">
+                            <property name="aggregationOnRow">Group3/indicador</property>
+                            <property name="aggregationOnColumn">Group2/fechacita</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="width">0in</property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="1844">
+                            <property name="aggregationOnRow">Group3/indicador</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="content">
+                                <data id="2178">
+                                    <property name="style">axiomaLabelCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">Fixed</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">Column Binding_3</property>
+                                </data>
+                            </property>
+                            <property name="width">2px</property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="2179">
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+                <extended-item extensionName="MeasureView" id="2180">
+                    <property name="measure">promedio</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="2181">
+                            <property name="aggregationOnRow">Group3/indicador</property>
+                            <property name="aggregationOnColumn">Group2/fechacita</property>
+                            <property name="verticalAlign">middle</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="content">
+                                <data id="2182">
+                                    <property name="style">axiomaInfoCelda</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Fixed</property>
+                                        <property name="pattern">###0.000</property>
+                                    </structure>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">promedio_Group3/indicador_Group2/fechacita_1</property>
+                                </data>
+                            </property>
+                            <property name="width">15px</property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="1846">
+                            <property name="aggregationOnRow">Group3/indicador</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="width">0in</property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="2183">
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="2184">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="2185">
+                            <property name="dimension">Group3</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View2" id="2186">
+                                    <property name="level">Group3/indicador</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="2187">
+                                            <property name="content">
+                                                <data name="indicador3" id="2188">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="textAlign">left</property>
+                                                    <property name="resultSetColumn">indicador</property>
+                                                </data>
+                                            </property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="width">77px</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="2189">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="1843">
+                            <property name="content">
+                                <label id="1849">
+                                    <property name="style">axiomaLabelCelda</property>
+                                    <text-property name="text">TOTAL</text-property>
+                                </label>
+                            </property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="2190">
+                            <property name="dimension">Group2</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View7" id="2191">
+                                    <property name="level">Group2/numeromes</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="2192">
+                                            <property name="content">
+                                                <data name="fechacita12" id="2193">
+                                                    <property name="style">axiomaLabelCelda</property>
+                                                    <property name="resultSetColumn">fechacita</property>
+                                                </data>
+                                            </property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View14" id="2194">
+                                    <property name="level">Group2/fechacita</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="2195">
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="2196">
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                </extended-item>
+            </property>
+            <property name="cube">CubePorcentajes</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">numeromes</property>
+                    <expression name="expression">dimension["Group2"]["numeromes"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">fechacita</property>
+                    <expression name="expression">dimension["Group2"]["fechacita"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">indicador</property>
+                    <expression name="expression">dimension["Group3"]["indicador"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">promedio_Group3/indicador_Group2/fechacita</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/indicador</value>
+                        <value>Group2/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["promedio"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">promedio_Group3/indicador</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/indicador</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["promedio"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression">measure["promedio"]</expression>
+                    <property name="dataType">any</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_1</property>
+                    <expression name="expression">data["promedio_Group3/indicador"]/measure["orden"]</expression>
+                    <property name="dataType">any</property>
+                </structure>
+                <structure>
+                    <property name="name">orden_Group3/indicador_Group2/fechacita</property>
+                    <property name="displayName">orden</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/indicador</value>
+                        <value>Group2/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["orden"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">promedio_Group3/indicador_Group2/fechacita_1</property>
+                    <expression name="expression">measure["promedio"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/indicador</value>
+                        <value>Group2/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_2</property>
+                    <expression name="expression">data["promedio_Group3/indicador_Group2/fechacita"]</expression>
+                    <property name="dataType">any</property>
+                </structure>
+                <structure>
+                    <property name="name">orden_Group3/indicador</property>
+                    <property name="displayName">totalorden</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/indicador</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["orden"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">promedio_Group3/indicador_1</property>
+                    <property name="displayName">totalpromedio</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/indicador</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">measure["promedio"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">orden_Group3/indicador_Group2/fechacita_1</property>
+                    <expression name="expression">measure["orden"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/indicador</value>
+                        <value>Group2/fechacita</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">sum</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_3</property>
+                    <expression name="expression">data["promedio_Group3/indicador_1"]/data["orden_Group3/indicador"]</expression>
+                    <property name="dataType">any</property>
+                </structure>
+            </list-property>
+        </extended-item>
+    </body>
+</report>

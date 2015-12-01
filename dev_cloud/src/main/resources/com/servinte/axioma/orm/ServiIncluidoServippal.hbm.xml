@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ServiIncluidoServippal" table="servi_incluido_servippal" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="centrosCosto" class="com.servinte.axioma.orm.CentrosCosto" fetch="select">
+            <column name="centro_costo_grupo_serv" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" fetch="select">
+            <column name="cod_servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="serviPpalincluidos" class="com.servinte.axioma.orm.ServiPpalincluidos" fetch="select">
+            <column name="cod_servippal" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <set name="artServiIncluidoses" inverse="true" lazy="true" table="art_servi_incluidos" fetch="select">
+            <key>
+                <column name="cod_servi_incluido" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ArtServiIncluidos" />
+        </set>
+    </class>
+</hibernate-mapping>

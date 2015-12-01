@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/06/2011 10:00:00 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.PeticionesServicio" table="peticiones_servicio" schema="salascirugia">
+        <composite-id name="id" class="com.servinte.axioma.orm.PeticionesServicioId">
+            <key-property name="peticionQx" type="int">
+                <column name="peticion_qx" />
+            </key-property>
+            <key-property name="servicio" type="int">
+                <column name="servicio" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="peticionQx" class="com.servinte.axioma.orm.PeticionQx" update="false" insert="false" fetch="select">
+            <column name="peticion_qx" not-null="true" />
+        </many-to-one>
+        <many-to-one name="contratos" class="com.servinte.axioma.orm.Contratos" fetch="select">
+            <column name="contrato_convenio" />
+        </many-to-one>
+        <many-to-one name="servicios" class="com.servinte.axioma.orm.Servicios" update="false" insert="false" fetch="select">
+            <column name="servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="autorizacionesEntidadesSub" class="com.servinte.axioma.orm.AutorizacionesEntidadesSub" fetch="select">
+            <column name="auto_ent_sub" precision="12" scale="0" />
+        </many-to-one>
+        <property name="numeroServicio" type="int">
+            <column name="numero_servicio" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="256" />
+        </property>
+        <property name="cubierto" type="string">
+            <column name="cubierto" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

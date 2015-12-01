@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.ElementosGraficos" table="elementos_graficos" schema="odontologia">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="128" not-null="true" />
+        </property>
+        <property name="archivo" type="string">
+            <column name="archivo" length="128" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="4" not-null="true" />
+        </property>
+        <set name="convencionesOdontologicasesForTrama" inverse="true" lazy="true" table="convenciones_odontologicas" fetch="select">
+            <key>
+                <column name="trama" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConvencionesOdontologicas" />
+        </set>
+        <set name="convencionesOdontologicasesForImagen" inverse="true" lazy="true" table="convenciones_odontologicas" fetch="select">
+            <key>
+                <column name="imagen" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ConvencionesOdontologicas" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 13, 2010 1:53:04 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoDetalleMonto" table="histo_detalle_monto" schema="facturacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_his_det_monto</param>
+			</generator>
+        </id>
+        <many-to-one name="detalleMonto" class="com.servinte.axioma.orm.DetalleMonto" fetch="select">
+            <column name="detalle_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK del registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="histoMontosCobro" class="com.servinte.axioma.orm.HistoMontosCobro" fetch="select">
+            <column name="monto_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK del monto de cobro relacionado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="viaIngresoCodigo" type="int">
+            <column name="via_ingreso_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK de la v&#195;&#173;a de Ingreso del paciente</comment>
+            </column>
+        </property>
+        <property name="tipoAfiliadoCodigo" type="char">
+            <column name="tipo_afiliado_codigo" length="1" not-null="true">
+                <comment>C&#195;&#179;digo PK del tipo de afiliado del paciente</comment>
+            </column>
+        </property>
+        <property name="tipoPacienteCodigo" type="char">
+            <column name="tipo_paciente_codigo" length="1" not-null="true">
+                <comment>C&#195;&#179;digo PK del tipo de paciente</comment>
+            </column>
+        </property>
+        <property name="estratoSocialCodigo" type="int">
+            <column name="estrato_social_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK del estrato social del paciente</comment>
+            </column>
+        </property>
+        <property name="naturalezaCodigo" type="java.lang.Integer">
+            <column name="naturaleza_codigo">
+                <comment>C&#195;&#179;digo PK de la naturaleza de paciente</comment>
+            </column>
+        </property>
+        <property name="tipoMontoCodigo" type="int">
+            <column name="tipo_monto_codigo" not-null="true">
+                <comment>C&#195;&#179;digo PK del tipo de monto del registro</comment>
+            </column>
+        </property>
+        <property name="tipoDetalle" type="string">
+            <column name="tipo_detalle" length="6" not-null="true">
+                <comment>Tipo al que pertenece el detalle: GEN general o DET detallado</comment>
+            </column>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="accionRealizada" type="string">
+            <column name="accion_realizada" length="3" not-null="true">
+                <comment>Acci&#195;&#179;n que se realiz&#195;&#179; sobre el registro</comment>
+            </column>
+        </property>
+        <set name="histoMontoArticuloEsps" inverse="true" lazy="true" table="histo_monto_articulo_esp" fetch="select"  cascade="all">
+            <key>
+                <column name="histo_detalle_monto" not-null="true">
+                    <comment>C&#195;&#179;digo PK del hist&#195;&#179;rico del detalle del monto de cobro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoMontoArticuloEsp" />
+        </set>
+        <one-to-one name="histoDetMontoGen" class="com.servinte.axioma.orm.HistoDetMontoGen"  cascade="all"></one-to-one>
+        <set name="facturases" inverse="true" lazy="true" table="facturas" fetch="select">
+            <key>
+                <column name="monto_cobro" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.Facturas" />
+        </set>
+        <set name="histoMontoAgrupServs" inverse="true" lazy="true" table="histo_monto_agrup_serv" fetch="select"  cascade="all">
+            <key>
+                <column name="histo_detalle_monto" not-null="true">
+                    <comment>C&#195;&#179;digo PK del hsit&#195;&#179;rico del detalle del monto de cobro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoMontoAgrupServ" />
+        </set>
+        <set name="histoMontoServEsps" inverse="true" lazy="true" table="histo_monto_serv_esp" fetch="select"  cascade="all">
+            <key>
+                <column name="histo_detalle_monto" not-null="true">
+                    <comment>C&#195;&#179;digo PK del hist&#195;&#179;rico del detalle del monto de cobro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoMontoServEsp" />
+        </set>
+    </class>
+</hibernate-mapping>

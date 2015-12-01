@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 11, 2010 2:02:00 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.DetalleMovCajaCierre" table="detalle_mov_caja_cierre" schema="tesoreria">
+        <comment>Detalles de Movimiento de cierre</comment>
+        <id name="movimientoCajaCierre" type="long">
+            <column name="movimiento_caja_cierre" precision="10" scale="0" />
+            <generator class="foreign">
+                <param name="property">movimientosCaja</param>
+            </generator>
+        </id>
+        <one-to-one name="movimientosCaja" class="com.servinte.axioma.orm.MovimientosCaja" constrained="true"></one-to-one>
+        <many-to-one name="cajas" class="com.servinte.axioma.orm.Cajas" fetch="select">
+            <column name="caja_destino" not-null="true">
+                <comment>Caja Principal Destino Seleccionada</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

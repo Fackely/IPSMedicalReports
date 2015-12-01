@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2/06/2011 08:10:33 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.EsquemasTarifarios" table="esquemas_tarifarios" schema="facturacion">
+        <id name="codigo" type="int">
+            <column name="codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="metodosAjuste" class="com.servinte.axioma.orm.MetodosAjuste" fetch="select">
+            <column name="metodo_ajuste" length="1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="instituciones" class="com.servinte.axioma.orm.Instituciones" fetch="select">
+            <column name="institucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tarifariosOficiales" class="com.servinte.axioma.orm.TarifariosOficiales" fetch="select">
+            <column name="tarifario_oficial" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="70" not-null="true" />
+        </property>
+        <property name="esInventario" type="boolean">
+            <column name="es_inventario" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="activo" not-null="true" />
+        </property>
+        <property name="cantidad" type="java.lang.Double">
+            <column name="cantidad" precision="17" scale="17" />
+        </property>
+        <set name="tarifasEntidadSubs" table="tarifas_entidad_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasEntidadSub" />
+        </set>
+        <set name="detPaqOdontConvenios" table="det_paq_odont_convenio" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetPaqOdontConvenio" />
+        </set>
+        <set name="reliquidacionTarifasesForEsqTarArtOriginal" table="reliquidacion_tarifas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esq_tar_art_original" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReliquidacionTarifas" />
+        </set>
+        <set name="detCargoses" table="det_cargos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetCargos" />
+        </set>
+        <set name="historicoSubcuentasesForEsquemaTarifariosArticulos" table="historico_subcuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifarios_articulos" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoSubcuentas" />
+        </set>
+        <set name="esqTarInvtSubCuentases" table="esq_tar_invt_sub_cuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarInvtSubCuentas" />
+        </set>
+        <set name="historicoSubcuentasesForEsquemaTarifariosServicios" table="historico_subcuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifarios_servicios" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoSubcuentas" />
+        </set>
+        <set name="paquetizacionDetFacturas" table="paquetizacion_det_factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PaquetizacionDetFactura" />
+        </set>
+        <set name="presuOdoConvDetServProgs" table="presu_odo_conv_det_serv_prog" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PresuOdoConvDetServProg" />
+        </set>
+        <set name="poolesEsquemaTarifarios" table="pooles_esquema_tarifario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.PoolesEsquemaTarifario" />
+        </set>
+        <set name="tarifasInvConEntSubs" table="tarifas_inv_con_ent_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasInvConEntSub" />
+        </set>
+        <set name="esqTarInventariosContratos" table="esq_tar_inventarios_contrato" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarInventariosContrato" />
+        </set>
+        <set name="reliquidacionTarifasesForEsqTarServNuevo" table="reliquidacion_tarifas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esq_tar_serv_nuevo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReliquidacionTarifas" />
+        </set>
+        <set name="tarifasIsses" table="tarifas_iss" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasIss" />
+        </set>
+        <set name="logEsqTarProcContratos" table="log_esq_tar_proc_contrato" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEsqTarProcContrato" />
+        </set>
+        <set name="historicoSubcuentasesForEsquemaTarServOriginal" table="historico_subcuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tar_serv_original" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoSubcuentas" />
+        </set>
+        <set name="reliquidacionTarifasesForEsqTarServOriginal" table="reliquidacion_tarifas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esq_tar_serv_original" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReliquidacionTarifas" />
+        </set>
+        <set name="logTarifasServicioses" table="log_tarifas_servicios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogTarifasServicios" />
+        </set>
+        <set name="tarifasInventarios" table="tarifas_inventario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasInventario" />
+        </set>
+        <set name="tarifasProcConEntSubs" table="tarifas_proc_con_ent_sub" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasProcConEntSub" />
+        </set>
+        <set name="tarifasSoats" table="tarifas_soat" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.TarifasSoat" />
+        </set>
+        <set name="incluServicioConvenios" table="inclu_servicio_convenio" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true">
+                    <comment>Relaci&#243;n al esquema tarifario con el cual se calculan las tarifas</comment>
+                </column>
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.IncluServicioConvenio" />
+        </set>
+        <set name="reliquidacionTarifasesForEsqTarArtNuevo" table="reliquidacion_tarifas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esq_tar_art_nuevo" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.ReliquidacionTarifas" />
+        </set>
+        <set name="honorariosEspServs" table="honorarios_esp_serv" schema="odontologia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HonorariosEspServ" />
+        </set>
+        <set name="historicoSubcuentasesForEsquemaTarArtiOriginal" table="historico_subcuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tar_arti_original" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HistoricoSubcuentas" />
+        </set>
+        <set name="esqTarProcSubCuentases" table="esq_tar_proc_sub_cuentas" schema="manejopaciente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarProcSubCuentas" />
+        </set>
+        <set name="solCirugiaPorServicios" table="sol_cirugia_por_servicio" schema="salascirugia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.SolCirugiaPorServicio" />
+        </set>
+        <set name="logEsqTarInvContratos" table="log_esq_tar_inv_contrato" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.LogEsqTarInvContrato" />
+        </set>
+        <set name="detFacturaSolicituds" table="det_factura_solicitud" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.DetFacturaSolicitud" />
+        </set>
+        <set name="honorariosPools" table="honorarios_pool" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.HonorariosPool" />
+        </set>
+        <set name="esqTarProcedimientoContratos" table="esq_tar_procedimiento_contrato" schema="inventarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esquema_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="com.servinte.axioma.orm.EsqTarProcedimientoContrato" />
+        </set>
+    </class>
+</hibernate-mapping>

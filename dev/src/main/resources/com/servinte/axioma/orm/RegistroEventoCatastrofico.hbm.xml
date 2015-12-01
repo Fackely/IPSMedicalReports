@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2010 3:58:54 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.RegistroEventoCatastrofico" table="registro_evento_catastrofico" schema="manejopaciente">
+        <id name="codigo" type="long">
+            <column name="codigo" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="zonasDomicilio" class="com.servinte.axioma.orm.ZonasDomicilio" fetch="select">
+            <column name="zona_urbana_evento" length="1" />
+        </many-to-one>
+        <many-to-one name="natEventoCatastrofico" class="com.servinte.axioma.orm.NatEventoCatastrofico" fetch="select">
+            <column name="naturaleza_evento" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRevCiu7" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_transporta" length="10" />
+            <column name="departamento_transporta" length="10" />
+            <column name="pais_transporta" length="10" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_modifica" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRevCiu6" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_exp_id_transporta" length="10" />
+            <column name="depto_exp_id_transporta" length="10" />
+            <column name="pais_exp_id_transporta" length="10" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRevCiu1" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_empresa" length="10" />
+            <column name="departamento_empresa" length="10" />
+            <column name="pais_empresa" length="10" />
+        </many-to-one>
+        <many-to-one name="tiposIdentificacion" class="com.servinte.axioma.orm.TiposIdentificacion" fetch="select">
+            <column name="tipo_id_transporta" length="3" />
+        </many-to-one>
+        <many-to-one name="ciudadesByFkRevCiu2" class="com.servinte.axioma.orm.Ciudades" fetch="select">
+            <column name="ciudad_evento" length="10" />
+            <column name="departamento_evento" length="10" />
+            <column name="pais_evento" length="10" />
+        </many-to-one>
+        <property name="empresaTrabaja" type="string">
+            <column name="empresa_trabaja" length="256" not-null="true" />
+        </property>
+        <property name="fechaEvento" type="date">
+            <column name="fecha_evento" length="13" />
+        </property>
+        <property name="direccionEvento" type="string">
+            <column name="direccion_evento" length="128" not-null="true" />
+        </property>
+        <property name="apellidoNombreTransporta" type="string">
+            <column name="apellido_nombre_transporta" length="128" not-null="true" />
+        </property>
+        <property name="numeroIdTransporta" type="string">
+            <column name="numero_id_transporta" length="20" not-null="true" />
+        </property>
+        <property name="telefonoTransporta" type="string">
+            <column name="telefono_transporta" length="20" not-null="true" />
+        </property>
+        <property name="direccionTransporta" type="string">
+            <column name="direccion_transporta" length="128" not-null="true" />
+        </property>
+        <property name="transportaVictimaDesde" type="string">
+            <column name="transporta_victima_desde" length="125" not-null="true" />
+        </property>
+        <property name="transportaVictimaHasta" type="string">
+            <column name="transporta_victima_hasta" length="125" not-null="true" />
+        </property>
+        <property name="tipoTransporte" type="string">
+            <column name="tipo_transporte" length="5" not-null="true" />
+        </property>
+        <property name="placaVehiculoTranporta" type="string">
+            <column name="placa_vehiculo_tranporta" length="15" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="3" not-null="true" />
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13" not-null="true" />
+        </property>
+        <property name="horaModifica" type="string">
+            <column name="hora_modifica" length="5" not-null="true" />
+        </property>
+        <property name="sgsss" type="string">
+            <column name="sgsss" length="4" not-null="true" />
+        </property>
+        <property name="tipoRegimen" type="string">
+            <column name="tipo_regimen" length="5" />
+        </property>
+        <property name="horaOcurrencia" type="string">
+            <column name="hora_ocurrencia" length="5" not-null="true" />
+        </property>
+        <property name="descOcurrencia" type="string">
+            <column name="desc_ocurrencia" />
+        </property>
+        <property name="descOtroEvento" type="string">
+            <column name="desc_otro_evento" length="25" />
+        </property>
+        <property name="tipoReferencia" type="string">
+            <column name="tipo_referencia" length="3" />
+        </property>
+        <property name="fechaRemision" type="date">
+            <column name="fecha_remision" length="13" />
+        </property>
+        <property name="horaRemision" type="string">
+            <column name="hora_remision" length="5" />
+        </property>
+        <property name="institucion" type="int">
+            <column name="institucion" not-null="true" />
+        </property>
+        <property name="codInscripRemitente" type="string">
+            <column name="cod_inscrip_remitente" length="10" />
+        </property>
+        <property name="profesionalRemite" type="string">
+            <column name="profesional_remite" length="128" />
+        </property>
+        <property name="cargoProfesionalRemitente" type="string">
+            <column name="cargo_profesional_remitente" length="64" />
+        </property>
+        <property name="fechaAceptacion" type="date">
+            <column name="fecha_aceptacion" length="13" />
+        </property>
+        <property name="horaAceptacion" type="string">
+            <column name="hora_aceptacion" length="5" />
+        </property>
+        <property name="codInscripReceptor" type="string">
+            <column name="cod_inscrip_receptor" length="10" />
+        </property>
+        <property name="profesionalRecibe" type="string">
+            <column name="profesional_recibe" length="128" />
+        </property>
+        <property name="cargoProfesionalRecibe" type="string">
+            <column name="cargo_profesional_recibe" length="64" />
+        </property>
+        <property name="otroTipoTrans" type="string">
+            <column name="otro_tipo_trans" length="20" />
+        </property>
+        <property name="zonaTransporte" type="java.lang.Character">
+            <column name="zona_transporte" length="1" />
+        </property>
+        <property name="totalFacAmpQx" type="big_decimal">
+            <column name="total_fac_amp_qx" precision="12" />
+        </property>
+        <property name="totalReclamoAmpQx" type="big_decimal">
+            <column name="total_reclamo_amp_qx" precision="12" />
+        </property>
+        <property name="totalFacAmpTx" type="big_decimal">
+            <column name="total_fac_amp_tx" precision="12" />
+        </property>
+        <property name="totalReclamoAmpTx" type="big_decimal">
+            <column name="total_reclamo_amp_tx" precision="12" />
+        </property>
+        <property name="esReclamacion" type="java.lang.Character">
+            <column name="es_reclamacion" length="1" />
+        </property>
+        <property name="furips" type="java.lang.Character">
+            <column name="furips" length="1" />
+        </property>
+        <property name="furpro" type="java.lang.Character">
+            <column name="furpro" length="1" />
+        </property>
+        <property name="furtran" type="java.lang.Character">
+            <column name="furtran" length="1" />
+        </property>
+        <property name="respGlosa" type="string">
+            <column name="resp_glosa" length="8" />
+        </property>
+        <property name="nroRadicadoAnterior" type="string">
+            <column name="nro_radicado_anterior" length="10" />
+        </property>
+        <property name="nroConsReclamacion" type="java.lang.Long">
+            <column name="nro_cons_reclamacion" precision="12" scale="0" />
+        </property>
+        <property name="protesis" type="string">
+            <column name="protesis" length="100" />
+        </property>
+        <property name="valorProtesis" type="big_decimal">
+            <column name="valor_protesis" precision="15" />
+        </property>
+        <property name="adaptacionProtesis" type="string">
+            <column name="adaptacion_protesis" length="100" />
+        </property>
+        <property name="valorAdaptacionProtesis" type="big_decimal">
+            <column name="valor_adaptacion_protesis" precision="15" />
+        </property>
+        <property name="rehabilitacion" type="string">
+            <column name="rehabilitacion" length="100" />
+        </property>
+        <property name="valorRehabilitacion" type="big_decimal">
+            <column name="valor_rehabilitacion" precision="15" />
+        </property>
+        <set name="ingresoses" inverse="false" lazy="true" table="ingresos_reg_even_catastrofico" fetch="select">
+            <key>
+                <column name="codigo_registro" precision="10" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.servinte.axioma.orm.Ingresos">
+                <column name="ingreso" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

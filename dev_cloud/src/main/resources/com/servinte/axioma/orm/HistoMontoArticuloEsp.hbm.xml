@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2010 2:49:56 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.servinte.axioma.orm.HistoMontoArticuloEsp" table="histo_monto_articulo_esp" schema="facturacion">
+        <id name="codigoPk" type="int">
+            <column name="codigo_pk" />
+            <generator class="sequence" >
+				<param name="sequence">facturacion.seq_his_monto_art_esp</param>
+			</generator>
+        </id>
+        <many-to-one name="histoDetalleMonto" class="com.servinte.axioma.orm.HistoDetalleMonto" fetch="select">
+            <column name="histo_detalle_monto" not-null="true">
+                <comment>C&#195;&#179;digo PK del hist&#195;&#179;rico del detalle del monto de cobro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="usuarios" class="com.servinte.axioma.orm.Usuarios" fetch="select">
+            <column name="usuario_registra" length="30" not-null="true">
+                <comment>Usuario quien realiza el registro</comment>
+            </column>
+        </many-to-one>
+        <property name="articulo" type="java.lang.Integer">
+            <column name="articulo">
+                <comment>C&#195;&#179;digo PK del art&#195;&#173;culo relacionado</comment>
+            </column>
+        </property>
+        <property name="cantidadArticulos" type="java.lang.Integer">
+            <column name="cantidad_articulos">
+                <comment>Cantidad de art&#195;&#173;culos a agrupar</comment>
+            </column>
+        </property>
+        <property name="cantidadMonto" type="int">
+            <column name="cantidad_monto" not-null="true">
+                <comment>Cantidad de montos a cobrar</comment>
+            </column>
+        </property>
+        <property name="valorMonto" type="double">
+            <column name="valor_monto" precision="17" scale="17" not-null="true">
+                <comment>Valor del monto a cobrar</comment>
+            </column>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true">
+                <comment>Fecha en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="horaRegistro" type="string">
+            <column name="hora_registro" length="5" not-null="true">
+                <comment>Hora en que se realiza el registro</comment>
+            </column>
+        </property>
+        <property name="accionRealizada" type="string">
+            <column name="accion_realizada" length="3" not-null="true">
+                <comment>Acci&#195;&#179;n que se realiz&#195;&#179; sobre el registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
