@@ -125,9 +125,9 @@ public class GeneradorSubReporteNotasEnfermeria {
 		DataSource dataSource = new DataSource("fecha","anotaciones","usuarioAnotacion");
 			for (int i = 0; i <notasEnfermeria.size(); i++) {
 				String anotacion = String.valueOf(notasEnfermeria.get(i).get("anotacion"));
-				if((anotacion.length()%89) < 20){
-					anotacion += anotacion+"\n";
-				}
+				//Se agrega un salto de línea para dar solución a la MT 13996
+				anotacion += "\n";
+				
 				dataSource.add(String.valueOf(notasEnfermeria.get(i).get("fecha_hora_reg")),anotacion,String.valueOf(notasEnfermeria.get(i).get("nombre_usuario")));
 			}
 		return dataSource;
