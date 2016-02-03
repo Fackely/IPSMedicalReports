@@ -860,6 +860,7 @@ public class ImpresionResumenAtencionesAction extends Action
 				//La impresion en el detalle de un ingreso se convierte en subreporte para que el reporte quede igual 
 				//al reporte de varios ingresos.
 				report = generarPdf(dto,filtro,mundo.obtenerEncabezadoPaciente(con, forma.getIdIngreso()),usuario,paciente,institucionActual,forma.getIdIngreso(),imprimirSoloNotasAclaratorias,primerIngreso,/*varios*/true);
+				list.add(cmp.subreport(report));
 			}else{
 
 				//EN CASO DE IMPRIMIR VARIOS INGRESOS
