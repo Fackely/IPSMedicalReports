@@ -992,7 +992,6 @@ public class GeneradorSubReporteHojaQuirurgica {
 			
 			matriz.newRow();
 		
-			VerticalListBuilder componenteVerticalLabel=cmp.verticalList();
 			TextFieldBuilder<String> vacio=cmp.text("").setStyle(stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT));
 			
 			for(NotaAclaratoriaDto notaAclaratoriaDto:notasAclaratoriaDto){
@@ -1010,20 +1009,20 @@ public class GeneradorSubReporteHojaQuirurgica {
 					fecha.append(notaAclaratoriaDto.getHoraGrabacion());
 				}
 				
-				
+				 //CASO: 14439-Se agrega cada componenteLabel a la matriz
 				contenido=cmp.text(fecha.toString()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloNegrillaL).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				
 				componenteLabel=cmp.horizontalList(vacio.setWidth(5));
 				componenteLabel.add(contenido);
-				
-				componenteVerticalLabel.add(componenteLabel);
+				matriz.add(componenteLabel);
+				matriz.newRow();
 				
 				contenido=cmp.text(notaAclaratoriaDto.getDescripcion()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloSubTituloSinBold).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				
 				componenteLabel=cmp.horizontalList(vacio.setWidth(5));
 				componenteLabel.add(contenido);
-				
-				componenteVerticalLabel.add(componenteLabel);
+				matriz.add(componenteLabel);
+				matriz.newRow();
 				
 				
 				StringBuffer usuario=new StringBuffer();
@@ -1039,13 +1038,9 @@ public class GeneradorSubReporteHojaQuirurgica {
 				
 				componenteLabel.add(contenido);
 				
-				componenteVerticalLabel.add(componenteLabel);
+				matriz.add(componenteLabel);
+				matriz.newRow();
 			}
-			
-	
-			componenteLabel=cmp.horizontalList(componenteVerticalLabel).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde));
-			matriz.add(componenteLabel);
-			
 			matriz.newRow();
 			
 		}
