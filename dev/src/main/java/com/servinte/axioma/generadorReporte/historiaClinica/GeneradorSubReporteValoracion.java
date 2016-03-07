@@ -31,11 +31,13 @@ import net.sf.dynamicreports.report.constant.LineStyle;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.definition.expression.DRIPropertyExpression;
 import util.ConstantesBD;
 import util.ConstantesCamposParametrizables;
 import util.ConstantesIntegridadDominio;
 import util.InfoDatosInt;
 import util.UtilidadBD;
+import util.UtilidadImpresion;
 import util.UtilidadTexto;
 import util.Utilidades;
 import util.ValoresPorDefecto;
@@ -267,6 +269,9 @@ public class GeneradorSubReporteValoracion
 							listaComponentes.add(createComponentConductaSeguir(seccionFija, mundoValoracion));
 								/* Alberto Ovalle mt 5749: se modifica la vista de la valoracion de Urgencias*/
 								List<DtoValoracion> listaOrdenada = mundoValoracion.obtenerValoracionesOrdenada(con,usuario, paciente,String.valueOf(numeroSolicitud));
+								for (DtoValoracion valoracion : listaOrdenada) {
+									valoracion.setValor(UtilidadImpresion.arreglarCampoStringImpresion(valoracion.getValor()));
+								}
 								List <HorizontalListBuilder> listaOrden = createComponentConductaVistaObservaciones(seccionFija,listaOrdenada);
 								for(HorizontalListBuilder comHor:listaOrden) {
 								listaComponentes.add(comHor);
@@ -1045,6 +1050,7 @@ public class GeneradorSubReporteValoracion
 			{
 				titulo=cmp.text(obs.getLabel()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				
+				obs.setValor(UtilidadImpresion.arreglarCampoStringImpresion(obs.getValor()));
 				
 				texto=cmp.text(obs.getValor()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				if(!UtilidadTexto.isEmpty(String.valueOf(texto))){

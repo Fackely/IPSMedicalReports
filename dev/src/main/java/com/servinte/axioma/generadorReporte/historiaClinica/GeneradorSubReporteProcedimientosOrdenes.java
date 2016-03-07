@@ -24,6 +24,7 @@ import net.sf.jasperreports.engine.JRDataSource;
 
 import org.apache.struts.util.MessageResources;
 
+import util.UtilidadImpresion;
 import util.UtilidadTexto;
 import util.Utilidades;
 import util.reportes.dinamico.DataSource;
@@ -124,7 +125,7 @@ public class GeneradorSubReporteProcedimientosOrdenes {
 				dataSource.add(String.valueOf(mapa.get("codigocups_"+i))+" - "+String.valueOf(mapa.get("servicio_"+i)),
 						String.valueOf(mapa.get("urgente_"+i)),
 						String.valueOf(mapa.get("pos_"+i)),
-						String.valueOf(mapa.get("observaciones_"+i)));
+						String.valueOf(UtilidadImpresion.arreglarCampoStringImpresion((String)mapa.get("observaciones_"+i))));
 			}
 		}
 
