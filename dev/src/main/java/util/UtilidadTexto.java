@@ -2252,5 +2252,30 @@ public class UtilidadTexto {
         return 0;
     }
 	
+    /**
+     * Método que parte un texto dado, cada n cantidad de caracteres (sin partir palabras)
+     * @param texto
+     * @return
+     */
+    public static String partirTextoNCaracteres (String texto, int maximoCaracteres) {
+    	String [] arregloTexto = texto.split(" ");
+		int caracteres = 0;
+		StringBuilder strBldr = new StringBuilder();
+		for (String s : arregloTexto) {
+			if (caracteres <= maximoCaracteres) {
+				if (s.contains("\n")) {
+					strBldr.append(s);
+					caracteres = s.length();
+				} else {
+					strBldr.append(s + " ");
+					caracteres += s.length() + 1;
+				}
+			} else {
+				strBldr.append("\n" + s + " ");
+				caracteres = s.length() + 1;
+			}
+		}
+		return strBldr.toString();
+    }
 
 }

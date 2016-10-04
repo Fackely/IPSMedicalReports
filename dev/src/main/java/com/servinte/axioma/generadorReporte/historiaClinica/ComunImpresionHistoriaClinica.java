@@ -101,7 +101,7 @@ public class ComunImpresionHistoriaClinica
 						{
 							DtoSeccionParametrizable seccion = (DtoSeccionParametrizable)elemento;
 							if(obtenerCantidadInformacionSeccionesAMostrar(itemComponent, seccion)>0){
-								titulo=cmp.text((elemento.getDescripcion()).toUpperCase()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla).setHorizontalAlignment(HorizontalAlignment.LEFT));
+								titulo=cmp.text((elemento.getDescripcion()).toUpperCase()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla).setHorizontalAlignment(HorizontalAlignment.LEFT)).setStretchWithOverflow(Boolean.TRUE);
 								itemComponent=cmp.horizontalList(titulo);
 							}
 							if(itemComponent==null){
@@ -238,7 +238,7 @@ public class ComunImpresionHistoriaClinica
 				else
 				{
 					//Cuando itemComponent es null se inicializa con el título de la sección
-					TextFieldBuilder<String> titulo=cmp.text((seccion.getDescripcion()+"").toUpperCase()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla).setHorizontalAlignment(HorizontalAlignment.LEFT));
+					TextFieldBuilder<String> titulo=cmp.text((seccion.getDescripcion()+"").toUpperCase()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla).setHorizontalAlignment(HorizontalAlignment.LEFT)).setStretchWithOverflow(Boolean.TRUE);
 					itemComponent=cmp.horizontalList(titulo);
 				}
 
@@ -271,7 +271,7 @@ public class ComunImpresionHistoriaClinica
 					//se valida si se debe pintar el titulo de la sección
 					if(pintarTituloSeccionDentroSeccion(subseccion2.getCampos(), subseccion2)){
 						itemComponent.newRow();
-						texto=cmp.text(subseccion2.getDescripcion()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
+						texto=cmp.text(subseccion2.getDescripcion()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 						itemComponent.add(texto);
 					}
 				}	
@@ -301,7 +301,7 @@ public class ComunImpresionHistoriaClinica
 							//Se valida si se debe pintar el título de la seccion 
 							if(pintarTituloSeccionDentroSeccion(subseccion3.getCampos(), subseccion3)){
 								itemComponent.newRow();
-								texto=cmp.text(subseccion3.getDescripcion()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
+								texto=cmp.text(subseccion3.getDescripcion()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 								itemComponent.add(texto);
 							}
 						}	
@@ -575,7 +575,8 @@ public class ComunImpresionHistoriaClinica
 		for (int i = 0; i < listaCadenasComponenetes.size(); i++) {
 			if(!flagContieneVacios){
 				for (int j = 0; j <listaCadenasComponenetes.get(i).size(); j++) {
-					texto=cmp.text(listaCadenasComponenetes.get(i).get(j)).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
+					String str = UtilidadTexto.partirTextoNCaracteres(listaCadenasComponenetes.get(i).get(j), 120);
+					texto=cmp.text(str).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 					itemComponent.add(texto);
 				}
 			}
@@ -827,11 +828,11 @@ public class ComunImpresionHistoriaClinica
 				}////
 				else if (campo.getTipoHtml().equals(ConstantesCamposParametrizables.campoTipoText))
 				{
-					texto=cmp.text(campo.getEtiqueta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
+					texto=cmp.text(campo.getEtiqueta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 					itemComponent.add(texto);
 
 					String tempo=campo.getValor()+(!campo.getNombreUnidad().equals("")&&!campo.getValor().equals("")?" "+campo.getNombreUnidad():"");
-					texto=cmp.text(tempo).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
+					texto=cmp.text(tempo).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 					itemComponent.add(texto);
 				}
 				else if (campo.getTipoHtml().equals(ConstantesCamposParametrizables.campoTipoLabel))
