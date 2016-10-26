@@ -1251,7 +1251,8 @@ public class GeneradorSubReporteValoracion
 				    HorizontalListBuilder itemComponent=cmp.horizontalList(titulo);
 
 					texto5=cmp.text(tempo5).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
-					texto6=cmp.text(tempo6).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
+					//MT 14683 Se agrega salto de línea
+					texto6=cmp.text(tempo6+"\n\n").setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
 					texto7=cmp.text(tempo7).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));				
 					
 
