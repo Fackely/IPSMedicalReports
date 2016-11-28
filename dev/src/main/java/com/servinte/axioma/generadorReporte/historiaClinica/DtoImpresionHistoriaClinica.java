@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import com.princetonsa.dto.historiaClinica.enfermeria.escalaGlasgow.DtoEscalaGlasgow;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.*;
 import com.princetonsa.mundo.PersonaBasica;
 import com.princetonsa.mundo.UsuarioBasico;
 import com.servinte.axioma.dto.manejoPaciente.DtoNotaAclaratoria;
@@ -277,6 +279,16 @@ public class DtoImpresionHistoriaClinica
 	private Boolean imprimirNotasAclaratorias;
 	
 	private List<DtoNotaAclaratoria> listaNotasAclaratorias;
+	
+	//Caso:15565
+	private Boolean imprimirEscalaGlasgow;
+	private List<DtoEscalaGlasgow> historicoEscalaGlasgowList = new ArrayList<>();
+	private Boolean imprimirHojaNeurologica;
+	private List<DtoPupila> pupilaIzquierdaList;
+	private List<DtoPupila> pupilaDerechaList;
+	private List<DtoConvulsion> convulsiones;
+	private List<DtoControlEsfinteres> controlEsfinteresList;
+	private List<DtoFuerzaMuscular> fuerzaMuscularList;
 
 	/**
 	 * Constructor de clase 
@@ -329,7 +341,16 @@ public class DtoImpresionHistoriaClinica
 		this.imprimirNotasGeneralesCirugia=false;
 		this.imprimirNotasRecuperacion=false;
 		this.imprimirNotasAclaratorias=false;
-		this.listaNotasAclaratorias=new ArrayList<DtoNotaAclaratoria>();
+		this.listaNotasAclaratorias=new ArrayList<>();
+		
+		this.imprimirEscalaGlasgow = Boolean.FALSE;
+		this.imprimirHojaNeurologica = Boolean.FALSE;
+		this.historicoEscalaGlasgowList = new ArrayList<>();
+		this.pupilaIzquierdaList = new ArrayList<>();
+		this.pupilaDerechaList = new ArrayList<>();
+		this.convulsiones = new ArrayList<>();
+		this.controlEsfinteresList = new ArrayList<>();
+		this.fuerzaMuscularList = new ArrayList<>();
 	}
 
 
@@ -1303,7 +1324,71 @@ public class DtoImpresionHistoriaClinica
 		this.listaNotasAclaratorias = listaNotasAclaratorias;
 	}
 
+	public Boolean getImprimirEscalaGlasgow() {
+		return imprimirEscalaGlasgow;
+	}
 	
+	public void setImprimirEscalaGlasgow(Boolean imprimirEscalaGlasgow) {
+		this.imprimirEscalaGlasgow = imprimirEscalaGlasgow;
+	}
+	
+	public Boolean getImprimirHojaNeurologica() {
+		return imprimirHojaNeurologica;
+	}
+	
+	public void setImprimirHojaNeurologica(Boolean imprimirHojaNeurologica) {
+		this.imprimirHojaNeurologica = imprimirHojaNeurologica;
+	}
+	
+	public List<DtoEscalaGlasgow> getHistoricoEscalaGlasgowList() {
+		return historicoEscalaGlasgowList;
+	}
+	
+	public void setHistoricoEscalaGlasgowList(
+			List<DtoEscalaGlasgow> historicoEscalaGlasgowList) {
+		this.historicoEscalaGlasgowList = historicoEscalaGlasgowList;
+	}
 
+	public List<DtoPupila> getPupilaDerechaList() {
+		return pupilaDerechaList;
+	}
+	
+	public void setPupilaDerechaList(List<DtoPupila> pupilaDerechaList) {
+		this.pupilaDerechaList = pupilaDerechaList;
+	}
+	
+	public List<DtoPupila> getPupilaIzquierdaList() {
+		return pupilaIzquierdaList;
+	}
+	
+	public void setPupilaIzquierdaList(List<DtoPupila> pupilaIzquierdaList) {
+		this.pupilaIzquierdaList = pupilaIzquierdaList;
+	}
+	
+	public List<DtoConvulsion> getConvulsiones() {
+		return convulsiones;
+	}
+	
+	public void setConvulsiones(List<DtoConvulsion> convulsiones) {
+		this.convulsiones = convulsiones;
+	}
+	
+	public List<DtoControlEsfinteres> getControlEsfinteresList() {
+		return controlEsfinteresList;
+	}
+	
+	public void setControlEsfinteresList(
+			List<DtoControlEsfinteres> controlEsfinteresList) {
+		this.controlEsfinteresList = controlEsfinteresList;
+	}
+	
+	public List<DtoFuerzaMuscular> getFuerzaMuscularList() {
+		return fuerzaMuscularList;
+	}
+	
+	public void setFuerzaMuscularList(List<DtoFuerzaMuscular> fuerzaMuscularList) {
+		this.fuerzaMuscularList = fuerzaMuscularList;
+	}
+	
 }
 

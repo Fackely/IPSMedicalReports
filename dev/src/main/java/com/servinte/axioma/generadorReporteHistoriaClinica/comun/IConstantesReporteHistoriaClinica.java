@@ -155,6 +155,7 @@ public interface IConstantesReporteHistoriaClinica {
 	public static final String constanteEvoluciones="evoluciones";
 	public static final String constanteResultadosLaboratorios="resultadosLaboratorios";
 	public static final String constanteHojaNeurologica="hojaNeurologica";
+	public static final String constanteEscalaGlasgow="escalaGlasgow";
 	public static final String constanteEstadoGenerarReporte="generarReporte";
 	public static final String constanteNotasGeneralesCirugia="notasGeneralesCirugia";
 	public static final String constanteNotasRecuperacion="notasRecuperacion";

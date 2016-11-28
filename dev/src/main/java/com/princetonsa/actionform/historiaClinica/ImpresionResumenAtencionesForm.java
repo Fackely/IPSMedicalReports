@@ -15,6 +15,11 @@ import org.apache.struts.validator.ValidatorForm;
 import util.InfoDatos;
 
 import com.princetonsa.dto.historiaClinica.DtoIngresoHistoriaClinica;
+import com.princetonsa.dto.historiaClinica.enfermeria.escalaGlasgow.DtoEscalaGlasgow;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.DtoControlEsfinteres;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.DtoConvulsion;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.DtoFuerzaMuscular;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.DtoPupila;
 import com.princetonsa.dto.historiaClinica.parametrizacion.DtoComponente;
 import com.princetonsa.dto.odontologia.DtoAntecendenteOdontologico;
 import com.princetonsa.mundo.antecedentes.AntecedentePediatrico;
@@ -235,38 +240,39 @@ public class ImpresionResumenAtencionesForm extends ValidatorForm implements Ser
     private Collection escalasGlasgowInstitucionCCosto;
     
     /**
-     * Mapa que contiene el histï¿½rico de escala glasgow para
-     * ser mostrado en la impresiï¿½n de historia clï¿½nica
+     * Lista que contiene el histórico de escala glasgow para
+     * ser mostrado en la impresión de historia clínica
      */
-    private HashMap mapaHistoricoEscalaGlasgow;
+    private List<DtoEscalaGlasgow> historicoEscalaGlasgowList;
     
     //  -----------------------------SUB-SECCION PUPILAS-------------------------------------------------//
     /**
-     * Mapa que contiene el histï¿½rico de pupilas para
-     * ser mostrado en la impresiï¿½n de historia clï¿½nica
+     * Lista que contiene el histórico de pupilas para
+     * ser mostrado en la impresión de historia clínica
      */
-    private HashMap mapaHistoricoPupilas;
-    
+	private List<DtoPupila> pupilaIzquierdaList;
+	private List<DtoPupila> pupilaDerechaList;
+	
     //  -----------------------------SUB-SECCION CONVULSIONES-------------------------------------------------//
     /**
-     * Mapa que contiene el histï¿½rico de convulsiones para
-     * ser mostrado en la impresiï¿½n de historia clï¿½nica
+     * Lista que contiene el histórico de convulsiones para
+     * ser mostrado en la impresión de historia clínica
      */
-    private HashMap mapaHistoricoConvulsiones;
+	private List<DtoConvulsion> convulsiones;
     
     //-----------------------------SUB-SECCION CONTROL ESFINTERES-------------------------------------------------//
     /**
-     * Mapa que contiene el histï¿½rico de control de esfinteres para
-     * ser mostrado en la impresiï¿½n de historia clï¿½nica
+     * Lista que contiene el histórico de control de esfinteres para
+     * ser mostrado en la impresión de historia clínica
      */
-    private HashMap mapaHistoricoControlEsfinteres;
+	private List<DtoControlEsfinteres> controlEsfinteresList;
     
     //-----------------------------SUB-SECCION FUERZA MUSCULAR-------------------------------------------------//
     /**
-     * Mapa que contiene el histï¿½rico de fuerza muscular para
-     * ser mostrado en la impresiï¿½n de historia clï¿½nica
+     * Lista que contiene el histórico de fuerza muscular para
+     * ser mostrado en la impresión de historia clínica
      */
-    private HashMap mapaHistoricoFuerzaMuscular;
+	private List<DtoFuerzaMuscular> fuerzaMuscularList;
     
     //------------------------------ SECCION CIRUGï¿½AS ------------------------------------------//
     /**
@@ -637,24 +643,20 @@ public class ImpresionResumenAtencionesForm extends ValidatorForm implements Ser
 		
 		//------------------ESCALA GLASGOW --------------------------//
 		this.escalasGlasgowInstitucionCCosto=new ArrayList();
-		this.mapaHistoricoEscalaGlasgow=new HashMap();
-		this.mapaHistoricoEscalaGlasgow.put("numRegistros","0");
+		this.historicoEscalaGlasgowList = new ArrayList<>();
 		
 		//------------------PUPILAS --------------------------//
-		this.mapaHistoricoPupilas=new HashMap();
-		this.mapaHistoricoPupilas.put("numRegistros","0");
+		this.pupilaDerechaList = new ArrayList<>();
+		this.pupilaIzquierdaList = new ArrayList<>();
 		
 		//----------------- CONVULSIONES ------------------------//
-		this.mapaHistoricoConvulsiones=new HashMap();
-		this.mapaHistoricoConvulsiones.put("numRegistros","0");
+		this.convulsiones = new ArrayList<>();
 		
 		//----------------- CONTROL DE ESFINTERES ------------------------//
-		this.mapaHistoricoControlEsfinteres=new HashMap();
-		this.mapaHistoricoControlEsfinteres.put("numRegistros","0");
+		this.controlEsfinteresList = new ArrayList<>();
 		
 		//----------------- FUERZA MUSCULAR ------------------------//
-		this.mapaHistoricoFuerzaMuscular=new HashMap();
-		this.mapaHistoricoFuerzaMuscular.put("numRegistros","0");
+		this.fuerzaMuscularList = new ArrayList<>();
 		
 		//------------------------ CIRUGï¿½AS ------------------------------//
 		this.mapaCodigosPeticionCirugia=new HashMap();
@@ -1120,45 +1122,54 @@ public class ImpresionResumenAtencionesForm extends ValidatorForm implements Ser
 		this.escalasGlasgowInstitucionCCosto = escalasGlasgowInstitucionCCosto;
 	}
 
-	public HashMap getMapaHistoricoEscalaGlasgow() {
-		return mapaHistoricoEscalaGlasgow;
+	public List<DtoEscalaGlasgow> getHistoricoEscalaGlasgowList() {
+		return historicoEscalaGlasgowList;
+	}
+	
+	public void setHistoricoEscalaGlasgowList(
+			List<DtoEscalaGlasgow> historicoEscalaGlasgowList) {
+		this.historicoEscalaGlasgowList = historicoEscalaGlasgowList;
 	}
 
-	public void setMapaHistoricoEscalaGlasgow(HashMap mapaHistoricoEscalaGlasgow) {
-		this.mapaHistoricoEscalaGlasgow = mapaHistoricoEscalaGlasgow;
+	public List<DtoPupila> getPupilaDerechaList() {
+		return pupilaDerechaList;
 	}
-
-	public HashMap getMapaHistoricoPupilas() {
-		return mapaHistoricoPupilas;
+	
+	public void setPupilaDerechaList(List<DtoPupila> pupilaDerechaList) {
+		this.pupilaDerechaList = pupilaDerechaList;
 	}
-
-	public void setMapaHistoricoPupilas(HashMap mapaHistoricoPupilas) {
-		this.mapaHistoricoPupilas = mapaHistoricoPupilas;
+	
+	public List<DtoPupila> getPupilaIzquierdaList() {
+		return pupilaIzquierdaList;
 	}
-
-	public HashMap getMapaHistoricoConvulsiones() {
-		return mapaHistoricoConvulsiones;
+	
+	public void setPupilaIzquierdaList(List<DtoPupila> pupilaIzquierdaList) {
+		this.pupilaIzquierdaList = pupilaIzquierdaList;
 	}
-
-	public void setMapaHistoricoConvulsiones(HashMap mapaHistoricoConvulsiones) {
-		this.mapaHistoricoConvulsiones = mapaHistoricoConvulsiones;
+	
+	public List<DtoConvulsion> getConvulsiones() {
+		return convulsiones;
 	}
-
-	public HashMap getMapaHistoricoControlEsfinteres() {
-		return mapaHistoricoControlEsfinteres;
+	
+	public void setConvulsiones(List<DtoConvulsion> convulsiones) {
+		this.convulsiones = convulsiones;
 	}
-
-	public void setMapaHistoricoControlEsfinteres(
-			HashMap mapaHistoricoControlEsfinteres) {
-		this.mapaHistoricoControlEsfinteres = mapaHistoricoControlEsfinteres;
+	
+	public List<DtoControlEsfinteres> getControlEsfinteresList() {
+		return controlEsfinteresList;
 	}
-
-	public HashMap getMapaHistoricoFuerzaMuscular() {
-		return mapaHistoricoFuerzaMuscular;
+	
+	public void setControlEsfinteresList(
+			List<DtoControlEsfinteres> controlEsfinteresList) {
+		this.controlEsfinteresList = controlEsfinteresList;
 	}
-
-	public void setMapaHistoricoFuerzaMuscular(HashMap mapaHistoricoFuerzaMuscular) {
-		this.mapaHistoricoFuerzaMuscular = mapaHistoricoFuerzaMuscular;
+	
+	public List<DtoFuerzaMuscular> getFuerzaMuscularList() {
+		return fuerzaMuscularList;
+	}
+	
+	public void setFuerzaMuscularList(List<DtoFuerzaMuscular> fuerzaMuscularList) {
+		this.fuerzaMuscularList = fuerzaMuscularList;
 	}
 	
 	public HashMap getMapaCodigosPeticionCirugia() {

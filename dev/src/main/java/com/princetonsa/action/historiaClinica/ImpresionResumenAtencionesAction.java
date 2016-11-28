@@ -46,6 +46,7 @@ import util.reportes.dinamico.GeneradorReporteDinamico;
 import com.princetonsa.action.cartera.ConceptosCarteraAction;
 import com.princetonsa.actionform.AntecedentesGinecoObstetricosForm;
 import com.princetonsa.actionform.historiaClinica.ImpresionResumenAtencionesForm;
+import com.princetonsa.actionform.resumenAtenciones.ResumenAtencionesForm;
 import com.princetonsa.dao.sqlbase.SqlBaseImpresionResumenAtencionesDao;
 import com.princetonsa.dao.sqlbase.SqlBaseResumenAtencionesDao;
 import com.princetonsa.dto.historiaClinica.DtoIngresoHistoriaClinica;
@@ -135,7 +136,7 @@ public class ImpresionResumenAtencionesAction extends Action
 	private static int codigoSeccionNotasGeneralesCirugia=32;
 	private static int codigoSeccionNotasRecuperacion=33;
 	private static int codigoSeccionNotasAclaratorias=34;
-
+	private static int codigoSeccionEscalaGlasgow=35;
 
 
 
@@ -507,6 +508,24 @@ public class ImpresionResumenAtencionesAction extends Action
 					forma.setRepuestaInterpretacionProcedimientos(mundo.consultarRespuestaInterpretacionProcedimientos(con, crearValueObjectFiltro(forma,ImpresionResumenAtencionesAction.codigoSeccionRespInterprataProcedimientos)));
 					dto.setInterpretacionRespuesta(forma.getRepuestaInterpretacionProcedimientos());
 					dto.setImprimirInterpretacionRespuesta(true);
+				}
+				
+				//SECCION ESCALA GLASGOW 
+				if(UtilidadTexto.getBoolean(String.valueOf(forma.getSecciones(IConstantesReporteHistoriaClinica.constanteEscalaGlasgow)))){
+					accionCargarSeccionEscalaGlasgow(con, mundoRegistroEnfer, forma, usuario.getCodigoInstitucionInt(), paciente.getCodigoArea(), UtilidadesManejoPaciente.obtenerCuentasXIngreso(con, forma.getIdIngreso()+""), fechaInicialBD, fechaFinalBD, forma.getHoraInicial(), forma.getHoraFinal(), forma.getFiltroAsocio());
+					dto.setHistoricoEscalaGlasgowList(forma.getHistoricoEscalaGlasgowList());
+					dto.setImprimirEscalaGlasgow(Boolean.TRUE);
+				}
+				
+				//SECCION HOJA NEUROLOGICA 
+				if(UtilidadTexto.getBoolean(String.valueOf(forma.getSecciones(IConstantesReporteHistoriaClinica.constanteHojaNeurologica)))){
+					accionCargarSeccionHojaNeurologica(con, mundoRegistroEnfer, forma, usuario.getCodigoInstitucionInt(), paciente.getCodigoArea(), UtilidadesManejoPaciente.obtenerCuentasXIngreso(con, forma.getIdIngreso()+""), fechaInicialBD, fechaFinalBD, forma.getHoraInicial(), forma.getHoraFinal(), forma.getFiltroAsocio());
+					dto.setPupilaDerechaList(forma.getPupilaDerechaList());
+					dto.setPupilaIzquierdaList(forma.getPupilaIzquierdaList());
+					dto.setConvulsiones(forma.getConvulsiones());
+					dto.setControlEsfinteresList(forma.getControlEsfinteresList());
+					dto.setFuerzaMuscularList(forma.getFuerzaMuscularList());
+					dto.setImprimirHojaNeurologica(Boolean.TRUE);
 				}
 
 				//SECCION ANOTACIONES DE ENFERMERIA
@@ -1661,6 +1680,7 @@ public class ImpresionResumenAtencionesAction extends Action
 		forma.setSecciones("resumenParcialHistoriaClinica",validacionSeccion(listaSecciones, "20") );
 		forma.setSecciones("ordenesAmbulatorias",validacionSeccion(listaSecciones, "21") );
 		forma.setSecciones("notasAclaratorias",validacionSeccion(listaSecciones, "22") );
+		forma.setSecciones("escalaGlasgow",validacionSeccion(listaSecciones, "23") );
 
 		logger.info("Salio al metodo mostrarSeccionesVariosIngresos");
 	}
@@ -1734,6 +1754,7 @@ public class ImpresionResumenAtencionesAction extends Action
 		forma.setSecciones("valoracionesEnfermeria", mostrarSeccion(forma,ImpresionResumenAtencionesAction.codigoSeccionValoracionEnfermeria)+"");
 		forma.setSecciones("notasEnfermeria", mostrarSeccion(forma,ImpresionResumenAtencionesAction.codigoSeccionNotasEnfermeria)+"");
 		forma.setSecciones("hojaNeurologica", mostrarSeccion(forma,ImpresionResumenAtencionesAction.codigoSeccionHojaNeurologica)+"");
+		forma.setSecciones("escalaGlasgow", mostrarSeccion(forma,ImpresionResumenAtencionesAction.codigoSeccionEscalaGlasgow)+"");
 		forma.setSecciones("administracionMedicamentos", mostrarSeccion(forma,ImpresionResumenAtencionesAction.codigoSeccionAdminMedicamentos)+"");
 		forma.setSecciones("consumoInsumos", mostrarSeccion(forma,ImpresionResumenAtencionesAction.codigoSeccionConsumoInsumos)+"");
 		forma.setSecciones("cirugias", mostrarSeccion(forma,ImpresionResumenAtencionesAction.codigoSeccionCirugias)+"");
@@ -3277,6 +3298,17 @@ public class ImpresionResumenAtencionesAction extends Action
 
 		return mapaCuidadosEspeciales;
 	}
+	
+	private void accionCargarSeccionEscalaGlasgow(Connection con, RegistroEnfermeria mundoRegEnfer,ImpresionResumenAtencionesForm forma, int institucion, int centroCosto, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) {
+		//-----------Se consultan las especificaciones Glasgow por institución centro de costo-----------//
+		forma.setEscalasGlasgowInstitucionCCosto(mundoRegEnfer.consultarTiposInstitucionCCosto(con,institucion, cuentas, 12));
+	 	
+	 	//----Se quitan los tipos de escala glasgow en la coleccion------//
+		forma.setEscalasGlasgowInstitucionCCosto(Utilidades.coleccionSinRegistrosRepetidos(forma.getEscalasGlasgowInstitucionCCosto(), "codigo_tipo"));
+	 	
+	 	//-----Se consulta el histórico de escala glasgow de acuerdo a los parámetros de búsqueda de la impresion hc-----//
+		forma.setHistoricoEscalaGlasgowList(mundoRegEnfer.consultarEscalaGlasgowHistoImpresionHC(con, cuentas,fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
+}
 
 	/**
 	 * Método que consulta la información de la sección Hoja Neurológica para la impresión
@@ -3296,26 +3328,18 @@ public class ImpresionResumenAtencionesAction extends Action
 	 */
 	private void accionCargarSeccionHojaNeurologica(Connection con, RegistroEnfermeria mundoRegEnfer,ImpresionResumenAtencionesForm forma, int institucion, int centroCosto, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) 
 	{
-		//-----------Se consultan las especificaciones Glasgow por institución centro de costo-----------//
-		forma.setEscalasGlasgowInstitucionCCosto(mundoRegEnfer.consultarTiposInstitucionCCosto(con,institucion, cuentas, 12));
-
-		//----Se quitan los tipos de escala glasgow en la coleccion------//
-		forma.setEscalasGlasgowInstitucionCCosto(Utilidades.coleccionSinRegistrosRepetidos(forma.getEscalasGlasgowInstitucionCCosto(), "codigo_tipo"));
-
-		//-----Se consulta el histórico de escala glasgow de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		forma.setMapaHistoricoEscalaGlasgow(mundoRegEnfer.consultarEscalaGlasgowHistoImpresionHC(con,cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion));
-
 		//-----Se consulta el histórico de pupilas de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		forma.setMapaHistoricoPupilas(mundoRegEnfer.consultarPupilasHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion));
-
-		//----- Se consulta el histórico de convulsiones de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		forma.setMapaHistoricoConvulsiones(mundoRegEnfer.consultarConvulsionesHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion));
-
-		//----- Se consulta el histórico de control de esfinteres de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		forma.setMapaHistoricoControlEsfinteres(mundoRegEnfer.consultarControlEsfinteresHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion));
-
-		//----- Se consulta el histórico de fuerza muscular de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		forma.setMapaHistoricoFuerzaMuscular(mundoRegEnfer.consultarFuerzaMuscularHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion));
+		forma.setPupilaDerechaList(mundoRegEnfer.consultarPupilasHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, "", 'D'));
+		forma.setPupilaIzquierdaList(mundoRegEnfer.consultarPupilasHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, "", 'I'));
+	 	
+	 	//----- Se consulta el histórico de convulsiones de acuerdo a los parámetros de búsqueda de la impresion hc-----//
+		forma.setConvulsiones(mundoRegEnfer.consultarConvulsionesHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
+	 	
+	 	//----- Se consulta el histórico de control de esfinteres de acuerdo a los parámetros de búsqueda de la impresion hc-----//
+		forma.setControlEsfinteresList(mundoRegEnfer.consultarControlEsfinteresHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
+	 	
+	 	//----- Se consulta el histórico de fuerza muscular de acuerdo a los parámetros de búsqueda de la impresion hc-----//
+		forma.setFuerzaMuscularList(mundoRegEnfer.consultarFuerzaMuscularHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
 	}
 
 	/**

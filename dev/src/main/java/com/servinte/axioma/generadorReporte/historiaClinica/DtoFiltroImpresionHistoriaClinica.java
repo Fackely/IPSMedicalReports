@@ -150,6 +150,7 @@ public class DtoFiltroImpresionHistoriaClinica
 	 */
 	private boolean imprimirCirugia;
 	
+	private boolean imprimirEscalaGlasgow;
 
 	public DtoFiltroImpresionHistoriaClinica()
 	{
@@ -180,6 +181,7 @@ public class DtoFiltroImpresionHistoriaClinica
 		this.imprimirCateteresSondas=false;
 		this.imprimirCuidadosEspeciales=false;
 		this.imprimirCirugia=false;
+		this.imprimirEscalaGlasgow = false;
 	}
 
 
@@ -570,8 +572,12 @@ public class DtoFiltroImpresionHistoriaClinica
 		this.imprimirCirugia = imprimirCirugia;
 	}
 
-
+	public boolean isImprimirEscalaGlasgow() {
+		return imprimirEscalaGlasgow;
+	}
 	
-	
+	public void setImprimirEscalaGlasgow(boolean imprimirEscalaGlasgow) {
+		this.imprimirEscalaGlasgow = imprimirEscalaGlasgow;
+	}
 	
 }

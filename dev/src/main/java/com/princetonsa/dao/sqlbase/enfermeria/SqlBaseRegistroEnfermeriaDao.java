@@ -12,6 +12,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -30,9 +31,12 @@ import util.ValoresPorDefecto;
 import util.historiaClinica.UtilidadesHistoriaClinica;
 
 import com.princetonsa.dao.DaoFactory;
+import com.princetonsa.dao.UtilidadesBDDao;
 import com.princetonsa.decorator.PreparedStatementDecorator;
 import com.princetonsa.decorator.ResultSetDecorator;
 import com.princetonsa.dto.enfermeria.DtoRegistroAlertaOrdenesMedicas;
+import com.princetonsa.dto.historiaClinica.enfermeria.escalaGlasgow.DtoEscalaGlasgow;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.*;
 import com.princetonsa.dto.manejoPaciente.DtoHistoricoValoracionEnfermeria;
 import com.princetonsa.dto.manejoPaciente.DtoResultadoLaboratorio;
 import com.princetonsa.dto.manejoPaciente.DtoValoracionEnfermeria;
@@ -5850,10 +5854,15 @@ public class SqlBaseRegistroEnfermeriaDao
 	 * 							 A -> Ambos	
 	 * @return
 	 */
-	public static HashMap consultarEscalaGlasgowHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion)
+	public static List<DtoEscalaGlasgow> consultarEscalaGlasgowHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion)
 	{
 		StringBuffer consultaBuffer=new StringBuffer();
 		String fechaHoraInicial="", fechaHoraFinal="", filtroCuenta="";
+		
+		PreparedStatementDecorator stm = null;
+		ResultSet rs = null;
+		
+		List<DtoEscalaGlasgow> escalaGlasgowList = new ArrayList<>();
 		
 		Vector cuentasConsulta= new Vector ();
  		if(mostrarInformacion.equals("A") || !UtilidadCadena.noEsVacio(mostrarInformacion))
@@ -5888,84 +5897,119 @@ public class SqlBaseRegistroEnfermeriaDao
  		}
 		
 		
-		
-		
-	  consultaBuffer.append("SELECT deg.enca_histo_reg_enfer AS codigo_histo_enfer,"+ 
-							"		to_char(ehre.fecha_registro, 'dd/mm/yyyy') || '-' ||  ehre.hora_registro||'' AS fecha_registro, "+
-							"		tgci.tipo_glasgow AS codigo_esc_glasgow,teg.nombre AS nombre_especificacion,eg.valor AS valor_glasgow, "+
-							"		deg.observacion AS observacion,getnombreusuario(ehre.usuario) AS usuario,x.total AS total "+ 
-							"			FROM detalle_escala_glasgow deg "+
-							"			INNER JOIN enca_histo_registro_enfer ehre ON (deg.enca_histo_reg_enfer=ehre.codigo) "+                   
-							"			INNER JOIN registro_enfermeria re ON (ehre.registro_enfer=re.codigo)                 "+  
-							"			INNER JOIN especificaciones_glasgow eg ON (deg.especificacion_glasgow=eg.codigo) "+
-							"			INNER JOIN tipo_glasgow_cc_inst tgci ON (eg.glasgow_cc_inst=tgci.codigo)           "+          
-							"			INNER JOIN tipo_especificacion_glasgow teg ON (eg.tipo_especificacion_glasgow=teg.codigo) "+
-							"			INNER JOIN "+
-							"				(SELECT deg.enca_histo_reg_enfer AS codigo_histo_enfer, sum(eg.valor) AS total "+ 
-							"				    FROM detalle_escala_glasgow deg  "+
-							"					INNER JOIN enca_histo_registro_enfer ehre ON (deg.enca_histo_reg_enfer=ehre.codigo) "+
-							"					INNER JOIN registro_enfermeria re ON (ehre.registro_enfer=re.codigo) "+
-							"					INNER JOIN especificaciones_glasgow eg ON (deg.especificacion_glasgow=eg.codigo) " +
-							filtroCuenta);
-	  
-	  consultaBuffer.append(" GROUP BY deg.enca_histo_reg_enfer "+
-							")x ON x.codigo_histo_enfer=ehre.codigo");
-	  
-	  consultaBuffer.append(filtroCuenta);
-		
-	  if(UtilidadCadena.noEsVacio(fechaInicial))
-		{
-			if(UtilidadCadena.noEsVacio(horaInicial))
-			{
-				fechaHoraInicial=fechaInicial+"-"+horaInicial;
-				consultaBuffer.append(" AND ehre.fecha_registro || '-' || ehre.hora_registro >= '"+fechaHoraInicial+"'");
+ 		String strFechaSql = "";
+ 		  
+		if (UtilidadCadena.noEsVacio(fechaInicial)) {
+			if (UtilidadCadena.noEsVacio(horaInicial)) {
+				fechaHoraInicial = fechaInicial + "-" + horaInicial;
+				strFechaSql.concat(" AND ehre.fecha_registro || '-' || ehre.hora_registro >= '" + fechaHoraInicial + "'");
+			} else {
+				fechaHoraInicial = fechaInicial;
+				strFechaSql.concat(" AND ehre.fecha_registro >= '" + fechaHoraInicial + "'");
 			}
-			else
-			{
-			   fechaHoraInicial=fechaInicial;
-			   consultaBuffer.append(" AND ehre.fecha_registro >= '"+fechaHoraInicial+"'");
+		}
+
+		if (UtilidadCadena.noEsVacio(fechaFinal)) {
+			if (UtilidadCadena.noEsVacio(horaFinal)) {
+				fechaHoraFinal = fechaFinal + "-" + horaFinal;
+				strFechaSql.concat(" AND ehre.fecha_registro || '-' || ehre.hora_registro <= '" + fechaHoraFinal + "'");
+			} else {
+				fechaHoraFinal = fechaFinal;
+				strFechaSql.concat(" AND ehre.fecha_registro <= '" + fechaHoraFinal + "'");
 			}
 		}
 		
-	  if(UtilidadCadena.noEsVacio(fechaFinal))
-		{
-			if(UtilidadCadena.noEsVacio(horaFinal))
-			{
-				fechaHoraFinal=fechaFinal+"-"+horaFinal;
-				consultaBuffer.append(" AND ehre.fecha_registro || '-' || ehre.hora_registro <= '"+fechaHoraFinal+"'");
-			}
-			else
-			{
-				fechaHoraFinal=fechaFinal;
-				consultaBuffer.append(" AND ehre.fecha_registro <= '"+fechaHoraFinal+"'");
-			}
-		}
-	  
-	  consultaBuffer.append(" ORDER BY ehre.fecha_registro || '-' || ehre.hora_registro, ehre.codigo");
-	  
-	  //logger.info("\n\nconsultarEscalaGlasgowHistoImpresionHC-->"+consultaBuffer.toString()+"\n");
 		
-	   try
-		{
-		PreparedStatementDecorator stm= new PreparedStatementDecorator(con.prepareStatement(consultaBuffer.toString(),ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
+	  consultaBuffer.append("WITH T1 AS( "
+							+ "SELECT DEG.ENCA_HISTO_REG_ENFER, "
+							+ "  (SELECT TGCI.TIPO_GLASGOW FROM TIPO_GLASGOW_CC_INST TGCI WHERE EG.GLASGOW_CC_INST=TGCI.CODIGO) AS CODIGO_ESC_GLASGOW, "
+							+ "  (SELECT TEG.NOMBRE FROM TIPO_ESPECIFICACION_GLASGOW TEG WHERE EG.TIPO_ESPECIFICACION_GLASGOW=TEG.CODIGO) "
+							+ "   || ' (' || EG.VALOR || ')' AS DETALLE "
+							+ "FROM DETALLE_ESCALA_GLASGOW DEG "
+							+ "INNER JOIN ENCA_HISTO_REGISTRO_ENFER EHRE "
+							+ "ON (DEG.ENCA_HISTO_REG_ENFER=EHRE.CODIGO) "
+							+ "INNER JOIN REGISTRO_ENFERMERIA RE "
+							+ "ON (EHRE.REGISTRO_ENFER=RE.CODIGO) "
+							+ "INNER JOIN ESPECIFICACIONES_GLASGOW EG "
+							+ "ON (DEG.ESPECIFICACION_GLASGOW=EG.CODIGO) "
+							+ filtroCuenta + strFechaSql + "), "
+							+ "T2 AS( "
+							+ "SELECT DEG.ENCA_HISTO_REG_ENFER, "
+							+ "  EHRE.FECHA_REGISTRO, "
+							+ "  EHRE.HORA_REGISTRO, "
+							+ "  DEG.OBSERVACION, "
+							+ "  EHRE.USUARIO, "
+							+ "  SUM(EG.VALOR) AS TOTAL "
+							+ "FROM DETALLE_ESCALA_GLASGOW DEG "
+							+ "INNER JOIN ENCA_HISTO_REGISTRO_ENFER EHRE "
+							+ "ON (DEG.ENCA_HISTO_REG_ENFER=EHRE.CODIGO) "
+							+ "INNER JOIN REGISTRO_ENFERMERIA RE "
+							+ "ON (EHRE.REGISTRO_ENFER=RE.CODIGO) "
+							+ "INNER JOIN ESPECIFICACIONES_GLASGOW EG "
+							+ "ON (DEG.ESPECIFICACION_GLASGOW=EG.CODIGO) "
+							+ filtroCuenta + strFechaSql + " "
+							+ "GROUP BY DEG.ENCA_HISTO_REG_ENFER, "
+							+ "  EHRE.FECHA_REGISTRO, "
+							+ "  EHRE.HORA_REGISTRO, "
+							+ "  DEG.OBSERVACION, "
+							+ "  EHRE.USUARIO "
+							+ "ORDER BY DEG.ENCA_HISTO_REG_ENFER) "
+							+ "SELECT T2.ENCA_HISTO_REG_ENFER AS CODIGO, "
+							+ "  TO_CHAR(T2.FECHA_REGISTRO, 'DD/MM/YYYY') || '-' || T2.HORA_REGISTRO AS FECHA_REGISTRO, "
+							+ "  (SELECT T1.DETALLE FROM T1 WHERE T1.ENCA_HISTO_REG_ENFER = T2.ENCA_HISTO_REG_ENFER AND T1.CODIGO_ESC_GLASGOW = 1) AS APERT_OJOS, "
+							+ "  (SELECT T1.DETALLE FROM T1 WHERE T1.ENCA_HISTO_REG_ENFER = T2.ENCA_HISTO_REG_ENFER AND T1.CODIGO_ESC_GLASGOW = 2) AS RESP_VERB, "
+							+ "  (SELECT T1.DETALLE FROM T1 WHERE T1.ENCA_HISTO_REG_ENFER = T2.ENCA_HISTO_REG_ENFER AND T1.CODIGO_ESC_GLASGOW = 3) AS RESP_MOT, "
+							+ "  T2.OBSERVACION AS OBSERVACION, "
+							+ "  GETNOMBREUSUARIO(T2.USUARIO) AS USUARIO, "
+							+ "  T2.TOTAL AS TOTAL "
+							+ "  FROM T2 ");
+	  
+	  	try {
+	  		stm = new PreparedStatementDecorator(con.prepareStatement(consultaBuffer.toString(),ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
+	  		rs = stm.executeQuery();
+	  		
+	  		while (rs.next()) {
+	  			DtoEscalaGlasgow escalaGlasgow = new DtoEscalaGlasgow();
+	  			escalaGlasgow.setCodigo(rs.getBigDecimal("CODIGO"));
+	  			escalaGlasgow.setFechaHora(rs.getString("FECHA_REGISTRO"));
+	  			escalaGlasgow.setAperturaOjos(rs.getString("APERT_OJOS"));
+	  			escalaGlasgow.setRespuestaVerbal(rs.getString("RESP_VERB"));
+	  			escalaGlasgow.setRespuestaMotora(rs.getString("RESP_MOT"));
+	  			escalaGlasgow.setObservaciones(rs.getString("RESP_MOT"));
+	  			escalaGlasgow.setUsuario(rs.getString("USUARIO"));
+	  			escalaGlasgow.setEscalaGlasgow(obtenerClasificacionGlasgow(rs.getInt("TOTAL")));
+	  			escalaGlasgowList.add(escalaGlasgow);
+	  		}
 		
-		HashMap mapaRetorno=UtilidadBD.cargarValueObject(new ResultSetDecorator(stm.executeQuery()));
-		stm.close();
-		return mapaRetorno;
-		}
-		catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			logger.error("Error en consultarEscalaGlasgowHistoImpresionHC [SqlBaseRegistroEnfermeriaDao] "+e);
-			return null;
+		} finally {
+			UtilidadBD.cerrarObjetosPersistencia(stm, rs, null);
 		}
+	  	return escalaGlasgowList;
+	}
+	
+	public static String obtenerClasificacionGlasgow(int val) {
+		String clasificacionStr = new String("(" + String.valueOf(val) + ") ");
+		if (val == 15) {
+			clasificacionStr = clasificacionStr.concat("ALERTA");
+		} else if (val >= 13 && val <= 14) {
+			clasificacionStr = clasificacionStr.concat("SOMNOLENCIA");
+		} else if (val >= 11 && val <= 12) {
+			clasificacionStr = clasificacionStr.concat("OBNUBILADO");
+		} else if (val >= 8 && val <= 10) {
+			clasificacionStr = clasificacionStr.concat("ESTUPUROSO");
+		} else if (val >= 3 && val <= 7) {
+			clasificacionStr = clasificacionStr.concat("COMA");
+		}
+		return clasificacionStr;
 	}
 	
 	/**
 	 * Método que consulta el histórico de pupilas de acuerdo
 	 * a los parámetros de búsqueda para mostrarse en la impresión de historia clínica
 	 * @param con
-	 * @param codigoCuenta
-	 * @param cuentaAsocio
+	 * @param cuentas
 	 * @param fechaInicial
 	 * @param fechaFinal
 	 * @param horaInicial
@@ -5974,118 +6018,113 @@ public class SqlBaseRegistroEnfermeriaDao
 	 * 							 U -> Urgencias
 	 * 							 H -> Hospitalizacion
 	 * 							 A -> Ambos	
+	 * @param ladoChar ('I'zquierda o 'D'erecha)
 	 * @return
 	 */
-	public static HashMap consultarPupilasHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion)
-	{
-		StringBuffer consultaBuffer=new StringBuffer();
-		String fechaHoraInicial="", fechaHoraFinal="", filtroCuenta="",filtroFechaInicial="", filtroFechaFinal="";
+	public static List<DtoPupila> consultarPupilasHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion, char ladoChar) {
 		
+		List<DtoPupila> pupilas = new ArrayList<>();
+		
+		StringBuilder consulta = new StringBuilder();
+		String fechaHoraInicial="", fechaHoraFinal="", filtroCuenta="",filtroFechaInicial="", filtroFechaFinal="";
+		String ladoStr = (ladoChar == 'I' ? "IZQUIERDA" : "DERECHA");
+		
+		PreparedStatementDecorator stm = null;
+		ResultSet rs = null;
+		
+		consulta.append("SELECT  DP.ENCA_HISTO_REG_ENFER AS CODIGO_ENCA, "
+						+ "'" + ladoStr + "' AS PUPILA, "
+						+ "TO_CHAR(ENC.FECHA_REGISTRO,'DD/MM/YYYY') AS FECHA_REGISTRO, "
+						+ "ENC.HORA_REGISTRO||'' AS HORA_REGISTRO, "
+						+ "TPD.VALOR AS VALOR_TAMANO, "
+						+ "DAD.ABREVIATURA AS ABREVIATURA_TAMANO, "
+						+ "DAD.DESCRIPCION AS NOMBRE_TAMANO, "
+						+ "RPD.NOMBRE AS NOMBRE_REACCION, "
+						+ "DP." + ladoStr + "_OBSERVACIONES AS OBSERVACIONES, "
+						+ "GETNOMBREUSUARIO(ENC.USUARIO) AS USUARIO "
+						+ "FROM REGISTRO_ENFERMERIA RE "
+						+ "INNER JOIN ENCA_HISTO_REGISTRO_ENFER ENC ON(ENC.REGISTRO_ENFER=RE.CODIGO) "
+						+ "INNER JOIN DETALLE_CARACTE_PUPILA DP ON(DP.ENCA_HISTO_REG_ENFER=ENC.CODIGO) "
+						+ "INNER JOIN TAMANO_PUPILA TPD ON(TPD.VALOR=DP." + ladoStr + "_TAMANO) "
+						+ "INNER JOIN DESCRIPCION_ABREV_PUPILA DAD ON(DAD.CODIGO=TPD.DESCRIPCION_ABREVIATURA) "
+						+ "INNER JOIN REACCION_PUPILA RPD ON(RPD.ACRONIMO=DP." + ladoStr + "_REACCION) ");
+
 		Vector cuentasConsulta= new Vector ();
- 		if(mostrarInformacion.equals("A") || !UtilidadCadena.noEsVacio(mostrarInformacion))
-			filtroCuenta=" WHERE re.cuenta IN ("+cuentas+")";
- 		else
- 		{
+
+		if (mostrarInformacion.equals("A") || !UtilidadCadena.noEsVacio(mostrarInformacion)) {
+			filtroCuenta="WHERE re.cuenta IN ("+cuentas+") ";
+		} else {
  			String [] cuentaTmp=cuentas.split(",");
  			
- 			if(mostrarInformacion.equals("U"))
-			{
-	 			for (int i=0;i<cuentaTmp.length;i++)
-	 			{
+ 			if (mostrarInformacion.equals("U")) {
+	 			for (int i=0;i<cuentaTmp.length;i++) {
 	 				String viaIng=Utilidades.obtenerViaIngresoCuenta(con, cuentaTmp[i]+"");
-	 			 				
-	 				if (viaIng.equals(ConstantesBD.codigoViaIngresoUrgencias+""))
+	 				if (viaIng.equals(ConstantesBD.codigoViaIngresoUrgencias+"")) {
 	 					cuentasConsulta.add(cuentaTmp[i]);
+	 				}
 	 			}
-			}
-			else
-				if(mostrarInformacion.equals("H"))
-				{
-					for (int i=0;i<cuentaTmp.length;i++)
-		 			{
+			} else {
+				if (mostrarInformacion.equals("H")) {
+					for (int i=0;i<cuentaTmp.length;i++) {
 		 				String viaIng=Utilidades.obtenerViaIngresoCuenta(con, cuentaTmp[i]+"");
-		 			 				
-		 				if (viaIng.equals(ConstantesBD.codigoViaIngresoHospitalizacion+""))
+		 				if (viaIng.equals(ConstantesBD.codigoViaIngresoHospitalizacion+"")) {
 		 					cuentasConsulta.add(cuentaTmp[i]);
+		 				}
 		 			}
 				}
-					
-				filtroCuenta=" WHERE re.cuenta IN ("+ UtilidadTexto.convertirVectorACodigosSeparadosXComas(cuentasConsulta, false)+")";
+			}
+			filtroCuenta="WHERE re.cuenta IN ("+ UtilidadTexto.convertirVectorACodigosSeparadosXComas(cuentasConsulta, false)+") ";
  		}
-		
-		if(UtilidadCadena.noEsVacio(fechaInicial))
-		{
-			if(UtilidadCadena.noEsVacio(horaInicial))
-			{
+			
+		if (UtilidadCadena.noEsVacio(fechaInicial)) {
+			if (UtilidadCadena.noEsVacio(horaInicial)) {
 				fechaHoraInicial=fechaInicial+"-"+horaInicial;
-				filtroFechaInicial=" AND enc.fecha_registro || '-' || enc.hora_registro >= '"+fechaHoraInicial+"'";
-			}
-			else
-			{
+				filtroFechaInicial="AND enc.fecha_registro || '-' || enc.hora_registro >= '"+fechaHoraInicial+"' ";
+			} else {
 			   fechaHoraInicial=fechaInicial;
-			   filtroFechaInicial=" AND enc.fecha_registro >= '"+fechaHoraInicial+"'";
+			   filtroFechaInicial="AND enc.fecha_registro >= '"+fechaHoraInicial+"' ";
 			}
 		}
-		
-	  if(UtilidadCadena.noEsVacio(fechaFinal))
-		{
-			if(UtilidadCadena.noEsVacio(horaFinal))
-			{
+			
+		if (UtilidadCadena.noEsVacio(fechaFinal)) {
+			if (UtilidadCadena.noEsVacio(horaFinal)) {
 				fechaHoraFinal=fechaFinal+"-"+horaFinal;
-				filtroFechaFinal=" AND enc.fecha_registro || '-' || enc.hora_registro <= '"+fechaHoraFinal+"'";
-			}
-			else
-			{
+				filtroFechaFinal="AND enc.fecha_registro || '-' || enc.hora_registro <= '"+fechaHoraFinal+"' ";
+			} else {
 				fechaHoraFinal=fechaFinal;
-				filtroFechaFinal=" AND enc.fecha_registro <= '"+fechaHoraFinal+"'";
+				filtroFechaFinal="AND enc.fecha_registro <= '"+fechaHoraFinal+"' ";
 			}
 		}
-	  
-	  consultaBuffer.append("SELECT * FROM "+ 
-							"	( "+
-							"	SELECT  enca_histo_reg_enfer AS codigo_enca, 'Derecha' AS pupila, "+ 
-							"			to_char(enc.fecha_registro,'dd/mm/yyyy') AS fecha_registro,enc.hora_registro||'' AS hora_registro,enc.fecha_registro || '-' ||  enc.hora_registro AS fecha, " +
-							"			tpd.valor AS valor_tamano,dad.abreviatura AS abreviatura_tamano,dad.descripcion AS nombre_tamano,rpd.nombre AS nombre_reaccion, "+       
-							"			dp.derecha_observaciones AS observaciones, getnombreusuario(enc.usuario) AS usuario     "+
-							"				FROM registro_enfermeria re             "+
-							"					INNER JOIN enca_histo_registro_enfer enc ON(enc.registro_enfer=re.codigo) "+         
-							"					INNER JOIN detalle_caracte_pupila dp ON(dp.enca_histo_reg_enfer=enc.codigo) "+             
-							"					INNER JOIN tamano_pupila tpd ON(tpd.valor=dp.derecha_tamano) "+ 
-							"					INNER JOIN descripcion_abrev_pupila dad ON(dad.codigo=tpd.descripcion_abreviatura) "+ 
-							"					INNER JOIN reaccion_pupila rpd ON(rpd.acronimo=dp.derecha_reaccion) " +
-							filtroCuenta+filtroFechaInicial+filtroFechaFinal);
-	  
-	  consultaBuffer.append(" UNION " +
-	  						" SELECT  enca_histo_reg_enfer AS codigo_enca, 'Izquierda' AS pupila, "+ 
-							"		  to_char(enc.fecha_registro,'dd/mm/yyyy') AS fecha_registro,enc.hora_registro||'' AS hora_registro,enc.fecha_registro || '-' ||  enc.hora_registro AS fecha, " + 
-							"		  tpi.valor AS valor_tamano,dai.abreviatura AS abreviatura_tamano,dai.descripcion AS nombre_tamano,rpi.nombre AS nombre_reaccion, "+      
-							"		  dp.izquierda_observaciones AS observaciones, getnombreusuario(enc.usuario) AS usuario     "+ 
-							"			FROM registro_enfermeria re             "+
-							"				INNER JOIN enca_histo_registro_enfer enc ON(enc.registro_enfer=re.codigo) "+         
-							"				INNER JOIN detalle_caracte_pupila dp ON(dp.enca_histo_reg_enfer=enc.codigo) "+              
-							"				INNER JOIN tamano_pupila tpi ON(tpi.valor=dp.izquierda_tamano) "+
-							"				INNER JOIN descripcion_abrev_pupila dai ON(dai.codigo=tpi.descripcion_abreviatura) "+ 
-							"				INNER JOIN reaccion_pupila rpi ON(rpi.acronimo=dp.izquierda_reaccion) 	" +
-							filtroCuenta+filtroFechaInicial+filtroFechaFinal);
-	  
-	  consultaBuffer.append(")x "+
-			  				"	ORDER BY x.fecha,x.codigo_enca");
-	  
-	  //logger.info("\n\nconsultarPupilasHistoImpresionHC-->"+consultaBuffer.toString()+"\n");
 		
-	   try
-		{
-		PreparedStatementDecorator stm= new PreparedStatementDecorator(con.prepareStatement(consultaBuffer.toString(),ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
-		
-		HashMap mapaRetorno=UtilidadBD.cargarValueObject(new ResultSetDecorator(stm.executeQuery()));
-		stm.close();
-		return mapaRetorno;
-		}
-		catch (SQLException e)
-		{
+		consulta.append(filtroCuenta+filtroFechaInicial+filtroFechaFinal);
+		consulta.append("ORDER BY DP.ENCA_HISTO_REG_ENFER");
+	  
+		try {
+			stm = new PreparedStatementDecorator(con.prepareStatement(consulta.toString(),ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
+			
+			rs = stm.executeQuery();
+			
+			while (rs.next()) {
+				DtoPupila p = new DtoPupila();
+				p.setCodigo(rs.getBigDecimal("CODIGO_ENCA"));
+				p.setLado(ladoStr);
+				p.setFechaRegistro(rs.getString("FECHA_REGISTRO"));
+				p.setHoraRegistro(rs.getString("HORA_REGISTRO"));
+				p.setValorTamanio(rs.getInt("VALOR_TAMANO"));
+				p.setAbreviaturaTamanio(rs.getString("ABREVIATURA_TAMANO"));
+				p.setNombreTamanio(rs.getString("NOMBRE_TAMANO"));
+				p.setNombreReaccion(rs.getString("NOMBRE_REACCION"));
+				p.setObservaciones(rs.getString("OBSERVACIONES"));
+				p.setUsuario(rs.getString("USUARIO"));
+				pupilas.add(p);
+			}
+			
+		} catch (SQLException e) {
 			logger.error("Error en consultarPupilasHistoImpresionHC [SqlBaseRegistroEnfermeriaDao] "+e);
-			return null;
+		} finally {
+			UtilidadBD.cerrarObjetosPersistencia(stm, rs, null);
 		}
+		return pupilas;
 	}
 	
 	/**
@@ -6104,99 +6143,100 @@ public class SqlBaseRegistroEnfermeriaDao
 	 * 							 A -> Ambos	
 	 * @return
 	 */
-	public static HashMap consultarConvulsionesHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion)
-	{
-		StringBuffer consultaBuffer=new StringBuffer();
+	public static List<DtoConvulsion> consultarConvulsionesHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) {
+		StringBuilder consulta = new StringBuilder();
 		String fechaHoraInicial="", fechaHoraFinal="";
 		String filtroCuenta="";
-		consultaBuffer.append("SELECT ehre.codigo AS codigohistoregistro,to_char(ehre.fecha_registro,'dd/mm/yyyy') AS fecha_registro," +
-							  "		  ehre.hora_registro||'' AS hora_registro, tc.nombre as tipo_convulsion," +
-							  "		  getnombreusuario(ehre.usuario) AS nombre_usuario,dc.observacion AS observacion_convulsion "+ 
-							  "			  FROM detalle_convulsion dc "+
-							  "				INNER JOIN  enca_histo_registro_enfer ehre ON (ehre.codigo=dc.enca_histo_reg_enfer) "+ 
-							  "				INNER JOIN registro_enfermeria re ON (ehre.registro_enfer=re.codigo) "+
-							  "				INNER JOIN tipo_convulsion tc ON (dc.tipo_convulsion=tc.codigo)");
 		
+		PreparedStatementDecorator stm = null;
+		ResultSet rs = null;
+		
+		List<DtoConvulsion> convulsiones = new ArrayList<>();
+		
+		consulta.append("SELECT EHRE.CODIGO AS CODIGOHISTOREGISTRO, "
+			+ "TO_CHAR(EHRE.FECHA_REGISTRO,'DD/MM/YYYY') AS FECHA_REGISTRO, "
+			+ "EHRE.HORA_REGISTRO||'' AS HORA_REGISTRO, "
+			+ "TC.NOMBRE AS TIPO_CONVULSION, "
+			+ "GETNOMBREUSUARIO(EHRE.USUARIO) AS NOMBRE_USUARIO, "
+			+ "DC.OBSERVACION AS OBSERVACION_CONVULSION "
+			+ "FROM DETALLE_CONVULSION DC "
+			+ "INNER JOIN ENCA_HISTO_REGISTRO_ENFER EHRE ON (EHRE.CODIGO=DC.ENCA_HISTO_REG_ENFER) "
+			+ "INNER JOIN REGISTRO_ENFERMERIA RE ON (EHRE.REGISTRO_ENFER=RE.CODIGO) "
+			+ "INNER JOIN TIPO_CONVULSION TC ON (DC.TIPO_CONVULSION=TC.CODIGO)");
 
 		Vector cuentasConsulta= new Vector ();
- 		if(mostrarInformacion.equals("A") || !UtilidadCadena.noEsVacio(mostrarInformacion))
+ 		if (mostrarInformacion.equals("A") || !UtilidadCadena.noEsVacio(mostrarInformacion)) {
 			filtroCuenta=" WHERE re.cuenta IN ("+cuentas+")";
- 		else
- 		{
+ 		} else {
  			String [] cuentaTmp=cuentas.split(",");
  			
- 			if(mostrarInformacion.equals("U"))
-			{
-	 			for (int i=0;i<cuentaTmp.length;i++)
-	 			{
+ 			if (mostrarInformacion.equals("U")) {
+	 			for (int i=0;i<cuentaTmp.length;i++) {
 	 				String viaIng=Utilidades.obtenerViaIngresoCuenta(con, cuentaTmp[i]+"");
 	 			 				
-	 				if (viaIng.equals(ConstantesBD.codigoViaIngresoUrgencias+""))
+	 				if (viaIng.equals(ConstantesBD.codigoViaIngresoUrgencias+"")) {
 	 					cuentasConsulta.add(cuentaTmp[i]);
+	 				}
+	 			}
+			} else if (mostrarInformacion.equals("H")) {
+				for (int i=0;i<cuentaTmp.length;i++) {
+	 				String viaIng=Utilidades.obtenerViaIngresoCuenta(con, cuentaTmp[i]+"");
+	 			 				
+	 				if (viaIng.equals(ConstantesBD.codigoViaIngresoHospitalizacion+"")) {
+	 					cuentasConsulta.add(cuentaTmp[i]);
+	 				}
 	 			}
 			}
-			else
-				if(mostrarInformacion.equals("H"))
-				{
-					for (int i=0;i<cuentaTmp.length;i++)
-		 			{
-		 				String viaIng=Utilidades.obtenerViaIngresoCuenta(con, cuentaTmp[i]+"");
-		 			 				
-		 				if (viaIng.equals(ConstantesBD.codigoViaIngresoHospitalizacion+""))
-		 					cuentasConsulta.add(cuentaTmp[i]);
-		 			}
-				}
 					
-				filtroCuenta=" WHERE re.cuenta IN ("+ UtilidadTexto.convertirVectorACodigosSeparadosXComas(cuentasConsulta, false)+")";
+			filtroCuenta=" WHERE re.cuenta IN ("+ UtilidadTexto.convertirVectorACodigosSeparadosXComas(cuentasConsulta, false)+")";
  		}
 		
-    		consultaBuffer.append(filtroCuenta);
+ 		consulta.append(filtroCuenta);
 		
-		if(UtilidadCadena.noEsVacio(fechaInicial))
-			{
-				if(UtilidadCadena.noEsVacio(horaInicial))
-				{
+		if (UtilidadCadena.noEsVacio(fechaInicial)) {
+			if (UtilidadCadena.noEsVacio(horaInicial)) {
 					fechaHoraInicial=fechaInicial+"-"+horaInicial;
-					consultaBuffer.append(" AND ehre.fecha_registro || '-' || ehre.hora_registro >= '"+fechaHoraInicial+"'");
-				}
-				else
-				{
-				   fechaHoraInicial=fechaInicial;
-				   consultaBuffer.append(" AND ehre.fecha_registro >= '"+fechaHoraInicial+"'");
-				}
+					consulta.append(" AND ehre.fecha_registro || '-' || ehre.hora_registro >= '"+fechaHoraInicial+"'");
+			} else {
+				fechaHoraInicial=fechaInicial;
+				consulta.append(" AND ehre.fecha_registro >= '"+fechaHoraInicial+"'");
 			}
+		}
 			
-		if(UtilidadCadena.noEsVacio(fechaFinal))
-			{
-				if(UtilidadCadena.noEsVacio(horaFinal))
-				{
-					fechaHoraFinal=fechaFinal+"-"+horaFinal;
-					consultaBuffer.append(" AND ehre.fecha_registro || '-' || ehre.hora_registro <= '"+fechaHoraFinal+"'");
-				}
-				else
-				{
-					fechaHoraFinal=fechaFinal;
-					consultaBuffer.append(" AND ehre.fecha_registro <= '"+fechaHoraFinal+"'");
-				}
+		if (UtilidadCadena.noEsVacio(fechaFinal)) {
+			if (UtilidadCadena.noEsVacio(horaFinal)) {
+				fechaHoraFinal=fechaFinal+"-"+horaFinal;
+				consulta.append(" AND ehre.fecha_registro || '-' || ehre.hora_registro <= '"+fechaHoraFinal+"'");
+			} else {
+				fechaHoraFinal=fechaFinal;
+				consulta.append(" AND ehre.fecha_registro <= '"+fechaHoraFinal+"'");
 			}
+		}
 		
-		consultaBuffer.append(" ORDER BY ehre.fecha_registro,ehre.hora_registro,ehre.codigo");
-		
-		 //logger.info("\n\nconsultarConvulsionesHistoImpresionHC-->"+consultaBuffer.toString()+"\n");
+		consulta.append(" ORDER BY ehre.fecha_registro,ehre.hora_registro,ehre.codigo");
 			
-		   try
-			{
-			PreparedStatementDecorator stm= new PreparedStatementDecorator(con.prepareStatement(consultaBuffer.toString(),ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
+		try {
+			stm = new PreparedStatementDecorator(con.prepareStatement(consulta.toString(),ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
 			
-			HashMap mapaRetorno=UtilidadBD.cargarValueObject(new ResultSetDecorator(stm.executeQuery()));
-			stm.close();
-			return mapaRetorno;
+			rs = stm.executeQuery();
+			
+			while (rs.next()) {
+				DtoConvulsion c = new DtoConvulsion();
+				c.setCodigo(rs.getBigDecimal("CODIGOHISTOREGISTRO"));
+				c.setFecha(rs.getString("FECHA_REGISTRO"));
+				c.setHora(rs.getString("HORA_REGISTRO"));
+				c.setObservacion(rs.getString("OBSERVACION_CONVULSION"));
+				c.setTipoConvulsion(rs.getString("TIPO_CONVULSION"));
+				c.setUsuario(rs.getString("NOMBRE_USUARIO"));
+				convulsiones.add(c);
 			}
-			catch (SQLException e)
-			{
-				logger.error("Error en consultarConvulsionesHistoImpresionHC [SqlBaseRegistroEnfermeriaDao] "+e);
-				return null;
-			}
+		} catch (SQLException e) {
+			logger.error("Error en consultarConvulsionesHistoImpresionHC [SqlBaseRegistroEnfermeriaDao] "+e);
+			return null;
+		} finally {
+			UtilidadBD.cerrarObjetosPersistencia(stm, rs, null);
+		}
+		return convulsiones;
 	}
 	
 	/**
@@ -6215,99 +6255,103 @@ public class SqlBaseRegistroEnfermeriaDao
 	 * 							 A -> Ambos	
 	 * @return
 	 */
-	public static HashMap consultarControlEsfinteresHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion)
-	{
-		StringBuffer consultaBuffer=new StringBuffer();
+	public static List<DtoControlEsfinteres> consultarControlEsfinteresHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) {
+		StringBuilder consulta = new StringBuilder();
 		String fechaHoraInicial="", fechaHoraFinal="";
 		String filtroCuenta="";
-		consultaBuffer.append("SELECT ehre.codigo AS codigohisto,to_char(ehre.fecha_registro,'dd/mm/yyyy') AS fecha_registro," +
-							  "		  ehre.hora_registro||'' AS hora_registro, cce.descripcion as control_esfinter, " +
-							  "		  getnombreusuario(ehre.usuario) AS nombre_usuario, dce.observacion AS observacion, cce.ausente AS ausente "+  
-							  "			FROM detalle_control_esfinteres dce  "+
-							  "				INNER JOIN caract_control_esfinter cce ON(dce.caracte_control_esfinter=cce.codigo) "+  
-							  "				INNER JOIN enca_histo_registro_enfer ehre ON(dce.enca_histo_reg_enfer=ehre.codigo) "+
-							  "				INNER JOIN registro_enfermeria re ON(ehre.registro_enfer=re.codigo) ");
+		
+		PreparedStatementDecorator stm = null;
+		ResultSet rs = null;
+		
+		List<DtoControlEsfinteres> controlEsfinteresList = new ArrayList<>();
+		
+		consulta.append("SELECT EHRE.CODIGO AS CODIGOHISTO, "
+							+ "TO_CHAR(EHRE.FECHA_REGISTRO,'DD/MM/YYYY') AS FECHA_REGISTRO, "
+							+ "EHRE.HORA_REGISTRO||'' AS HORA_REGISTRO, "
+							+ "CCE.DESCRIPCION AS CONTROL_ESFINTER, "
+							+ "GETNOMBREUSUARIO(EHRE.USUARIO) AS NOMBRE_USUARIO, "
+							+ "DCE.OBSERVACION AS OBSERVACION, "
+							+ "CCE.AUSENTE AS AUSENTE "
+							+ "FROM DETALLE_CONTROL_ESFINTERES DCE "
+							+ "INNER JOIN CARACT_CONTROL_ESFINTER CCE ON(DCE.CARACTE_CONTROL_ESFINTER=CCE.CODIGO) "
+							+ "INNER JOIN ENCA_HISTO_REGISTRO_ENFER EHRE ON(DCE.ENCA_HISTO_REG_ENFER=EHRE.CODIGO) "
+							+ "INNER JOIN REGISTRO_ENFERMERIA RE ON(EHRE.REGISTRO_ENFER=RE.CODIGO) ");
 		
 		Vector cuentasConsulta= new Vector ();
- 		if(mostrarInformacion.equals("A") || !UtilidadCadena.noEsVacio(mostrarInformacion))
+		
+ 		if (mostrarInformacion.equals("A") || !UtilidadCadena.noEsVacio(mostrarInformacion)) {
 			filtroCuenta=" WHERE re.cuenta IN ("+cuentas+")";
- 		else
- 		{
+ 		} else {
  			String [] cuentaTmp=cuentas.split(",");
  			
- 			if(mostrarInformacion.equals("U"))
-			{
-	 			for (int i=0;i<cuentaTmp.length;i++)
-	 			{
+ 			if (mostrarInformacion.equals("U")) {
+	 			for (int i=0;i<cuentaTmp.length;i++) {
 	 				String viaIng=Utilidades.obtenerViaIngresoCuenta(con, cuentaTmp[i]+"");
 	 			 				
-	 				if (viaIng.equals(ConstantesBD.codigoViaIngresoUrgencias+""))
+	 				if (viaIng.equals(ConstantesBD.codigoViaIngresoUrgencias+"")) {
 	 					cuentasConsulta.add(cuentaTmp[i]);
+	 				}
 	 			}
-			}
-			else
-				if(mostrarInformacion.equals("H"))
-				{
-					for (int i=0;i<cuentaTmp.length;i++)
-		 			{
-		 				String viaIng=Utilidades.obtenerViaIngresoCuenta(con, cuentaTmp[i]+"");
-		 			 				
-		 				if (viaIng.equals(ConstantesBD.codigoViaIngresoHospitalizacion+""))
+			} else if (mostrarInformacion.equals("H")) {
+				for (int i=0;i<cuentaTmp.length;i++) {
+					String viaIng=Utilidades.obtenerViaIngresoCuenta(con, cuentaTmp[i]+"");
+		 			
+					if (viaIng.equals(ConstantesBD.codigoViaIngresoHospitalizacion+"")) {
 		 					cuentasConsulta.add(cuentaTmp[i]);
-		 			}
+					}
 				}
-					
-				filtroCuenta=" WHERE re.cuenta IN ("+ UtilidadTexto.convertirVectorACodigosSeparadosXComas(cuentasConsulta, false)+")";
+			}
+ 			filtroCuenta=" WHERE re.cuenta IN ("+ UtilidadTexto.convertirVectorACodigosSeparadosXComas(cuentasConsulta, false)+")";
  		}
 		
-    		consultaBuffer.append(filtroCuenta);
+ 		consulta.append(filtroCuenta);
 		
+		if (UtilidadCadena.noEsVacio(fechaInicial)) {
+			if (UtilidadCadena.noEsVacio(horaInicial)) {
+				fechaHoraInicial=fechaInicial+"-"+horaInicial;
+				consulta.append(" AND ehre.fecha_registro || '-' || ehre.hora_registro >= '"+fechaHoraInicial+"'");
+			} else {
+				fechaHoraInicial=fechaInicial;
+				consulta.append(" AND ehre.fecha_registro >= '"+fechaHoraInicial+"'");
+			}
+		}
+			
+		if (UtilidadCadena.noEsVacio(fechaFinal)) {
+			if (UtilidadCadena.noEsVacio(horaFinal)) {
+				fechaHoraFinal=fechaFinal+"-"+horaFinal;
+				consulta.append(" AND ehre.fecha_registro || '-' || ehre.hora_registro <= '"+fechaHoraFinal+"'");
+			} else {
+				fechaHoraFinal=fechaFinal;
+				consulta.append(" AND ehre.fecha_registro <= '"+fechaHoraFinal+"'");
+			}
+		}
 		
-		if(UtilidadCadena.noEsVacio(fechaInicial))
-			{
-				if(UtilidadCadena.noEsVacio(horaInicial))
-				{
-					fechaHoraInicial=fechaInicial+"-"+horaInicial;
-					consultaBuffer.append(" AND ehre.fecha_registro || '-' || ehre.hora_registro >= '"+fechaHoraInicial+"'");
-				}
-				else
-				{
-				   fechaHoraInicial=fechaInicial;
-				   consultaBuffer.append(" AND ehre.fecha_registro >= '"+fechaHoraInicial+"'");
-				}
+		consulta.append(" ORDER BY ehre.fecha_registro,ehre.hora_registro,ehre.codigo");
+
+		try {
+			stm = new PreparedStatementDecorator(con.prepareStatement(consulta.toString(),ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
+			
+			rs = stm.executeQuery();
+			
+			while (rs.next()) {
+				DtoControlEsfinteres c = new DtoControlEsfinteres();
+				c.setCodigo(rs.getBigDecimal("CODIGOHISTO"));
+				c.setFecha(rs.getString("FECHA_REGISTRO"));
+				c.setHora(rs.getString("HORA_REGISTRO"));
+				c.setCtrlEsfinter(rs.getString("CONTROL_ESFINTER"));
+				c.setUsuario(rs.getString("NOMBRE_USUARIO"));
+				c.setObservaciones(rs.getString("OBSERVACION"));
+				c.setAusente(rs.getBoolean("AUSENTE"));
+				controlEsfinteresList.add(c);
 			}
 			
-		if(UtilidadCadena.noEsVacio(fechaFinal))
-			{
-				if(UtilidadCadena.noEsVacio(horaFinal))
-				{
-					fechaHoraFinal=fechaFinal+"-"+horaFinal;
-					consultaBuffer.append(" AND ehre.fecha_registro || '-' || ehre.hora_registro <= '"+fechaHoraFinal+"'");
-				}
-				else
-				{
-					fechaHoraFinal=fechaFinal;
-					consultaBuffer.append(" AND ehre.fecha_registro <= '"+fechaHoraFinal+"'");
-				}
-			}
-		
-		consultaBuffer.append(" ORDER BY ehre.fecha_registro,ehre.hora_registro,ehre.codigo");
-		
-		 //logger.info("\n\nconsultarControlEsfinteresHistoImpresionHC-->"+consultaBuffer.toString()+"\n");
-			
-		   try
-			{
-			PreparedStatementDecorator stm= new PreparedStatementDecorator(con.prepareStatement(consultaBuffer.toString(),ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
-			
-			HashMap mapaRetorno=UtilidadBD.cargarValueObject(new ResultSetDecorator(stm.executeQuery()));
-			stm.close();
-			return mapaRetorno;
-			}
-			catch (SQLException e)
-			{
-				logger.error("Error en consultarControlEsfinteresHistoImpresionHC [SqlBaseRegistroEnfermeriaDao] "+e);
-				return null;
-			}	
+		} catch (SQLException e) {
+			logger.error("Error en consultarControlEsfinteresHistoImpresionHC [SqlBaseRegistroEnfermeriaDao] "+e);
+			return null;
+		} finally {
+			UtilidadBD.cerrarObjetosPersistencia(stm, rs, null);
+		}
+		return controlEsfinteresList;
 	}
 	
 	/**
@@ -6326,145 +6370,199 @@ public class SqlBaseRegistroEnfermeriaDao
 	 * 							 A -> Ambos	
 	 * @return
 	 */
-	public static HashMap consultarFuerzaMuscularHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion)
-	{
+	public static List<DtoFuerzaMuscular> consultarFuerzaMuscularHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) {
 		StringBuffer consultaBuffer=new StringBuffer();
 		String fechaHoraInicial="", fechaHoraFinal="",filtroCuenta="",filtroFechaInicial="",filtroFechaFinal="";
 		
+		List<DtoFuerzaMuscular> fuerzaMuscularList = new ArrayList<>();
+		
+		PreparedStatementDecorator stm = null;
+		ResultSet rs = null;
+		
 		Vector cuentasConsulta= new Vector ();
- 		if(mostrarInformacion.equals("A") || !UtilidadCadena.noEsVacio(mostrarInformacion))
+		
+ 		if (mostrarInformacion.equals("A") || !UtilidadCadena.noEsVacio(mostrarInformacion)) {
 			filtroCuenta=" WHERE re.cuenta IN ("+cuentas+")";
- 		else
- 		{
+ 		} else {
  			String [] cuentaTmp=cuentas.split(",");
  			
- 			if(mostrarInformacion.equals("U"))
-			{
-	 			for (int i=0;i<cuentaTmp.length;i++)
-	 			{
+ 			if (mostrarInformacion.equals("U")) {
+	 			for (int i=0;i<cuentaTmp.length;i++) {
 	 				String viaIng=Utilidades.obtenerViaIngresoCuenta(con, cuentaTmp[i]+"");
 	 			 				
-	 				if (viaIng.equals(ConstantesBD.codigoViaIngresoUrgencias+""))
+	 				if (viaIng.equals(ConstantesBD.codigoViaIngresoUrgencias+"")) {
 	 					cuentasConsulta.add(cuentaTmp[i]);
+	 				}
 	 			}
-			}
-			else
-				if(mostrarInformacion.equals("H"))
-				{
-					for (int i=0;i<cuentaTmp.length;i++)
-		 			{
+			} else if(mostrarInformacion.equals("H")) {
+					for (int i=0;i<cuentaTmp.length;i++) {
 		 				String viaIng=Utilidades.obtenerViaIngresoCuenta(con, cuentaTmp[i]+"");
 		 			 				
-		 				if (viaIng.equals(ConstantesBD.codigoViaIngresoHospitalizacion+""))
+		 				if (viaIng.equals(ConstantesBD.codigoViaIngresoHospitalizacion+"")) {
 		 					cuentasConsulta.add(cuentaTmp[i]);
+		 				}
 		 			}
 				}
 					
 				filtroCuenta=" WHERE re.cuenta IN ("+ UtilidadTexto.convertirVectorACodigosSeparadosXComas(cuentasConsulta, false)+")";
  		}
 		
-    		
-		
-		
-		if(UtilidadCadena.noEsVacio(fechaInicial))
-		{
-			if(UtilidadCadena.noEsVacio(horaInicial))
-			{
+		if (UtilidadCadena.noEsVacio(fechaInicial)) {
+			if (UtilidadCadena.noEsVacio(horaInicial)) {
 				fechaHoraInicial=fechaInicial+"-"+horaInicial;
 				filtroFechaInicial=" AND ehre.fecha_registro || '-' || ehre.hora_registro >= '"+fechaHoraInicial+"'";
-			}
-			else
-			{
+			} else {
 			   fechaHoraInicial=fechaInicial;
 			   filtroFechaInicial=" AND ehre.fecha_registro >= '"+fechaHoraInicial+"'";
 			}
 		}
 		
-		if(UtilidadCadena.noEsVacio(fechaFinal))
-		{
-			if(UtilidadCadena.noEsVacio(horaFinal))
-			{
+		if (UtilidadCadena.noEsVacio(fechaFinal)) {
+			if (UtilidadCadena.noEsVacio(horaFinal)) {
 				fechaHoraFinal=fechaFinal+"-"+horaFinal;
 				filtroFechaFinal=" AND ehre.fecha_registro || '-' || ehre.hora_registro <= '"+fechaHoraFinal+"'";
-			}
-			else
-			{
+			} else {
 				fechaHoraFinal=fechaFinal;
 				filtroFechaFinal=" AND ehre.fecha_registro <= '"+fechaHoraFinal+"'";
 			}
 		}
 
 		//----------Miembro superior derecho ------------------//
-		consultaBuffer.append("SELECT * FROM ("+
-							  "		SELECT ehre.codigo AS codigohisto,to_char(ehre.fecha_registro, 'DD/MM/YYYY') AS fecha_registro,ehre.hora_registro||'' AS hora_registro, 'MIEMBRO SUPERIOR - Derecho' AS caracteristica, "+
-							  "			   CASE WHEN tfm.nombre IS NULL THEN '' ELSE tfm.nombre END AS nombre_fuerza,"+
-							  "			   CASE WHEN dfm.obs_m_sup_derecho IS NULL THEN '' ELSE dfm.obs_m_sup_derecho END AS observacion, "+
-							  "			   getnombreusuario(ehre.usuario) AS nombre_usuario,ehre.fecha_registro || '-' ||  ehre.hora_registro AS fecha, '1' AS orden "+
-							  "					FROM enca_histo_registro_enfer ehre "+
-							  "						INNER JOIN registro_enfermeria re on (ehre.registro_enfer=re.codigo) "+ 
-							  "						INNER JOIN detalle_fuerza_muscular dfm ON (ehre.codigo=dfm.enca_histo_reg_enfer) "+ 
-							  "						INNER JOIN tipo_fuerza_muscular tfm ON (dfm.m_superior_derecho=tfm.acronimo)" +
+		consultaBuffer.append("SELECT * "
+							+ "FROM "
+							+ "  (SELECT EHRE.CODIGO AS CODIGOHISTO, "
+							+ "    TO_CHAR(EHRE.FECHA_REGISTRO, 'DD/MM/YYYY') AS FECHA_REGISTRO, "
+							+ "    EHRE.HORA_REGISTRO || '' AS HORA_REGISTRO, "
+							+ "    'SUP' AS MIEMBRO, "
+							+ "    'Derecho' AS COSTADO, "
+							+ "    CASE "
+							+ "      WHEN TFM.NOMBRE IS NULL "
+							+ "      THEN '' "
+							+ "      ELSE TFM.NOMBRE "
+							+ "    END AS RESULTADO, "
+							+ "    CASE "
+							+ "      WHEN DFM.OBS_M_SUP_DERECHO IS NULL "
+							+ "      THEN '' "
+							+ "      ELSE DFM.OBS_M_SUP_DERECHO "
+							+ "    END AS OBSERVACION, "
+							+ "    GETNOMBREUSUARIO(EHRE.USUARIO) AS NOMBRE_USUARIO "
+							+ "  FROM ENCA_HISTO_REGISTRO_ENFER EHRE "
+							+ "  INNER JOIN REGISTRO_ENFERMERIA RE "
+							+ "  ON (EHRE.REGISTRO_ENFER=RE.CODIGO) "
+							+ "  INNER JOIN DETALLE_FUERZA_MUSCULAR DFM "
+							+ "  ON (EHRE.CODIGO=DFM.ENCA_HISTO_REG_ENFER) "
+							+ "  INNER JOIN TIPO_FUERZA_MUSCULAR TFM "
+							+ "  ON (DFM.M_SUPERIOR_DERECHO=TFM.ACRONIMO) " +
 							  filtroCuenta+filtroFechaInicial+filtroFechaFinal);
 		
 		//----------Miembro superior izquierdo---------------------//
-		consultaBuffer.append("		UNION "+ 
-							  "		SELECT ehre.codigo AS codigohisto,to_char(ehre.fecha_registro, 'DD/MM/YYYY') AS fecha_registro,ehre.hora_registro||'' AS hora_registro, 'MIEMBRO SUPERIOR - Izquierdo' AS caracteristica, "+
-							  "			   CASE WHEN tfm.nombre IS NULL THEN '' ELSE tfm.nombre END AS nombre_fuerza, "+
-							  "			   CASE WHEN dfm.obs_m_sup_izquierdo IS NULL THEN '' ELSE dfm.obs_m_sup_izquierdo END AS observacion, "+
-							  "			   getnombreusuario(ehre.usuario) AS nombre_usuario,ehre.fecha_registro || '-' ||  ehre.hora_registro AS fecha,'2' AS orden "+
-							  "			   	   FROM enca_histo_registro_enfer ehre "+
-							  "			   	   		INNER JOIN registro_enfermeria re on (ehre.registro_enfer=re.codigo) "+ 
-							  "						INNER JOIN detalle_fuerza_muscular dfm ON (ehre.codigo=dfm.enca_histo_reg_enfer) "+ 
-							  "						INNER JOIN tipo_fuerza_muscular tfm ON (dfm.m_superior_izquierdo=tfm.acronimo) " +
+		consultaBuffer.append("  UNION "
+							+ "  SELECT EHRE.CODIGO AS CODIGOHISTO, "
+							+ "    TO_CHAR(EHRE.FECHA_REGISTRO, 'DD/MM/YYYY') AS FECHA_REGISTRO, "
+							+ "    EHRE.HORA_REGISTRO || '' AS HORA_REGISTRO, "
+							+ "    'SUP' AS MIEMBRO, "
+							+ "    'Izquierdo' AS COSTADO, "
+							+ "    CASE "
+							+ "      WHEN TFM.NOMBRE IS NULL "
+							+ "      THEN '' "
+							+ "      ELSE TFM.NOMBRE "
+							+ "    END AS RESULTADO, "
+							+ "    CASE "
+							+ "      WHEN DFM.OBS_M_SUP_IZQUIERDO IS NULL "
+							+ "      THEN '' "
+							+ "      ELSE DFM.OBS_M_SUP_IZQUIERDO "
+							+ "    END                            AS OBSERVACION, "
+							+ "    GETNOMBREUSUARIO(EHRE.USUARIO) AS NOMBRE_USUARIO "
+							+ "  FROM ENCA_HISTO_REGISTRO_ENFER EHRE "
+							+ "  INNER JOIN REGISTRO_ENFERMERIA RE "
+							+ "  ON (EHRE.REGISTRO_ENFER=RE.CODIGO) "
+							+ "  INNER JOIN DETALLE_FUERZA_MUSCULAR DFM "
+							+ "  ON (EHRE.CODIGO=DFM.ENCA_HISTO_REG_ENFER) "
+							+ "  INNER JOIN TIPO_FUERZA_MUSCULAR TFM "
+							+ "  ON (DFM.M_SUPERIOR_IZQUIERDO=TFM.ACRONIMO) " +
 							  filtroCuenta+filtroFechaInicial+filtroFechaFinal);
 		
 		//-----------Miembro Inferior derecho ------------------------------//
-		consultaBuffer.append("		UNION "+
-							  "		SELECT ehre.codigo AS codigohisto,to_char(ehre.fecha_registro, 'DD/MM/YYYY') AS fecha_registro,ehre.hora_registro||'' AS hora_registro, 'MIEMBRO INFERIOR - Derecho' AS caracteristica, "+
-							  "			   CASE WHEN tfm.nombre IS NULL THEN '' ELSE tfm.nombre END AS nombre_fuerza, "+
-							  "			   CASE WHEN dfm.obs_m_inf_derecho IS NULL THEN '' ELSE dfm.obs_m_inf_derecho END AS observacion, "+
-							  "			   getnombreusuario(ehre.usuario) AS nombre_usuario,ehre.fecha_registro || '-' ||  ehre.hora_registro AS fecha,'3' AS orden "+
-							  "					FROM enca_histo_registro_enfer ehre  "+
-							  "						INNER JOIN registro_enfermeria re on (ehre.registro_enfer=re.codigo) "+ 
-							  "						INNER JOIN detalle_fuerza_muscular dfm ON (ehre.codigo=dfm.enca_histo_reg_enfer) "+ 
-							  "						INNER JOIN tipo_fuerza_muscular tfm ON (dfm.m_inferior_derecho=tfm.acronimo)" +
+		consultaBuffer.append("  UNION "
+							+ "  SELECT EHRE.CODIGO AS CODIGOHISTO, "
+							+ "    TO_CHAR(EHRE.FECHA_REGISTRO, 'DD/MM/YYYY') AS FECHA_REGISTRO, "
+							+ "    EHRE.HORA_REGISTRO || '' AS HORA_REGISTRO, "
+							+ "    'INF' AS MIEMBRO, "
+							+ "    'Derecho' AS COSTADO, "
+							+ "    CASE "
+							+ "      WHEN TFM.NOMBRE IS NULL "
+							+ "      THEN '' "
+							+ "      ELSE TFM.NOMBRE "
+							+ "    END AS RESULTADO, "
+							+ "    CASE "
+							+ "      WHEN DFM.OBS_M_INF_DERECHO IS NULL "
+							+ "      THEN '' "
+							+ "      ELSE DFM.OBS_M_INF_DERECHO "
+							+ "    END                            AS OBSERVACION, "
+							+ "    GETNOMBREUSUARIO(EHRE.USUARIO) AS NOMBRE_USUARIO "
+							+ "  FROM ENCA_HISTO_REGISTRO_ENFER EHRE "
+							+ "  INNER JOIN REGISTRO_ENFERMERIA RE "
+							+ "  ON (EHRE.REGISTRO_ENFER=RE.CODIGO) "
+							+ "  INNER JOIN DETALLE_FUERZA_MUSCULAR DFM "
+							+ "  ON (EHRE.CODIGO=DFM.ENCA_HISTO_REG_ENFER) "
+							+ "  INNER JOIN TIPO_FUERZA_MUSCULAR TFM "
+							+ "  ON (DFM.M_INFERIOR_DERECHO=TFM.ACRONIMO) " +
 							  filtroCuenta+filtroFechaInicial+filtroFechaFinal);
 		
 		//-----------Miembro Inferior Izquierdo-----------------------------------//
-		consultaBuffer.append("		UNION "+ 
-							  "		SELECT ehre.codigo AS codigohisto,to_char(ehre.fecha_registro, 'DD/MM/YYYY') AS fecha_registro,ehre.hora_registro||'' AS hora_registro, 'MIEMBRO INFERIOR - Izquierdo' AS caracteristica, "+
-							  "		CASE WHEN tfm.nombre IS NULL THEN '' ELSE tfm.nombre END AS nombre_fuerza,"+
-							  "		CASE WHEN dfm.obs_m_inf_izquierdo IS NULL THEN '' ELSE dfm.obs_m_inf_izquierdo END AS observacion, "+
-							  "		getnombreusuario(ehre.usuario) AS nombre_usuario,ehre.fecha_registro || '-' ||  ehre.hora_registro AS fecha, '4' AS orden "+
-							  "			FROM enca_histo_registro_enfer ehre "+
-							  "				INNER JOIN registro_enfermeria re on (ehre.registro_enfer=re.codigo) "+ 
-							  "				INNER JOIN detalle_fuerza_muscular dfm ON (ehre.codigo=dfm.enca_histo_reg_enfer) "+ 
-							  "				INNER JOIN tipo_fuerza_muscular tfm ON (dfm.m_inferior_izquierdo=tfm.acronimo) " +
+		consultaBuffer.append("  UNION "
+							+ "  SELECT EHRE.CODIGO AS CODIGOHISTO, "
+							+ "    TO_CHAR(EHRE.FECHA_REGISTRO, 'DD/MM/YYYY') AS FECHA_REGISTRO, "
+							+ "    EHRE.HORA_REGISTRO || '' AS HORA_REGISTRO, "
+							+ "    'INF' AS MIEMBRO, "
+							+ "    'Izquierdo' AS COSTADO, "
+							+ "    CASE "
+							+ "      WHEN TFM.NOMBRE IS NULL "
+							+ "      THEN '' "
+							+ "      ELSE TFM.NOMBRE "
+							+ "    END AS RESULTADO, "
+							+ "    CASE "
+							+ "      WHEN DFM.OBS_M_INF_IZQUIERDO IS NULL "
+							+ "      THEN '' "
+							+ "      ELSE DFM.OBS_M_INF_IZQUIERDO "
+							+ "    END                            AS OBSERVACION, "
+							+ "    GETNOMBREUSUARIO(EHRE.USUARIO) AS NOMBRE_USUARIO "
+							+ "  FROM ENCA_HISTO_REGISTRO_ENFER EHRE "
+							+ "  INNER JOIN REGISTRO_ENFERMERIA RE "
+							+ "  ON (EHRE.REGISTRO_ENFER=RE.CODIGO) "
+							+ "  INNER JOIN DETALLE_FUERZA_MUSCULAR DFM "
+							+ "  ON (EHRE.CODIGO=DFM.ENCA_HISTO_REG_ENFER) "
+							+ "  INNER JOIN TIPO_FUERZA_MUSCULAR TFM "
+							+ "  ON (DFM.M_INFERIOR_IZQUIERDO=TFM.ACRONIMO) " +
 							  filtroCuenta+filtroFechaInicial+filtroFechaFinal);
 		
-		consultaBuffer.append("  )x "+
-							  "     ORDER BY x.fecha,x.orden");
+		consultaBuffer.append(" ) x ORDER BY CODIGOHISTO");
+				
+		try {
+			stm = new PreparedStatementDecorator(con.prepareStatement(consultaBuffer.toString(),ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
+			
+			rs = stm.executeQuery();
+			
+			while (rs.next()) {
+				DtoFuerzaMuscular f = new DtoFuerzaMuscular();
+				f.setCodigo(rs.getBigDecimal("CODIGOHISTO"));
+				f.setFecha(rs.getString("FECHA_REGISTRO"));
+				f.setHora(rs.getString("HORA_REGISTRO"));
+				f.setMiembro(rs.getString("MIEMBRO"));
+				f.setCostado(rs.getString("COSTADO"));
+				f.setResultado(rs.getString("RESULTADO"));
+				f.setObservaciones(rs.getString("OBSERVACION"));
+				f.setUsuario(rs.getString("NOMBRE_USUARIO"));
+				fuerzaMuscularList.add(f);
+			}
 		
-		//logger.info("\n\nconsultarFuerzaMuscularHistoImpresionHC-->"+consultaBuffer.toString()+"\n");
-		
-		PreparedStatementDecorator stm = null;
-		ResultSetDecorator rs = null;
-		try
-		{
-		stm= new PreparedStatementDecorator(con.prepareStatement(consultaBuffer.toString()));
-		rs = new ResultSetDecorator(stm.executeQuery());
-		HashMap mapaRetorno=UtilidadBD.cargarValueObject(rs);
-		
-		return mapaRetorno;
-		}
-		catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			logger.error("Error en consultarFuerzaMuscularHistoImpresionHC [SqlBaseRegistroEnfermeriaDao] "+e);
 			return null;
-		}
-		finally{
+		} finally {
 			UtilidadBD.cerrarObjetosPersistencia(stm, rs, null);
 		}
+		return fuerzaMuscularList;
 	}
 
 

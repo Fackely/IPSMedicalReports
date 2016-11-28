@@ -556,6 +556,26 @@ public class GeneradorReporteHistoriaClinica {
 					}
 				}
 				
+				if (dtoResultado.getImprimirEscalaGlasgow()) {
+					if (!dtoResultado.getHistoricoEscalaGlasgowList().isEmpty()) {
+						GeneradorSubReporteEscalaGlasgow generadorSubReporteEscalaGlasgow = new GeneradorSubReporteEscalaGlasgow();
+						reportFormatoHc.summary(cmp.subreport(generadorSubReporteEscalaGlasgow.generarSubReporteEscalaGlasgow(dtoResultado, usuario, paciente)));
+						
+					}
+				}
+				
+				if (dtoResultado.getImprimirHojaNeurologica()) {
+					if (dtoResultado.getPupilaDerechaList().size() > 0 || dtoResultado.getPupilaIzquierdaList().size() > 0 
+				 			|| dtoResultado.getConvulsiones().size() > 0 
+				 			|| dtoResultado.getControlEsfinteresList().size() > 0 
+				 			|| dtoResultado.getFuerzaMuscularList().size() > 0) {
+						
+						GeneradorSubReporteHojaNeurologica generadorSubReporteHojaNeurologica = new GeneradorSubReporteHojaNeurologica();
+						reportFormatoHc.summary(cmp.subreport(generadorSubReporteHojaNeurologica.generarSubReporteHojaNeurologica(dtoResultado, usuario, paciente)));
+						
+					}
+				}
+				
 				if(dtoResultado.isImprimirNotasEnfermeria())
 				{
 					// seccion de notas de enfermeria

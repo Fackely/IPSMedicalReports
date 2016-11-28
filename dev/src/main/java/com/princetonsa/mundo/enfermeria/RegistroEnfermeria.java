@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,11 @@ import com.princetonsa.dao.DaoFactory;
 import com.princetonsa.dao.enfermeria.RegistroEnfermeriaDao;
 import com.princetonsa.dto.enfermeria.DtoFrecuenciaCuidadoEnferia;
 import com.princetonsa.dto.enfermeria.DtoRegistroAlertaOrdenesMedicas;
+import com.princetonsa.dto.historiaClinica.enfermeria.escalaGlasgow.DtoEscalaGlasgow;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.DtoControlEsfinteres;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.DtoConvulsion;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.DtoFuerzaMuscular;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.DtoPupila;
 import com.princetonsa.mundo.CuentasPaciente;
 import com.princetonsa.mundo.PersonaBasica;
 import com.princetonsa.mundo.UsuarioBasico;
@@ -2677,7 +2683,7 @@ public class RegistroEnfermeria
 	 * 							 A -> Ambos	
 	 * @return
 	 */
-	public HashMap consultarEscalaGlasgowHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) 
+	public List<DtoEscalaGlasgow> consultarEscalaGlasgowHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) 
 	{
 		return registroEnfermeriaDao.consultarEscalaGlasgowHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion);
 	}
@@ -2686,8 +2692,7 @@ public class RegistroEnfermeria
 	 * Método que consulta el histórico de pupilas de acuerdo
 	 * a los parámetros de búsqueda para mostrarse en la impresión de historia clínica
 	 * @param con
-	 * @param codigoCuenta
-	 * @param cuentaAsocio
+	 * @param cuentas
 	 * @param fechaInicial
 	 * @param fechaFinal
 	 * @param horaInicial
@@ -2696,11 +2701,12 @@ public class RegistroEnfermeria
 	 * 							 U -> Urgencias
 	 * 							 H -> Hospitalizacion
 	 * 							 A -> Ambos	
+	 * @param ladoChar ('I'zquierda o 'D'erecha)
 	 * @return
 	 */
-	public HashMap consultarPupilasHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) 
+	public List<DtoPupila> consultarPupilasHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion, char ladoChar) 
 	{
-		return registroEnfermeriaDao.consultarPupilasHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion);
+		return registroEnfermeriaDao.consultarPupilasHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion, ladoChar);
 	}
 	
 	/**
@@ -2719,7 +2725,7 @@ public class RegistroEnfermeria
 	 * 							 A -> Ambos	
 	 * @return
 	 */
-	public HashMap consultarConvulsionesHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) 
+	public List<DtoConvulsion> consultarConvulsionesHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) 
 	{
 		return registroEnfermeriaDao.consultarConvulsionesHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion);
 	}
@@ -2740,7 +2746,7 @@ public class RegistroEnfermeria
 	 * 							 A -> Ambos	
 	 * @return
 	 */
-	public HashMap consultarControlEsfinteresHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) 
+	public List<DtoControlEsfinteres> consultarControlEsfinteresHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) 
 	{
 		return registroEnfermeriaDao.consultarControlEsfinteresHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion);
 	}
@@ -2761,7 +2767,7 @@ public class RegistroEnfermeria
 	 * 							 A -> Ambos	
 	 * @return
 	 */
-	public HashMap consultarFuerzaMuscularHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) 
+	public List<DtoFuerzaMuscular> consultarFuerzaMuscularHistoImpresionHC(Connection con, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal, String mostrarInformacion) 
 	{
 		return registroEnfermeriaDao.consultarFuerzaMuscularHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, mostrarInformacion);
 	}

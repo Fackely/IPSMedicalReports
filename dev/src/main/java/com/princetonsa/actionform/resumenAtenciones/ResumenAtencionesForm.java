@@ -32,6 +32,7 @@ import com.princetonsa.dto.historiaClinica.DtoEspecialidadesHC;
 import com.princetonsa.dto.historiaClinica.DtoIngresoHistoriaClinica;
 import com.princetonsa.dto.historiaClinica.DtoPreanestesia;
 import com.princetonsa.dto.historiaClinica.DtoViasIngresoHC;
+import com.princetonsa.dto.historiaClinica.enfermeria.hojaNeurologica.*;
 import com.princetonsa.dto.historiaClinica.parametrizacion.DtoComponente;
 import com.princetonsa.dto.historiaClinica.parametrizacion.DtoEscala;
 import com.princetonsa.dto.historiaClinica.parametrizacion.DtoPlantilla;
@@ -301,14 +302,18 @@ public class ResumenAtencionesForm extends ActionForm
 	private boolean existeCuidadosEspeciales;
 	private HashMap mapaHistoricoCuidadosEspeciales = new HashMap();
 	
-	//atributos para la hoja neurólogica
-	private boolean existeHojaNeurologica;
+	private boolean existeEscalaGlasgow;
 	private Collection escalasGlasgowInstitucionCCosto = new ArrayList();
 	private HashMap mapaHistoricoEscalaGlasgow = new HashMap();
-	private HashMap mapaHistoricoPupilas = new HashMap();
-	private HashMap mapaHistoricoConvulsiones = new HashMap();
-	private HashMap mapaHistoricoControlEsfinteres = new HashMap();
-	private HashMap mapaHistoricoFuerzaMuscular = new HashMap();
+
+	//atributos para la hoja neurólogica
+	private boolean existeHojaNeurologica;
+	private List<DtoPupila> pupilaIzquierdaList;
+	private List<DtoPupila> pupilaDerechaList;
+	private List<DtoConvulsion> convulsiones;
+	private List<DtoControlEsfinteres> controlEsfinteresList;
+	private List<DtoFuerzaMuscular> fuerzaMuscularList;
+	
 	
 	//atributos para las escalas
 	private boolean existenEscalasXIngreso;
@@ -1805,10 +1810,11 @@ public class ResumenAtencionesForm extends ActionForm
 		this.existeHojaNeurologica = false;
 		this.escalasGlasgowInstitucionCCosto = new ArrayList();
 		this.mapaHistoricoEscalaGlasgow = new HashMap();
-		this.mapaHistoricoPupilas = new HashMap();
-		this.mapaHistoricoConvulsiones = new HashMap();
-		this.mapaHistoricoControlEsfinteres = new HashMap();
-		this.mapaHistoricoFuerzaMuscular = new HashMap();
+		this.pupilaIzquierdaList = new ArrayList<>();
+		this.pupilaDerechaList = new ArrayList<>();
+		this.convulsiones = new ArrayList<>();
+		this.controlEsfinteresList = new ArrayList<>();
+		this.fuerzaMuscularList = new ArrayList<>();
 		//--------------------------------------------
 		
 		this.existeConsultasPYP = false;
@@ -5502,40 +5508,6 @@ public class ResumenAtencionesForm extends ActionForm
 		this.existeHojaNeurologicaAsocio = existeHojaNeurologicaAsocio;
 	}
 
-
-	/**
-	 * @return Returns the mapaHistoricoControlEsfinteres.
-	 */
-	public HashMap getMapaHistoricoControlEsfinteres() {
-		return mapaHistoricoControlEsfinteres;
-	}
-
-
-	/**
-	 * @param mapaHistoricoControlEsfinteres The mapaHistoricoControlEsfinteres to set.
-	 */
-	public void setMapaHistoricoControlEsfinteres(
-			HashMap mapaHistoricoControlEsfinteres) {
-		this.mapaHistoricoControlEsfinteres = mapaHistoricoControlEsfinteres;
-	}
-	
-	/**
-	 * @return Retorna un elemento del mapa mapaHistoricoControlEsfinteres.
-	 */
-	public Object getMapaHistoricoControlEsfinteres(String key) {
-		return mapaHistoricoControlEsfinteres.get(key);
-	}
-
-
-	/**
-	 * @param Asigna un elemento al mapa mapaHistoricoControlEsfinteres.
-	 */
-	public void setMapaHistoricoControlEsfinteres(String key,Object obj) {
-		this.mapaHistoricoControlEsfinteres.put(key,obj);
-	}
-	
-
-
 	/**
 	 * @return Returns the mapaHistoricoControlEsfinteresAsocio.
 	 */
@@ -5567,39 +5539,6 @@ public class ResumenAtencionesForm extends ActionForm
 		this.mapaHistoricoControlEsfinteresAsocio.put(key,obj);
 	}
 	
-
-	/**
-	 * @return Returns the mapaHistoricoConvulsiones.
-	 */
-	public HashMap getMapaHistoricoConvulsiones() {
-		return mapaHistoricoConvulsiones;
-	}
-
-
-	/**
-	 * @param mapaHistoricoConvulsiones The mapaHistoricoConvulsiones to set.
-	 */
-	public void setMapaHistoricoConvulsiones(HashMap mapaHistoricoConvulsiones) {
-		this.mapaHistoricoConvulsiones = mapaHistoricoConvulsiones;
-	}
-	
-	
-	/**
-	 * @return Retorna un elemento del mapa mapaHistoricoConvulsiones.
-	 */
-	public Object getMapaHistoricoConvulsiones(String key) {
-		return mapaHistoricoConvulsiones.get(key);
-	}
-
-
-	/**
-	 * @param Asigna un elemento al mapa mapaHistoricoConvulsiones.
-	 */
-	public void setMapaHistoricoConvulsiones(String key,Object obj) {
-		this.mapaHistoricoConvulsiones.put(key,obj);
-	}
-
-
 	/**
 	 * @return Returns the mapaHistoricoConvulsionesAsocio.
 	 */
@@ -5694,38 +5633,6 @@ public class ResumenAtencionesForm extends ActionForm
 		this.mapaHistoricoEscalaGlasgowAsocio.put(key,obj);
 	}
 
-
-	/**
-	 * @return Retorna un elemento del mapa mapaHistoricoFuerzaMuscular.
-	 */
-	public Object getMapaHistoricoFuerzaMuscular(String key) {
-		return mapaHistoricoFuerzaMuscular.get(key);
-	}
-
-
-	/**
-	 * @param Asigna un elemento al mapa mapaHistoricoFuerzaMuscular.
-	 */
-	public void setMapaHistoricoFuerzaMuscular(String key,Object obj) {
-		this.mapaHistoricoFuerzaMuscular.put(key,obj);
-	}
-	/**
-	 * @return Returns the mapaHistoricoFuerzaMuscular.
-	 */
-	public HashMap getMapaHistoricoFuerzaMuscular() {
-		return mapaHistoricoFuerzaMuscular;
-	}
-
-
-	/**
-	 * @param mapaHistoricoFuerzaMuscular The mapaHistoricoFuerzaMuscular to set.
-	 */
-	public void setMapaHistoricoFuerzaMuscular(HashMap mapaHistoricoFuerzaMuscular) {
-		this.mapaHistoricoFuerzaMuscular = mapaHistoricoFuerzaMuscular;
-	}
-	
-
-
 	/**
 	 * @return Returns the mapaHistoricoFuerzaMuscularAsocio.
 	 */
@@ -5756,37 +5663,6 @@ public class ResumenAtencionesForm extends ActionForm
 	public void setMapaHistoricoFuerzaMuscularAsocio(String key,Object obj) {
 		this.mapaHistoricoFuerzaMuscularAsocio.put(key,obj);
 	}
-
-
-	/**
-	 * @return Returns the mapaHistoricoPupilas.
-	 */
-	public HashMap getMapaHistoricoPupilas() {
-		return mapaHistoricoPupilas;
-	}
-
-
-	/**
-	 * @param mapaHistoricoPupilas The mapaHistoricoPupilas to set.
-	 */
-	public void setMapaHistoricoPupilas(HashMap mapaHistoricoPupilas) {
-		this.mapaHistoricoPupilas = mapaHistoricoPupilas;
-	}
-	/**
-	 * @return Retorna un elemento del mapa mapaHistoricoPupilas.
-	 */
-	public Object getMapaHistoricoPupilas(String key) {
-		return mapaHistoricoPupilas.get(key);
-	}
-
-
-	/**
-	 * @param Asigna un elemento al mapa mapaHistoricoPupilas.
-	 */
-	public void setMapaHistoricoPupilas(String key,Object obj) {
-		this.mapaHistoricoPupilas.put(key,obj);
-	}
-
 
 	/**
 	 * @return Returns the mapaHistoricoPupilasAsocio.
@@ -8714,6 +8590,55 @@ public class ResumenAtencionesForm extends ActionForm
 
 	public void setCantidadIngresosSeleccionados(int cantidadIngresosSeleccionados) {
 		this.cantidadIngresosSeleccionados = cantidadIngresosSeleccionados;
+	}
+
+	public boolean isExisteEscalaGlasgow() {
+		return existeEscalaGlasgow;
+	}
+
+	public void setExisteEscalaGlasgow(boolean existeEscalaGlasgow) {
+		this.existeEscalaGlasgow = existeEscalaGlasgow;
+	}
+
+	public List<DtoPupila> getPupilaIzquierdaList() {
+		return pupilaIzquierdaList;
+	}
+
+	public void setPupilaIzquierdaList(List<DtoPupila> pupilaIzquierdaList) {
+		this.pupilaIzquierdaList = pupilaIzquierdaList;
+	}
+
+	public List<DtoPupila> getPupilaDerechaList() {
+		return pupilaDerechaList;
+	}
+
+	public void setPupilaDerechaList(List<DtoPupila> pupilaDerechaList) {
+		this.pupilaDerechaList = pupilaDerechaList;
+	}
+
+	public List<DtoConvulsion> getConvulsiones() {
+		return convulsiones;
+	}
+
+	public void setConvulsiones(List<DtoConvulsion> convulsiones) {
+		this.convulsiones = convulsiones;
+	}
+
+	public List<DtoControlEsfinteres> getControlEsfinteresList() {
+		return controlEsfinteresList;
+	}
+
+	public void setControlEsfinteresList(
+			List<DtoControlEsfinteres> controlEsfinteresList) {
+		this.controlEsfinteresList = controlEsfinteresList;
+	}
+
+	public List<DtoFuerzaMuscular> getFuerzaMuscularList() {
+		return fuerzaMuscularList;
+	}
+
+	public void setFuerzaMuscularList(List<DtoFuerzaMuscular> fuerzaMuscularList) {
+		this.fuerzaMuscularList = fuerzaMuscularList;
 	}
 
 	//----------------------------------------------------------------------------------------	

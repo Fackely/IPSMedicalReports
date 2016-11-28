@@ -6029,112 +6029,28 @@ public class ResumenAtencionesAction extends Action
 	 * @param horaFinal
 	 * @param asocio
 	 */
-	private void accionCargarSeccionHojaNeurologica(Connection con, RegistroEnfermeria mundoEnfer, ResumenAtencionesForm resumenAtencionesForm, int institucion, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal) 
-	{
-		/*****************************************************************************
-		 * 
-		 */
-			//-----------Se consultan las especificaciones Glasgow por institución centro de costo-----------//
-		 	resumenAtencionesForm.setEscalasGlasgowInstitucionCCosto(mundoEnfer.consultarTiposInstitucionCCosto(con,institucion, cuentas, 12));
-		 	
-		 	//----Se quitan los tipos de escala glasgow en la coleccion------//
-		 	resumenAtencionesForm.setEscalasGlasgowInstitucionCCosto(Utilidades.coleccionSinRegistrosRepetidos(resumenAtencionesForm.getEscalasGlasgowInstitucionCCosto(), "codigo_tipo"));
-		 	
-		 	//-----Se consulta el histórico de escala glasgow de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoEscalaGlasgow(mundoEnfer.consultarEscalaGlasgowHistoImpresionHC(con, cuentas,fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//-----Se consulta el histórico de pupilas de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoPupilas(mundoEnfer.consultarPupilasHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//----- Se consulta el histórico de convulsiones de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoConvulsiones(mundoEnfer.consultarConvulsionesHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//----- Se consulta el histórico de control de esfinteres de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoControlEsfinteres(mundoEnfer.consultarControlEsfinteresHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//----- Se consulta el histórico de fuerza muscular de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoFuerzaMuscular(mundoEnfer.consultarFuerzaMuscularHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	if(Integer.parseInt(resumenAtencionesForm.getMapaHistoricoEscalaGlasgow("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoPupilas("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoConvulsiones("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoControlEsfinteres("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoFuerzaMuscular("numRegistros").toString())>0)
-		 		resumenAtencionesForm.setExisteHojaNeurologica(true);
-		 	else
-		 		resumenAtencionesForm.setExisteHojaNeurologica(false);
-			
-		/*
-		 * 
-		 ********************************************************************************/
-		
-		/*
-		if(asocio)
-		{
-			//-----------Se consultan las especificaciones Glasgow por institución centro de costo-----------//
-		 	resumenAtencionesForm.setEscalasGlasgowInstitucionCCostoAsocio(mundoEnfer.consultarTiposInstitucionCCosto(con,institucion, centroCosto, idCuenta, 0, 12));
-		 	
-		 	//----Se quitan los tipos de escala glasgow en la coleccion------//
-		 	resumenAtencionesForm.setEscalasGlasgowInstitucionCCostoAsocio(Utilidades.coleccionSinRegistrosRepetidos(resumenAtencionesForm.getEscalasGlasgowInstitucionCCostoAsocio(), "codigo_tipo"));
-		 	
-		 	//-----Se consulta el histórico de escala glasgow de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoEscalaGlasgowAsocio(mundoEnfer.consultarEscalaGlasgowHistoImpresionHC(con, idCuenta, 0, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//-----Se consulta el histórico de pupilas de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoPupilasAsocio(mundoEnfer.consultarPupilasHistoImpresionHC(con, idCuenta, 0, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//----- Se consulta el histórico de convulsiones de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoConvulsionesAsocio(mundoEnfer.consultarConvulsionesHistoImpresionHC(con, idCuenta, 0, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//----- Se consulta el histórico de control de esfinteres de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoControlEsfinteresAsocio(mundoEnfer.consultarControlEsfinteresHistoImpresionHC(con, idCuenta, 0, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//----- Se consulta el histórico de fuerza muscular de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoFuerzaMuscularAsocio(mundoEnfer.consultarFuerzaMuscularHistoImpresionHC(con, idCuenta, 0, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	if(Integer.parseInt(resumenAtencionesForm.getMapaHistoricoEscalaGlasgowAsocio("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoPupilasAsocio("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoConvulsionesAsocio("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoControlEsfinteresAsocio("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoFuerzaMuscularAsocio("numRegistros").toString())>0)
-		 		resumenAtencionesForm.setExisteHojaNeurologicaAsocio(true);
-		 	else
-		 		resumenAtencionesForm.setExisteHojaNeurologicaAsocio(false);
-		}
-		else
-		{
-			//-----------Se consultan las especificaciones Glasgow por institución centro de costo-----------//
-		 	resumenAtencionesForm.setEscalasGlasgowInstitucionCCosto(mundoEnfer.consultarTiposInstitucionCCosto(con,institucion, centroCosto, idCuenta, 0, 12));
-		 	
-		 	//----Se quitan los tipos de escala glasgow en la coleccion------//
-		 	resumenAtencionesForm.setEscalasGlasgowInstitucionCCosto(Utilidades.coleccionSinRegistrosRepetidos(resumenAtencionesForm.getEscalasGlasgowInstitucionCCosto(), "codigo_tipo"));
-		 	
-		 	//-----Se consulta el histórico de escala glasgow de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoEscalaGlasgow(mundoEnfer.consultarEscalaGlasgowHistoImpresionHC(con, idCuenta, 0, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//-----Se consulta el histórico de pupilas de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoPupilas(mundoEnfer.consultarPupilasHistoImpresionHC(con, idCuenta, 0, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//----- Se consulta el histórico de convulsiones de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoConvulsiones(mundoEnfer.consultarConvulsionesHistoImpresionHC(con, idCuenta, 0, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//----- Se consulta el histórico de control de esfinteres de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoControlEsfinteres(mundoEnfer.consultarControlEsfinteresHistoImpresionHC(con, idCuenta, 0, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	//----- Se consulta el histórico de fuerza muscular de acuerdo a los parámetros de búsqueda de la impresion hc-----//
-		 	resumenAtencionesForm.setMapaHistoricoFuerzaMuscular(mundoEnfer.consultarFuerzaMuscularHistoImpresionHC(con, idCuenta, 0, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
-		 	
-		 	if(Integer.parseInt(resumenAtencionesForm.getMapaHistoricoEscalaGlasgow("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoPupilas("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoConvulsiones("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoControlEsfinteres("numRegistros").toString())>0||
-		 		Integer.parseInt(resumenAtencionesForm.getMapaHistoricoFuerzaMuscular("numRegistros").toString())>0)
-		 		resumenAtencionesForm.setExisteHojaNeurologica(true);
-		 	else
-		 		resumenAtencionesForm.setExisteHojaNeurologica(false);
-		}
-		*/
-		
+	private void accionCargarSeccionHojaNeurologica(Connection con, RegistroEnfermeria mundoEnfer, ResumenAtencionesForm resumenAtencionesForm, int institucion, String cuentas, String fechaInicial, String fechaFinal, String horaInicial, String horaFinal) {
+	 	//-----Se consulta el histórico de pupilas de acuerdo a los parámetros de búsqueda de la impresion hc-----//
+	 	resumenAtencionesForm.setPupilaDerechaList(mundoEnfer.consultarPupilasHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, "", 'D'));
+	 	resumenAtencionesForm.setPupilaIzquierdaList(mundoEnfer.consultarPupilasHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, "", 'I'));
+	 	
+	 	//----- Se consulta el histórico de convulsiones de acuerdo a los parámetros de búsqueda de la impresion hc-----//
+	 	resumenAtencionesForm.setConvulsiones(mundoEnfer.consultarConvulsionesHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
+	 	
+	 	//----- Se consulta el histórico de control de esfinteres de acuerdo a los parámetros de búsqueda de la impresion hc-----//
+	 	resumenAtencionesForm.setControlEsfinteresList(mundoEnfer.consultarControlEsfinteresHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
+	 	
+	 	//----- Se consulta el histórico de fuerza muscular de acuerdo a los parámetros de búsqueda de la impresion hc-----//
+	 	resumenAtencionesForm.setFuerzaMuscularList(mundoEnfer.consultarFuerzaMuscularHistoImpresionHC(con, cuentas, fechaInicial, fechaFinal, horaInicial, horaFinal, ""));
+	 	
+	 	if(resumenAtencionesForm.getPupilaDerechaList().size() > 0 || resumenAtencionesForm.getPupilaIzquierdaList().size() > 0 
+	 			|| resumenAtencionesForm.getConvulsiones().size() > 0 
+	 			|| resumenAtencionesForm.getControlEsfinteresList().size() > 0 
+	 			|| resumenAtencionesForm.getFuerzaMuscularList().size() > 0) {
+	 		resumenAtencionesForm.setExisteHojaNeurologica(true);
+	 	} else {
+	 		resumenAtencionesForm.setExisteHojaNeurologica(false);
+	 	}
 	}
 
 	/**
