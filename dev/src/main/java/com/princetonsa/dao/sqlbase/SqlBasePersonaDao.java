@@ -1230,16 +1230,16 @@ public class SqlBasePersonaDao
 	 * @param numeroSolicitud
 	 * @return firma del medico 
 	 */
-	public static  String obtenerFirmaDigitalMedico(Connection con,Integer numeroSolicitud){
+	public static  String obtenerFirmaDigitalMedico(Connection con,Integer codigoMedico){
 		String res = "";
 
-		String consulta ="select m.firma_digital from valoraciones v inner join medicos m  " +
-		"on (v.codigo_medico=m.codigo_medico) " +
-		"where v.numero_solicitud=? ";
+		String consulta = " SELECT FIRMA_DIGITAL " + 
+						  "	FROM ADMINISTRACION.MEDICOS " + 
+						  " WHERE CODIGO_MEDICO = ? ";
 		try
 		{
 			PreparedStatementDecorator pst =  new PreparedStatementDecorator(con,consulta);
-			pst.setInt(1,numeroSolicitud);
+			pst.setInt(1,codigoMedico);
 			ResultSet resu = pst.executeQuery();
 
 			if(resu.next()){

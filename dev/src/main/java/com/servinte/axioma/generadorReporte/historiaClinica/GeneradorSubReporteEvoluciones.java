@@ -22,6 +22,7 @@ import net.sf.dynamicreports.report.builder.MarginBuilder;
 import net.sf.dynamicreports.report.builder.ReportTemplateBuilder;
 import net.sf.dynamicreports.report.builder.component.ComponentBuilder;
 import net.sf.dynamicreports.report.builder.component.HorizontalListBuilder;
+import net.sf.dynamicreports.report.builder.component.LineBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -47,11 +48,13 @@ import com.princetonsa.dto.historiaClinica.parametrizacion.DtoElementoParam;
 import com.princetonsa.dto.historiaClinica.parametrizacion.DtoPlantilla;
 import com.princetonsa.dto.historiaClinica.parametrizacion.DtoSeccionFija;
 import com.princetonsa.dto.historiaClinica.parametrizacion.DtoSeccionParametrizable;
+import com.princetonsa.mundo.Persona;
 import com.princetonsa.mundo.PersonaBasica;
 import com.princetonsa.mundo.UsuarioBasico;
 import com.princetonsa.mundo.atencion.Diagnostico;
 import com.princetonsa.mundo.historiaClinica.Evoluciones;
 import com.princetonsa.mundo.historiaClinica.Plantillas;
+import com.princetonsa.mundo.historiaClinica.Valoraciones;
 import com.servinte.axioma.bl.historiaClinica.facade.HistoriaClinicaFacade;
 import com.servinte.axioma.dto.historiaClinica.HistoricoImagenPlantillaDto;
 import com.servinte.axioma.dto.manejoPaciente.InformacionCentroCostoValoracionDto;
@@ -213,12 +216,7 @@ public class GeneradorSubReporteEvoluciones
 			}		
 		}
 		
-		HorizontalListBuilder itemComponent=cmp.horizontalList();
-		itemComponent.newRow();
-		medicoReponsable=cmp.text(evolucion.getFechaGrabacion()+" "+evolucion.getHoraGrabacion()+" "+evolucion.getDatosMedico())
-		.setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
-		itemComponent.add(medicoReponsable);
-		listaComponentes.add(itemComponent);
+		listaComponentes.add(createComponentProfesionalQueResponde(evolucion));
 		
 		ComponentBuilder[] componentesArray= new ComponentBuilder[listaComponentes.size()];
 		for (int j = 0; j < listaComponentes.size(); j++) 
@@ -653,7 +651,46 @@ public class GeneradorSubReporteEvoluciones
 		return itemComponent;
 	}
 	
-	
+	/**
+	 * 
+	 * @param dto
+	 * @param seccionFija
+	 * @param mundoValoracion
+	 * @param diagnosticosRelacionado
+	 * @return
+	 */
+	private ComponentBuilder createComponentProfesionalQueResponde(DtoEvolucion evolucion) 
+	{
+		HorizontalListBuilder itemComponent=null;
+		String firmaConsultada ="";
+		TextFieldBuilder<String> texto1=null;
+		TextFieldBuilder<String> texto2=null;
+		
+		Connection con=UtilidadBD.abrirConexion();
+		
+		firmaConsultada=Persona.obtenerFirmaDigitalMedico(con, evolucion.getProfesional().getCodigoPersona());
+		UtilidadBD.closeConnection(con);
+		//String folderFirmas=System.getProperty("ADJUNTOS");
+		String path = ValoresPorDefecto.getDirectorioAxiomaBase();
+		String directorio = "upload" + System.getProperty("file.separator");
+		//folderFirmas=folderFirmas.replace("../","");
+		
+		String firmaStr = path + directorio +  System.getProperty("file.separator")+System.getProperty("FIRMADIGITAL")+System.getProperty("file.separator")+firmaConsultada;
+		LineBuilder linea=cmp.line().setDimension(5, 1);
+			
+		texto1=cmp.text(evolucion.getProfesional().getNombreyRMPersonalSalud()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
+		texto2=cmp.text(evolucion.getFechaGrabacion()+" "+evolucion.getHoraGrabacion()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
+			
+		itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(90, 60)
+				,linea,
+				texto1,
+				texto2));
+		
+		itemComponent.add(cmp.text(""));
+		itemComponent.add(cmp.text(""));
+				
+		return cmp.horizontalList(itemComponent.setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla)));
+	}
 
 	/**
 	 * @return templante para columnas de tablas de subreportes

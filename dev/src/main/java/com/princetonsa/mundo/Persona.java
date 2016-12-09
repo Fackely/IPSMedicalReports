@@ -2085,9 +2085,9 @@ public abstract class Persona {
 	 * @param numeroSolicitud
 	 * @return firma de medico
 	 */
-	public static String obtenerFirmaDigitalMedico(Connection con,Integer numeroSolicitud ){
+	public static String obtenerFirmaDigitalMedico(Connection con,Integer codigoMedico ){
 		String res = "";
-		res = DaoFactory.getDaoFactory(System.getProperty("TIPOBD")).getPersonaDao().obtenerFirmaDigitalMedico(con, numeroSolicitud);
+		res = DaoFactory.getDaoFactory(System.getProperty("TIPOBD")).getPersonaDao().obtenerFirmaDigitalMedico(con, codigoMedico);
 		return res;
 	}
 	

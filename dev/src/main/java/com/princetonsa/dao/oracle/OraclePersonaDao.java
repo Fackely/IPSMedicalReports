@@ -284,9 +284,9 @@ public class OraclePersonaDao implements PersonaDao
 	 */
 	@Override
 	public String obtenerFirmaDigitalMedico(Connection con,
-			Integer numeroSolicitud) {
+			Integer codigoMedico) {
 		// TODO Auto-generated method stub
-		return SqlBasePersonaDao.obtenerFirmaDigitalMedico(con, numeroSolicitud);
+		return SqlBasePersonaDao.obtenerFirmaDigitalMedico(con, codigoMedico);
 	}
 	
 	

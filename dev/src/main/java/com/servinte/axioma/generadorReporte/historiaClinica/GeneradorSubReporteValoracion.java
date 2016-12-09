@@ -463,7 +463,16 @@ public class GeneradorSubReporteValoracion
 		
 		Connection con=UtilidadBD.abrirConexion();
 		
-		firmaConsultada=Persona.obtenerFirmaDigitalMedico(con, numeroSolicitud);
+		if(esUrgencias){
+			firmaConsultada=Persona.obtenerFirmaDigitalMedico(con, mundoValoracion.getValoracionUrgencias().getProfesional().getCodigoPersona());
+			texto1=cmp.text(mundoValoracion.getValoracionUrgencias().getProfesional().getNombreyRMPersonalSalud()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
+			texto2=cmp.text(mundoValoracion.getValoracionUrgencias().getFechaGrabacion()+" "+mundoValoracion.getValoracionUrgencias().getHoraGrabacion()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
+		}else{
+			firmaConsultada=Persona.obtenerFirmaDigitalMedico(con, mundoValoracion.getValoracionHospitalizacion().getProfesional().getCodigoPersona());
+			texto1=cmp.text(mundoValoracion.getValoracionHospitalizacion().getProfesional().getNombreyRMPersonalSalud()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
+			texto2=cmp.text(mundoValoracion.getValoracionHospitalizacion().getFechaGrabacion()+" "+mundoValoracion.getValoracionHospitalizacion().getHoraGrabacion()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
+		}
+		
 		UtilidadBD.closeConnection(con);
 		//String folderFirmas=System.getProperty("ADJUNTOS");
 		String path = ValoresPorDefecto.getDirectorioAxiomaBase();
@@ -472,15 +481,7 @@ public class GeneradorSubReporteValoracion
 		
 		String firmaStr = path + directorio +  System.getProperty("file.separator")+System.getProperty("FIRMADIGITAL")+System.getProperty("file.separator")+firmaConsultada;
 		LineBuilder linea=cmp.line().setDimension(5, 1);
-		TextFieldBuilder<String>  imagen=cmp.text("    ");
-
-		if(esUrgencias){
-			texto1=cmp.text(mundoValoracion.getValoracionUrgencias().getProfesional().getNombreyRMPersonalSalud()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
-			texto2=cmp.text(mundoValoracion.getValoracionUrgencias().getFechaGrabacion()+" "+mundoValoracion.getValoracionUrgencias().getHoraGrabacion()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
-		}else{
-			texto1=cmp.text(mundoValoracion.getValoracionHospitalizacion().getProfesional().getNombreyRMPersonalSalud()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
-			texto2=cmp.text(mundoValoracion.getValoracionHospitalizacion().getFechaGrabacion()+" "+mundoValoracion.getValoracionHospitalizacion().getHoraGrabacion()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
-		}
+		
 		itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(90, 60)
 				,linea,
 				texto1,
