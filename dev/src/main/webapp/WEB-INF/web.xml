@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<web-app id="WebApp_ID" version="3.0"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>/dev/</display-name>
+	<context-param>
+		<param-name>FIRMADIGITAL</param-name>
+		<param-value>FirmaDigital</param-value>
+	</context-param>
+	<context-param>
+		<param-name>NOMBRESISTEMA</param-name>
+		<param-value>::: SERVINTE CLINICAL SIUTE ONE:::</param-value>
+	</context-param>
+	<context-param>
+		<param-name>CODIGOINSTITUCION</param-name>
+		<param-value>2</param-value>
+	</context-param>
+	<context-param>
+		<param-name>CLIENTE</param-name>
+		<param-value>SHAIO</param-value>
+		<description>Variable que identifica el cliente del sistema. los valores hasta ahora son SHAIO, SUBA, CAIHCRON, INMACULADA, HILARIOLUGO, SOMOSSALUD, SANJUANDIOS, UNIDADSANTAFE</description>
+	</context-param>
+	<context-param>
+		<param-name>TIEMPOINTERFAZLABORATORIOS</param-name>
+		<param-value>120000</param-value>
+		<description>Milisegundos de espera de lectura de los resultados de	laboratorio</description>
+	</context-param>
+	<context-param>
+		<param-name>USUARIOLABORATORIOS</param-name>
+		<param-value>1714</param-value>
+		<description>codigo del usuario que ingresa la respuesta de laboratorios</description>
+	</context-param>
+	<context-param>
+		<param-name>TIPOBD</param-name>
+<!-- 		<param-value>POSTGRESQL</param-value> -->
+		<param-value>ORACLE</param-value>
+	</context-param>
+	<!-- parametro libre para que c/u ponga una identificacion para su ambiente -->
+	<context-param>
+		<param-name>VERSIONAXIOMA</param-name>
+<!-- 		<param-value>POSTGRESQL</param-value> -->
+		<param-value>ORACLE</param-value>
+	</context-param>
+	<!-- tipos de ambiente: desarrollo, pruebas, piloto, produccion -->
+	<context-param>
+		<param-name>TIPOAMBIENTE</param-name>
+		<param-value>desarrollo</param-value>
+	</context-param>
+	<context-param>
+		<param-name>WEBXMLPATH</param-name>
+		<param-value>/opt/aplicaciones/wildfly910/standalone/deployments/medico_ear.ear/medico_web.war/WEB-INF/web.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>BIRTRUNTIMEPATH</param-name>
+		<param-value>/opt/aplicaciones/birt-runtime-2_3_1/ReportEngine</param-value>
+	</context-param>
+	<context-param>
+		<param-name>REPORTSPATH</param-name>
+		<param-value>/opt/aplicaciones/wildfly910/standalone/deployments/medico_ear.ear/medico_web.war/WEB-INF/reports/designs/</param-value>
+	</context-param>
+	<context-param>
+		<param-name>BIRTVIEWERPATH</param-name>
+		<param-value>http://localhost:8080/birtViewer/run?__format=pdf</param-value>
+	</context-param>
+	<!--para almacenar los designs temporales generados por el birt, para los 
+		reports -->
+	<context-param>
+		<param-name>REPORTSPATHTEMP</param-name>
+		<param-value>/opt/aplicaciones/wildfly910/standalone/deployments/medico_ear.ear/medico_web.war/WEB-INF/reports/reportsTemp/</param-value>
+	</context-param>
+	<context-param>
+		<param-name>PAIS</param-name>
+		<param-value>Colombia</param-value>
+	</context-param>
+	<context-param>
+		<param-name>IMAGENES</param-name>
+		<param-value>../imagenes/</param-value>
+	</context-param>
+	<context-param>
+		<param-name>RUTAEPIDEMIOLOGIA</param-name>
+		<param-value>/saludPublica/</param-value>
+	</context-param>
+	<!--parametros para el Componente de Integracion MT7055 -->
+	<context-param>
+		<param-name>ubicacionIntegracion</param-name>
+		<param-value>/opt/aplicaciones/ipsmedico/integracion/</param-value>
+		<description>Ubicacion donde se aloja el mensaje enviado al contexto
+			de integracion</description>
+	</context-param>
+
+	<context-param>
+		<param-name>timeOutIntegracion</param-name>
+		<param-value>144000</param-value>
+		<description>tiempo máximo de espera por respuesta del contexto de
+			integracion</description>
+	</context-param>
+
+	<context-param>
+		<param-name>hostpuertoIntegracion</param-name>
+		<param-value>http://localhost:8081/dev</param-value>
+		<description>URL del contexto de integracion</description>
+	</context-param>
+	<!--Fin parametros para el Componente de Integracion MT7055 -->
+
+
+	<filter>
+		<filter-name>MenuFilter</filter-name>
+		<filter-class>util.MenuFilter</filter-class>
+		<init-param>
+			<param-name>DRIVER</param-name>
+<!-- 			<param-value>org.postgresql.Driver</param-value> -->
+			<param-value>oracle.jdbc.OracleDriver</param-value>
+		</init-param>
+		<init-param>
+			<param-name>PROTOCOLO</param-name>
+<!-- 			<param-value>jdbc:oracle:thin:@172.19.152.248:1521:Desarrollo</param-value> -->
+<!-- 			<param-value>jdbc:oracle:thin:@172.19.152.248:1521:versa23may16</param-value> -->
+			<!-- <param-value>jdbc:oracle:thin:@172.20.20.206:1521:ipsmVersa20</param-value> -->
+			<!-- <param-value>jdbc:oracle:thin:@172.20.20.137:1521:versa23oct15</param-value> -->
+			<param-value>jdbc:oracle:thin:@172.19.152.248:1521:versa27oct16</param-value>
+		</init-param>
+		<init-param>
+			<param-name>USUARIO</param-name>
+<!-- 			<param-value>axioma</param-value> -->
+			<param-value>axioma</param-value>
+		</init-param>
+		<init-param>
+			<param-name>PASSWORD</param-name>
+<!-- 			<param-value>axioma16</param-value> -->
+			<param-value>axioma16</param-value>
+<!-- 			<param-value>axioma</param-value> -->
+		</init-param>
+		<init-param>
+			<param-name>MOSTRAR_JSP</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>POPUP_NAVEGACION</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>BASE_AXIOMA</param-name>
+			<param-value>/opt/aplicaciones/wildfly910/standalone/deployments/medico_ear.ear/medico_web.war/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ADJUNTOS</param-name>
+			<param-value>/opt/aplicaciones/wildfly910/standalone/deployments/medico_ear.ear/medico_web.war/upload/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>REPORTPATH</param-name>
+			<param-value>/opt/aplicaciones/wildfly910/standalone/deployments/medico_ear.ear/medico_web.war/reportes/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>REPORTURL</param-name>
+			<param-value>../reportes/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>FOTOSPATH</param-name>
+			<param-value>/fotos/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>FOTOSURL</param-name>
+			<param-value>../fotos/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>RUTALOGSAPLICACION</param-name>
+			<param-value>/logs/axioma/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>RUTABACKUPAPLICACION</param-name>
+			<param-value>/backUps/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>RUTAINTERFAZLABORATORIOS</param-name>
+			<param-value>/opt/contextos/test_1/interfaces/labsoft/planos/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>MAXACTIVE</param-name>
+			<param-value>24</param-value>
+		</init-param>
+		<init-param>
+			<param-name>MAXIDLE</param-name>
+			<param-value>1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>MAXWAIT</param-name>
+			<param-value>5000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>SMTPSERVER</param-name>
+			<param-value>mail.princetonsa.com</param-value>
+			<description>
+				Servidor SMTP encargado de la gestin de correos
+			</description>
+		</init-param>
+		<init-param>
+			<param-name>LOGSLOG4J</param-name>
+			<param-value>/home/user/git/IPSMedicoReportes/dev/src/main/webapp/WEB-INF/log4j-conf-axioma.properties</param-value>
+			<description>
+				Archivo de configuración para hacer logs con log4j
+			</description>
+		</init-param>
+		<init-param>
+			<param-name>WEBPATH</param-name>
+			<param-value>
+				http://localhost:8081/dev/
+			</param-value>
+			<description>
+				URL raíz de la aplicación
+			</description>
+		</init-param>
+		<init-param>
+			<param-name>tiempoSesion</param-name>
+			<param-value>60</param-value>
+		</init-param>
+		<init-param>
+			<param-name>FILEPATH</param-name>
+			<param-value>/opt/contextos/versalles/dev_reportes/src/main/webapp/upload/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>REPORTESARCHIVOPLANO</param-name>
+			<param-value>/reportesArchivoPlano/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ARCHIVOSPLANOS</param-name>
+			<param-value>/reportesArchivoPlano/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>FECHACORTECURVASCRECIMIENTO</param-name>
+			<param-value>23/11/2012</param-value>
+			<description> dd/mm/aaaa (fecha corte curvas de crecimiento
+				anteriores)</description>
+		</init-param>
+		<init-param>
+			<param-name>HORACORTECURVASCRECIMIENTO</param-name>
+			<param-value>14:35</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>MenuFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!--listener> <listener-class>util.listener.ListenerConsecutivos</listener-class> 
+		</listener -->
+
+	<!--listener para el Componente de Integracion MT7055 -->
+	<listener>
+		<listener-class>util.integracion.listener.Inicializador</listener-class>
+	</listener>
+	<!--Fin listener para el Componente de Integracion MT7055 -->
+
+	<!-- <listener> <listener-class>util.EnviarALogin</listener-class> </listener> 
+		<listener> <listener-class>util.laboratorios.InterfazListener</listener-class> 
+		</listener> <listener> <listener-class>util.facturacion.ConsumosXFacturarListener</listener-class> 
+		</listener> <listener> <listener-class>util.listener.HiloEstanciaAutomatica</listener-class> 
+		</listener> -->
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml,/WEB-INF/sies-config.xml,/WEB-INF/struts-messages-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>3</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>3</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+		<!-- This should NEVER be present in live -->
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logLevel</param-name>
+			<param-value>FATAL</param-value>
+		</init-param>
+
+		<!-- By default DWR creates application scope objects when they are first 
+			used. This creates them when the app-server is started -->
+		<init-param>
+			<param-name>initApplicationScopeCreatorsAtStartup</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<!-- data: URLs are good for small images, but are slower, and could OOM 
+			for larger images. Leave this out (or keep 'false') for anything but small 
+			images -->
+		<init-param>
+			<param-name>preferDataUrlSchema</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<!-- This enables full streaming mode. It's probably better to leave this 
+			out if you are running across the Internet -->
+		<init-param>
+			<param-name>maxWaitAfterWrite</param-name>
+			<param-value>-1</param-value>
+		</init-param>
+		<!-- For more information on these parameters, see: - http://getahead.org/dwr/server/servlet 
+			- http://getahead.org/dwr/reverse-ajax/configuration -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Mapeo de Servlets -->
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+	<welcome-file-list>
+		<welcome-file>mainMenu.jsp</welcome-file>
+	</welcome-file-list>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>/tagsAyudaEspecificos</taglib-uri>
+			<taglib-location>/WEB-INF/tld/TagsAyudaEspecificosJSP.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/tagsAyuda</taglib-uri>
+			<taglib-location>/WEB-INF/tld/TagsAyudaJSP.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://jakarta.apache.org/struts/tags-bean</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-bean.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://jakarta.apache.org/struts/tags-html</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-html.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://jakarta.apache.org/struts/tags-logic</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-logic.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://jakarta.apache.org/struts/tags-template</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-template.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+</web-app>
