@@ -242,7 +242,7 @@ public class GeneradorSubReporteValoracionesConsultaExterna
 		
 		Connection con=UtilidadBD.abrirConexion();
 		
-		firmaConsultada=Persona.obtenerFirmaDigitalMedico(con, numeroSolicitud);
+		firmaConsultada=Persona.obtenerFirmaDigitalMedico(con, mundoValoracion.getValoracion().getProfesional().getCodigoPersona());
 		UtilidadBD.closeConnection(con);
 		
 		
