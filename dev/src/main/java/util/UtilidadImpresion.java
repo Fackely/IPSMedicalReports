@@ -37,14 +37,27 @@ public class UtilidadImpresion
 	 * @return
 	 */
 	public static String arreglarCampoStringImpresion(String campo) {
+		return arreglarCampoStringImpresion(campo, 138);
+	}
+	
+	/**
+	 * <b>arreglarCampoStringImpresion</b> - Método que arregla los campos para la impresión en reportes.
+	 * Se implementa debido a que en algunos campos, cuando hay líneas de texto que exceden los n caracteres, 
+	 * el reporte corta la línea, pero no se cuenta el salto de línea como una línea nueva, por lo que al finalizar el texto,
+	 * no hay espacio (visualmente) para la línea, y no muestra información.  
+	 * @param campo
+	 * @return
+	 */
+	public static String arreglarCampoStringImpresion(String campo, int cantCaracteres) {
 		String strAux = campo;
 		if (campo != null) {
 			String str[] = campo.split("\n");
-			for (int i=0; i<str.length-1; i++) {
-				int times = str[i].length()/138;
-				while (times > 0) {
+			for (int i=0; i<str.length; i++) {
+				int times = str[i].length()/cantCaracteres;
+//				while (times > 0) {
+				if (times > 0) {
 					strAux += "\n";
-					times--;
+//					times--;
 				}
 			}
 		}

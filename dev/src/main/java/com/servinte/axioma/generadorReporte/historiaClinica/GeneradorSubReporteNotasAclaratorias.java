@@ -144,7 +144,7 @@ public class GeneradorSubReporteNotasAclaratorias {
 		//CICLO QUE LLENA EL DATA SOURCE 
 		for (DtoNotaAclaratoria dtoNotaAclaratoria : notasAclaratoriasList) {
 			datosDataSource[0]=String.valueOf(dtoNotaAclaratoria.getFecha())+" "+dtoNotaAclaratoria.getHora();
-			datosDataSource[1]=UtilidadImpresion.arreglarCampoStringImpresion(dtoNotaAclaratoria.getDescripcion());
+			datosDataSource[1]=UtilidadImpresion.arreglarCampoStringImpresion(dtoNotaAclaratoria.getDescripcion(), 30);
 			datosDataSource[2]=dtoNotaAclaratoria.getNombreCompletoProfesional()+" "+
 			dtoNotaAclaratoria.getNumeroRegistroProfesional()+" "+dtoNotaAclaratoria.getEspecialidadesProfesional();
 			datosDataSource[3]=String.valueOf(dtoNotaAclaratoria.getNumeroDocumentosAdjuntos());
