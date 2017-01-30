@@ -1817,7 +1817,7 @@ public class GeneradorSubReporteHojaQuirurgica {
 							+ System.getProperty("file.separator") + medico.getFirmaDigital();
 					LineBuilder linea=cmp.line().setDimension(5, 1);
 						
-					texto1=cmp.text(medico.getNombreyRMPersonalSalud()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
+					texto1=cmp.text(medico.getNombreyRMPersonalSaludEsp()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 					if(ingresoSalidaPacienteDto.getFechaIngresoSala() != null &&
 							ingresoSalidaPacienteDto.getHoraIngresoSala() != null){
 						texto2=cmp.text(UtilidadFecha.conversionFormatoFechaAAp(ingresoSalidaPacienteDto.getFechaIngresoSala()) + " " + ingresoSalidaPacienteDto.getHoraIngresoSala()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
@@ -1825,7 +1825,7 @@ public class GeneradorSubReporteHojaQuirurgica {
 						texto2=cmp.text(" ").setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 					}
 						
-					itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(90, 60)
+					itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60)
 							,linea,
 							texto1,
 							texto2));

@@ -254,9 +254,9 @@ public class GeneradorSubReporteValoracionesConsultaExterna
 		LineBuilder linea=cmp.line().setDimension(5, 1);
 		TextFieldBuilder<String>  imagen=cmp.text("    ");
 
-		TextFieldBuilder<String> texto1=cmp.text(mundoValoracion.getValoracion().getProfesional().getNombreyRMPersonalSalud()).setHorizontalAlignment(HorizontalAlignment.LEFT);
+		TextFieldBuilder<String> texto1=cmp.text(mundoValoracion.getValoracion().getProfesional().getNombreyRMPersonalSaludEsp()).setHorizontalAlignment(HorizontalAlignment.LEFT);
 		TextFieldBuilder<String> texto2=cmp.text(mundoValoracion.getValoracion().getFechaGrabacion()+" "+mundoValoracion.getValoracion().getHoraGrabacion()).setHorizontalAlignment(HorizontalAlignment.LEFT);
-		itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(90, 60),
+		itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60),
 				linea,
 				texto1,
 				texto2));

@@ -966,6 +966,26 @@ public class UsuarioBasico implements Observer, Serializable, HttpSessionBinding
 
 		return informacionGeneralStr;
 	}
+	
+	public String getNombreyRMPersonalSaludEsp()
+	{
+	    String informacionGeneralStr = new String();
+
+		if (this.numeroRegistroMedico!=null&&!this.numeroRegistroMedico.equals(""))
+		{
+			if (this.nombreUsuario!=null)
+			{
+				informacionGeneralStr=nombreUsuario + "  -  R.M.  " + numeroRegistroMedico 
+						+ getEspecialidadesMedico();
+			}
+		}
+		else
+		{
+			informacionGeneralStr="Este usuario no esta registrado en el sistema como profesional de la salud";
+		}
+
+		return informacionGeneralStr;
+	}
 
 
 	/**

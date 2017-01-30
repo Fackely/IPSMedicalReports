@@ -465,11 +465,11 @@ public class GeneradorSubReporteValoracion
 		
 		if(esUrgencias){
 			firmaConsultada=Persona.obtenerFirmaDigitalMedico(con, mundoValoracion.getValoracionUrgencias().getProfesional().getCodigoPersona());
-			texto1=cmp.text(mundoValoracion.getValoracionUrgencias().getProfesional().getNombreyRMPersonalSalud()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
+			texto1=cmp.text(mundoValoracion.getValoracionUrgencias().getProfesional().getNombreyRMPersonalSaludEsp()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 			texto2=cmp.text(mundoValoracion.getValoracionUrgencias().getFechaGrabacion()+" "+mundoValoracion.getValoracionUrgencias().getHoraGrabacion()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 		}else{
 			firmaConsultada=Persona.obtenerFirmaDigitalMedico(con, mundoValoracion.getValoracionHospitalizacion().getProfesional().getCodigoPersona());
-			texto1=cmp.text(mundoValoracion.getValoracionHospitalizacion().getProfesional().getNombreyRMPersonalSalud()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
+			texto1=cmp.text(mundoValoracion.getValoracionHospitalizacion().getProfesional().getNombreyRMPersonalSaludEsp()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 			texto2=cmp.text(mundoValoracion.getValoracionHospitalizacion().getFechaGrabacion()+" "+mundoValoracion.getValoracionHospitalizacion().getHoraGrabacion()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 		}
 		
@@ -482,7 +482,7 @@ public class GeneradorSubReporteValoracion
 		String firmaStr = path + directorio +  System.getProperty("file.separator")+System.getProperty("FIRMADIGITAL")+System.getProperty("file.separator")+firmaConsultada;
 		LineBuilder linea=cmp.line().setDimension(5, 1);
 		
-		itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(90, 60)
+		itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60)
 				,linea,
 				texto1,
 				texto2));
