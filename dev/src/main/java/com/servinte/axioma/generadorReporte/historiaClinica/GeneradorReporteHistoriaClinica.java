@@ -159,16 +159,14 @@ public class GeneradorReporteHistoriaClinica {
 					else if(dto.getCodigoTipoEvolucion()==ConstantesImpresionHistoriaClinica.tipoEvolucionValoracionHospitalizacion)
 					{
 						ResumenAtenciones resumenAtencionesMundo = new ResumenAtenciones();
-						boolean comentariosValorUrgHospIguales = resumenAtencionesMundo.numeroObservacionesSolicitudesIgualesValUrgHosp(idIngreso);
 						
 						//MT-5571
-						if(!SqlBaseResumenAtencionesDao.valoracionTieneInterpretacionAuto(null,dto.getCodigoPk()) ||
-								!comentariosValorUrgHospIguales)
+						if(!SqlBaseResumenAtencionesDao.valoracionTieneInterpretacionAuto(null,dto.getCodigoPk()))
 						{
 							//reporte de valoracion de Hospitalización 
 							GeneradorSubReporteValoracion generador=new GeneradorSubReporteValoracion();
 							//List<JasperReportBuilder> subRValHospital = 
-									generador.generarReporte(dto.getCodigoPk(),filtro,usuario,paciente,ConstantesBD.codigoViaIngresoHospitalizacion,reportFormatoHc, comentariosValorUrgHospIguales);
+									generador.generarReporte(dto.getCodigoPk(),filtro,usuario,paciente,ConstantesBD.codigoViaIngresoHospitalizacion,reportFormatoHc, true);
 							/*if(subRValHospital != null && !subRValHospital.isEmpty()){
 	
 								//se recorren lista de subreportes y se adicionan al summary del reporte global 
@@ -181,6 +179,25 @@ public class GeneradorReporteHistoriaClinica {
 									reportFormatoHc.summary(cmp.text("").setHeight(8));
 								}
 							}*/
+						} else {
+							if(!resumenAtencionesMundo.numeroObservacionesSolicitudesIgualesValUrgHosp(idIngreso)){
+								//reporte de valoracion de Hospitalización 
+								GeneradorSubReporteValoracion generador=new GeneradorSubReporteValoracion();
+								//List<JasperReportBuilder> subRValHospital = 
+										generador.generarReporte(dto.getCodigoPk(),filtro,usuario,paciente,ConstantesBD.codigoViaIngresoHospitalizacion,reportFormatoHc, false);
+								/*if(subRValHospital != null && !subRValHospital.isEmpty()){
+		
+									//se recorren lista de subreportes y se adicionan al summary del reporte global 
+									for(JasperReportBuilder subRValHosp : subRValHospital){ 
+										reportFormatoHc.summary(cmp.subreport(subRValHosp));
+									}
+		
+									if(subRValHospital.size()>0){
+										//espacio entre valoraciones 
+										reportFormatoHc.summary(cmp.text("").setHeight(8));
+									}
+								}*/
+							}
 						}
 					}
 					else if(dto.getCodigoTipoEvolucion()==ConstantesImpresionHistoriaClinica.tipoEvolucionEvoluciones)
