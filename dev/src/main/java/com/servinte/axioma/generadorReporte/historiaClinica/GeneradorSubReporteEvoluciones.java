@@ -33,6 +33,7 @@ import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import util.ConstantesBD;
 import util.ConstantesCamposParametrizables;
 import util.UtilidadBD;
+import util.UtilidadFileUpload;
 import util.UtilidadImpresion;
 import util.UtilidadTexto;
 import util.ValoresPorDefecto;
@@ -681,10 +682,16 @@ public class GeneradorSubReporteEvoluciones
 		texto1=cmp.text(evolucion.getProfesional().getNombreyRMPersonalSaludEsp()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 		texto2=cmp.text(evolucion.getFechaGrabacion()+" "+evolucion.getHoraGrabacion()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 			
-		itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60)
-				,linea,
-				texto1,
-				texto2));
+		if(!UtilidadTexto.isEmpty2(firmaConsultada) && UtilidadFileUpload.existeArchivoRutaCompelta(firmaStr)){		
+			itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60)
+					,linea,
+					texto1,
+					texto2));
+		} else {
+			itemComponent=cmp.horizontalList(cmp.verticalList(
+					texto1,
+					texto2));
+		}
 		
 		itemComponent.add(cmp.text(""));
 		itemComponent.add(cmp.text(""));

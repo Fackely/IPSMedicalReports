@@ -37,6 +37,7 @@ import util.ConstantesCamposParametrizables;
 import util.ConstantesIntegridadDominio;
 import util.InfoDatosInt;
 import util.UtilidadBD;
+import util.UtilidadFileUpload;
 import util.UtilidadImpresion;
 import util.UtilidadTexto;
 import util.Utilidades;
@@ -482,10 +483,17 @@ public class GeneradorSubReporteValoracion
 		String firmaStr = path + directorio +  System.getProperty("file.separator")+System.getProperty("FIRMADIGITAL")+System.getProperty("file.separator")+firmaConsultada;
 		LineBuilder linea=cmp.line().setDimension(5, 1);
 		
-		itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60)
-				,linea,
-				texto1,
-				texto2));
+		if(!UtilidadTexto.isEmpty2(firmaConsultada) && UtilidadFileUpload.existeArchivoRutaCompelta(firmaStr)){		
+			itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60)
+					,linea,
+					texto1,
+					texto2));
+		} else {
+			itemComponent=cmp.horizontalList(cmp.verticalList(
+					texto1,
+					texto2));
+		}
+		
 		itemComponent.add(cmp.text(""));
 		itemComponent.add(cmp.text(""));
 				

@@ -27,6 +27,7 @@ import net.sf.dynamicreports.report.constant.StretchType;
 import util.ConstantesBD;
 import util.UtilidadBD;
 import util.UtilidadFecha;
+import util.UtilidadFileUpload;
 import util.UtilidadTexto;
 import util.ValoresPorDefecto;
 import util.reportes.dinamico.EstilosReportesDinamicosHistoriaClinica;
@@ -1825,10 +1826,16 @@ public class GeneradorSubReporteHojaQuirurgica {
 						texto2=cmp.text(" ").setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 					}
 						
-					itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60)
-							,linea,
-							texto1,
-							texto2));
+					if(!UtilidadTexto.isEmpty2(medico.getFirmaDigital()) && UtilidadFileUpload.existeArchivoRutaCompelta(firmaStr)){		
+						itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60)
+								,linea,
+								texto1,
+								texto2));
+					} else {
+						itemComponent=cmp.horizontalList(cmp.verticalList(
+								texto1,
+								texto2));
+					}
 					
 					itemComponent.add(cmp.text(""));
 					itemComponent.add(cmp.text(""));
