@@ -151,7 +151,7 @@ public class SqlBaseImpresionResumenAtencionesDao
 	public static String consultaRespuestaInterpretacionProcedimientos="SELECT " +
 																			" s.numero_solicitud AS numerosolicitud, "+
 																			" to_char(rsp.fecha_ejecucion,'dd/mm/yyyy')||' '|| substr(rsp.hora_grabacion||'',0,6) as fechahora," +
-																			" sp.codigo_servicio_solicitado ||' - '||getnombreservicio(codigo_servicio_solicitado,0) as servicio," +
+																			"     FACTURACION.getObtenerCodigoServHist(sp.codigo_servicio_solicitado, 0, TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) ||' - '||FACTURACION.getNombreServicioHistorico(sp.codigo_servicio_solicitado, 0, TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) as servicio," +
 																			" rsp.codigo AS codigorespuesta, "+
 																			" rsp.resultados as resultado," +
 																			" rsp.observaciones as observaciones," +
@@ -163,6 +163,7 @@ public class SqlBaseImpresionResumenAtencionesDao
 																	" inner join sol_procedimientos sp on(sp.numero_solicitud=s.numero_solicitud) " +
 																	" inner join res_sol_proc rsp on(sp.numero_solicitud=rsp.numero_solicitud) " +
 																	" inner join cuentas c on(c.id=s.cuenta) " +
+																	" INNER JOIN MANEJOPACIENTE.INGRESOS ING  ON (ING.ID = c.ID_INGRESO) "+
 																	" where c.id_ingreso=? ";
 	
 	/**
@@ -264,9 +265,9 @@ public class SqlBaseImpresionResumenAtencionesDao
 																" getnomcentrocosto(s.centro_costo_solicitado) as centrocostosolicitado," +
 																" getCentroAtencionCC(s.centro_costo_solicitado) as centroatencionsolicitado, "+
 																" getnombreespecialidad(s.especialidad_solicitante) as especialidad," +
-																" rs.codigo_propietario as codigocups," +
+																" FACTURACION.getObtenerCodigoServHist(rs.SERVICIO, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) as codigocups," +
 																" rs.servicio as codigoservicio," +
-																" rs.descripcion as servicio," +
+																" FACTURACION.getNombreServicioHistorico(rs.SERVICIO, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) as servicio," +
 																" case when ser.espos="+ValoresPorDefecto.getValorTrueParaConsultas()+" then 'Si' else 'No' end as pos, " +
 																" fs.nombre as finalidad, " +
 																" '1' as cantidad," +
@@ -284,8 +285,9 @@ public class SqlBaseImpresionResumenAtencionesDao
 														" from solicitudes s " +
 														" inner join sol_procedimientos sp on(sp.numero_solicitud=s.numero_solicitud) " +
 														" inner join cuentas c on(c.id=s.cuenta) " +
+														" INNER JOIN MANEJOPACIENTE.INGRESOS    ING     ON(ING.ID = C.ID_INGRESO) "+
 														" inner join servicios ser on (ser.codigo=sp.codigo_servicio_solicitado) " +
-														" inner join  referencias_servicio rs on(rs.servicio=ser.codigo and rs.tipo_tarifario='"+ConstantesBD.codigoTarifarioCups+"') " +
+														" inner join referencias_servicio rs on(rs.servicio=ser.codigo and rs.tipo_tarifario='"+ConstantesBD.codigoTarifarioCups+"') " +
 														" inner join finalidades_servicio fs on (fs.codigo=sp.finalidad) " +
 														" left outer join anulaciones_solicitud anulsol on(anulsol.solicitud=s.numero_solicitud)  " +
 														"  LEFT OUTER JOIN medicos m  on(anulsol.codigo_medico = m.codigo_medico)" +
@@ -302,8 +304,8 @@ public class SqlBaseImpresionResumenAtencionesDao
 																	" getnomcentrocosto(s.centro_costo_solicitante) as centrocostosolicitante," +
 																	" getnomcentrocosto(s.centro_costo_solicitado) as centrocostosolicitado," +
 																	" getnombreespecialidad(s.especialidad_solicitante) as especialidad," +
-																	" rs.codigo_propietario as codigocups," +
-																	" rs.descripcion as servicio," +
+																	" FACTURACION.getObtenerCodigoServHist(rs.SERVICIO, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) as codigocups," +
+																	" FACTURACION.getNombreServicioHistorico(rs.SERVICIO, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) as servicio," +
 																	" case when ser.espos="+ValoresPorDefecto.getValorTrueParaConsultas()+" then 'Si' else 'No' end as pos, " +
 																	" case when s.urgente  ="+ValoresPorDefecto.getValorTrueParaConsultas()+" then 'Si' else 'No' end as urgente," +
 																	" si.comentario as observaciones, " +
@@ -320,8 +322,9 @@ public class SqlBaseImpresionResumenAtencionesDao
 														" from solicitudes s " +
 														" inner join solicitudes_inter si On(si.numero_solicitud=s.numero_solicitud) " +
 														" inner join cuentas c on(c.id=s.cuenta) " +
+														" INNER JOIN MANEJOPACIENTE.INGRESOS    ING     ON(ING.ID = C.ID_INGRESO) "+
 														" inner join servicios ser on (ser.codigo=si.codigo_servicio_solicitado) " +
-														" inner join  referencias_servicio rs on(rs.servicio=ser.codigo and rs.tipo_tarifario=0) " +
+														" inner join referencias_servicio rs on(rs.servicio=ser.codigo and rs.tipo_tarifario=0) " +
 														" inner join op_man_intercon omi on(omi.codigo=si.codigo_manejo_interconsulta) " +
 														" left outer join anulaciones_solicitud anulsol on(anulsol.solicitud=s.numero_solicitud)  " +
 														" LEFT OUTER JOIN medicos m on(anulsol.codigo_medico = m.codigo_medico) " +
@@ -808,7 +811,16 @@ public class SqlBaseImpresionResumenAtencionesDao
 			mapa =UtilidadBD.cargarValueObject(new ResultSetDecorator(ps.executeQuery()));
 			for(int i=0;i<Integer.parseInt(mapa.get("numRegistros")+"");i++)
 			{
-				ps= new PreparedStatementDecorator(con.prepareStatement("SELECT rs.codigo_propietario as codigo,rs.descripcion as servicio,getnombreespecialidad(s.especialidad) as especialidad from sol_cirugia_por_servicio scs inner join servicios s on(s.codigo=scs.servicio) inner join referencias_servicio rs on(rs.servicio=s.codigo and rs.tipo_tarifario='"+ConstantesBD.codigoTarifarioCups+"') where numero_solicitud='"+mapa.get("numerosolicitud_"+i)+"'",ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
+				ps= new PreparedStatementDecorator(con.prepareStatement(   "SELECT FACTURACION.getObtenerCodigoServHist(scs.SERVICIO, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) as codigo,"
+																		+ "	FACTURACION.getNombreServicioHistorico(scs.SERVICIO, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) as servicio,"
+																		+ " getnombreespecialidad(s.especialidad) as especialidad "
+																		+ " FROM SALASCIRUGIA.sol_cirugia_por_servicio   	scs "
+																		+ " INNER JOIN ORDENES.solicitudes  				SOL ON (scs.NUMERO_SOLICITUD = SOL.NUMERO_SOLICITUD)"
+																		+ "	INNER JOIN FACTURACION.servicios 				s 	ON (s.codigo=scs.servicio) "
+																		+ " INNER JOIN MANEJOPACIENTE.cuentas             	CUE ON (CUE.id = SOL.cuenta) "
+																		+ " INNER JOIN MANEJOPACIENTE.INGRESOS          	ING ON (ING.ID = CUE.ID_INGRESO) "
+																		+ " INNER JOIN FACTURACION.referencias_servicio 	rs 	ON (rs.servicio=s.codigo and rs.tipo_tarifario='"+ConstantesBD.codigoTarifarioCups+"') "
+																		+ " where SOL.numero_solicitud='"+mapa.get("numerosolicitud_"+i)+"'",ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
 				mapa.put("servicios_"+i,UtilidadBD.cargarValueObject(new ResultSetDecorator(ps.executeQuery())));
 			}
 		}
@@ -843,7 +855,17 @@ public class SqlBaseImpresionResumenAtencionesDao
 			mapa =UtilidadBD.cargarValueObject(new ResultSetDecorator(ps.executeQuery()));
 			for(int i=0;i<Integer.parseInt(mapa.get("numRegistros")+"");i++)
 			{
-				ps= new PreparedStatementDecorator(con.prepareStatement("SELECT rs.codigo_propietario as codigo,rs.descripcion as servicio,getnombreespecialidad(s.especialidad) as especialidad from sol_cirugia_por_servicio scs inner join servicios s on(s.codigo=scs.servicio) inner join referencias_servicio rs on(rs.servicio=s.codigo and rs.tipo_tarifario='"+ConstantesBD.codigoTarifarioCups+"') where numero_solicitud='"+mapa.get("numerosolicitud_"+i)+"'",ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
+				String cons = "SELECT FACTURACION.getObtenerCodigoServHist(scs.SERVICIO, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) as codigo,"
+						+ "	FACTURACION.getNombreServicioHistorico(scs.SERVICIO, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) as servicio,"
+						+ " getnombreespecialidad(s.especialidad) as especialidad "
+						+ " from SALASCIRUGIA.sol_cirugia_por_servicio 		scs "
+						+ " INNER JOIN ORDENES.solicitudes  				SOL ON (scs.NUMERO_SOLICITUD = SOL.NUMERO_SOLICITUD)"
+						+ " INNER JOIN MANEJOPACIENTE.cuentas             	CUE ON (CUE.id = SOL.cuenta) "
+						+ " INNER JOIN MANEJOPACIENTE.INGRESOS          	ING ON (ING.ID = CUE.ID_INGRESO) "
+						+ " INNER JOIN FACTURACION.servicios 				s 	on (s.codigo=scs.servicio) "
+						+ " INNER JOIN FACTURACION.referencias_servicio 	rs 	on (rs.servicio=s.codigo and rs.tipo_tarifario='"+ConstantesBD.codigoTarifarioCups+"') "
+						+ " where SOL.numero_solicitud='"+mapa.get("numerosolicitud_"+i)+"'";
+				ps= new PreparedStatementDecorator(con.prepareStatement(  cons ,ConstantesBD.typeResultSet,ConstantesBD.concurrencyResultSet));
 				mapa.put("servicios_"+i,UtilidadBD.cargarValueObject(new ResultSetDecorator(ps.executeQuery())));
 			}
 		}
@@ -2408,11 +2430,14 @@ public class SqlBaseImpresionResumenAtencionesDao
 			break;
 			case 30:  //-- Consultar Los servicios de Todas las Hojas Quirurgicas
 			{
-				consulta = "SELECT s.codigo AS cir_servicio, scps.numero_solicitud as cir_solicitud,  rs.codigo_propietario || '  ' || s.especialidad || '-' || s.codigo || '-' || rs.descripcion as cir_cirugia, " +
+				consulta = "SELECT s.codigo AS cir_servicio, scps.numero_solicitud as cir_solicitud,  FACTURACION.getObtenerCodigoServHist(scps.SERVICIO, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) || '  ' || s.especialidad || '-' || s.codigo || '-' || FACTURACION.getNombreServicioHistorico(scps.SERVICIO, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) as cir_cirugia, " +
 						   "	   s.espos as cir_espos, getnombrepersona(pc.codigo_profesional) as cir_medico, ind_via_acceso As indviaacc," +
 						   "		getDescQxHq(scps.codigo) As infoqx, scps.codigo as codigo_cirugia , espe.nombre AS especialidad_interviene	" +
 						   "  	   FROM referencias_servicio rs 											" +
-						   "			INNER JOIN sol_cirugia_por_servicio scps	ON ( rs.servicio = scps.servicio )					" +
+						   "			INNER JOIN sol_cirugia_por_servicio 		scps	ON ( rs.servicio = scps.servicio )			 " +
+						   "			INNER JOIN ORDENES.solicitudes              SOL ON (scps.NUMERO_SOLICITUD = SOL.NUMERO_SOLICITUD)" +
+						   "			INNER JOIN MANEJOPACIENTE.cuentas           CUE ON (CUE.id = SOL.cuenta)						 " +
+						   "			INNER JOIN MANEJOPACIENTE.INGRESOS          ING ON (ING.ID = CUE.ID_INGRESO)					 " +
 						   "			INNER JOIN servicios s ON ( s.codigo = scps.servicio )					" +
 						   "			LEFT OUTER JOIN profesionales_cirugia pc ON (pc.cod_sol_cx_serv=scps.codigo AND pc.tipo_asocio="+ValoresPorDefecto.getAsocioCirujano(Integer.parseInt(mp.get("institucion")+""))+")	" +
 						   "  			INNER JOIN especialidades espe on(espe.codigo=scps.especialidad)   		" +

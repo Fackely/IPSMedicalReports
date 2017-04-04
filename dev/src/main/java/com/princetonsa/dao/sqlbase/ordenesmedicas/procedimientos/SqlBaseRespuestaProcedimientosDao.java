@@ -428,7 +428,7 @@ private static String strConsultaNoCruentosPeticion = " SELECT " +
 															  "coalesce(e.res_proc,"+ConstantesBD.codigoNuncaValido+") AS egreso_res_proc," +
 															  "sol.tipo," +
 															  "coalesce(getgruposervicio(coalesce(solp.codigo_servicio_solicitado,"+ConstantesBD.codigoNuncaValido+")),"+ConstantesBD.codigoNuncaValido+") AS gruposervicio, " +
-															  "getcodigoservicio(solp.codigo_servicio_solicitado, ?) ||' '||getnombreservicio(solp.codigo_servicio_solicitado,?) AS nombre_servicio_solicitado, "+															  
+															  "FACTURACION.getObtenerCodigoServHist(solp.codigo_servicio_solicitado, ?, TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) ||' '||FACTURACION.getNombreServicioHistorico(solp.codigo_servicio_solicitado, ?, TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) AS nombre_servicio_solicitado, "+															  
 															  "conv.codigo as codigoConvenio, " +
 															  "conv.nombre as nombreConvenio, " +
 															  "conv.tipo_regimen as codigoTipoRegimen,"+
@@ -438,6 +438,7 @@ private static String strConsultaNoCruentosPeticion = " SELECT " +
 															  "INNER JOIN sol_procedimientos solp ON (solp.numero_solicitud = sol.numero_solicitud) " +															  
 															  "LEFT OUTER JOIN egresos e ON (e.cuenta = sol.cuenta) " +
 															  "INNER JOIN cuentas cue ON (cue.id = sol.cuenta) " +
+															  "INNER JOIN MANEJOPACIENTE.INGRESOS ING ON (ING.ID = CUE.ID_INGRESO) "+
 															  "INNER JOIN sub_cuentas subc ON (subc.ingreso=cue.id_ingreso AND subc.nro_prioridad = 1) " +
 															  "INNER JOIN convenios conv ON (conv.codigo=subc.convenio) " +
 															  "WHERE sol.numero_solicitud = ? " +

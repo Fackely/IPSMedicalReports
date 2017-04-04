@@ -35,8 +35,9 @@ public class OracleSolicitudProcedimientoDao implements SolicitudProcedimientoDa
 {
 	/** Sentencia SQL para cargar los datos particulares de una solicitud de procedimientos */
 	private static final String is_cargar =
-		"SELECT "	+	"sp.codigo_servicio_solicitado "	+ "AS codigoServicioSolicitado,"		+								
-						"getcodigoservicio(sp.codigo_servicio_solicitado, "+ConstantesBD.separadorSplit+") ||' '||getnombreservicio(sp.codigo_servicio_solicitado, "+ConstantesBD.separadorSplit+")"+ "AS nombreServicioSolicitado,"+						
+						"SELECT "	+	
+						"sp.codigo_servicio_solicitado "	+ "AS codigoServicioSolicitado,"		+								
+						"FACTURACION.getObtenerCodigoServHist(sp.codigo_servicio_solicitado, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) ||' '|| FACTURACION.getNombreServicioHistorico(sp.codigo_servicio_solicitado, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) AS nombreServicioSolicitado,"+						
 						"sp.nombre_otros "					+ "AS nombreOtros,"						+
 						"sp.comentario "					+ "AS comentario,"						+
 						"CASE "								+
@@ -58,6 +59,9 @@ public class OracleSolicitudProcedimientoDao implements SolicitudProcedimientoDa
 						"  coalesce (sp.portatil_asociado,-1) As portatil, "+
 						"  coalesce (sp.motivo_anul_portatil,'') As motivoanulport "+
 		"FROM "		+	"sol_procedimientos "			+ "sp "	+
+						" INNER JOIN SOLICITUDES                SOL ON (SOL.NUMERO_SOLICITUD = SP.NUMERO_SOLICITUD) "+
+						" INNER JOIN CUENTAS                    CUE ON (CUE.ID= SOL.CUENTA) "+
+						" INNER JOIN MANEJOPACIENTE.INGRESOS    ING ON (ING.ID = CUE.ID_INGRESO) "+
 						"INNER JOIN"						+
 						"("										+
 							"servicios "						+ "s "	+
@@ -65,7 +69,7 @@ public class OracleSolicitudProcedimientoDao implements SolicitudProcedimientoDa
 							"INNER JOIN especialidades "		+ "e "	+ "ON(s.especialidad=e.codigo)"							+
 						") "												+ "ON(s.codigo=sp.codigo_servicio_solicitado)"			+
 						" LEFT OUTER JOIN finalidades_servicio fs ON(fs.codigo=sp.finalidad) " +
-		"WHERE "	+	"numero_solicitud=?";
+		"WHERE "	+	" SOL.numero_solicitud=?";
 
 	/**
 	* Carga los datos de una solicitud de procedimientos desde una
