@@ -3322,7 +3322,7 @@ public class SqlBaseImpresionResumenAtencionesDao
 								"getnombrepersona(u.codigo_persona) AS profesional, " +
 								"administracion.getespecialidadesmedico(oa.usuario_solicita, ', ') AS especialidades, "+
 								"oa.observaciones AS observaciones, " +
-								"doaa.articulo AS codigo, " +
+								"doaa.articulo||'' AS codigo, " +
 								"getdescarticulo(doaa.articulo) AS descripcion, " +
 								"doaa.dosis||'' AS dosis, " +
 								"tf.nombre AS nomtipofrecuencia, " +
@@ -3352,8 +3352,8 @@ public class SqlBaseImpresionResumenAtencionesDao
 								"getnombrepersona(u.codigo_persona) AS profesional, " +
 								"administracion.getespecialidadesmedico(oa.usuario_solicita, ', ') AS especialidades, "+
 								"oa.observaciones AS observaciones, " +
-								"doas.servicio AS codigo, " +
-								"facturacion.getnombreservicio(doas.servicio, "+ConstantesBD.codigoTarifarioCups+") AS descripcion, " +
+								"FACTURACION.getObtenerCodigoServHist(doas.servicio,"+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) AS codigo, " +
+								"FACTURACION.getNombreServicioHistorico(doas.servicio, "+ConstantesBD.codigoTarifarioCups+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY'))  AS descripcion, " +
 								"'' AS dosis, " +
 								"'' AS nomtipofrecuencia, " +
 								"'' AS frecuencia, " +
@@ -3365,6 +3365,7 @@ public class SqlBaseImpresionResumenAtencionesDao
 								"'' AS unidosis," +
 								"coalesce(roa.resultado,'') as resultado " +
 							"FROM ordenes_ambulatorias oa " +
+							"INNER JOIN INGRESOS ING ON (ING.ID = oa.INGRESO)"+
 							"LEFT OUTER JOIN  det_orden_amb_servicio doas ON (oa.codigo   = doas.codigo_orden) " +
 							"LEFT OUTER JOIN  resultado_orden_ambulatorias roa ON (roa.codigo_orden=oa.codigo) " +
 							"INNER JOIN usuarios u ON (oa.usuario_solicita=u.login) " +
