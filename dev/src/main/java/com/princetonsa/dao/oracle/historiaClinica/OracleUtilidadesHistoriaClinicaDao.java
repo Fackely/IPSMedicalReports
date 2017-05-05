@@ -931,9 +931,9 @@ public class OracleUtilidadesHistoriaClinicaDao implements UtilidadesHistoriaCli
 	/**
 	 * @see com.princetonsa.dao.historiaClinica.UtilidadesHistoriaClinicaDao#consultarMedicamentosOriginales(java.lang.Integer, java.sql.Connection, java.lang.Integer)
 	 */
-	public DtoMedicamentosOriginales consultarMedicamentosOriginales(Integer codigoEquivalente,Connection con,Integer ingreso )throws Exception
+	public DtoMedicamentosOriginales consultarMedicamentosOriginales(Integer codigoEquivalente, Integer codigoAdm, Connection con,Integer ingreso )throws Exception
 	{
-		return SqlBaseUtilidadesHistoriaClinicaDao.consultarMedicamentosOriginales(codigoEquivalente, con, ingreso);
+		return SqlBaseUtilidadesHistoriaClinicaDao.consultarMedicamentosOriginales(codigoEquivalente, codigoAdm, con, ingreso);
 	}
 	
 	/**

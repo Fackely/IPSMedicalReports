@@ -56,6 +56,7 @@ public class SqlBaseImpresionResumenAtencionesDao
 	 * Consulta de los medicamentos administrados
 	 */
 	public static String consultaAdminMedicamentos="SELECT DISTINCT "+ 
+		"am.codigo AS codigo_admin, " +
 		"a.codigo AS articulo, "+
 		"a.descripcion AS medicamento, "+
 		"a.concentracion AS concentracion, "+

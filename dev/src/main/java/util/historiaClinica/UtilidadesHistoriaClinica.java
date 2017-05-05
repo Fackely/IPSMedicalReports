@@ -1278,9 +1278,9 @@ public class UtilidadesHistoriaClinica
 	 * @return medicamento original
 	 * @throws Exception
 	 */
-	public static DtoMedicamentosOriginales consultarMedicamentosOriginales(Integer codigoEquivalente,Connection con,Integer ingreso )throws Exception
+	public static DtoMedicamentosOriginales consultarMedicamentosOriginales(Integer codigoEquivalente, Integer codigoAdm, Connection con,Integer ingreso )throws Exception
 	{
-		return utilidadesDao().consultarMedicamentosOriginales(codigoEquivalente, con, ingreso);
+		return utilidadesDao().consultarMedicamentosOriginales(codigoEquivalente, codigoAdm, con, ingreso);
 	}
 	
 	/**

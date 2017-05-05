@@ -6983,86 +6983,55 @@ public class SqlBaseUtilidadesHistoriaClinicaDao
 
 	/**
 	 * @param codigoEquivalente
+	 * @param codigoAdm TODO
 	 * @param con
 	 * @param ingreso
 	 * @return medicamento original
 	 * @throws Exception
 	 */
-	public static DtoMedicamentosOriginales consultarMedicamentosOriginales(Integer codigoEquivalente,Connection con,Integer ingreso )throws Exception{
+	public static DtoMedicamentosOriginales consultarMedicamentosOriginales(Integer codigoEquivalente, Integer codigoAdm,Connection con, Integer ingreso )throws Exception{
 		Integer res = new Integer(0);
 		DtoMedicamentosOriginales medicamentoOriginal = new DtoMedicamentosOriginales();
 		PreparedStatement pst =  null;
 		ResultSet rs =  null;
 		try
 		{	
-			String consulta1 = " SELECT DISTINCT a.codigo                        AS articulo, "+
-			" a.descripcion                                 AS medicamento,  "+
-			" a.concentracion                               AS concentracion, "+
-			" getnomformafarmaceutica(a.forma_farmaceutica) AS forma_farmaceutica, "+
-			" getnomunidadmedida(a.unidad_medida)           AS unidad_medida, "+
-			" da.art_principal                              AS artppal "+
-			" FROM cuentas c "+
-			" INNER JOIN solicitudes s "+
-			" ON (s.cuenta=c.id) "+
-			" INNER JOIN admin_medicamentos am "+
-			" ON(am.numero_solicitud=s.numero_solicitud) "+
-			" INNER JOIN detalle_admin da "+
-			" ON(da.administracion=am.codigo) "+ 
-			" INNER JOIN articulo a "+
-			" ON(a.codigo=da.articulo) "+
-			" INNER JOIN naturaleza_articulo na "+
-			" ON (na.acronimo      =a.naturaleza "+
-			" AND a.institucion    =na.institucion) "+
-			" WHERE " +
-			" na.es_medicamento='S' "+
-			" AND a.codigo  =?  "+
-			" AND da.art_principal IS NOT NULL " +
-			" ORDER BY a.descripcion";
+			String consulta1 = " SELECT da.art_principal AS artppal " +
+					" FROM ENFERMERIA.DETALLE_ADMIN da " +
+					" WHERE da.art_principal IS NOT NULL " +
+					" AND da.articulo = ? " +
+					" AND da.administracion = ? ";
 
-
-			String consulta2= " SELECT DISTINCT a.codigo                        AS articulo, "+
-			" a.descripcion                                 AS medicamento,  "+
-			" a.concentracion                               AS concentracion, "+
-			" getnomformafarmaceutica(a.forma_farmaceutica) AS forma_farmaceutica, "+
-			" getnomunidadmedida(a.unidad_medida)           AS unidad_medida, "+
-			" da.art_principal                              AS artppal "+
-			" FROM cuentas c "+
-			" INNER JOIN solicitudes s "+
-			" ON (s.cuenta=c.id) "+
-			" INNER JOIN admin_medicamentos am "+
-			" ON(am.numero_solicitud=s.numero_solicitud) "+
-			" INNER JOIN detalle_admin da "+
-			" ON(da.administracion=am.codigo) "+ 
-			" INNER JOIN articulo a "+
-			" ON(a.codigo=da.articulo) "+
-			" INNER JOIN naturaleza_articulo na "+
-			" ON (na.acronimo      =a.naturaleza "+
-			" AND a.institucion    =na.institucion) "+
-			" WHERE  " +
-			" na.es_medicamento='S' "+
-			" AND a.codigo  =?  "+
-			" ORDER BY a.descripcion";
-
-
-
-			 pst = con.prepareStatement(consulta1);
+			String consulta2 = " SELECT  " +
+					"	a.codigo                                 	  AS articulo," +
+					" 	a.descripcion                                 AS medicamento, " +
+					" 	a.concentracion                               AS concentracion, " +
+					" 	getnomformafarmaceutica(a.forma_farmaceutica) AS forma_farmaceutica, " +
+					" 	getnomunidadmedida(a.unidad_medida)           AS unidad_medida " +
+					" FROM INVENTARIOS.ARTICULO a  " +
+					" WHERE a.codigo = ? ";
+				
+			pst = con.prepareStatement(consulta1);
 			pst.setInt(1, codigoEquivalente);
-			 rs = pst.executeQuery();
+			pst.setInt(2, codigoAdm);
+			
+			rs = pst.executeQuery();
 			if(rs.next()){
 				res = rs.getInt("artppal");
 			}
 
-			pst = con.prepareStatement(consulta2);
-			pst.setInt(1, res);
-			rs = pst.executeQuery();
-
-
-			if (rs.next()) {
-				medicamentoOriginal.setCodigo(rs.getInt("ARTICULO"));
-				medicamentoOriginal.setMedicamento (rs.getString("MEDICAMENTO"));
-				medicamentoOriginal.setFormaFarmaceutica(rs.getString("FORMA_FARMACEUTICA"));
-				medicamentoOriginal.setConcentracion(rs.getString("CONCENTRACION"));
-				medicamentoOriginal.setUnidadMedida(rs.getString("UNIDAD_MEDIDA"));
+			if(res > new Integer(0)){
+				pst = con.prepareStatement(consulta2);
+				pst.setInt(1, res);
+				rs = pst.executeQuery();
+	
+				if (rs.next()) {
+					medicamentoOriginal.setCodigo(rs.getInt("articulo"));
+					medicamentoOriginal.setMedicamento (rs.getString("medicamento"));
+					medicamentoOriginal.setFormaFarmaceutica(rs.getString("forma_farmaceutica"));
+					medicamentoOriginal.setConcentracion(rs.getString("concentracion"));
+					medicamentoOriginal.setUnidadMedida(rs.getString("unidad_medida"));
+				}
 			}
 		}
 		catch(SQLException e)

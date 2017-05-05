@@ -138,7 +138,10 @@ public class GeneradorSubReporteAdministracionMedicamentosHojaAdministracionMedi
 
 
 					DtoMedicamentosOriginales medicamentoOriginal = UtilidadesHistoriaClinica.
-					consultarMedicamentosOriginales(Integer.valueOf(String.valueOf(adminMedicamentos.get("articulo_"+i))), con, Integer.valueOf(idIngreso));
+					consultarMedicamentosOriginales(
+							Integer.valueOf(String.valueOf(adminMedicamentos.get("articulo_" + i))),
+							Integer.valueOf(String.valueOf(adminMedicamentos.get("codigo_admin_" + i))), con,
+							Integer.valueOf(idIngreso));
 					
 					agrupador=String.valueOf(adminMedicamentos.get("articulo_"+i)).toLowerCase()+" ";
 					agrupador+=" -"+String.valueOf(adminMedicamentos.get("medicamento_"+i)).toLowerCase()+" ";

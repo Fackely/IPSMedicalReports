@@ -763,7 +763,7 @@ public interface UtilidadesHistoriaClinicaDao
 	 * @return medicamento original
 	 * @throws Exception
 	 */
-	public DtoMedicamentosOriginales consultarMedicamentosOriginales(Integer codigoEquivalente,Connection con,Integer ingreso )throws Exception;
+	public DtoMedicamentosOriginales consultarMedicamentosOriginales(Integer codigoEquivalente, Integer codigoAdm, Connection con,Integer ingreso )throws Exception;
 	
 	/**
 	 * @param con
