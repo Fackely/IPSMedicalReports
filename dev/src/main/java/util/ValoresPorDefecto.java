@@ -11529,7 +11529,7 @@ public class ValoresPorDefecto {
 		if(UtilidadTexto.isEmpty(valor))
 			valor=ConstantesBD.codigoTarifarioCups+"";
 		
-		return valor;
+		return "0";
 	}
 	
 	/**

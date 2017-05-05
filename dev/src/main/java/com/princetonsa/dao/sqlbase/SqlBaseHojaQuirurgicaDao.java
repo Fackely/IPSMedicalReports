@@ -4605,8 +4605,8 @@ public class SqlBaseHojaQuirurgicaDao
 			
 			StringBuffer consulta=new StringBuffer("SELECT ") 
 					.append(" scxs.servicio AS codigo_servicio,") 
-					.append(" getcodigopropservicio2(scxs.servicio, ").append(codigoTarifario).append(") AS cod_referencia_servicio, ")
-					.append(" getnombreservicio(scxs.servicio,").append(codigoTarifario).append(") AS nombre_referencia_servicio, " )
+					.append(" FACTURACION.getObtenerCodigoServHist(scxs.SERVICIO, "+codigoTarifario+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) AS cod_referencia_servicio, ")
+					.append(" FACTURACION.getNombreServicioHistorico(scxs.SERVICIO, "+codigoTarifario+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) AS nombre_referencia_servicio, " )
 					.append(" getnombreespecialidad(s.especialidad) as nom_especialidad_servicio, " )
 					.append(" s.especialidad As especialidad_servicio, "  )
 					.append(" scxs.consecutivo AS numero_servicio, ")
@@ -4628,6 +4628,9 @@ public class SqlBaseHojaQuirurgicaDao
 					.append(" count(jus.codigo) as cantidad_justificacion ")
 				.append(" FROM sol_cirugia_por_servicio scxs " )
 				.append(" INNER JOIN servicios s ON (scxs.servicio=s.codigo) " )
+				.append(" INNER JOIN ORDENES.solicitudes  				SOL ON (scxs.NUMERO_SOLICITUD = SOL.NUMERO_SOLICITUD) " )
+				.append(" INNER JOIN MANEJOPACIENTE.cuentas             CUE ON (CUE.id = SOL.cuenta) " )
+				.append(" INNER JOIN MANEJOPACIENTE.INGRESOS          	ING ON (ING.ID = CUE.ID_INGRESO) " )
 				.append(" LEFT JOIN inventarios.justificacion_serv_sol jus ON (jus.solicitud=scxs.numero_solicitud AND jus.servicio =s.codigo) ");
 				
 			if(especialidadDto!=null){
@@ -4646,8 +4649,8 @@ public class SqlBaseHojaQuirurgicaDao
 			}
 			
 			consulta.append("group by scxs.servicio , ")
-					.append("getcodigopropservicio2(scxs.servicio, 0), ")
-					.append("getnombreservicio(scxs.servicio,0), ")
+					.append("FACTURACION.getObtenerCodigoServHist(scxs.SERVICIO, "+codigoTarifario+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')), ")
+					.append("FACTURACION.getNombreServicioHistorico(scxs.SERVICIO, "+codigoTarifario+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')), ")
 					.append("getnombreespecialidad(s.especialidad), ")
 					.append("s.especialidad, ")
 					.append("scxs.consecutivo, ")
@@ -4672,8 +4675,8 @@ public class SqlBaseHojaQuirurgicaDao
 			
 			consulta=new StringBuffer(" SELECT ") 
 					.append("ps.servicio AS codigo_servicio, ") 
-					.append("getcodigopropservicio2(ps.servicio, ").append(codigoTarifario).append(") AS cod_referencia_servicio, ")
-					.append("getnombreservicio(ps.servicio,").append(codigoTarifario).append(") AS nombre_referencia_servicio, " )
+					.append("FACTURACION.getObtenerCodigoServHist(scxs.SERVICIO, "+codigoTarifario+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) AS cod_referencia_servicio, ")
+					.append("FACTURACION.getNombreServicioHistorico(scs.SERVICIO, "+codigoTarifario+", TO_CHAR(ING.FECHA_INGRESO, 'DD/MM/YYYY')) AS nombre_referencia_servicio, " )
 					.append("getnombreespecialidad(s.especialidad) as nom_especialidad_servicio, ")
 					.append("s.especialidad As especialidad_servicio, ")
 					.append("ps.numero_servicio AS numero_servicio, " )
