@@ -304,7 +304,7 @@ public class GeneradorSubReporteRespuestaInterconsultas
 				HorizontalListBuilder itemComponent=cmp.horizontalList(titulo);
 				if(!observacion.getValor().equals(""))
 				{
-					tempo=observacion.getValor()+" \n "+observacion.getFecha()+" - "+observacion.getHora()+" \n "+observacion.getProfesional().getInformacionGeneralPersonalSalud();
+					tempo= UtilidadTexto.partirTextoNCaracteres(observacion.getValor(), 120) + " \n "+observacion.getFecha()+" - "+observacion.getHora()+" \n "+observacion.getProfesional().getInformacionGeneralPersonalSalud();
 					texto=cmp.text(tempo).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
 					itemComponent.newRow().add(texto);
 				}
@@ -317,7 +317,7 @@ public class GeneradorSubReporteRespuestaInterconsultas
 				HorizontalListBuilder itemComponent=cmp.horizontalList(titulo);
 				if(!observacion.getValor().equals(""))
 				{
-					tempo=observacion.getValor()+" \n "+observacion.getFecha()+" - "+observacion.getHora()+" \n "+observacion.getProfesional().getInformacionGeneralPersonalSalud();
+					tempo= UtilidadTexto.partirTextoNCaracteres(observacion.getValor(), 120) +" \n "+observacion.getFecha()+" - "+observacion.getHora()+" \n "+observacion.getProfesional().getInformacionGeneralPersonalSalud();
 					texto=cmp.text(tempo).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
 					itemComponent.newRow().add(texto);
 				}
@@ -331,7 +331,7 @@ public class GeneradorSubReporteRespuestaInterconsultas
 				
 				if(!observacion.getValor().equals(""))
 				{
-					tempo=observacion.getValor()+" \n "+observacion.getFecha()+" - "+observacion.getHora()+" \n "+observacion.getProfesional().getInformacionGeneralPersonalSalud();
+					tempo= UtilidadTexto.partirTextoNCaracteres(observacion.getValor(), 120) +" \n "+observacion.getFecha()+" - "+observacion.getHora()+" \n "+observacion.getProfesional().getInformacionGeneralPersonalSalud();
 					texto=cmp.text(tempo).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
 					itemComponent.newRow().add(texto);
 				}
@@ -365,7 +365,7 @@ public class GeneradorSubReporteRespuestaInterconsultas
 				texto=cmp.text(obs.getLabel()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				itemComponent=cmp.horizontalList(texto);
 				
-				texto=cmp.text(obs.getValor()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
+				texto=cmp.text(UtilidadTexto.partirTextoNCaracteres(obs.getValor(), 120)).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				itemComponent.newRow().add(texto);
 				
 				
@@ -457,7 +457,7 @@ public class GeneradorSubReporteRespuestaInterconsultas
 		titulo=cmp.text(seccionFija.getNombreSeccion()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla).setHorizontalAlignment(HorizontalAlignment.LEFT));
 		itemComponent=cmp.horizontalList(titulo);
 		
-		texto=cmp.text(mundoValoracion.getValoracion().getValoracionConsulta().getNombreFinalidadConsulta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
+		texto=cmp.text(UtilidadTexto.partirTextoNCaracteres(mundoValoracion.getValoracion().getValoracionConsulta().getNombreFinalidadConsulta(), 120)).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
 		itemComponent.add(texto);
 		
 		return itemComponent;
@@ -482,7 +482,7 @@ public class GeneradorSubReporteRespuestaInterconsultas
 		titulo=cmp.text(seccionFija.getNombreSeccion()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla).setHorizontalAlignment(HorizontalAlignment.LEFT));
 		itemComponent=cmp.horizontalList(titulo);
 		
-		texto=cmp.text(mundoValoracion.getValoracion().getNombreCausaExterna()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
+		texto=cmp.text(UtilidadTexto.partirTextoNCaracteres(mundoValoracion.getValoracion().getNombreCausaExterna(), 120)).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
 		itemComponent.add(texto);
 		
 		return itemComponent;
@@ -577,7 +577,7 @@ public class GeneradorSubReporteRespuestaInterconsultas
 				titulo=cmp.text(obs.getLabel()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				itemComponent.newRow().add(titulo);
 				
-				texto=cmp.text(obs.getValor()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
+				texto=cmp.text(UtilidadTexto.partirTextoNCaracteres(obs.getValor(), 120)).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				itemComponent.newRow().add(texto);
 			}
 		}
