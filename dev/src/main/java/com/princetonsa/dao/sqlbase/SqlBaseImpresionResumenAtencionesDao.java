@@ -55,8 +55,8 @@ public class SqlBaseImpresionResumenAtencionesDao
 	/***
 	 * Consulta de los medicamentos administrados
 	 */
-	public static String consultaAdminMedicamentos="SELECT DISTINCT "+ 
-		"am.codigo AS codigo_admin, " +
+	public static String consultaAdminMedicamentos="SELECT "+ 
+		"MAX(am.codigo) AS codigo_admin, " +
 		"a.codigo AS articulo, "+
 		"a.descripcion AS medicamento, "+
 		"a.concentracion AS concentracion, "+
@@ -451,7 +451,7 @@ public class SqlBaseImpresionResumenAtencionesDao
 				cadena+=" AND a.codigo=? ";
 			}
 			
-			cadena+=" ) ORDER BY a.descripcion";
+			cadena += ") GROUP BY a.codigo, a.descripcion, a.concentracion, getnomformafarmaceutica(a.forma_farmaceutica), getnomunidadmedida(a.unidad_medida), da.art_principal  ORDER BY a.descripcion";
 			
 			logger.info("Consulta -->"+cadena);
 			ps= new PreparedStatementDecorator(con.prepareStatement(cadena));
