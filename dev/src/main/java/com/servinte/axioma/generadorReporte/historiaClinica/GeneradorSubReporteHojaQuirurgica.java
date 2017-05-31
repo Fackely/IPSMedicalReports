@@ -1841,7 +1841,11 @@ public class GeneradorSubReporteHojaQuirurgica {
 					itemComponent.add(cmp.text(""));
 				}
 			}
-			return cmp.horizontalList(itemComponent.setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla)));
+			if(itemComponent != null){
+				return cmp.horizontalList(itemComponent.setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla)));
+			} else {
+				return cmp.horizontalList();
+			}			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
