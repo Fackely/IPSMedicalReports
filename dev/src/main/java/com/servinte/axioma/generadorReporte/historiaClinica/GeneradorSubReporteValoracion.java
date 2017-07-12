@@ -494,9 +494,7 @@ public class GeneradorSubReporteValoracion
 					texto2));
 		}
 		
-		itemComponent.add(cmp.text(""));
-		itemComponent.add(cmp.text(""));
-				
+		itemComponent.add(cmp.horizontalList(cmp.verticalList()));				
 		
 		return cmp.horizontalList(itemComponent.setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla)));
 	}

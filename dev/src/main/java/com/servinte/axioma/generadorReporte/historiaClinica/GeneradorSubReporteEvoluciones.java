@@ -666,6 +666,8 @@ public class GeneradorSubReporteEvoluciones
 		String firmaConsultada ="";
 		TextFieldBuilder<String> texto1=null;
 		TextFieldBuilder<String> texto2=null;
+		TextFieldBuilder<String> textoBlanco=cmp.text("").
+				setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 		
 		Connection con=UtilidadBD.abrirConexion();
 		
@@ -678,13 +680,13 @@ public class GeneradorSubReporteEvoluciones
 		
 		String firmaStr = path + directorio +  System.getProperty("file.separator")+System.getProperty("FIRMADIGITAL")+System.getProperty("file.separator")+firmaConsultada;
 		LineBuilder linea=cmp.line().setDimension(5, 1);
-			
+		
 		texto1=cmp.text(evolucion.getProfesional().getNombreyRMPersonalSaludEsp()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 		texto2=cmp.text(evolucion.getFechaGrabacion()+" "+evolucion.getHoraGrabacion()).setHorizontalAlignment(HorizontalAlignment.LEFT).setStretchWithOverflow(Boolean.TRUE);
 			
 		if(!UtilidadTexto.isEmpty2(firmaConsultada) && UtilidadFileUpload.existeArchivoRutaCompelta(firmaStr)){		
-			itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60)
-					,linea,
+			itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60),
+					linea,
 					texto1,
 					texto2));
 		} else {
@@ -693,8 +695,7 @@ public class GeneradorSubReporteEvoluciones
 					texto2));
 		}
 		
-		itemComponent.add(cmp.text(""));
-		itemComponent.add(cmp.text(""));
+		itemComponent.add(cmp.horizontalList(cmp.verticalList()));
 				
 		return cmp.horizontalList(itemComponent.setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla)));
 	}

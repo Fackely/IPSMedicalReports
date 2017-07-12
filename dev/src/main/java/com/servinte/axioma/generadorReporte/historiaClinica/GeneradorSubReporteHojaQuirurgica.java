@@ -1837,8 +1837,7 @@ public class GeneradorSubReporteHojaQuirurgica {
 								texto2));
 					}
 					
-					itemComponent.add(cmp.text(""));
-					itemComponent.add(cmp.text(""));
+					itemComponent.add(cmp.horizontalList(cmp.verticalList()));
 				}
 			}
 			if(itemComponent != null){
