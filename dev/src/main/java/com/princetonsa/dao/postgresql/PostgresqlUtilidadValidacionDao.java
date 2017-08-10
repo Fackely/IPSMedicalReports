@@ -22,6 +22,7 @@ import util.InfoDatosString;
 import util.RespuestaValidacion;
 import util.RespuestaValidacionTratante;
 import util.ResultadoBoolean;
+import util.UtilidadBD;
 import util.ValoresPorDefecto;
 
 import com.princetonsa.dao.DaoFactory;
@@ -1198,7 +1199,7 @@ public class PostgresqlUtilidadValidacionDao  implements UtilidadValidacionDao
 	}
 
 	/**
-	 * Método para verificar la existencia de cuenta
+	 * Metodo para verificar la existencia de cuenta
 	 * asociada
 	 * @param con
 	 * @param ingreso
@@ -1206,8 +1207,32 @@ public class PostgresqlUtilidadValidacionDao  implements UtilidadValidacionDao
 	 */
 	public int tieneCuentaAsociada(Connection con, int ingreso)
 	{
-		String sentenciaSQL="SELECT cuenta_inicial as cuentaInicial, cuenta_final as cuentaFinal from asocios_cuenta where activo=true and (cuenta_inicial IN (SELECT id from cuentas where id_ingreso =?) or cuenta_final IN (SELECT id from cuentas where id_ingreso =?) )";
-		return SqlBaseUtilidadValidacionDao.tieneCuentaAsociada(con, ingreso, sentenciaSQL);
+		if(ingreso > 0){
+			PreparedStatementDecorator cuentaAsociada=null;
+			ResultSetDecorator resultado = null;
+			try
+			{
+				cuentaAsociada= new PreparedStatementDecorator(con.prepareStatement(SqlBaseUtilidadValidacionDao.getConsultaCuentasAsociadas().toString()));
+				cuentaAsociada.setString(1, "true");
+				cuentaAsociada.setInt(2, ingreso);
+				resultado=new ResultSetDecorator(cuentaAsociada.executeQuery());
+				while(resultado.next())
+				{
+					return resultado.getInt("cuentainicial");
+				}
+				return 0;
+			}
+			catch (SQLException e)
+			{
+				logger.error("Error consultando la existencia de la cuenta Asociada "+e);
+				return 0;
+			}
+			finally{
+				UtilidadBD.cerrarObjetosPersistencia(cuentaAsociada, resultado, null);
+			}
+		} else {
+			return 0;
+		}
 	}
 	
 	/**

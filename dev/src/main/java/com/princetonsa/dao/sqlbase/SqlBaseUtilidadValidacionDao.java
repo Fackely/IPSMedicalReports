@@ -5878,6 +5878,29 @@ public class SqlBaseUtilidadValidacionDao
 		}
 	}
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static StringBuffer getConsultaCuentasAsociadas() {
+		StringBuffer sentenciaSQL = new StringBuffer("SELECT ACU.CUENTA_INICIAL AS cuentaInicial, ");
+		sentenciaSQL.append("       ACU.CUENTA_FINAL AS cuentaFinal ");
+		sentenciaSQL.append("  FROM asocios_cuenta ACU");
+		sentenciaSQL.append(" LEFT JOIN cuentas CUI");
+		sentenciaSQL.append("   ON CUI.ID = ACU.CUENTA_INICIAL");
+		sentenciaSQL.append(" LEFT JOIN cuentas CUF");
+		sentenciaSQL.append("     ON CUF.ID = ACU.CUENTA_FINAL");
+		sentenciaSQL.append(" WHERE ACU.ACTIVO = ?");
+		sentenciaSQL.append("   AND CUI.ID_INGRESO = CUF.ID_INGRESO");
+		sentenciaSQL.append("   AND CUF.ID_INGRESO = ?");
+		sentenciaSQL.append("   AND (CUI.ID IS NOT NULL");
+		sentenciaSQL.append("    OR CUF.ID IS NOT NULL) ");
+		sentenciaSQL.append(" ORDER BY ACU.CODIGO");
+		
+		return sentenciaSQL;
+	}
+	
 	/**
 	 * Implementación del método que dado el código de una 
 	 * cuenta o subcuenta devuelve su estado, para una BD 
