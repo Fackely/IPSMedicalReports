@@ -127,12 +127,12 @@ public class GeneradorSubReporteValoracion
 		
 		
 		
-		String nombreValoracion="Valoración de ";
+		String nombreValoracion="Valoración";
 		if(viaIngreso==ConstantesBD.codigoViaIngresoUrgencias)
 		{
 			mundoValoracion.setNumeroSolicitud(numeroSolicitud+"");
 			mundoValoracion.cargarUrgencias(con,usuario,paciente,paciente.getCodigoPersona(),false);
-			nombreValoracion="Urgencias";
+//			nombreValoracion="Urgencias";
 			/**
 			 * MT 5568
 			 * @author javrammo
@@ -150,7 +150,7 @@ public class GeneradorSubReporteValoracion
 		{
 			mundoValoracion.setNumeroSolicitud(numeroSolicitud+"");
 			mundoValoracion.cargarHospitalizacion(con,usuario,paciente,false);
-			nombreValoracion="Hospitalización";
+			nombreValoracion=" de Hospitalización";
 			/**
 			 * MT 5568
 			 * @author javrammo

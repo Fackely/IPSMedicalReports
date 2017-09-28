@@ -109,8 +109,16 @@ public class GeneradorSubReporteHojaQuirurgica {
 						, matriz);
 				if(otrosProfesionales.isEmpty()){
 					otrosProfesionales=dtoHojaQuirurgicaAnestesia.getMapaDescripcionesOperatorias().get(solicitud).get(especialidadDto.getCodigo()).getOtrosProfesionales();
-				}
+				}				
 				listaComponentes.addAll(tmpList);
+				/*
+				 * Se crea el componente de firma digital del cirujano unicamente
+				 */
+				listaComponentes.add(createComponentProfesionalQueResponde(
+						dtoHojaQuirurgicaAnestesia.getMapaDescripcionesOperatorias().get(solicitud)
+								.get(especialidadDto.getCodigo()).getInformeQxEspecialidad().getProfesionales(),
+						dtoHojaQuirurgicaAnestesia.getMapaIngresoSalidaPaciente().get(solicitud)));
+//				matriz.newRow();
 			}
 			matriz=cmp.horizontalList();
 		}
@@ -886,13 +894,7 @@ public class GeneradorSubReporteHojaQuirurgica {
 		
 		createComponentNotaAclaratoria(notasAclaratorias, matriz);
 		
-		if(!informeQxDto.getInformeQxEspecialidad().getProfesionales().isEmpty()){	
-			/*
-			 * Se crea el componente de firma digital del cirujano unicamente
-			 */
-			matriz.add(createComponentProfesionalQueResponde(informeQxDto.getInformeQxEspecialidad().getProfesionales(), ingresoSalidaPacienteDto));
-			matriz.newRow();
-			
+		if(!informeQxDto.getInformeQxEspecialidad().getProfesionales().isEmpty()){
 			tituloInformacionActoQx=cmp.text(etiquetas.getString("msgHojaQuirurgicaForm.informeQx.profesionalesXEspeciadad")).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla).setBackgroundColor(Color.LIGHT_GRAY).setHorizontalAlignment(HorizontalAlignment.LEFT));
 			matriz.add(tituloInformacionActoQx);
 			matriz.newRow();
@@ -1027,15 +1029,15 @@ public class GeneradorSubReporteHojaQuirurgica {
 				 //CASO: 14439-Se agrega cada componenteLabel a la matriz
 				contenido=cmp.text(fecha.toString()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloNegrillaL).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				
-				componenteLabel=cmp.horizontalList(vacio.setWidth(5));
-				componenteLabel.add(contenido);
+				componenteLabel=cmp.horizontalList(cmp.verticalList());
+				componenteLabel.add(cmp.horizontalList(cmp.verticalList(contenido)));
 				matriz.add(componenteLabel);
 				matriz.newRow();
 				
 				contenido=cmp.text(notaAclaratoriaDto.getDescripcion()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloSubTituloSinBold).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				
-				componenteLabel=cmp.horizontalList(vacio.setWidth(5));
-				componenteLabel.add(contenido);
+				componenteLabel=cmp.horizontalList(cmp.verticalList());
+				componenteLabel.add(cmp.horizontalList(cmp.verticalList(contenido)));
 				matriz.add(componenteLabel);
 				matriz.newRow();
 				
@@ -1045,13 +1047,13 @@ public class GeneradorSubReporteHojaQuirurgica {
 				usuario.append(" ");
 				contenido=cmp.text(usuario.toString()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloNegrillaL).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				
-				componenteLabel=cmp.horizontalList(vacio.setWidth(5));
-				componenteLabel.add(contenido.setWidth(7));
+				componenteLabel=cmp.horizontalList(cmp.verticalList());
+				componenteLabel.add(cmp.horizontalList(cmp.verticalList(contenido)));
 				
 				usuario=new StringBuffer(notaAclaratoriaDto.getDatosMedico());
 				contenido=cmp.text(usuario.toString()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloSubTituloSinBold).setHorizontalAlignment(HorizontalAlignment.LEFT));
 				
-				componenteLabel.add(contenido);
+				componenteLabel.add(cmp.horizontalList(cmp.verticalList(contenido)));
 				
 				matriz.add(componenteLabel);
 				matriz.newRow();
