@@ -648,7 +648,7 @@ public class ComunImpresionHistoriaClinica
 				{
 					if(!UtilidadTexto.isEmpty(campo.getEtiqueta()))
 					{
-						texto=cmp.text(campo.getEtiqueta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
+						texto=cmp.text(campo.getEtiqueta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla)).setHorizontalAlignment(HorizontalAlignment.LEFT);
 						tmpCampos.add(campo.getEtiqueta());
 					}
 					for(int i=0;i<campo.getOpciones().size();i++)
@@ -669,7 +669,7 @@ public class ComunImpresionHistoriaClinica
 				{
 					if(!UtilidadTexto.isEmpty(campo.getEtiqueta()))
 					{
-						texto=cmp.text(campo.getEtiqueta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
+						texto=cmp.text(campo.getEtiqueta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla)).setHorizontalAlignment(HorizontalAlignment.LEFT);
 						tmpCampos.add(campo.getEtiqueta());
 					}
 
@@ -685,19 +685,27 @@ public class ComunImpresionHistoriaClinica
 				else if (campo.getTipoHtml().equals(ConstantesCamposParametrizables.campoTipoSelect))
 				{
 					if(!campo.getEtiqueta().isEmpty()) {
-						texto=cmp.text(campo.getEtiqueta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
+						texto=cmp.text(campo.getEtiqueta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla)).setHorizontalAlignment(HorizontalAlignment.LEFT);
 						tmpCampos.add(campo.getEtiqueta());
 					}	
 						
 					if(campo.getTipoHtml().equals(ConstantesCamposParametrizables.campoTipoSelect) &&campo.getOpciones().size() > 0)
 					{
+						Boolean tieneData = new Boolean (false);
 						for(int i=0;i<campo.getOpciones().size();i++)
 						{
 							if(campo.getOpciones().get(i).getSeleccionado().equals(ConstantesBD.acronimoSi))
 							{
 								texto=cmp.text(campo.getOpciones().get(i).getValor()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
 								tmpCampos.add(campo.getOpciones().get(i).getValor());
+								tieneData = new Boolean (true);
 							}
+						}
+
+						if (!tieneData) {
+							String tempo=""+(campo.getValor().equals("")?"":(campo.getValor().split(ConstantesBD.separadorSplit).length>1?campo.getValor().split(ConstantesBD.separadorSplit)[1]:campo.getValor()));
+							texto=cmp.text(tempo).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
+							tmpCampos.add(tempo);
 						}
 					}
 					else
@@ -716,7 +724,7 @@ public class ComunImpresionHistoriaClinica
 				else if (campo.getTipoHtml().equals(ConstantesCamposParametrizables.campoTipoText))
 				{
 					if(!campo.getEtiqueta().isEmpty()) {
-						texto=cmp.text(campo.getEtiqueta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBorde)).setHorizontalAlignment(HorizontalAlignment.LEFT);
+						texto=cmp.text(campo.getEtiqueta()).setStyle(stl.style(EstilosReportesDinamicosHistoriaClinica.estiloBordeNegrilla)).setHorizontalAlignment(HorizontalAlignment.LEFT);
 						tmpCampos.add(campo.getEtiqueta());
 					}
 
