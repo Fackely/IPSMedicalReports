@@ -486,6 +486,7 @@ public class GeneradorSubReporteValoracion
 		if(!UtilidadTexto.isEmpty2(firmaConsultada) && UtilidadFileUpload.existeArchivoRutaCompelta(firmaStr)){		
 			itemComponent=cmp.horizontalList(cmp.verticalList(cmp.image(firmaStr).setDimension(170, 60)
 					,linea,
+					cmp.horizontalList(cmp.verticalList(cmp.text(""))),
 					texto1,
 					texto2));
 		} else {
