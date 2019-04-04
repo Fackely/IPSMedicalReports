@@ -403,8 +403,10 @@ public class GeneradorSubReporteEvoluciones
 		int contadorObservaciones=0;
 		for(DtoEvolucionComentarios comentarios:evolucion.getComentarios())
 		{
-			if(contadorObservaciones==0)
-			tempo=tempo+UtilidadImpresion.arreglarCampoStringImpresion(comentarios.getValor())+comentarios.getFecha()+" - "+comentarios.getHora()+"\n"+comentarios.getProfesional().getInformacionGeneralPersonalSalud();
+			if(contadorObservaciones!=0)
+				tempo=tempo+"\n \n";
+			tempo=tempo+UtilidadImpresion.arreglarCampoStringImpresion(comentarios.getValor())+" \n"+comentarios.getFecha()+" - "+comentarios.getHora()+"\n"+comentarios.getProfesional().getInformacionGeneralPersonalSalud();
+			
 			contadorObservaciones++;
 		}
 		itemComponent.newRow();

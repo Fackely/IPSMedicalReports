@@ -40,10 +40,10 @@ public class GeneradorSubReporteOrdenesMedicamentos {
 	 */
 	private static MessageResources messageResource = MessageResources.getMessageResources("com.servinte.mensajes.historiaclinica.impresionHistoriaClinica");
 
-	private String  valorInsumos;
+	private List<String> valorInsumos;
 
 	public GeneradorSubReporteOrdenesMedicamentos() {
-		this.valorInsumos="";
+		this.valorInsumos = new ArrayList<String>(0);
 	}
 
 
@@ -111,11 +111,15 @@ public class GeneradorSubReporteOrdenesMedicamentos {
 		TextColumnBuilder []cols = new TextColumnBuilder[6];
 		HashMap mapa = new HashMap();
 		GeneradorDisenoSubReportes generadorDisenoSubReportes = new GeneradorDisenoSubReportes();
-		String comentsGen="";
+		String comentsGen=" ";
 
-		if (!valorInsumos.trim().equals("")) {
+		if (valorInsumos != null) {
+			String tituloInsumos = new String(" ");
+			for (String valor : (this.valorInsumos)) {
+				tituloInsumos += valor;
+			}
 			tituloSeccion=	cmp.horizontalList(cmp.verticalList(cmp.horizontalList(
-					cmp.text(this.valorInsumos).setStyle(stl.style().setVerticalAlignment(VerticalAlignment.MIDDLE).setHorizontalAlignment(HorizontalAlignment.LEFT).setBackgroundColor(Color.WHITE).setFontSize(7).setBorder(stl.pen(new Float(0.4), LineStyle.SOLID).setLineColor(Color.BLACK)))
+					cmp.text(tituloInsumos).setStyle(stl.style().setVerticalAlignment(VerticalAlignment.MIDDLE).setHorizontalAlignment(HorizontalAlignment.LEFT).setBackgroundColor(Color.WHITE).setFontSize(7).setBorder(stl.pen(new Float(0.4), LineStyle.SOLID).setLineColor(Color.BLACK)))
 			)))	;
 			componentBuilder = cmp.verticalList(tituloSeccion);
 			mezclaReport
@@ -131,8 +135,6 @@ public class GeneradorSubReporteOrdenesMedicamentos {
 			.setPageMargin(generadorDisenoSubReportes.crearMagenesSubReporteVacias())
 			.build();
 		}
-		this.valorInsumos=""; 
-
 		return mezclaReport;
 	}
 
@@ -186,13 +188,13 @@ public class GeneradorSubReporteOrdenesMedicamentos {
 		HashMap mapaOrdenesMedicamentos=med;
 		String res = "";
 		for (int i = 0; i < tama; i++) {
-		String naturaleza = 	mapa.get("naturaleza_"+i).toString();
-		Integer codigoArticulo=	Integer.valueOf(mapa.get("articulo_"+i).toString());
-		int codigoInstitucion=		Integer.valueOf(mapaOrdenesMedicamentos.get("codigoInstitucion").toString());
-		String codigoInterfaz=	 mapa.get("codigo_interfaz_"+i).toString();
-		String codigoCum =	 mapa.get("codigocum_"+i).toString();
-			
-		String presentacionCUM  = Utilidades.getPresentacionCodigoArticulo(naturaleza, codigoArticulo, codigoInstitucion, codigoInterfaz, codigoCum);
+			String naturaleza = 	mapa.get("naturaleza_"+i).toString();
+			Integer codigoArticulo=	Integer.valueOf(mapa.get("articulo_"+i).toString());
+			int codigoInstitucion=		Integer.valueOf(mapaOrdenesMedicamentos.get("codigoInstitucion").toString());
+			String codigoInterfaz=	 mapa.get("codigo_interfaz_"+i).toString();
+			String codigoCum =	 mapa.get("codigocum_"+i).toString();
+				
+			String presentacionCUM  = Utilidades.getPresentacionCodigoArticulo(naturaleza, codigoArticulo, codigoInstitucion, codigoInterfaz, codigoCum);
 			dataSource.add(String.valueOf(mapaOrdenesMedicamentos.get("fecha_"+j))+" "+String.valueOf(mapaOrdenesMedicamentos.get("hora_"+j)),
 					String.valueOf(presentacionCUM)+"-"+String.valueOf(mapa.get("medicamento_"+i)),
 					String.valueOf(mapa.get("dosis_"+i))+" " +String.valueOf(mapa.get("unidadmedida_"+i)),
@@ -200,17 +202,18 @@ public class GeneradorSubReporteOrdenesMedicamentos {
 					String.valueOf(mapa.get("via_"+i)),
 					String.valueOf(mapa.get("cantidad_"+i)),
 					String.valueOf(mapa.get("observaciones_"+i)));
-
+	
 			res = obtenerJustificacionNoPos(mapa, i);
+			String obsGenerales= String.valueOf(mapaOrdenesMedicamentos.get("obsgenerales_"+j));
+	
+			if (obsGenerales!=null) {
+				this.valorInsumos.add(res+" "+obsGenerales);
+			}else{
+				this.valorInsumos.add(res);
+			}
 		}
 
-		String obsGenerales= String.valueOf(mapaOrdenesMedicamentos.get("obsgenerales_"+j));
-
-		if (obsGenerales!=null) {
-			this.valorInsumos=res+" "+obsGenerales;
-		}else{
-			this.valorInsumos=res;
-		}
+		
 		return dataSource;
 	}
 
