@@ -916,30 +916,39 @@ public class GeneradorReporteHistoriaClinica {
 		
 		boolean utilizarEdadActual=false;
 		
-		if (!UtilidadTexto.isEmpty(fechaMuerte)){
-			diaComp = UtilidadFecha.getMesAnoDiaFecha("dia", paciente.getFechaNacimiento());                                                                                                                   
-			mesComp = UtilidadFecha.getMesAnoDiaFecha("mes", paciente.getFechaNacimiento());
-			anioComp = UtilidadFecha.getMesAnoDiaFecha("anio", paciente.getFechaNacimiento());
-			
-			anioNac = UtilidadFecha.getMesAnoDiaFecha("dia", fechaMuerte.split(" ")[0].replace("-", "/"));
-			mesNac = UtilidadFecha.getMesAnoDiaFecha("mes", fechaMuerte.split(" ")[0].replace("-", "/"));
-			diaNac= UtilidadFecha.getMesAnoDiaFecha("anio", fechaMuerte.split(" ")[0].replace("-", "/"));
-			
-		}else{
-			if(!UtilidadTexto.isEmpty(dto.getFechaEgreso())){
-				diaComp = UtilidadFecha.getMesAnoDiaFecha("dia", paciente.getFechaNacimiento());                                                                                                                   
-				mesComp = UtilidadFecha.getMesAnoDiaFecha("mes", paciente.getFechaNacimiento());
-				anioComp = UtilidadFecha.getMesAnoDiaFecha("anio", paciente.getFechaNacimiento());
-				
-				anioNac = UtilidadFecha.getMesAnoDiaFecha("dia", dto.getFechaEgreso().split(" ")[0].replace("-", "/"));
-				mesNac = UtilidadFecha.getMesAnoDiaFecha("mes", dto.getFechaEgreso().split(" ")[0].replace("-", "/"));
-				diaNac= UtilidadFecha.getMesAnoDiaFecha("anio", dto.getFechaEgreso().split(" ")[0].replace("-", "/"));
-				
-			}else{
-				parametros.put(IConstantesReporteHistoriaClinica.edad,paciente.getEdad()+" años");
-				utilizarEdadActual=true;
-			}
-		}
+//		if (!UtilidadTexto.isEmpty(fechaMuerte)){
+//			diaComp = UtilidadFecha.getMesAnoDiaFecha("dia", paciente.getFechaNacimiento());                                                                                                                   
+//			mesComp = UtilidadFecha.getMesAnoDiaFecha("mes", paciente.getFechaNacimiento());
+//			anioComp = UtilidadFecha.getMesAnoDiaFecha("anio", paciente.getFechaNacimiento());
+//			
+//			anioNac = UtilidadFecha.getMesAnoDiaFecha("dia", fechaMuerte.split(" ")[0].replace("-", "/"));
+//			mesNac = UtilidadFecha.getMesAnoDiaFecha("mes", fechaMuerte.split(" ")[0].replace("-", "/"));
+//			diaNac= UtilidadFecha.getMesAnoDiaFecha("anio", fechaMuerte.split(" ")[0].replace("-", "/"));
+//			
+//		}else{
+//			if(!UtilidadTexto.isEmpty(dto.getFechaEgreso())){
+//				diaComp = UtilidadFecha.getMesAnoDiaFecha("dia", paciente.getFechaNacimiento());                                                                                                                   
+//				mesComp = UtilidadFecha.getMesAnoDiaFecha("mes", paciente.getFechaNacimiento());
+//				anioComp = UtilidadFecha.getMesAnoDiaFecha("anio", paciente.getFechaNacimiento());
+//				
+//				anioNac = UtilidadFecha.getMesAnoDiaFecha("dia", dto.getFechaEgreso().split(" ")[0].replace("-", "/"));
+//				mesNac = UtilidadFecha.getMesAnoDiaFecha("mes", dto.getFechaEgreso().split(" ")[0].replace("-", "/"));
+//				diaNac= UtilidadFecha.getMesAnoDiaFecha("anio", dto.getFechaEgreso().split(" ")[0].replace("-", "/"));
+//				
+//			}else{
+//				parametros.put(IConstantesReporteHistoriaClinica.edad,paciente.getEdad()+" años");
+//				utilizarEdadActual=true;
+//			}
+//		}
+		
+		//La edad del paciente debe calcularse con la fecha de ingreso siempre
+		diaComp = UtilidadFecha.getMesAnoDiaFecha("dia", paciente.getFechaNacimiento());                                                                                                                   
+		mesComp = UtilidadFecha.getMesAnoDiaFecha("mes", paciente.getFechaNacimiento());
+		anioComp = UtilidadFecha.getMesAnoDiaFecha("anio", paciente.getFechaNacimiento());
+		
+		anioNac = UtilidadFecha.getMesAnoDiaFecha("dia", fechaHoraIngresoPaciente.split(" ")[0].replace("-", "/"));
+		mesNac = UtilidadFecha.getMesAnoDiaFecha("mes", fechaHoraIngresoPaciente.split(" ")[0].replace("-", "/"));
+		diaNac= UtilidadFecha.getMesAnoDiaFecha("anio", fechaHoraIngresoPaciente.split(" ")[0].replace("-", "/"));
 		
 		//calcularEdadDetalladaCompleta
 		if(!utilizarEdadActual){
